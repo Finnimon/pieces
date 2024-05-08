@@ -2,17 +2,16 @@ package com.gitgud.model.gameObjects.interacteble.collectibles;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
-import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.gameObjects.GameObject;
-import com.gitgud.model.mission.GridMapContext;
+import com.gitgud.model.map.GridMapContext;
 import com.gitgud.model.player.ArtefactPouch;
 import com.gitgud.utility.Core;
-import com.gitgud.utility.interfaces.Collectible;
 import com.gitgud.utility.modification.Modifier;
 
 
 /**
- * Artifacts that can be placed in {@link GridMapContext} and collected by the {@link com.pieces.model.player.Player}.
+ * Artifacts that can be placed in {@link GridMapContext} and collected by the {@link com.gitgud.model.player.Player}.
  *
  * @author Finn L.
  * @version 1.0

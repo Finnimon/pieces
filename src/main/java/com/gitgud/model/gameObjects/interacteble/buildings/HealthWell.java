@@ -1,7 +1,7 @@
 package com.gitgud.model.gameObjects.interacteble.buildings;
 
 import com.gitgud.control.MissionController;
-import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 import java.util.List;
 

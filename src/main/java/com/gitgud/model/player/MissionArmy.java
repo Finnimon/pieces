@@ -1,6 +1,6 @@
 package com.gitgud.model.player;
 
-import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 
 public class MissionArmy

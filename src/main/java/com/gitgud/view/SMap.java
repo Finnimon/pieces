@@ -9,8 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import com.gitgud.model.mission.map.Tile;
-import com.gitgud.model.mission.map.TerrainType;
+
+
 public class SMap{
 
     /**

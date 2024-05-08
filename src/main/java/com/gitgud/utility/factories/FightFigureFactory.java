@@ -1,7 +1,7 @@
 package com.gitgud.utility.factories;
 
-import com.gitgud.model.gameObjects.FightAgent;
-import com.gitgud.utility.enums.Allegiance;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.fight.Allegiance;
 
 
 public class FightFigureFactory

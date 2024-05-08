@@ -1,10 +1,9 @@
 package com.gitgud.model.gameObjects.interacteble.collectibles;
 
 import com.gitgud.control.MissionController;
-import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.gameObjects.GameObject;
 import com.gitgud.utility.Core;
-import com.gitgud.utility.interfaces.Collectible;
 
 import java.util.Arrays;
 import java.util.Objects;

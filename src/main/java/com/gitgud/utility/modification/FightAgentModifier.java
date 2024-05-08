@@ -1,6 +1,6 @@
 package com.gitgud.utility.modification;
 
-import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 
 public class FightAgentModifier extends Modifier<FightAgent>

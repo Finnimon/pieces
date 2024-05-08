@@ -1,6 +1,6 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.mission.Mission;
 
 

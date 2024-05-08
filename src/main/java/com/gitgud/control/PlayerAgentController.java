@@ -1,11 +1,11 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.Agent;
-import com.gitgud.model.gameObjects.FightAgent;
-import com.gitgud.model.gameObjects.PlayerAgent;
+import com.gitgud.model.gameObjects.gridMovable.Agent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.PlayerAgent;
 import com.gitgud.model.mission.Mission;
-import com.gitgud.model.mission.map.GridMapping;
-import com.gitgud.model.mission.map.Tile;
+import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.map.Tile;
 
 
 public class PlayerAgentController extends GridMovableController

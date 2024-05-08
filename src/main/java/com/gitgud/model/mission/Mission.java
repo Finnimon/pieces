@@ -1,10 +1,11 @@
 package com.gitgud.model.mission;
 
-import com.gitgud.model.gameObjects.PlayerAgent;
-import com.gitgud.model.mission.map.GridMap;
-import com.gitgud.model.mission.map.GridMapping;
-import com.gitgud.model.mission.map.Tile;
-import com.gitgud.utility.interfaces.Interacteble;
+import com.gitgud.model.map.GridMapContext;
+import com.gitgud.model.gameObjects.gridMovable.PlayerAgent;
+import com.gitgud.model.map.GridMap;
+import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.map.Tile;
+import com.gitgud.model.gameObjects.interacteble.Interacteble;
 
 import java.util.HashMap;
 

@@ -2,7 +2,7 @@ package com.gitgud.control;
 
 
 import com.gitgud.model.gameObjects.interacteble.FightTrigger;
-import com.gitgud.model.mission.fight.Fight;
+import com.gitgud.model.fight.Fight;
 
 
 public class FightController implements Runnable

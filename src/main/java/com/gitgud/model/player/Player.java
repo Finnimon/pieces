@@ -1,6 +1,6 @@
 package com.gitgud.model.player;
 
-import com.gitgud.model.mission.fight.SpellBook;
+import com.gitgud.model.fight.SpellBook;
 
 
 /**

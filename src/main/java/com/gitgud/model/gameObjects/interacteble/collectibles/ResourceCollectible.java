@@ -4,7 +4,6 @@ import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GameObject;
 import com.gitgud.model.player.RessourceType;
-import com.gitgud.utility.interfaces.Collectible;
 
 
 public class ResourceCollectible extends GameObject implements Collectible

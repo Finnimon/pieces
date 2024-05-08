@@ -1,11 +1,10 @@
 package com.gitgud.model.gameObjects;
 
-import com.gitgud.model.mission.GridMapContext;
-import com.gitgud.model.mission.map.GridMapping;
-import com.gitgud.model.mission.map.Tile;
-import com.gitgud.model.mission.fight.Fight;
-import com.gitgud.model.mission.map.GridMap;
-import com.gitgud.utility.interfaces.GridMappable;
+import com.gitgud.model.map.GridMapContext;
+import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.map.Tile;
+import com.gitgud.model.fight.Fight;
+import com.gitgud.model.map.GridMap;
 
 import java.util.Arrays;
 

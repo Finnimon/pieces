@@ -3,8 +3,7 @@ package com.gitgud.model.gameObjects.interacteble;
 import com.gitgud.control.FightController;
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.GameObject;
-import com.gitgud.model.mission.fight.Fight;
-import com.gitgud.utility.interfaces.Interacteble;
+import com.gitgud.model.fight.Fight;
 
 
 public class FightTrigger extends GameObject implements Interacteble

@@ -1,9 +1,9 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.Agent;
-import com.gitgud.model.mission.GridMapContext;
-import com.gitgud.model.mission.map.GridMapping;
-import com.gitgud.model.mission.map.Tile;
+import com.gitgud.model.gameObjects.gridMovable.Agent;
+import com.gitgud.model.map.GridMapContext;
+import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.map.Tile;
 
 
 public class GridMovableController

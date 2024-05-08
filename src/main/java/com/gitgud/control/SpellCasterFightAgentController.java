@@ -1,9 +1,9 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.FightAgent;
-import com.gitgud.model.gameObjects.SpellCasterFightAgent;
-import com.gitgud.model.mission.GridMapContext;
-import com.gitgud.model.mission.map.GridMapping;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.SpellCasterFightAgent;
+import com.gitgud.model.map.GridMapContext;
+import com.gitgud.model.map.GridMapping;
 
 
 public class SpellCasterFightAgentController extends FightAgentController

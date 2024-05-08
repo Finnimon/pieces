@@ -1,7 +1,7 @@
 package com.gitgud.control;
 
 import com.gitgud.model.FightTimeLine;
-import com.gitgud.model.mission.fight.Fight;
+import com.gitgud.model.fight.Fight;
 
 import java.util.TreeSet;
 import java.util.stream.Collectors;
