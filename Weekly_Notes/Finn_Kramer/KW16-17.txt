@@ -1,0 +1,52 @@
+19.04.2024
+KW16-17
+Finn Kramer
+
+1. Datenstruktur für das Spiel auf Objekt-Ebene
+
+> Spiel
+    > Ressourcen (Alle Daten, die auch außerhalb des Spiels existieren können)
+        > Sprites (Skins für die Tiles)
+        > Spielstände (Man kann ein Spiel aus einem Spielstand laden oder ein Spiel speichern)
+        > UnitFile (Eigenschaften für die Kampf-Einheiten)
+        > BuildingFile (Eigenschaften für die Gebäude)
+        > ArtefactFiles
+            > SpellFile (Eigenschaften für die Zaubersprüche/-tränke)
+            > WeaponFile (Eigenschaften für die Waffen)
+            > ResourceList (Liste aller Ressourcen)
+        > Terrain File (Liste aller Vegetationsformen)
+    > Spieldaten (Alle Daten, die nur innerhalb des Spiels existieren können und flüchtig sind)
+        > Player (extends Figure implements iVisible implements iMobile)
+            > Weapons implements GameObjectCollection<ObjectType> (Weapon implements iVisible implements iCollectable)
+                > Bow
+                > Arrows
+                > Sword
+                > Knife
+                > Axe
+            --> Army (Nur Referenz auf Söldner-Gruppe, die auf Spieldatenebene existiert)
+                > Army implements GameObjectCollection<ObjectType> (FightUnit extends Figure implements iVisible implements iMobile)
+            > Resources implements GameObjectCollection<ObjectType> (Resource extends Artefact implements iVisible implements iCollectable)
+                > Ore
+                > Gold
+                > Silver
+                > Wheat
+                > Meat
+                > ...
+            > Spellbook implements GameObjectCollection<ObjectType> (Spell extends Artefact implements iVisible implements iCollectable)
+                > Wingardium Leviosa
+                > Stupor
+                > ...
+        > Army (extends FigureCollection) (Wird global angelegt, da Player und Army lediglich Beziehung eingehen)
+            > FightUnit (extends Figure implements iVisible implements iMobile)
+
+        > Building (implements iVisible implements iInteractable)
+            > Artefacts
+            > Army (Gebäude stellen weitere Kämpfer bereit)
+                > Fight Unit (extends Figure implements iVisible implements iMobile)
+            > Resources
+            > Wallet
+        > Map (implements iInteractable)
+        >
+       >
+
+

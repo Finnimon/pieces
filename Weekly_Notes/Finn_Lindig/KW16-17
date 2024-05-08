@@ -1,0 +1,85 @@
+
+Finn Lindig:
+1.  Spieltest
+
+    Fragestellung:
+        Entspricht unser bisheriges Verständnis der Spielmechaniken der Realität?
+        Können wir Inspiration von dem Spiel erhalten?
+    Vorgehen:
+        Ich habe mir die kostenfreie Demo heruntergeladen und durchgespielt.
+    Ergebnisse:
+        1.  Ein Kampf als auch die normale Missionsmap sind sich sehr ähnlich.
+            a.  Beide finden auf einer Grid-Map statt
+                -   Ein Tile kann blockiert(Stein oder Baum), leer sein oder Folgende Gameobjects enthalten:
+                    Fight:      FightUnit
+                    Mission:    Player,
+                                Fight(Hier wird ein Gegner angezeigt, der bei Interaktion einen Fight auslöst) das Tile ist nach dem Fight leer,
+                                Ressourcen (Es gibt drei Ressourcen die bei Interaktion eine feste Anzahl dieser Währung zu dem Player Konto hinzufügen) Das Tile ist nach dem einsammeln leer,
+                                Artefactständer (Bei Interaktion erhält der Spieler ein neues Artefakt, das auch direkt Equipped wird), der Artefaktständer bleibt bestehen, das Tile bleibt blockiert,
+                                Building (Hier werden verschiedene Events bei einer Interaktion ausgelöst) das Tile bleibt weiterhin blockiert
+                                -   QuestGiver (Man erhält einen Auftrag, der innerhalb der Mission erfüllt werden muss)
+                                -   Portal (Man wird an einen anderen Teil der Map transportiert, wo auch ein Portal ist. Es kann frei zwischen den beiden Portalen gereist werden)
+                                -   Mine (Nach der Interaktion generiert eine Mine permant jeden Turn eine bestimmte Ressource)
+                                -   Taverne (Hier können FightUnits von drei verschiedenen Arten gekauft werden. Jede Unit kann nur einmal gekauft werden)
+                                QuestBlockade (Ein Interaktion ist nicht möglich, das Tile kann durch das auslösen anderer Events freigelegt werden - Bspw: einen quest erfüllen, und magische Barriere wird gesenkt)
+                                Chest (Bei Interaktion wird ein screen geöffnet, worin man sich zwischen zwei Optionen entscheiden kann, z.B. Ressourcen unterschiedlicher Art)
+
+            b.  Es gibt steuerbare Einheiten, die Steuerung ist auch identisch.
+                -   Das Spiel diktiert welche Einheit gerade ausgewählt ist.
+                -   Mit Linksklick kann ein Ziel ausgeählt werden (Bewegung/Interaktion/Angriff/Ziel eines ausgewählten Zaubers).
+                -   Mit Rechtklick auf ein Gameobject, können Information darüber Angezeigt werden.
+                -   Es gibt auf Tasten gemappte Ereignisse. Diese können an der Sidebar auch durch die Maus ausgewählt werden.
+                        Kampf:      Zauber des Players (Ein neues Fenster wird geöffnet, darin können Zauber des Players )
+                                    Fightoptions der Einheit: Zauber, Blocken, Fernangriff, Warten(Einheiten mit hoher Initiative die eigentlich am Anfang des Zuges handeln, können dadurch ihr Handeln nach hinten verschieben)
+                        Mission:    Armee (siehe Armee)
+                                    EndTurn (Siehe Turn)
+                                    ...
+                -   Es ist rundenbasiert (Siehe Turn).
+            c.  Turn
+                -   Ein Mobile Gameobject ist ausgewählt
+                -   Dieses kann mit linksklick gesteuert werden
+                -   Dieses hat eine Movement Range
+                Fight:      Eine FightUnit kann innerhalb ihrer Range einmal bewegt werden
+                            oder einen Zauber wirken
+                            oder angreifen
+                            oder blocken
+                            oder warten
+                Mission:    Der Player hat 8 Schritte zur Verfügung diese können einzeln getätigt werden. Eine Bewegung zu einem anderen Tile verbraucht einen Schritt
+                            Wenn der Player neben einem anderen Gameobject steht, kann damit interagiert werden, das verbraucht keinen Schritt.
+                            Der Player hat drei Methoden die einen Turn beenden und die Schritte wieder auffüllen.
+                                1   Gibt dem Player im nächsten Turn zwei Schritte mehr
+                                2   Heilt Alle Einheiten
+                                3   Stellt das Mana des Players wieder her
+        2.  Mission
+            a.  Armee
+                -   Alle dem Player zur Verfügung stehenden FightUnits werden angezeigt
+                    Es gibt zwei Kategorien
+                        Aktiv (Werden im nächsten Fight mitgenommen)
+                        Discard (Werden im nächsten Kampf nicht mitgenommen werden, können permanent aus der Armee entlassen werden)
+        3. Fight
+        4. City
+            a.  Die City ist keine GridMap sondern eine Ansammlung von Buttons die verschiedene Fenster Öffnen. Diese Fenster können jeweils einem Citybuilding zugeordnet werden
+...
+    Konklusion:
+        Alle Gruppenmitglieder sollten die Demo gemeinsam oder einzeln testen und notizen nehmen, da alle Feststellungen festzuhalten zu umfangreich wäre.
+        Einen gemeinsamen Test halte ich für die perfekte Gelegenheit um die Nebenläufigkeitsanforderungen zu definieren.
+
+        Ich würde die Tasks innerhalb der Spiellogik unter folgenden Punkten aufteilen und Organisieren:
+            -   Mission und Level
+                >   Mapping
+                >   Combat
+                >   Turn
+                >   Path finding
+                >   KI (Rule based)
+            -   Player Inventory als global  (Army, Artefacts, Ressources)
+            -   City
+                >   Buildings
+                >   Buildings Inventory Interaction
+            -   Global Menüs (Escape führt immer zum Menü)
+                >   Speichern des Spielstandes
+            -   Vernetung der o.g.
+
+2.  Ich habe den bisherigen Code weitgehend an die UML Diagramme angepasst. Es fehlen noch einige Änderungen, Kommentare
+    und es muss in meinen Augen besprochen werden,
+    ob der Einsatz an Interfaces an bestimmten Stellen nicht Vorzüge gegenüber einer tiefen Vererbungshierarchie Vorteile hätte.
+

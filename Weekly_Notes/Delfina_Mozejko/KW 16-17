@@ -1,0 +1,56 @@
+Es gibt verschiedene Menüs die entweder dauerhaft agnzezeigt werden oder auch nur vorübergehend
+Ich habe mir jetzt überlegt welche GUIs auf jeden Fall drankommen sollten:
+1. Das Hauptmenü GUI was am Anfang des Spiels angezeigt werden soll: Titel des Spiels Fortfahren, neues Spiel, Spiel
+    laden, Einstellungen und Spiel beenden
+2. Das Menü mit den drei Schwierigkeitsgraden, man könnte den Grad als Parameter an das Programm übergeben. Man könnte
+    ein Eingabefeld für den Namen des Spielers erstellen, Startknopf zum Beginnen eines neuen Spiels
+
+3. Eine GUI die auf dem Spielbildschirm ständig angezeigt wird:
+- eingesammelte Ressourcen wie Granit und Eisen
+- Name der Spielfigur
+- eingesammelte Artefakte
+- Mitglieder der Armee
+- jede Runde braucht die Armee essen (Infos zu Vorräten)
+
+4. Szene Kampf:
+- 12x12 grid aus Gifs?? hab ich mal gehört
+- links auf dem Bildschirm stehen die Möglichkeiten: Magie, Nahkampfangriff, Fernkamppfangriff, Aufgeben, verteidigen,
+    warten
+- eine Schadenanzeige
+- Informationen wie Gesundheit, Mana und Statusbedingungen (Vergiftung, Betäubung) sollen angezeigt werden
+- die eigene Spielfigur steht in der Ecke (am Anfang des Spiels gewählt) und kann Zaubersprüche verwenden => hier eine
+    GUI mit sechs unterschiedlichen Kategorien z.B eine Blitzheilung
+- Hovert man mit der Maus auf das Monster gegen das man spielt + rechtsklick => das Monster sollte eine eigene Einzeige
+    haben, wo seine Eigenschaften und so drin stehen (spezifische Schwächen oder Resistenz gegenüber bestimmten
+    Angriffstypen)
+- Optionen für das Pausieren, Fortsetzen oder Beenden des Kampfes jederzeit verfügbar
+- hier genauso wie bei Szene Kampf: Name des Heldes, Artefakte, Mitglieder der Armee
+
+=> nach dem beenden des Kampfes geht man zur Szene Stadt rüber
+
+5. Szene Stadt:
+    - Man kann dort Monster einkaufen, es sollte angezeigt werden welche Eigenschaften die Monster besitzen (Zauber,
+        Schild usw.)
+    - nachdem man den Kampf verloren hat, kann man die Figur mithilfe von Kristallien wiederbeleben (Magic Amplifier Menü)
+
+7. Szene Mission:
+- vier Missioen mit jeweils einer Beschreibung (Ziel, Belohnung)
+- ein Fenster wo man den Fortschritt der augewählten Mission verfolgen kann
+
+8. Szene Player Reborn:
+- Optionen zur Anpassung des Charakters wie z.B Aussehen, Fähigkeiten maybe Ausrüstung
+- mithilfe von Menüs, fancy Buttons, Schieberegler vielleicht?
+- verwalten von Waffen und gegenständen
+- man sollte die Einstellungen auch rückgängig machen können
+
+9. Szene Map:
+- man sammelt random Artefakte
+- Auf der Karte sollten verschiedene Orte markiert sein (Städte, Gefahrenzonen), können durch Icons auf der Karte
+    markiert werden
+- vielleicht ein popup-Fenster der Infos zur ausgewählten Orten zeigt (Quests die man machen kann, Artefakte die man
+    dafür benötigt
+- trifft man auf einen Gegner => direkte "Überweisung" zur Szene Kampf
+
+6. GUI zum beenden des Spiels:
+- In der Ecke kann man ein X reinklatschen
+- popup-box mit zwei Optionen beenden und Spiel fortsetzen

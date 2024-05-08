@@ -1,0 +1,82 @@
+Ich habe Grundlegen Informationen über JAVA_FX aufgenommen
+1. Event Key Inputs while running:
+    javafx.scene.input Class KeyEvent
+        onKeyPressed, onKeyTyped or onKeyReleased
+        https://docs.oracle.com/javase/8/javafx/api/javafx/scene/input/KeyEvent.html
+
+2. Wie ist die Generelle Struktur unsere GUI
+    Wir haben eine Map. Auf dieser Können bestimmte Events Passieren.
+        - esc: "Pause-Menu"
+        - 1: "Ein zug wird beendet und Im nächsten zug gibt es mehr schritte"
+        - 2: "Ein zug wird beendet und Im nächstenZug werden die Einheiten geheilt"
+        - 3: "Ein zug wird beendet und Im nächsten zug wird mana von dem Player wider hergestellt"
+        - strg: "Der Player läuft in die angegeben Richtung"
+        - Interaktionen mit Gebäuden: Ein Event passieren (Oft ein Neues Fenster, welches erst abgearbeitet werden muss)
+        - Interaktion mit Collectables: Dem Inventar wird was hinzugefügt und das Objekt muss danach entfernt werden
+        - Left Mouse-button: Ein weg zu dem kachel muss gefunden werden
+        - Right Mouse-button: Informationen über Objekte werden angezeigt
+        - Portale: Die map ändert sich und Der Player bekommt eine Neue Position
+        - Fights: Eine Neue Mat, die
+        - Tap: Neues Fenster für das Globale Einheiten Inventar
+
+3. Dauerhaftes Menue:
+    Ressourcen Inventar: Es gibt mehrere Images und mengenanzeigen
+        Diese müssen immer updated werden.
+        Liegt oben Rechts in der Ecke
+    Anzeig vür das vohandene Essen
+    Menue Bar untenam Bildschirm Rand
+        Der Bildschir muss unterteilt werden in zwei nebenläufige Breiche.
+        Kleine Anzeige für:
+            Armee
+            Artefakte
+            Mana
+            Schritte
+            zug überspringen Anzeige
+4. Startanzeige
+    Diese ist die Selbe wie die Stoppanzeige
+
+5. Fight
+    - Map
+        12 x 12 Matrik
+        Setimmte Belegungen in einer Matrik bedeuten eineGrafische Darstellung in einer Kachel
+    - Belegte Felder
+        z.B. Grau hinterlegen
+    - Warteschlang der einheiten
+        Am unterren Rand auflisten, muss nach jedem zug geupdatet werden
+        Die einheit , die am zug ist kann angreifen
+    - Anzeige über den letzten Zug
+        vlt. weglassen (Textuelle beschreibung)
+    - Animation der Bewegung
+        warscheinlich einfach eine Teleportation
+    - zu bewegende felder Anzeigen
+        Eine Liste an feldern, die Grün angezeit werden.
+        mit einem Mouse-click muss ein Positionswechsel realisiert werden
+    - Infoanzeige für die Einheiten
+        Mit dem rechtsklick auf eine Einheit muss ein neues fenster Geöffnet werden.
+        eine Bestimmte Darstellung aller Informationen über das Objekt darstellen.
+        mit dem Rausclicken, aus demFenster muss das Menue geschlossen werden können
+    - Lebens- Schild Anzeige der Einheiten
+        muss nach jedem Zug geupdatet werden
+        Plazieung innerhalb des Kachelz absolut
+    - PNG für jede einheit
+        Muss geändert werden beim sterben der Einheit
+        und gelöscht aus dem Globalen Inventar
+    - Buttons für die Aktionen des Spielers
+    -kurze Anzeige nach beendigung des Zuges
+        Wie viel Leben wurde abgezogen
+        Welche Einheiten sind Gestorben
+
+Fragen:
+Wie stellt man die Positionen der Objekte dar.
+Wie stellt man die Map dar.
+Wie kann man ein Kachel des Rasters für das Movement auswählen?
+
+
+
+Beachten:
+Für jeden Schritt des Player muss ein counter runtergesetzt werden.
+Es darf kein weiterer Schritt gemacht werden,wenn der counter 0 ist.
+
+Hilfestellungen:
+Zur darstellung der Map
+https://stackoverflow.com/questions/27870674/display-2d-array-as-grid-in-javafx

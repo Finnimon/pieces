@@ -1,0 +1,69 @@
+package com.gitgud.model.gameObjects.interacteble.collectibles;
+
+import com.gitgud.control.MissionController;
+import com.gitgud.control.PlayerController;
+import com.gitgud.model.gameObjects.FightAgent;
+import com.gitgud.model.gameObjects.GameObject;
+import com.gitgud.model.mission.GridMapContext;
+import com.gitgud.model.player.ArtefactPouch;
+import com.gitgud.utility.Core;
+import com.gitgud.utility.interfaces.Collectible;
+import com.gitgud.utility.modification.Modifier;
+
+
+/**
+ * Artifacts that can be placed in {@link GridMapContext} and collected by the {@link com.pieces.model.player.Player}.
+ *
+ * @author Finn L.
+ * @version 1.0
+ * @Owner: Finn L.
+ * @since 19.04.2022
+ */
+public class Artefact extends GameObject implements Collectible
+{
+    private final ArtefactType artefactType;
+    
+    
+    private final Modifier<FightAgent> modifier;
+    
+    
+    public Artefact(ArtefactType artefactType, Modifier<FightAgent> modifier)
+    {
+        super(artefactType.name(), artefactType.getDescription(), artefactType.getSpriteUrl());
+        this.artefactType = artefactType;
+        this.modifier = modifier;
+    }
+    
+    
+    public ArtefactType getArtifactType()
+    {
+        return artefactType;
+    }
+    
+    
+    public Modifier<FightAgent> getModifier()
+    {
+        return modifier;
+    }
+    
+    
+    @Override
+    public String getSpriteUrl()
+    {
+        return null;
+    }
+    
+    
+    @Override
+    public void addToInventory(MissionController missionController)
+    {
+        ArtefactPouch artefactPouch = PlayerController.getInstance().getPlayer().artefactPouch();
+        Artefact[] equippedArtifacts = artefactPouch.getEquippedArtifacts();
+        
+        Core.insertAtFirstNullIndex(equippedArtifacts, this);
+        
+        artefactPouch.getAllOwnedArtefacts().add(this);
+    }
+}
+
+
