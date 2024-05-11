@@ -2,6 +2,7 @@ package com.gitgud.view;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class SStory {
@@ -15,7 +16,10 @@ public class SStory {
         stage.setScene(StoryScene);
 
         // Hier kannst du alles machen
-// Wichtig ist, dass du keine Atrribute zunzufügst und alle Methoden Static sind
+
+        Button button = new Button("Continuo");
+        button.setOnAction(e -> stage.setScene(STutorial.createTutorialScene(stage)));
+        root.getChildren().addAll(button);
         return StoryScene;
     }
 }
