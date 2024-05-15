@@ -14,8 +14,8 @@ import java.util.Objects;
  *
  * @author Finn L.
  * @Owner: Finn L.
- * @Since: 16.04.2024
- * @Version: 1.0
+ * @Since: 15.05.2024
+ * @Version: 3.0
  */
 public class GridMap<T extends GridMappable>
 {
@@ -87,6 +87,15 @@ public class GridMap<T extends GridMappable>
         return otherTile.terrain().isTraversable() && tile.terrain().isTraversable();
     }
     
+    
+    /**
+     * Returns all non null T Values in {@link #getGraph()}
+     * @Author: Finn L.
+     * @Owner: Finn L.
+     * @Since: 15.05.2024
+     * @Version: 1.0
+     * @return all non null T Values in {@link #getGraph()}
+     */
     public List<T> getAllGridMappables()
     {
         return this.graph.values().stream().filter(Objects::nonNull).toList();
