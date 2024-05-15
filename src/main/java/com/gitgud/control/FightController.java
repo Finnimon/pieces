@@ -13,6 +13,9 @@ public class FightController implements Runnable
     private final MissionController missionController;
     
     
+    private final FightTimeLine fightTimeLine;
+    
+    
     private int turn = 0;
     
     
@@ -20,6 +23,8 @@ public class FightController implements Runnable
     {
         this.fight = fightTrigger.getFight();
         this.missionController = missionController;
+        
+        this.fightTimeLine = new FightTimeLine(fight);
     }
     
     
@@ -51,5 +56,11 @@ public class FightController implements Runnable
     public int increaseTurn()
     {
         return ++turn;
+    }
+    
+    
+    public FightTimeLine getFightTimeLineController()
+    {
+        return fightTimeLine;
     }
 }

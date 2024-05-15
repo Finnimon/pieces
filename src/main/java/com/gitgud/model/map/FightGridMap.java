@@ -8,7 +8,7 @@ public class FightGridMap extends GridMap
     
     public FightGridMap(Tile[][] tiles)
     {
-        super(tiles);
+        super(tiles, graph, width, height);
         
         checkValidity(tiles);
     }
