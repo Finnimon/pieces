@@ -17,7 +17,7 @@ public class FightAgentCollectible extends GameObject implements Collectible
     public FightAgentCollectible(FightAgent fightFigure)
     {
         super("Resting " + fightFigure.getName(), fightFigure.getDescription() + "\r\nThey would like to join your army",
-              fightFigure.getSpriteUrl());
+              fightFigure.getSpriteFilePath());
         this.fightFigure = fightFigure;
     }
     

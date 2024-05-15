@@ -47,7 +47,7 @@ public class Artefact extends GameObject implements Collectible
     
     
     @Override
-    public String getSpriteUrl()
+    public String getSpriteFilePath()
     {
         return null;
     }

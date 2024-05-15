@@ -27,6 +27,7 @@ public class HelloApplication extends Application
         stage.setHeight(1000);
         stage.setWidth(1000);
         stage.setTitle("Pieces");
+        
         stage.setScene(SMainMenue.createMainMenueScene(stage));
         stage.show();
     }

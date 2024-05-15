@@ -25,14 +25,14 @@ public abstract class GameObject implements GridMappable
     private final String description;
     
     
-    private final String spriteUrl;
+    private final String spriteFilePath;
     
     
-    public GameObject(String name, String description, String spriteUrl)
+    public GameObject(String name, String description, String spriteFilePath)
     {
         this.name = name;
         this.description = description;
-        this.spriteUrl = spriteUrl;
+        this.spriteFilePath = spriteFilePath;
     }
     
     
@@ -51,14 +51,14 @@ public abstract class GameObject implements GridMappable
     
     
     @Override
-    public String getSpriteUrl()
+    public String getSpriteFilePath()
     {
-        return spriteUrl;
+        return spriteFilePath;
     }
     
     
     @Override
-    public GridMapping getMappingTo(Tile tile)
+    public GridMapping <GameObject> getMappingTo(Tile tile)
     {
         return new GridMapping(this, tile);
     }

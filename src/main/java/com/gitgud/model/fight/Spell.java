@@ -20,7 +20,7 @@ public final class Spell implements Sprite, Describable, Named
     private final String Description;
     
     
-    private final String spriteUrl;
+    private final String spriteFilePath;
     
     
     private final SpellType spellType;
@@ -41,18 +41,18 @@ public final class Spell implements Sprite, Describable, Named
     /**
      * @param name
      * @param description
-     * @param spriteUrl
+     * @param spriteFilePath
      * @param spellType
      * @param modifiers
      * @param manaCost
      * @param successChance
      */
-    public Spell(String name, String description, String spriteUrl, SpellType spellType,
+    public Spell(String name, String description, String spriteFilePath, SpellType spellType,
                  FightAgentModifier[] modifiers, int manaCost, float successChance, Allegiance targeting)
     {
         this.name = name;
         Description = description;
-        this.spriteUrl = spriteUrl;
+        this.spriteFilePath = spriteFilePath;
         this.spellType = spellType;
         this.modifiers = modifiers;
         this.manaCost = manaCost;
@@ -76,9 +76,9 @@ public final class Spell implements Sprite, Describable, Named
     
     
     @Override
-    public String getSpriteUrl()
+    public String getSpriteFilePath()
     {
-        return spriteUrl;
+        return spriteFilePath;
     }
     
     

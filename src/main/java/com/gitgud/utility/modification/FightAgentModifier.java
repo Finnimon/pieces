@@ -111,7 +111,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
         }
         
         
-        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteUrl(),
+        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteFilePath(),
                               fightAgent.isFlying(), movementRange, fightAgent.getType(), fightAgent.getFaction(),
                               rank, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
                               magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
@@ -155,7 +155,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
         }
         
         
-        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteUrl(),
+        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteFilePath(),
                               fightAgent.isFlying(), movementRange, fightAgent.getType(), fightAgent.getFaction(),
                               rank, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
                               magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
