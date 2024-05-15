@@ -1,5 +1,6 @@
 package com.gitgud.pieces;
 
+import com.gitgud.model.player.RessourceType;
 import com.gitgud.view.SMainMenue;
 import com.gitgud.view.SMap;
 import javafx.application.Application;
@@ -22,6 +23,7 @@ public class HelloApplication extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
+        System.out.println(RessourceType.GOLD.getSpriteUrl());
         stage.setHeight(1000);
         stage.setWidth(1000);
         stage.setTitle("Pieces");

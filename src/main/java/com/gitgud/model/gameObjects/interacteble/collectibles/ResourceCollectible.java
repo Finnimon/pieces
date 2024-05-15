@@ -14,10 +14,10 @@ public class ResourceCollectible extends GameObject implements Collectible
     private final RessourceType resourceType;
     
     
-    public ResourceCollectible(String name, String description, String spriteUrl, int resourceValue,
-                               RessourceType resourceType)
+    public ResourceCollectible(int resourceValue, RessourceType resourceType)
     {
-        super(name, description, spriteUrl);
+        super(resourceType.name(), "description",
+              "src/main/resources/com/gitgud/sprites/interactables/collectibles" + resourceType.name().toLowerCase() + ".png");
         this.resourceValue = resourceValue;
         this.resourceType = resourceType;
     }
