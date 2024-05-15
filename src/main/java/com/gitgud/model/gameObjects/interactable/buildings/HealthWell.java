@@ -13,8 +13,8 @@ public class HealthWell extends GridMappableBuilding
     
     private final static String DESCRIPTION = "Come to this building to replenish all your troops' health.";
     
-    
-    private static final String SPRITE_URL = "src/resources/sprites/buildings/healthwell.png";
+    //todo
+    private static final String SPRITE_URL = "src\\resources\\sprites\\buildings\\healthwell.png";
     
     
     public HealthWell()
