@@ -4,15 +4,19 @@ import com.gitgud.control.PlayerController;
 import com.gitgud.model.map.TerrainType;
 import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
-import com.gitgud.model.player.RessourceType;
+import com.gitgud.model.player.ResourceType;
 import com.gitgud.model.player.Wallet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -21,6 +25,23 @@ import java.util.HashMap;
 
 
 public class SMap{
+
+    private static String ICH_HASSE_MEIN_LEBEN = "FICKMICH";
+
+    private static final int STAGE_WITH = 1000;
+    private static final int MAIN_MAP_HEIGHT = 600;
+    private static final int TOP_MENU_HEIGHT = 100;
+    private static final int BOTTOM_MENU_HEIGHT = 300;
+    private static final int TILE_DIMENSIONS = 100;
+    private static final int TILE_SPACING = 110;
+    private static final int STAGE_WITH = 1000;
+    private static final int STAGE_WITH = 1000;
+    private static final int STAGE_WITH = 1000;
+    private static final int STAGE_WITH = 1000;
+    private static final int STAGE_WITH = 1000;
+    private static final String MOVE_TRANSITION_INFO = "Press 1 to skip the turn and get more steps on the next turn,\n"
+            + "Press 2 to skip the turn and regenerate a little mana,\n"
+            + "Press 3 to skip turn and heal your units,";
 
     /**
      * This Method creates the Map-scene including: the Feld of Tiles, the Move transition methods, The Inventory,
@@ -38,22 +59,22 @@ public class SMap{
 
         BorderPane mapMenue = new BorderPane();
         ScrollPane mainMap = new ScrollPane();
-        mainMap.setPrefSize(1000,600);
+        mainMap.setPrefSize(STAGE_WITH,MAIN_MAP_HEIGHT);
 
         Group tilesGroup = new Group();
-        //createFieldOfTiles(tilesGroup);
+        createFieldOfTiles(tilesGroup);
         mainMap.setContent(tilesGroup);
 
         Group gameObjektGroup = new Group();
-        //createFieldOfGameObjekts(gameObjektGroup, );
+        createFieldOfGameObjekts(gameObjektGroup, );
         mainMap.setContent(gameObjektGroup);
 
         HBox topMenue = new HBox();
-        topMenue.setMinHeight(100);
+        topMenue.setMinHeight(TOP_MENU_HEIGHT);
         createTopMenu(topMenue);
 
         HBox bottomMenue = new HBox();
-        bottomMenue.setMinHeight(300);
+        bottomMenue.setMinHeight(BOTTOM_MENU_HEIGHT);
         createBottomMenu(bottomMenue);
 
         mapMenue.setTop(topMenue);
@@ -83,10 +104,10 @@ public class SMap{
                 Rectangle rectangle = new Rectangle();
                 int xPosition = tile.xPosition();
                 int yPosition = tile.yPosition();
-                rectangle.setX(xPosition * 110);
-                rectangle.setY(yPosition * 110);
-                rectangle.setWidth(100);
-                rectangle.setHeight(100);
+                rectangle.setX(xPosition * TILE_SPACING);
+                rectangle.setY(yPosition * TILE_SPACING);
+                rectangle.setWidth(TILE_DIMENSIONS);
+                rectangle.setHeight(TILE_DIMENSIONS);
 
                 if(tile.terrain().terrainType() == TerrainType.MOUNTAIN)
                 {
@@ -117,31 +138,7 @@ public class SMap{
     {
         for (int i = 0; i < 10; i++)
         {
-            for (int j = 0; j < 10; j++)
-            {
-                Rectangle tile = new Rectangle();
-                tile.setY(i * 110);
-                tile.setX(j * 110);
-                tile.setWidth(100);
-                tile.setHeight(100);
-                if((i + j) % 2 == 1 )
-                {
-                    tile.setFill(Color.SADDLEBROWN);
-                }
-                else
-                {
-                    tile.setFill(Color.WHEAT);
-                }
-                tile.setOnMouseClicked(event ->
-                {
-                    if (event.getButton() == MouseButton.SECONDARY)
-                    {
-                        moveRequest(tile);
-                    }
 
-                });
-                tilesGroup.getChildren().add(tile);
-            }
         }
     }
 
@@ -156,19 +153,39 @@ public class SMap{
 
         Wallet wallet = player.wallet();
 
-       HashMap<RessourceType,Long> resourceMap = wallet.resourceMap();
-        for (RessourceType key : resourceMap.keySet())
+       HashMap<ResourceType,Long> resourceMap = wallet.resourceMap();
+        for (ResourceType key : resourceMap.keySet())
         {
             long value = resourceMap.get(key);
-
+            Label ValueShow = new Label(Long.toString(value));
             HBox box = new HBox();
 
-        }
+            Image image = new Image(key.getSpriteUrl());
 
-        menu.getChildren().addAll();
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(TOP_MENU_HEIGHT);
+            imageView.setFitWidth(TOP_MENU_HEIGHT);
+            box.getChildren().addAll(ValueShow, imageView);
+
+            menu.getChildren().add(box);
+        }
     }
 
     private static void createBottomMenu(HBox menu)
+    {
+        VBox bottomCentreMenu = new VBox();
+        HBox BottomLeftMenu = new HBox();
+        TextField bottomRightMenu = new TextField(MOVE_TRANSITION_INFO);
+
+        createBottomLeftMenu(bottomCentreMenu);
+        createBottomCentreMenu(BottomLeftMenu);
+        menu.getChildren().addAll(BottomLeftMenu, bottomCentreMenu, bottomRightMenu);
+    }
+    private static void createBottomLeftMenu(VBox bottomCentreMenu)
+    {
+
+    }
+    private static void createBottomCentreMenu(HBox bottomLeftMenu)
     {
 
     }
