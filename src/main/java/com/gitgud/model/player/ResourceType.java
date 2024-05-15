@@ -4,7 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 
 
-public enum RessourceType
+public enum ResourceType
 {
     IRON, COPPER, SILVER, GOLD, PLATINUM, REDSTONE;
     

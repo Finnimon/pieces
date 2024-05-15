@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
-public record Wallet(HashMap<RessourceType, Long> resourceMap)
+public record Wallet(HashMap<ResourceType, Long> resourceMap)
 {
 
 }

@@ -3,7 +3,7 @@ package com.gitgud.model.gameObjects.interactable.collectibles;
 import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GameObject;
-import com.gitgud.model.player.RessourceType;
+import com.gitgud.model.player.ResourceType;
 
 
 public class ResourceCollectible extends GameObject implements Collectible
@@ -11,10 +11,10 @@ public class ResourceCollectible extends GameObject implements Collectible
     private final long resourceValue;
     
     
-    private final RessourceType resourceType;
+    private final ResourceType resourceType;
     
     
-    public ResourceCollectible(int resourceValue, RessourceType resourceType)
+    public ResourceCollectible(int resourceValue, ResourceType resourceType)
     {
         super(resourceType.name(), "description",
               "src\\main\\resources\\com\\gitgud\\sprites\\interactables\\collectibles\\" + resourceType.name().toLowerCase() + ".png");
