@@ -15,11 +15,11 @@ public class PlayerAgent extends Agent
     private static final String DESCRIPTION = "Once a just king. Now broken by many defensive battles he marches forth to retake all his lands.";
     
     
-    private static final String SPRITE_URL = "src/resources/sprites/figures/blackAndWhite/black_king.png";
+    private static final String SPRITE_PATH = "src/main/resources/com/gitgud/sprites/agents/blackAndWhite/black_king.png";
     
     
     public PlayerAgent()
     {
-        super(NAME, DESCRIPTION, SPRITE_URL, IS_FLYING, MOVEMENT_RANGE);
+        super(NAME, DESCRIPTION, SPRITE_PATH, IS_FLYING, MOVEMENT_RANGE);
     }
 }

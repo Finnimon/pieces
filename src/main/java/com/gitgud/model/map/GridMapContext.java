@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class GridMapContext<T extends GridMappable>
 {
-    private final GridMap gridMap;
+    private final GridMap<T> gridMap;
     
     
     private final HashMap<T, Tile> gridMappings;
@@ -22,7 +22,7 @@ public class GridMapContext<T extends GridMappable>
     }
     
     
-    public GridMap getGridMap()
+    public GridMap<T> getGridMap()
     {
         return gridMap;
     }

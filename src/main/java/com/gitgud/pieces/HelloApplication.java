@@ -3,6 +3,7 @@ package com.gitgud.pieces;
 import com.gitgud.model.player.ResourceType;
 import com.gitgud.view.SMainMenue;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,7 +25,6 @@ public class HelloApplication extends Application
         stage.setHeight(1000);
         stage.setWidth(1000);
         stage.setTitle("Pieces");
-        
         stage.setScene(SMainMenue.createMainMenueScene(stage));
         stage.show();
     }

@@ -1,8 +1,10 @@
 package com.gitgud.model.gameObjects.gridMovable;
 
+import com.gitgud.control.GridMovableController;
 import com.gitgud.model.fight.*;
 import com.gitgud.model.gameObjects.Faction;
 import com.gitgud.model.gameObjects.FightAgentType;
+import com.gitgud.model.map.GridMapContext;
 
 
 /**
@@ -321,4 +323,6 @@ public class FightAgent extends Agent implements Defender, Attacker
     {
         return rank;
     }
+    
+    
 }

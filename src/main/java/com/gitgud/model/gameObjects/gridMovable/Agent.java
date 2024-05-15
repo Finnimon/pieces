@@ -2,7 +2,7 @@ package com.gitgud.model.gameObjects.gridMovable;
 
 import com.gitgud.control.GridMovableController;
 import com.gitgud.model.gameObjects.GameObject;
-import com.gitgud.model.map.GridMapContext;
+import com.gitgud.model.map.GridMap;
 
 
 public abstract class Agent extends GameObject implements GridMovable
@@ -42,9 +42,9 @@ public abstract class Agent extends GameObject implements GridMovable
     
     
     @Override
-    public GridMovableController getMovableController(GridMapContext gridMapContext)
+    public GridMovableController<Agent> getMovableController(GridMap<Agent> gridMap)
     {
-        return new GridMovableController(gridMapContext, this);
+        return new GridMovableController(gridMap, this);
     }
     
     

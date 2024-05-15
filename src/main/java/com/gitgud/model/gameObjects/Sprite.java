@@ -25,8 +25,8 @@ public interface Sprite
     }
     
     
-    private String urlFromFilePath(String path) throws MalformedURLException
+    public static String urlFromFilePath(String filePath) throws MalformedURLException
     {
-        return new File(path).toURI().toURL().toString();
+        return new File(filePath).toURI().toURL().toString();
     }
 }

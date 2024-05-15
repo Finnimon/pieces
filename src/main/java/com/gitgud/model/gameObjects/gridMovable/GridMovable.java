@@ -2,6 +2,7 @@ package com.gitgud.model.gameObjects.gridMovable;
 
 import com.gitgud.control.GridMovableController;
 import com.gitgud.model.gameObjects.GridMappable;
+import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.GridMapContext;
 
 
@@ -21,5 +22,5 @@ public interface GridMovable extends GridMappable
     public boolean isFlying();
     
     
-    public GridMovableController getMovableController(GridMapContext gridMapContext);
+    GridMovableController<Agent> getMovableController(GridMap<Agent> gridMap);
 }

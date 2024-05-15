@@ -3,7 +3,6 @@ package com.gitgud.model.map;
 
 import com.gitgud.model.gameObjects.GridMappable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -72,6 +71,19 @@ public class GridMap<T extends GridMappable>
     }
     
     
+    public Tile getTile(int x, int y)
+    {
+        return getGraph().keySet().stream().filter(tile -> tile.xPosition() == x && tile.yPosition() == y).findFirst().orElse(null);
+    }
+    
+    public Tile getTile(T gridMappable)
+    {
+        return Objects.requireNonNull(
+                getGraph().entrySet().stream().filter(entry -> entry.getValue() == gridMappable).findFirst().orElse(
+                        null)).getKey();
+    }
+    
+    
     private boolean isConnected(Tile tile, Tile otherTile)
     {
         if (Math.abs(tile.xPosition() - otherTile.xPosition()) > 1)
@@ -90,11 +102,12 @@ public class GridMap<T extends GridMappable>
     
     /**
      * Returns all non null T Values in {@link #getGraph()}
+     *
+     * @return all non null T Values in {@link #getGraph()}
      * @Author: Finn L.
      * @Owner: Finn L.
      * @Since: 15.05.2024
      * @Version: 1.0
-     * @return all non null T Values in {@link #getGraph()}
      */
     public List<T> getAllGridMappables()
     {

@@ -15,7 +15,7 @@ public class ManaWell extends GridMappableBuilding
     private final static String DESCRIPTION = "Come to this building to replenish all your troops' mana.";
     
     //todo
-    private static final String SPRITE_URL = "src\\resources\\sprites\\buildings\\manawell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/manawell.png";
     
     
     public ManaWell()
