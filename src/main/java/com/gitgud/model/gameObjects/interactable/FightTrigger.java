@@ -1,4 +1,4 @@
-package com.gitgud.model.gameObjects.interacteble;
+package com.gitgud.model.gameObjects.interactable;
 
 import com.gitgud.control.FightController;
 import com.gitgud.control.MissionController;
@@ -6,7 +6,7 @@ import com.gitgud.model.gameObjects.GameObject;
 import com.gitgud.model.fight.Fight;
 
 
-public class FightTrigger extends GameObject implements Interacteble
+public class FightTrigger extends GameObject implements Interactable
 {
     private final Fight fight;
     

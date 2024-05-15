@@ -1,11 +1,11 @@
-package com.gitgud.model.gameObjects.interacteble.collectibles;
+package com.gitgud.model.gameObjects.interactable.collectibles;
 
 import com.gitgud.control.MissionController;
-import com.gitgud.model.gameObjects.interacteble.Interacteble;
+import com.gitgud.model.gameObjects.interactable.Interactable;
 import com.gitgud.model.map.GridMapContext;
 
 
-public interface Collectible extends Interacteble
+public interface Collectible extends Interactable
 {
     @Override
     public default void interact(MissionController missionController)
@@ -36,7 +36,7 @@ public interface Collectible extends Interacteble
     }
     
     
-    private void removeFromMap(GridMapContext<Interacteble> gridMapContext)
+    private void removeFromMap(GridMapContext<Interactable> gridMapContext)
     {
         gridMapContext.getGridMappings().remove(this);
     }

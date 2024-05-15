@@ -1,4 +1,4 @@
-package com.gitgud.model.gameObjects.interacteble.buildings;
+package com.gitgud.model.gameObjects.interactable.buildings;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;

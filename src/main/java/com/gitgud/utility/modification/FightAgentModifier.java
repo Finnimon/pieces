@@ -8,6 +8,9 @@ public class FightAgentModifier extends Modifier<FightAgent>
     private final int movementRangeModifier;
     
     
+    private final int rankModifier;
+    
+    
     private final int meleeDamageModifier;
     
     
@@ -47,13 +50,14 @@ public class FightAgentModifier extends Modifier<FightAgent>
     private final float accuracyModifier;
     
     
-    public FightAgentModifier(int movementRangeModifier, int meleeDamageModifier, int rangedDamageModifier,
+    public FightAgentModifier(int movementRangeModifier, int rankModifier, int meleeDamageModifier, int rangedDamageModifier,
                               int rangedAttackRangeModifier, int remainingRangedAttacksModifier,
                               int physicalDefenceModifier, int magicDefenceModifier, float evadeChanceModifier,
                               int maxHealthModifier, int maxManaModifier, int healthModifier, int manaModifier,
                               int initiativeModifier, float accuracyModifier)
     {
         this.movementRangeModifier = movementRangeModifier;
+        this.rankModifier = rankModifier;
         this.meleeDamageModifier = meleeDamageModifier;
         this.rangedDamageModifier = rangedDamageModifier;
         this.rangedAttackRangeModifier = rangedAttackRangeModifier;
@@ -71,29 +75,30 @@ public class FightAgentModifier extends Modifier<FightAgent>
     
     
     @Override
-    public FightAgent modify(FightAgent fightFigure)
+    public FightAgent modify(FightAgent fightAgent)
     {
-        int rangedAttackRange = fightFigure.getRangedAttackRange();
-        int rangedDamage = fightFigure.getRangedDamage();
-        int remainingRangedAttacks = fightFigure.getRemainingRangedAttacks();
-        if (fightFigure.isRangedAttacker())
+        int rank=fightAgent.getRank()+rankModifier;
+        int rangedAttackRange = fightAgent.getRangedAttackRange();
+        int rangedDamage = fightAgent.getRangedDamage();
+        int remainingRangedAttacks = fightAgent.getRemainingRangedAttacks();
+        if (fightAgent.isRangedAttacker())
         {
             rangedAttackRange += rangedAttackRangeModifier;
             rangedDamage += rangedDamageModifier;
             remainingRangedAttacks += remainingRangedAttacksModifier;
         }
         
-        int movementRange = fightFigure.getMovementRange() + movementRangeModifier;
-        int meleeDamage = fightFigure.getMeleeDamage() + meleeDamageModifier;
-        int physicalDefence = fightFigure.getPhysicalDefence() + physicalDefenceModifier;
-        int magicDefence = fightFigure.getMagicDefence() + magicDefenceModifier;
-        float evadeChance = fightFigure.getEvadeChance() * evadeChanceModifier;
-        int maxHealth = fightFigure.getMaxHealth() + maxHealthModifier;
-        int maxMana = fightFigure.getMaxMana() + maxManaModifier;
-        int health = fightFigure.getHealth() + healthModifier;
-        int mana = fightFigure.getMana() + manaModifier;
-        int initiative = fightFigure.getInitiative() + initiativeModifier;
-        float accuracy = fightFigure.getAccuracy() * accuracyModifier;
+        int movementRange = fightAgent.getMovementRange() + movementRangeModifier;
+        int meleeDamage = fightAgent.getMeleeDamage() + meleeDamageModifier;
+        int physicalDefence = fightAgent.getPhysicalDefence() + physicalDefenceModifier;
+        int magicDefence = fightAgent.getMagicDefence() + magicDefenceModifier;
+        float evadeChance = fightAgent.getEvadeChance() * evadeChanceModifier;
+        int maxHealth = fightAgent.getMaxHealth() + maxHealthModifier;
+        int maxMana = fightAgent.getMaxMana() + maxManaModifier;
+        int health = fightAgent.getHealth() + healthModifier;
+        int mana = fightAgent.getMana() + manaModifier;
+        int initiative = fightAgent.getInitiative() + initiativeModifier;
+        float accuracy = fightAgent.getAccuracy() * accuracyModifier;
         
         if (health > maxHealth)
         {
@@ -106,37 +111,38 @@ public class FightAgentModifier extends Modifier<FightAgent>
         }
         
         
-        return new FightAgent(fightFigure.getName(), fightFigure.getDescription(), fightFigure.getSpriteUrl(),
-                              fightFigure.isFlying(), movementRange, fightFigure.getType(), fightFigure.getFaction(),
-                              meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
+        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteUrl(),
+                              fightAgent.isFlying(), movementRange, fightAgent.getType(), fightAgent.getFaction(),
+                              rank, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
                               magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
     }
     
     
     @Override
-    public FightAgent demodify(FightAgent fightFigure)
+    public FightAgent demodify(FightAgent fightAgent)
     {
-        int rangedAttackRange = fightFigure.getRangedAttackRange();
-        int rangedDamage = fightFigure.getRangedDamage();
-        int remainingRangedAttacks = fightFigure.getRemainingRangedAttacks();
-        if (fightFigure.isRangedAttacker())
+        int rank=fightAgent.getRank()-rankModifier;
+        int rangedAttackRange = fightAgent.getRangedAttackRange();
+        int rangedDamage = fightAgent.getRangedDamage();
+        int remainingRangedAttacks = fightAgent.getRemainingRangedAttacks();
+        if (fightAgent.isRangedAttacker())
         {
             rangedAttackRange -= rangedAttackRangeModifier;
             rangedDamage -= rangedDamageModifier;
             remainingRangedAttacks -= remainingRangedAttacksModifier;
         }
         
-        int movementRange = fightFigure.getMovementRange() - movementRangeModifier;
-        int meleeDamage = fightFigure.getMeleeDamage() - meleeDamageModifier;
-        int physicalDefence = fightFigure.getPhysicalDefence() - physicalDefenceModifier;
-        int magicDefence = fightFigure.getMagicDefence() - magicDefenceModifier;
-        float evadeChance = fightFigure.getEvadeChance() / evadeChanceModifier;
-        int maxHealth = fightFigure.getMaxHealth() - maxHealthModifier;
-        int maxMana = fightFigure.getMaxMana() - maxManaModifier;
-        int health = fightFigure.getHealth() - healthModifier;
-        int mana = fightFigure.getMana() - manaModifier;
-        int initiative = fightFigure.getInitiative() - initiativeModifier;
-        float accuracy = fightFigure.getAccuracy() / accuracyModifier;
+        int movementRange = fightAgent.getMovementRange() - movementRangeModifier;
+        int meleeDamage = fightAgent.getMeleeDamage() - meleeDamageModifier;
+        int physicalDefence = fightAgent.getPhysicalDefence() - physicalDefenceModifier;
+        int magicDefence = fightAgent.getMagicDefence() - magicDefenceModifier;
+        float evadeChance = fightAgent.getEvadeChance() / evadeChanceModifier;
+        int maxHealth = fightAgent.getMaxHealth() - maxHealthModifier;
+        int maxMana = fightAgent.getMaxMana() - maxManaModifier;
+        int health = fightAgent.getHealth() - healthModifier;
+        int mana = fightAgent.getMana() - manaModifier;
+        int initiative = fightAgent.getInitiative() - initiativeModifier;
+        float accuracy = fightAgent.getAccuracy() / accuracyModifier;
         
         if (health > maxHealth)
         {
@@ -149,9 +155,9 @@ public class FightAgentModifier extends Modifier<FightAgent>
         }
         
         
-        return new FightAgent(fightFigure.getName(), fightFigure.getDescription(), fightFigure.getSpriteUrl(),
-                              fightFigure.isFlying(), movementRange, fightFigure.getType(), fightFigure.getFaction(),
-                              meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
+        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteUrl(),
+                              fightAgent.isFlying(), movementRange, fightAgent.getType(), fightAgent.getFaction(),
+                              rank, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
                               magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
     }
 }

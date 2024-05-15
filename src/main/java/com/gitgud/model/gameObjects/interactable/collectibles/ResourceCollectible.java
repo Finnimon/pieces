@@ -1,4 +1,4 @@
-package com.gitgud.model.gameObjects.interacteble.collectibles;
+package com.gitgud.model.gameObjects.interactable.collectibles;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;

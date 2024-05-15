@@ -1,6 +1,6 @@
 package com.gitgud.model.gameObjects;
 
-public enum FightFigureType
+public enum FightAgentType
 {
     PAWN, ROOK, BISHOP, QUEEN, KNIGHT;
     

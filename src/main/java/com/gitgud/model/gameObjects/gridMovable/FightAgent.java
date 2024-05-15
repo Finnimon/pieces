@@ -1,13 +1,8 @@
 package com.gitgud.model.gameObjects.gridMovable;
 
-import com.gitgud.model.gameObjects.FightFigureFaction;
-import com.gitgud.model.gameObjects.FightFigureType;
-import com.gitgud.model.fight.Attack;
-import com.gitgud.model.fight.DamageType;
-import com.gitgud.model.fight.Defence;
-import com.gitgud.model.fight.Fight;
-import com.gitgud.model.fight.Attacker;
-import com.gitgud.model.fight.Defender;
+import com.gitgud.model.fight.*;
+import com.gitgud.model.gameObjects.Faction;
+import com.gitgud.model.gameObjects.FightAgentType;
 
 
 /**
@@ -20,13 +15,16 @@ import com.gitgud.model.fight.Defender;
  */
 public class FightAgent extends Agent implements Defender, Attacker
 {
-    private final FightFigureType type;
+    private final FightAgentType type;
     
     
-    private final FightFigureFaction faction;
+    private final Faction faction;
     
     
     private final boolean isRangedAttacker;
+    
+    
+    private final int rank;
     
     
     private int meleeDamage;
@@ -69,7 +67,7 @@ public class FightAgent extends Agent implements Defender, Attacker
     
     
     public FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
-                      FightFigureType type, FightFigureFaction faction, int meleeDamage, int rangedDamage,
+                      FightAgentType type, Faction faction, int rank, int meleeDamage, int rangedDamage,
                       int rangedAttackRange, int remainingRangedAttacks, int physicalDefence, int magicDefence,
                       float evadeChance, int maxHealth, int maxMana, int health, int mana, int initiative,
                       float accuracy)
@@ -77,6 +75,7 @@ public class FightAgent extends Agent implements Defender, Attacker
         super(name, description, spriteUrl, isFlying, movementRange);
         this.type = type;
         this.faction = faction;
+        this.rank = rank;
         this.meleeDamage = meleeDamage;
         this.rangedDamage = rangedDamage;
         this.rangedAttackRange = rangedAttackRange;
@@ -91,6 +90,12 @@ public class FightAgent extends Agent implements Defender, Attacker
         this.mana = mana;
         this.initiative = initiative;
         this.accuracy = accuracy;
+    }
+    
+    
+    public FightAgent create(FightAgentType type, Faction faction, int rank)
+    {
+        return null;
     }
     
     
@@ -300,14 +305,20 @@ public class FightAgent extends Agent implements Defender, Attacker
     }
     
     
-    public FightFigureFaction getFaction()
+    public Faction getFaction()
     {
         return faction;
     }
     
     
-    public FightFigureType getType()
+    public FightAgentType getType()
     {
         return type;
+    }
+    
+    
+    public int getRank()
+    {
+        return rank;
     }
 }

@@ -1,4 +1,4 @@
-package com.gitgud.model.gameObjects.interacteble.collectibles;
+package com.gitgud.model.gameObjects.interactable.collectibles;
 
 public enum ArtefactType
 {

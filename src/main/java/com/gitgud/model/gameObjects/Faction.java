@@ -1,6 +1,6 @@
 package com.gitgud.model.gameObjects;
 
-public enum FightFigureFaction
+public enum Faction
 {
     MONOCHROME, PINK, GREEN;
 }

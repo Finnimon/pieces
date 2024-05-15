@@ -1,11 +1,11 @@
-package com.gitgud.model.gameObjects.interacteble;
+package com.gitgud.model.gameObjects.interactable;
 
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.GridMappable;
 
 
-public interface Interacteble extends GridMappable
+public interface Interactable extends GridMappable
 {
     void interact(MissionController missionController);
 }

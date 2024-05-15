@@ -1,4 +1,4 @@
-package com.gitgud.model.gameObjects.interacteble.collectibles;
+package com.gitgud.model.gameObjects.interactable.collectibles;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
@@ -9,12 +9,12 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class FightFigureCollectible extends GameObject implements Collectible
+public class FightAgentCollectible extends GameObject implements Collectible
 {
     private final FightAgent fightFigure;
     
     
-    public FightFigureCollectible(FightAgent fightFigure)
+    public FightAgentCollectible(FightAgent fightFigure)
     {
         super("Resting " + fightFigure.getName(), fightFigure.getDescription() + "\nThey would like to join your army",
               fightFigure.getSpriteUrl());
