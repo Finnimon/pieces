@@ -9,7 +9,7 @@ public enum RessourceType
     PLATINUM,
     REDSTONE;
     
-    String getSpriteUrl()
+    public String getSpriteUrl()
     {
         return "com/gitgud/sprites/resources/" + this.name().toLowerCase().trim() + ".png";
     }

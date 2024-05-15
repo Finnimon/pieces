@@ -3,7 +3,10 @@ package com.gitgud.model.map;
 
 import com.gitgud.model.gameObjects.GridMappable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -82,5 +85,10 @@ public class GridMap<T extends GridMappable>
         
         
         return otherTile.terrain().isTraversable() && tile.terrain().isTraversable();
+    }
+    
+    public List<T> getAllGridMappables()
+    {
+        return this.graph.values().stream().filter(Objects::nonNull).toList();
     }
 }

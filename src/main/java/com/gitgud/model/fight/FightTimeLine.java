@@ -1,7 +1,6 @@
-package com.gitgud.control;
+package com.gitgud.model.fight;
 
-import com.gitgud.model.fight.Defender;
-import com.gitgud.model.fight.Fight;
+
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class FightTimeLine
     
     public FightTimeLine(Fight fight)
     {
-        List<FightAgent>fightAgentList= fight.getGridMap().getGraph().values().stream().filter(fightAgent -> fightAgent!=null).toList();
+        List<FightAgent>fightAgentList= fight.getGridMap().getAllGridMappables();
         this.current = new TreeSet<>(fightAgentList);
         this.next = new TreeSet<>();
     }

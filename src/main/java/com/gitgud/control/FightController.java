@@ -1,6 +1,7 @@
 package com.gitgud.control;
 
 
+import com.gitgud.model.fight.FightTimeLine;
 import com.gitgud.model.gameObjects.interacteble.FightTrigger;
 import com.gitgud.model.fight.Fight;
 
