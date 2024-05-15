@@ -12,13 +12,10 @@ public class GridMapContext<T extends GridMappable>
     private final GridMap<T> gridMap;
     
     
-    private final HashMap<T, Tile> gridMappings;
     
-    
-    public GridMapContext(GridMap gridMap, HashMap<T, Tile> gridMappings)
+    public GridMapContext(GridMap gridMap)
     {
         this.gridMap = gridMap;
-        this.gridMappings = gridMappings;
     }
     
     
@@ -27,9 +24,4 @@ public class GridMapContext<T extends GridMappable>
         return gridMap;
     }
     
-    
-    public HashMap<T, Tile> getGridMappings()
-    {
-        return gridMappings;
-    }
 }

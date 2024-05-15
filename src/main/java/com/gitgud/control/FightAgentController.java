@@ -1,33 +1,80 @@
 package com.gitgud.control;
 
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.map.GridMapContext;
-import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.map.GridMap;
+import com.gitgud.model.map.Tile;
 
 
-public class FightAgentController extends GridMovableController implements Comparable<FightAgentController>
+public class FightAgentController extends GridMovableController<FightAgent>
 {
+    private final GridMap<FightAgent> gridMap;
     
-    public FightAgentController(GridMapContext<FightAgent> gridMapContext, GridMapping<FightAgent> gridMapping)
+    
+    private final FightAgent fightAgent;
+    
+    
+    private Tile position;
+    
+    
+    public FightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent)
     {
-        super(gridMapContext, gridMapping);
+        this.gridMap = gridMap;
+        this.fightAgent = fightAgent;
+        
+        this.position=gridMap.getGraph().entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(null).getKey();
     }
     
     
-    public FightAgentController(GridMapContext<FightAgent> gridMapContext, FightAgent FightFigure)
+    public FightAgentController(GridMap<FightAgent> gridMap ,FightAgent fightAgent, Tile position)
     {
-        super(gridMapContext, FightFigure);
+        this.gridMap = gridMap;
+        this.fightAgent = fightAgent;
+        this.position = position;
     }
     
-    public FightAgent getFightFigure()
+    
+    public FightAgent getFightAgent()
     {
-        return (FightAgent) getGridMapping().getKey();
+        return fightAgent;
     }
     
     
     @Override
-    public int compareTo(FightAgentController other)
+    public Tile moveTo(Tile tile)
     {
-        return getFightFigure().getInitiative() - other.getFightFigure().getInitiative();
+        Tile oldTile = getPosition();
+        gridMap.getGraph().put(oldTile, null);
+        gridMap.getGraph().put(tile,getFightAgent());
+        setPosition(tile);
+        
+        
+        return oldTile;
+    }
+    
+    
+    @Override
+    public GridMap<FightAgent> getGridMap()
+    {
+        return this.gridMap;
+    }
+    
+    
+    @Override
+    public FightAgent getGridMovable()
+    {
+        return this.fightAgent;
+    }
+    
+    
+    @Override
+    public Tile getPosition()
+    {
+        return this.position;
+    }
+    
+    
+    public void setPosition(Tile position)
+    {
+        this.position = position;
     }
 }

@@ -33,7 +33,7 @@ public class GridMap<T extends GridMappable>
      * @Author: Finn L.
      * @Owner: Finn L.
      */
-    private final Boolean[][] adjecancyMatrix;
+    private final float[][] adjecancyMatrix;
     
     
     public GridMap(HashMap<Tile, T> graph, int width, int height)
@@ -47,13 +47,22 @@ public class GridMap<T extends GridMappable>
     }
     
     
+    public GridMap(HashMap<Tile, T> graph, int width, int height, float[][] adjecancyMatrix)
+    {
+        this.graph = graph;
+        this.width = width;
+        this.height = height;
+        this.adjecancyMatrix = adjecancyMatrix;
+    }
+    
+    
     public HashMap<Tile, T> getGraph()
     {
         return this.graph;
     }
     
     
-    public Boolean[][] getAdjecancyMatrix()
+    public float[][] getAdjecancyMatrix()
     {
         return adjecancyMatrix;
     }
@@ -73,8 +82,9 @@ public class GridMap<T extends GridMappable>
     
     public Tile getTile(int x, int y)
     {
-        return getGraph().keySet().stream().filter(tile -> tile.xPosition() == x && tile.yPosition() == y).findFirst().orElse(null);
+        return getTileByIndex(calculateIndex(x, y));
     }
+    
     
     public Tile getTile(T gridMappable)
     {
@@ -112,5 +122,23 @@ public class GridMap<T extends GridMappable>
     public List<T> getAllGridMappables()
     {
         return this.graph.values().stream().filter(Objects::nonNull).toList();
+    }
+    
+    
+    public int getTileIndex(Tile tile)
+    {
+        return calculateIndex(tile.xPosition(), tile.yPosition());
+    }
+    
+    
+    private int calculateIndex(int x, int y)
+    {
+        return y * width + x;
+    }
+    
+    
+    public Tile getTileByIndex(int index)
+    {
+        return getGraph().keySet().stream().filter(tile -> getTileIndex(tile) == index).findFirst().orElse(null);
     }
 }
