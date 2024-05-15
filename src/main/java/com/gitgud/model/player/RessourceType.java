@@ -11,6 +11,6 @@ public enum RessourceType
     
     public String getSpriteUrl()
     {
-        return "src\\main\\resources\\com\\gitgud\\sprites\\resources\\" + this.name().toLowerCase().trim() + ".png";
+        return "com\\gitgud\\resources\\sprites\\resources\\" + this.name().toLowerCase().trim() + ".png";
     }
 }
