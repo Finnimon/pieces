@@ -2,7 +2,10 @@ package com.gitgud.model.gameObjects.interactable.collectibles;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.interactable.Interactable;
-import com.gitgud.model.map.GridMapContext;
+import com.gitgud.model.map.GridMap;
+import com.gitgud.model.map.Tile;
+
+import java.util.TreeMap;
 
 
 public interface Collectible extends Interactable
@@ -23,7 +26,7 @@ public interface Collectible extends Interactable
         
         
         addToInventory(missionController);
-        removeFromMap(missionController.getMission());
+        removeFromMap(missionController.getMission().getGridMap());
     }
     
     
@@ -36,9 +39,10 @@ public interface Collectible extends Interactable
     }
     
     
-    private void removeFromMap(GridMapContext<Interactable> gridMapContext)
+    private void removeFromMap(GridMap<Interactable> gridMap)
     {
-        gridMapContext.getGridMappings().remove(this);
+        TreeMap<Tile, Interactable> graph = gridMap.getGraph();
+        graph.keySet().stream().filter(tile->graph.get(tile) == this).findFirst().ifPresent(tile -> graph.put(tile, null));
     }
     
     

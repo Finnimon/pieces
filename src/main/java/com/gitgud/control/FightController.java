@@ -1,9 +1,9 @@
 package com.gitgud.control;
 
 
+import com.gitgud.model.fight.Fight;
 import com.gitgud.model.fight.FightTimeLine;
 import com.gitgud.model.gameObjects.interactable.FightTrigger;
-import com.gitgud.model.fight.Fight;
 
 
 public class FightController implements Runnable

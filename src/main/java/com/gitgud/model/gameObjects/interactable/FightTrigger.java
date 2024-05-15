@@ -2,8 +2,8 @@ package com.gitgud.model.gameObjects.interactable;
 
 import com.gitgud.control.FightController;
 import com.gitgud.control.MissionController;
-import com.gitgud.model.gameObjects.GameObject;
 import com.gitgud.model.fight.Fight;
+import com.gitgud.model.gameObjects.GameObject;
 
 
 public class FightTrigger extends GameObject implements Interactable

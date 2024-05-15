@@ -5,8 +5,6 @@ import com.gitgud.model.gameObjects.interactable.Interactable;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;
 
-import java.util.HashMap;
-
 
 public class Mission
 {

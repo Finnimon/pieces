@@ -1,6 +1,7 @@
 package com.gitgud.model.gameObjects.gridMovable;
 
 import com.gitgud.control.GridMovableController;
+import com.gitgud.control.PlayerAgentController;
 import com.gitgud.model.gameObjects.GameObject;
 import com.gitgud.model.map.GridMap;
 
@@ -38,13 +39,6 @@ public abstract class Agent extends GameObject implements GridMovable
     public boolean isFlying()
     {
         return isFlying;
-    }
-    
-    
-    @Override
-    public GridMovableController<Agent> getMovableController(GridMap<Agent> gridMap)
-    {
-        return new GridMovableController(gridMap, this);
     }
     
     

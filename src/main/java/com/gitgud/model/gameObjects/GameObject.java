@@ -1,8 +1,5 @@
 package com.gitgud.model.gameObjects;
 
-import com.gitgud.model.map.GridMapContext;
-import com.gitgud.model.map.GridMapping;
-import com.gitgud.model.map.Tile;
 import com.gitgud.model.fight.Fight;
 import com.gitgud.model.map.GridMap;
 
@@ -10,7 +7,7 @@ import java.util.Arrays;
 
 
 /**
- * Objects to be used in a {@link GridMapContext} or {@link Fight} and plotted on their respective {@link GridMap}.
+ * Objects to be used in a {@link com.gitgud.model.mission.Mission} or {@link Fight} and plotted on their respective {@link GridMap}.
  *
  * @version 2.0
  * @Owner: Finn K.
@@ -54,13 +51,6 @@ public abstract class GameObject implements GridMappable
     public String getSpriteFilePath()
     {
         return spriteFilePath;
-    }
-    
-    
-    @Override
-    public GridMapping <GameObject> getMappingTo(Tile tile)
-    {
-        return new GridMapping(this, tile);
     }
     
     

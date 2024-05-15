@@ -1,28 +1,21 @@
 package com.gitgud.control;
 
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.gameObjects.gridMovable.SpellCasterFightAgent;
-import com.gitgud.model.map.GridMapContext;
-import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.map.GridMap;
+import com.gitgud.model.map.Tile;
 
 
 public class SpellCasterFightAgentController extends FightAgentController
 {
-    public SpellCasterFightAgentController(GridMapContext<FightAgent> gridMapContext, GridMapping gridMapping)
+    public SpellCasterFightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent)
     {
-        super(gridMapContext, gridMapping);
+        super(gridMap, fightAgent);
     }
     
     
-    public SpellCasterFightAgentController(GridMapContext<FightAgent> gridMapContext, FightAgent FightFigure)
+    public SpellCasterFightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent, Tile position)
     {
-        super(gridMapContext, FightFigure);
+        super(gridMap, fightAgent, position);
     }
     
-    
-    @Override
-    public SpellCasterFightAgent getFightFigure()
-    {
-        return (SpellCasterFightAgent) super.getFightFigure();
-    }
 }

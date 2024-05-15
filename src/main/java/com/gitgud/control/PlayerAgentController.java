@@ -3,8 +3,8 @@ package com.gitgud.control;
 import com.gitgud.model.gameObjects.gridMovable.PlayerAgent;
 import com.gitgud.model.gameObjects.interactable.Interactable;
 import com.gitgud.model.map.GridMap;
-import com.gitgud.model.mission.Mission;
 import com.gitgud.model.map.Tile;
+import com.gitgud.model.mission.Mission;
 
 
 public class PlayerAgentController extends GridMovableController<PlayerAgent>
