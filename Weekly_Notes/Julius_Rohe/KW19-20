@@ -1,0 +1,4 @@
+Die HP der Gameobjekts brauchen Bindings,damit man die HP der Gameobjekts Darstellen kann.
+Die charaktäre brauch absolute und Prozentuale Leben.
+Die Items sollten in einemAbrufbaren Array gespeichert werden.
+Mit der GUI muss mit static methoden Kommuniziert werden.

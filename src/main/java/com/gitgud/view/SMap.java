@@ -1,20 +1,30 @@
 package com.gitgud.view;
 
+import com.gitgud.control.PlayerController;
+import com.gitgud.model.map.TerrainType;
+import com.gitgud.model.map.Tile;
+import com.gitgud.model.player.Player;
+import com.gitgud.model.player.RessourceType;
+import com.gitgud.model.player.Wallet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
 
 
 public class SMap{
 
     /**
-     * THis Method creates a Map of Tiles
+     * This Method creates the Map-scene including: the Feld of Tiles, the Move transition methods, The Inventory,
+     * Methods for displaying the game objects
      * @author Julius R.
      * @Owner: Julius R.
      * @Since: 01.05.2024
@@ -29,16 +39,22 @@ public class SMap{
         BorderPane mapMenue = new BorderPane();
         ScrollPane mainMap = new ScrollPane();
         mainMap.setPrefSize(1000,600);
+
         Group tilesGroup = new Group();
         //createFieldOfTiles(tilesGroup);
-        createFieldOfGameObjekts(tilesGroup);
-
         mainMap.setContent(tilesGroup);
+
+        Group gameObjektGroup = new Group();
+        //createFieldOfGameObjekts(gameObjektGroup, );
+        mainMap.setContent(gameObjektGroup);
+
         HBox topMenue = new HBox();
         topMenue.setMinHeight(100);
-
+        createTopMenu(topMenue);
 
         HBox bottomMenue = new HBox();
+        bottomMenue.setMinHeight(300);
+        createBottomMenu(bottomMenue);
 
         mapMenue.setTop(topMenue);
         mapMenue.setBottom(bottomMenue);
@@ -47,7 +63,18 @@ public class SMap{
         root.getChildren().add(mapMenue);
         return MapScene;
     }
-    /*
+
+
+
+    /**
+     * THis Method creates a field of Tiles
+     *
+     *
+     * @author Julius R.
+     * @Owner: Julius R.
+     * @Since: 01.05.2024
+     * @Version: 1.0
+     */
     public static void createFieldOfTiles(Group tilesGroup, Tile[] tiles)
     {
         {
@@ -61,17 +88,9 @@ public class SMap{
                 rectangle.setWidth(100);
                 rectangle.setHeight(100);
 
-                if(tile.terrain().terrainType() == )
-                {
-                    rectangle.setFill(Color.LIGHTBLUE);
-                }
-                else if (tile.getTerrain.getTerrainType == "Mountain")
+                if(tile.terrain().terrainType() == TerrainType.MOUNTAIN)
                 {
                     rectangle.setFill(Color.GRAY);
-                }
-                else if (tile.getTerrain.getTerrainType == "Forest")
-                {
-                    rectangle.setFill(Color.GREEN.darker());
                 }
                 else if((xPosition + yPosition) % 2 == 1 )
                 {
@@ -93,7 +112,7 @@ public class SMap{
             }
         }
     }
-    */
+
     public static void createFieldOfGameObjekts(Group tilesGroup)
     {
         for (int i = 0; i < 10; i++)
@@ -130,4 +149,29 @@ public class SMap{
     {
         System.out.println(tile);
     }
+
+    private static void createTopMenu(HBox menu)
+    {
+        Player player = PlayerController.getInstance().getPlayer();
+
+        Wallet wallet = player.wallet();
+
+       HashMap<RessourceType,Long> resourceMap = wallet.resourceMap();
+        for (RessourceType key : resourceMap.keySet())
+        {
+            long value = resourceMap.get(key);
+
+            HBox box = new HBox();
+
+        }
+
+        menu.getChildren().addAll();
+    }
+
+    private static void createBottomMenu(HBox menu)
+    {
+
+    }
+
+
 }

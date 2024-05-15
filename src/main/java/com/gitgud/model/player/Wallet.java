@@ -14,4 +14,5 @@ import java.util.HashMap;
  */
 public record Wallet(HashMap<RessourceType, Long> resourceMap)
 {
+
 }
