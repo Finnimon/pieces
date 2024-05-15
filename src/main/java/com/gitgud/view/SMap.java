@@ -4,7 +4,7 @@ import com.gitgud.control.PlayerController;
 import com.gitgud.model.map.TerrainType;
 import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
-import com.gitgud.model.player.ResourceType;
+import com.gitgud.model.player.RessourceType;
 import com.gitgud.model.player.Wallet;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,6 +12,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -155,8 +156,8 @@ public class SMap{
 
         Wallet wallet = player.wallet();
 
-       HashMap<ResourceType,Long> resourceMap = wallet.resourceMap();
-        for (ResourceType key : resourceMap.keySet())
+       HashMap<RessourceType,Long> resourceMap = wallet.resourceMap();
+        for (RessourceType key : resourceMap.keySet())
         {
             long value = resourceMap.get(key);
 
