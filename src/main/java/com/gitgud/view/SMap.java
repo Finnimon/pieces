@@ -26,8 +26,6 @@ import java.util.HashMap;
 
 public class SMap{
 
-    private static String ICH_HASSE_MEIN_LEBEN = "FICKMICH";
-
     private static final int STAGE_WITH = 1000;
     private static final int MAIN_MAP_HEIGHT = 600;
     private static final int TOP_MENU_HEIGHT = 100;
@@ -184,10 +182,14 @@ public class SMap{
     private static void createBottomLeftMenu(VBox bottomCentreMenu)
     {
 
+
+        bottomCentreMenu.getChildren().add();
     }
     private static void createBottomCentreMenu(HBox bottomLeftMenu)
     {
 
+
+        bottomLeftMenu.getChildren().add();
     }
 
 
