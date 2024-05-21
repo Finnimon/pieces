@@ -80,14 +80,18 @@ public class FightAgent extends Agent implements Defender, Attacker
     @Override
     public boolean isFlying ()
     {
-        return Objects.requireNonNull(AssetParser.getAttributeValueByTypeFromArray(AssetLocator.FIGHT_AGENT_TYPES,
-                this.type, GameObjectAttribute.IS_FLYING)).getAsBoolean();
+        JsonArray types = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
+        JsonObject fightAttributes = AssetParser.getFightAgentByType(types, this.type);
+
+        return fightAttributes.get(GameObjectAttribute.IS_FLYING).getAsBoolean();
     }
 
     public boolean isRangedAttacker ()
     {
-        return Objects.requireNonNull(AssetParser.getAttributeValueByTypeFromArray(AssetLocator.FIGHT_AGENT_TYPES,
-                this.type, GameObjectAttribute.IS_RANGED_ATTACKER)).getAsBoolean();
+        JsonArray types = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
+        JsonObject fightAttributes = AssetParser.getFightAgentByType(types, this.type);
+
+        return fightAttributes.get(GameObjectAttribute.IS_RANGED_ATTACKER).getAsBoolean();
     }
 
     @Override
@@ -295,7 +299,9 @@ public class FightAgent extends Agent implements Defender, Attacker
         {
             return AssetLocator.DEAD_SPRITE;
         }
-
-        return this.getSpriteUrl();
+        else
+        {
+            return super.getSpriteUrl();
+        }
     }
 }
