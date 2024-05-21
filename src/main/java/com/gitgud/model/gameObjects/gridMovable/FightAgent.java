@@ -323,4 +323,15 @@ public class FightAgent extends Agent implements Defender, Attacker
     }
     
     
+    @Override
+    public String getSpriteFilePath()
+    {
+        if (isDead())
+        {
+            return "src\\main\\resources\\com\\gitgud\\sprites\\agents\\transparent18x18.png";
+        }
+        return super.getSpriteUrl();
+    }
+    
+    
 }
