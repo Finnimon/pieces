@@ -30,7 +30,7 @@ public class HelloApplication extends Application
     public void start(Stage stage) throws IOException
     {
         stage.setTitle("Pieces");
-        stage.getIcons().add(new Image(Sprite.urlFromFilePath("src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png")));
+//        stage.getIcons().add(new Image(Sprite.urlFromFilePath("src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png")));
         delfiMain(stage);
         stage.show();
     }
