@@ -14,7 +14,7 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 
 /**
- * Diese Klasse stellt alle Methoden bereit, um die Informationen aus den externen Spielressourcen an die Spielobjekte zu verteilen.
+ * Diese Klasse stellt alle Methoden bereit, um Informationen aus externen Spielressourcen an Spielobjekte zu verteilen.
  * @author Finn Maximilian Kramer
  * @version 1.0
  */
@@ -132,25 +132,5 @@ public class AssetParser
         }
 
         return map;
-    }
-
-    /**
-     * Liefert ein JsonElement-Objekt als Attributwert eines JsonObject-Objektes aus einem JsonArray-Objekt aus einer Ressource.
-     * @param assetUrl Pfad zur Ressource
-     * @param type Wert des Typ-Attributes des JsonObject-Objektes aus einem JsonArray-Objekt
-     * @param attributeName Bezeichnung des Attributes, dessen Wert zurückgegeben werden soll.
-     * @return Der Wert des Attributes wird als JsonElement-Objekt zurückgegeben.
-     */
-    public static JsonElement getAttributeValueByTypeFromArray (String assetUrl, String type, String attributeName)
-    {
-        JsonArray types = AssetParser.parseJsonArray(assetUrl);
-        HashMap<String, JsonObject> typeToJsonObject = AssetParser.attributeKeyToJsonObject(types, attributeName);
-
-        if (typeToJsonObject != null)
-        {
-            return typeToJsonObject.get(type).getAsJsonObject().get(attributeName);
-        }
-
-        return null;
     }
 }
