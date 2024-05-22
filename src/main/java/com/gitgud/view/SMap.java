@@ -1,6 +1,8 @@
 package com.gitgud.view;
 
 import com.gitgud.control.PlayerController;
+import com.gitgud.model.gameObjects.GridMappable;
+import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.TerrainType;
 import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
@@ -14,14 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 
 public class SMap{
@@ -49,8 +50,9 @@ public class SMap{
      * @Since: 01.05.2024
      * @Version: 1.0
      */
-    public static Scene createMapScene(Stage stage)
+    public static Scene createMapScene(Stage stage, GridMap gridMap)
     {
+
         Group root = new Group();
         Scene MapScene = new Scene(root);
         stage.setScene(MapScene);
@@ -60,11 +62,11 @@ public class SMap{
         mainMap.setPrefSize(STAGE_WITH,MAIN_MAP_HEIGHT);
 
         Group tilesGroup = new Group();
-        createFieldOfTiles(tilesGroup);
+        createFieldOfTiles(tilesGroup, gridMap);
         mainMap.setContent(tilesGroup);
 
         Group gameObjektGroup = new Group();
-        createFieldOfGameObjekts(gameObjektGroup, );
+        createFieldOfGameObjects(gameObjektGroup, gridMap);
         mainMap.setContent(gameObjektGroup);
 
         HBox topMenue = new HBox();
@@ -94,51 +96,67 @@ public class SMap{
      * @Since: 01.05.2024
      * @Version: 1.0
      */
-    public static void createFieldOfTiles(Group tilesGroup, Tile[] tiles)
+    public static void createFieldOfTiles(Group tilesGroup, GridMap gridMap)
     {
         {
-            for (Tile tile : tiles)
+            for (int i = 0 ; i < gridMap.getHeight() ; i++)
             {
-                Rectangle rectangle = new Rectangle();
-                int xPosition = tile.xPosition();
-                int yPosition = tile.yPosition();
-                rectangle.setX(xPosition * TILE_SPACING);
-                rectangle.setY(yPosition * TILE_SPACING);
-                rectangle.setWidth(TILE_DIMENSIONS);
-                rectangle.setHeight(TILE_DIMENSIONS);
+                for (int j = 0; j < gridMap.getWidth() ; j++)
+                {
+                    Tile tile = gridMap.getTile(i, j);
 
-                if(tile.terrain().terrainType() == TerrainType.MOUNTAIN)
-                {
-                    rectangle.setFill(Color.GRAY);
-                }
-                else if((xPosition + yPosition) % 2 == 1 )
-                {
-                    rectangle.setFill(Color.SADDLEBROWN);
-                }
-                else
-                {
-                    rectangle.setFill(Color.WHEAT);
-                }
-                rectangle.setOnMouseClicked(event ->
-                {
-                    if (event.getButton() == MouseButton.SECONDARY)
+                    Rectangle rectangle = new Rectangle();
+                    int xPosition = tile.xPosition();
+                    int yPosition = tile.yPosition();
+                    rectangle.setX(xPosition * TILE_SPACING);
+                    rectangle.setY(yPosition * TILE_SPACING);
+                    rectangle.setWidth(TILE_DIMENSIONS);
+                    rectangle.setHeight(TILE_DIMENSIONS);
+
+                    if (tile.terrain().terrainType() == TerrainType.MOUNTAIN)
                     {
-                        moveRequest(rectangle);
+                        rectangle.setFill(Color.GRAY);
+                    } else if ((xPosition + yPosition) % 2 == 1)
+                    {
+                        rectangle.setFill(Color.SADDLEBROWN);
+                    } else
+                    {
+                        rectangle.setFill(Color.WHEAT);
                     }
+                    rectangle.setOnMouseClicked(moveRequestEvent -> {
+                        if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
+                        {
+                            moveRequest(rectangle);
+                        }
 
-                });
-                tilesGroup.getChildren().add(rectangle);
+                    });
+                    tilesGroup.getChildren().add(rectangle);
+                }
             }
         }
     }
 
-    public static void createFieldOfGameObjekts(Group tilesGroup)
+    public static <T extends GridMappable> void createFieldOfGameObjects(Group tilesGroup, GridMap<T> gridMap)
     {
-        for (int i = 0; i < 10; i++)
+        AnchorPane anchorPane =new AnchorPane();
+        TreeMap<Tile, T> graph = gridMap.getGraph();
+        for (int i = 0; i < gridMap.getHeight(); i++)
         {
-
+            for (int j = 0; j < gridMap.getWidth(); j++)
+            {
+                Tile tile = gridMap.getTile(i, j);
+                T element = graph.get(tile);
+                if(element == null)
+                    continue;
+                Pane gameObjectContainer = new Pane();
+                anchorPane.setTopAnchor(gameObjectContainer, (double)(tile.yPosition() * TILE_SPACING));
+                anchorPane.setLeftAnchor(gameObjectContainer, (double)(tile.xPosition() * TILE_SPACING));
+                gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
+                gameObjectContainer.addEventFilter();
+            }
         }
     }
+
 
     public static void moveRequest(Rectangle tile)
     {
@@ -152,6 +170,7 @@ public class SMap{
         Wallet wallet = player.wallet();
 
        HashMap<ResourceType,Long> resourceMap = wallet.resourceMap();
+
         for (ResourceType key : resourceMap.keySet())
         {
             long value = resourceMap.get(key);
@@ -181,7 +200,6 @@ public class SMap{
     }
     private static void createBottomLeftMenu(VBox bottomCentreMenu)
     {
-
 
         bottomCentreMenu.getChildren().add();
     }

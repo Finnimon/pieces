@@ -20,11 +20,7 @@ import java.util.TreeMap;
 public class GridMap<T extends GridMappable>
 {
     private final TreeMap<Tile, T> graph;
-    
-    
     private final int width;
-    
-    
     private final int height;
     
     
