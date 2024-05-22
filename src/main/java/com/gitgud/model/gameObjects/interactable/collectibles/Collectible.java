@@ -41,8 +41,7 @@ public interface Collectible extends Interactable
     
     private void removeFromMap(GridMap<Interactable> gridMap)
     {
-        TreeMap<Tile, Interactable> graph = gridMap.getGraph();
-        graph.keySet().stream().filter(tile->graph.get(tile) == this).findFirst().ifPresent(tile -> graph.put(tile, null));
+        gridMap.keySet().stream().filter(key->gridMap.get(key) == this).findFirst().ifPresent(tile -> gridMap.put(tile, null));
     }
     
     

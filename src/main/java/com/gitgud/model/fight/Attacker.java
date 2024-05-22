@@ -1,6 +1,9 @@
 package com.gitgud.model.fight;
 
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.map.Tile;
+
+import java.util.List;
 
 
 /**
@@ -22,5 +25,7 @@ public interface Attacker
     
     
     Attack createAttack(float range);
+    
+    
     
 }

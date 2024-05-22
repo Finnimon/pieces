@@ -21,7 +21,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
         this.gridMap = gridMap;
         this.fightAgent = fightAgent;
         
-        this.position=gridMap.getGraph().entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(null).getKey();
+        this.position=gridMap.entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(null).getKey();
     }
     
     
@@ -43,8 +43,8 @@ public class FightAgentController extends GridMovableController<FightAgent>
     public Tile moveTo(Tile tile)
     {
         Tile oldTile = getPosition();
-        gridMap.getGraph().put(oldTile, null);
-        gridMap.getGraph().put(tile,getFightAgent());
+        gridMap.put(oldTile, null);
+        gridMap.put(tile,getFightAgent());
         setPosition(tile);
         
         
