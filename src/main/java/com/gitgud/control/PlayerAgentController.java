@@ -1,44 +1,60 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.gridMovable.Agent;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.gameObjects.gridMovable.PlayerAgent;
-import com.gitgud.model.mission.Mission;
-import com.gitgud.model.map.GridMapping;
+import com.gitgud.model.gameObjects.interactable.Interactable;
+import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;
+import com.gitgud.model.mission.Mission;
 
 
-public class PlayerAgentController extends GridMovableController
+public class PlayerAgentController extends GridMovableController<PlayerAgent>
 {
-    public PlayerAgentController(Mission mission, GridMapping<FightAgent> gridMapping)
+    private final Mission mission;
+    
+    
+    public PlayerAgentController(Mission mission)
     {
-        super(mission, gridMapping);
-    }
-    
-    
-    public PlayerAgentController(Mission mission, Agent agent)
-    {
-        super(mission, mission.getPlayerAgentGridMapping());
-    }
-    
-    
-    @Override
-    public Mission getGridMapContext()
-    {
-        return (Mission) super.getGridMapContext();
-    }
-    
-    
-    @Override
-    public GridMapping<PlayerAgent> getGridMapping()
-    {
-        return super.getGridMapping();
+        this.mission = mission;
     }
     
     
     @Override
     public Tile moveTo(Tile tile)
     {
-        return super.moveTo(tile);
+        Mission mission = getMission();
+        Tile oldTile=mission.getPlayerAgentPosition();
+        mission.setPlayerAgentPosition(tile);
+        
+        
+        return oldTile;
+    }
+    
+    
+    
+    
+    @Override
+    public GridMap<Interactable> getGridMap()
+    {
+        return getMission().getGridMap();
+    }
+    
+    
+    @Override
+    public PlayerAgent getGridMovable()
+    {
+        return getMission().getPlayerAgent();
+    }
+    
+    
+    @Override
+    public Tile getPosition()
+    {
+        return getMission().getPlayerAgentPosition();
+    }
+    
+    
+    public Mission getMission()
+    {
+        return mission;
     }
 }

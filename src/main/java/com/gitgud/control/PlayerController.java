@@ -41,6 +41,12 @@ public class PlayerController
     }
     
     
+    public static void reset()
+    {
+        playerControllerSingleton = null;
+    }
+    
+    
     public Player getPlayer()
     {
         return player;

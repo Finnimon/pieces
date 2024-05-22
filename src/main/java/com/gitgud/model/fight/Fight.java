@@ -1,12 +1,7 @@
 package com.gitgud.model.fight;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.map.GridMapContext;
-import com.gitgud.model.map.FightGridMap;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.Tile;
-
-import java.util.HashMap;
 
 
 /**
@@ -17,14 +12,19 @@ import java.util.HashMap;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-public class Fight extends GridMapContext<FightAgent>
+public class Fight
 {
+    private final GridMap<FightAgentFL> gridMap;
     
-    public Fight(FightGridMap gridMap, HashMap<FightAgent, Tile> gameObjectMappings)
+    
+    public Fight(GridMap<FightAgentFL> gridMap)
     {
-        super(gridMap, gameObjectMappings);
+        this.gridMap = gridMap;
     }
     
     
-    
+    public GridMap<FightAgentFL> getGridMap()
+    {
+        return gridMap;
+    }
 }

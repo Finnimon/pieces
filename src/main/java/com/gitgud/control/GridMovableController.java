@@ -3,69 +3,43 @@ package com.gitgud.control;
 import com.gitgud.model.gameObjects.gridMovable.GridMovable;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;
+import com.gitgud.utility.services.GridMapServices;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 
-public class GridMovableController <T extends GridMovable>
+public abstract class GridMovableController<T extends GridMovable>
 {
-    private final GridMap<T> gridMap;
-    
-    
-    private final T gridMovable;
-    
-  
-    private final Tile position;
-    
-    
-    public GridMovableController(GridMap<T> gridMap, T gridMovable, Tile position)
+    public ArrayList<Tile> getTilesInMovementRange()
     {
-        this.gridMap = gridMap;
-        this.gridMovable = gridMovable;
-        this.position = position;
-    }
-    
-    public  GridMovableController(GridMap<T> gridMap,T gridMovable)
-    {
-        this.gridMap = gridMap;
-        this.gridMovable = gridMovable;
-        this.position = gridMap.getTile(gridMovable);
+        GridMap gridMap = getGridMap();
+        int movementRange = getGridMovable().getMovementRange();
+        Tile position = getPosition();
+        return GridMapServices.getInRange(gridMap, position, movementRange);
     }
     
     
-    public Tile moveTo(Tile tile)
+    public abstract Tile moveTo(Tile tile);
+    
+    
+    public boolean canMoveTo(Tile tile)
     {
-        Tile oldTile = getPosition();
+        Tile position = getPosition();
         
-        HashMap<Tile,T> graph = gridMap.getGraph();
+        GridMap gridMap = getGridMap();
+        int positionIndex = gridMap.getTileIndex(position);
+        int tileIndex = gridMap.getTileIndex(tile);
         
-        graph.put(tile, getGridMovable());
-        graph.put(oldTile, null);
         
-        return oldTile;
+        return gridMap.getAdjecancyMatrix()[positionIndex][tileIndex]<= getGridMovable().getMovementRange();
     }
     
     
-    private boolean canMoveTo(Tile tile)
-    {
-        return false;
-    }
+    public abstract GridMap getGridMap();
     
     
-    public GridMap getGridMap()
-    {
-        return gridMap;
-    }
+    public abstract T getGridMovable();
     
     
-    public T getGridMovable()
-    {
-        return gridMovable;
-    }
-    
-    
-    public Tile getPosition()
-    {
-        return position;
-    }
+    public abstract Tile getPosition();
 }

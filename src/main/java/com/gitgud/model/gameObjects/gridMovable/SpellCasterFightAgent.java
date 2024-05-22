@@ -1,12 +1,12 @@
 package com.gitgud.model.gameObjects.gridMovable;
 
-import com.gitgud.model.gameObjects.Faction;
-import com.gitgud.model.gameObjects.FightAgentType;
 import com.gitgud.model.fight.SpellBook;
 import com.gitgud.model.fight.SpellCaster;
+import com.gitgud.model.gameObjects.Faction;
+import com.gitgud.model.gameObjects.FightAgentType;
 
 
-public class SpellCasterFightAgent extends FightAgent implements SpellCaster
+public class SpellCasterFightAgent extends FightAgentFL implements SpellCaster
 {
     
     public SpellCasterFightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,

@@ -1,6 +1,6 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 import com.gitgud.model.mission.Mission;
 
 
@@ -10,13 +10,13 @@ public class MissionController
     private final Mission mission;
     
     
-    private final FightAgent[] activeFightFigures;
+    private final FightAgentFL[] activeFightFigures;
     
     
-    private final FightAgent[] discardedFightFigures;
+    private final FightAgentFL[] discardedFightFigures;
     
     
-    public MissionController(Mission mission, FightAgent[] activeFightFigures, FightAgent[] discardedFightFigures)
+    public MissionController(Mission mission, FightAgentFL[] activeFightFigures, FightAgentFL[] discardedFightFigures)
     {
         this.mission = mission;
         this.activeFightFigures = activeFightFigures;
@@ -30,13 +30,13 @@ public class MissionController
     }
     
     
-    public FightAgent[] getActiveFightFigures()
+    public FightAgentFL[] getActiveFightFigures()
     {
         return activeFightFigures;
     }
     
     
-    public FightAgent[] getDiscardedFightFigures()
+    public FightAgentFL[] getDiscardedFightFigures()
     {
         return discardedFightFigures;
     }

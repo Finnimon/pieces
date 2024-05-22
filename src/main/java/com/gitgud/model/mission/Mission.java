@@ -3,28 +3,47 @@ package com.gitgud.model.mission;
 import com.gitgud.model.gameObjects.gridMovable.PlayerAgent;
 import com.gitgud.model.gameObjects.interactable.Interactable;
 import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.GridMapContext;
-import com.gitgud.model.map.GridMapping;
 import com.gitgud.model.map.Tile;
 
-import java.util.HashMap;
 
-
-public class Mission extends GridMapContext<Interactable>
+public class Mission
 {
-    private final GridMapping<PlayerAgent> playerAgentGridMapping;
+    private final GridMap<Interactable> gridMap;
+    
+    private final PlayerAgent playerAgent;
     
     
-    public Mission(GridMap gridMap, HashMap<Interactable, Tile> gridMappings,
-                   GridMapping<PlayerAgent> playerAgentGridMapping)
+    public void setPlayerAgentPosition(Tile playerAgentPosition)
     {
-        super(gridMap, gridMappings);
-        this.playerAgentGridMapping = playerAgentGridMapping;
+        this.playerAgentPosition = playerAgentPosition;
     }
     
     
-    public GridMapping<PlayerAgent> getPlayerAgentGridMapping()
+    private Tile playerAgentPosition;
+    
+    public Mission(GridMap<Interactable> gridMap, Tile startingPosition)
     {
-        return playerAgentGridMapping;
+        this.gridMap = gridMap;
+        
+        playerAgent=new PlayerAgent();
+        playerAgentPosition = startingPosition;
+    }
+    
+    
+    public GridMap<Interactable> getGridMap()
+    {
+        return gridMap;
+    }
+    
+    
+    public PlayerAgent getPlayerAgent()
+    {
+        return playerAgent;
+    }
+    
+    
+    public Tile getPlayerAgentPosition()
+    {
+        return playerAgentPosition;
     }
 }

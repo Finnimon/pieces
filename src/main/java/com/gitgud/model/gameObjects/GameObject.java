@@ -1,8 +1,5 @@
 package com.gitgud.model.gameObjects;
 
-import com.gitgud.model.map.GridMapContext;
-import com.gitgud.model.map.GridMapping;
-import com.gitgud.model.map.Tile;
 import com.gitgud.model.fight.Fight;
 import com.gitgud.model.map.GridMap;
 
@@ -10,7 +7,7 @@ import java.util.Arrays;
 
 
 /**
- * Objects to be used in a {@link GridMapContext} or {@link Fight} and plotted on their respective {@link GridMap}.
+ * Objects to be used in a {@link com.gitgud.model.mission.Mission} or {@link Fight} and plotted on their respective {@link GridMap}.
  *
  * @version 2.0
  * @Owner: Finn K.
@@ -19,53 +16,61 @@ import java.util.Arrays;
  */
 public abstract class GameObject implements GridMappable
 {
-    private final String name;
+    private String name;
+    private String description;
+    private String spriteUrl;
     
-    
-    private final String description;
-    
-    
-    private final String spriteFilePath;
-    
-    
-    public GameObject(String name, String description, String spriteFilePath)
+    public GameObject ()
+    {
+
+    }
+
+    public GameObject (String name, String description, String spriteUrl)
     {
         this.name = name;
         this.description = description;
-        this.spriteFilePath = spriteFilePath;
+        this.spriteUrl = spriteUrl;
     }
     
     
     @Override
-    public String getName()
+    public String getName ()
     {
         return name;
     }
-    
-    
+
     @Override
-    public String getDescription()
+    public void setName (String name)
+    {
+        this.name = name;
+    }
+
+    @Override
+    public String getDescription ()
     {
         return description;
     }
-    
-    
+
     @Override
-    public String getSpriteFilePath()
+    public void setDescription (String description)
     {
-        return spriteFilePath;
+        this.description = description;
     }
-    
-    
+
     @Override
-    public GridMapping <GameObject> getMappingTo(Tile tile)
+    public String getSpriteUrl ()
     {
-        return new GridMapping(this, tile);
+        return spriteUrl;
     }
-    
-    
+
     @Override
-    public int hashCode()
+    public void setSpriteUrl (String spriteUrl)
+    {
+        this.spriteUrl = spriteUrl;
+    }
+
+    @Override
+    public int hashCode ()
     {
         return Arrays.hashCode(new Object[]{ this });
     }

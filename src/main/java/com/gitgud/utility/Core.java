@@ -43,4 +43,6 @@ public record Core()
         IntStream.range(0, objects.length).filter(i -> objects[i] == object).findFirst().ifPresent(
                 i -> objects[i] = replacement);
     }
+    
+    
 }

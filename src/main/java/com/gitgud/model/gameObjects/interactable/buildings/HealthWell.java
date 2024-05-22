@@ -1,7 +1,7 @@
 package com.gitgud.model.gameObjects.interactable.buildings;
 
 import com.gitgud.control.MissionController;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class HealthWell extends GridMappableBuilding
     }
     
     
-    private void healFightFigures(FightAgent[] fightFigures)
+    private void healFightFigures(FightAgentFL[] fightFigures)
     {
         List.of(fightFigures).forEach(fightFigure -> fightFigure.setHealth(fightFigure.getMaxHealth()));
     }
