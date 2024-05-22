@@ -1,11 +1,11 @@
 package com.gitgud.model.fight;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 
 
 /**
  * All Objects using {@link Defence} to defend from {@link Attacker} must implement this interface.
- * implemented by {@link FightAgent}
+ * implemented by {@link FightAgentFL}
  *
  * @author Finn L.
  * @Owner: Finn L.

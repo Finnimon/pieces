@@ -3,14 +3,14 @@ package com.gitgud.model.fight;
 import com.gitgud.model.gameObjects.Describable;
 import com.gitgud.model.gameObjects.Named;
 import com.gitgud.model.gameObjects.Sprite;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 import com.gitgud.model.player.Player;
 import com.gitgud.utility.Core;
 import com.gitgud.utility.modification.FightAgentModifier;
 
 
 /**
- * A Spell to be used in {@link Fight} by either {@link Player} or {@link FightAgent} on a {@link FightAgent}
+ * A Spell to be used in {@link Fight} by either {@link Player} or {@link FightAgentFL} on a {@link FightAgentFL}
  */
 public final class Spell implements Sprite, Describable, Named
 {
@@ -66,22 +66,40 @@ public final class Spell implements Sprite, Describable, Named
     {
         return name;
     }
-    
-    
+
+    @Override
+    public void setName(String name)
+    {
+
+    }
+
+
     @Override
     public String getDescription()
     {
         return Description;
     }
-    
-    
+
     @Override
-    public String getSpriteFilePath()
+    public void setDescription(String description)
+    {
+
+    }
+
+
+    @Override
+    public String getSpriteUrl()
     {
         return spriteFilePath;
     }
-    
-    
+
+    @Override
+    public void setSpriteUrl(String spriteUrl)
+    {
+
+    }
+
+
     public boolean doesSucceed()
     {
         return Core.roll(successChance);
