@@ -1,6 +1,6 @@
 package com.gitgud.model.fight;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 import com.gitgud.model.map.GridMap;
 
 
@@ -14,16 +14,16 @@ import com.gitgud.model.map.GridMap;
  */
 public class Fight
 {
-    private final GridMap<FightAgent> gridMap;
+    private final GridMap<FightAgentFL> gridMap;
     
     
-    public Fight(GridMap<FightAgent> gridMap)
+    public Fight(GridMap<FightAgentFL> gridMap)
     {
         this.gridMap = gridMap;
     }
     
     
-    public GridMap<FightAgent> getGridMap()
+    public GridMap<FightAgentFL> getGridMap()
     {
         return gridMap;
     }

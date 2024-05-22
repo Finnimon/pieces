@@ -1,22 +1,22 @@
 package com.gitgud.control;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;
 
 
-public class FightAgentController extends GridMovableController<FightAgent>
+public class FightAgentController extends GridMovableController<FightAgentFL>
 {
-    private final GridMap<FightAgent> gridMap;
+    private final GridMap<FightAgentFL> gridMap;
     
     
-    private final FightAgent fightAgent;
+    private final FightAgentFL fightAgent;
     
     
     private Tile position;
     
     
-    public FightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent)
+    public FightAgentController(GridMap<FightAgentFL> gridMap, FightAgentFL fightAgent)
     {
         this.gridMap = gridMap;
         this.fightAgent = fightAgent;
@@ -25,7 +25,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
     }
     
     
-    public FightAgentController(GridMap<FightAgent> gridMap ,FightAgent fightAgent, Tile position)
+    public FightAgentController(GridMap<FightAgentFL> gridMap , FightAgentFL fightAgent, Tile position)
     {
         this.gridMap = gridMap;
         this.fightAgent = fightAgent;
@@ -33,7 +33,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
     }
     
     
-    public FightAgent getFightAgent()
+    public FightAgentFL getFightAgent()
     {
         return fightAgent;
     }
@@ -53,14 +53,14 @@ public class FightAgentController extends GridMovableController<FightAgent>
     
     
     @Override
-    public GridMap<FightAgent> getGridMap()
+    public GridMap<FightAgentFL> getGridMap()
     {
         return this.gridMap;
     }
     
     
     @Override
-    public FightAgent getGridMovable()
+    public FightAgentFL getGridMovable()
     {
         return this.fightAgent;
     }

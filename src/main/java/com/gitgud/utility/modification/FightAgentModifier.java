@@ -1,9 +1,9 @@
 package com.gitgud.utility.modification;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
 
 
-public class FightAgentModifier extends Modifier<FightAgent>
+public class FightAgentModifier extends Modifier<FightAgentFL>
 {
     private final int movementRangeModifier;
     
@@ -75,7 +75,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
     
     
     @Override
-    public FightAgent modify(FightAgent fightAgent)
+    public FightAgentFL modify(FightAgentFL fightAgent)
     {
         int rank=fightAgent.getRank()+rankModifier;
         int rangedAttackRange = fightAgent.getRangedAttackRange();
@@ -111,7 +111,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
         }
         
         
-        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteFilePath(),
+        return new FightAgentFL(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteUrl(),
                               fightAgent.isFlying(), movementRange, fightAgent.getType(), fightAgent.getFaction(),
                               rank, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
                               magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
@@ -119,7 +119,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
     
     
     @Override
-    public FightAgent demodify(FightAgent fightAgent)
+    public FightAgentFL demodify(FightAgentFL fightAgent)
     {
         int rank=fightAgent.getRank()-rankModifier;
         int rangedAttackRange = fightAgent.getRangedAttackRange();
@@ -155,7 +155,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
         }
         
         
-        return new FightAgent(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteFilePath(),
+        return new FightAgentFL(fightAgent.getName(), fightAgent.getDescription(), fightAgent.getSpriteUrl(),
                               fightAgent.isFlying(), movementRange, fightAgent.getType(), fightAgent.getFaction(),
                               rank, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, physicalDefence,
                               magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
