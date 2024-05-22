@@ -3,7 +3,6 @@ package com.gitgud.model.map;
 
 import com.gitgud.model.gameObjects.GridMappable;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.TreeMap;

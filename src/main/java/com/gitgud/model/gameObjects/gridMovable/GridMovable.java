@@ -1,8 +1,6 @@
 package com.gitgud.model.gameObjects.gridMovable;
 
-import com.gitgud.control.GridMovableController;
 import com.gitgud.model.gameObjects.GridMappable;
-import com.gitgud.model.map.GridMap;
 
 
 /**

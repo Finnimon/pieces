@@ -7,6 +7,8 @@ import com.gitgud.model.map.Tile;
 
 public class SpellCasterFightAgentController extends FightAgentController
 {
+    
+    
     public SpellCasterFightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent)
     {
         super(gridMap, fightAgent);
@@ -17,5 +19,6 @@ public class SpellCasterFightAgentController extends FightAgentController
     {
         super(gridMap, fightAgent, position);
     }
+    
     
 }
