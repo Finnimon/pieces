@@ -16,61 +16,46 @@ import java.util.Arrays;
  */
 public abstract class GameObject implements GridMappable
 {
-    private String name;
-    private String description;
-    private String spriteUrl;
+    private final String name;
     
-    public GameObject ()
-    {
-
-    }
-
-    public GameObject (String name, String description, String spriteUrl)
+    
+    private final String description;
+    
+    
+    private final String spriteFilePath;
+    
+    
+    public GameObject(String name, String description, String spriteFilePath)
     {
         this.name = name;
         this.description = description;
-        this.spriteUrl = spriteUrl;
+        this.spriteFilePath = spriteFilePath;
     }
     
     
     @Override
-    public String getName ()
+    public String getName()
     {
         return name;
     }
-
+    
+    
     @Override
-    public void setName (String name)
-    {
-        this.name = name;
-    }
-
-    @Override
-    public String getDescription ()
+    public String getDescription()
     {
         return description;
     }
-
+    
+    
     @Override
-    public void setDescription (String description)
+    public String getSpriteFilePath()
     {
-        this.description = description;
+        return spriteFilePath;
     }
-
+    
+    
     @Override
-    public String getSpriteUrl ()
-    {
-        return spriteUrl;
-    }
-
-    @Override
-    public void setSpriteUrl (String spriteUrl)
-    {
-        this.spriteUrl = spriteUrl;
-    }
-
-    @Override
-    public int hashCode ()
+    public int hashCode()
     {
         return Arrays.hashCode(new Object[]{ this });
     }

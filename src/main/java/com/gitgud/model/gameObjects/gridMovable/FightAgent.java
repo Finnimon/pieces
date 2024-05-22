@@ -1,301 +1,337 @@
 package com.gitgud.model.gameObjects.gridMovable;
 
 import com.gitgud.model.fight.*;
-import com.gitgud.model.gameObjects.AssetLocator;
 import com.gitgud.model.gameObjects.Faction;
 import com.gitgud.model.gameObjects.FightAgentType;
-import com.gitgud.model.gameObjects.GameObjectAttribute;
-import com.gitgud.utility.ExceptionMessage;
-import com.gitgud.utility.services.AssetParser;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
- * @author Finn Maximilian Kramer
- * @version 1.0
+ * This Class represents a FightAgent in a {@link Fight}.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 16.04.2024
+ * @Version: 1.0
  */
 public class FightAgent extends Agent implements Defender, Attacker
 {
-    // Typ des FightAgent-Objekts
-    private final String type;
-
-    // Fraktion des FightAgent-Objekts
-    private final String faction;
-
-    // Rang des FightAgent-Objekts
-    private int rank;
-
-    // Kampf-Attribute des FightAgent-Objekts
-    private HashMap<String, Integer> fightAttributes;
-
-
-    /**
-     * Die Konstruktor-Methode stellt ein FightAgent-Objekt für entsprechenden Typ, Rang, Fraktion & Farbe bereit.
-     * @param type Typ des FightAgent-Objekts
-     * @param faction Fraktion des FightAgent-Objekts
-     * @param rank Rang des FightAgent-Objekts
-     * @param color Farbe des FightAgent-Objekts
-     */
-    public FightAgent (String type, String faction, int rank, String color)
+    private final FightAgentType type;
+    
+    
+    private final Faction faction;
+    
+    
+    private final boolean isRangedAttacker;
+    
+    
+    private final int rank;
+    
+    
+    private int meleeDamage;
+    
+    
+    private int rangedDamage;
+    
+    
+    private int rangedAttackRange;
+    
+    
+    private int remainingRangedAttacks;
+    
+    
+    private int physicalDefence;
+    
+    
+    private int magicDefence;
+    
+    
+    private float evadeChance;
+    
+    
+    private int maxHealth;
+    
+    
+    private int maxMana;
+    
+    
+    private int health;
+    
+    
+    private int mana;
+    
+    
+    private int initiative;
+    
+    
+    private float accuracy;
+    
+    
+    public FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
+                      FightAgentType type, Faction faction, int rank, int meleeDamage, int rangedDamage,
+                      int rangedAttackRange, int remainingRangedAttacks, int physicalDefence, int magicDefence,
+                      float evadeChance, int maxHealth, int maxMana, int health, int mana, int initiative,
+                      float accuracy)
     {
+        super(name, description, spriteUrl, isFlying, movementRange);
         this.type = type;
         this.faction = faction;
         this.rank = rank;
-        init(type, color);
+        this.meleeDamage = meleeDamage;
+        this.rangedDamage = rangedDamage;
+        this.rangedAttackRange = rangedAttackRange;
+        this.remainingRangedAttacks = remainingRangedAttacks;
+        this.isRangedAttacker = rangedDamage > 0;
+        this.physicalDefence = physicalDefence;
+        this.magicDefence = magicDefence;
+        this.evadeChance = evadeChance;
+        this.maxHealth = maxHealth;
+        this.maxMana = maxMana;
+        this.health = health;
+        this.mana = mana;
+        this.initiative = initiative;
+        this.accuracy = accuracy;
     }
-
-
-    /**
-     * Initialisiert ein FightAgent-Objekt entsprechend dem Typ.
-     * @param type Typ des FightAgent-Objekts
-     */
-    private void init (String type, String color)
+    
+    
+    public FightAgent create(FightAgentType type, Faction faction, int rank)
     {
-        JsonArray types = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
-        JsonObject fightAttributes = AssetParser.getFightAgentByType(types, type);
-
-        this.setName(fightAttributes.get(GameObjectAttribute.TYPE).getAsString());
-        this.setDescription(fightAttributes.get(GameObjectAttribute.DESCRIPTION).getAsString());
-
-        switch (color)
-        {
-            case ("white"):
-                this.setSpriteUrl(fightAttributes.get(GameObjectAttribute.SPRITE_URL_WHITE).getAsString());
-                break;
-
-            case ("black"):
-                this.setSpriteUrl(fightAttributes.get(GameObjectAttribute.SPRITE_URL_BLACK).getAsString());
-                break;
-
-            default:
-                break;
-        }
-
-        this.fightAttributes = AssetParser.mapAttributeKeysToIntegers(fightAttributes);
+        return null;
     }
-
-    @Override
-    public boolean isFlying ()
+    
+    
+    public int getMana()
     {
-        return Objects.requireNonNull(AssetParser.getAttributeValueByTypeFromArray(AssetLocator.FIGHT_AGENT_TYPES,
-                this.type, GameObjectAttribute.IS_FLYING)).getAsBoolean();
+        return mana;
     }
-
-    public boolean isRangedAttacker ()
+    
+    
+    public void setMana(int mana)
     {
-        return Objects.requireNonNull(AssetParser.getAttributeValueByTypeFromArray(AssetLocator.FIGHT_AGENT_TYPES,
-                this.type, GameObjectAttribute.IS_RANGED_ATTACKER)).getAsBoolean();
+        this.mana = mana;
     }
-
-    @Override
-    public int getMovementRange ()
+    
+    
+    public float getEvadeChance()
     {
-        return this.fightAttributes.get(GameObjectAttribute.MOVEMENT_RANGE);
+        return evadeChance;
     }
-
-    public String getType ()
+    
+    
+    public void setEvadeChance(float evadeChance)
     {
-        return this.type;
+        this.evadeChance = evadeChance;
     }
-
-    public int getRank ()
+    
+    
+    public boolean isRangedAttacker()
     {
-        return this.rank;
+        return isRangedAttacker;
     }
-
-    public void upgradeRank ()
+    
+    
+    public int getMeleeDamage()
     {
-        this.rank++;
+        return meleeDamage;
     }
-
-    public String getFaction ()
+    
+    
+    public void setMeleeDamage(int meleeDamage)
     {
-        return this.faction;
+        this.meleeDamage = meleeDamage;
     }
-
-    public int getHealth ()
+    
+    
+    public int getRangedDamage()
     {
-        return this.fightAttributes.get(GameObjectAttribute.HEALTH);
+        return rangedDamage;
     }
-
-    public void setHealth (int newValue)
+    
+    
+    public void setRangedDamage(int rangedDamage)
     {
-        this.fightAttributes.replace(GameObjectAttribute.HEALTH, newValue);
+        this.rangedDamage = rangedDamage;
     }
-
-    public int getMaxHealth ()
+    
+    
+    public int getRemainingRangedAttacks()
     {
-        return this.fightAttributes.get(GameObjectAttribute.MAX_HEALTH);
+        return remainingRangedAttacks;
     }
-
-    public void setMaxHealth (int newValue)
+    
+    
+    public void setRemainingRangedAttacks(int remainingRangedAttacks)
     {
-        this.fightAttributes.replace(GameObjectAttribute.MAX_HEALTH, newValue);
+        this.remainingRangedAttacks = remainingRangedAttacks;
     }
-
-    public int getPhysicalDefence ()
+    
+    
+    public int getPhysicalDefence()
     {
-        return this.fightAttributes.get(GameObjectAttribute.PHYSICAL_DEFENCE);
+        return physicalDefence;
     }
-
-    public void setPhysicalDefence (int newValue)
+    
+    
+    public void setPhysicalDefence(int physicalDefence)
     {
-        this.fightAttributes.replace(GameObjectAttribute.PHYSICAL_DEFENCE, newValue);
+        this.physicalDefence = physicalDefence;
     }
-
-    public int getMana ()
+    
+    
+    public int getMagicDefence()
     {
-        return this.fightAttributes.get(GameObjectAttribute.MANA);
+        return magicDefence;
     }
-
-    public void setMana (int newValue)
+    
+    
+    public void setMagicDefence(int magicDefence)
     {
-        this.fightAttributes.replace(GameObjectAttribute.MANA, newValue);
+        this.magicDefence = magicDefence;
     }
-
-    public int getMaxMana ()
+    
+    
+    public int getMaxHealth()
     {
-        return this.fightAttributes.get(GameObjectAttribute.MAX_MANA);
+        return maxHealth;
     }
-
-    public void setMaxMana (int newValue)
+    
+    
+    public void setMaxHealth(int maxHealth)
     {
-        this.fightAttributes.replace(GameObjectAttribute.MAX_MANA, newValue);
+        this.maxHealth = maxHealth;
     }
-
-    public int getMeleeDamage ()
+    
+    
+    public int getHealth()
     {
-        return this.fightAttributes.get(GameObjectAttribute.MELEE_DAMAGE);
+        return health;
     }
-
-    public void setMeleeDamage (int newValue)
+    
+    
+    public void setHealth(int health)
     {
-        this.fightAttributes.replace(GameObjectAttribute.MELEE_DAMAGE, newValue);
+        this.health = health;
     }
-
-    public int getRangedDamage ()
+    
+    
+    public int getRangedAttackRange()
     {
-        return this.fightAttributes.get(GameObjectAttribute.RANGE_DAMAGE);
+        return rangedAttackRange;
     }
-
-    public void setRangedDamage (int newValue)
+    
+    
+    public void setRangedAttackRange(int rangedAttackRange)
     {
-        this.fightAttributes.replace(GameObjectAttribute.RANGE_DAMAGE, newValue);
+        this.rangedAttackRange = rangedAttackRange;
     }
-
-    public int getRemainingRangedAttacks ()
+    
+    
+    public int getMaxMana()
     {
-        return this.fightAttributes.get(GameObjectAttribute.REMAINING_RANGED_ATTACKS);
+        return maxMana;
     }
-
-    public void setRemainingRangedAttacks (int newValue)
+    
+    
+    public void setMaxMana(int maxMana)
     {
-        this.fightAttributes.replace(GameObjectAttribute.REMAINING_RANGED_ATTACKS, newValue);
+        this.maxMana = maxMana;
     }
-
-    public int getEvadeChance ()
+    
+    
+    public int getInitiative()
     {
-        return this.fightAttributes.get(GameObjectAttribute.EVADE_CHANCE);
+        return initiative;
     }
-
-    public void setEvadeChance (int newValue)
+    
+    
+    public void setInitiative(int initative)
     {
-        this.fightAttributes.replace(GameObjectAttribute.EVADE_CHANCE, newValue);
+        this.initiative = initative;
     }
-
-    public int getMagicDefence ()
+    
+    
+    public float getAccuracy()
     {
-        return this.fightAttributes.get(GameObjectAttribute.MAGIC_DEFENCE);
+        return accuracy;
     }
-
-    public void setMagicDefence (int newValue)
+    
+    
+    public void setAccuracy(float accuracy)
     {
-        this.fightAttributes.replace(GameObjectAttribute.MAGIC_DEFENCE, newValue);
+        this.accuracy = accuracy;
     }
-
-    public int getRangedAttackRange ()
-    {
-        return this.fightAttributes.get(GameObjectAttribute.RANGED_ATTACK_RANGE);
-    }
-
-    public void setRangedAttackRange (int newValue)
-    {
-        this.fightAttributes.replace(GameObjectAttribute.RANGED_ATTACK_RANGE, newValue);
-    }
-
-    public int getInitiative ()
-    {
-        return this.fightAttributes.get(GameObjectAttribute.INITIATIVE);
-    }
-
-    public void setInitiative (int newValue)
-    {
-        this.fightAttributes.replace(GameObjectAttribute.INITIATIVE, newValue);
-    }
-
-    public int getAccuracy ()
-    {
-        return this.fightAttributes.get(GameObjectAttribute.ACCURACY);
-    }
-
-    public void setAccuracy (int newValue)
-    {
-        this.fightAttributes.replace(GameObjectAttribute.ACCURACY, newValue);
-    }
-
+    
+    
     @Override
     public Defence getDefenceTo(DamageType damageType)
     {
         int defenceValue = damageType != DamageType.MAGIC ? getPhysicalDefence() : getMagicDefence();
-
+        
+        
         return new Defence(defenceValue, getEvadeChance(), damageType);
     }
-
-
+    
+    
     @Override
     public Attack createAttack(float distance) throws IllegalArgumentException
     {
         boolean isMelee = Float.isNaN(distance);
-
+        
         if (!isMelee && !canAttackRangedAtDistance(distance))
         {
-            throw new IllegalArgumentException(ExceptionMessage.CANNOT_ATTACK_AT_DISTANCE + distance);
+            throw new IllegalArgumentException("Cannot attack at distance " + distance);
         }
-
+        
         if (!isMelee)
         {
-            setRemainingRangedAttacks(getRemainingRangedAttacks() - 1);
+            remainingRangedAttacks--;
         }
-
+        
         int attackValue = isMelee ? getMeleeDamage() : calculateRangedAttackDamage(distance);
-
+        
+        
         return new Attack(attackValue, getAccuracy(), DamageType.PHYSICAL);
     }
-
-
+    
+    
     private int calculateRangedAttackDamage(float distance)
     {
         return Math.round(getRangedDamage() * (1 - (distance / 2 / getRangedAttackRange())));
     }
-
-
+    
+    
     private boolean canAttackRangedAtDistance(float distance)
     {
         return getRemainingRangedAttacks() > 0 && getRangedAttackRange() >= Math.round(distance);
     }
-
-
+    
+    
+    public Faction getFaction()
+    {
+        return faction;
+    }
+    
+    
+    public FightAgentType getType()
+    {
+        return type;
+    }
+    
+    
+    public int getRank()
+    {
+        return rank;
+    }
+    
+    
     @Override
-    public String getSpriteUrl()
+    public String getSpriteFilePath()
     {
         if (isDead())
         {
-            return AssetLocator.DEAD_SPRITE;
+            return "src\\main\\resources\\com\\gitgud\\sprites\\agents\\transparent18x18.png";
         }
-
-        return this.getSpriteUrl();
+        return super.getSpriteUrl();
     }
+    
+    
 }

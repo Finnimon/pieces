@@ -2,7 +2,7 @@ package com.gitgud.model.gameObjects.interactable.buildings;
 
 
 import com.gitgud.control.MissionController;
-import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class ManaWell extends GridMappableBuilding
     }
     
     
-    private void replenishFightFiguresMana(FightAgentFL[] fightFigures)
+    private void replenishFightFiguresMana(FightAgent[] fightFigures)
     {
         List.of(fightFigures).forEach(fightFigure -> fightFigure.setMana(fightFigure.getMaxMana()));
     }

@@ -9,24 +9,19 @@ import com.gitgud.model.map.GridMap;
 public abstract class Agent extends GameObject implements GridMovable
 {
     private final boolean isFlying;
-
+    
+    
     private int movementRange;
     
     
-    public Agent (boolean isFlying, int movementRange)
+    public Agent(String name, String description, String spriteUrl, boolean isFlying, int movementRange)
     {
+        super(name, description, spriteUrl);
         this.isFlying = isFlying;
-
         this.movementRange = movementRange;
     }
-
-    public Agent()
-    {
-        super();
-        this.isFlying = false;
-    }
-
-
+    
+    
     @Override
     public int getMovementRange()
     {

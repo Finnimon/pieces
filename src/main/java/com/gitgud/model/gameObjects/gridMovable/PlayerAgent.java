@@ -20,6 +20,6 @@ public class PlayerAgent extends Agent
     
     public PlayerAgent()
     {
-        // super(NAME, DESCRIPTION, SPRITE_PATH, IS_FLYING, MOVEMENT_RANGE);
+        super(NAME, DESCRIPTION, SPRITE_PATH, IS_FLYING, MOVEMENT_RANGE);
     }
 }
