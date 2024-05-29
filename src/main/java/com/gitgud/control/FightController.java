@@ -5,18 +5,19 @@ import com.gitgud.model.fight.Fight;
 import com.gitgud.model.fight.FightTimeLine;
 import com.gitgud.model.gameObjects.interactable.FightTrigger;
 
-
+//todo render as scene
 public class FightController implements Runnable
 {
+    //todo render
     private final Fight fight;
     
     
     private final MissionController missionController;
-    
-    
+
+    //todo render at bottom of screen
     private final FightTimeLine fightTimeLine;
-    
-    
+
+    //todo render next to timeline?
     private int turn = 0;
     
     

@@ -8,18 +8,21 @@ import com.gitgud.model.map.Tile;
 
 public class Mission
 {
+    //todo render
     private final GridMap<Interactable> gridMap;
-    
+
+
+    //todo render on top of map at playerAgentPosition
     private final PlayerAgent playerAgent;
-    
+
+    //todo render position for the playeragentsprite
+    private Tile playerAgentPosition;
     
     public void setPlayerAgentPosition(Tile playerAgentPosition)
     {
         this.playerAgentPosition = playerAgentPosition;
     }
-    
-    
-    private Tile playerAgentPosition;
+
     
     public Mission(GridMap<Interactable> gridMap, Tile startingPosition)
     {
