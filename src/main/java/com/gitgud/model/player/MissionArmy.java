@@ -1,17 +1,17 @@
 package com.gitgud.model.player;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 
 public class MissionArmy
 {
-    private final FightAgentFL[] activeFightFigures;
+    private final FightAgent[] activeFightFigures;
     
     
-    private final FightAgentFL[] discard;
+    private final FightAgent[] discard;
     
     
-    private MissionArmy(FightAgentFL[] activeFightFigures, FightAgentFL[] discard)
+    private MissionArmy(FightAgent[] activeFightFigures, FightAgent[] discard)
     {
         this.activeFightFigures = activeFightFigures;
         this.discard = discard;
@@ -20,23 +20,23 @@ public class MissionArmy
     
     public static MissionArmy create()
     {
-        return new MissionArmy(new FightAgentFL[5], new FightAgentFL[5]);
+        return new MissionArmy(new FightAgent[5], new FightAgent[5]);
     }
     
     
-    public static MissionArmy create(FightAgentFL[] activeFightFigures, FightAgentFL[] discard)
+    public static MissionArmy create(FightAgent[] activeFightFigures, FightAgent[] discard)
     {
         return new MissionArmy(activeFightFigures, discard);
     }
     
     
-    public FightAgentFL[] getActiveFightUnits()
+    public FightAgent[] getActiveFightUnits()
     {
         return activeFightFigures;
     }
     
     
-    public FightAgentFL[] getDiscard()
+    public FightAgent[] getDiscard()
     {
         return discard;
     }

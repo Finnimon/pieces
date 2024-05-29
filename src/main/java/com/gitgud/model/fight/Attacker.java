@@ -1,11 +1,14 @@
 package com.gitgud.model.fight;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.map.Tile;
+
+import java.util.List;
 
 
 /**
  * All Objects using {@link Attack} to attack {@link Defender} must implement this interface
- * implemented by {@link FightAgentFL}
+ * implemented by {@link FightAgent}
  *
  * @author Finn L.
  * @Owner: Finn L.
@@ -22,5 +25,7 @@ public interface Attacker
     
     
     Attack createAttack(float range);
+    
+    
     
 }

@@ -1,11 +1,11 @@
 package com.gitgud.model.fight;
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 
 /**
  * Objects that have a health stat.
- * implemented by {@link FightAgentFL}
+ * implemented by {@link FightAgent}
  *
  * @author Finn L.
  * @Owner: Finn L.

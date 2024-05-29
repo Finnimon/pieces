@@ -3,7 +3,7 @@ package com.gitgud.model.gameObjects.interactable.collectibles;
 import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GameObject;
-import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.player.ArtefactPouch;
 import com.gitgud.utility.Core;
 import com.gitgud.utility.modification.Modifier;
@@ -22,10 +22,10 @@ public class Artefact extends GameObject implements Collectible
     private final ArtefactType artefactType;
     
     
-    private final Modifier<FightAgentFL> modifier;
+    private final Modifier<FightAgent> modifier;
     
     
-    public Artefact(ArtefactType artefactType, Modifier<FightAgentFL> modifier)
+    public Artefact(ArtefactType artefactType, Modifier<FightAgent> modifier)
     {
         super(artefactType.name(), artefactType.getDescription(), artefactType.getSpriteUrl());
         this.artefactType = artefactType;
@@ -39,14 +39,14 @@ public class Artefact extends GameObject implements Collectible
     }
     
     
-    public Modifier<FightAgentFL> getModifier()
+    public Modifier<FightAgent> getModifier()
     {
         return modifier;
     }
     
     
     @Override
-    public String getSpriteUrl()
+    public String getSpriteFilePath()
     {
         return null;
     }

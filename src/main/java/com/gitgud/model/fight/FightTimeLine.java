@@ -1,7 +1,7 @@
 package com.gitgud.model.fight;
 
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgentFL;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 
 import java.util.List;
 import java.util.TreeSet;
@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 public class FightTimeLine
 {
     
-    private final TreeSet<FightAgentFL> current;
+    private final TreeSet<FightAgent> current;
     
     
-    private final TreeSet<FightAgentFL> next;
+    private final TreeSet<FightAgent> next;
     
     
-    public FightTimeLine(TreeSet<FightAgentFL> current, TreeSet<FightAgentFL> next)
+    public FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> next)
     {
         this.current = current;
         this.next = next;
@@ -26,19 +26,19 @@ public class FightTimeLine
     
     public FightTimeLine(Fight fight)
     {
-        List<FightAgentFL>fightAgentList= fight.getGridMap().getAllGridMappables();
+        List<FightAgent>fightAgentList= fight.getGridMap().getAllGridMappables();
         this.current = new TreeSet<>(fightAgentList);
         this.next = new TreeSet<>();
     }
     
     
-    public TreeSet<FightAgentFL> getCurrent()
+    public TreeSet<FightAgent> getCurrent()
     {
         return current;
     }
     
     
-    public TreeSet<FightAgentFL> getNext()
+    public TreeSet<FightAgent> getNext()
     {
         return next;
     }
@@ -46,8 +46,8 @@ public class FightTimeLine
     
     public void advance()
     {
-        TreeSet<FightAgentFL> fightTimeLine = getCurrent();
-        TreeSet<FightAgentFL> nextTimeLine = getNext();
+        TreeSet<FightAgent> fightTimeLine = getCurrent();
+        TreeSet<FightAgent> nextTimeLine = getNext();
         removeDeadFightFigures(fightTimeLine);
         removeDeadFightFigures(nextTimeLine);
         
@@ -63,9 +63,9 @@ public class FightTimeLine
     }
     
     
-    public void removeDeadFightFigures(TreeSet<FightAgentFL> fightAgentTreeSet)
+    public void removeDeadFightFigures(TreeSet<FightAgent> fightAgentTreeSet)
     {
-        TreeSet<FightAgentFL> deadFigures = fightAgentTreeSet.stream().filter(Defender::isDead).collect(
+        TreeSet<FightAgent> deadFigures = fightAgentTreeSet.stream().filter(Defender::isDead).collect(
                 Collectors.toCollection(TreeSet::new));
         fightAgentTreeSet.removeAll(deadFigures);
     }
