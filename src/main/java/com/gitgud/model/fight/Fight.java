@@ -18,6 +18,7 @@ import java.util.HashSet;
  */
 public class Fight
 {
+    //todo render
     private final GridMap<FightAgent> gridMap;
     
     

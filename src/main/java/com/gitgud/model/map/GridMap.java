@@ -20,12 +20,8 @@ import java.util.function.Function;
  */
 public class GridMap<T extends GridMappable> extends AbstractMap<Tile, T> implements NavigableMap<Tile, T>, Serializable
 {
-    private final TreeMap<Tile, T> graph;
-    
-    
+    private final TreeMap<Tile, T> graph;//todo render
     private final int width;
-    
-    
     private final int height;
     
     

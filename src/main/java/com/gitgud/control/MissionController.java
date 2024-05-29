@@ -4,15 +4,17 @@ import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.mission.Mission;
 
 
-//todo
+//todo render as scene
 public class MissionController
 {
+
+    //todo render
     private final Mission mission;
-    
-    
+
+    //todo render at the bottom of the screen and in selection screen
     private final FightAgent[] activeFightFigures;
-    
-    
+
+    //todo render only in selction screen
     private final FightAgent[] discardedFightFigures;
     
     

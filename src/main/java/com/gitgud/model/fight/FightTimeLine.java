@@ -10,10 +10,10 @@ import java.util.stream.Collectors;
 
 public class FightTimeLine
 {
-    
+    //todo render
     private final TreeSet<FightAgent> current;
-    
-    
+
+    //todo render
     private final TreeSet<FightAgent> next;
     
     
