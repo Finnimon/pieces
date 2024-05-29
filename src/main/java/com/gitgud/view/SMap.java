@@ -27,8 +27,6 @@ import javafx.stage.Stage;
 import java.lang.ref.PhantomReference;
 import java.util.HashMap;
 import java.util.TreeMap;
-
-
 public class SMap {
 
     private static final int STAGE_WITH = 1000;
@@ -68,6 +66,10 @@ public class SMap {
 
         Group gameObjektGroup = new Group();
         createFieldOfGameObjects(gameObjektGroup, gridMap);
+        mainMap.setContent(gameObjektGroup);
+
+        Group PlayerAgentRender = new Group();
+        createFieldOfGameObjects(PlayerAgentRender);
         mainMap.setContent(gameObjektGroup);
 
         HBox topMenue = new HBox();
@@ -137,13 +139,12 @@ public class SMap {
     public static <T extends GridMappable> void createFieldOfGameObjects(Group gameObjektGroup, GridMap<T> gridMap)
     {
         AnchorPane anchorPane = new AnchorPane();
-        TreeMap<Tile, T> graph = gridMap.getGraph();
         for (int i = 0; i < gridMap.getHeight(); i++)
         {
             for (int j = 0; j < gridMap.getWidth(); j++)
             {
                 Tile tile = gridMap.getTile(i, j);
-                T element = graph.get(tile);
+                T element = gridMap.get(tile);
                 if (element == null)
                 {
                     continue;
