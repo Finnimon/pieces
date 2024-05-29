@@ -14,6 +14,7 @@ import com.gitgud.model.map.GridMap;
  */
 public class Fight
 {
+    //todo render
     private final GridMap<FightAgentFL> gridMap;
     
     
