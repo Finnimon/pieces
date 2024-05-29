@@ -87,7 +87,7 @@ public class SMap{
                 rectangle.setWidth(100);
                 rectangle.setHeight(100);
 
-                if(tile.terrain().terrainType() == TerrainType.MOUNTAIN)
+                if(tile.terrain().terrainType() == TerrainType.NON_TRAVERSABLE)
                 {
                     rectangle.setFill(Color.GRAY);
                 }

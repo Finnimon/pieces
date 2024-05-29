@@ -66,11 +66,10 @@ public class FightAgent extends Agent implements Defender, Attacker
     private float accuracy;
     
     
-    public FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
-                      FightAgentType type, Faction faction, int rank, int meleeDamage, int rangedDamage,
-                      int rangedAttackRange, int remainingRangedAttacks, int physicalDefence, int magicDefence,
-                      float evadeChance, int maxHealth, int maxMana, int health, int mana, int initiative,
-                      float accuracy)
+    FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
+               FightAgentType type, Faction faction, int rank, int meleeDamage, int rangedDamage, int rangedAttackRange,
+               int remainingRangedAttacks, int physicalDefence, int magicDefence, float evadeChance, int maxHealth,
+               int maxMana, int health, int mana, int initiative, float accuracy)
     {
         super(name, description, spriteUrl, isFlying, movementRange);
         this.type = type;
