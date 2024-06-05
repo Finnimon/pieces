@@ -3,6 +3,7 @@ package com.gitgud.model.gameObjects.interactable.buildings;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.mission.Mission;
 
 import java.util.List;
 
@@ -33,9 +34,10 @@ public class ManaWell extends GridMappableBuilding
     @Override
     public void interact(MissionController missionController)
     {
-        missionController.getActiveFightFigures();
-        replenishFightFiguresMana(missionController.getActiveFightFigures());
-        replenishFightFiguresMana(missionController.getDiscardedFightFigures());
+        Mission mission = missionController.getMission();
+        
+        replenishFightFiguresMana(mission.getActiveFightAgents());
+        replenishFightFiguresMana(mission.getDiscardedFightAgents());
     }
 }
 

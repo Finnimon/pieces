@@ -4,9 +4,14 @@ import com.gitgud.model.gameObjects.Describable;
 import com.gitgud.model.gameObjects.Named;
 import com.gitgud.model.gameObjects.Sprite;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.map.GridMap;
+import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
 import com.gitgud.utility.Core;
-import com.gitgud.utility.modification.FightAgentModifier;
+import com.gitgud.utility.modification.Modifier;
+import com.gitgud.utility.modification.fightAgent.FightAgentModifier;
+
+import java.util.Collection;
 
 
 /**
@@ -26,7 +31,7 @@ public final class Spell implements Sprite, Describable, Named
     private final SpellType spellType;
     
     
-    private final FightAgentModifier[] modifiers;
+    private final Modifier<FightAgent> modifier;
     
     
     private final int manaCost;
@@ -35,29 +40,26 @@ public final class Spell implements Sprite, Describable, Named
     private final float successChance;
     
     
-    private final Allegiance targeting;
-    
     
     /**
      * @param name
      * @param description
      * @param spriteFilePath
      * @param spellType
-     * @param modifiers
+     * @param modifier
      * @param manaCost
      * @param successChance
      */
     public Spell(String name, String description, String spriteFilePath, SpellType spellType,
-                 FightAgentModifier[] modifiers, int manaCost, float successChance, Allegiance targeting)
+                 Modifier<FightAgent> modifier, int manaCost, float successChance)
     {
         this.name = name;
         Description = description;
         this.spriteFilePath = spriteFilePath;
         this.spellType = spellType;
-        this.modifiers = modifiers;
+        this.modifier = modifier;
         this.manaCost = manaCost;
         this.successChance = successChance;
-        this.targeting = targeting;
     }
     
     
@@ -94,9 +96,9 @@ public final class Spell implements Sprite, Describable, Named
     }
     
     
-    public FightAgentModifier[] getModifiers()
+    public Modifier<FightAgent> getModifier()
     {
-        return modifiers;
+        return modifier;
     }
     
     
@@ -111,9 +113,4 @@ public final class Spell implements Sprite, Describable, Named
         return successChance;
     }
     
-    
-    public Allegiance getTargeting()
-    {
-        return targeting;
-    }
 }

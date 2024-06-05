@@ -12,17 +12,12 @@ public class MissionController
     private final Mission mission;
 
     //todo render at the bottom of the screen and in selection screen
-    private final FightAgent[] activeFightFigures;
 
-    //todo render only in selction screen
-    private final FightAgent[] discardedFightFigures;
     
     
-    public MissionController(Mission mission, FightAgent[] activeFightFigures, FightAgent[] discardedFightFigures)
+    public MissionController(Mission mission)
     {
         this.mission = mission;
-        this.activeFightFigures = activeFightFigures;
-        this.discardedFightFigures = discardedFightFigures;
     }
     
     
@@ -30,16 +25,5 @@ public class MissionController
     {
         return mission;
     }
-    
-    
-    public FightAgent[] getActiveFightFigures()
-    {
-        return activeFightFigures;
-    }
-    
-    
-    public FightAgent[] getDiscardedFightFigures()
-    {
-        return discardedFightFigures;
-    }
+
 }

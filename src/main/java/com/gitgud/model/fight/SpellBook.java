@@ -2,6 +2,7 @@ package com.gitgud.model.fight;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**
@@ -12,7 +13,7 @@ import java.util.HashMap;
  * @version 1.0
  * @since 19.04.2022
  */
-public record SpellBook(HashMap<SpellType, Spell> spells)
+public record SpellBook(HashSet< Spell> spells)
 {
 
 
