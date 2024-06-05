@@ -35,7 +35,7 @@ public class AssetParser
         }
         catch (FileNotFoundException e)
         {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 
@@ -60,9 +60,9 @@ public class AssetParser
     }
 
     /**
-     * Liefert eine Abbildung von spezifischen Attributwerten auf JSON-Objekte.
+     * Liefert eine Zuordnung von Attributwerten auf entsprechende JSON-Objekte.
      * @param objectTypes Ein Array aus JSON-Objekten
-     * @param attributeName Name des Attributes, dessen Werte als Schlüssel verwendet werden sollen
+     * @param attributeName Name des Attributes, dessen Wert als Schlüssel verwendet werden soll
      * @return Gibt ein HashMap<String, JsonObject>-Objekt zurück.
      */
     public static HashMap<String, JsonObject> attributeKeyToJsonObject (JsonArray objectTypes, String attributeName)

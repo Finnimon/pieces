@@ -1,7 +1,6 @@
 package com.gitgud.utility.gsonSerialization;
 
 import sun.reflect.ReflectionFactory;
-
 import java.lang.reflect.Constructor;
 
 public class SilentObjectCreator
@@ -29,7 +28,7 @@ public class SilentObjectCreator
 
         } catch (Exception e)
         {
-            throw new IllegalStateException("Cannot create object", e);
+            throw new IllegalStateException(e);
         }
     }
 }

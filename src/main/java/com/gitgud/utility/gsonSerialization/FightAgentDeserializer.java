@@ -2,11 +2,9 @@ package com.gitgud.utility.gsonSerialization;
 
 import com.gitgud.model.gameObjects.Faction;
 import com.gitgud.model.gameObjects.FightAgentType;
-import com.gitgud.model.gameObjects.gridMovable.Agent;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.google.gson.*;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
@@ -32,19 +30,19 @@ public class FightAgentDeserializer implements JsonDeserializer<FightAgent>
 
             try
             {
-                if (field.getName().equals(TYPE))
+                switch (field.getName())
                 {
-                    field.set(fightAgent, FightAgentType.fromString(jsonObject.get(TYPE).getAsString()));
-                }
-                else if (field.getName().equals(FACTION))
-                {
-                    field.set(fightAgent, Faction.fromString(jsonObject.get(FACTION).getAsString()));
-                }
-                else
-                {
-                    field.set(fightAgent, context.deserialize(jsonObject.get(field.getName()), field.getType()));
-                }
+                    case TYPE :
+                        field.set(fightAgent, FightAgentType.fromString(jsonObject.get(TYPE).getAsString()));
+                        break;
 
+                    case FACTION :
+                        field.set(fightAgent, Faction.fromString(jsonObject.get(FACTION).getAsString()));
+                        break;
+
+                    default :
+                        field.set(fightAgent, context.deserialize(jsonObject.get(field.getName()), field.getType()));
+                }
             } catch (IllegalAccessException e)
             {
                 throw new RuntimeException(e);
