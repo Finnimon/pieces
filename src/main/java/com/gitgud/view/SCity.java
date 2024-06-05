@@ -40,7 +40,7 @@ public class SCity {
         market.setOnAction(e -> startMarketInteraction());
 
         Button headquarters = new Button("headquarters");
-        headquarters.setOnAction(e -> stage.setScene(SMap.createMapScene(stage)));
+        headquarters.setOnAction(e -> stage.setScene(SMission.createMissionScene(stage)));
 
         root.getChildren().addAll(wrought, tavern,magicAmplifier, basisCamp, factionCamps, trainingGrounds, market, headquarters);
         return CityScene;
