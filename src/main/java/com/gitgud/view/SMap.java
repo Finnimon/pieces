@@ -114,13 +114,13 @@ public class SMap {
                     rectangle.setWidth(TILE_DIMENSIONS);
                     rectangle.setHeight(TILE_DIMENSIONS);
 
-                    if (tile.terrain().terrainType() == TerrainType.MOUNTAIN)
+                    // if (tile.terrain().terrainType() == TerrainType.MOUNTAIN)
                     {
                         rectangle.setFill(Color.GRAY);
-                    } else if ((xPosition + yPosition) % 2 == 1)
+                    } // else if ((xPosition + yPosition) % 2 == 1)
                     {
                         rectangle.setFill(Color.SADDLEBROWN);
-                    } else
+                    } // else
                     {
                         rectangle.setFill(Color.WHEAT);
                     }

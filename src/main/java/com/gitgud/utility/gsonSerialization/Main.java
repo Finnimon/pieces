@@ -17,5 +17,7 @@ public class Main {
         Gson gson = new GsonBuilder().registerTypeAdapter(FightAgent.class, new FightAgentDeserializer()).create();
 
         FightAgent fighter = gson.fromJson(jsonObject, FightAgent.class);
+
+        System.out.println(fighter.getInitiative());
     }
 }
