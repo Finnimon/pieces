@@ -1,16 +1,22 @@
 package com.gitgud.view;
 
 import com.gitgud.model.fight.Fight;
+import com.gitgud.model.fight.FightTimeLine;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.map.GridMap;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class SFight extends SMission implements IDimentions {
+import java.util.TreeSet;
+
+public class SFight extends SGridMap implements IDimentions {
 
 
     /**
@@ -25,7 +31,7 @@ public class SFight extends SMission implements IDimentions {
     public static Scene createFightScene(Stage stage) // todo GridMap gridMap, FightAgent[] activeFightFigures
     {
         Fight fight = null;
-        GridMap<FightAgent> gridMap= fight.getGridMap();
+        GridMap<FightAgent> gridMap = fight.getGridMap();
 
         Group root = new Group();
         Scene MapScene = new Scene(root);
@@ -39,13 +45,9 @@ public class SFight extends SMission implements IDimentions {
         createFieldOfTiles(tilesGroup, gridMap);
         mainMap.setContent(tilesGroup);
 
-        Group gameObjektGroup = new Group();
-        createFieldOfGameObjects(gameObjektGroup, gridMap);
-        mainMap.setContent(gameObjektGroup);
-
-        Group playerAgentRender = new Group();
-        createPlayerPosition(playerAgentRender);
-        mainMap.setContent(gameObjektGroup);
+        Group fightFigureGroup = new Group();
+        createFieldOfGameObjects(fightFigureGroup, gridMap);
+        mainMap.setContent(fightFigureGroup);
 
         HBox topMenue = new HBox();
         topMenue.setMinHeight(TOP_MENU_HEIGHT);
@@ -54,17 +56,28 @@ public class SFight extends SMission implements IDimentions {
         HBox FightTimelineMenu = new HBox();
         FightTimelineMenu.setMinHeight(BOTTOM_MENU_HEIGHT);
         createFightTimelineMenu(FightTimelineMenu);
+        ScrollPane scrollPane = new ScrollPane(FightTimelineMenu);
 
         mapMenue.setTop(topMenue);
-        mapMenue.setBottom(FightTimelineMenu);
+        mapMenue.setBottom(scrollPane);
         mapMenue.setCenter(mainMap);
 
         root.getChildren().add(mapMenue);
         return MapScene;
     }
-    private static void createFightTimelineMenu(HBox FightTimelineMenu)
+
+    private static void createFightTimelineMenu(HBox fightTimelineMenu)
     {
+        FightTimeLine fightTimeLine = new FightTimeLine(); //todo
+        TreeSet<FightAgent> activeFightFigures = fightTimeLine.getCurrent();
 
+        for (FightAgent fightAgent : activeFightFigures)
+        {
+            VBox fightFigureContainer = new VBox();
+            Image fightFigureSprite = new Image(fightAgent.getSpriteUrl());
+            ImageView viewFightFigureSprite = new ImageView(fightFigureSprite);
+            fightFigureContainer.getChildren().add(viewFightFigureSprite);
+            fightTimelineMenu.getChildren().add(fightFigureContainer);
+        }
     }
-
 }

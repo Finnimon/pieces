@@ -8,6 +8,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -65,8 +68,7 @@ public class SMission extends SGridMap implements IDimentions {
     }
     protected static void createBottomMenu(HBox menu)
     {
-        Mission mission = null;
-        FightAgent[] activeFightFigures = mission.getActiveFightFigures;
+
 
         VBox bottomCentreMenu = new VBox();
         bottomCentreMenu.setPrefSize(BC_MENU_WIDTH, BOTTOM_MENU_HEIGHT);
@@ -88,13 +90,26 @@ public class SMission extends SGridMap implements IDimentions {
 
     protected static void createBottomCentreMenu(HBox bottomLeftMenu)
     {
+        Mission mission = null;
+        FightAgent[] activeFightFigures = mission.getActiveFightFigures();
+
         for (int i = 0; i < NUMBER_OF_UNITS; i++)
         {
             VBox unitContainer = new VBox();
             unitContainer.setPrefSize((float) BC_MENU_WIDTH / NUMBER_OF_UNITS, BOTTOM_MENU_HEIGHT);
-            bottomLeftMenu.getChildren().add(unitContainer);
-        }
 
+            Image fightFigureSprite = new Image(activeFightFigures[i].getSpriteUrl());
+            ImageView viewFightFigureSprite = new ImageView(fightFigureSprite);
+
+            bottomLeftMenu.getChildren().addAll(unitContainer, viewFightFigureSprite);
+        }
+    }
+
+    protected static void createPlayerPosition(Group playerAgentRender)
+    {
+        AnchorPane anchorPane = new AnchorPane();
+        //todo Player position und mögliche bewegungen
+        playerAgentRender.getChildren().add(anchorPane);
     }
 
 }

@@ -1,10 +1,8 @@
 package com.gitgud.view;
 
-import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GridMappable;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.gameObjects.interactable.Interactable;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.TerrainType;
 import com.gitgud.model.map.Tile;
@@ -14,7 +12,6 @@ import com.gitgud.model.player.Wallet;
 import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -64,7 +61,7 @@ public class SGridMap implements IDimentions {
                     rectangle.setOnMouseClicked(moveRequestEvent -> {
                         if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
                         {
-                            moveRequest(rectangle);
+                            moveRequest(tile);
                         }
                     });
                     tilesGroup.getChildren().add(rectangle);
@@ -85,36 +82,42 @@ public class SGridMap implements IDimentions {
         AnchorPane anchorPane = new AnchorPane();
         for (Tile tile : gridMap.keySet())
         {
-                T element = gridMap.get(tile);
-                if (element == null)
+            T element = gridMap.get(tile);
+            if (element == null)
+            {
+                continue;
+            }
+            VBox gameObjectContainer = new VBox();
+            anchorPane.setTopAnchor(gameObjectContainer, (double) (tile.yPosition() * TILE_SPACING));
+            anchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.xPosition() * TILE_SPACING));
+            gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
+            gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
+
+            gameObjectContainer.setOnMouseClicked(moveRequestEvent -> {
+                if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
                 {
-                    continue;
+                    interactionRequest(element);
                 }
-                VBox gameObjectContainer = new VBox();
-                anchorPane.setTopAnchor(gameObjectContainer, (double) (tile.yPosition() * TILE_SPACING));
-                anchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.xPosition() * TILE_SPACING));
-                gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
-                gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
+            });
 
 
-                Image gameObjektSprite = new Image(); //TODO: Need Game Objekt URL
-                ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
+            Image gameObjektSprite = new Image(element.getSpriteUrl());
+            ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
+
+            if (element instanceof FightAgent)
+            {
                 Rectangle healthBar = new Rectangle();
-
+                healthBar.setHeight(20);
+                healthBar.setWidth((float)((FightAgent) element).getMaxHealth()/((FightAgent) element).getHealth());
                 gameObjectContainer.getChildren().addAll(viewGameObjektSprite, healthBar);
-                gameObjektGroup.getChildren().add(gameObjectContainer);
+            }
+            else
+            {
+                gameObjectContainer.getChildren().add(viewGameObjektSprite);
+            }
+
+            gameObjektGroup.getChildren().add(gameObjectContainer);
         }
-    }
-    protected static void createPlayerPosition(Group playerAgentRender)
-    {
-        AnchorPane anchorPane = new AnchorPane();
-
-        playerAgentRender.getChildren().add(anchorPane);
-    }
-
-    protected static void moveRequest(Rectangle tile)
-    {
-        System.out.println(tile);
     }
 
     protected static void createTopMenu(HBox menu)
@@ -142,7 +145,13 @@ public class SGridMap implements IDimentions {
         }
     }
 
-
-
+    private static <T extends GridMappable> void interactionRequest(T element)
+    {
+        //todo
+    }
+    protected static void moveRequest(Tile tile)
+    {
+        //todo
+    }
 
 }
