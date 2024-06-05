@@ -1,7 +1,15 @@
 package com.gitgud.pieces;
 
+import com.gitgud.model.gameObjects.AssetLocator;
 import com.gitgud.model.gameObjects.Sprite;
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.utility.gsonSerialization.AssetParser;
+import com.gitgud.utility.gsonSerialization.FightAgentDeserializer;
 import com.gitgud.view.SMainMenue;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -19,6 +27,11 @@ public class App extends Application
     
     public static final String APP_TITLE = "Pieces";
     
+    private static void setTitleAndIcon(Stage stage) throws MalformedURLException
+    {
+        stage.setTitle(APP_TITLE);
+        stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
+    }
     
     public static void main(String[] args)
     {
@@ -43,9 +56,16 @@ public class App extends Application
     }
     
     
-    private static void setTitleAndIcon(Stage stage) throws MalformedURLException
+    
+    public static void jsonTestFinnK(String[] args)
     {
-        stage.setTitle(APP_TITLE);
-        stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
+        JsonArray jsonArray = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        
+        Gson gson = new GsonBuilder().registerTypeAdapter(FightAgent.class, new FightAgentDeserializer()).create();
+        
+        FightAgent fighter = gson.fromJson(jsonObject, FightAgent.class);
+        
+        System.out.println(fighter.getInitiative());
     }
 }
