@@ -69,7 +69,7 @@ public class SMap {
         mainMap.setContent(gameObjektGroup);
 
         Group PlayerAgentRender = new Group();
-        createFieldOfGameObjects(PlayerAgentRender);
+        // createFieldOfGameObjects(PlayerAgentRender);
         mainMap.setContent(gameObjektGroup);
 
         HBox topMenue = new HBox();
@@ -155,11 +155,11 @@ public class SMap {
                 gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
                 gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
 
-                Image gameObjektSprite = new Image(); //TODO: Need Game Objekt URL
-                ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
+                // Image gameObjektSprite = new Image(); //TODO: Need Game Objekt URL
+                //ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
                 Rectangle healthBar = new Rectangle();
 
-                gameObjectContainer.getChildren().addAll(viewGameObjektSprite, healthBar);
+                // gameObjectContainer.getChildren().addAll(viewGameObjektSprite, healthBar);
                 gameObjektGroup.getChildren().add(gameObjectContainer);
             }
         }
@@ -213,7 +213,7 @@ public class SMap {
     private static void createBottomLeftMenu(VBox bottomCentreMenu)
     {
 
-            bottomCentreMenu.getChildren().add();
+            // bottomCentreMenu.getChildren().add();
     }
 
     private static void createBottomCentreMenu(HBox bottomLeftMenu)
