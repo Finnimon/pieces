@@ -1,13 +1,9 @@
 package com.gitgud.control;
 
-import com.gitgud.model.fight.Spell;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.gameObjects.gridMovable.SpellCasterFightAgent;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;
-
-import java.util.Collection;
-import java.util.HashMap;
 
 
 public class SpellCasterFightAgentController extends FightAgentController

@@ -4,14 +4,9 @@ import com.gitgud.model.gameObjects.Describable;
 import com.gitgud.model.gameObjects.Named;
 import com.gitgud.model.gameObjects.Sprite;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
 import com.gitgud.utility.Core;
 import com.gitgud.utility.modification.Modifier;
-import com.gitgud.utility.modification.fightAgent.FightAgentModifier;
-
-import java.util.Collection;
 
 
 /**

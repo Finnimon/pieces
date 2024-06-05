@@ -3,9 +3,6 @@ package com.gitgud.model.gameObjects.interactable.collectibles;
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.interactable.Interactable;
 import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.Tile;
-
-import java.util.TreeMap;
 
 
 public interface Collectible extends Interactable

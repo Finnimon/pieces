@@ -3,6 +3,14 @@ package com.gitgud.control;
 import com.gitgud.model.activeGame.ActiveGame;
 
 
+/**
+ * Stores all global data and handles GameState/Flow
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 05.06.2024
+ * @Version: 1.0
+ */
 public class ActiveGameController
 {
     private static ActiveGameController instance = null;
