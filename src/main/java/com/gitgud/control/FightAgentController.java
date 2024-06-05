@@ -16,9 +16,9 @@ public class FightAgentController extends GridMovableController<FightAgent>
     private Tile position;
     
     
-    public FightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent)
+    public FightAgentController(FightAgent fightAgent)
     {
-        this.gridMap = gridMap;
+        this.gridMap = ActiveGameController.getInstance().get().getFight().getGridMap();
         this.fightAgent = fightAgent;
         
         this.position=gridMap.entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(null).getKey();
@@ -46,7 +46,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
         gridMap.put(oldTile, null);
         gridMap.put(tile,getFightAgent());
         setPosition(tile);
-        
+        //todo update gui method
         
         return oldTile;
     }

@@ -1,5 +1,6 @@
 package com.gitgud.model.gameObjects.interactable.collectibles;
 
+import com.gitgud.control.ActiveGameController;
 import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GameObject;
@@ -55,7 +56,7 @@ public class Artefact extends GameObject implements Collectible
     @Override
     public void addToInventory(MissionController missionController)
     {
-        ArtefactPouch artefactPouch = PlayerController.getInstance().getPlayer().artefactPouch();
+        ArtefactPouch artefactPouch = ActiveGameController.getInstance().get().getPlayer().artefactPouch();
         Artefact[] equippedArtifacts = artefactPouch.getEquippedArtifacts();
         
         Core.insertAtFirstNullIndex(equippedArtifacts, this);

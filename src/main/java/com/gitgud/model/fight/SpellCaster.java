@@ -1,6 +1,7 @@
 package com.gitgud.model.fight;
 
 
+import com.gitgud.control.ActiveGameController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.map.GridMap;
@@ -38,13 +39,13 @@ public interface SpellCaster
         HashSet<Tile> targets = new HashSet<>();
         boolean friendlyTargeting = spell.getSpellType().getIsFriendlyTargeting();
         
-        Player thisPlayer= PlayerController.getInstance().getPlayer();
+        Player thisPlayer= ActiveGameController.getInstance().get().getPlayer();
         
         HashMap<Player, HashSet<FightAgent>> ownershipMap= fight.getOwnershipMap();
         for (Player player: fight.getOwnershipMap().keySet()
              )
         {
-         throw new RuntimeException("Not Implemenzed");
+         throw new RuntimeException("Not Implemented");
         }
         
         return targets;

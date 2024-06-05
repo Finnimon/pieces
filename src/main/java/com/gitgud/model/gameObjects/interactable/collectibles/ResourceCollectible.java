@@ -1,5 +1,6 @@
 package com.gitgud.model.gameObjects.interactable.collectibles;
 
+import com.gitgud.control.ActiveGameController;
 import com.gitgud.control.MissionController;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GameObject;
@@ -26,6 +27,6 @@ public class ResourceCollectible extends GameObject implements Collectible
     @Override
     public void addToInventory(MissionController missionController)
     {
-        PlayerController.getInstance().getPlayer().wallet().resourceMap().put(resourceType, resourceValue);
+        ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap().put(resourceType, resourceValue);
     }
 }

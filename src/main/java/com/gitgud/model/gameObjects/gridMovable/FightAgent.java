@@ -13,7 +13,7 @@ import com.gitgud.model.gameObjects.FightAgentType;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-public class FightAgent extends Agent implements Defender, Attacker
+public class FightAgent extends Agent implements Defender, Attacker, Comparable<FightAgent>
 {
     private final FightAgentType type;
     
@@ -322,15 +322,33 @@ public class FightAgent extends Agent implements Defender, Attacker
     }
     
     
-//    @Override
-//    public String getSpriteFilePath()
-//    {
-//        if (isDead())
-//        {
-//            return "src\\main\\resources\\com\\gitgud\\sprites\\agents\\transparent18x18.png";
-//        }
-//        return super.getSpriteUrl();
-//    }
+    @Override
+    public int compareTo(FightAgent o)
+    {
+        if (this==o)
+        {
+            return 0;
+        }
+        
+        
+        int comparison=this.getInitiative()-o.getInitiative();
+        
+        if(comparison!=0)
+        {
+            return comparison;
+        }
+        
+        
+        comparison=this.getRank()-o.getRank();
+        
+        if(comparison!=0)
+        {
+            return comparison;
+        }
+        
+        
+        return this.hashCode()-o.hashCode();
+    }
     
     
 }

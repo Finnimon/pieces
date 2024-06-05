@@ -1,11 +1,12 @@
 package com.gitgud.utility.modification;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 
 public abstract class Modifier<T>
 {
-    public static <T> T applyModifiers(T object, ArrayList<Modifier<T>> modifier)
+    public static <T> T applyModifiers(T object, Collection<Modifier<T>> modifier)
     {
         for (Modifier<T> m : modifier)
         {
