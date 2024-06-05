@@ -10,10 +10,8 @@ import com.gitgud.model.map.GridMap;
 import com.gitgud.model.player.Player;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.stream.Stream;
 
 
 /**

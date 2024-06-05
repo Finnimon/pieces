@@ -17,7 +17,7 @@ public class App extends Application
     public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png";
     
     
-    public static final String APP_NAME = "Pieces";
+    public static final String APP_TITLE = "Pieces";
     
     
     public static void main(String[] args)
@@ -45,7 +45,7 @@ public class App extends Application
     
     private static void setTitleAndIcon(Stage stage) throws MalformedURLException
     {
-        stage.setTitle(APP_NAME);
+        stage.setTitle(APP_TITLE);
         stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
     }
 }

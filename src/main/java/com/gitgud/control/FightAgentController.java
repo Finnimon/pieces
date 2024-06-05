@@ -4,7 +4,14 @@ import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;
 
-
+/**
+ * Controller for {@link com.gitgud.model.gameObjects.gridMovable.FightAgent}
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 05.06.2024
+ * @Version: 1.0
+ */
 public class FightAgentController extends GridMovableController<FightAgent>
 {
     private final GridMap<FightAgent> gridMap;

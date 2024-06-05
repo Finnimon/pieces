@@ -2,7 +2,6 @@ package com.gitgud.model.fight;
 
 
 import com.gitgud.control.ActiveGameController;
-import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.Tile;

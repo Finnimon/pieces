@@ -2,8 +2,6 @@ package com.gitgud.control;
 
 
 import com.gitgud.model.fight.Fight;
-import com.gitgud.model.fight.FightTimeLine;
-import com.gitgud.model.gameObjects.interactable.FightTrigger;
 
 //todo render as scene
 public class FightController

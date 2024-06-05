@@ -2,7 +2,6 @@ package com.gitgud.utility.services;
 
 import com.gitgud.model.gameObjects.AssetLocator;
 import com.gitgud.model.gameObjects.GameObjectAttribute;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -10,7 +9,6 @@ import com.google.gson.JsonParser;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.text.NumberFormat;
 import java.util.HashMap;
 
 /**

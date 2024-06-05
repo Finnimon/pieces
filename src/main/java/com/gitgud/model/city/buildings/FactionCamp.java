@@ -2,14 +2,12 @@ package com.gitgud.model.city.buildings;
 
 import com.gitgud.control.ActiveGameController;
 import com.gitgud.model.gameObjects.Faction;
-import com.gitgud.model.gameObjects.FightAgentType;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.utility.modification.Modifier;
 import com.gitgud.utility.modification.fightAgent.FightAgentModifier;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 

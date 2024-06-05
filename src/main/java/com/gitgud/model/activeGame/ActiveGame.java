@@ -6,7 +6,14 @@ import com.gitgud.model.mission.Mission;
 import com.gitgud.model.player.Player;
 import javafx.stage.Stage;
 
-
+/**
+ * The data object used by the Singleton {@link com.gitgud.control.ActiveGameController}
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 05.06.2024
+ * @Version: 1.0
+ */
 public class ActiveGame
 {
     private final Stage stage;
