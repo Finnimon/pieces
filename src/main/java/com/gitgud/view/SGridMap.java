@@ -120,17 +120,6 @@ public class SGridMap implements IDimentions {
         }
     }
 
-
-
-    protected static void createPlayerPosition(Group playerAgentRender)
-    {
-        AnchorPane anchorPane = new AnchorPane();
-        //todo Player position und mögliche bewegungen
-        playerAgentRender.getChildren().add(anchorPane);
-    }
-
-
-
     protected static void createTopMenu(HBox menu)
     {
         Player player = PlayerController.getInstance().getPlayer();

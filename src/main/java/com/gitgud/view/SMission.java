@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -102,7 +103,13 @@ public class SMission extends SGridMap implements IDimentions {
 
             bottomLeftMenu.getChildren().addAll(unitContainer, viewFightFigureSprite);
         }
+    }
 
+    protected static void createPlayerPosition(Group playerAgentRender)
+    {
+        AnchorPane anchorPane = new AnchorPane();
+        //todo Player position und mögliche bewegungen
+        playerAgentRender.getChildren().add(anchorPane);
     }
 
 }
