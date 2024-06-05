@@ -85,13 +85,13 @@ public class SMission extends SGridMap implements IDimentions {
     protected static void createBottomLeftMenu(VBox bottomCentreMenu)
     {
 
-        bottomCentreMenu.getChildren().add();
+        bottomCentreMenu.getChildren().add(null);//todo
     }
 
     protected static void createBottomCentreMenu(HBox bottomLeftMenu)
     {
-        Mission mission = null;
-        FightAgent[] activeFightFigures = mission.getActiveFightFigures();
+        Mission mission = null;//todo
+        FightAgent[] activeFightFigures = mission.getActiveFightAgents();
 
         for (int i = 0; i < NUMBER_OF_UNITS; i++)
         {

@@ -7,10 +7,19 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 
 public class App extends Application
 {
+    
+    
+    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png";
+    
+    
+    public static final String APP_NAME = "Pieces";
+    
+    
     public static void main(String[] args)
     {
         launch();
@@ -28,10 +37,15 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        stage.setTitle("Pieces");
-        stage.getIcons().add(new Image(Sprite.urlFromFilePath(
-                "src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png")));
+        setTitleAndIcon(stage);
         delfiMain(stage);
         stage.show();
+    }
+    
+    
+    private static void setTitleAndIcon(Stage stage) throws MalformedURLException
+    {
+        stage.setTitle(APP_NAME);
+        stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
     }
 }

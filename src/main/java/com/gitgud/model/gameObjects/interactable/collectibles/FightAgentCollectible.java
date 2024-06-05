@@ -27,24 +27,24 @@ public class FightAgentCollectible extends GameObject implements Collectible
     {
         FightAgent fightFigure = getFightFigure();
         
-        FightAgent[] activeFightFigures = missionController.getActiveFightFigures();
-        Core.insertAtFirstNullIndex(activeFightFigures, fightFigure);
+        FightAgent[] activeFightAgents = missionController.getMission().getActiveFightAgents();
+        Core.insertAtFirstNullIndex(activeFightAgents, fightFigure);
         
-        if (Arrays.asList(activeFightFigures).contains(fightFigure))
+        if (Arrays.asList(activeFightAgents).contains(fightFigure))
         {
             return;
         }
         
-        FightAgent[] discardedFightFigures = missionController.getDiscardedFightFigures();
-        Core.insertAtFirstNullIndex(discardedFightFigures, fightFigure);
+        FightAgent[] discardedFightAgents = missionController.getMission().getDiscardedFightAgents();
+        Core.insertAtFirstNullIndex(discardedFightAgents, fightFigure);
     }
     
     
     @Override
     public boolean isCollectionPossible(MissionController missionController)
     {
-        return Arrays.stream(missionController.getActiveFightFigures()).anyMatch(Objects::isNull) || Arrays.stream(
-                missionController.getDiscardedFightFigures()).anyMatch(Objects::isNull);
+        return Arrays.stream(missionController.getMission().getActiveFightAgents()).anyMatch(Objects::isNull) || Arrays.stream(
+                missionController.getMission().getDiscardedFightAgents()).anyMatch(Objects::isNull);
     }
     
     

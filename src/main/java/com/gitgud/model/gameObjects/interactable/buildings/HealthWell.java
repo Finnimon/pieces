@@ -2,6 +2,7 @@ package com.gitgud.model.gameObjects.interactable.buildings;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+import com.gitgud.model.mission.Mission;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class HealthWell extends GridMappableBuilding
     
     
     private final static String DESCRIPTION = "Come to this building to replenish all your troops' health.";
+    
     
     //todo
     private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/healthwell.png";
@@ -32,9 +34,9 @@ public class HealthWell extends GridMappableBuilding
     @Override
     public void interact(MissionController missionController)
     {
-        missionController.getActiveFightFigures();
-        healFightFigures(missionController.getActiveFightFigures());
-        healFightFigures(missionController.getDiscardedFightFigures());
+        Mission mission = missionController.getMission();
+        healFightFigures(mission.getActiveFightAgents());
+        healFightFigures(mission.getDiscardedFightAgents());
     }
     
 }

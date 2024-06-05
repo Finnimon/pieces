@@ -48,7 +48,7 @@ public class SGridMap implements IDimentions {
                     rectangle.setWidth(TILE_DIMENSIONS);
                     rectangle.setHeight(TILE_DIMENSIONS);
 
-                    if (tile.terrain().terrainType() == TerrainType.MOUNTAIN)
+                    if (tile.terrain().terrainType() == TerrainType.NON_TRAVERSABLE)
                     {
                         rectangle.setFill(Color.GRAY);
                     } else if ((xPosition + yPosition) % 2 == 1)

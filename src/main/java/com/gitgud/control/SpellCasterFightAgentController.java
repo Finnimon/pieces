@@ -14,7 +14,7 @@ public class SpellCasterFightAgentController extends FightAgentController
 {
     public SpellCasterFightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent)
     {
-        super(gridMap, fightAgent);
+        super(fightAgent);
     }
     
     
