@@ -1,8 +1,6 @@
 package com.gitgud.control;
 
 import com.gitgud.model.gameObjects.gridMovable.GridMovable;
-import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.Tile;
 
 
 public abstract class GridMovableController<T extends GridMovable>

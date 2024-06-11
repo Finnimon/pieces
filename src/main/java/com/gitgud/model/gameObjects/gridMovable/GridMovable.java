@@ -40,9 +40,9 @@ public interface GridMovable extends GridMappable
         }
         
         
-        Stream<Tile> reachableTiles= gridMap.keySet().stream();
+        Stream<Tile> reachableTiles= gridMap.nodeSet().stream();
         
-        return reachableTiles.filter(tile->tile.terrain().isTraversable())
+        return reachableTiles.filter(tile->tile.getTerrain().isTraversable())
                 .filter(tile->movementRange>= calculateAbsoluteDistance(position, tile))
                 .toList();
     }

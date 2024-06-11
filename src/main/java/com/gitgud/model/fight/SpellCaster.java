@@ -3,8 +3,6 @@ package com.gitgud.model.fight;
 
 import com.gitgud.control.ActiveGameController;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
 
 import java.util.HashMap;

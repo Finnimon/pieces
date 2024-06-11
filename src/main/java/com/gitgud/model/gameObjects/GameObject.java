@@ -1,7 +1,6 @@
 package com.gitgud.model.gameObjects;
 
 import com.gitgud.model.fight.Fight;
-import com.gitgud.model.map.GridMap;
 
 import java.util.Arrays;
 

@@ -2,7 +2,6 @@ package com.gitgud.model.gameObjects.interactable.collectibles;
 
 import com.gitgud.control.MissionController;
 import com.gitgud.model.gameObjects.interactable.Interactable;
-import com.gitgud.model.map.GridMap;
 
 
 public interface Collectible extends Interactable
@@ -38,7 +37,7 @@ public interface Collectible extends Interactable
     
     private void removeFromMap(GridMap<Interactable> gridMap)
     {
-        gridMap.keySet().stream().filter(key->gridMap.get(key) == this).findFirst().ifPresent(tile -> gridMap.put(tile, null));
+        gridMap.nodeSet().stream().filter(key->gridMap.get(key) == this).findFirst().ifPresent(tile -> gridMap.put(tile, null));
     }
     
     

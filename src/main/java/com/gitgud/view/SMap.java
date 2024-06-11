@@ -2,14 +2,10 @@ package com.gitgud.view;
 
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GridMappable;
-import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.TerrainType;
-import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
 import com.gitgud.model.player.ResourceType;
 import com.gitgud.model.player.Wallet;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -24,9 +20,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-import java.lang.ref.PhantomReference;
 import java.util.HashMap;
-import java.util.TreeMap;
+
+
 public class SMap {
 
     private static final int STAGE_WITH = 1000;
@@ -104,7 +100,7 @@ public class SMap {
             {
                 for (int j = 0; j < gridMap.getWidth(); j++)
                 {
-                    Tile tile = gridMap.getTile(i, j);
+                    Tile tile = gridMap.getNode(i, j);
 
                     Rectangle rectangle = new Rectangle();
                     int xPosition = tile.xPosition();
@@ -143,7 +139,7 @@ public class SMap {
         {
             for (int j = 0; j < gridMap.getWidth(); j++)
             {
-                Tile tile = gridMap.getTile(i, j);
+                Tile tile = gridMap.getNode(i, j);
                 T element = gridMap.get(tile);
                 if (element == null)
                 {

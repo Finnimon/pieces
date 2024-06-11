@@ -15,8 +15,8 @@ public class GridMapServices
     
     public static ArrayList<Tile> getInRange(GridMap gridMap, Tile position, int Range)
     {
-        int tileIndex = gridMap.getTileIndex(position);
-        float[] adjecancies = gridMap.getAdjecancyMatrix()[tileIndex];
+        int tileIndex = gridMap.getNodeIndex(position);
+        float[] adjecancies = gridMap.getWeightMatrix()[tileIndex];
         
         ArrayList<Tile> inRangeTiles=new ArrayList<>();
         
@@ -24,7 +24,7 @@ public class GridMapServices
         {
             if (adjecancies[index] <= Range)
             {
-                inRangeTiles.add(gridMap.getTileByIndex(index));
+                inRangeTiles.add(gridMap.getNode(index));
             }
         }
         inRangeTiles.remove(position);

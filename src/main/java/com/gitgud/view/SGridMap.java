@@ -3,9 +3,7 @@ package com.gitgud.view;
 import com.gitgud.control.PlayerController;
 import com.gitgud.model.gameObjects.GridMappable;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.map.GridMap;
 import com.gitgud.model.map.TerrainType;
-import com.gitgud.model.map.Tile;
 import com.gitgud.model.player.Player;
 import com.gitgud.model.player.ResourceType;
 import com.gitgud.model.player.Wallet;
@@ -40,7 +38,7 @@ public class SGridMap implements IDimentions {
             {
                 for (int j = 0; j < gridMap.getWidth(); j++)
                 {
-                    Tile tile = gridMap.getTile(i, j);
+                    Tile tile = gridMap.getNode(i, j);
 
                     Rectangle rectangle = new Rectangle();
                     int xPosition = tile.xPosition();
@@ -82,7 +80,7 @@ public class SGridMap implements IDimentions {
     protected static <T extends GridMappable> void createFieldOfGameObjects(Group gameObjektGroup, GridMap<T> gridMap)
     {
         AnchorPane anchorPane = new AnchorPane();
-        for (Tile tile : gridMap.keySet())
+        for (Tile tile : gridMap.nodeSet())
         {
             T element = gridMap.get(tile);
             if (element == null)

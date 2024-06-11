@@ -6,7 +6,6 @@ import com.gitgud.model.activeGame.ActiveGame;
 import com.gitgud.model.activeGame.GameState;
 import com.gitgud.model.gameObjects.FightAgentType;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.model.map.GridMap;
 import com.gitgud.model.player.Player;
 
 import java.util.ArrayList;

@@ -2,7 +2,6 @@ package com.gitgud.view;
 
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.gameObjects.interactable.Interactable;
-import com.gitgud.model.map.GridMap;
 import com.gitgud.model.mission.Mission;
 import javafx.scene.Group;
 import javafx.scene.Scene;

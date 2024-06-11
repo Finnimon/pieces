@@ -4,8 +4,6 @@ import com.gitgud.model.Ending;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.gameObjects.gridMovable.PlayerAgent;
 import com.gitgud.model.gameObjects.interactable.Interactable;
-import com.gitgud.model.map.GridMap;
-import com.gitgud.model.map.Tile;
 
 
 public class Mission implements Ending
