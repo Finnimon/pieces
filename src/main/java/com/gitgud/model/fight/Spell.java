@@ -7,6 +7,7 @@ import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.model.player.Player;
 import com.gitgud.utility.Core;
 import com.gitgud.utility.modification.Modifier;
+import com.gitgud.utility.modification.fightAgent.FightAgentModifier;
 
 
 /**
@@ -17,16 +18,16 @@ public final class Spell implements Sprite, Describable, Named
     private final String name;
     
     
-    private final String Description;
+    private final String description;
     
     
     private final String spriteFilePath;
     
     
-    private final SpellType spellType;
+    private final SpellType type;
     
     
-    private final Modifier<FightAgent> modifier;
+    private final FightAgentModifier modifier;
     
     
     private final int manaCost;
@@ -40,18 +41,18 @@ public final class Spell implements Sprite, Describable, Named
      * @param name
      * @param description
      * @param spriteFilePath
-     * @param spellType
+     * @param type
      * @param modifier
      * @param manaCost
      * @param successChance
      */
-    public Spell(String name, String description, String spriteFilePath, SpellType spellType,
-                 Modifier<FightAgent> modifier, int manaCost, float successChance)
+    public Spell(String name, String description, String spriteFilePath, SpellType type,
+                 FightAgentModifier modifier, int manaCost, float successChance)
     {
         this.name = name;
-        Description = description;
+        this.description = description;
         this.spriteFilePath = spriteFilePath;
-        this.spellType = spellType;
+        this.type = type;
         this.modifier = modifier;
         this.manaCost = manaCost;
         this.successChance = successChance;
@@ -68,7 +69,7 @@ public final class Spell implements Sprite, Describable, Named
     @Override
     public String getDescription()
     {
-        return Description;
+        return description;
     }
     
     
@@ -85,13 +86,13 @@ public final class Spell implements Sprite, Describable, Named
     }
     
     
-    public SpellType getSpellType()
+    public SpellType getType()
     {
-        return spellType;
+        return type;
     }
     
     
-    public Modifier<FightAgent> getModifier()
+    public FightAgentModifier getModifier()
     {
         return modifier;
     }

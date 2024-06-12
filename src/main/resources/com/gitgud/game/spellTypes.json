@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Bombus-Explosivus",
+    "description": "Endeavoring to light the sky with bright flames, this explosive piece of magic hits fatal on rooks.",
+    "spriteFilePath" : "src/main/resources/com/gitgud/sprites/agents/transparent18x18.png",
+    "type" : "damage",
+    "modifier" : {
+      "FightAgentAttackModifier" : {
+        "meleeDamageModifier" : 5,
+        "rangedDamageModifier" : 5,
+        "accuracyModifier" : 5
+      },
+      "FightAgentDefenceModifier" : {
+        "physicalDefenceModifier" : 5,
+        "magicDefenceModifier" : 5,
+        "evadeChanceModifier" : 5
+      }
+    },
+    "manaCost" : 4,
+    "successChance" : 5
+  },
+
+  {
+    "name": "Bombus-Explosivus",
+    "description": "Endeavoring to light the sky with bright flames, this explosive piece of magic hits fatal on rooks.",
+    "spriteFilePath" : "src/main/resources/com/gitgud/sprites/agents/transparent18x18.png",
+    "type" : "damage",
+    "modifier" : {
+      "FightAgentAttackModifier" : {
+        "meleeDamageModifier" : 5,
+        "rangedDamageModifier" : 5,
+        "accuracyModifier" : 5
+      },
+      "FightAgentDefenceModifier" : {
+        "physicalDefenceModifier" : 5,
+        "magicDefenceModifier" : 5,
+        "evadeChanceModifier" : 5
+      }
+    },
+    "manaCost" : 4,
+    "successChance" : 5
+  }
+]

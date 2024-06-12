@@ -11,7 +11,7 @@ public abstract class Agent extends GameObject implements GridMovable
     private int movementRange;
     
     
-    public Agent(String name, String description, String spriteUrl, boolean isFlying, int movementRange)
+    public Agent (String name, String description, String spriteUrl, boolean isFlying, int movementRange)
     {
         super(name, description, spriteUrl);
         this.isFlying = isFlying;

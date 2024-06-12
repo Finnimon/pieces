@@ -34,7 +34,7 @@ public abstract class GameObject implements GridMappable
     
     
     @Override
-    public String getName()
+    public String getName ()
     {
         return name;
     }
@@ -48,14 +48,14 @@ public abstract class GameObject implements GridMappable
     
     
     @Override
-    public String getSpriteFilePath()
+    public String getSpriteFilePath ()
     {
         return spriteFilePath;
     }
     
     
     @Override
-    public int hashCode()
+    public int hashCode ()
     {
         return Arrays.hashCode(new Object[]{ this });
     }
