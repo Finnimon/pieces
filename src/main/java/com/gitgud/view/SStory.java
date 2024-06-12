@@ -4,10 +4,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
+
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -19,32 +21,45 @@ import javafx.stage.Stage;
 public class SStory {
 
 
+        public static Scene createStoryScene(Stage stage) {
+            VBox root = GuiUtils.createVBox("/com/gitgud/menueimage/storyImage.jpg");
+            Scene StoryScene = new Scene(root, 800, 600);
+            stage.setScene(StoryScene);
 
-    public static Scene createStoryScene(Stage stage)
-    {
-        VBox root = GuiUtils.createVBox("C:/Users/delfi/Desktop/2 Semester 2024/GUI_prog/Papier.jpg");
-        Scene StoryScene = new Scene(root, 800, 600);
-        stage.setScene(StoryScene);
+            // VBox für den Text
+            VBox textBox = new VBox();
+            textBox.setAlignment(Pos.BASELINE_CENTER);
+            textBox.setPadding(new Insets(230, 10,160, 10));
+            textBox.setSpacing(10);
 
-        // VBox für den Text
-        VBox textBox = new VBox();
-        textBox.setAlignment(Pos.CENTER);
-        textBox.setPadding(new Insets(50));
-        textBox.setSpacing(20);
+            String text = "In einer längst vergangenen Ära, als Magie und Mythen das Land Elaris prägten, herrschte " +
+                    "Frieden und Wohlstand. Doch eines unheilvollen Tages, erwachte der dunkle Zauberer Mykanos aus " +
+                    "seinem jahrhundertelangen Schlaf. " +
+                    "Mit mächtigen, bösartigen Kräften riss er das Licht aus der Welt und verbreitete Schrecken in jeder " +
+                    "Ecke des Königreichs. Du, ein Explorer mit verborgenen Kräften, wurdest durch eine uralte " +
+                    "Prophezeiung auserwählt, um das Gleichgewicht wiederherzustellen. Deine Reise beginnt in der letzten " +
+                    "Bastion des Lichts, der Stadt Elaris, wo die Hoffnung auf Erlösung glimmt und dein Schicksal sich entfaltet.";
 
-        Text text = new Text("blablabla");
-        text.setFont(Font.font("Courier", 24)); // Retro Schriftart und Größe festlegen
-        text.setFill(Color.BLACK); // Textfarbe festlegen
+            String[] storyLines = text.split("\\, "); //Der Text wird auf die Kommas aufgesplittet
+            for (String line : storyLines) {
+                Text textLine = new Text(line.trim() + ",");
+                textLine.setFont(Font.font("Courier", 15)); // Retro Schriftart und Größe festlegen
+                textLine.setFill(Color.BLACK); // Textfarbe festlegen
+                textLine.setTextAlignment(TextAlignment.LEFT); // Textzentrierung
+                textBox.getChildren().add(textLine);
+            }
 
-        Button button = new Button("Continue");
-        GuiUtils.setButtonTrait(button);
+            Button button = new Button("Fortfahren");
+            GuiUtils.setButtonTrait(button);
 
-        button.setOnAction(e -> stage.setScene(STutorial.createTutorialScene(stage)));
+            button.setOnAction(e -> stage.setScene(STutorial.createTutorialScene(stage)));
 
-        textBox.getChildren().addAll(text, button);
-        root.getChildren().addAll(textBox);
-        return StoryScene;
+            textBox.getChildren().add(button); //Button zur VBox hinzufügen
+            root.setAlignment(Pos.CENTER);
+            root.getChildren().addAll(textBox, button);
 
 
+            return StoryScene;
+        }
     }
 }
