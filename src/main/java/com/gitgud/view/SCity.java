@@ -1,136 +1,71 @@
 package com.gitgud.view;
 
-import javafx.scene.Group;
+
+import com.opencsv.exceptions.CsvException;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Modality;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import com.opencsv.CSVReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
 
 public class SCity {
 
+    private static final short DEFAULT_WIDTH = 50;
+    private static final short MAP_DIMENSION = 12;
+    private static final String MAP_PATH = "src/main/java/com/gitgud/csv/Map.csv";
 
-    public static Scene createCityScene(Stage stage)
-    {
-        Group root = new Group();
-        Scene CityScene = new Scene(root);
-        stage.setScene(CityScene);
 
-        // Hier kannst du alles machen
-        // Wichtig ist, dass du keine Atrribute zunzufügst und alle Methoden Static sind
+    public static Scene createCityScene(Stage stage) {
+        GridPane pane = new GridPane();
+        Scene scene = new Scene(pane, DEFAULT_WIDTH * MAP_DIMENSION, DEFAULT_WIDTH * MAP_DIMENSION);
+        int[][] map = new int[MAP_DIMENSION][MAP_DIMENSION];
 
-        Button wrought = new Button("wrought");
-        wrought.setOnAction(e -> startWroughtInteraction());
+        for (int i = 0; i < 12; i++)
+            pane.getRowConstraints().add(new RowConstraints(DEFAULT_WIDTH));
 
-        Button tavern = new Button("tavern");
-        tavern.setOnAction(e -> startTavernInteraction());
+        for (int i = 0; i < 12; i++)
+            pane.getColumnConstraints().add(new ColumnConstraints(DEFAULT_WIDTH));
 
-        Button magicAmplifier = new Button("magicAmplifier");
-        magicAmplifier.setOnAction(e -> startMagicAmplifierInteraction());
+        try (CSVReader reader = new CSVReader(new FileReader(MAP_PATH))) {
+            List<String[]> lines = reader.readAll();
+            for (int i = 0; i < MAP_DIMENSION; i++) {
+                for (int j = 0; j < MAP_DIMENSION; j++) {
+                    map[i][j] = Integer.parseInt(lines.get(i)[j]);
+                }
+            }
+        } catch (IOException | CsvException | NumberFormatException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
 
-        Button basisCamp = new Button("basisCamp");
-        basisCamp.setOnAction(e -> startBasisCampInteraction());
 
-        Button factionCamps = new Button("factionCamps");
-        factionCamps.setOnAction(e -> startFactionCampsInteraction());
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[0].length; j++) {
+                Region region = new Region();
+                switch (map[i][j]) {
+                    case 0 ->
+                            region.setBackground(new Background(new BackgroundFill(Color.GREEN, new CornerRadii(0), new Insets(0))));
+                    case 1 ->
+                            region.setBackground(new Background(new BackgroundFill(Color.GRAY, new CornerRadii(0), new Insets(0))));
+                    case 2 -> {
+                        region.setBackground(new Background(new BackgroundFill(Color.BROWN, new CornerRadii(0), new Insets(0))));
+                        region.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        region.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        region.setOnMouseClicked(e -> stage.setScene(SWrought.createWroughtScene(stage)));
+                    }
+                }
+                pane.add(region, j, i);
+            }
+        }
 
-        Button trainingGrounds = new Button("trainingGrounds");
-        trainingGrounds.setOnAction(e -> startTrainingGroundsInteraction());
-
-        Button market = new Button("market");
-        market.setOnAction(e -> startMarketInteraction());
-
-        Button headquarters = new Button("headquarters");
-        // headquarters.setOnAction(e -> stage.setScene(SMap.createMapScene(stage)));
-
-        root.getChildren().addAll(wrought, tavern,magicAmplifier, basisCamp, factionCamps, trainingGrounds, market, headquarters);
-        return CityScene;
-    }
-
-    private static void startHeadquartersInteraction()
-    {
-        Stage StageHeadquarters = new Stage();
-        StageHeadquarters.initModality(Modality.APPLICATION_MODAL);// Blocking input events so that no interaction occurs in the city meanwhile
-        Group root = new Group();
-        Scene SceneHeadquarters= new Scene(root);
-        //Hier kannst du alle sachen machen, die mit den einzelnen Gebäuden zutun haben
-        root.getChildren().addAll();
-        StageHeadquarters.setScene(SceneHeadquarters);
-    }
-
-    private static void startMarketInteraction()
-    {
-        Stage StageMarket = new Stage();
-        StageMarket.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneMarket= new Scene(root);
-
-        root.getChildren().addAll();
-        StageMarket.setScene(SceneMarket);
-    }
-
-    private static void startTrainingGroundsInteraction()
-    {
-        Stage StageTrainingGrounds = new Stage();
-        StageTrainingGrounds.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneTrainingGrounds= new Scene(root);
-
-        root.getChildren().addAll();
-        StageTrainingGrounds.setScene(SceneTrainingGrounds);
-    }
-
-    private static void startFactionCampsInteraction()
-    {
-        Stage StageFactionCamps = new Stage();
-        StageFactionCamps.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneFactionCamps= new Scene(root);
-
-        root.getChildren().addAll();
-        StageFactionCamps.setScene(SceneFactionCamps);
-    }
-
-    private static void startBasisCampInteraction()
-    {
-        Stage StageBasisCamp = new Stage();
-        StageBasisCamp.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneBasisCamp= new Scene(root);
-
-        root.getChildren().addAll();
-        StageBasisCamp.setScene(SceneBasisCamp);
-    }
-
-    private static void startMagicAmplifierInteraction()
-    {
-        Stage StageMagicAmplifier = new Stage();
-        StageMagicAmplifier.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneMagicAmplifier= new Scene(root);
-
-        root.getChildren().addAll();
-        StageMagicAmplifier.setScene(SceneMagicAmplifier);
-    }
-
-    private static void startTavernInteraction()
-    {
-        Stage StageTavern = new Stage();
-        StageTavern.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneTavern= new Scene(root);
-
-        root.getChildren().addAll();
-        StageTavern.setScene(SceneTavern);
-    }
-
-    private static void startWroughtInteraction()
-    {
-        Stage StageWrought = new Stage();
-        StageWrought.initModality(Modality.APPLICATION_MODAL);
-        Group root = new Group();
-        Scene SceneWrought= new Scene(root);
-
-        root.getChildren().addAll();
-        StageWrought.setScene(SceneWrought);
+        pane.setAlignment(Pos.CENTER);
+        return scene;
     }
 }
