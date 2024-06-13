@@ -2,6 +2,7 @@ package com.gitgud.utility.gsonSerialization;
 
 
 import com.gitgud.model.fight.Spell;
+import com.gitgud.model.fight.SpellType;
 import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.utility.modification.Modifier;
 import com.gitgud.utility.modification.fightAgent.FightAgentAttackModifier;
@@ -10,8 +11,10 @@ import com.google.gson.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 
-public class SpellSerializer implements JsonSerializer<Spell>
+public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<Spell>
 {
     private static final String TYPE = "type";
     private static final String MODIFIER = "modifier";
@@ -39,7 +42,7 @@ public class SpellSerializer implements JsonSerializer<Spell>
                         break;
 
                     case MODIFIER:
-                        serializeModifier(jsonObject, src, context);
+                        serializeModifiers(jsonObject, src, context);
                         break;
 
                     default:
@@ -56,7 +59,7 @@ public class SpellSerializer implements JsonSerializer<Spell>
     }
 
 
-    private void serializeModifier (JsonObject jsonObject, Spell src, JsonSerializationContext context)
+    private void serializeModifiers (JsonObject jsonObject, Spell src, JsonSerializationContext context)
     {
         JsonObject modifierCollection = new JsonObject();
 
@@ -85,5 +88,56 @@ public class SpellSerializer implements JsonSerializer<Spell>
         }
 
         jsonObject.add(MODIFIER, modifierCollection);
+    }
+
+    @Override
+    public Spell deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
+    {
+        JsonObject jsonObject = src.getAsJsonObject();
+
+        Spell spell = SilentObjectCreator.create(Spell.class);
+
+        Field[] fields = spell.getClass().getDeclaredFields();
+
+        for (Field field : fields)
+        {
+            field.setAccessible(true);
+
+            try
+            {
+                switch (field.getName())
+                {
+                    case TYPE :
+                        field.set(spell, SpellType.fromString(jsonObject.get(TYPE).getAsString()));
+                        break;
+
+                    case MODIFIER :
+                        deserializeModifiers(jsonObject, spell, field, context);
+                        break;
+
+                    default :
+                        field.set(spell, context.deserialize(jsonObject.get(field.getName()), field.getType()));
+                }
+            } catch (IllegalAccessException e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return spell;
+    }
+
+    private void deserializeModifiers (JsonObject src, Spell spell, Field field, JsonDeserializationContext context) throws IllegalAccessException
+    {
+        Collection<Modifier<FightAgent>> collectionOfModifiers = new ArrayList<>();
+
+        JsonObject modifiers = src.get(MODIFIER).getAsJsonObject();
+
+        for (String modifier : modifiers.keySet())
+        {
+            collectionOfModifiers.add(context.deserialize(modifiers.get(modifier), Modifier.class));
+        }
+
+        field.set(spell, new FightAgentModifier(collectionOfModifiers));
     }
 }
