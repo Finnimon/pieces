@@ -2,7 +2,7 @@ package com.gitgud.engine.model.action;
 
 
 
-public interface Action extends Consumable
+public interface Action<Awaiter extends ActionAwaiter>
 {
-    void enAct();
+    void enAct(Awaiter awaiter);
 }

@@ -1,11 +1,11 @@
 package com.gitgud.pieces;
 
-import com.gitgud.model.gameObjects.AssetLocator;
-import com.gitgud.model.gameObjects.Sprite;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.utility.gsonSerialization.AssetParser;
-import com.gitgud.utility.gsonSerialization.FightAgentDeserializer;
-import com.gitgud.view.SMainMenue;
+import com.gitgud.pieces.model.gameObjects.AssetLocator;
+import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.utility.gsonSerialization.AssetParser;
+import com.gitgud.pieces.utility.gsonSerialization.FightAgentDeserializer;
+import com.gitgud.pieces.view.SMainMenue;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;

@@ -3,7 +3,8 @@ package com.gitgud.engine.model.action;
 import com.gitgud.engine.model.action.types.Applicable;
 
 
-public interface ApplicableToAction<A extends Applicable<Target>, Target> extends TargetedAction<Target>
+public interface ApplicableToAction<Awaiter extends ActionAwaiter, ApplicableClass extends Applicable<Target>, Target> extends TargetedAction<Awaiter,Target>
 {
-    A getApplicable();
+    
+    ApplicableClass getApplicable();
 }

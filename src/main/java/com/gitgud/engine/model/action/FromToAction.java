@@ -1,7 +1,7 @@
 package com.gitgud.engine.model.action;
 
-public interface FromToAction<F,T> extends Action
+public interface FromToAction<Awaiter extends ActionAwaiter,From, To> extends Action<Awaiter>
 {
-    public F getFrom();
-    public T getTo();
+    public From getFrom();
+    public To getTo();
 }
