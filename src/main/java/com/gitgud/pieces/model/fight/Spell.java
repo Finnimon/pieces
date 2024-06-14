@@ -3,13 +3,14 @@ package com.gitgud.pieces.model.fight;
 import com.gitgud.engine.model.gameObject.Describable;
 import com.gitgud.engine.model.gameObject.Named;
 import com.gitgud.engine.model.gameObject.Sprite;
-import com.gitgud.pieces.model.fight.SpellType;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
-import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
+import com.gitgud.engine.utility.modification.Modifier;
 
 
 /**
- * A Spell to be used in {@link Fight} by either {@link com.gitgud.pieces.model.player.Player} or {@link com.gitgud.pieces.model.gameObjects.agents.FightAgent} on a {@link com.gitgud.pieces.model.gameObjects.agents.FightAgent}
+ * A Spell to be used in {@link Fight} by either {@link Player} or {@link FightAgent} on a {@link FightAgent}
  */
 public final class Spell implements Sprite, Describable, Named
 {

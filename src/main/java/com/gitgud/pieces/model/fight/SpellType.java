@@ -1,7 +1,7 @@
 package com.gitgud.pieces.model.fight;
 
 
-
+import com.gitgud.model.gameObjects.FightAgentType;
 public enum SpellType
 {
     HEAL("heal"),
