@@ -18,7 +18,7 @@ public class STutorial {
 
     public static Scene createTutorialScene(Stage stage)
     {
-        VBox root = GuiUtils.createVBox("/com/gitgud/menueimage/Wallpaper.png");
+        VBox root = GuiUtils.createVBox("src\\main\\resources\\com\\gitgud\\backgroundImages\\Wallpaper.png");
         root.setAlignment(Pos.CENTER); // Zentriert die Elemente vertikal und horizontal
         root.setPadding(new Insets(20)); // Setzt den Abstand vom Rand
         root.setSpacing(20); // Abstand zwischen den Elementen
@@ -27,7 +27,12 @@ public class STutorial {
         stage.setScene(tutorialScene);
 
         Text tutorialText = new Text("Tutorial");
-        tutorialText.setFont(Font.font("Verdana", FontWeight.MEDIUM, 30)); // Schriftart und Größe festlegen
+        Font customFont = Font.loadFont(STutorial.class.getResourceAsStream("com/gitgud/fonts/fontArt.ttf"), 20);
+        if (customFont == null) {
+            System.err.println("Schriftart konnte nicht geladen werden!");
+        }
+        //tutorialText.setFont(Font.font("Verdana", FontWeight.MEDIUM, 30)); // Schriftart und Größe festlegen
+        tutorialText.setFont(customFont);
         tutorialText.setFill(Color.HONEYDEW); //Farbe des texts festlegen
 
 
@@ -35,17 +40,18 @@ public class STutorial {
         String[] storyLines = text.split("\\. "); //Der Text wird auf die Kommas aufgesplittet
 
         VBox textBox = new VBox(); // VBox für den Text
+        textBox.setAlignment(Pos.BASELINE_CENTER);
         textBox.setSpacing(10); // Abstand zwischen den Textzeilen
 
         for (String line : storyLines) {
             Text textLine = new Text(line.trim() + ",");
             textLine.setFont(Font.font("Courier", 15)); // Retro Schriftart und Größe festlegen
             textLine.setFill(Color.HONEYDEW); // Textfarbe festlegen
-            textLine.setTextAlignment(TextAlignment.LEFT); // Textzentrierung
             textBox.getChildren().add(textLine);
         }
 
         Button button = new Button("Fortfahren");
+        GuiUtils.setButtonTrait(button);
         button.setOnAction(e -> stage.setScene(SCity.createCityScene(stage)));
         root.getChildren().addAll(tutorialText, textBox, button);
 

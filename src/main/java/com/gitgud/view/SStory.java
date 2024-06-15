@@ -24,7 +24,7 @@ public class SStory
     
     public static Scene createStoryScene(Stage stage)
     {
-        VBox root = GuiUtils.createVBox("/com/gitgud/menueimage/storyImage.jpg");
+        VBox root = GuiUtils.createVBox("src/main/resources/com/gitgud/backgroundImages/Papier.jpg");
         Scene StoryScene = new Scene(root, 800, 600);
         stage.setScene(StoryScene);
         
@@ -36,7 +36,7 @@ public class SStory
         
         String text = "In einer längst vergangenen Ära, als Magie und Mythen das Land Elaris prägten, herrschte " + "Frieden und Wohlstand. Doch eines unheilvollen Tages, erwachte der dunkle Zauberer Mykanos aus " + "seinem jahrhundertelangen Schlaf. " + "Mit mächtigen, bösartigen Kräften riss er das Licht aus der Welt und verbreitete Schrecken in jeder " + "Ecke des Königreichs. Du, ein Explorer mit verborgenen Kräften, wurdest durch eine uralte " + "Prophezeiung auserwählt, um das Gleichgewicht wiederherzustellen. Deine Reise beginnt in der letzten " + "Bastion des Lichts, der Stadt Elaris, wo die Hoffnung auf Erlösung glimmt und dein Schicksal sich entfaltet.";
         
-        String[] storyLines = text.split("\\, "); //Der Text wird auf die Kommas aufgesplittet
+        String[] storyLines = text.split(", "); //Der Text wird auf die Kommas aufgesplittet
         for (String line : storyLines)
         {
             Text textLine = new Text(line.trim() + ",");

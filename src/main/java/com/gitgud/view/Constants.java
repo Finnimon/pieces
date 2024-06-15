@@ -8,14 +8,15 @@ package com.gitgud.view;
  * Eine Klasse für Konstanten
  */
 public class Constants {
-    private static final double BUTTON_BREITE = 400;
-    private static final double BUTTON_HOEHE = 90;
+    public static final double BUTTON_BREITE = 400;
+    public  static final double BUTTON_HOEHE = 90;
 
-    public static final double getButtonBreite(){
-        return BUTTON_BREITE;
-    }
-    public static final double getButtonHoehe() {
-        return BUTTON_HOEHE;
-    }
+    public static final short DEFAULT_WIDTH = 50;
+
+    public static final short MAP_DIMENSION = 12;
+    public static final String MAP_PATH = "src/main/resources/com/gitgud/maps/csv/Map.csv";
+
+
+
 }
 

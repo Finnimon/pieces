@@ -1,10 +1,13 @@
 package com.gitgud.view;
+import com.gitgud.model.gameObjects.Sprite;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+
+import java.net.MalformedURLException;
 
 /**
  * @author Delfina
@@ -17,8 +20,8 @@ import javafx.scene.text.Font;
 public class GuiUtils {
     //Methode zur Festlegung der Größe und Schriftart für einen Button
     public static void setButtonTrait(Button button) {
-        button.setPrefWidth(Constants.getButtonBreite());
-        button.setPrefHeight(Constants.getButtonHoehe());
+        button.setPrefWidth(Constants.BUTTON_BREITE);
+        button.setPrefHeight(Constants.BUTTON_HOEHE);
         button.setFont(Font.font("Verdana", 20));
     }
     public static VBox createVBox(String backgroundImagePath) {
@@ -28,7 +31,12 @@ public class GuiUtils {
         vbox.setAlignment(Pos.CENTER);
 
         // Hintergrundbild festlegen
-        Image backgroundImage = new Image("file:///" + backgroundImagePath);
+        Image backgroundImage = null;
+        try {
+            backgroundImage = new Image(Sprite.urlFromFilePath(backgroundImagePath));
+        } catch (MalformedURLException e) {
+            System.out.println(e.getMessage());
+        }
         BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false,
                 false, true, false);
         BackgroundImage background = new BackgroundImage(backgroundImage,

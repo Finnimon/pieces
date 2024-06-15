@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * @author Delfina
@@ -17,12 +18,10 @@ import javafx.stage.Stage;
 public class SMainMenue {
 
     public static Scene createMainMenueScene(Stage stage) {
-        String mainMenueBackgroundPath = "C:/Users/delfi/Desktop/2 Semester 2024/GUI_prog/GUI_pics.jpg";
-        VBox root = GuiUtils.createVBox(mainMenueBackgroundPath);
-        Scene MainMenueScene = new Scene(root); //alle Knoten als Inhalt der Szene festgelegt
-        stage.setScene(MainMenueScene);
 
-        // "url('file:///C:/Users/delfi/Desktop/2_Semester_2024/GUI_prog/GUI_Grafik.jpeg');");
+        VBox root = GuiUtils.createVBox("src\\main\\resources\\com\\gitgud\\backgroundImages\\Wallpaper.png");
+        Scene MainMenueScene = new Scene(root, 800, 600); //alle Knoten als Inhalt der Szene festgelegt
+        stage.setScene(MainMenueScene);
 
         Text hauptmenueText = new Text("Hauptmenü");
         hauptmenueText.setFont(Font.font("Lato", FontWeight.MEDIUM, 24)); // Schriftart und Größe festlegen
@@ -54,7 +53,13 @@ public class SMainMenue {
 
         //getChildren()-Methode gibt eine Liste der direkten untergeordneten Knoten des aktuellen Knotens zurück
         root.getChildren().addAll(buttonsArray);
+        stage.setOnCloseRequest(event -> windowCloseRequest(event, stage));
 
         return MainMenueScene;
+    }
+
+    private static void windowCloseRequest(WindowEvent event, Stage stage) {
+        event.consume();
+        stage.setScene(createMainMenueScene(stage));
     }
 }

@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class SDifficulty {
 
     public static Scene createDifficultyScene(Stage stage) {
-        String difficultySceneBackgroundPath = "C:/Users/delfi/Desktop/2 Semester 2024/GUI_prog/GUI_pics.jpg";
+        String difficultySceneBackgroundPath = "src\\main\\resources\\com\\gitgud\\backgroundImages\\Wallpaper.png";
         VBox rootD = GuiUtils.createVBox(difficultySceneBackgroundPath);
         Scene DifficultyScene = new Scene(rootD);
         stage.setScene(DifficultyScene);
