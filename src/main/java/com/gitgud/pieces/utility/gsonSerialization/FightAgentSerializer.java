@@ -8,6 +8,9 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class FightAgentSerializer implements JsonSerializer<FightAgent> {
 
@@ -16,10 +19,14 @@ public class FightAgentSerializer implements JsonSerializer<FightAgent> {
     private static final String FACTION = "faction";
 
     @Override
-    public JsonElement serialize(FightAgent src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize (FightAgent src, Type typeOfSrc, JsonSerializationContext context) {
 
         JsonObject jsonObject = new JsonObject();
-        Field[] fields = src.getClass().getDeclaredFields();
+
+        List<Field> fields = new ArrayList<>(List.of(src.getClass().getDeclaredFields()));
+
+        fields.addAll(Arrays.asList(src.getClass().getSuperclass().getDeclaredFields()));
+        fields.addAll(Arrays.asList(src.getClass().getSuperclass().getSuperclass().getDeclaredFields()));
 
         try
         {

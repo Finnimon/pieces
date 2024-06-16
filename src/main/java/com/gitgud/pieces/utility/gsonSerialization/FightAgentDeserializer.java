@@ -7,6 +7,9 @@ import com.google.gson.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class FightAgentDeserializer implements JsonDeserializer<FightAgent>
@@ -16,13 +19,16 @@ public class FightAgentDeserializer implements JsonDeserializer<FightAgent>
     private static final String FACTION = "faction";
 
     @Override
-    public FightAgent deserialize (JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    public FightAgent deserialize (JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-        JsonObject jsonObject = json.getAsJsonObject();
+        JsonObject jsonObject = src.getAsJsonObject();
 
         FightAgent fightAgent = SilentObjectCreator.create(FightAgent.class);
 
-        Field[] fields = fightAgent.getClass().getDeclaredFields();
+        List<Field> fields = new ArrayList<>(List.of(fightAgent.getClass().getDeclaredFields()));
+        fields.addAll(Arrays.asList(fightAgent.getClass().getSuperclass().getDeclaredFields()));
+        fields.addAll(Arrays.asList(fightAgent.getClass().getSuperclass().getSuperclass().getDeclaredFields()));
+
 
         for (Field field : fields)
         {
@@ -48,6 +54,7 @@ public class FightAgentDeserializer implements JsonDeserializer<FightAgent>
                 throw new RuntimeException(e);
             }
         }
+
         return fightAgent;
     }
 }

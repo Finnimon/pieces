@@ -7,6 +7,7 @@ module com.gitgud.pieces {
 
 
     opens com.gitgud.pieces to javafx.fxml;
+    opens com.gitgud.utility.modification.fightAgent to com.google.gson;
     exports com.gitgud.pieces;
     exports com.gitgud.pieces.model.gameObjects to com.google.gson;
     exports com.gitgud.engine.model.gameObject to com.google.gson;

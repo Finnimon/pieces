@@ -1,9 +1,10 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.pieces.control.PlayerController;
+
 import com.gitgud.engine.model.gameObject.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
@@ -171,7 +172,7 @@ public class SMap {
 
     private static void createTopMenu(HBox menu)
     {
-        Player player = PlayerController.getInstance().getPlayer();
+        Player player = ActiveGameController.getInstance().get().getPlayer();
 
         Wallet wallet = player.wallet();
 

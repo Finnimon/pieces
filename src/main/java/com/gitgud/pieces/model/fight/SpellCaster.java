@@ -36,7 +36,7 @@ public interface SpellCaster
         GridMap<FightAgent> gridMap = fight.getGridMap();
         
         HashSet<Tile> targets = new HashSet<>();
-        boolean friendlyTargeting = spell.getSpellType().getIsFriendlyTargeting();
+        boolean friendlyTargeting = spell.getType().getIsFriendlyTargeting();
         
         Player thisPlayer= ActiveGameController.getInstance().get().getPlayer();
         
