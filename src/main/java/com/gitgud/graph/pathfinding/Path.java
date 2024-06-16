@@ -2,36 +2,23 @@ package com.gitgud.graph.pathfinding;
 
 import com.gitgud.graph.WeightedEdge;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
-public class Path<Vertex extends com.gitgud.graph.Vertex, Edge extends com.gitgud.graph.Edge<Vertex>>
+public class Path<Vertex extends com.gitgud.graph.Vertex, Edge extends com.gitgud.graph.Edge<Vertex>> extends LinkedList<Edge>
 {
-    
-    //the path is unaware of its starting vertex because it only knows the edges after said start
-    private final List<Edge> path;
-    
-    
-    public Path(List<Edge> path)
-    {
-        this.path = path;
-    }
-    
-    
-    public List<Edge> getPath()
-    {
-        return path;
-    }
     
     
     public float calculateLength()
     {
         float length = 0;
         
-        for (Edge edge : path)
+        for (Edge edge : this)
         {
             length += determineEdgeLength(edge);
         }
+        
         
         return length;
     }
@@ -44,13 +31,14 @@ public class Path<Vertex extends com.gitgud.graph.Vertex, Edge extends com.gitgu
             return 1;
         }
         
+        
         return ((WeightedEdge<?>) edge).getWeight();
     }
     
     
     public float addEdge(Edge edge)
     {
-        path.add(edge);
+        add(edge);
         
         return calculateLength();
     }

@@ -31,7 +31,8 @@ public class SMainMenue {
 
         Button button = new Button();
 
-
+        //todo warum array?
+        
         //erstellen der Szene mit den buttons etc
         Button[] buttonsArray = new Button[5];
         buttonsArray[0] = new Button("Fortfahren");

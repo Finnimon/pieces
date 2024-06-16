@@ -1,5 +1,7 @@
 package com.gitgud.pieces;
 
+import com.gitgud.engine.model.action.Action;
+import com.gitgud.engine.model.action.FromToAction;
 import com.gitgud.pieces.model.gameObjects.AssetLocator;
 import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
@@ -27,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.HashSet;
 
 
 public class App extends Application
@@ -62,6 +65,7 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         setTitleAndIcon(stage);
+        finnTest();
         delfiMain(stage);
         stage.show();
     }
@@ -104,5 +108,13 @@ public class App extends Application
 
 
 
+    }
+    
+    public static void finnTest()
+    {
+        HashSet<Class> hashSet=new HashSet<>();
+        hashSet.add(FromToAction.class);
+        hashSet.add(Action.class);
+        System.out.println(hashSet);
     }
 }
