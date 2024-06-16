@@ -1,19 +1,23 @@
 package com.gitgud.pieces.utility.modification.fightAgent;
 
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.engine.utility.modification.Modifier;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 
 
 public class FightAgentMovementModifier extends Modifier<FightAgent>
 {
     private final int movementRangeModifier;
+    
+    
     private final int initiativeModifier;
+    
     
     public FightAgentMovementModifier(int movementRangeModifier, int initiativeModifier)
     {
         this.movementRangeModifier = movementRangeModifier;
         this.initiativeModifier = initiativeModifier;
     }
+    
     
     public FightAgent modify(FightAgent fightAgent)
     {
@@ -25,6 +29,7 @@ public class FightAgentMovementModifier extends Modifier<FightAgent>
         
         return fightAgent;
     }
+    
     
     public FightAgent demodify(FightAgent fightAgent)
     {

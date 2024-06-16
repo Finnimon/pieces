@@ -8,9 +8,9 @@ import java.util.Arrays;
 /**
  * Objects to be plotted on their respective {@link GridMap}.
  *
+ * @author Finn L.
  * @version 2.0
  * @Owner: Finn K.
- * @author  Finn L.
  * @since 22.04.2022
  */
 public abstract class GameObject implements GridMappable
@@ -33,7 +33,7 @@ public abstract class GameObject implements GridMappable
     
     
     @Override
-    public String getName ()
+    public String getName()
     {
         return name;
     }
@@ -47,14 +47,14 @@ public abstract class GameObject implements GridMappable
     
     
     @Override
-    public String getSpriteFilePath ()
+    public String getSpriteFilePath()
     {
         return spriteFilePath;
     }
     
     
     @Override
-    public int hashCode ()
+    public int hashCode()
     {
         return Arrays.hashCode(new Object[]{ this });
     }

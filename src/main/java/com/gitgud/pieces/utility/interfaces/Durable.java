@@ -10,5 +10,5 @@ package com.gitgud.pieces.utility.interfaces;
  */
 public interface Durable
 {
-    public int getDuration();
+    int getDuration();
 }

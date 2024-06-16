@@ -1,9 +1,10 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.GridMovableController;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+
 
 /**
  * Controller for {@link com.gitgud.pieces.model.gameObjects.agents.FightAgent}
@@ -29,11 +30,12 @@ public class FightAgentController extends GridMovableController<FightAgent>
         this.gridMap = ActiveGameController.getInstance().get().getFight().getGridMap();
         this.fightAgent = fightAgent;
         
-        this.position=gridMap.entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(null).getKey();
+        this.position = gridMap.entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(
+                null).getKey();
     }
     
     
-    public FightAgentController(GridMap<FightAgent> gridMap ,FightAgent fightAgent, Tile position)
+    public FightAgentController(GridMap<FightAgent> gridMap, FightAgent fightAgent, Tile position)
     {
         this.gridMap = gridMap;
         this.fightAgent = fightAgent;
@@ -52,7 +54,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
     {
         Tile oldTile = getPosition();
         gridMap.put(oldTile, null);
-        gridMap.put(tile,getFightAgent());
+        gridMap.put(tile, getFightAgent());
         setPosition(tile);
         //todo update gui method
         

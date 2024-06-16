@@ -20,5 +20,4 @@ public interface Attacker
     Attack createAttack(float distance);
     
     
-    
 }

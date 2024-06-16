@@ -9,7 +9,7 @@ public interface Sprite
     String getSpriteFilePath();
     
     
-    public default String getSpriteUrl()
+    default String getSpriteUrl()
     {
         try
         {
@@ -25,7 +25,7 @@ public interface Sprite
     }
     
     
-    public static String urlFromFilePath(String filePath) throws MalformedURLException
+    static String urlFromFilePath(String filePath) throws MalformedURLException
     {
         return new File(filePath).toURI().toURL().toString();
     }

@@ -14,8 +14,8 @@ import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
  */
 public interface Health
 {
-    public int getHealth();
+    int getHealth();
     
     
-    public void setHealth(int health);
+    void setHealth(int health);
 }

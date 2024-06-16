@@ -19,33 +19,33 @@ import java.util.stream.Stream;
  */
 public interface GridMovable extends GridMappable
 {
-    public int getMovementRange();
+    int getMovementRange();
     
     
-    public boolean isFlying();
+    boolean isFlying();
     
     
-    public default boolean canMoveTo(GridMap gridMap, Tile position, Tile target)
+    default boolean canMoveTo(GridMap gridMap, Tile position, Tile target)
     {
         return getInRangeTiles(gridMap, position).contains(target);
     }
     
     
-    public default Collection<Tile> getInRangeTiles(GridMap gridMap, Tile position)
+    default Collection<Tile> getInRangeTiles(GridMap gridMap, Tile position)
     {
-        int movementRange=getMovementRange();
+        int movementRange = getMovementRange();
         if (!isFlying())
         {
             return GridMapServices.getInRange(gridMap, position, movementRange);
         }
         
         
-        Stream<Tile> reachableTiles= gridMap.keySet().stream();
+        Stream<Tile> reachableTiles = gridMap.keySet().stream();
         
-        return reachableTiles.filter(tile->tile.terrain().isTraversable())
-                .filter(tile->movementRange>= calculateAbsoluteDistance(position, tile))
-                .toList();
+        return reachableTiles.filter(tile -> tile.terrain().isTraversable()).filter(
+                tile -> movementRange >= calculateAbsoluteDistance(position, tile)).toList();
     }
+    
     
     private static double calculateAbsoluteDistance(Tile a, Tile b)
     {

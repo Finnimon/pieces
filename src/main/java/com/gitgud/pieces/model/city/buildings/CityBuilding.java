@@ -7,6 +7,7 @@ import com.gitgud.engine.model.gameObject.Sprite;
 
 /**
  * The Buildings to be used by the {@link com.gitgud.pieces.model.city.City}.
+ *
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 05.06.2024

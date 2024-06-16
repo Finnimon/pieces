@@ -1,13 +1,14 @@
-package com.gitgud.pieces.model;
+package com.gitgud.engine.control;
 
 public interface Ending
 {
     /**
      * If isFinished returns true, then {@link #end()} will be called.
      * else returns false.
+     *
      * @return if {@link #end()} has been called
      */
-    public default boolean tryEnd()
+    default boolean tryEnd()
     {
         if (!isFinished())
         {
@@ -17,6 +18,10 @@ public interface Ending
         end();
         return true;
     }
+    
+    
     void end();
+    
+    
     boolean isFinished();
 }

@@ -1,12 +1,12 @@
 package com.gitgud.pieces.model.fight;
 
+import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.Ending;
+import com.gitgud.engine.control.Ending;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.model.gameObjects.FightAgentType;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.player.Player;
 
 import java.util.ArrayList;
@@ -106,14 +106,14 @@ public class Fight implements Ending
     @Override
     public boolean isFinished()
     {
-
+        
         for (Player player : ownershipMap.keySet())
         {
             boolean anyAlive = false;
             
-            for (FightAgent fightAgent: ownershipMap.get(player))
+            for (FightAgent fightAgent : ownershipMap.get(player))
             {
-                anyAlive = anyAlive ||!fightAgent.isDead();
+                anyAlive = anyAlive || !fightAgent.isDead();
             }
             
             if (!anyAlive)

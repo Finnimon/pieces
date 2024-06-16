@@ -38,7 +38,8 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     }
     
     
-    public static <GridmappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridmappableType> create(TerrainType[][] terrain)
+    public static <GridmappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridmappableType> create(
+            TerrainType[][] terrain)
     {
         //todo for first instance creation
         return null;

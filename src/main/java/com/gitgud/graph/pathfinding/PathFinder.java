@@ -28,28 +28,29 @@ public class PathFinder<Vertex extends com.gitgud.graph.Vertex, Element, Edge ex
         return graph;
     }
     
+    
     public Graph<Vertex, Element, Edge> subGraph(Vertex start, double range)
     {
         return null;
     }
+    
     
     public Graph<Vertex, Element, Edge> subGraph(Vertex start, float range)
     {
         return subGraph(start, (double) range);
     }
     
+    
     public Graph<Vertex, Element, Edge> subGraph(Vertex start, int range)
     {
         return subGraph(start, (double) range);
     }
     
+    
     public Path<Vertex, Edge> shortestPath(Vertex from, Vertex to)
     {
         return null;
     }
-    
-    
-    
     
     
 }

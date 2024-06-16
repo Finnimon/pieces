@@ -6,7 +6,7 @@ import com.gitgud.engine.model.map.GridMap;
 public interface Collectible extends Interactable
 {
     @Override
-    public default void interact(GridMap gridMap)
+    default void interact(GridMap gridMap)
     {
         collect(gridMap);
     }
@@ -25,10 +25,10 @@ public interface Collectible extends Interactable
     }
     
     
-    public void addToInventory();
+    void addToInventory();
     
     
-    public default boolean isCollectionPossible()
+    default boolean isCollectionPossible()
     {
         return true;
     }
@@ -36,7 +36,8 @@ public interface Collectible extends Interactable
     
     private void removeFromMap(GridMap<Interactable> gridMap)
     {
-        gridMap.keySet().stream().filter(key->gridMap.get(key) == this).findFirst().ifPresent(tile -> gridMap.put(tile, null));
+        gridMap.keySet().stream().filter(key -> gridMap.get(key) == this).findFirst().ifPresent(
+                tile -> gridMap.put(tile, null));
     }
     
     

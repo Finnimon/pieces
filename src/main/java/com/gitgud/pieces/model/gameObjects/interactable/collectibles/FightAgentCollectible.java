@@ -1,8 +1,8 @@
 package com.gitgud.pieces.model.gameObjects.interactable.collectibles;
 
-import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.engine.model.gameObject.interactable.Collectible;
 import com.gitgud.engine.model.gameObject.GameObject;
+import com.gitgud.engine.model.gameObject.interactable.Collectible;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.utility.Core;
@@ -18,8 +18,8 @@ public class FightAgentCollectible extends GameObject implements Collectible
     
     public FightAgentCollectible(FightAgent fightFigure)
     {
-        super("Resting " + fightFigure.getName(), fightFigure.getDescription() + "\r\nThey would like to join your army",
-              fightFigure.getSpriteFilePath());
+        super("Resting " + fightFigure.getName(),
+              fightFigure.getDescription() + "\r\nThey would like to join your army", fightFigure.getSpriteFilePath());
         this.fightFigure = fightFigure;
     }
     

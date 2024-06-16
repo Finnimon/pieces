@@ -6,7 +6,7 @@ import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
-import com.gitgud.engine.utility.modification.Modifier;
+import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
 
 /**
@@ -35,7 +35,6 @@ public final class Spell implements Sprite, Describable, Named
     private final float successChance;
     
     
-    
     /**
      * @param name
      * @param description
@@ -45,8 +44,8 @@ public final class Spell implements Sprite, Describable, Named
      * @param manaCost
      * @param successChance
      */
-    public Spell(String name, String description, String spriteFilePath, SpellType type,
-                 FightAgentModifier modifier, int manaCost, float successChance)
+    public Spell(String name, String description, String spriteFilePath, SpellType type, FightAgentModifier modifier,
+                 int manaCost, float successChance)
     {
         this.name = name;
         this.description = description;

@@ -1,6 +1,9 @@
 package com.gitgud.engine.model.action;
 
-public interface TargetedAction<Awaiter extends ActionAwaiter,Target> extends Action<Awaiter>
+import com.gitgud.engine.control.ActionAwaiter;
+
+
+public interface TargetedAction<Awaiter extends ActionAwaiter, Target> extends Action<Awaiter>
 {
     Target getTarget();
 }

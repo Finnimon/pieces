@@ -1,9 +1,9 @@
 package com.gitgud.pieces.model.gameObjects.interactable.buildings;
 
 
-import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.engine.model.gameObject.interactable.GridMappableBuilding;
 import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 
@@ -16,6 +16,7 @@ public class ManaWell extends GridMappableBuilding
     
     
     private final static String DESCRIPTION = "Come to this building to replenish all your troops' mana.";
+    
     
     //todo
     private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/manawell.png";

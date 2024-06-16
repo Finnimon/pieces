@@ -21,7 +21,11 @@ import java.util.function.Function;
 public class GridMap<T extends GridMappable> extends AbstractMap<Tile, T> implements NavigableMap<Tile, T>, Serializable
 {
     private final TreeMap<Tile, T> graph;//todo render
+    
+    
     private final int width;
+    
+    
     private final int height;
     
     
@@ -285,7 +289,7 @@ public class GridMap<T extends GridMappable> extends AbstractMap<Tile, T> implem
     @Override
     public Entry<Tile, T> pollLastEntry()
     {
-        return graph.pollFirstEntry()   ;
+        return graph.pollFirstEntry();
     }
     
     

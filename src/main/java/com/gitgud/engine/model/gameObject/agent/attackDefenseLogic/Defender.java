@@ -14,7 +14,7 @@ import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
  */
 public interface Defender extends Health
 {
-    public default void defend(Attack attack)
+    default void defend(Attack attack)
     {
         takeDamage(getDefenceTo(attack.damageType()).calculateDamage(attack));
     }
@@ -26,10 +26,10 @@ public interface Defender extends Health
     }
     
     
-    public Defence getDefenceTo(DamageType damageType);
+    Defence getDefenceTo(DamageType damageType);
     
     
-    public default boolean isDead()
+    default boolean isDead()
     {
         return getHealth() <= 0;
     }

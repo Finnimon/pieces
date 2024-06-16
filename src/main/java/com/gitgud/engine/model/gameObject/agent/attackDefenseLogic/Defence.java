@@ -31,13 +31,14 @@ public record Defence(int defence, float evasionChance, DamageType damageType)
         return Core.roll(evasionChance());
     }
     
+    
     public int calculateDamage(Attack attack)
     {
-        if (!attack.doesHit() ||doesEvade())
+        if (!attack.doesHit() || doesEvade())
         {
             return 0;
         }
-     
+        
         
         return attack.damage() - defence();
     }

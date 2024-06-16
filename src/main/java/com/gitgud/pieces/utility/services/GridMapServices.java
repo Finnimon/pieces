@@ -18,9 +18,9 @@ public class GridMapServices
         int tileIndex = gridMap.getTileIndex(position);
         float[] adjecancies = gridMap.getAdjecancyMatrix()[tileIndex];
         
-        ArrayList<Tile> inRangeTiles=new ArrayList<>();
+        ArrayList<Tile> inRangeTiles = new ArrayList<>();
         
-        for (int index = 0; index<adjecancies.length;index++)
+        for (int index = 0; index < adjecancies.length; index++)
         {
             if (adjecancies[index] <= Range)
             {

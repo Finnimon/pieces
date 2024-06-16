@@ -3,7 +3,6 @@ package com.gitgud.graph.pathfinding;
 import com.gitgud.graph.WeightedEdge;
 
 import java.util.LinkedList;
-import java.util.List;
 
 
 public class Path<Vertex extends com.gitgud.graph.Vertex, Edge extends com.gitgud.graph.Edge<Vertex>> extends LinkedList<Edge>

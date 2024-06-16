@@ -2,9 +2,10 @@ package com.gitgud.graph;
 
 public interface Vertex extends Comparable<Vertex>
 {
-    public int getIndex();
+    int getIndex();
     
-    public void setIndex(int index);
+    
+    void setIndex(int index);
     
     
     @Override

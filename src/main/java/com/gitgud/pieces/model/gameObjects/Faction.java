@@ -2,23 +2,25 @@ package com.gitgud.pieces.model.gameObjects;
 
 public enum Faction
 {
-    MONOCHROME ("monochrome"),
-    PINK ("pink"),
-    GREEN ("green");
-
+    MONOCHROME("monochrome"), PINK("pink"), GREEN("green");
+    
+    
     private final String name;
-
-    Faction (String name)
+    
+    
+    Faction(String name)
     {
         this.name = name;
     }
-
-    public String getAsString ()
+    
+    
+    public String getAsString()
     {
         return this.name;
     }
-
-    public static Faction fromString (String name)
+    
+    
+    public static Faction fromString(String name)
     {
         for (Faction f : Faction.values())
         {

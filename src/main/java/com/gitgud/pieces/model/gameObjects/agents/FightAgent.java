@@ -2,7 +2,7 @@ package com.gitgud.pieces.model.gameObjects.agents;
 
 import com.gitgud.engine.model.gameObject.agent.Agent;
 import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.*;
-import com.gitgud.pieces.model.fight.*;
+import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameObjects.Faction;
 import com.gitgud.pieces.model.gameObjects.FightAgentType;
 
@@ -327,29 +327,29 @@ public class FightAgent extends Agent implements Defender, Attacker, Comparable<
     @Override
     public int compareTo(FightAgent o)
     {
-        if (this==o)
+        if (this == o)
         {
             return 0;
         }
         
         
-        int comparison=this.getInitiative()-o.getInitiative();
+        int comparison = this.getInitiative() - o.getInitiative();
         
-        if(comparison!=0)
+        if (comparison != 0)
         {
             return comparison;
         }
         
         
-        comparison=this.getRank()-o.getRank();
+        comparison = this.getRank() - o.getRank();
         
-        if(comparison!=0)
+        if (comparison != 0)
         {
             return comparison;
         }
         
         
-        return this.hashCode()-o.hashCode();
+        return this.hashCode() - o.hashCode();
     }
     
     

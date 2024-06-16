@@ -1,9 +1,9 @@
 package com.gitgud.pieces.view;
 
+import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.fight.FightTimeLine;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.engine.model.map.GridMap;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -16,9 +16,11 @@ import javafx.stage.Stage;
 
 import java.util.TreeSet;
 
-public class SFight extends SGridMap implements IDimentions {
 
-
+public class SFight extends SGridMap implements IDimentions
+{
+    
+    
     /**
      * This Method creates the Mission-scene including: the Feld of Tiles, the Move transition methods, The Inventory,
      * Methods for displaying the game objects.
@@ -32,45 +34,46 @@ public class SFight extends SGridMap implements IDimentions {
     {
         Fight fight = null;
         GridMap<FightAgent> gridMap = fight.getGridMap();
-
+        
         Group root = new Group();
         Scene MapScene = new Scene(root);
         stage.setScene(MapScene);
-
+        
         BorderPane mapMenue = new BorderPane();
         ScrollPane mainMap = new ScrollPane();
         mainMap.setPrefSize(STAGE_WIDTH, MAIN_MAP_HEIGHT);
-
+        
         Group tilesGroup = new Group();
         createFieldOfTiles(tilesGroup, gridMap);
         mainMap.setContent(tilesGroup);
-
+        
         Group fightFigureGroup = new Group();
         createFieldOfGameObjects(fightFigureGroup, gridMap);
         mainMap.setContent(fightFigureGroup);
-
+        
         HBox topMenue = new HBox();
         topMenue.setMinHeight(TOP_MENU_HEIGHT);
         createTopMenu(topMenue);
-
+        
         HBox FightTimelineMenu = new HBox();
         FightTimelineMenu.setMinHeight(BOTTOM_MENU_HEIGHT);
         createFightTimelineMenu(FightTimelineMenu);
         ScrollPane scrollPane = new ScrollPane(FightTimelineMenu);
-
+        
         mapMenue.setTop(topMenue);
         mapMenue.setBottom(scrollPane);
         mapMenue.setCenter(mainMap);
-
+        
         root.getChildren().add(mapMenue);
         return MapScene;
     }
-
+    
+    
     private static void createFightTimelineMenu(HBox fightTimelineMenu)
     {
         FightTimeLine fightTimeLine = null;//todo
         TreeSet<FightAgent> activeFightFigures = fightTimeLine.getCurrent();
-
+        
         for (FightAgent fightAgent : activeFightFigures)
         {
             VBox fightFigureContainer = new VBox();

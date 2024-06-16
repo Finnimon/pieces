@@ -1,12 +1,11 @@
 package com.gitgud.pieces.view;
 
 import com.gitgud.engine.model.gameObject.GridMappable;
-import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.TerrainType;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
@@ -25,7 +24,9 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
 
-public class SGridMap implements IDimentions {
+
+public class SGridMap implements IDimentions
+{
     /**
      * THis Method creates a field of Tiles
      *
@@ -34,7 +35,7 @@ public class SGridMap implements IDimentions {
      * @Since: 01.05.2024
      * @Version: 1.0
      */
-    protected static void createFieldOfTiles(Group tilesGroup,  GridMap gridMap)
+    protected static void createFieldOfTiles(Group tilesGroup, GridMap gridMap)
     {
         {
             for (int i = 0; i < gridMap.getHeight(); i++)
@@ -42,7 +43,7 @@ public class SGridMap implements IDimentions {
                 for (int j = 0; j < gridMap.getWidth(); j++)
                 {
                     Tile tile = gridMap.getTile(i, j);
-
+                    
                     Rectangle rectangle = new Rectangle();
                     int xPosition = tile.xPosition();
                     int yPosition = tile.yPosition();
@@ -50,28 +51,33 @@ public class SGridMap implements IDimentions {
                     rectangle.setY(yPosition * TILE_SPACING);
                     rectangle.setWidth(TILE_DIMENSIONS);
                     rectangle.setHeight(TILE_DIMENSIONS);
-
+                    
                     if (tile.terrain().terrainType() == TerrainType.NON_TRAVERSABLE)
                     {
                         rectangle.setFill(Color.GRAY);
-                    } else if ((xPosition + yPosition) % 2 == 1)
+                    }
+                    else if ((xPosition + yPosition) % 2 == 1)
                     {
                         rectangle.setFill(Color.SADDLEBROWN);
-                    } else
+                    }
+                    else
                     {
                         rectangle.setFill(Color.WHEAT);
                     }
-                    rectangle.setOnMouseClicked(moveRequestEvent -> {
-                        if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
-                        {
-                            moveRequest(tile);
-                        }
-                    });
+                    rectangle.setOnMouseClicked(moveRequestEvent ->
+                                                {
+                                                    if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
+                                                    {
+                                                        moveRequest(tile);
+                                                    }
+                                                });
                     tilesGroup.getChildren().add(rectangle);
                 }
             }
         }
     }
+    
+    
     /**
      * THis Method creates a field of Game Objekts
      *
@@ -91,70 +97,75 @@ public class SGridMap implements IDimentions {
                 continue;
             }
             VBox gameObjectContainer = new VBox();
-            anchorPane.setTopAnchor(gameObjectContainer, (double) (tile.yPosition() * TILE_SPACING));
-            anchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.xPosition() * TILE_SPACING));
+            AnchorPane.setTopAnchor(gameObjectContainer, (double) (tile.yPosition() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.xPosition() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
             gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
-
-            gameObjectContainer.setOnMouseClicked(moveRequestEvent -> {
-                if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
-                {
-                    interactionRequest(element);
-                }
-            });
-
-
+            
+            gameObjectContainer.setOnMouseClicked(moveRequestEvent ->
+                                                  {
+                                                      if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
+                                                      {
+                                                          interactionRequest(element);
+                                                      }
+                                                  });
+            
+            
             Image gameObjektSprite = new Image(element.getSpriteUrl());
             ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
-
+            
             if (element instanceof FightAgent)
             {
                 Rectangle healthBar = new Rectangle();
                 healthBar.setHeight(20);
-                healthBar.setWidth((float)((FightAgent) element).getMaxHealth()/((FightAgent) element).getHealth());
+                healthBar.setWidth((float) ((FightAgent) element).getMaxHealth() / ((FightAgent) element).getHealth());
                 gameObjectContainer.getChildren().addAll(viewGameObjektSprite, healthBar);
             }
             else
             {
                 gameObjectContainer.getChildren().add(viewGameObjektSprite);
             }
-
+            
             gameObjektGroup.getChildren().add(gameObjectContainer);
         }
     }
-
+    
+    
     protected static void createTopMenu(HBox menu)
     {
         Player player = ActiveGameController.getInstance().get().getPlayer();
-
+        
         Wallet wallet = player.wallet();
-
+        
         HashMap<ResourceType, Long> resourceMap = wallet.resourceMap();
-
+        
         for (ResourceType key : resourceMap.keySet())
         {
             long value = resourceMap.get(key);
             Label ValueShow = new Label(Long.toString(value));
             HBox box = new HBox();
-
+            
             Image image = new Image(key.getSpriteUrl());
-
+            
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(TOP_MENU_HEIGHT);
             imageView.setFitWidth(TOP_MENU_HEIGHT);
             box.getChildren().addAll(ValueShow, imageView);
-
+            
             menu.getChildren().add(box);
         }
     }
-
+    
+    
     private static <T extends GridMappable> void interactionRequest(T element)
     {
         //todo
     }
+    
+    
     protected static void moveRequest(Tile tile)
     {
         //todo
     }
-
+    
 }

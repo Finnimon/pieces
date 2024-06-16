@@ -13,7 +13,8 @@ public class FightTimeLine
 {
     //todo render
     private final TreeSet<FightAgent> current;
-
+    
+    
     //todo render
     private final TreeSet<FightAgent> next;
     
@@ -27,7 +28,7 @@ public class FightTimeLine
     
     public FightTimeLine(Fight fight)
     {
-        List<FightAgent>fightAgentList= fight.getGridMap().getAllGridMappables();
+        List<FightAgent> fightAgentList = fight.getGridMap().getAllGridMappables();
         this.current = new TreeSet<>(fightAgentList);
         this.next = new TreeSet<>();
     }

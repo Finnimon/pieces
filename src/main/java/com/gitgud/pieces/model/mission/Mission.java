@@ -1,11 +1,11 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.pieces.model.Ending;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
 import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.engine.control.Ending;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
 
 
 public class Mission implements Ending
@@ -21,7 +21,9 @@ public class Mission implements Ending
     //todo render position for the playeragentsprite
     private Tile playerAgentPosition;
     
+    
     private final FightAgent[] activeFightAgents;
+    
     
     //todo render only in selction screen
     private final FightAgent[] discardedFightAgents;
@@ -76,7 +78,6 @@ public class Mission implements Ending
     }
     
     
-    
     public FightAgent[] getActiveFightAgents()
     {
         return activeFightAgents;
@@ -87,6 +88,7 @@ public class Mission implements Ending
     {
         return discardedFightAgents;
     }
+    
     
     @Override
     public void end()
@@ -107,5 +109,5 @@ public class Mission implements Ending
         this.finished = finished;
     }
     
-
+    
 }

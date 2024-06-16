@@ -10,6 +10,5 @@ package com.gitgud.engine.model.gameObject.agent.attackDefenseLogic;
  */
 public enum DamageType
 {
-    PHYSICAL,
-    MAGIC
+    PHYSICAL, MAGIC
 }

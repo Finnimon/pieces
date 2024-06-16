@@ -1,12 +1,12 @@
 package com.gitgud.pieces.model.gameObjects.interactable.collectibles;
 
-import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.engine.model.gameObject.interactable.Collectible;
 import com.gitgud.engine.model.gameObject.GameObject;
+import com.gitgud.engine.model.gameObject.interactable.Collectible;
+import com.gitgud.engine.utility.modification.Modifier;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.ArtefactPouch;
 import com.gitgud.pieces.utility.Core;
-import com.gitgud.engine.utility.modification.Modifier;
 
 
 /**

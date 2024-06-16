@@ -1,8 +1,8 @@
 package com.gitgud.pieces.model.gameObjects.interactable.collectibles;
 
-import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.engine.model.gameObject.interactable.Collectible;
 import com.gitgud.engine.model.gameObject.GameObject;
+import com.gitgud.engine.model.gameObject.interactable.Collectible;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.player.ResourceType;
 
 

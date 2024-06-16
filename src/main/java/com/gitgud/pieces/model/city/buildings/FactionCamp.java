@@ -1,9 +1,9 @@
 package com.gitgud.pieces.model.city.buildings;
 
+import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.gameObjects.Faction;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
 import java.util.ArrayList;
@@ -24,14 +24,16 @@ public class FactionCamp extends CityBuilding
 {
     private final Faction faction;
     
+    
     private final List<Modifier<FightAgent>> modifiers;
+    
     
     public FactionCamp(String name, String description, String spriteFilePath, int level, Faction faction,
                        Modifier<FightAgent> modifier)
     {
         super(name, description, spriteFilePath, level);
         this.faction = faction;
-        modifiers= new ArrayList<>();
+        modifiers = new ArrayList<>();
         getModifiers().add(modifier);
     }
     
@@ -59,8 +61,9 @@ public class FactionCamp extends CityBuilding
     
     private Collection<FightAgent> getTrainableFightAgents()
     {
-        return ActiveGameController.getInstance().get().getPlayer().army().baseCampStash().values().stream().flatMap(Collection::stream).collect(
-                Collectors.toCollection(ArrayList::new)).stream().filter(x->x.getFaction()==this.faction).toList();
+        return ActiveGameController.getInstance().get().getPlayer().army().baseCampStash().values().stream().flatMap(
+                Collection::stream).collect(Collectors.toCollection(ArrayList::new)).stream().filter(
+                x -> x.getFaction() == this.faction).toList();
     }
     
     

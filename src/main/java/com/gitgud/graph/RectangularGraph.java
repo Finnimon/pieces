@@ -2,16 +2,17 @@ package com.gitgud.graph;
 
 public interface RectangularGraph<Vertex extends com.gitgud.graph.Vertex>
 {
-    public int getHeight();
+    int getHeight();
     
     
-    public int getWidth();
+    int getWidth();
     
     
-    public void updateDimensions();
+    void updateDimensions();
     
     
-    public boolean isValid();
+    boolean isValid();
     
-    public boolean isVertexValid(Vertex vertex);
+    
+    boolean isVertexValid(Vertex vertex);
 }
