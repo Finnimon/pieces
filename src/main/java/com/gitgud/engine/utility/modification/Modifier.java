@@ -1,8 +1,5 @@
 package com.gitgud.engine.utility.modification;
 
-
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-
 import java.util.Collection;
 
 

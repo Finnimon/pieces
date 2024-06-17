@@ -2,7 +2,9 @@ package com.gitgud.engine.model.action;
 
 import com.gitgud.engine.control.ActionAwaiter;
 import com.gitgud.engine.model.gameObject.agent.Fighter;
+
 import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.map.Tile;
 import javafx.geometry.Point2D;
 
 
@@ -15,7 +17,7 @@ public interface AttackAction<Awaiter extends ActionAwaiter<Fighter>> extends Fr
         Point2D from = getFrom();
         Point2D to = getTo();
         float distance = (float) from.distance(to);
-        gridMap.get(from).attack(gridMap.get(to), distance);
+        gridMap.get((Tile) from).attack(gridMap.get((Tile) to), distance);
     }
     
 }

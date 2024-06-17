@@ -10,7 +10,7 @@ import com.gitgud.pieces.utility.Core;
 
 
 /**
- * Artifacts that can be placed in {@link com.gitgud.engine.model.map.GridMap} and collected by the {@link com.gitgud.pieces.model.player.Player}.
+ * Artifacts that can be placed in {@link com.gitgud.engine.model.oldMap.GridMap} and collected by the {@link com.gitgud.pieces.model.player.Player}.
  *
  * @author Finn L.
  * @version 1.0

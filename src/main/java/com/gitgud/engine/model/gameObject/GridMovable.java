@@ -2,10 +2,11 @@ package com.gitgud.engine.model.gameObject;
 
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.utility.services.GridMapServices;
+import com.gitgud.graph.pathfinding.PathFinder;
+import javafx.geometry.Point2D;
 
 import java.util.Collection;
-import java.util.stream.Stream;
+import java.util.List;
 
 
 /**
@@ -34,22 +35,19 @@ public interface GridMovable extends GridMappable
     default Collection<Tile> getInRangeTiles(GridMap gridMap, Tile position)
     {
         int movementRange = getMovementRange();
-        if (!isFlying())
+        if (isFlying())
         {
-            return GridMapServices.getInRange(gridMap, position, movementRange);
+            return getInAbsoluteRangeTiles(gridMap, position);
         }
         
-        
-        Stream<Tile> reachableTiles = gridMap.keySet().stream();
-        
-        return reachableTiles.filter(tile -> tile.terrain().isTraversable()).filter(
-                tile -> movementRange >= calculateAbsoluteDistance(position, tile)).toList();
+        return new PathFinder(gridMap).subGraph(position, getMovementRange()).verticeSet();
     }
     
     
-    private static double calculateAbsoluteDistance(Tile a, Tile b)
+    private List<Tile> getInAbsoluteRangeTiles(GridMap gridMap, Tile position)
     {
-        return Math.sqrt(Math.pow(a.xPosition() - b.yPosition(), 2) + Math.pow(a.yPosition() - b.yPosition(), 2));
+        return gridMap.verticeSet().stream().filter(
+                otherVertex -> position.distance((Point2D) otherVertex) <= getMovementRange()).toList();
     }
     
 }

@@ -5,7 +5,7 @@ import com.gitgud.engine.model.gameObject.GridMovable;
 
 
 /**
- * Agents are the most basic controllable unit of the game. They can move on a {@link com.gitgud.engine.model.map.GridMap}
+ * Agents are the most basic controllable unit of the game. They can move on a {@link com.gitgud.engine.model.oldMap.GridMap}
  *
  * @Owner: Finn L.
  * @Author: Finn L.

@@ -30,8 +30,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
         this.gridMap = ActiveGameController.getInstance().get().getFight().getGridMap();
         this.fightAgent = fightAgent;
         
-        this.position = gridMap.entrySet().stream().filter(entry -> entry.getValue() == fightAgent).findFirst().orElse(
-                null).getKey();
+        position=gridMap.getVertex(fightAgent);
     }
     
     
@@ -53,8 +52,8 @@ public class FightAgentController extends GridMovableController<FightAgent>
     public Tile moveTo(Tile tile)
     {
         Tile oldTile = getPosition();
-        gridMap.put(oldTile, null);
-        gridMap.put(tile, getFightAgent());
+        gridMap.place(oldTile, null);
+        gridMap.place(tile, getFightAgent());
         setPosition(tile);
         //todo update gui method
         

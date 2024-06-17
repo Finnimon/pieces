@@ -1,5 +1,7 @@
 package com.gitgud.engine.model.map;
 
+
+
 /**
  * The Geographic Type of Terrain on a {@link GridMap}
  *

@@ -118,42 +118,38 @@ public class SMap
      * @Since: 01.05.2024
      * @Version: 1.0
      */
-    public static void createFieldOfTiles(Group tilesGroup, GridMap gridMap)
+    public static <T extends GridMappable> void createFieldOfTiles(Group tilesGroup, GridMap<T> gridMap)
     {
         {
-            for (int i = 0; i < gridMap.getHeight(); i++)
+            for (Tile tile : gridMap.verticeSet())
             {
-                for (int j = 0; j < gridMap.getWidth(); j++)
+                Rectangle rectangle = new Rectangle();
+                int xPosition = (int) tile.getX();
+                int yPosition = (int) tile.getY();
+                rectangle.setX(xPosition * TILE_SPACING);
+                rectangle.setY(yPosition * TILE_SPACING);
+                rectangle.setWidth(TILE_DIMENSIONS);
+                rectangle.setHeight(TILE_DIMENSIONS);
+                
+                // if (tile.terrain().terrainType() == TerrainType.MOUNTAIN)
                 {
-                    Tile tile = gridMap.getTile(i, j);
-                    
-                    Rectangle rectangle = new Rectangle();
-                    int xPosition = tile.xPosition();
-                    int yPosition = tile.yPosition();
-                    rectangle.setX(xPosition * TILE_SPACING);
-                    rectangle.setY(yPosition * TILE_SPACING);
-                    rectangle.setWidth(TILE_DIMENSIONS);
-                    rectangle.setHeight(TILE_DIMENSIONS);
-                    
-                    // if (tile.terrain().terrainType() == TerrainType.MOUNTAIN)
-                    {
-                        rectangle.setFill(Color.GRAY);
-                    } // else if ((xPosition + yPosition) % 2 == 1)
-                    {
-                        rectangle.setFill(Color.SADDLEBROWN);
-                    } // else
-                    {
-                        rectangle.setFill(Color.WHEAT);
-                    }
-                    rectangle.setOnMouseClicked(moveRequestEvent ->
-                                                {
-                                                    if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
-                                                    {
-                                                        moveRequest(rectangle);
-                                                    }
-                                                });
-                    tilesGroup.getChildren().add(rectangle);
+                    rectangle.setFill(Color.GRAY);
+                } // else if ((xPosition + yPosition) % 2 == 1)
+                {
+                    rectangle.setFill(Color.SADDLEBROWN);
+                } // else
+                {
+                    rectangle.setFill(Color.WHEAT);
                 }
+                rectangle.setOnMouseClicked(moveRequestEvent ->
+                                            {
+                                                if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
+                                                {
+                                                    moveRequest(rectangle);
+                                                }
+                                            });
+                tilesGroup.getChildren().add(rectangle);
+                
             }
         }
     }
@@ -162,30 +158,27 @@ public class SMap
     public static <T extends GridMappable> void createFieldOfGameObjects(Group gameObjektGroup, GridMap<T> gridMap)
     {
         AnchorPane anchorPane = new AnchorPane();
-        for (int i = 0; i < gridMap.getHeight(); i++)
+        for (Tile tile : gridMap.verticeSet())
         {
-            for (int j = 0; j < gridMap.getWidth(); j++)
+            T element = gridMap.get(tile);
+            if (element == null)
             {
-                Tile tile = gridMap.getTile(i, j);
-                T element = gridMap.get(tile);
-                if (element == null)
-                {
-                    continue;
-                }
-                VBox gameObjectContainer = new VBox();
-                AnchorPane.setTopAnchor(gameObjectContainer, (double) (tile.yPosition() * TILE_SPACING));
-                AnchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.xPosition() * TILE_SPACING));
-                gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
-                gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
-                
-                // Image gameObjektSprite = new Image(); //TODO: Need Game Objekt URL
-                //ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
-                Rectangle healthBar = new Rectangle();
-                
-                // gameObjectContainer.getChildren().addAll(viewGameObjektSprite, healthBar);
-                gameObjektGroup.getChildren().add(gameObjectContainer);
+                continue;
             }
+            VBox gameObjectContainer = new VBox();
+            AnchorPane.setTopAnchor(gameObjectContainer, (tile.getX() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (tile.getY() * TILE_SPACING));
+            gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
+            gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
+            
+            // Image gameObjektSprite = new Image(); //TODO: Need Game Objekt URL
+            //ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
+            Rectangle healthBar = new Rectangle();
+            
+            // gameObjectContainer.getChildren().addAll(viewGameObjektSprite, healthBar);
+            gameObjektGroup.getChildren().add(gameObjectContainer);
         }
+        
     }
     
     

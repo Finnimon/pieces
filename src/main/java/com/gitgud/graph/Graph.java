@@ -42,7 +42,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
-    protected TreeMap<Vertex, HashSet<Edge>> getEdges()
+    protected TreeMap<Vertex, HashSet<Edge>> getEdgeMap()
     {
         return edges;
     }
@@ -112,9 +112,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         
         return vertex;
     }
+    public Vertex getVertex(Element element)
+    {
+        return verticeSet().stream().filter(vertex -> get(vertex)==element).findFirst().orElse(null);
+    }
     
     
-    public HashSet<Edge> getEdges(Vertex vertex)
+    public HashSet<Edge> getEdgeMap(Vertex vertex)
     {
         return edges.get(vertex);
     }
@@ -163,7 +167,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
-    public Collection<Element> Elements()
+    public Collection<Element> elements()
     {
         return vertices.values().stream().filter(Objects::nonNull).toList();
     }
@@ -172,6 +176,24 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     public int size()
     {
         return vertices.size();
+    }
+    
+    public Collection<Vertex> getAdjacentVertices(Vertex root)
+    {
+        ArrayList<Vertex> adjacentVertices = new ArrayList<>();
+
+        for (Edge edge:getEdges(root))
+        {
+            adjacentVertices.add(edge.getTo());
+        }
+        
+        
+        return adjacentVertices;
+    }
+    
+    public Collection<Edge> getEdges(Vertex root)
+    {
+        return getEdgeMap().get(root);
     }
     
 }

@@ -42,17 +42,17 @@ public class SGridMap implements IDimentions
             {
                 for (int j = 0; j < gridMap.getWidth(); j++)
                 {
-                    Tile tile = gridMap.getTile(i, j);
+                    Tile tile = gridMap.getVertex(i, j);
                     
                     Rectangle rectangle = new Rectangle();
-                    int xPosition = tile.xPosition();
-                    int yPosition = tile.yPosition();
+                    double xPosition = tile.getX();
+                    double yPosition = tile.getY();
                     rectangle.setX(xPosition * TILE_SPACING);
                     rectangle.setY(yPosition * TILE_SPACING);
                     rectangle.setWidth(TILE_DIMENSIONS);
                     rectangle.setHeight(TILE_DIMENSIONS);
                     
-                    if (tile.terrain().terrainType() == TerrainType.NON_TRAVERSABLE)
+                    if (tile.getTerrain().terrainType() == TerrainType.NON_TRAVERSABLE)
                     {
                         rectangle.setFill(Color.GRAY);
                     }
@@ -89,7 +89,7 @@ public class SGridMap implements IDimentions
     protected static <T extends GridMappable> void createFieldOfGameObjects(Group gameObjektGroup, GridMap<T> gridMap)
     {
         AnchorPane anchorPane = new AnchorPane();
-        for (Tile tile : gridMap.keySet())
+        for (Tile tile : gridMap.verticeSet())
         {
             T element = gridMap.get(tile);
             if (element == null)
@@ -97,8 +97,8 @@ public class SGridMap implements IDimentions
                 continue;
             }
             VBox gameObjectContainer = new VBox();
-            AnchorPane.setTopAnchor(gameObjectContainer, (double) (tile.yPosition() * TILE_SPACING));
-            AnchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.xPosition() * TILE_SPACING));
+            AnchorPane.setTopAnchor(gameObjectContainer,  (tile.getY() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (tile.getX() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
             gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
             

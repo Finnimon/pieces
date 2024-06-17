@@ -1,7 +1,6 @@
 package com.gitgud.engine.model.gameObject;
 
 import com.gitgud.engine.model.map.GridMap;
-
 import java.util.Arrays;
 
 

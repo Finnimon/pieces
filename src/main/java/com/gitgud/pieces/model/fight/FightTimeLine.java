@@ -4,6 +4,7 @@ package com.gitgud.pieces.model.fight;
 import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.Defender;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class FightTimeLine
     
     public FightTimeLine(Fight fight)
     {
-        List<FightAgent> fightAgentList = fight.getGridMap().getAllGridMappables();
+        Collection<FightAgent> fightAgentList = fight.getGridMap().elements();
         this.current = new TreeSet<>(fightAgentList);
         this.next = new TreeSet<>();
     }

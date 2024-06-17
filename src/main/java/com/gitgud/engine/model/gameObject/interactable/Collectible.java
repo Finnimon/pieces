@@ -1,6 +1,8 @@
 package com.gitgud.engine.model.gameObject.interactable;
 
+
 import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.map.Tile;
 
 
 public interface Collectible extends Interactable
@@ -36,8 +38,15 @@ public interface Collectible extends Interactable
     
     private void removeFromMap(GridMap<Interactable> gridMap)
     {
-        gridMap.keySet().stream().filter(key -> gridMap.get(key) == this).findFirst().ifPresent(
-                tile -> gridMap.put(tile, null));
+        Tile vertex = gridMap.getVertex(this);
+        
+        if (vertex == null)
+        {
+            return;
+        }
+        
+        
+        gridMap.place(vertex, null);
     }
     
     

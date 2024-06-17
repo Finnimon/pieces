@@ -1,6 +1,7 @@
 package com.gitgud.pieces.model.gameObjects.agents;
 
 import com.gitgud.engine.model.gameObject.agent.Agent;
+import com.gitgud.engine.model.gameObject.agent.Fighter;
 import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.*;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameObjects.Faction;
@@ -15,7 +16,7 @@ import com.gitgud.pieces.model.gameObjects.FightAgentType;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-public class FightAgent extends Agent implements Defender, Attacker, Comparable<FightAgent>
+public class FightAgent extends Fighter implements Comparable<FightAgent>
 {
     private final FightAgentType type;
     

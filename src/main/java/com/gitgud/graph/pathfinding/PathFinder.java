@@ -29,9 +29,8 @@ public class PathFinder<Vertex extends com.gitgud.graph.Vertex, Element, Edge ex
     }
     
     
-    public Graph<Vertex, Element, Edge> subGraph(Vertex start, double range)
+    public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range)
     {
-        return null;
     }
     
     

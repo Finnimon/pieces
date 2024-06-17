@@ -1,7 +1,7 @@
 package com.gitgud.engine.model.gameObject;
 
 /**
- * All Objects that can be placed on a {@link com.gitgud.engine.model.map.GridMap}.
+ * All Objects that can be placed on a {@link com.gitgud.engine.model.oldMap.GridMap}.
  * This Interface should normally not be used directly.
  * Instead, use {@link GameObject} and its respective Inheritors
  *
