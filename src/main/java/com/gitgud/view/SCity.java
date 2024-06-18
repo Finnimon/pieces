@@ -2,7 +2,6 @@ package com.gitgud.view;
 
 
 import com.opencsv.exceptions.CsvException;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -18,11 +17,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Delfina
+ * @version 1.0
+ * @Owner: Delfina
+ * @since 02.06.2024
+ */
+
 public class SCity {
 
-    //private static final short DEFAULT_WIDTH = 50;
-    //private static final short MAP_DIMENSION = 12;
-    //private static final String MAP_PATH = "src/main/resources/com/gitgud/maps/csv/Map.csv";
+
 
     private static int playerX = 11;
     private static int playerY = 5;
@@ -116,6 +120,12 @@ public class SCity {
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SWrought.createWroughtScene(stage)));
+                    }
+                    case 3 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.ROSYBROWN, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(STale.createTaleScene(stage)));
                     }
                 }
                 grid.add(pane, j, i);

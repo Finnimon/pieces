@@ -14,17 +14,23 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * @author Delfina
+ * @version 1.0
+ * @Owner: Delfina
+ * @since 12.06.2024
+ */
+
 public class SWrought {
 
     public static Scene createWroughtScene(Stage stage) {
-        VBox root = new VBox();
-        Scene WroughtScene = new Scene(root);
-        stage.setScene(WroughtScene);
 
         Text WroughtMenueText = new Text("Schmiede");
+        VBox root = new VBox();
+        Scene scene = new Scene(root);
         WroughtMenueText.setFont(Font.font("Verdana", FontWeight.MEDIUM, 30)); // Schriftart und Größe festlegen
         WroughtMenueText.setFill(Color.BISQUE); //Farbe des texts festlegen
-       root.getChildren().add(WroughtMenueText);
+        root.getChildren().add(WroughtMenueText);
 
 
 
@@ -46,7 +52,7 @@ public class SWrought {
         root.setSpacing(15);
         root.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         root.getChildren().addAll(buttonsArray);
-        return WroughtScene;
+        return scene;
     }
 
 }
