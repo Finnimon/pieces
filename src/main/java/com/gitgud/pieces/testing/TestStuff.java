@@ -23,6 +23,6 @@ public class TestStuff
             }
         }
         
-        return new GridMap<T>(terrainTypes);
+        return  GridMap.create(terrainTypes);
     }
 }
