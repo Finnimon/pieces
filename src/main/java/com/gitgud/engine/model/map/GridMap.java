@@ -4,9 +4,8 @@ import com.gitgud.graph.RectangularGraph;
 import com.gitgud.graph.WeightedEdge;
 import com.gitgud.graph.WeightedGraph;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.TreeMap;
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 /**
@@ -55,7 +54,7 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
             TerrainType[][] grid)
     {
-        GridMap<GridMappableType> gridMap = new GridMap();
+        GridMap<GridMappableType> gridMap = new GridMap<>();
         Tile[][] tileGrid = tileGridFromTerrainTypeGrid(grid);
         gridMap.height = tileGrid.length;
         gridMap.width = tileGrid[0].length;
@@ -76,7 +75,7 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
             boolean[][] grid, GridMappableType[][] gridMappables)
     {
-        GridMap<GridMappableType> gridMap= create(grid);
+        GridMap<GridMappableType> gridMap = create(grid);
         for (int y = 0; y < gridMap.height; y++)
         {
             for (int x = 0; x < gridMap.width; x++)
@@ -88,10 +87,12 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
         
         return gridMap;
     }
+    
+    
     public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
             boolean[][] grid)
     {
-        int height= grid.length;
+        int height = grid.length;
         int width = grid[0].length;
         
         TerrainType[][] terrainGrid = new TerrainType[height][width];
@@ -185,6 +186,12 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     public void updateDimensions()
     {
         TreeMap<Tile, GridMappable> vertices = this.getVertices();
+        if (vertices.isEmpty())
+        {
+            width = 0;
+            height = 0;
+            return;
+        }
         width = (int) Math.round(vertices.lastKey().getX() + 1);
         height = (int) Math.round(vertices.lastKey().getY() + 1);
     }
@@ -240,5 +247,20 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     public GridMappable get(double x, double y)
     {
         return get(getVertex(x, y));
+    }
+    
+    
+    @Override
+    public Tile[][] getVertexGrid()
+    {
+        Tile[][] tileGrid = new Tile[height][width];
+        
+        for (Tile tile : verticeSet())
+        {
+            tileGrid[(int) tile.getY()][(int) tile.getX()] = tile;
+        }
+        
+        
+        return tileGrid;
     }
 }

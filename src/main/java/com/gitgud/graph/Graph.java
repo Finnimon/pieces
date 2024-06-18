@@ -51,6 +51,14 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    /**
+     * Adds a new {@param vertex} with Element and Edges to the Graph and assigns it an index.
+     * If this already contains {@param vertex} it will return false and do nothing.
+     * @param vertex
+     * @param element
+     * @param edges
+     * @return
+     */
     public boolean add(Vertex vertex, Element element, HashSet<Edge> edges)
     {
         if (vertices.containsKey(vertex))
@@ -82,6 +90,12 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    /**
+     * Places {@param element} at {@param vertex} if this contains {@param vertex}.
+     * @param vertex
+     * @param element
+     * @return the previous Element or null if there was none or if the vertex does not exist.
+     */
     public Element place(Vertex vertex, Element element)
     {
         if (!containsVertex(vertex))
@@ -94,18 +108,33 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    /**
+     * Gets the {@link Element} on {@param vertex}
+     * @param vertex
+     * @return {@link Element} mapped to {@param vertex}
+     */
     public Element get(Vertex vertex)
     {
         return vertices.get(vertex);
     }
     
     
+    /**
+     * Gets the {@link Element} at {@param index}
+     * @param index The Index of the {@link Vertex} which has the {@link Element}
+     * @return The {@link Element} or null if there is none
+     */
     public Element get(int index)
     {
         return get(getVertex(index));
     }
     
     
+    /**
+     * Gets the {@link Vertex} at {@param index}
+     * @param index The Index of the {@link Vertex}
+     * @return The {@link Vertex} or null if there is none
+     */
     public Vertex getVertex(int index)
     {
         Object[] vertices = this.vertices.keySet().toArray();
@@ -119,12 +148,22 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    /**
+     * Finds first {@link Vertex} with {@param element} as value
+     * @param element The value mapped to the {@link Vertex}.
+     * @return The {@link Vertex} or null if there is none
+     */
     public Vertex getVertex(Element element)
     {
         return getVertices(element).stream().findFirst().orElse(null);
     }
     
     
+    /**
+     * Gets all Vertices with {@param element} as value.
+     * @param element The value mapped to the {@link Vertex}es.
+     * @return All {@link Vertex}es with {@param element} as value or an empty {@link Collection} if there are none
+     */
     public Collection<Vertex> getVertices(Element element)
     {
         return verticeSet().stream().filter(vertex -> get(vertex) == element).toList();
@@ -190,7 +229,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
-    public Collection<Element> elements()
+    public Collection<Element> nonNullElements()
     {
         return vertices.values().stream().filter(Objects::nonNull).toList();
     }
@@ -222,6 +261,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    /**
+     * Sub graphs indexing will be lost. This is to ensure that the original indexing is intact.
+     * Use non Indexed methods on the returned SubGraph.
+     * @param root
+     * @param range
+     * @return
+     */
     public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range)
     {
         Graph<Vertex, Element, Edge> subGraph = new Graph<>();
@@ -293,6 +339,10 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    /**
+     * This Method does not ensure that the indexing is intact afterwards. This means that if Vertices with are added, that have the same index as an existing vertex, the index will be overwritten.
+      * @param addGraph
+     */
     public void addAll(Graph<Vertex, Element, Edge> addGraph)
     {
         for (Vertex vertex : addGraph.verticeSet())
@@ -309,15 +359,10 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
             {
                 addEdge(vertex, edge);
             }
-            //
-            //            HashSet<Edge> currentEdges = getEdges(vertex);
-            //            if (currentEdges == null)
-            //            {
-            //                currentEdges = new HashSet<>();
-            //                edges.put(vertex, currentEdges);
-            //            }
-            //
-            //            currentEdges.addAll(addGraph.getEdges(vertex));
         }
+    }
+    public List<Element> elements()
+    {
+        return vertices.values().stream().toList();
     }
 }

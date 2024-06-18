@@ -100,7 +100,7 @@ public class App extends Application
     {
         GridMap<GridMappable> testMap = TestStuff.getTestMap(4, 5);
         Tile problemChild = testMap.getVertex(5);
-        
+        testMap.elements();
         
         printGridMap(testMap);
         System.out.println("----------\n---------");

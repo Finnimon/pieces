@@ -28,7 +28,7 @@ public class FightTimeLine
     
     public FightTimeLine(Fight fight)
     {
-        Collection<FightAgent> fightAgentList = fight.getGridMap().elements();
+        Collection<FightAgent> fightAgentList = fight.getGridMap().nonNullElements();
         this.current = new TreeSet<>(fightAgentList);
         this.next = new TreeSet<>();
     }
