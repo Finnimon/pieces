@@ -22,7 +22,9 @@ public class GridMapSerializer implements JsonSerializer<GridMap<GridMappable>>,
             rows = src.getAsJsonObject().get(key).getAsJsonArray();
         }
 
-        boolean[][] map = context.deserialize(rows, boolean.class);
+        boolean[][] grid = context.deserialize(rows, boolean[][].class);
+
+        return GridMap.create(grid);
     }
 
     @Override

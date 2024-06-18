@@ -17,7 +17,7 @@ import java.util.TreeMap;
  * @Since: 13.06.2024
  * @Version: 2.0
  */
-public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable > implements RectangularGraph<Tile, GridMappable>
+public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> implements RectangularGraph<Tile, GridMappable>
 {
     //    private final float tileSpacing;
     
