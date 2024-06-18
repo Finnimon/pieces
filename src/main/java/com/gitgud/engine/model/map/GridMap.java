@@ -52,48 +52,78 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     }
     
     
-    public GridMap(int width, int height, Collection<Tile> tiles)
+    public GridMap(TerrainType[][] grid)
     {
-        this.width = width;
-        this.height = height;
-        for (Tile tile : tiles)
+        Tile[][] tileGrid= tileGridFromTerrainTypeGrid(grid);
+        this.height = tileGrid.length;
+        this.width = tileGrid[0].length;
+        for (int y = 0; y < height; y++)
         {
-            add(tile);
+            for (int x = 0; x < width; x++)
+            {
+                getVertices().put(tileGrid[y][x], null);
+            }
         }
+        drawConcludableEdges();
+    }
+    
+    
+    private static Tile[][] tileGridFromTerrainTypeGrid(TerrainType[][] grid)
+    {
+        int height = grid.length;
+        int width = grid[0].length;
+        Tile[][] tileGrid = new Tile[height][width];
         
-        for (Tile tile : tiles)
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                tileGrid[y][x] = Tile.create(x, y, new Terrain(grid[y][x]), width);
+            }
+        }
+        return tileGrid;
+    }
+    
+    
+    private void drawConcludableEdges()
+    {
+        for (Tile tile : getVertices().keySet())
         {
             if (!tile.getTerrain().isTraversable())
+            {
+                getEdgeMap().put(tile,new HashSet<>());
+                continue;
+            }
+            
+            Collection<Tile> neighbors = getNeighbors(tile);
+            
+            for (Tile neighbor : neighbors.stream().filter(n -> n.getTerrain().isTraversable()).toList())
+            {
+                addEdge(tile, new WeightedEdge<>(neighbor, (float) tile.distance(neighbor)));
+            }
+        }
+    }
+    
+    
+    public Collection<Tile> getNeighbors(Tile tile)
+    {
+        HashSet<Tile> neighbors = new HashSet<>();
+        float adjuster = 0.01f;
+        
+        for (Tile neighbor : getVertices().keySet())
+        {
+            if (!(tile.distance(neighbor) < Math.sqrt(2) + adjuster))
+            {
+                continue;
+            }
+            if (tile == neighbor)
             {
                 continue;
             }
             
-            int tileX = (int) tile.getX();
-            int tileY = (int) tile.getY();
-            
-            for (int x = tileX - 1; x < tileX + 2; x++)
-            {
-                for (int y = tileY - 1; y < tileY + 2; y++)
-                {
-                    if (x < 0 || x >= width || y < 0 || y >= height)
-                    {
-                        continue;
-                    }
-                    
-                    Tile neighbor = getVertex(x, y);
-                    
-                    if (neighbor == null || neighbor == tile)
-                    {
-                        continue;
-                    }
-                    if (!neighbor.getTerrain().isTraversable())
-                    {
-                        continue;
-                    }
-                    addEdge(tile, new WeightedEdge<>(neighbor, (float) tile.distance(neighbor)));
-                }
-            }
+            neighbors.add(neighbor);
         }
+        return neighbors;
     }
     
     

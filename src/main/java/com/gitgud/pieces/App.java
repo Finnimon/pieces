@@ -4,7 +4,9 @@ import com.gitgud.engine.model.gameObject.GridMappable;
 import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.graph.Edge;
+import com.gitgud.graph.Graph;
+import com.gitgud.graph.WeightedEdge;
+import com.gitgud.graph.WeightedGraph;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameObjects.AssetLocator;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
@@ -99,13 +101,26 @@ public class App extends Application
         GridMap<GridMappable> testMap = TestStuff.getTestMap(4, 5);
         Tile problemChild = testMap.getVertex(5);
         
+        
+        printGridMap(testMap);
+        System.out.println("----------\n---------");
+        testMap.subGraph(problemChild, 3);
+        System.out.println("----------\n---------");
+        printGridMap(testMap.subGraph(testMap.getVertex(2), 3));
+    }
+    
+    
+    private static void printGridMap(Graph<Tile,GridMappable,WeightedEdge<Tile>> testMap)
+    {
         for (Tile tile : testMap.verticeSet())
         {
             System.out.println("x" + tile.getX() + "y" + tile.getY() + "\n\r");
             
-            for (Edge<Tile> edge : testMap.getEdges(tile))
+            System.out.println(testMap.getEdges(tile).size() + "\n\r");
+            for (WeightedEdge<Tile> edge : testMap.getEdges(tile))
             {
-                System.out.println("x" + edge.getTo().getX() + "y" + edge.getTo().getY());
+                System.out.println(
+                        "x" + edge.getTo().getX() + "y" + edge.getTo().getY() + "\tlength\t" + edge.getWeight());
             }
             System.out.println("---------");
         }

@@ -1,7 +1,10 @@
 package com.gitgud.pieces.model.fight;
 
 import com.gitgud.engine.control.Ending;
+import com.gitgud.engine.model.action.Action;
+import com.gitgud.engine.model.action.ActionAwaiter;
 import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
@@ -22,7 +25,7 @@ import java.util.HashSet;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-public class Fight implements Ending
+public class Fight implements ActionAwaiter<FightAgent>, Ending
 {
     //todo render
     private final GridMap<FightAgent> gridMap;
@@ -51,6 +54,27 @@ public class Fight implements Ending
     public GridMap<FightAgent> getGridMap()
     {
         return gridMap;
+    }
+    
+    
+    @Override
+    public Tile getActivePosition()
+    {
+        return getGridMap().getVertex(getFightTimeLine().getActiveFightAgent());
+    }
+    
+    
+    @Override
+    public HashSet<Class> getAvailableActionTypes()
+    {
+        return null;
+    }
+    
+    
+    @Override
+    public HashSet<Action> getActionsOfType(Class actionClass)
+    {
+        return null;
     }
     
     

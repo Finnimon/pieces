@@ -72,5 +72,10 @@ public class FightTimeLine
         fightAgentTreeSet.removeAll(deadFigures);
     }
     
+    public FightAgent getActiveFightAgent()
+    {
+        return current.first();
+    }
+    
     
 }

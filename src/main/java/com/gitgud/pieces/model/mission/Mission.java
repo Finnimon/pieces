@@ -1,14 +1,20 @@
 package com.gitgud.pieces.model.mission;
 
 import com.gitgud.engine.control.Ending;
+import com.gitgud.engine.model.action.Action;
+import com.gitgud.engine.model.action.ActionAwaiter;
+import com.gitgud.engine.model.action.MovementAction;
 import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
 
+import java.util.Collection;
+import java.util.HashSet;
 
-public class Mission implements Ending
+
+public class Mission implements Ending, ActionAwaiter<PlayerAgent>
 {
     //todo render
     private final GridMap<Interactable> gridMap;
@@ -18,15 +24,15 @@ public class Mission implements Ending
     private final PlayerAgent playerAgent;
     
     
-    //todo render position for the playeragentsprite
-    private Tile playerAgentPosition;
-    
-    
     private final FightAgent[] activeFightAgents;
     
     
     //todo render only in selction screen
     private final FightAgent[] discardedFightAgents;
+    
+    
+    //todo render position for the playeragentsprite
+    private Tile playerAgentPosition;
     
     
     private boolean finished = false;
@@ -54,9 +60,54 @@ public class Mission implements Ending
     }
     
     
+    @Override
+    public HashSet<Class> getAvailableActionTypes()
+    {
+        HashSet<Class> availableActionTypes = new HashSet<>();
+        availableActionTypes.add(MovementAction.class);
+        
+        
+        return availableActionTypes;
+    }
+    
+    
+    @Override
+    public HashSet<Action> getActionsOfType(Class actionClass)
+    {
+        HashSet<Action> actions = new HashSet<>();
+        
+        if (actionClass == MovementAction.class)
+        {
+            addAvailableMovementActions(actions);
+        }
+        
+        
+        return actions;
+    }
+    
+    
+    private void addAvailableMovementActions(HashSet<Action> actions)
+    {
+        Tile from = getPlayerAgentPosition();
+        Collection<Tile> inMovementRangeTiles = getPlayerAgent().getInRangeTiles(getGridMap(), from);
+        
+        for (Tile tile : inMovementRangeTiles)
+        {
+            actions.add(new MissionMovementAction(from, tile));
+        }
+    }
+    
+    
     public GridMap<Interactable> getGridMap()
     {
         return gridMap;
+    }
+    
+    
+    @Override
+    public Tile getActivePosition()
+    {
+        return playerAgentPosition;
     }
     
     
@@ -93,7 +144,7 @@ public class Mission implements Ending
     @Override
     public void end()
     {
-    
+        //todo
     }
     
     

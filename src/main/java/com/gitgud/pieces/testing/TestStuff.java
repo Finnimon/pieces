@@ -13,16 +13,16 @@ public class TestStuff
 {
     public static <T extends GridMappable> GridMap<T> getTestMap(int width, int height)
     {
-        HashSet<Tile> tiles = new HashSet<>();
+        TerrainType[][] terrainTypes = new TerrainType[height][width];
         
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                tiles.add(Tile.create(x, y, new Terrain(TerrainType.values()[x * y % 2]), width));
+                terrainTypes[y][x] = TerrainType.values()[(x*y)%2];
             }
         }
-        System.out.println(tiles.size());
-        return new GridMap<T>(width, height, tiles);
+        
+        return new GridMap<T>(terrainTypes);
     }
 }

@@ -1,7 +1,15 @@
 package com.gitgud.pieces.model.gameObjects.agents;
 
 
+import com.gitgud.engine.model.action.Action;
+import com.gitgud.engine.model.action.ActionAwaiter;
+import com.gitgud.engine.model.action.Actor;
+import com.gitgud.engine.model.action.MovementAction;
 import com.gitgud.engine.model.gameObject.agent.Agent;
+import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.mission.Mission;
+
+import java.util.HashSet;
 
 
 public class PlayerAgent extends Agent
@@ -25,4 +33,7 @@ public class PlayerAgent extends Agent
     {
         super(NAME, DESCRIPTION, SPRITE_PATH, IS_FLYING, MOVEMENT_RANGE);
     }
+    
+    
+    
 }

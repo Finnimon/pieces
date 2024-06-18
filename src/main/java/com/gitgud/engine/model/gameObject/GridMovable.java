@@ -40,7 +40,6 @@ public interface GridMovable extends GridMappable
         }
         
         return gridMap.subGraph(position, getMovementRange()).verticeSet();
-        //        return new gridMap.subGraph(position, getMovementRange()).verticeSet();
     }
     
     

@@ -3,7 +3,7 @@ package com.gitgud.engine.view;
 import com.gitgud.engine.model.map.GridMap;
 
 
-public class GridMapRender implements Render
+public class GridMapRender implements Render<GridMap>
 {
     private final GridMap gridMap;
     
@@ -23,6 +23,13 @@ public class GridMapRender implements Render
     
     @Override
     public void reRender()
+    {
+    
+    }
+    
+    
+    @Override
+    public void removeFromStage()
     {
     
     }

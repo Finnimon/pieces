@@ -1,6 +1,5 @@
 package com.gitgud.engine.model.action;
 
-import com.gitgud.engine.control.ActionAwaiter;
 import com.gitgud.engine.model.action.types.Applicable;
 
 

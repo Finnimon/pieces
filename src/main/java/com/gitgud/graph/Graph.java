@@ -16,8 +16,6 @@ import java.util.*;
  */
 public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends com.gitgud.graph.Edge<Vertex>>
 {
-    
-    
     public static final float DEFAULT_WEIGHT = 0.9999f;
     
     
@@ -123,7 +121,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     public Vertex getVertex(Element element)
     {
-        return verticeSet().stream().filter(vertex -> get(vertex) == element).findFirst().orElse(null);
+        return getVertices(element).stream().findFirst().orElse(null);
+    }
+    
+    
+    public Collection<Vertex> getVertices(Element element)
+    {
+        return verticeSet().stream().filter(vertex -> get(vertex) == element).toList();
     }
     
     
@@ -139,7 +143,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         }
         
         nullSafeEdgeAdd(from, edge);
-        HashSet<Edge> edgeSet;
         
         nullSafeEdgeAdd(to, (Edge) edge.reverse(from));
         
@@ -228,18 +231,36 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
             return subGraph;
         }
         
-        subGraph.vertices.put(root, get(root));
-        HashSet<Edge> rootEdges = new HashSet<>(
-                getEdges(root).stream().filter(edge -> determineWeight(edge) <= range).toList());
+        subGraph.vertices.put(root, get(root)); //adds current root Element
         
-        subGraph.edges.put(root, rootEdges);
+        subGraph.edges.put(root, new HashSet<>());
+        
+        HashSet<Edge> rootEdges = getEdges(root);
         
         for (Edge edge : getEdges(root))
         {
+            double weight = determineWeight(edge);
+            
+            if (weight > range)
+            {
+                continue;
+            }
+            
+            
             Vertex current = edge.getTo();
             
             subGraph.vertices.put(current, get(current));
-            subGraph.addAll(subGraph(current, range - determineWeight(edge)));
+            subGraph.edges.put(current, new HashSet<>());
+            subGraph.addEdge(root, edge);
+            
+            double remainingRange = range - weight;
+            
+            if (remainingRange <= 0)
+            {
+                continue;
+            }
+            
+            subGraph.addAll(subGraph(current, remainingRange));
         }
         
         
@@ -277,15 +298,26 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         for (Vertex vertex : addGraph.verticeSet())
         {
             vertices.putIfAbsent(vertex, addGraph.get(vertex));
+            HashSet<Edge> currentEdges = addGraph.getEdges(vertex);
             
-            HashSet<Edge> currentEdges = getEdges(vertex);
             if (currentEdges == null)
             {
                 currentEdges = new HashSet<>();
-                edges.put(vertex, currentEdges);
             }
             
-            currentEdges.addAll(addGraph.getEdges(vertex));
+            for (Edge edge : currentEdges)
+            {
+                addEdge(vertex, edge);
+            }
+            //
+            //            HashSet<Edge> currentEdges = getEdges(vertex);
+            //            if (currentEdges == null)
+            //            {
+            //                currentEdges = new HashSet<>();
+            //                edges.put(vertex, currentEdges);
+            //            }
+            //
+            //            currentEdges.addAll(addGraph.getEdges(vertex));
         }
     }
 }

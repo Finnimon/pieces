@@ -1,18 +1,24 @@
 package com.gitgud.engine.model.gameObject.agent;
 
+import com.gitgud.engine.model.action.Action;
+import com.gitgud.engine.model.action.ActionAwaiter;
+import com.gitgud.engine.model.action.Actor;
+import com.gitgud.engine.model.action.MovementAction;
 import com.gitgud.engine.model.gameObject.GameObject;
 import com.gitgud.engine.model.gameObject.GridMovable;
 
+import java.util.HashSet;
+
 
 /**
- * Agents are the most basic controllable unit of the game. They can move on a {@link com.gitgud.engine.model.oldMap.GridMap}
+ * Agents are the most basic controllable unit of the game. They can move on a {@link com.gitgud.engine.model.map.GridMap}
  *
  * @Owner: Finn L.
  * @Author: Finn L.
  * @Since: 12.06.2024
  * @Version: 2.0
  */
-public abstract class Agent extends GameObject implements GridMovable
+public abstract class Agent extends GameObject implements GridMovable, Actor
 {
     private final boolean isFlying;
     
