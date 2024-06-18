@@ -1,5 +1,7 @@
 package com.gitgud.graph;
 
+import com.gitgud.engine.model.map.Tile;
+
 import java.util.*;
 
 
@@ -67,6 +69,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         vertices.put(vertex, element);
         addEdges(vertex, edges);
         
+        
         return true;
     }
     
@@ -109,13 +112,14 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     public Vertex getVertex(int index)
     {
-        Vertex vertex = (Vertex) vertices.keySet().toArray()[index];
-        if (vertex.getIndex() != index)
+        Object[] vertices = this.vertices.keySet().toArray();
+        
+        if (index >= vertices.length)
         {
-            throw new IllegalStateException("Vertex" + vertex + " has wrong index");
+            return null;
         }
         
-        return vertex;
+        return (Vertex) vertices[index];
     }
     
     
@@ -132,14 +136,26 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         
         boolean operationPossible = !(!containsVertex(from) || !containsVertex(to));
         
-        if (operationPossible)
+        if (!operationPossible)
         {
-            edges.get(from).add(edge);
-            edges.get(to).add((Edge) edge.reverse(from));
+            return false;
         }
         
+        nullSafeEdgeAdd(from, edge);
+        HashSet<Edge> edgeSet;
         
-        return operationPossible;
+        nullSafeEdgeAdd(to, (Edge) edge.reverse(from));
+        
+        
+        
+        return true;
+    }
+    
+    
+    private void nullSafeEdgeAdd(Vertex from, Edge edge)
+    {
+        HashSet<Edge> edgeSet = edges.computeIfAbsent(from, k -> new HashSet<>());
+        edgeSet.add(edge);
     }
     
     
@@ -147,13 +163,19 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     {
         boolean operationPossible = containsVertex(from);
         
-        if (operationPossible)
+        if (!operationPossible)
         {
-            edges.forEach(edge -> addEdge(from, edge));
+            return false;
         }
         
         
-        return operationPossible;
+        HashSet<Edge> edgeSet = getEdgeMap().computeIfAbsent(from, k -> new HashSet<>());
+        
+        
+        edges.forEach(edge -> addEdge(from, edge));
+        
+        
+        return true;
     }
     
     

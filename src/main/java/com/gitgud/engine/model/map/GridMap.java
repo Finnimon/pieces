@@ -1,10 +1,10 @@
 package com.gitgud.engine.model.map;
 
-import com.gitgud.graph.Graph;
 import com.gitgud.graph.RectangularGraph;
 import com.gitgud.graph.WeightedEdge;
 import com.gitgud.graph.WeightedGraph;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.TreeMap;
 
@@ -19,7 +19,7 @@ import java.util.TreeMap;
  */
 public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.GridMappable> extends WeightedGraph<Tile, GridMappable> implements RectangularGraph<Tile, GridMappable>
 {
-//    private final float tileSpacing;
+    //    private final float tileSpacing;
     
     
     private int width;
@@ -28,35 +28,72 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     private int height;
     
     
-//    public GridMap(TreeMap<Tile, GridMappable> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges,
-//                   float tileSpacing)
-//    {
-//        super(vertices, edges);
-//        this.tileSpacing = tileSpacing;
-//        updateDimensions();
-//    }
+    //    public GridMap(TreeMap<Tile, GridMappable> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges,
+    //                   float tileSpacing)
+    //    {
+    //        super(vertices, edges);
+    //        this.tileSpacing = tileSpacing;
+    //        updateDimensions();
+    //    }
     
     
     public GridMap(TreeMap<Tile, GridMappable> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges)
     {
         super(vertices, edges);
-//        this.tileSpacing = 1;
+        //        this.tileSpacing = 1;
         updateDimensions();
     }
     
     
     public GridMap()
     {
-//        this.tileSpacing = 1;
+        //        this.tileSpacing = 1;
         updateDimensions();
     }
     
     
-    public static <GridmappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridmappableType> create(
-            TerrainType[][] terrain)
+    public GridMap(int width, int height, Collection<Tile> tiles)
     {
-        //todo for first instance creation
-        return null;
+        this.width = width;
+        this.height = height;
+        for (Tile tile : tiles)
+        {
+            add(tile);
+        }
+        
+        for (Tile tile : tiles)
+        {
+            if (!tile.getTerrain().isTraversable())
+            {
+                continue;
+            }
+            
+            int tileX = (int) tile.getX();
+            int tileY = (int) tile.getY();
+            
+            for (int x = tileX - 1; x < tileX + 2; x++)
+            {
+                for (int y = tileY - 1; y < tileY + 2; y++)
+                {
+                    if (x < 0 || x >= width || y < 0 || y >= height)
+                    {
+                        continue;
+                    }
+                    
+                    Tile neighbor = getVertex(x, y);
+                    
+                    if (neighbor == null||neighbor==tile)
+                    {
+                        continue;
+                    }
+                    if (!neighbor.getTerrain().isTraversable())
+                    {
+                        continue;
+                    }
+                    addEdge(tile, new WeightedEdge<>(neighbor, (float) tile.distance(neighbor)));
+                }
+            }
+        }
     }
     
     
@@ -115,7 +152,7 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
         double y = vertex.getY();
         
         isValid = Math.round(x + y * width) != index;
-//        isValid = Math.round((x + y * width) / tileSpacing) != index;
+        //        isValid = Math.round((x + y * width) / tileSpacing) != index;
         
         
         return isValid;

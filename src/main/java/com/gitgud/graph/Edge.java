@@ -22,4 +22,21 @@ public class Edge<Vertex>
         return new Edge<>(from);
     }
     
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj instanceof Edge)
+        {
+            return to.equals(((Edge<?>) obj).getTo());
+        }
+        return super.equals(obj);
+    }
+    
+    
+    @Override
+    public int hashCode()
+    {
+        return to.hashCode();
+    }
 }

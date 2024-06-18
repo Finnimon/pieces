@@ -35,11 +35,12 @@ public class Tile extends Vertex2D implements Sprite
      * @param y       the y coordinate of the point
      * @param terrain
      */
-    private Tile(double x, double y, Terrain terrain)
+    public Tile(double x, double y, Terrain terrain, int index)
     {
         super(x, y);
         this.terrain = terrain;
         spriteFilePath = determineSpriteFilePath();
+        this.index = index;
     }
     
     
@@ -54,17 +55,15 @@ public class Tile extends Vertex2D implements Sprite
         this.index = index;
     }
     
-    
-    public Tile create(int x, int y, String terrainType)
+    public static Tile create(int x, int y, Terrain terrain,int width)
     {
-        Terrain terrain = new Terrain(TerrainType.valueOf(terrainType.trim().toUpperCase()));
-        return new Tile(x, y, terrain);
+        return new Tile(x, y, terrain,x+width*y);
     }
     
     
-    public Tile create(int x, int y)
+    public static Tile create(int x, int y,int width)
     {
-        return create(x, y, TerrainType.TRAVERSABLE.name());
+        return create(x, y, new Terrain(TerrainType.TRAVERSABLE),width);
     }
     
     
