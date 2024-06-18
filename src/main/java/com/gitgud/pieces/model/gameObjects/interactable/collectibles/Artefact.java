@@ -11,7 +11,6 @@ import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -83,9 +82,9 @@ public class Artefact extends GameObject implements Collectible, Leveler
     @Override
     public int levelUp()
     {
-        ArrayList<Modifier<FightAgent>> modifierList=new ArrayList<>();
+        ArrayList<Modifier<FightAgent>> modifierList = new ArrayList<>();
         modifierList.add(modifier);
-        modifier=new FightAgentModifier(modifierList);
+        modifier = new FightAgentModifier(modifierList);
         modifierList.add(modifierList.getLast());
         
         return level++;

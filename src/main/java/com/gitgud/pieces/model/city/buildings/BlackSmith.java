@@ -1,11 +1,8 @@
 package com.gitgud.pieces.model.city.buildings;
 
-import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.ResourceCost;
 import com.gitgud.pieces.model.gameObjects.interactable.collectibles.Artefact;
 import com.gitgud.pieces.model.player.ResourceType;
-
-import java.util.HashMap;
 
 
 public class BlackSmith extends CityBuilding implements Transactor<Artefact>
@@ -13,7 +10,7 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     private static final ResourceType REQUIRED_RESOURCE = ResourceType.PLATINUM;
     
     
-    private final static ResourceCost COST_PER_LEVEL  = new ResourceCost(REQUIRED_RESOURCE, 10);
+    private final static ResourceCost COST_PER_LEVEL = new ResourceCost(REQUIRED_RESOURCE, 10);
     
     
     private static final String NAME = "BlackSmith";
@@ -31,8 +28,7 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     @Override
     public boolean isTransactionPossible(Artefact artefact)
     {
-        return artefact.getLevel() < getLevel()
-                && COST_PER_LEVEL.isResourceCostCoveredByWallet(artefact.getLevel());
+        return artefact.getLevel() < getLevel() && COST_PER_LEVEL.isResourceCostCoveredByWallet(artefact.getLevel());
     }
     
     
@@ -47,8 +43,8 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     public Artefact changeValue(Artefact value)
     {
         value.levelUp();
-     
-     
+        
+        
         return value;
     }
     

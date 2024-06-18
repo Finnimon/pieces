@@ -1,7 +1,5 @@
 package com.gitgud.graph;
 
-import com.gitgud.engine.model.map.Tile;
-
 import java.util.*;
 
 
@@ -129,7 +127,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
-    
     public boolean addEdge(Vertex from, Edge edge)
     {
         Vertex to = edge.getTo();
@@ -145,7 +142,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         HashSet<Edge> edgeSet;
         
         nullSafeEdgeAdd(to, (Edge) edge.reverse(from));
-        
         
         
         return true;

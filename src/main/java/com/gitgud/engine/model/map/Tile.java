@@ -55,15 +55,16 @@ public class Tile extends Vertex2D implements Sprite
         this.index = index;
     }
     
-    public static Tile create(int x, int y, Terrain terrain,int width)
+    
+    public static Tile create(int x, int y, Terrain terrain, int width)
     {
-        return new Tile(x, y, terrain,x+width*y);
+        return new Tile(x, y, terrain, x + width * y);
     }
     
     
-    public static Tile create(int x, int y,int width)
+    public static Tile create(int x, int y, int width)
     {
-        return create(x, y, new Terrain(TerrainType.TRAVERSABLE),width);
+        return create(x, y, new Terrain(TerrainType.TRAVERSABLE), width);
     }
     
     

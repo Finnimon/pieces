@@ -1,13 +1,10 @@
 package com.gitgud.pieces;
 
-import com.gitgud.engine.model.action.Action;
-import com.gitgud.engine.model.action.FromToAction;
 import com.gitgud.engine.model.gameObject.GridMappable;
 import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.graph.Edge;
-import com.gitgud.graph.Vertex;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameObjects.AssetLocator;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
@@ -19,14 +16,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.application.Application;
-import javafx.scene.DepthTest;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.HashSet;
 
 
 public class App extends Application
@@ -102,15 +97,15 @@ public class App extends Application
     public static void finnTest()
     {
         GridMap<GridMappable> testMap = TestStuff.getTestMap(4, 5);
-        Tile problemChild=testMap.getVertex(5);
+        Tile problemChild = testMap.getVertex(5);
         
         for (Tile tile : testMap.verticeSet())
         {
-            System.out.println("x"+tile.getX()+"y"+ tile.getY()+"\n\r");
+            System.out.println("x" + tile.getX() + "y" + tile.getY() + "\n\r");
             
             for (Edge<Tile> edge : testMap.getEdges(tile))
             {
-                System.out.println("x"+edge.getTo().getX()+ "y"+edge.getTo().getY());
+                System.out.println("x" + edge.getTo().getX() + "y" + edge.getTo().getY());
             }
             System.out.println("---------");
         }

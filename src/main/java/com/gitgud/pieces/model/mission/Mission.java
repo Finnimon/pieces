@@ -1,7 +1,7 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.control.Ending;
+import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;

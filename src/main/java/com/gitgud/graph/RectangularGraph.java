@@ -25,13 +25,13 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
     
     default int calculateIndex(float x, float y)
     {
-        return calculateIndex((double) x, (double) y);
+        return calculateIndex(x, (double) y);
     }
     
     
     default int calculateIndex(int x, int y)
     {
-        return calculateIndex((double) x, (double) y);
+        return calculateIndex(x, (double) y);
     }
     
     

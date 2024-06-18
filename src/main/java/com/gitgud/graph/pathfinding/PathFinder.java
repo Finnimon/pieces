@@ -12,7 +12,7 @@ import com.gitgud.graph.Graph;
  * @Since: 13.06.2024
  * @Version: 2.0
  */
-public class PathFinder<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends com.gitgud.graph.Edge<Vertex>,GraphType extends Graph<Vertex, Element, Edge>> //todo specification of Element generic irrelevant
+public class PathFinder<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends com.gitgud.graph.Edge<Vertex>, GraphType extends Graph<Vertex, Element, Edge>> //todo specification of Element generic irrelevant
 {
     private final GraphType graph;
     
@@ -27,9 +27,6 @@ public class PathFinder<Vertex extends com.gitgud.graph.Vertex, Element, Edge ex
     {
         return graph;
     }
-    
-    
-    
     
     
     public Path<Vertex, Edge> shortestPath(Vertex from, Vertex to)

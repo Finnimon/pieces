@@ -82,7 +82,7 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
                     
                     Tile neighbor = getVertex(x, y);
                     
-                    if (neighbor == null||neighbor==tile)
+                    if (neighbor == null || neighbor == tile)
                     {
                         continue;
                     }

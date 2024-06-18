@@ -1,7 +1,7 @@
 package com.gitgud.pieces.model.city.buildings;
 
-import com.gitgud.engine.model.gameObject.Leveler;
 import com.gitgud.engine.model.gameObject.Describable;
+import com.gitgud.engine.model.gameObject.Leveler;
 import com.gitgud.engine.model.gameObject.Named;
 import com.gitgud.engine.model.gameObject.Sprite;
 
@@ -21,8 +21,13 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
     
     private final String description;
     
+    
     private static final String SPRITE_FILE_PATH_PREFIX = "com\\gitgud\\sprites\\city\\building";
+    
+    
     private static final String SPRITE_FILE_PATH_APPENDIX = ".png";
+    
+    
     private final String spriteFilePath;
     
     
@@ -33,7 +38,7 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
     {
         this.name = name;
         this.description = description;
-        this.spriteFilePath = SPRITE_FILE_PATH_PREFIX+name+SPRITE_FILE_PATH_APPENDIX;
+        this.spriteFilePath = SPRITE_FILE_PATH_PREFIX + name + SPRITE_FILE_PATH_APPENDIX;
         this.level = level;
     }
     
@@ -58,11 +63,13 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
         return spriteFilePath;
     }
     
+    
     @Override
     public int getLevel()
     {
         return level;
     }
+    
     
     @Override
     public int levelUp()

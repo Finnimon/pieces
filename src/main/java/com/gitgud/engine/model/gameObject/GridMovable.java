@@ -39,8 +39,8 @@ public interface GridMovable extends GridMappable
             return getInAbsoluteRangeTiles(gridMap, position);
         }
         
-        return gridMap.subGraph(position,getMovementRange()).verticeSet();
-//        return new gridMap.subGraph(position, getMovementRange()).verticeSet();
+        return gridMap.subGraph(position, getMovementRange()).verticeSet();
+        //        return new gridMap.subGraph(position, getMovementRange()).verticeSet();
     }
     
     

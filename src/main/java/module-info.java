@@ -4,8 +4,8 @@ module com.gitgud.pieces {
     requires com.google.gson;
     requires jdk.unsupported;
     requires com.opencsv;
-
-
+    
+    
     opens com.gitgud.pieces to javafx.fxml;
     opens com.gitgud.pieces.utility.modification.fightAgent to com.google.gson;
     exports com.gitgud.pieces;

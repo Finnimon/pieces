@@ -2,7 +2,6 @@ package com.gitgud.engine.model.action;
 
 import com.gitgud.engine.control.ActionAwaiter;
 import com.gitgud.engine.model.gameObject.agent.Fighter;
-
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import javafx.geometry.Point2D;

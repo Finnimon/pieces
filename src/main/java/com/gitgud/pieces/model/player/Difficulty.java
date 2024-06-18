@@ -8,9 +8,8 @@ import com.gitgud.pieces.utility.modification.fightAgent.FightAgentDefenceModifi
 
 public enum Difficulty
 {
-    EASY(new FightAgentAttackModifier(0, 0, 0)),
-    MEDIUM(new FightAgentDefenceModifier(2, 0, 1.2f)),
-    HARD(new FightAgentAttackModifier(2,3,2f));
+    EASY(new FightAgentAttackModifier(0, 0, 0)), MEDIUM(new FightAgentDefenceModifier(2, 0, 1.2f)), HARD(
+        new FightAgentAttackModifier(2, 3, 2f));
     
     
     Modifier<FightAgent> modifier;

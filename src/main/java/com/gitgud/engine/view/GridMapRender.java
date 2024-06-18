@@ -7,10 +7,12 @@ public class GridMapRender implements Render
 {
     private final GridMap gridMap;
     
+    
     public GridMapRender(GridMap gridMap)
     {
         this.gridMap = gridMap;
     }
+    
     
     @Override
     public void initialRender()

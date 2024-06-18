@@ -2,7 +2,6 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.GridMovableController;
 import com.gitgud.engine.model.gameObject.interactable.Interactable;
-
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;

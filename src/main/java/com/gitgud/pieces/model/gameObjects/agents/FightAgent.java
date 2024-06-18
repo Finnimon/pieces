@@ -1,8 +1,9 @@
 package com.gitgud.pieces.model.gameObjects.agents;
 
-import com.gitgud.engine.model.gameObject.agent.Agent;
 import com.gitgud.engine.model.gameObject.agent.Fighter;
-import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.*;
+import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.Attack;
+import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.DamageType;
+import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.Defence;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameObjects.Faction;
 import com.gitgud.pieces.model.gameObjects.FightAgentType;

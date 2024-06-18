@@ -7,9 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 
@@ -29,7 +27,8 @@ public class STutorial
         
         Text tutorialText = new Text("Tutorial");
         Font customFont = Font.loadFont(STutorial.class.getResourceAsStream("com/gitgud/fonts/fontArt.ttf"), 20);
-        if (customFont == null) {
+        if (customFont == null)
+        {
             System.err.println("Schriftart konnte nicht geladen werden!");
         }
         //tutorialText.setFont(Font.font("Verdana", FontWeight.MEDIUM, 30)); // Schriftart und Größe festlegen

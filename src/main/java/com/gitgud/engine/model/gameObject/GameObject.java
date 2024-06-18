@@ -1,6 +1,7 @@
 package com.gitgud.engine.model.gameObject;
 
 import com.gitgud.engine.model.map.GridMap;
+
 import java.util.Arrays;
 
 
@@ -46,14 +47,14 @@ public abstract class GameObject implements GridMappable
     
     
     @Override
-    public String getSpriteFilePath ()
+    public String getSpriteFilePath()
     {
         return spriteFilePath;
     }
     
     
     @Override
-    public int hashCode ()
+    public int hashCode()
     {
         return Arrays.hashCode(new Object[]{ this });
     }

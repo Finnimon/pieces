@@ -3,7 +3,6 @@ package com.gitgud.pieces.model.city.buildings;
 import com.gitgud.pieces.model.gameObjects.Faction;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 
@@ -50,7 +49,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     }
     
     
-    public HashMap<FightAgent,Integer> loadRecruitableFightAgents()
+    public HashMap<FightAgent, Integer> loadRecruitableFightAgents()
     {
         return null;
     }//todo

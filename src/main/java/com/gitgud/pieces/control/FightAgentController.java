@@ -30,7 +30,7 @@ public class FightAgentController extends GridMovableController<FightAgent>
         this.gridMap = ActiveGameController.getInstance().get().getFight().getGridMap();
         this.fightAgent = fightAgent;
         
-        position=gridMap.getVertex(fightAgent);
+        position = gridMap.getVertex(fightAgent);
     }
     
     

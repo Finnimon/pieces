@@ -1,8 +1,8 @@
 package com.gitgud.pieces.model.fight;
 
+import com.gitgud.engine.control.Ending;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.engine.control.Ending;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.model.gameObjects.FightAgentType;

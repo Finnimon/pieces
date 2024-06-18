@@ -29,13 +29,15 @@ public class ResourceCost
         HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
-            if (walletResourceMap.get(resourceType) < resourceCostMap.get(resourceType)*multiplier)
+            if (walletResourceMap.get(resourceType) < resourceCostMap.get(resourceType) * multiplier)
             {
                 return false;
             }
         }
         return true;
     }
+    
+    
     public boolean isResourceCostCoveredByWallet()
     {
         int defaultMultiplier = 1;
@@ -48,7 +50,8 @@ public class ResourceCost
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
             HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
-            walletResourceMap.put(resourceType, walletResourceMap.get(resourceType) - resourceCostMap.get(resourceType)*multiplier);
+            walletResourceMap.put(resourceType,
+                                  walletResourceMap.get(resourceType) - resourceCostMap.get(resourceType) * multiplier);
         }
     }
     

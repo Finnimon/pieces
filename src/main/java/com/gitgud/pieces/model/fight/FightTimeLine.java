@@ -5,7 +5,6 @@ import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.Defender;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 

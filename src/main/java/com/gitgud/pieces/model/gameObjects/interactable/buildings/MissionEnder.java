@@ -1,8 +1,6 @@
 package com.gitgud.pieces.model.gameObjects.interactable.buildings;
 
 import com.gitgud.engine.model.gameObject.interactable.GridMappableBuilding;
-
-import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
 

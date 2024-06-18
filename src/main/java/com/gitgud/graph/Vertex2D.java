@@ -1,6 +1,5 @@
 package com.gitgud.graph;
 
-import com.gitgud.graph.Vertex;
 import javafx.geometry.Point2D;
 
 
