@@ -1,14 +1,13 @@
 package com.gitgud.engine.model.map;
 
 import com.gitgud.engine.model.gameObject.Sprite;
-import com.gitgud.graph.Vertex;
+import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.graph.Vertex2D;
-import javafx.geometry.Point2D;
 
 
 /**
  * The default Vertex implementation for {@link GridMap}
- * This Vertex offers a Sprite to be used on the {@link com.gitgud.engine.view.GridMapView}
+ * This Vertex offers a Sprite to be used on the {@link GridMapRender}
  *
  * @author Finn L.
  * @Owner: Finn L.

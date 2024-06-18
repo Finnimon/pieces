@@ -10,5 +10,5 @@ package com.gitgud.engine.model.gameObject;
  */
 public interface Describable
 {
-    String getDescription();
+    String description();
 }

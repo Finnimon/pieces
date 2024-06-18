@@ -3,6 +3,7 @@ package com.gitgud.pieces.model.city;
 import com.gitgud.pieces.model.city.buildings.CityBuilding;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 
 /**
@@ -15,10 +16,10 @@ import java.util.Collection;
  */
 public class City
 {
-    private final Collection<CityBuilding> cityBuildings;
+    private final HashSet<CityBuilding> cityBuildings;
     
     
-    public City(Collection<CityBuilding> cityBuildings)
+    public City(HashSet<CityBuilding> cityBuildings)
     {
         this.cityBuildings = cityBuildings;
     }

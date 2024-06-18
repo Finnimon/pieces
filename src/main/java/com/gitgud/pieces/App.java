@@ -72,8 +72,8 @@ public class App extends Application
         String spellJson = gson.toJson(spell, Spell.class);
         
         System.out.println(spell.getType());
-        System.out.println(spell.getDescription());
-        System.out.println(spell.getName());
+        System.out.println(spell.description());
+        System.out.println(spell.name());
         System.out.println(spell.getModifier());
         System.out.println(spell.doesSucceed());
         System.out.println(spell.getManaCost());

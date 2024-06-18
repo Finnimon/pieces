@@ -2,7 +2,6 @@ package com.gitgud.engine.model.gameObject;
 
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.graph.pathfinding.PathFinder;
 import javafx.geometry.Point2D;
 
 import java.util.Collection;
@@ -40,7 +39,8 @@ public interface GridMovable extends GridMappable
             return getInAbsoluteRangeTiles(gridMap, position);
         }
         
-        return new PathFinder(gridMap).subGraph(position, getMovementRange()).verticeSet();
+        return gridMap.subGraph(position,getMovementRange()).verticeSet();
+//        return new gridMap.subGraph(position, getMovementRange()).verticeSet();
     }
     
     

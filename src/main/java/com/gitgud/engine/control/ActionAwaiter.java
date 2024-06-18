@@ -12,12 +12,8 @@ public interface ActionAwaiter<T extends GridMappable> extends Ending
     void await();
     
     
-    HashSet<Action<ActionAwaiter<T>>> getActionsOfType(Class<Action<ActionAwaiter<T>>> actionClass);
-    
-    
-    HashSet<Class<Action<ActionAwaiter<T>>>> getAvailableActionTypes();
+    public Actor<T> getActiveActor();
     
     
     GridMap<T> getGridMap();
-    
 }

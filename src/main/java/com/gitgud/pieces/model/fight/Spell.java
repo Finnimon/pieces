@@ -58,14 +58,14 @@ public final class Spell implements Sprite, Describable, Named
     
     
     @Override
-    public String getName()
+    public String name()
     {
         return name;
     }
     
     
     @Override
-    public String getDescription()
+    public String description()
     {
         return description;
     }

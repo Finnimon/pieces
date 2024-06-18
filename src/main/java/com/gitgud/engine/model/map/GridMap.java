@@ -1,5 +1,6 @@
 package com.gitgud.engine.model.map;
 
+import com.gitgud.graph.Graph;
 import com.gitgud.graph.RectangularGraph;
 import com.gitgud.graph.WeightedEdge;
 import com.gitgud.graph.WeightedGraph;

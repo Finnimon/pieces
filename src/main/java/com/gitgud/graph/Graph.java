@@ -16,6 +16,11 @@ import java.util.*;
  */
 public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends com.gitgud.graph.Edge<Vertex>>
 {
+    
+    
+    public static final float DEFAULT_WEIGHT = 0.9999f;
+    
+    
     private final TreeMap<Vertex, Element> vertices;
     
     
@@ -112,16 +117,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         
         return vertex;
     }
+    
+    
     public Vertex getVertex(Element element)
     {
-        return verticeSet().stream().filter(vertex -> get(vertex)==element).findFirst().orElse(null);
+        return verticeSet().stream().filter(vertex -> get(vertex) == element).findFirst().orElse(null);
     }
     
-    
-    public HashSet<Edge> getEdgeMap(Vertex vertex)
-    {
-        return edges.get(vertex);
-    }
     
     
     public boolean addEdge(Vertex from, Edge edge)
@@ -178,11 +180,12 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         return vertices.size();
     }
     
+    
     public Collection<Vertex> getAdjacentVertices(Vertex root)
     {
         ArrayList<Vertex> adjacentVertices = new ArrayList<>();
-
-        for (Edge edge:getEdges(root))
+        
+        for (Edge edge : getEdges(root))
         {
             adjacentVertices.add(edge.getTo());
         }
@@ -191,9 +194,80 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         return adjacentVertices;
     }
     
-    public Collection<Edge> getEdges(Vertex root)
+    
+    public HashSet<Edge> getEdges(Vertex root)
     {
         return getEdgeMap().get(root);
     }
     
+    
+    public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range)
+    {
+        Graph<Vertex, Element, Edge> subGraph = new Graph<>();
+        
+        if (!this.containsVertex(root))
+        {
+            return subGraph;
+        }
+        
+        subGraph.vertices.put(root, get(root));
+        HashSet<Edge> rootEdges = new HashSet<>(
+                getEdges(root).stream().filter(edge -> determineWeight(edge) <= range).toList());
+        
+        subGraph.edges.put(root, rootEdges);
+        
+        for (Edge edge : getEdges(root))
+        {
+            Vertex current = edge.getTo();
+            
+            subGraph.vertices.put(current, get(current));
+            subGraph.addAll(subGraph(current, range - determineWeight(edge)));
+        }
+        
+        
+        return subGraph;
+    }
+    
+    
+    private float determineWeight(Edge edge)
+    {
+        if (!(edge instanceof WeightedEdge<?>))
+        {
+            return DEFAULT_WEIGHT;
+        }
+        else
+        {
+            return ((WeightedEdge<?>) edge).getWeight();
+        }
+    }
+    
+    
+    public Graph<Vertex, Element, Edge> subGraph(Vertex start, float range)
+    {
+        return subGraph(start, (double) range);
+    }
+    
+    
+    public Graph<Vertex, Element, Edge> subGraph(Vertex start, int range)
+    {
+        return subGraph(start, (double) range);
+    }
+    
+    
+    public void addAll(Graph<Vertex, Element, Edge> addGraph)
+    {
+        for (Vertex vertex : addGraph.verticeSet())
+        {
+            vertices.putIfAbsent(vertex, addGraph.get(vertex));
+            
+            HashSet<Edge> currentEdges = getEdges(vertex);
+            if (currentEdges == null)
+            {
+                currentEdges = new HashSet<>();
+                edges.put(vertex, currentEdges);
+            }
+            
+            currentEdges.addAll(addGraph.getEdges(vertex));
+        }
+    }
 }

@@ -11,6 +11,6 @@ import com.gitgud.pieces.model.fight.SpellBook;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
-public record Player(Army army, Wallet wallet, ArtefactPouch artefactPouch, SpellBook spellbook)
+public record Player(String name,Difficulty difficulty,Army army, Wallet wallet, ArtefactPouch artefactPouch, SpellBook spellbook)
 {
 }

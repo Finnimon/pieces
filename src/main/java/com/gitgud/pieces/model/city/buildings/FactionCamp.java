@@ -1,74 +1,78 @@
 package com.gitgud.pieces.model.city.buildings;
 
-import com.gitgud.engine.utility.modification.Modifier;
-import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.gameObjects.Faction;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
 
 
-/**
- * A {@link CityBuilding} with the option to train {@link FightAgent}s of a specified {@link Faction}
- *
- * @author Finn L.
- * @Owner: Finn L.
- * @Since: 05.06.2024
- * @Version: 1.0
- */
-public class FactionCamp extends CityBuilding
+public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
 {
+    private static final Faction DEFAULT_FACTION = Faction.MONOCHROME;
+    
+    
+    private static final String DEFAULT_DESCRIPTION = "Pieces of it's faction can be recruited here.";
+    
+    
+    /**
+     * Should Contain the recruitable {@link FightAgent}s   //todo
+     */
+    private static final String JSON_FILE_PATH = "com\\gitgud\\pieces\\model\\city\\buildings\\FactionCamp.json";
+    
+    
     private final Faction faction;
     
     
-    private final List<Modifier<FightAgent>> modifiers;
-    
-    
-    public FactionCamp(String name, String description, String spriteFilePath, int level, Faction faction,
-                       Modifier<FightAgent> modifier)
+    public FactionCamp(String name, String description, int level, Faction faction)
     {
-        super(name, description, spriteFilePath, level);
+        super(name, description, level);
         this.faction = faction;
-        modifiers = new ArrayList<>();
-        getModifiers().add(modifier);
     }
     
     
-    public Faction getFaction()
+    public static FactionCamp create(Faction faction, int level)
     {
-        return this.faction;
+        return new FactionCamp(faction + "FactionCamp", DEFAULT_DESCRIPTION, level, faction);
     }
     
     
-    public List<Modifier<FightAgent>> getModifiers()
+    public static FactionCamp create(Faction faction)
     {
-        return this.modifiers;
+        return create(faction, 1);
     }
     
     
     @Override
-    public int levelUp()
+    public String getSpriteFilePath()
     {
-        super.levelUp();
-        modifiers.addAll(modifiers);
-        return getLevel();
+        return JSON_FILE_PATH;
     }
     
     
-    private Collection<FightAgent> getTrainableFightAgents()
+    public HashMap<FightAgent,Integer> loadRecruitableFightAgents()
     {
-        return ActiveGameController.getInstance().get().getPlayer().army().baseCampStash().values().stream().flatMap(
-                Collection::stream).collect(Collectors.toCollection(ArrayList::new)).stream().filter(
-                x -> x.getFaction() == this.faction).toList();
+        return null;
+    }//todo
+    
+    
+    @Override
+    public boolean isTransactionPossible(FightAgent fightAgent)
+    {
+        return false;//todo
     }
     
     
-    private void trainFightAgent(FightAgent fightAgent)
+    @Override
+    public void deductCostFromInventory(FightAgent fightAgent)
     {
-        FightAgentModifier.applyModifiers(fightAgent, getModifiers());
+        //todo
+    }
+    
+    
+    @Override
+    public FightAgent changeValue(FightAgent value)
+    {
+        return null;
     }
 }
