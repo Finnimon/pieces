@@ -62,6 +62,12 @@ public class Tile extends Vertex2D implements Sprite
     }
     
     
+    public static Tile create(int x,int y,TerrainType terrainType, int width)
+    {
+        return create(x, y, new Terrain(terrainType), width);
+    }
+    
+    
     public static Tile create(int x, int y, int width)
     {
         return create(x, y, new Terrain(TerrainType.TRAVERSABLE), width);

@@ -52,19 +52,59 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
     }
     
     
-    public GridMap(TerrainType[][] grid)
+    public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
+            TerrainType[][] grid)
     {
-        Tile[][] tileGrid= tileGridFromTerrainTypeGrid(grid);
-        this.height = tileGrid.length;
-        this.width = tileGrid[0].length;
+        GridMap<GridMappableType> gridMap = new GridMap();
+        Tile[][] tileGrid = tileGridFromTerrainTypeGrid(grid);
+        gridMap.height = tileGrid.length;
+        gridMap.width = tileGrid[0].length;
+        for (int y = 0; y < gridMap.height; y++)
+        {
+            for (int x = 0; x < gridMap.width; x++)
+            {
+                gridMap.getVertices().put(tileGrid[y][x], null);
+            }
+        }
+        gridMap.drawConcludableEdges();
+        
+        
+        return gridMap;
+    }
+    
+    
+    public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
+            boolean[][] grid, GridMappableType[][] gridMappables)
+    {
+        GridMap<GridMappableType> gridMap= create(grid);
+        for (int y = 0; y < gridMap.height; y++)
+        {
+            for (int x = 0; x < gridMap.width; x++)
+            {
+                gridMap.getVertices().put(gridMap.getVertex(x, y), gridMappables[y][x]);
+            }
+        }
+        
+        
+        return gridMap;
+    }
+    public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
+            boolean[][] grid)
+    {
+        int height= grid.length;
+        int width = grid[0].length;
+        
+        TerrainType[][] terrainGrid = new TerrainType[height][width];
+        
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                getVertices().put(tileGrid[y][x], null);
+                terrainGrid[y][x] = grid[y][x] ? TerrainType.TRAVERSABLE : TerrainType.NON_TRAVERSABLE;
             }
         }
-        drawConcludableEdges();
+        
+        return create(terrainGrid);
     }
     
     
@@ -91,7 +131,7 @@ public class GridMap<GridMappable extends com.gitgud.engine.model.gameObject.Gri
         {
             if (!tile.getTerrain().isTraversable())
             {
-                getEdgeMap().put(tile,new HashSet<>());
+                getEdgeMap().put(tile, new HashSet<>());
                 continue;
             }
             
