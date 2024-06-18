@@ -10,6 +10,7 @@ import com.gitgud.graph.WeightedGraph;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameObjects.AssetLocator;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameObjects.interactable.collectibles.FightAgentCollectable;
 import com.gitgud.pieces.testing.TestStuff;
 import com.gitgud.pieces.utility.gsonSerialization.*;
 import com.gitgud.pieces.view.SMainMenue;
@@ -43,9 +44,10 @@ public class App extends Application
     }
     
     
-    public static void main(String[] args)
-    {
-        launch();
+    public static void main(String[] args) throws IOException {
+        // launch();
+
+        jsonTestFinnK(args);
     }
     
     
@@ -69,12 +71,17 @@ public class App extends Application
         gsonBuilder.registerTypeAdapter(FightAgent.class, new FightAgentSerializer());
         gsonBuilder.registerTypeAdapter(Spell.class, new SpellDeserializer());
         gsonBuilder.registerTypeAdapter(Spell.class, new SpellSerializer());
+        gsonBuilder.registerTypeAdapter(FightAgentCollectable.class, new FightAgentCollectableSerializer());
+        gsonBuilder.registerTypeAdapter(GridMap.class, new GridMapSerializer());
         Gson gson = gsonBuilder.create();
         
         FightAgent fighter = gson.fromJson(jsonObject, FightAgent.class);
         Spell spell = gson.fromJson(jsonSpell, Spell.class);
         String spellJson = gson.toJson(spell, Spell.class);
-        
+        FightAgentCollectable fightAgentCollectable = gson.fromJson(jsonObject, FightAgentCollectable.class);
+        String fightAgentCollectableToJson = gson.toJson(fightAgentCollectable, FightAgentCollectable.class);
+        GridMap<?> map = gson.fromJson(spellJson, GridMap.class);
+
         System.out.println(spell.getType());
         System.out.println(spell.description());
         System.out.println(spell.name());
@@ -84,15 +91,17 @@ public class App extends Application
         System.out.println(spell.getSpriteFilePath());
         System.out.println(spell.getSpriteUrl());
         System.out.println(spell.getClass());
-        
+
+        GridMap<GridMappable> mapTest = TestStuff.getTestMap(5,5);
+
+        System.out.println(gson.toJson(mapTest, GridMap.class));
+
         String fighterJson = gson.toJson(fighter, FightAgent.class);
         
         FileOutputStream writableFile = new FileOutputStream(
-                "src/main/java/com/gitgud/utility/gsonSerialization/test.json");
-        writableFile.write(spellJson.getBytes());
+                "src/main/resources/com/gitgud/gameObjectTypes/test.json");
+        writableFile.write(fightAgentCollectableToJson.getBytes());
         writableFile.close();
-        
-        
     }
     
     
