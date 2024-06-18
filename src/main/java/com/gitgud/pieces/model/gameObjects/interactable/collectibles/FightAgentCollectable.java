@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class FightAgentCollectible extends GameObject implements Collectible
+public class FightAgentCollectable extends GameObject implements Collectible
 {
     private final FightAgent fightFigure;
     
     
-    public FightAgentCollectible(FightAgent fightFigure)
+    public FightAgentCollectable(FightAgent fightFigure)
     {
         super("Resting " + fightFigure.name(), fightFigure.description() + "\r\nThey would like to join your army",
               fightFigure.getSpriteFilePath());
