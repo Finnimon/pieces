@@ -45,9 +45,9 @@ public class App extends Application
     
     
     public static void main(String[] args) throws IOException {
-        // launch();
+        launch();
 
-        jsonTestFinnK(args);
+        //jsonTestFinnK(args);
     }
     
     
@@ -140,7 +140,7 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         setTitleAndIcon(stage);
-        finnTest();
+        //finnTest();
         delfiMain(stage);
         stage.show();
     }

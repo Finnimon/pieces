@@ -9,13 +9,11 @@ import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
-import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -65,12 +63,12 @@ public class SGridMap implements IDimentions
                         rectangle.setFill(Color.WHEAT);
                     }
                     rectangle.setOnMouseClicked(moveRequestEvent ->
-                                                {
-                                                    if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
-                                                    {
-                                                        moveRequest(tile);
-                                                    }
-                                                });
+                    {
+                        if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
+                        {
+                            moveRequest(tile);
+                        }
+                    });
                     tilesGroup.getChildren().add(rectangle);
                 }
             }
@@ -88,7 +86,6 @@ public class SGridMap implements IDimentions
      */
     protected static <T extends GridMappable> void createFieldOfGameObjects(Group gameObjektGroup, GridMap<T> gridMap)
     {
-        AnchorPane anchorPane = new AnchorPane();
         for (Tile tile : gridMap.verticeSet())
         {
             T element = gridMap.get(tile);
@@ -100,17 +97,7 @@ public class SGridMap implements IDimentions
             AnchorPane.setTopAnchor(gameObjectContainer, (tile.getY() * TILE_SPACING));
             AnchorPane.setLeftAnchor(gameObjectContainer, (tile.getX() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
-            gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
-            
-            gameObjectContainer.setOnMouseClicked(moveRequestEvent ->
-                                                  {
-                                                      if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
-                                                      {
-                                                          interactionRequest(element);
-                                                      }
-                                                  });
-            
-            
+
             Image gameObjektSprite = new Image(element.getSpriteUrl());
             ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
             
@@ -129,8 +116,15 @@ public class SGridMap implements IDimentions
             gameObjektGroup.getChildren().add(gameObjectContainer);
         }
     }
-    
-    
+
+    /**
+     * THis Method creates the top menu
+     *
+     * @author Julius R.
+     * @Owner: Julius R.
+     * @Since: 01.05.2024
+     * @Version: 1.0
+     */
     protected static void createTopMenu(HBox menu)
     {
         Player player = ActiveGameController.getInstance().get().getPlayer();
@@ -155,14 +149,6 @@ public class SGridMap implements IDimentions
             menu.getChildren().add(box);
         }
     }
-    
-    
-    private static <T extends GridMappable> void interactionRequest(T element)
-    {
-        //todo
-    }
-    
-    
     protected static void moveRequest(Tile tile)
     {
         //todo

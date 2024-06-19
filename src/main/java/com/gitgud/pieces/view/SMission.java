@@ -2,8 +2,12 @@ package com.gitgud.pieces.view;
 
 import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.testing.TestStuff;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -28,11 +32,13 @@ public class SMission extends SGridMap implements IDimentions
      * @Since: 01.05.2024
      * @Version: 1.0
      */
-    public static Scene createMissionScene(Stage stage) //todo GridMap gridMap, FightAgent[] activeFightFigures
+    public static Scene createMissionScene(Stage stage)
     {
-        Mission mission = null; //todo
-        GridMap<Interactable> gridMap = mission.getGridMap(); //todo
-        
+        //todo Mission mission = ActiveGameController.getInstance().get().getMission();
+        //todo GridMap<Interactable> gridMap = mission.getGridMap();
+        GridMap<Interactable> gridMap = TestStuff.getTestMap(10, 10); // todo testsachen entfernen
+        Mission mission = TestStuff.getMission();
+
         Group root = new Group();
         Scene MapScene = new Scene(root);
         stage.setScene(MapScene);
@@ -50,8 +56,8 @@ public class SMission extends SGridMap implements IDimentions
         mainMap.setContent(gameObjektGroup);
         
         Group playerAgentRender = new Group();
-        createPlayerPosition(playerAgentRender);
-        mainMap.setContent(gameObjektGroup);
+        createPlayerPosition(playerAgentRender, mission);
+        mainMap.setContent(playerAgentRender);
         
         HBox topMenu = new HBox();
         topMenu.setMinHeight(TOP_MENU_HEIGHT);
@@ -59,7 +65,7 @@ public class SMission extends SGridMap implements IDimentions
         
         HBox bottomMenu = new HBox();
         bottomMenu.setMinHeight(BOTTOM_MENU_HEIGHT);
-        createBottomMenu(bottomMenu);
+        createBottomMenu(bottomMenu, mission);
         
         mapMenu.setTop(topMenu);
         mapMenu.setBottom(bottomMenu);
@@ -70,10 +76,8 @@ public class SMission extends SGridMap implements IDimentions
     }
     
     
-    protected static void createBottomMenu(HBox menu)
+    protected static void createBottomMenu(HBox menu, Mission mission)
     {
-        
-        
         VBox bottomCentreMenu = new VBox();
         bottomCentreMenu.setPrefSize(BC_MENU_WIDTH, BOTTOM_MENU_HEIGHT);
         HBox BottomLeftMenu = new HBox();
@@ -82,21 +86,20 @@ public class SMission extends SGridMap implements IDimentions
         bottomRightMenu.setPrefSize(BS_MENU_WIDTH, BOTTOM_MENU_HEIGHT);
         
         createBottomLeftMenu(bottomCentreMenu);
-        createBottomCentreMenu(BottomLeftMenu);
+        createBottomCentreMenu(BottomLeftMenu, mission);
         menu.getChildren().addAll(BottomLeftMenu, bottomCentreMenu, bottomRightMenu);
     }
     
     
-    protected static void createBottomLeftMenu(VBox bottomCentreMenu)
+    protected static void createBottomLeftMenu(VBox bottomLeftMenu)
     {
         
-        bottomCentreMenu.getChildren().add(null);//todo
+        bottomLeftMenu.getChildren().add(null);//todo
     }
     
     
-    protected static void createBottomCentreMenu(HBox bottomLeftMenu)
+    protected static void createBottomCentreMenu(HBox bottomCentreMenu, Mission mission)
     {
-        Mission mission = null;//todo
         FightAgent[] activeFightFigures = mission.getActiveFightAgents();
         
         for (int i = 0; i < NUMBER_OF_UNITS; i++)
@@ -107,16 +110,24 @@ public class SMission extends SGridMap implements IDimentions
             Image fightFigureSprite = new Image(activeFightFigures[i].getSpriteUrl());
             ImageView viewFightFigureSprite = new ImageView(fightFigureSprite);
             
-            bottomLeftMenu.getChildren().addAll(unitContainer, viewFightFigureSprite);
+            bottomCentreMenu.getChildren().addAll(unitContainer, viewFightFigureSprite);
         }
     }
     
     
-    protected static void createPlayerPosition(Group playerAgentRender)
+    protected static void createPlayerPosition(Group playerAgentRender, Mission mission)
     {
-        AnchorPane anchorPane = new AnchorPane();
-        //todo Player position und mögliche bewegungen
-        playerAgentRender.getChildren().add(anchorPane);
+        VBox playerContainer = new VBox();
+        playerContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
+        AnchorPane.setTopAnchor(playerContainer, (mission.getPlayerAgentPosition().getY() * TILE_SPACING));
+        AnchorPane.setLeftAnchor(playerContainer, (mission.getPlayerAgentPosition().getX() * TILE_SPACING));
+        mission.getPlayerAgent().getSpriteUrl();
+        Image playerSprite = new Image(mission.getPlayerAgent().getSpriteUrl());
+        ImageView imageView = new ImageView(playerSprite);
+
+        playerContainer.getChildren().add(imageView);
+        playerAgentRender.getChildren().add(playerContainer);
+
     }
     
 }

@@ -28,8 +28,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     private final Group gridMappableGroup;
     
     private final HashMap<GridMappableType, ImagePattern> gridMappablePatterns;
-    
-    
+
     private GridMapRender(GridMap<GridMappableType> gridMap,int tileSize)
     {
         super();

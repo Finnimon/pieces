@@ -1,6 +1,7 @@
 package com.gitgud.pieces.view;
 
 import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.fight.FightTimeLine;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
@@ -30,9 +31,9 @@ public class SFight extends SGridMap implements IDimentions
      * @Since: 01.05.2024
      * @Version: 1.0
      */
-    public static Scene createFightScene(Stage stage) // todo GridMap gridMap, FightAgent[] activeFightFigures
+    public static Scene createFightScene(Stage stage)
     {
-        Fight fight = null;
+        Fight fight = ActiveGameController.getInstance().get().getFight();
         GridMap<FightAgent> gridMap = fight.getGridMap();
         
         Group root = new Group();
@@ -51,16 +52,16 @@ public class SFight extends SGridMap implements IDimentions
         createFieldOfGameObjects(fightFigureGroup, gridMap);
         mainMap.setContent(fightFigureGroup);
         
-        HBox topMenue = new HBox();
-        topMenue.setMinHeight(TOP_MENU_HEIGHT);
-        createTopMenu(topMenue);
+        HBox topMenu = new HBox();
+        topMenu.setMinHeight(TOP_MENU_HEIGHT);
+        createTopMenu(topMenu);
         
         HBox FightTimelineMenu = new HBox();
         FightTimelineMenu.setMinHeight(BOTTOM_MENU_HEIGHT);
-        createFightTimelineMenu(FightTimelineMenu);
+        createFightTimelineMenu(FightTimelineMenu, fight);
         ScrollPane scrollPane = new ScrollPane(FightTimelineMenu);
         
-        mapMenue.setTop(topMenue);
+        mapMenue.setTop(topMenu);
         mapMenue.setBottom(scrollPane);
         mapMenue.setCenter(mainMap);
         
@@ -69,9 +70,10 @@ public class SFight extends SGridMap implements IDimentions
     }
     
     
-    private static void createFightTimelineMenu(HBox fightTimelineMenu)
+    private static void createFightTimelineMenu(HBox fightTimelineMenu, Fight fight)
     {
-        FightTimeLine fightTimeLine = null;//todo
+
+        FightTimeLine fightTimeLine = fight.getFightTimeLine();
         TreeSet<FightAgent> activeFightFigures = fightTimeLine.getCurrent();
         
         for (FightAgent fightAgent : activeFightFigures)
