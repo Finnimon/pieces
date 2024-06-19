@@ -52,10 +52,4 @@ public abstract class GameObject implements GridMappable
         return spriteFilePath;
     }
     
-    
-    @Override
-    public int hashCode()
-    {
-        return Arrays.hashCode(new Object[]{ this });
-    }
 }

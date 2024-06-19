@@ -73,14 +73,14 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     
     
     public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
-            boolean[][] grid, GridMappableType[][] gridMappables)
+            boolean[][] grid, GridMappableType[] gridMappables)
     {
         GridMap<GridMappableType> gridMap = create(grid);
         for (int y = 0; y < gridMap.height; y++)
         {
             for (int x = 0; x < gridMap.width; x++)
             {
-                gridMap.getVertices().put(gridMap.getVertex(x, y), gridMappables[y][x]);
+                gridMap.getVertices().put(gridMap.getVertex(x, y), gridMappables[gridMap.calculateIndex(x, y)]);
             }
         }
         

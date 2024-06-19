@@ -3,7 +3,7 @@ package com.gitgud.pieces.model.mission;
 import com.gitgud.engine.control.Ending;
 import com.gitgud.engine.model.action.Action;
 import com.gitgud.engine.model.action.ActionAwaiter;
-import com.gitgud.engine.model.action.MovementAction;
+import com.gitgud.engine.model.action.TileMovementAction;
 import com.gitgud.engine.model.gameObject.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
@@ -64,7 +64,7 @@ public class Mission implements Ending, ActionAwaiter<PlayerAgent>
     public HashSet<Class> getAvailableActionTypes()
     {
         HashSet<Class> availableActionTypes = new HashSet<>();
-        availableActionTypes.add(MovementAction.class);
+        availableActionTypes.add(TileMovementAction.class);
         
         
         return availableActionTypes;
@@ -76,7 +76,7 @@ public class Mission implements Ending, ActionAwaiter<PlayerAgent>
     {
         HashSet<Action> actions = new HashSet<>();
         
-        if (actionClass == MovementAction.class)
+        if (actionClass == TileMovementAction.class)
         {
             addAvailableMovementActions(actions);
         }

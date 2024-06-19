@@ -1,13 +1,8 @@
 package com.gitgud.engine.model.gameObject.agent;
 
-import com.gitgud.engine.model.action.Action;
-import com.gitgud.engine.model.action.ActionAwaiter;
 import com.gitgud.engine.model.action.Actor;
-import com.gitgud.engine.model.action.MovementAction;
 import com.gitgud.engine.model.gameObject.GameObject;
 import com.gitgud.engine.model.gameObject.GridMovable;
-
-import java.util.HashSet;
 
 
 /**

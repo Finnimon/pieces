@@ -97,12 +97,14 @@ public class Tile extends Vertex2D implements Sprite
         
         if (isWhite)
         {
-            stringBuilder.append("white\\");
+            stringBuilder.append("\\white");
         }
         else
         {
-            stringBuilder.append("black\\");
+            stringBuilder.append("\\black");
         }
+        
+        stringBuilder.append(".png");
         
         return stringBuilder.toString();
     }
