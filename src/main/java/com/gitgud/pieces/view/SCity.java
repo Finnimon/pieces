@@ -1,8 +1,8 @@
 package com.gitgud.pieces.view;
 
 
-import com.gitgud.view.STale;
-import com.gitgud.view.SWrought;
+import com.gitgud.pieces.view.STale;
+import com.gitgud.pieces.view.SWrought;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import javafx.geometry.Insets;

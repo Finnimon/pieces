@@ -6,6 +6,8 @@ import com.gitgud.pieces.model.mission.Mission;
 
 public class MissionRender implements Render <Mission>
 {
+    
+    
     @Override
     public void reRender()
     {
@@ -15,13 +17,6 @@ public class MissionRender implements Render <Mission>
     
     @Override
     public void initialRender()
-    {
-    
-    }
-    
-    
-    @Override
-    public void removeFromStage()
     {
     
     }

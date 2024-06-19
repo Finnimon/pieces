@@ -7,6 +7,4 @@ public interface Render<T>
     
     void initialRender();
     
-    
-    void removeFromStage();
 }

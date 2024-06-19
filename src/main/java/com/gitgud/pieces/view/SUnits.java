@@ -1,4 +1,4 @@
-package com.gitgud.view;
+package com.gitgud.pieces.view;
 
 import javafx.geometry.Pos;
 

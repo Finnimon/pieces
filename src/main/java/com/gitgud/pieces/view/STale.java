@@ -1,4 +1,4 @@
-package com.gitgud.view;
+package com.gitgud.pieces.view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
