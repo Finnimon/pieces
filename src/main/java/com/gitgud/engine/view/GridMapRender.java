@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
@@ -16,8 +17,6 @@ import java.util.HashMap;
 
 public class GridMapRender<GridMappableType extends GridMappable> extends Group implements Render<GridMap<GridMappableType>>
 {
-    
-    
     public static final double HIGHLIGHT_OPACITY = 0.3;
     
     
@@ -27,31 +26,30 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     private final Group tileGroup;
     
     
-    private final HashMap<Tile, Rectangle> tileRectangles = new HashMap<>();
-    
-    
     private final Group gridMappableGroup;
     
     
     private final HashMap<GridMappableType, Rectangle> gridMappableRectangles = new HashMap<>();
     
     
-    private final Group highLightGroup = new Group();
+    private final Group highLightGroup;
     
     
     private final HashMap<Tile, Rectangle> highLightRectangles = new HashMap<>();
     
     
-    private GridMapRender(GridMap<GridMappableType> gridMap, int tileSize)
+    public GridMapRender(GridMap<GridMappableType> gridMap, int tileSize)
     {
         super();
         this.tileSize = tileSize;
         
         tileGroup = new Group();
         gridMappableGroup = new Group();
-        
+        highLightGroup = new Group();
         
         render(gridMap);
+        
+        
         getChildren().add(tileGroup);
         getChildren().add(gridMappableGroup);
         getChildren().add(highLightGroup);
@@ -68,7 +66,6 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
             ImagePattern currentPattern = gridMapTiles.get(tile);
             
             Rectangle rectangle = SpriteHelper.createRectangle(currentPattern, tile, tileSize);
-            tileRectangles.put(tile, rectangle);
             
             children.add(rectangle);
         }
@@ -79,7 +76,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     {
         ObservableList<Node> children = this.gridMappableGroup.getChildren();
         HashMap<GridMappableType, ImagePattern> gridMappablePatterns = SpriteHelper.loadImagePatterns(
-                gridMap.elements());
+                gridMap.nonNullElements());
         
         children.clear();
         
@@ -92,11 +89,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
                 continue;
             }
             
-            ImagePattern currentPattern = gridMappablePatterns.get(gridMappable);
-            
-            Rectangle rectangle = SpriteHelper.createRectangle(currentPattern, tile, tileSize);
-            
-            children.add(rectangle);
+            addGridMappable(gridMappable, tile, gridMappablePatterns.get(gridMappable));
         }
         
     }
@@ -130,7 +123,11 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     {
         ImagePattern pattern = new ImagePattern(new Image(gridMappable.getSpriteUrl()));
         
-        
+        addGridMappable(gridMappable, tile, pattern);
+    }
+    
+    public void addGridMappable(GridMappableType gridMappable, Tile tile, ImagePattern pattern)
+    {
         Rectangle rectangle = SpriteHelper.createRectangle(pattern, tile, tileSize);
         gridMappableGroup.getChildren().add(rectangle);
         gridMappableRectangles.put(gridMappable, rectangle);

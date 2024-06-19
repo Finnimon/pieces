@@ -4,13 +4,16 @@ import com.gitgud.engine.model.gameObject.GridMappable;
 import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
 import com.gitgud.graph.WeightedGraph;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameObjects.AssetLocator;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.gameObjects.interactable.collectibles.FightAgentCollectable;
+import com.gitgud.pieces.testing.TestAssets;
 import com.gitgud.pieces.testing.TestStuff;
 import com.gitgud.pieces.utility.gsonSerialization.*;
 import com.gitgud.pieces.view.SMainMenue;
@@ -19,6 +22,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -45,9 +51,9 @@ public class App extends Application
     
     
     public static void main(String[] args) throws IOException {
-        // launch();
+         launch();
 
-        jsonTestFinnK(args);
+//        jsonTestFinnK(args);
     }
     
     
@@ -105,17 +111,26 @@ public class App extends Application
     }
     
     
-    public static void finnTest()
+    public static void finnTest(Stage stage)
     {
-        GridMap<GridMappable> testMap = TestStuff.getTestMap(4, 5);
-        Tile problemChild = testMap.getVertex(5);
-        testMap.elements();
+        addTestGridMapRenderToStage(stage);
         
-        printGridMap(testMap);
-        System.out.println("----------\n---------");
-        testMap.subGraph(problemChild, 3);
-        System.out.println("----------\n---------");
-        printGridMap(testMap.subGraph(testMap.getVertex(2), 3));
+    }
+    
+    
+    private static void addTestGridMapRenderToStage(Stage stage)
+    {
+        GridMap<GridMappable> testMap = TestStuff.getTestMap(12,12);
+        
+        GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 100);
+        Group group=new Group();
+        PlayerAgent playerAgent = new PlayerAgent();
+        gridMapRender.addGridMappable(playerAgent, testMap.getVertex(0));
+        ScrollPane scrollPane=new ScrollPane(gridMapRender);
+        group.getChildren().add(scrollPane);
+        Scene scene = new Scene(group,1000,1000);
+        stage.setScene(scene);
+        gridMapRender.relocateGridMappable(playerAgent, testMap.getVertex(1));
     }
     
     
@@ -140,8 +155,9 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         setTitleAndIcon(stage);
-        finnTest();
-        delfiMain(stage);
+        finnTest(stage);
+//        delfiMain(stage);
         stage.show();
+        System.out.println("test");
     }
 }
