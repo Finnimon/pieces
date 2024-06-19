@@ -4,10 +4,12 @@ import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.engine.model.map.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 
 public class SpriteHelper
@@ -16,7 +18,7 @@ public class SpriteHelper
     {}
     
     
-    public static <SpriteType extends Sprite> HashMap<SpriteType, ImagePattern> loadImagePattern(
+    public static <SpriteType extends Sprite> HashMap<SpriteType, ImagePattern> loadImagePatterns(
             Collection<SpriteType> spriteCollection)
     {
         HashMap<SpriteType,ImagePattern> patterns=new HashMap<>();
@@ -35,7 +37,7 @@ public class SpriteHelper
     }
     
     
-    public static Rectangle createRectangle(ImagePattern pattern,int x, int y, int width, int height)
+    public static Rectangle createRectangle(Paint pattern, int x, int y, int width, int height)
     {
         Rectangle rectangle = new Rectangle();
         rectangle.setX(x);
@@ -45,7 +47,7 @@ public class SpriteHelper
         rectangle.setFill(pattern);
         return rectangle;
     }
-    public static Rectangle createRectangle(ImagePattern pattern, Tile tile, int tileSize)
+    public static Rectangle createRectangle(Paint pattern, Tile tile, int tileSize)
     {
         return SpriteHelper.createRectangle(pattern, (int) (tileSize*tile.getX()),
                                             (int) (tileSize*tile.getY()), tileSize, tileSize);

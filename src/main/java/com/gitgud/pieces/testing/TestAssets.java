@@ -6,5 +6,5 @@ import com.gitgud.engine.model.map.GridMap;
 
 public interface TestAssets
 {
-    GridMap<GridMappable> testMap=TestStuff.getTestMap(10,12);
+    GridMap<GridMappable> testMap=TestStuff.getTestMap(12,12);
 }

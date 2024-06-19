@@ -365,4 +365,9 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     {
         return vertices.values().stream().toList();
     }
+    
+    public Element clearVertex(Vertex vertex)
+    {
+        return vertices.put(vertex,null);
+    }
 }

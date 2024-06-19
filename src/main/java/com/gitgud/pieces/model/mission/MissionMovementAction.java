@@ -1,17 +1,15 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.engine.model.action.MovementAction;
+import com.gitgud.engine.model.action.TileMovementAction;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.model.TileFromToAction;
 
 
-public class MissionMovementAction extends TileFromToAction<Mission>
+public class MissionMovementAction extends TileMovementAction<Mission>
 {
     @Override
     public void enAct(Mission awaiter)
     {
         awaiter.setPlayerAgentPosition(getTo());
-        //todo cause rerender
     }
     
     
