@@ -158,6 +158,5 @@ public class App extends Application
         finnTest(stage);
 //        delfiMain(stage);
         stage.show();
-        System.out.println("test");
     }
 }
