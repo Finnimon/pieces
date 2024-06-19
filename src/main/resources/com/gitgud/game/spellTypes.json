@@ -5,16 +5,22 @@
     "spriteFilePath" : "src/main/resources/com/gitgud/sprites/agents/transparent18x18.png",
     "type" : "damage",
     "modifier" : {
-      "FightAgentAttackModifier" : {
-        "meleeDamageModifier" : 5,
-        "rangedDamageModifier" : 5,
-        "accuracyModifier" : 5
-      },
-      "FightAgentDefenceModifier" : {
-        "physicalDefenceModifier" : 5,
-        "magicDefenceModifier" : 5,
-        "evadeChanceModifier" : 5
-      }
+      "FightAgentModifier": [
+        {
+          "FightAgentAttackModifier": {
+            "meleeDamageModifier": 5,
+            "rangedDamageModifier": 5,
+            "accuracyModifier": 5
+          }
+        },
+        {
+          "FightAgentDefenceModifier": {
+            "physicalDefenceModifier": 5,
+            "magicDefenceModifier": 5,
+            "evadeChanceModifier": 5
+          }
+        }
+      ]
     },
     "manaCost" : 4,
     "successChance" : 5
@@ -26,16 +32,22 @@
     "spriteFilePath" : "src/main/resources/com/gitgud/sprites/agents/transparent18x18.png",
     "type" : "damage",
     "modifier" : {
-      "FightAgentAttackModifier" : {
-        "meleeDamageModifier" : 5,
-        "rangedDamageModifier" : 5,
-        "accuracyModifier" : 5
-      },
-      "FightAgentDefenceModifier" : {
-        "physicalDefenceModifier" : 5,
-        "magicDefenceModifier" : 5,
-        "evadeChanceModifier" : 5
-      }
+      "FightAgentModifier": [
+        {
+          "FightAgentAttackModifier": {
+            "meleeDamageModifier": 5,
+            "rangedDamageModifier": 5,
+            "accuracyModifier": 5
+          }
+        },
+        {
+          "FightAgentDefenceModifier": {
+            "physicalDefenceModifier": 5,
+            "magicDefenceModifier": 5,
+            "evadeChanceModifier": 5
+          }
+        }
+      ]
     },
     "manaCost" : 4,
     "successChance" : 5

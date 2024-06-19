@@ -22,13 +22,13 @@ import java.net.MalformedURLException;
 
 public class App extends Application
 {
-    
-    
+
+
     public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png";
-    
-    
+
     public static final String APP_TITLE = "Pieces";
-    
+
+
     private static void setTitleAndIcon(Stage stage) throws MalformedURLException
     {
         stage.setTitle(APP_TITLE);
@@ -63,12 +63,12 @@ public class App extends Application
     
     public static void jsonTestFinnK (String[] args) throws IOException
     {
-        JsonArray jsonArray = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
+        JsonArray jsonFightAgents = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
         JsonArray jsonSpells = AssetParser.parseJsonArray(AssetLocator.SPELL_TYPES);
         JsonArray jsonModifiers = AssetParser.parseJsonArray(AssetLocator.MODIFIER_TYPES);
-        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject();
+        JsonObject jsonFightAgent = jsonFightAgents.get(0).getAsJsonObject();
         JsonObject jsonSpell = jsonSpells.get(0).getAsJsonObject();
-        JsonObject jsonModifier = jsonModifiers.get(4).getAsJsonObject();
+        JsonObject jsonModifier = jsonModifiers.get(1).getAsJsonObject();
         
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(FightAgent.class, new FightAgentSerializer());
@@ -76,15 +76,14 @@ public class App extends Application
         gsonBuilder.registerTypeAdapter(Modifier.class, new ModifierSerializer());
         Gson gson = gsonBuilder.create();
 
-        Spell spell = gson.fromJson(jsonSpell, Spell.class);
-        Modifier<?> modifier = gson.fromJson(jsonModifier, Modifier.class);
 
+        Modifier<?> modifier = gson.fromJson(jsonModifier, Modifier.class);
+        String modifierToJson = gson.toJson(modifier, Modifier.class);
         System.out.println(modifier);
-        System.out.println(spell.getModifier());
 
 
         FileOutputStream writableFile = new FileOutputStream("src/main/java/com/gitgud/utility/gsonSerialization/test.json");
-        // writableFile.write(spellJson.getBytes());
+        writableFile.write(modifierToJson.getBytes());
         writableFile.close();
     }
 }

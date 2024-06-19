@@ -1,15 +1,14 @@
 package com.gitgud.utility.gsonSerialization;
 
 
+import com.gitgud.model.gameObjects.gridMovable.FightAgent;
 import com.gitgud.utility.modification.Modifier;
 import com.gitgud.utility.modification.fightAgent.*;
 import com.google.gson.*;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+
+
 public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonDeserializer<Modifier<Type>>
 {
     private static final String FIGHT_AGENT = "FightAgentModifier";
@@ -21,49 +20,48 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
     private static final String DURATION = "DurableFightAgentModifier";
 
     @Override
-    public JsonElement serialize(Modifier<Type> src, Type type, JsonSerializationContext context)
+    public JsonElement serialize (Modifier<Type> src, Type type, JsonSerializationContext context)
     {
         JsonObject jsonObject = new JsonObject();
 
-        List<Field> fields = new ArrayList<>(List.of(src.getClass().getDeclaredFields()));
-
-        fields.addAll(Arrays.asList(src.getClass().getSuperclass().getDeclaredFields()));
-
-        try
+        switch (src.getClass().getSimpleName())
         {
-            switch (src.getClass().getSimpleName())
-            {
-                case FIGHT_AGENT :
+            case FIGHT_AGENT :
+                serializeFightAgentModifier(jsonObject, src, context);
+                break;
 
-            }
+            case DURATION :
+                serializeDurableFightAgentModifier();
+                break;
 
-
-            for (Field field : fields)
-            {
-                field.setAccessible(true);
-
-                switch ()
-                jsonObject.add(field.getName(), context.serialize(field.get(src)));
-            }
-        }
-        catch (IllegalAccessException e)
-        {
-            throw new RuntimeException(e);
+            default :
+                jsonObject.add(src.getClass().getSimpleName(), context.serialize(src));
+                break;
         }
 
         return jsonObject;
     }
 
-    private void serializeAllModifiers (FightAgentModifier src, JsonObject jsonObject)
+    private void serializeFightAgentModifier (JsonObject jsonObject, Modifier<Type> src, JsonSerializationContext context)
     {
-        JsonObject modifiers = new JsonObject();
+        JsonArray modifiers = new JsonArray();
+
+        for (Modifier<FightAgent> modifier : src.getModifiers())
+        {
+            modifiers.add(context.serialize(modifier, Modifier.class));
+        }
+
+        jsonObject.add(FIGHT_AGENT, modifiers);
+    }
 
 
+    private void serializeDurableFightAgentModifier ()
+    {
 
     }
 
     @Override
-    public Modifier<Type> deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
+    public Modifier<Type> deserialize (JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
     {
         Modifier<Type> modifier = null;
 
@@ -98,4 +96,11 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
 
         return modifier;
     }
+
+
+    private void deserializeFightAgentModifier (FightAgentModifier modifiers, JsonElement src, JsonSerializationContext context)
+    {
+
+    }
+
 }
