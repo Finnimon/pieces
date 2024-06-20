@@ -117,8 +117,6 @@ public class App extends Application
         
         GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
         
-        stage.setResizable(false);
-        
         Group group = new Group();
         PlayerAgent playerAgent = new PlayerAgent();
         gridMapRender.addGridMappable(playerAgent, testMap.getVertex(0));
@@ -128,7 +126,6 @@ public class App extends Application
         group.getChildren().add(scrollPane);
         Scene scene = new Scene(group);
         
-        stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
         stage.show();
         gridMapRender.relocateGridMappable(playerAgent, testMap.getVertex(1));
@@ -136,8 +133,8 @@ public class App extends Application
         group.getChildren().clear();
         scrollPane = new ScrollPane(new GridMapRender<GridMappable>(TestStuff.getTestMap(12, 12), 40));
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         group.getChildren().add(scrollPane);
-        stage.hide();
         
         stage.sizeToScene();
         
@@ -164,6 +161,8 @@ public class App extends Application
     
     private void initialize(Stage stage)
     {
+        stage.initStyle(StageStyle.UTILITY);
+        stage.setResizable(false);
         StageController.initialize(stage);
         setTitleAndIcon();
     }
