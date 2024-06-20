@@ -5,14 +5,16 @@ import com.gitgud.pieces.view.render.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
-import java.util.Collection;
-
 
 public class FightHud extends Hud<Fight>
 {
+    private final AvailableActionsRender availableActionsRender;
+    private final FightTimeLineRender fightTimeLineRender;
     public FightHud(Fight data)
     {
         super(data);
+        this.availableActionsRender = new AvailableActionsRender(data);
+        this.fightTimeLineRender = new FightTimeLineRender(data);
     }
     
     

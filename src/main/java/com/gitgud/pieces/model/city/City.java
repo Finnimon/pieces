@@ -1,6 +1,7 @@
 package com.gitgud.pieces.model.city;
 
-import com.gitgud.pieces.model.city.buildings.CityBuilding;
+import com.gitgud.pieces.model.city.buildings.*;
+import com.gitgud.pieces.model.gameObjects.Faction;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -16,17 +17,41 @@ import java.util.HashSet;
  */
 public class City
 {
-    private final HashSet<CityBuilding> cityBuildings;
+    private final BlackSmith blackSmith;
+    private final FactionCamp monoChromeFactionCamp;
+    private final FactionCamp pinkFactionCamp;
+    private final FactionCamp greenFactionCamp;
+    
+    private final HeadQuarter headQuarter;
+    private final MagicEnhancer magicEnhancer;
+    private final Market market;
+    
+    private final TrainingGrounds trainingGrounds;
     
     
-    public City(HashSet<CityBuilding> cityBuildings)
+    public City(BlackSmith blackSmith, FactionCamp monoChromeFactionCamp, FactionCamp pinkFactionCamp,
+                FactionCamp greenFactionCamp, HeadQuarter headQuarter, MagicEnhancer magicEnhancer, Market market,
+                TrainingGrounds trainingGrounds)
     {
-        this.cityBuildings = cityBuildings;
+        this.blackSmith = blackSmith;
+        this.monoChromeFactionCamp = monoChromeFactionCamp;
+        this.pinkFactionCamp = pinkFactionCamp;
+        this.greenFactionCamp = greenFactionCamp;
+        this.headQuarter = headQuarter;
+        this.magicEnhancer = magicEnhancer;
+        this.market = market;
+        this.trainingGrounds = trainingGrounds;
     }
     
-    
-    public Collection<CityBuilding> getCityBuildings()
+    private void validateFactionCamps()
     {
-        return cityBuildings;
+    }
+    private boolean validateFactionCamp(FactionCamp factionCamp, Faction faction)
+    {
+        if (factionCamp.getFaction().equals(faction))
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -15,7 +15,7 @@ public class MissionController extends Controller<Mission>
     
     public MissionController(Mission mission)
     {
-        super(mission,MissionRender.create(mission));
+        super(mission,new MissionRender(mission));
     }
     
     

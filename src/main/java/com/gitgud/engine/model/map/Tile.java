@@ -18,7 +18,7 @@ public class Tile extends Vertex2D implements Sprite
 {
     
     
-    private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\tiles\\";
+    private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\engine\\model\\map\\tile\\";
     
     
     public static final String WHITE = "\\white";

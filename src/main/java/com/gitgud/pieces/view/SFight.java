@@ -72,7 +72,7 @@ public class SFight extends SGridMap implements IDimentions
     private static void createFightTimelineMenu(HBox fightTimelineMenu)
     {
         FightTimeLine fightTimeLine = null;//todo
-        TreeSet<FightAgent> activeFightFigures = fightTimeLine.getCurrent();
+        TreeSet<FightAgent> activeFightFigures = fightTimeLine.current();
         
         for (FightAgent fightAgent : activeFightFigures)
         {

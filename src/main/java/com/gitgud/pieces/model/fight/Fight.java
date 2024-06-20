@@ -51,6 +51,12 @@ public class Fight implements ActionAwaiter<FightAgent>, Ending
     }
     
     
+    public Fight(GridMap<FightAgent> gridMap, HashMap<Player, HashSet<FightAgent>> ownershipMap)
+    {
+        this(gridMap, ownershipMap, FightTimeLine.create(gridMap.nonNullElements()));
+    }
+    
+    
     public GridMap<FightAgent> getGridMap()
     {
         return gridMap;
@@ -115,7 +121,7 @@ public class Fight implements ActionAwaiter<FightAgent>, Ending
         }
         else
         {
-            HashMap<FightAgentType, ArrayList<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
+            HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
             for (FightAgent fightAgent : survivingAgents)
             {
                 baseCampStash.get(fightAgent.getType()).add(fightAgent);

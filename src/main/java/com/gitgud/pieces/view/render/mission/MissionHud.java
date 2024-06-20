@@ -5,6 +5,7 @@ import com.gitgud.pieces.view.render.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.layout.BorderPane;
 
 
 public class MissionHud extends Hud<Mission>
@@ -13,8 +14,6 @@ public class MissionHud extends Hud<Mission>
     public MissionHud(Mission data)
     {
         super(data);
-        
-        render(getData());
     }
     
     

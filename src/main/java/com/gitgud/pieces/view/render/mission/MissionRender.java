@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 import java.util.Collection;
 
 
-public class MissionRender extends Scene implements UpdatableRender<Mission>
+public class MissionRender extends Group implements UpdatableRender<Mission>
 {
     private static final int TILE_SIZE = 100;
     
@@ -25,8 +25,6 @@ public class MissionRender extends Scene implements UpdatableRender<Mission>
     
     private static final int HEIGHT = 1080;
     
-    
-    private final Group root;
     
     
     private final Mission mission;
@@ -38,26 +36,20 @@ public class MissionRender extends Scene implements UpdatableRender<Mission>
     private final MissionHud missionHud;
     
     
-    private MissionRender(Group root, Mission mission)
+    public MissionRender(Mission mission)
     {
-        super(root, WIDTH, HEIGHT);
-        this.root = root;
         this.mission = mission;
         this.gridMapRender = new GridMapRender<Sprite>(mission.getGridMap(), TILE_SIZE);
         this.missionHud = new MissionHud(mission);
     }
     
     
-    public static MissionRender create(Mission mission)
-    {
-        return new MissionRender(new Group(), mission);
-    }
     
     
     @Override
     public void render(Mission data)
     {
-        ObservableList<Node> children= root.getChildren();
+        ObservableList<Node> children= getChildren();
 
         children.clear();
         children.add(gridMapRender);

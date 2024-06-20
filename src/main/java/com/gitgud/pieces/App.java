@@ -1,5 +1,6 @@
 package com.gitgud.pieces;
 
+import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.model.gameObject.GridMappable;
 import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.engine.model.map.GridMap;
@@ -7,13 +8,11 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
-import com.gitgud.graph.WeightedGraph;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameObjects.AssetLocator;
 import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.gameObjects.interactable.collectibles.FightAgentCollectable;
-import com.gitgud.pieces.testing.TestAssets;
 import com.gitgud.pieces.testing.TestStuff;
 import com.gitgud.pieces.utility.gsonSerialization.*;
 import com.gitgud.pieces.view.SMainMenue;
@@ -27,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,17 +43,11 @@ public class App extends Application
     public static final String APP_TITLE = "Pieces";
     
     
-    private static void setTitleAndIcon(Stage stage) throws MalformedURLException
+    public static void main(String[] args) throws IOException
     {
-        stage.setTitle(APP_TITLE);
-        stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
-    }
-    
-    
-    public static void main(String[] args) throws IOException {
-         launch();
-
-//        jsonTestFinnK(args);
+        launch();
+        
+        //        jsonTestFinnK(args);
     }
     
     
@@ -87,7 +81,7 @@ public class App extends Application
         FightAgentCollectable fightAgentCollectable = gson.fromJson(jsonObject, FightAgentCollectable.class);
         String fightAgentCollectableToJson = gson.toJson(fightAgentCollectable, FightAgentCollectable.class);
         GridMap<?> map = gson.fromJson(spellJson, GridMap.class);
-
+        
         System.out.println(spell.getType());
         System.out.println(spell.description());
         System.out.println(spell.name());
@@ -97,15 +91,14 @@ public class App extends Application
         System.out.println(spell.getSpriteFilePath());
         System.out.println(spell.getSpriteUrl());
         System.out.println(spell.getClass());
-
-        GridMap<GridMappable> mapTest = TestStuff.getTestMap(5,5);
-
+        
+        GridMap<GridMappable> mapTest = TestStuff.getTestMap(5, 5);
+        
         System.out.println(gson.toJson(mapTest, GridMap.class));
-
+        
         String fighterJson = gson.toJson(fighter, FightAgent.class);
         
-        FileOutputStream writableFile = new FileOutputStream(
-                "src/main/resources/com/gitgud/gameObjectTypes/test.json");
+        FileOutputStream writableFile = new FileOutputStream("src/main/resources/com/gitgud/gameObjectTypes/test.json");
         writableFile.write(fightAgentCollectableToJson.getBytes());
         writableFile.close();
     }
@@ -120,21 +113,39 @@ public class App extends Application
     
     private static void addTestGridMapRenderToStage(Stage stage)
     {
-        GridMap<GridMappable> testMap = TestStuff.getTestMap(12,12);
+        GridMap<GridMappable> testMap = TestStuff.getTestMap(12, 12);
         
-        GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 100);
-        Group group=new Group();
+        GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
+        
+        stage.setResizable(false);
+        
+        Group group = new Group();
         PlayerAgent playerAgent = new PlayerAgent();
         gridMapRender.addGridMappable(playerAgent, testMap.getVertex(0));
-        ScrollPane scrollPane=new ScrollPane(gridMapRender);
+        ScrollPane scrollPane = new ScrollPane(gridMapRender);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        
         group.getChildren().add(scrollPane);
-        Scene scene = new Scene(group,1000,1000);
+        Scene scene = new Scene(group);
+        
+        stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
+        stage.show();
         gridMapRender.relocateGridMappable(playerAgent, testMap.getVertex(1));
+        
+        group.getChildren().clear();
+        scrollPane = new ScrollPane(new GridMapRender<GridMappable>(TestStuff.getTestMap(12, 12), 40));
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        group.getChildren().add(scrollPane);
+        stage.hide();
+        
+        stage.sizeToScene();
+        
+        //        gridMapRender.removeGridMappable(playerAgent);
     }
     
     
-    private static void printGridMap(Graph<Tile,GridMappable,WeightedEdge<Tile>> testMap)
+    private static void printGridMap(Graph<Tile, GridMappable, WeightedEdge<Tile>> testMap)
     {
         for (Tile tile : testMap.verticeSet())
         {
@@ -151,12 +162,33 @@ public class App extends Application
     }
     
     
+    private void initialize(Stage stage)
+    {
+        StageController.initialize(stage);
+        setTitleAndIcon();
+    }
+    
+    
+    private void setTitleAndIcon()
+    {
+        Stage stage = StageController.getInstance().getStage();
+        stage.setTitle(APP_TITLE);
+        try
+        {
+            stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
+        }
+        catch (MalformedURLException ignored) //can be ignored because worst case there is no Icon
+        {
+        }
+    }
+    
+    
     @Override
     public void start(Stage stage) throws IOException
     {
-        setTitleAndIcon(stage);
+        initialize(stage);
         finnTest(stage);
-//        delfiMain(stage);
+        //        delfiMain(stage);
         stage.show();
     }
 }

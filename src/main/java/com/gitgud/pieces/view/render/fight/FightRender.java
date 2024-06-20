@@ -7,15 +7,11 @@ import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 
 
-public class FightRender extends Scene implements UpdatableRender<Fight>
+public class FightRender extends Group implements UpdatableRender<Fight>
 {
     private final static int TILE_SIZE = 200;
-    
-    
-    private final Group root;
     
     
     private final Fight fight;
@@ -27,10 +23,8 @@ public class FightRender extends Scene implements UpdatableRender<Fight>
     private final FightHud fightHud;
     
     
-    private FightRender(Group root, Fight fight)
+    private FightRender(Fight fight)
     {
-        super(root);
-        this.root = root;
         this.fight = fight;
         this.gridMapRender = new GridMapRender<>(fight.getGridMap(), TILE_SIZE);
         this.fightHud = new FightHud(fight);
@@ -39,32 +33,26 @@ public class FightRender extends Scene implements UpdatableRender<Fight>
     }
     
     
-    public static FightRender create(Fight fight)
-    {
-        return new FightRender(new Group(), fight);
-    }
-    
-    
     @Override
     public void updateRender()
     {
-    
+        fightHud.updateRender();
     }
     
     
     @Override
     public void render(Fight data)
     {
-        ObservableList<Node> childen = root.getChildren();
+        ObservableList<Node> children = getChildren();
         
-        childen.add(gridMapRender);
-        childen.add(fightHud);
+        children.add(gridMapRender);
+        children.add(fightHud);
     }
     
     
     @Override
     public Fight getData()
     {
-        return null;
+        return fight;
     }
 }
