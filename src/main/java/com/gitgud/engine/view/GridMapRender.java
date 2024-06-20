@@ -1,21 +1,24 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.engine.model.gameObject.GridMappable;
+import com.gitgud.engine.model.gameObject.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 import java.util.HashMap;
 
 
-public class GridMapRender<GridMappableType extends GridMappable> extends Group implements Render<GridMap<GridMappableType>>
+public class GridMapRender<Type extends Sprite> extends Group implements Render<GridMap<Type>>
 {
     public static final double HIGHLIGHT_OPACITY = 0.3;
     
@@ -29,7 +32,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     private final Group gridMappableGroup;
     
     
-    private final HashMap<GridMappableType, Rectangle> gridMappableRectangles = new HashMap<>();
+    private final HashMap<Type, Rectangle> gridMappableRectangles = new HashMap<>();
     
     
     private final Group highLightGroup;
@@ -38,7 +41,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     private final HashMap<Tile, Rectangle> highLightRectangles = new HashMap<>();
     
     
-    public GridMapRender(GridMap<GridMappableType> gridMap, int tileSize)
+    public GridMapRender(GridMap gridMap, int tileSize)
     {
         super();
         this.tileSize = tileSize;
@@ -56,7 +59,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     }
     
     
-    private void renderTiles(GridMap<GridMappableType> gridMap)
+    private void renderTiles(GridMap<Type> gridMap)
     {
         ObservableList<Node> children = this.tileGroup.getChildren();
         HashMap<Tile, ImagePattern> gridMapTiles = SpriteHelper.loadImagePatterns(gridMap.verticeSet());
@@ -72,17 +75,16 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     }
     
     
-    private void renderGridMappables(GridMap<GridMappableType> gridMap)
+    private void renderGridMappables(GridMap<Type> gridMap)
     {
         ObservableList<Node> children = this.gridMappableGroup.getChildren();
-        HashMap<GridMappableType, ImagePattern> gridMappablePatterns = SpriteHelper.loadImagePatterns(
-                gridMap.nonNullElements());
+        HashMap<Type, ImagePattern> gridMappablePatterns = SpriteHelper.loadImagePatterns(gridMap.nonNullElements());
         
         children.clear();
         
         for (Tile tile : gridMap.verticeSet())
         {
-            GridMappableType gridMappable = gridMap.get(tile);
+            Type gridMappable = gridMap.get(tile);
             
             if (gridMappable == null)
             {
@@ -96,14 +98,14 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     
     
     @Override
-    public void render(GridMap<GridMappableType> gridMap)
+    public void render(GridMap<Type> gridMap)
     {
         renderTiles(gridMap);
         renderGridMappables(gridMap);
     }
     
     
-    public void relocateGridMappable(GridMappableType gridMappable, Tile next)
+    public void relocateGridMappable(Type gridMappable, Tile next)
     {
         Rectangle rectangle = gridMappableRectangles.get(gridMappable);
         rectangle.setX(next.getX() * tileSize);
@@ -111,7 +113,7 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     }
     
     
-    public void removeGridMappable(GridMappableType gridMappable)
+    public void removeGridMappable(Type gridMappable)
     {
         Rectangle rectangle = gridMappableRectangles.get(gridMappable);
         gridMappableGroup.getChildren().remove(rectangle);
@@ -119,26 +121,41 @@ public class GridMapRender<GridMappableType extends GridMappable> extends Group 
     }
     
     
-    public void addGridMappable(GridMappableType gridMappable, Tile tile)
+    public void addGridMappable(Type gridMappable, Tile tile)
     {
         ImagePattern pattern = new ImagePattern(new Image(gridMappable.getSpriteUrl()));
         
         addGridMappable(gridMappable, tile, pattern);
     }
     
-    public void addGridMappable(GridMappableType gridMappable, Tile tile, ImagePattern pattern)
+    
+    public void addGridMappable(Type gridMappable, Tile tile, ImagePattern pattern)
     {
         Rectangle rectangle = SpriteHelper.createRectangle(pattern, tile, tileSize);
+        
         gridMappableGroup.getChildren().add(rectangle);
+        
         gridMappableRectangles.put(gridMappable, rectangle);
     }
     
+    private void addInfoShowingEventHandlerToGridMappable(Rectangle rectangle, Type gridMappable)
+    {
+        //todo
+    }
     
-    public void addHighLight(Tile tile, Color color)
+    
+    /**
+     * Highlights are transparent rectangles and recieve a {@link MouseEvent#MOUSE_CLICKED} eventHandler
+     * @param tile the tile above which the highlight will be placed
+     * @param color the color of the highlight
+     * @param eventHandler the eventHandler for a {@link MouseEvent#MOUSE_CLICKED}
+     */
+    public void addHighLight(Tile tile, Color color, EventHandler<MouseEvent> eventHandler)
     {
         Rectangle rectangle = SpriteHelper.createRectangle(color, tile, tileSize);
         rectangle.setOpacity(HIGHLIGHT_OPACITY);
-        
+        EventType<MouseEvent> eventType=new EventType<>(MouseEvent.MOUSE_CLICKED);
+        rectangle.addEventHandler(eventType,eventHandler);
         highLightGroup.getChildren().add(rectangle);
         highLightRectangles.put(tile, rectangle);
     }

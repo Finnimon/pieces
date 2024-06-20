@@ -16,7 +16,15 @@ import com.gitgud.graph.Vertex2D;
  */
 public class Tile extends Vertex2D implements Sprite
 {
+    
+    
     private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\tiles\\";
+    
+    
+    public static final String WHITE = "\\white";
+    
+    
+    public static final String BLACK = "\\black";
     
     
     private final Terrain terrain;
@@ -97,14 +105,14 @@ public class Tile extends Vertex2D implements Sprite
         
         if (isWhite)
         {
-            stringBuilder.append("\\white");
+            stringBuilder.append(WHITE);
         }
         else
         {
-            stringBuilder.append("\\black");
+            stringBuilder.append(BLACK);
         }
         
-        stringBuilder.append(".png");
+        stringBuilder.append(DOT_PNG);
         
         return stringBuilder.toString();
     }

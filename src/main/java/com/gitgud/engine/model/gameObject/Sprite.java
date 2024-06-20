@@ -6,6 +6,11 @@ import java.net.MalformedURLException;
 
 public interface Sprite
 {
+    String DOT_PNG=".png";
+    String DOT_JPG=".jpg";
+    String DOT_JPEG=".jpeg";
+    String DOT_GIF=".gif";
+    String DOT_SVG=".svg";
     String getSpriteFilePath();
     
     

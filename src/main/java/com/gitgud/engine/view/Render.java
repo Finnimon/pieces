@@ -1,6 +1,6 @@
 package com.gitgud.engine.view;
 
-public interface Render<T>
+public interface Render<DataType>
 {
-    void render(T data);
+    void render(DataType data);
 }

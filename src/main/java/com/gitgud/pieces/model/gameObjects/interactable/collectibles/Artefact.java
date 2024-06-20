@@ -56,6 +56,7 @@ public class Artefact extends GameObject implements Collectible, Leveler
     @Override
     public String getSpriteFilePath()
     {
+        //todo
         return null;
     }
     

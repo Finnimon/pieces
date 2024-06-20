@@ -72,6 +72,29 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     }
     
     
+    @Override
+    public GridMappable place(Tile vertex, GridMappable gridMappable)
+    {
+        if (!vertex.getTerrain().isTraversable())
+        {
+            return super.place(vertex, null);
+        }
+        return super.place(vertex, gridMappable);
+    }
+    
+    
+    @Override
+    public boolean add(Tile vertex, GridMappable gridMappable, HashSet<WeightedEdge<Tile>> weightedEdges)
+    {
+        if (!vertex.getTerrain().isTraversable())
+        {
+            return super.add(vertex, null, weightedEdges);
+        }
+        
+        return super.add(vertex, gridMappable, weightedEdges);
+    }
+    
+    
     public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
             boolean[][] grid, GridMappableType[] gridMappables)
     {

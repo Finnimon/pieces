@@ -2,7 +2,7 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.Controller;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.render.MissionRender;
+import com.gitgud.pieces.view.render.mission.MissionRender;
 
 
 //todo render as scene
