@@ -1,0 +1,17 @@
+package com.gitgud.pieces.testing;
+
+import com.gitgud.engine.model.gameObject.interactable.Interactable;
+import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.mission.Mission;
+
+
+public interface Missions
+{
+    Mission FIRST=create(getTestMap(20,12));
+    private static GridMap<Interactable> getTestMap(int width, int height) { return GridMap.create(TestStuff.booleanArray(width,height)); }
+    private static Mission create(GridMap<Interactable> gridMap) {
+        Tile startingPosition =  gridMap.getVertex(0);
+        return new Mission(gridMap,startingPosition,new FightAgent[0]); }
+}
