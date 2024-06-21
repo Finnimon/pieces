@@ -1,4 +1,5 @@
 package com.gitgud.pieces.view;
 
-public class SHeadquarter {
+public class SHeadquarter
+{
 }

@@ -1,21 +1,18 @@
 package com.gitgud.pieces.view.render.mission;
 
-import com.gitgud.engine.model.gameObject.Sprite;
-import com.gitgud.engine.model.gameObject.interactable.Interactable;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.GridMapRender;
-import com.gitgud.engine.view.UpdatableRender;
-import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
+import com.gitgud.engine.view.HudRender;
+import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.view.render.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-
-import java.util.Collection;
 
 
-public class MissionRender extends Group implements UpdatableRender<Mission>
+public class MissionRender extends Group implements HudRender<Mission>
 {
     private static final int TILE_SIZE = 100;
     
@@ -24,7 +21,6 @@ public class MissionRender extends Group implements UpdatableRender<Mission>
     
     
     private static final int HEIGHT = 1080;
-    
     
     
     private final Mission mission;
@@ -44,13 +40,11 @@ public class MissionRender extends Group implements UpdatableRender<Mission>
     }
     
     
-    
-    
     @Override
     public void render(Mission data)
     {
-        ObservableList<Node> children= getChildren();
-
+        ObservableList<Node> children = getChildren();
+        
         children.clear();
         children.add(gridMapRender);
         children.add(missionHud);
@@ -89,5 +83,9 @@ public class MissionRender extends Group implements UpdatableRender<Mission>
     }
     
     
-    
+    @Override
+    public Hud<Mission> getHud()
+    {
+        return this.missionHud;
+    }
 }

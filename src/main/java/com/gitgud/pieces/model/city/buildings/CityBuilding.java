@@ -1,9 +1,9 @@
 package com.gitgud.pieces.model.city.buildings;
 
-import com.gitgud.engine.model.gameObject.Describable;
-import com.gitgud.engine.model.gameObject.Leveler;
-import com.gitgud.engine.model.gameObject.Named;
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.Describable;
+import com.gitgud.engine.model.gameobjects.Leveler;
+import com.gitgud.engine.model.gameobjects.Named;
+import com.gitgud.engine.model.gameobjects.Sprite;
 
 
 /**

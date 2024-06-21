@@ -1,8 +1,8 @@
 package com.gitgud.pieces.model.fight;
 
 
-import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.Defender;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Defender;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 import java.util.Collection;
 import java.util.Comparator;

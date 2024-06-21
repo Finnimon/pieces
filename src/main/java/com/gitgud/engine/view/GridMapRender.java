@@ -1,10 +1,9 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Group;
@@ -138,6 +137,7 @@ public class GridMapRender<Type extends Sprite> extends Group implements Render<
         gridMappableRectangles.put(gridMappable, rectangle);
     }
     
+    
     private void addInfoShowingEventHandlerToGridMappable(Rectangle rectangle, Type gridMappable)
     {
         //todo
@@ -146,16 +146,17 @@ public class GridMapRender<Type extends Sprite> extends Group implements Render<
     
     /**
      * Highlights are transparent rectangles and recieve a {@link MouseEvent#MOUSE_CLICKED} eventHandler
-     * @param tile the tile above which the highlight will be placed
-     * @param color the color of the highlight
+     *
+     * @param tile         the tile above which the highlight will be placed
+     * @param color        the color of the highlight
      * @param eventHandler the eventHandler for a {@link MouseEvent#MOUSE_CLICKED}
      */
     public void addHighLight(Tile tile, Color color, EventHandler<MouseEvent> eventHandler)
     {
         Rectangle rectangle = SpriteHelper.createRectangle(color, tile, tileSize);
         rectangle.setOpacity(HIGHLIGHT_OPACITY);
-        EventType<MouseEvent> eventType=new EventType<>(MouseEvent.MOUSE_CLICKED);
-        rectangle.addEventHandler(eventType,eventHandler);
+        EventType<MouseEvent> eventType = new EventType<>(MouseEvent.MOUSE_CLICKED);
+        rectangle.addEventHandler(eventType, eventHandler);
         highLightGroup.getChildren().add(rectangle);
         highLightRectangles.put(tile, rectangle);
     }

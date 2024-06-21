@@ -1,6 +1,6 @@
 package com.gitgud.pieces.model.player;
 
-import com.gitgud.pieces.model.gameObjects.interactable.collectibles.Artefact;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact;
 
 import java.util.ArrayList;
 

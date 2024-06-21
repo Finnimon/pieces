@@ -1,6 +1,6 @@
 package com.gitgud.engine.model.map;
 
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.graph.Vertex2D;
 
@@ -70,7 +70,7 @@ public class Tile extends Vertex2D implements Sprite
     }
     
     
-    public static Tile create(int x,int y,TerrainType terrainType, int width)
+    public static Tile create(int x, int y, TerrainType terrainType, int width)
     {
         return create(x, y, new Terrain(terrainType), width);
     }

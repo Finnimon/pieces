@@ -1,10 +1,7 @@
 package com.gitgud.pieces.model.city;
 
 import com.gitgud.pieces.model.city.buildings.*;
-import com.gitgud.pieces.model.gameObjects.Faction;
-
-import java.util.Collection;
-import java.util.HashSet;
+import com.gitgud.pieces.model.gameobjects.Faction;
 
 
 /**
@@ -18,13 +15,25 @@ import java.util.HashSet;
 public class City
 {
     private final BlackSmith blackSmith;
+    
+    
     private final FactionCamp monoChromeFactionCamp;
+    
+    
     private final FactionCamp pinkFactionCamp;
+    
+    
     private final FactionCamp greenFactionCamp;
     
+    
     private final HeadQuarter headQuarter;
+    
+    
     private final MagicEnhancer magicEnhancer;
+    
+    
     private final Market market;
+    
     
     private final TrainingGrounds trainingGrounds;
     
@@ -43,15 +52,14 @@ public class City
         this.trainingGrounds = trainingGrounds;
     }
     
+    
     private void validateFactionCamps()
     {
     }
+    
+    
     private boolean validateFactionCamp(FactionCamp factionCamp, Faction faction)
     {
-        if (factionCamp.getFaction().equals(faction))
-        {
-            return true;
-        }
-        return false;
+        return factionCamp.getFaction().equals(faction);
     }
 }

@@ -3,7 +3,7 @@ package com.gitgud.pieces.view;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.fight.FightTimeLine;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;

@@ -1,6 +1,6 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.engine.model.gameObject.GridMappable;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;

@@ -1,6 +1,6 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.engine.model.gameObject.GridMappable;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.TerrainType;
 import com.gitgud.pieces.utility.Core;

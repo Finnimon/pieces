@@ -2,10 +2,7 @@ package com.gitgud.engine.view;
 
 
 import com.gitgud.engine.model.StoryDialog;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 

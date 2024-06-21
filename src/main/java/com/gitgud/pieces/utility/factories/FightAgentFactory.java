@@ -2,7 +2,7 @@ package com.gitgud.pieces.utility.factories;
 
 
 import com.gitgud.pieces.model.fight.Allegiance;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
 public class FightAgentFactory

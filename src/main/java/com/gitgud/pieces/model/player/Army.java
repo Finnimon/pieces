@@ -1,10 +1,9 @@
 package com.gitgud.pieces.model.player;
 
 
-import com.gitgud.pieces.model.gameObjects.FightAgentType;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 

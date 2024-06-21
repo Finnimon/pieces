@@ -3,9 +3,7 @@ package com.gitgud.pieces.view.render.mission;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.Hud;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
 
 
 public class MissionHud extends Hud<Mission>

@@ -1,15 +1,16 @@
 package com.gitgud.pieces.view.render.fight;
 
 import com.gitgud.engine.view.GridMapRender;
-import com.gitgud.engine.view.UpdatableRender;
+import com.gitgud.engine.view.HudRender;
 import com.gitgud.pieces.model.fight.Fight;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.view.render.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 
 
-public class FightRender extends Group implements UpdatableRender<Fight>
+public class FightRender extends Group implements HudRender<Fight>
 {
     private final static int TILE_SIZE = 200;
     
@@ -23,7 +24,7 @@ public class FightRender extends Group implements UpdatableRender<Fight>
     private final FightHud fightHud;
     
     
-    private FightRender(Fight fight)
+    public FightRender(Fight fight)
     {
         this.fight = fight;
         this.gridMapRender = new GridMapRender<>(fight.getGridMap(), TILE_SIZE);
@@ -54,5 +55,12 @@ public class FightRender extends Group implements UpdatableRender<Fight>
     public Fight getData()
     {
         return fight;
+    }
+    
+    
+    @Override
+    public Hud<Fight> getHud()
+    {
+        return this.fightHud;
     }
 }

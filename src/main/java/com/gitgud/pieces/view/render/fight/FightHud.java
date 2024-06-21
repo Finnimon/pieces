@@ -9,7 +9,11 @@ import javafx.scene.Node;
 public class FightHud extends Hud<Fight>
 {
     private final AvailableActionsRender availableActionsRender;
+    
+    
     private final FightTimeLineRender fightTimeLineRender;
+    
+    
     public FightHud(Fight data)
     {
         super(data);

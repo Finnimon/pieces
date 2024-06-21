@@ -4,8 +4,8 @@ import com.gitgud.engine.model.map.Tile;
 
 
 /**
- *
  * Implemented by {@link Graph}s that should be recangular
+ *
  * @param <Vertex>
  * @param <Element>
  */
@@ -56,5 +56,5 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
     Element get(double x, double y);
     
     
-    public Tile[][] getVertexGrid();
+    Tile[][] getVertexGrid();
 }

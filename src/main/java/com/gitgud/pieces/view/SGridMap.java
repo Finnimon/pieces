@@ -1,11 +1,11 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.engine.model.gameObject.GridMappable;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.TerrainType;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;

@@ -1,18 +1,15 @@
 package com.gitgud.pieces;
 
 import com.gitgud.engine.control.StageController;
-import com.gitgud.engine.model.gameObject.GridMappable;
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.GridMappable;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.GridMapRender;
-import com.gitgud.graph.Graph;
-import com.gitgud.graph.WeightedEdge;
 import com.gitgud.pieces.model.fight.Spell;
-import com.gitgud.pieces.model.gameObjects.AssetLocator;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
-import com.gitgud.pieces.model.gameObjects.interactable.collectibles.FightAgentCollectable;
+import com.gitgud.pieces.model.gameobjects.AssetLocator;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectable;
+import com.gitgud.pieces.testing.Missions;
 import com.gitgud.pieces.testing.TestStuff;
 import com.gitgud.pieces.utility.gsonSerialization.*;
 import com.gitgud.pieces.view.SMainMenue;
@@ -118,44 +115,18 @@ public class App extends Application
         GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
         
         Group group = new Group();
-        PlayerAgent playerAgent = new PlayerAgent();
-        gridMapRender.addGridMappable(playerAgent, testMap.getVertex(0));
-        ScrollPane scrollPane = new ScrollPane(gridMapRender);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         
-        group.getChildren().add(scrollPane);
-        Scene scene = new Scene(group);
-        
-        stage.setScene(scene);
-        stage.show();
-        gridMapRender.relocateGridMappable(playerAgent, testMap.getVertex(1));
-        
-        group.getChildren().clear();
-        scrollPane = new ScrollPane(new GridMapRender<GridMappable>(TestStuff.getTestMap(12, 12), 40));
+        ScrollPane scrollPane = new ScrollPane(new GridMapRender<GridMappable>(Missions.FIRST.getGridMap(), 90));
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         group.getChildren().add(scrollPane);
         
+        stage.setScene(new Scene(group));
+        
         stage.sizeToScene();
+        stage.centerOnScreen();
         
         //        gridMapRender.removeGridMappable(playerAgent);
-    }
-    
-    
-    private static void printGridMap(Graph<Tile, GridMappable, WeightedEdge<Tile>> testMap)
-    {
-        for (Tile tile : testMap.verticeSet())
-        {
-            System.out.println("x" + tile.getX() + "y" + tile.getY() + "\n\r");
-            
-            System.out.println(testMap.getEdges(tile).size() + "\n\r");
-            for (WeightedEdge<Tile> edge : testMap.getEdges(tile))
-            {
-                System.out.println(
-                        "x" + edge.getTo().getX() + "y" + edge.getTo().getY() + "\tlength\t" + edge.getWeight());
-            }
-            System.out.println("---------");
-        }
     }
     
     
@@ -163,6 +134,7 @@ public class App extends Application
     {
         stage.initStyle(StageStyle.UTILITY);
         stage.setResizable(false);
+        stage.centerOnScreen();
         StageController.initialize(stage);
         setTitleAndIcon();
     }

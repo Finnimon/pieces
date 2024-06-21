@@ -2,8 +2,8 @@ package com.gitgud.pieces.model.city.buildings;
 
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.ResourceCost;
-import com.gitgud.pieces.model.gameObjects.Faction;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.google.gson.Gson;
 
@@ -59,12 +59,11 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     }
     
     
-    
     public HashMap<FightAgent, ResourceCost> loadRecruitableFightAgentsWithCost()
     {
         int level = getLevel();
         Faction faction = getFaction();
-        HashMap<Integer,HashMap<FightAgent, ResourceCost>> recruitableFightAgentsWithCost;
+        HashMap<Integer, HashMap<FightAgent, ResourceCost>> recruitableFightAgentsWithCost;
         
         Gson gson = new Gson();
         try
@@ -99,7 +98,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
         ResourceCost resourceCost = loadRecruitableFightAgentsWithCost().get(fightAgent);
         if (resourceCost == null)
         {
-            throw  new IllegalArgumentException(FIGHT_AGENT_NOT_FOUND_IN_JSON_FILE);
+            throw new IllegalArgumentException(FIGHT_AGENT_NOT_FOUND_IN_JSON_FILE);
         }
     }
     
