@@ -2,11 +2,15 @@ package com.gitgud.view;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.net.MalformedURLException;
 
 /**
  * @author Delfina
@@ -23,11 +27,21 @@ public class SDifficulty {
         Scene DifficultyScene = new Scene(rootD);
         stage.setScene(DifficultyScene);
 
-        Text difficultyMenueText = new Text("Schwierigkeitsgrad");
-        difficultyMenueText.setFont(Font.font("Lato", FontWeight.MEDIUM, 24)); // Schriftart und Größe festlegen
-        rootD.getChildren().add(difficultyMenueText);
 
-        Button button = new Button();
+        Font customFont = null;
+        Label difficultyMenueText = null;
+        try {
+
+            customFont = GuiUtils.loadFont(25);
+
+            difficultyMenueText = new Label("Schwierigkeitsgrad");
+            difficultyMenueText.setFont(customFont); // Schriftart und Größe festlegen
+            difficultyMenueText.setTextFill(Color.LIGHTSLATEGRAY);
+        } catch (MalformedURLException e) {
+            System.out.println(e.getMessage());
+
+        }
+
 
         //erstellen der Szene mit den buttons etc
         Button[] buttonsArrayD = new Button[3];
@@ -35,16 +49,18 @@ public class SDifficulty {
         buttonsArrayD[1] = new Button("Normal");
         buttonsArrayD[2] = new Button("Schwer");
 
-        //Größe und Schriftart für jeweils alle Buttons festlegen
-        for (Button buttonD : buttonsArrayD) {
-            GuiUtils.setButtonTrait(buttonD);
+
+        // Größe und Schriftart für alle Buttons festlegen
+        if (customFont != null) {
+            GuiUtils.setButtonTraits(buttonsArrayD, customFont);
         }
 
-           buttonsArrayD[0].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage))); //TODO: inwifern werden die Schwierigkeitsgrade dargestellt? Weniger Einheiten die man in den Kampf mitnehmen darf?
-           buttonsArrayD[1].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
-           buttonsArrayD[2].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
 
+        buttonsArrayD[0].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage))); //TODO: inwifern werden die Schwierigkeitsgrade dargestellt? Weniger Einheiten die man in den Kampf mitnehmen darf?
+        buttonsArrayD[1].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
+        buttonsArrayD[2].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
 
+        rootD.getChildren().add(difficultyMenueText);
         rootD.getChildren().addAll(buttonsArrayD);
         return DifficultyScene;
     }

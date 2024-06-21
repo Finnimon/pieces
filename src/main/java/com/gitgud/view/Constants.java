@@ -16,6 +16,8 @@ public class Constants {
     public static final short MAP_DIMENSION = 12;
     public static final String MAP_PATH = "src/main/resources/com/gitgud/maps/csv/Map.csv";
 
+    //public static final String FONT_FILE_PATH = "src/main/resources/com/gitgud/fonts/Font.ttf";
+
 
 
 }

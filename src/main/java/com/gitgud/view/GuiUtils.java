@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.net.MalformedURLException;
@@ -18,11 +19,32 @@ import java.net.MalformedURLException;
  */
 
 public class GuiUtils {
+
+    public static final String FONT_FILE_PATH = "src/main/resources/com/gitgud/fonts/Font.ttf";
+
+
     //Methode zur Festlegung der Größe und Schriftart für einen Button
-    public static void setButtonTrait(Button button) {
+    public static void setButtonTrait(Button button, Font font) {
         button.setPrefWidth(Constants.BUTTON_BREITE);
         button.setPrefHeight(Constants.BUTTON_HOEHE);
-        button.setFont(Font.font("Verdana", 20));
+        button.setFont(font);
+    }
+
+    public static void setButtonTraits(Button[] buttons, Font font) {
+        for (Button button : buttons) {
+            setButtonTrait(button, font);
+        }
+    }
+
+
+    public static Font loadFont(double size) throws MalformedURLException {
+
+        try{
+            return Font.loadFont(Sprite.urlFromFilePath(FONT_FILE_PATH),size);
+
+        } catch (NullPointerException e){
+            throw new MalformedURLException("file invalid");
+        }
     }
     public static VBox createVBox(String backgroundImagePath) {
         VBox vbox = new VBox(); //Layout, in dem die untergeordneten Knoten vertikal gestapelt sind
@@ -46,4 +68,6 @@ public class GuiUtils {
 
         return vbox;
     }
+
+
 }

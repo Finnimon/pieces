@@ -26,10 +26,10 @@ public class SUnits {
         VBox layout = new VBox(50);
         layout.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
-        HBox units = new HBox(20);
+        HBox units = new HBox(60);
         units.setAlignment(Pos.CENTER);
         for (int i = 0; i < availableUnits.length; i++) {
-            VBox unit = new VBox(10);
+            VBox unit = new VBox(60);
             unit.setAlignment(Pos.CENTER);
             Label name = new Label(availableUnits[i]);
             Button select = new Button("Select Unit");

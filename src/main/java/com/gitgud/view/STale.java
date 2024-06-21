@@ -8,6 +8,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.net.MalformedURLException;
+
 /**
  * @author Delfina
  * @version 1.0
@@ -31,11 +33,26 @@ public class STale {
         for (int i = 0; i < buttonsArray.length; i++) {
             buttonsArray[i] = new Button("Mission " + (i + 1));
         }
-
-        //Größe und Schriftart für jeweils alle Buttons festlegen
-        for (Button buttonT : buttonsArray) {
-            GuiUtils.setButtonTrait(buttonT);
+        Font customFont = null;
+        try {
+            customFont = GuiUtils.loadFont(20);
+        } catch (MalformedURLException e) {
+            System.err.println("Schriftart konnte nicht geladen werden: " + e.getMessage());
         }
+
+        // Größe und Schriftart für alle Buttons festlegen
+        if (customFont != null) {
+            for (Button buttonT : buttonsArray) {
+                GuiUtils.setButtonTrait(buttonT, customFont);
+            }
+        } else {
+            // Fallback auf Standard-Schriftart
+            Font defaultFont = Font.font("Verdana", 20);
+            for (Button buttonT : buttonsArray) {
+                GuiUtils.setButtonTrait(buttonT, defaultFont);
+            }
+        }
+
 
         buttonsArray[0].setOnAction(e -> stage.setScene(SReborn.createRebornScene(stage)));
         buttonsArray[1].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
