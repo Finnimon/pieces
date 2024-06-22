@@ -4,8 +4,9 @@ import com.gitgud.graph.RectangularGraph;
 import com.gitgud.graph.WeightedEdge;
 import com.gitgud.graph.WeightedGraph;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.TreeMap;
 
 
 /**
@@ -51,7 +52,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     }
     
     
-    public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
+    public static <GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> GridMap<GridMappableType> create(
             TerrainType[][] grid)
     {
         GridMap<GridMappableType> gridMap = new GridMap<>();
@@ -72,7 +73,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     }
     
     
-    public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
+    public static <GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> GridMap<GridMappableType> create(
             boolean[][] grid, GridMappableType[] gridMappables)
     {
         GridMap<GridMappableType> gridMap = create(grid);
@@ -89,7 +90,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     }
     
     
-    public static <GridMappableType extends com.gitgud.engine.model.gameObject.GridMappable> GridMap<GridMappableType> create(
+    public static <GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> GridMap<GridMappableType> create(
             boolean[][] grid)
     {
         int height = grid.length;

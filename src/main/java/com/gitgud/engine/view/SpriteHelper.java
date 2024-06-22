@@ -1,6 +1,6 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.Tile;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;

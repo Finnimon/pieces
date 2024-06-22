@@ -1,8 +1,8 @@
 package com.gitgud.pieces.utility.gsonSerialization;
 
-import com.gitgud.pieces.model.gameObjects.Faction;
-import com.gitgud.pieces.model.gameObjects.FightAgentType;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.google.gson.*;
 
 import java.lang.reflect.Field;

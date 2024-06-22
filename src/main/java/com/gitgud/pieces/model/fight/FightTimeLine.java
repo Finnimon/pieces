@@ -1,55 +1,42 @@
 package com.gitgud.pieces.model.fight;
 
 
-import com.gitgud.engine.model.gameObject.agent.attackDefenseLogic.Defender;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Defender;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 
-public class FightTimeLine
+/**
+ * @param current todo render
+ * @param next    todo render
+ */
+public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> next)
 {
-    //todo render
-    private final TreeSet<FightAgent> current;
     
     
-    //todo render
-    private final TreeSet<FightAgent> next;
-    
-    
-    public FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> next)
+    public static FightTimeLine create(Collection<FightAgent> fightAgents)
     {
-        this.current = current;
-        this.next = next;
-    }
-    
-    
-    public FightTimeLine(Fight fight)
-    {
-        Collection<FightAgent> fightAgentList = fight.getGridMap().nonNullElements();
-        this.current = new TreeSet<>(fightAgentList);
-        this.next = new TreeSet<>();
-    }
-    
-    
-    public TreeSet<FightAgent> getCurrent()
-    {
-        return current;
-    }
-    
-    
-    public TreeSet<FightAgent> getNext()
-    {
-        return next;
+        Comparator<FightAgent> comparator = Comparator.comparingInt(FightAgent::getInitiative).reversed();
+        
+        TreeSet<FightAgent> current = new TreeSet<>(comparator);
+        
+        current.addAll(fightAgents);
+        
+        TreeSet<FightAgent> next = new TreeSet<>(comparator);
+        
+        
+        return new FightTimeLine(current, next);
     }
     
     
     public void advance()
     {
-        TreeSet<FightAgent> fightTimeLine = getCurrent();
-        TreeSet<FightAgent> nextTimeLine = getNext();
+        TreeSet<FightAgent> fightTimeLine = current();
+        TreeSet<FightAgent> nextTimeLine = next();
         removeDeadFightFigures(fightTimeLine);
         removeDeadFightFigures(nextTimeLine);
         
@@ -71,6 +58,7 @@ public class FightTimeLine
                 Collectors.toCollection(TreeSet::new));
         fightAgentTreeSet.removeAll(deadFigures);
     }
+    
     
     public FightAgent getActiveFightAgent()
     {

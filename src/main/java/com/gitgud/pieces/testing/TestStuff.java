@@ -1,12 +1,9 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.engine.model.gameObject.GridMappable;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.engine.model.map.Terrain;
 import com.gitgud.engine.model.map.TerrainType;
-import com.gitgud.engine.model.map.Tile;
-
-import java.util.HashSet;
+import com.gitgud.pieces.utility.Core;
 
 
 public class TestStuff
@@ -19,10 +16,27 @@ public class TestStuff
         {
             for (int y = 0; y < height; y++)
             {
-                terrainTypes[y][x] = TerrainType.values()[(x*y)%2];
+                terrainTypes[y][x] = TerrainType.values()[(x * y) % 2];
             }
         }
         
-        return  GridMap.create(terrainTypes);
+        return GridMap.create(terrainTypes);
     }
+    
+    
+    public static boolean[][] booleanArray(int width, int height)
+    {
+        boolean[][] array = new boolean[height][width];
+        
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                array[y][x] = Core.roll(0.9f);
+            }
+        }
+        
+        return array;
+    }
+    
 }

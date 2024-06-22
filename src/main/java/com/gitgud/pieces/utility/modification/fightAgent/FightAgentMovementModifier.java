@@ -1,7 +1,7 @@
 package com.gitgud.pieces.utility.modification.fightAgent;
 
 import com.gitgud.engine.utility.modification.Modifier;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
 public class FightAgentMovementModifier extends Modifier<FightAgent>

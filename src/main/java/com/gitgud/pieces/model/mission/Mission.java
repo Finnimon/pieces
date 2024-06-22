@@ -1,20 +1,18 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.engine.control.Ending;
 import com.gitgud.engine.model.action.Action;
-import com.gitgud.engine.model.action.ActionAwaiter;
-import com.gitgud.engine.model.action.TileMovementAction;
-import com.gitgud.engine.model.gameObject.interactable.Interactable;
+import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.pieces.model.gameObjects.agents.PlayerAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 
-public class Mission implements Ending, ActionAwaiter<PlayerAgent>
+public class Mission implements ActionAwaiterModel<Interactable>
 {
     //todo render
     private final GridMap<Interactable> gridMap;
@@ -60,32 +58,6 @@ public class Mission implements Ending, ActionAwaiter<PlayerAgent>
     }
     
     
-    @Override
-    public HashSet<Class> getAvailableActionTypes()
-    {
-        HashSet<Class> availableActionTypes = new HashSet<>();
-        availableActionTypes.add(TileMovementAction.class);
-        
-        
-        return availableActionTypes;
-    }
-    
-    
-    @Override
-    public HashSet<Action> getActionsOfType(Class actionClass)
-    {
-        HashSet<Action> actions = new HashSet<>();
-        
-        if (actionClass == TileMovementAction.class)
-        {
-            addAvailableMovementActions(actions);
-        }
-        
-        
-        return actions;
-    }
-    
-    
     private void addAvailableMovementActions(HashSet<Action> actions)
     {
         Tile from = getPlayerAgentPosition();
@@ -101,13 +73,6 @@ public class Mission implements Ending, ActionAwaiter<PlayerAgent>
     public GridMap<Interactable> getGridMap()
     {
         return gridMap;
-    }
-    
-    
-    @Override
-    public Tile getActivePosition()
-    {
-        return playerAgentPosition;
     }
     
     
@@ -141,14 +106,6 @@ public class Mission implements Ending, ActionAwaiter<PlayerAgent>
     }
     
     
-    @Override
-    public void end()
-    {
-        //todo
-    }
-    
-    
-    @Override
     public boolean isFinished()
     {
         return this.finished;

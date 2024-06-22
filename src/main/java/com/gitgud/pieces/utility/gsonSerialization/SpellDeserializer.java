@@ -4,7 +4,7 @@ package com.gitgud.pieces.utility.gsonSerialization;
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.fight.SpellType;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.utility.modification.fightAgent.*;
 import com.google.gson.*;
 

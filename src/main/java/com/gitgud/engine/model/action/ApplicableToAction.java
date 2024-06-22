@@ -1,12 +1,21 @@
 package com.gitgud.engine.model.action;
 
+import com.gitgud.engine.control.ActionAwaiterController;
 import com.gitgud.engine.model.action.types.Applicable;
+import com.gitgud.engine.model.gameobjects.GridMappable;
+import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import javafx.geometry.Point2D;
 
 
-public interface ApplicableToAction<Awaiter extends ActionAwaiter, ApplicableClass extends Applicable<Target>,Point extends Point2D, Target> extends ToAction<Awaiter, Point>
+public interface ApplicableToAction<ActionAwaiterControllerType extends ActionAwaiterController<ModelType, TargetType>, ApplicableType extends Applicable<TargetType>, TargetType extends GridMappable, ModelType extends ActionAwaiterModel<TargetType>> extends ToAction<ActionAwaiterControllerType, Tile>
 {
+    @Override
+    default void enAct(ActionAwaiterControllerType awaiter)
+    {
+        GridMap<TargetType> gridMap = awaiter.getModel().getGridMap();
+        getApplicable().apply(gridMap.get(getTo()));
+    }
     
-    ApplicableClass getApplicable();
+    
+    ApplicableType getApplicable();
 }

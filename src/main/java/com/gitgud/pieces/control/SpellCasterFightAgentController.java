@@ -2,8 +2,8 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
-import com.gitgud.pieces.model.gameObjects.agents.SpellCasterFightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
 
 
 public class SpellCasterFightAgentController extends FightAgentController

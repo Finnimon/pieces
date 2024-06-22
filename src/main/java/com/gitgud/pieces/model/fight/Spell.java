@@ -1,9 +1,9 @@
 package com.gitgud.pieces.model.fight;
 
-import com.gitgud.engine.model.gameObject.Describable;
-import com.gitgud.engine.model.gameObject.Named;
-import com.gitgud.engine.model.gameObject.Sprite;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.engine.model.gameobjects.Describable;
+import com.gitgud.engine.model.gameobjects.Named;
+import com.gitgud.engine.model.gameobjects.Sprite;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
