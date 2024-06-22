@@ -5,7 +5,7 @@ import com.gitgud.engine.control.ActionChoice;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.render.mission.MissionRender;
+import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
 
 //todo render as scene

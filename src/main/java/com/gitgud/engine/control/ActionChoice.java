@@ -1,5 +1,6 @@
 package com.gitgud.engine.control;
 
+import com.gitgud.engine.model.action.Action;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.Describable;
 import com.gitgud.engine.model.gameobjects.GridMappable;
@@ -9,18 +10,51 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 
-public interface ActionChoice<ActionAwaiterType extends ActionAwaiterController<ModelType, GridMappableType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable> extends Named, Describable
+public abstract class ActionChoice<ActionAwaiterType extends ActionAwaiterController<ModelType, GridMappableType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable> implements Named, Describable
 {
-    void select(ActionAwaiterType actionAwaiter);
+    private final String name;
     
     
-    default void show(ActionAwaiterType actionAwaiter)
+    private final String description;
+    
+    
+    private final Action<ActionAwaiterType> action;
+    
+    
+    public ActionChoice(String name, String description, Action<ActionAwaiterType> action)
+    {
+        this.name = name;
+        this.description = description;
+        this.action = action;
+    }
+    
+    
+    public ActionChoice( String name,String description)
+    {
+        this(name, description, null);
+    }
+    
+    
+    public void select(ActionAwaiterType actionAwaiterType)
+    {
+        if (action != null)
+        {
+            action.enAct(actionAwaiterType);
+            hide(actionAwaiterType);
+            return;
+        }
+        
+        show(actionAwaiterType);
+    }
+    
+    
+    public void show(ActionAwaiterType actionAwaiter)
     {
         getHudChildren(actionAwaiter).add(getNode());
     }
     
     
-    default void hide(ActionAwaiterType actionAwaiter)
+    public void hide(ActionAwaiterType actionAwaiter)
     {
         getHudChildren(actionAwaiter).remove(getNode());
     }
@@ -33,5 +67,19 @@ public interface ActionChoice<ActionAwaiterType extends ActionAwaiterController<
     }
     
     
-    Node getNode();
+    public abstract Node getNode();
+    
+    
+    @Override
+    public String description()
+    {
+        return this.description;
+    }
+    
+    
+    @Override
+    public String name()
+    {
+        return this.name;
+    }
 }
