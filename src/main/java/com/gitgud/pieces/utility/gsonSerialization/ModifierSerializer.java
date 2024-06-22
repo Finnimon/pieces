@@ -1,12 +1,15 @@
-package com.gitgud.utility.gsonSerialization;
+package com.gitgud.pieces.utility.gsonSerialization;
 
 
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.utility.modification.Modifier;
-import com.gitgud.utility.modification.fightAgent.*;
+
+import com.gitgud.engine.utility.modification.Modifier;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.utility.modification.fightAgent.*;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonDeserializer<Modifier<Type>>
@@ -18,6 +21,7 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
     private static final String MANA = "FightAgentManaModifier";
     private static final String MOVEMENT = "FightAgentMovementModifier";
     private static final String DURATION = "DurableFightAgentModifier";
+
 
     @Override
     public JsonElement serialize (Modifier<Type> src, Type type, JsonSerializationContext context)
@@ -42,13 +46,20 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
         return jsonObject;
     }
 
-    private void serializeFightAgentModifier (JsonObject jsonObject, Modifier<Type> src, JsonSerializationContext context)
+
+    private void serializeFightAgentModifier (JsonObject jsonObject, Modifier<?> src, JsonSerializationContext context)
     {
         JsonArray modifiers = new JsonArray();
+        FightAgentModifier fightAgentModifier;
 
-        for (Modifier<FightAgent> modifier : src.getModifiers())
+        if (src instanceof FightAgentModifier)
         {
-            modifiers.add(context.serialize(modifier, Modifier.class));
+            fightAgentModifier = (FightAgentModifier) src;
+
+            for (Modifier<FightAgent> modifier : fightAgentModifier.getModifiers())
+            {
+                modifiers.add(context.serialize(modifier, Modifier.class));
+            }
         }
 
         jsonObject.add(FIGHT_AGENT, modifiers);
@@ -63,12 +74,16 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
     @Override
     public Modifier<Type> deserialize (JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-        Modifier<Type> modifier = null;
+        Modifier<?> modifier = null;
 
         for (String key : src.getAsJsonObject().keySet())
         {
             switch (key)
             {
+                case FIGHT_AGENT :
+                    modifier = deserializeFightAgentModifier(src, context);
+                    break;
+
                 case ATTACK :
                     modifier = context.deserialize(src.getAsJsonObject().get(key), FightAgentAttackModifier.class);
                     break;
@@ -94,13 +109,19 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
             }
         }
 
-        return modifier;
+        return (Modifier<Type>) modifier;
     }
 
 
-    private void deserializeFightAgentModifier (FightAgentModifier modifiers, JsonElement src, JsonSerializationContext context)
+    private FightAgentModifier deserializeFightAgentModifier (JsonElement src, JsonDeserializationContext context)
     {
+        Collection<Modifier<FightAgent>> fightAgentModifiers = new ArrayList<>();
 
+        for (JsonElement modifier : src.getAsJsonObject().getAsJsonArray(FIGHT_AGENT))
+        {
+            fightAgentModifiers.add(context.deserialize(modifier, Modifier.class));
+        }
+
+        return new FightAgentModifier(fightAgentModifiers);
     }
-
 }

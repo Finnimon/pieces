@@ -1,8 +1,10 @@
-package com.gitgud.utility.gsonSerialization;
+package com.gitgud.pieces.utility.gsonSerialization;
 
-import com.gitgud.model.gameObjects.Faction;
-import com.gitgud.model.gameObjects.FightAgentType;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
+
+import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.utility.gsonSerialization.SilentObjectCreator;
 import com.google.gson.*;
 
 import java.lang.reflect.Field;
@@ -19,7 +21,8 @@ public class FightAgentSerializer implements JsonSerializer<FightAgent>, JsonDes
     private static final String FACTION = "faction";
 
     @Override
-    public JsonElement serialize (FightAgent src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize (FightAgent src, Type typeOfSrc, JsonSerializationContext context)
+    {
 
         JsonObject jsonObject = new JsonObject();
 

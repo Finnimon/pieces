@@ -1,16 +1,13 @@
 package com.gitgud.pieces;
 
-import com.gitgud.model.fight.Spell;
-import com.gitgud.model.gameObjects.AssetLocator;
-import com.gitgud.model.gameObjects.Sprite;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.utility.gsonSerialization.*;
-import com.gitgud.utility.modification.Modifier;
-import com.gitgud.view.SMainMenue;
+
+import com.gitgud.engine.model.gameobjects.Sprite;
+import com.gitgud.pieces.utility.Strings;
+import com.gitgud.pieces.utility.services.AssetParser;
+import com.gitgud.pieces.view.SMainMenue;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -35,11 +32,9 @@ public class App extends Application
         stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
     }
     
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, ClassNotFoundException
     {
-        // launch();
-
-        jsonTestFinnK(args);
+        launch();
     }
     
     
@@ -61,29 +56,33 @@ public class App extends Application
     
     
     
-    public static void jsonTestFinnK (String[] args) throws IOException
+    public static void jsonTestFinnK (String[] args) throws IOException, ClassNotFoundException
     {
-        JsonArray jsonFightAgents = AssetParser.parseJsonArray(AssetLocator.FIGHT_AGENT_TYPES);
-        JsonArray jsonSpells = AssetParser.parseJsonArray(AssetLocator.SPELL_TYPES);
-        JsonArray jsonModifiers = AssetParser.parseJsonArray(AssetLocator.MODIFIER_TYPES);
-        JsonObject jsonFightAgent = jsonFightAgents.get(0).getAsJsonObject();
-        JsonObject jsonSpell = jsonSpells.get(0).getAsJsonObject();
-        JsonObject jsonModifier = jsonModifiers.get(1).getAsJsonObject();
-        
+        // FightAgent --- OK
+        // Modifier --- OK
+        // Spell --- OK
+
+        // Insert resources here
+        JsonArray fightAgentTypes = AssetParser.parseJsonArray(Strings.FIGHT_AGENT_TYPES);
+        // Insert Json Objects here
+
+        // Register type adapters
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(FightAgent.class, new FightAgentSerializer());
-        gsonBuilder.registerTypeAdapter(Spell.class, new SpellSerializer());
-        gsonBuilder.registerTypeAdapter(Modifier.class, new ModifierSerializer());
+        // insert type adapters here
+
         Gson gson = gsonBuilder.create();
 
+        // Deserialization
 
-        Modifier<?> modifier = gson.fromJson(jsonModifier, Modifier.class);
-        String modifierToJson = gson.toJson(modifier, Modifier.class);
-        System.out.println(modifier);
+        // Serialization
+
+        // Test output
 
 
-        FileOutputStream writableFile = new FileOutputStream("src/main/java/com/gitgud/utility/gsonSerialization/test.json");
-        writableFile.write(modifierToJson.getBytes());
+        // Write Json file
+        FileOutputStream writableFile = new FileOutputStream("src/main/resources/com/gitgud/gameObjectTypes/test.json");
+        // Insert Json objects to write here
+        // writableFile.write(spellToJson.getBytes());
         writableFile.close();
     }
 }

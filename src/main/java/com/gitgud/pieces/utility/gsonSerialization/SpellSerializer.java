@@ -1,14 +1,13 @@
-package com.gitgud.utility.gsonSerialization;
+package com.gitgud.pieces.utility.gsonSerialization;
 
 
-import com.gitgud.model.fight.Spell;
-import com.gitgud.model.fight.SpellType;
-import com.gitgud.model.gameObjects.gridMovable.FightAgent;
-import com.gitgud.utility.modification.Modifier;
-import com.gitgud.utility.modification.fightAgent.FightAgentModifier;
+
+import com.gitgud.pieces.model.fight.Spell;
+import com.gitgud.pieces.model.fight.SpellType;
 import com.google.gson.*;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,7 +15,11 @@ import java.util.Collection;
 public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<Spell>
 {
     private static final String TYPE = "type";
+
+
     private static final String MODIFIER = "modifier";
+
+
 
     @Override
     public JsonElement serialize (Spell src, Type type, JsonSerializationContext context)
@@ -33,15 +36,15 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
 
                 switch (field.getName())
                 {
-                    case TYPE:
+                    case TYPE :
                         jsonObject.add(TYPE, context.serialize(src.getType().getAsString()));
                         break;
 
-                    case MODIFIER:
-                        serializeFightAgentModifier(jsonObject, src, context);
+                    case MODIFIER :
+                        jsonObject.add(MODIFIER, context.serialize(src.getModifier(), com.gitgud.engine.utility.modification.Modifier.class));
                         break;
 
-                    default:
+                    default :
                         jsonObject.add(field.getName(), context.serialize(field.get(src)));
                 }
             }
@@ -52,12 +55,6 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
         }
 
         return jsonObject;
-    }
-
-
-    private void serializeFightAgentModifier (JsonObject jsonObject, Spell src, JsonSerializationContext context)
-    {
-
     }
 
 
@@ -83,7 +80,7 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
                         break;
 
                     case MODIFIER :
-                        deserializeFightAgentModifier(jsonObject, spell, field, context);
+                        field.set(spell, context.deserialize(jsonObject.get(MODIFIER), com.gitgud.engine.utility.modification.Modifier.class));
                         break;
 
                     default :
@@ -96,10 +93,5 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
         }
 
         return spell;
-    }
-
-    private void deserializeFightAgentModifier(JsonObject src, Spell spell, Field field, JsonDeserializationContext context) throws IllegalAccessException
-    {
-
     }
 }

@@ -31,5 +31,9 @@
       "movementRangeModifier" : 5,
       "initiativeModifier" : 5
     }
+  },
+
+  {
+    "FightAgentModifier" : []
   }
 ]
