@@ -1,5 +1,6 @@
 package com.gitgud.pieces.view;
 
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
@@ -31,7 +32,7 @@ public class SMission extends SGridMap implements IDimentions
     public static Scene createMissionScene(Stage stage) //todo GridMap gridMap, FightAgent[] activeFightFigures
     {
         Mission mission = null; //todo
-        GridMap<Interactable> gridMap = mission.getGridMap(); //todo
+        GridMap<GameObject> gridMap = mission.getGridMap(); //todo
         
         Group root = new Group();
         Scene MapScene = new Scene(root);

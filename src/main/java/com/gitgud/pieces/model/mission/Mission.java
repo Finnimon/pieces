@@ -2,9 +2,12 @@ package com.gitgud.pieces.model.mission;
 
 import com.gitgud.engine.model.action.Action;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.model.gameobjects.GameObject;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 
@@ -12,10 +15,10 @@ import java.util.Collection;
 import java.util.HashSet;
 
 
-public class Mission implements ActionAwaiterModel<Interactable>
+public class Mission implements ActionAwaiterModel<GameObject>
 {
     //todo render
-    private final GridMap<Interactable> gridMap;
+    private final GridMap<GameObject> gridMap;
     
     
     //todo render on top of map at playerAgentPosition
@@ -36,18 +39,13 @@ public class Mission implements ActionAwaiterModel<Interactable>
     private boolean finished = false;
     
     
-    public Mission(GridMap<Interactable> gridMap, Tile startingPosition, FightAgent[] activeFightAgents)
+    public Mission(GridMap<GameObject> gridMap, Tile startingPosition, FightAgent[] activeFightAgents)
     {
-        this.gridMap = gridMap;
-        this.activeFightAgents = activeFightAgents;
-        this.discardedFightAgents = new FightAgent[activeFightAgents.length];
-        
-        playerAgent = new PlayerAgent();
-        playerAgentPosition = startingPosition;
+        this(gridMap, new PlayerAgent(), startingPosition, activeFightAgents, new FightAgent[activeFightAgents.length]);
     }
     
     
-    public Mission(GridMap<Interactable> gridMap, PlayerAgent playerAgent, Tile playerAgentPosition,
+    public Mission(GridMap<GameObject> gridMap, PlayerAgent playerAgent, Tile playerAgentPosition,
                    FightAgent[] activeFightAgents, FightAgent[] discardedFightAgents)
     {
         this.gridMap = gridMap;
@@ -58,7 +56,7 @@ public class Mission implements ActionAwaiterModel<Interactable>
     }
     
     
-    private void addAvailableMovementActions(HashSet<Action> actions)
+    private void addAvailableMovementActions(HashSet<Action<MissionController>> actions)
     {
         Tile from = getPlayerAgentPosition();
         Collection<Tile> inMovementRangeTiles = getPlayerAgent().getInRangeTiles(getGridMap(), from);
@@ -70,7 +68,7 @@ public class Mission implements ActionAwaiterModel<Interactable>
     }
     
     
-    public GridMap<Interactable> getGridMap()
+    public GridMap<GameObject> getGridMap()
     {
         return gridMap;
     }
@@ -90,7 +88,9 @@ public class Mission implements ActionAwaiterModel<Interactable>
     
     public void setPlayerAgentPosition(Tile playerAgentPosition)
     {
+        gridMap.place(this.playerAgentPosition, null);
         this.playerAgentPosition = playerAgentPosition;
+        gridMap.place(playerAgentPosition, playerAgent);
     }
     
     

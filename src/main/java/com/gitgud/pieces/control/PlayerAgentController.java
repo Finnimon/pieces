@@ -1,6 +1,7 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.GridMovableController;
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
@@ -32,7 +33,7 @@ public class PlayerAgentController extends GridMovableController<PlayerAgent>
     
     
     @Override
-    public GridMap<Interactable> getGridMap()
+    public GridMap<GameObject> getGridMap()
     {
         return getMission().getGridMap();
     }

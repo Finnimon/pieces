@@ -2,14 +2,15 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.ActionAwaiterController;
 import com.gitgud.engine.control.ActionChoice;
-import com.gitgud.engine.model.gameobjects.interactable.Interactable;
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
+import javafx.concurrent.Task;
 
 
 //todo render as scene
-public class MissionController extends ActionAwaiterController<Mission, Interactable>
+public class MissionController extends ActionAwaiterController<Mission, GameObject>
 {
     
     
@@ -30,7 +31,7 @@ public class MissionController extends ActionAwaiterController<Mission, Interact
     
     
     @Override
-    public ActionChoice<MissionController, Mission, Interactable> getActionChoice()
+    public Task<ActionChoice<ActionAwaiterController<Mission, GameObject>, Mission, GameObject>> getActionChoiceTask()
     {
         return null;
     }

@@ -8,6 +8,7 @@ import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
+import javafx.concurrent.Task;
 
 
 //todo render as scene
@@ -21,6 +22,9 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent>
     }
     
     
+    
+    
+    
     @Override
     public Tile getActivePosition()
     {
@@ -30,7 +34,7 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent>
     
     
     @Override
-    public ActionChoice<FightController, Fight, FightAgent> getActionChoice()
+    public Task<ActionChoice<ActionAwaiterController<Fight, FightAgent>, Fight, FightAgent>> getActionChoiceTask()
     {
         return null;//todo
     }

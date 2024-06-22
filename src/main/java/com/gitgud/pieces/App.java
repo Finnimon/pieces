@@ -4,6 +4,7 @@ import com.gitgud.engine.control.ActionAwaiterController;
 import com.gitgud.engine.control.ActionChoice;
 import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
@@ -118,7 +119,7 @@ public class App extends Application
     
     private static void addTestGridMapRenderToStage(Stage stage)
     {
-        GridMap<GridMappable> testMap = TestStuff.getTestMap(12, 12);
+        GridMap<GameObject> testMap = TestStuff.getTestMap(12, 12);
         
         GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
         
@@ -138,9 +139,13 @@ public class App extends Application
         
         gridMapRender.relocateGridMappable(playerAgent, Missions.FIRST.getGridMap().getVertex(5, 5));
         Node testRender = new TestActionChoice().getNode();
-        
+        gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().getVertex(0, 0));
         group.getChildren().add(testRender);
         
+        Gson gson =new Gson();
+        String json= gson.toJson(testMap, GridMap.class);
+        System.out.println(json);
+        GridMap<GameObject> gridMap = gson.fromJson(json, GridMap.class);
     }
     
     
