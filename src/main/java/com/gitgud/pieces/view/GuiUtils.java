@@ -1,6 +1,6 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

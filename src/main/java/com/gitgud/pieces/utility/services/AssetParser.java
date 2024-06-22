@@ -1,7 +1,7 @@
 package com.gitgud.pieces.utility.services;
 
-import com.gitgud.pieces.model.gameObjects.AssetLocator;
-import com.gitgud.pieces.model.gameObjects.GameObjectAttribute;
+import com.gitgud.pieces.model.gameobjects.AssetLocator;
+import com.gitgud.pieces.model.gameobjects.GameObjectAttribute;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

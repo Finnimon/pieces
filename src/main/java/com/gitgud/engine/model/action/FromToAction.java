@@ -1,10 +1,11 @@
 package com.gitgud.engine.model.action;
 
 
-public interface FromToAction<Awaiter extends ActionAwaiter, From, To> extends Action<Awaiter>
+import com.gitgud.engine.control.ActionAwaiter;
+import javafx.geometry.Point2D;
+
+
+public interface FromToAction<Awaiter extends ActionAwaiter, Point extends Point2D> extends ToAction<Awaiter, Point>
 {
-    From getFrom();
-    
-    
-    To getTo();
+    Point getFrom();
 }

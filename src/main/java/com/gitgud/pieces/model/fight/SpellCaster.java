@@ -4,7 +4,7 @@ package com.gitgud.pieces.model.fight;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 
 import java.util.HashMap;

@@ -1,8 +1,8 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.engine.model.gameObject.interactable.Interactable;
+import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import javafx.scene.Group;
 import javafx.scene.Scene;

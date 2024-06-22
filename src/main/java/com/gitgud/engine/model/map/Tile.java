@@ -1,6 +1,6 @@
 package com.gitgud.engine.model.map;
 
-import com.gitgud.engine.model.gameObject.Sprite;
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.graph.Vertex2D;
 
@@ -16,7 +16,15 @@ import com.gitgud.graph.Vertex2D;
  */
 public class Tile extends Vertex2D implements Sprite
 {
-    private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\tiles\\";
+    
+    
+    private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\engine\\model\\map\\tile\\";
+    
+    
+    public static final String WHITE = "\\white";
+    
+    
+    public static final String BLACK = "\\black";
     
     
     private final Terrain terrain;
@@ -62,7 +70,7 @@ public class Tile extends Vertex2D implements Sprite
     }
     
     
-    public static Tile create(int x,int y,TerrainType terrainType, int width)
+    public static Tile create(int x, int y, TerrainType terrainType, int width)
     {
         return create(x, y, new Terrain(terrainType), width);
     }
@@ -97,12 +105,14 @@ public class Tile extends Vertex2D implements Sprite
         
         if (isWhite)
         {
-            stringBuilder.append("white\\");
+            stringBuilder.append(WHITE);
         }
         else
         {
-            stringBuilder.append("black\\");
+            stringBuilder.append(BLACK);
         }
+        
+        stringBuilder.append(DOT_PNG);
         
         return stringBuilder.toString();
     }

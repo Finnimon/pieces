@@ -1,6 +1,6 @@
 package com.gitgud.pieces.model.player;
 
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
 public class MissionArmy

@@ -1,26 +1,55 @@
 package com.gitgud.pieces.control;
 
 
+import com.gitgud.engine.control.ActionAwaiterController;
+import com.gitgud.engine.control.ActionChoice;
+import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.view.render.fight.FightRender;
 
 
 //todo render as scene
-public class FightController
+public class FightController extends ActionAwaiterController<Fight, FightAgent>
 {
-    //todo render
-    private final Fight fight;
     
     
     public FightController(Fight fight)
     {
-        this.fight = fight;
+        super(fight, new FightRender(fight));
     }
     
     
-    public Fight getFight()
+    @Override
+    public Tile getActivePosition()
     {
-        return fight;
+        Fight fight = this.getModel();
+        return fight.getGridMap().getVertex(fight.getFightTimeLine().getActiveFightAgent());
     }
     
     
+    @Override
+    public ActionChoice<FightController, Fight, FightAgent> getActionChoice()
+    {
+        return null;//todo
+    }
+    
+    
+    @Override
+    public void end()
+    {
+        ActiveGame activeGame = ActiveGameController.getInstance().get();
+        
+        getModel().end();//todo
+        
+        activeGame.setFight(null);
+    }
+    
+    
+    @Override
+    public boolean isFinished()
+    {
+        return getModel().isFinished();
+    }
 }

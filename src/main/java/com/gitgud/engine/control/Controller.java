@@ -3,16 +3,16 @@ package com.gitgud.engine.control;
 import com.gitgud.engine.view.Render;
 
 
-public abstract class Controller<ModelType>
+public abstract class Controller<ModelType, RenderType extends Render<ModelType>>
 {
     
     private final ModelType model;
     
     
-    private final Render<ModelType> render;
+    private final RenderType render;
     
     
-    public Controller(ModelType model, Render<ModelType> render)
+    public Controller(ModelType model, RenderType render)
     {
         this.model = model;
         this.render = render;
@@ -25,7 +25,7 @@ public abstract class Controller<ModelType>
     }
     
     
-    public Render<ModelType> getRender()
+    public RenderType getRender()
     {
         return render;
     }

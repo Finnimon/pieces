@@ -2,8 +2,8 @@ package com.gitgud.pieces.model.city.buildings;
 
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.gameObjects.Faction;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
 import java.util.ArrayList;

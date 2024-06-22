@@ -3,11 +3,11 @@ package com.gitgud.pieces.control;
 import com.gitgud.engine.control.GridMovableController;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.model.gameObjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
 /**
- * Controller for {@link com.gitgud.pieces.model.gameObjects.agents.FightAgent}
+ * Controller for {@link com.gitgud.pieces.model.gameobjects.agents.FightAgent}
  *
  * @author Finn L.
  * @Owner: Finn L.
