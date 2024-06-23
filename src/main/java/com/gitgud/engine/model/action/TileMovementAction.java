@@ -1,11 +1,12 @@
 package com.gitgud.engine.model.action;
 
 import com.gitgud.engine.control.ActionAwaiterController;
-import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.engine.view.ActionContextRender;
 
 
-public abstract class TileMovementAction<Awaiter extends ActionAwaiterController<?, ?>> implements FromToAction<Awaiter, Tile>
+public class TileMovementAction<Awaiter extends ActionAwaiterController<ModelType, GridMappableType,RenderType>,ModelType extends ActionAwaiterModel<GridMappableType>,GridMappableType extends GridMappable,RenderType extends ActionContextRender<ModelType, GridMappableType>> implements FromToAction<Awaiter, Tile>
 {
     private final Tile from;
     
@@ -37,10 +38,7 @@ public abstract class TileMovementAction<Awaiter extends ActionAwaiterController
     @Override
     public void enAct(Awaiter awaiter)
     {
-        Tile from = getFrom();
-        Tile to = getTo();
-        GridMap gridMap = awaiter.getModel().getGridMap();
-        Object gridMappable = gridMap.clearVertex(from);
-        gridMap.place(to, gridMappable);
+        awaiter.getRender().getGridMapRender().relocateGridMappable(
+                awaiter.getModel().getGridMap().moveElement(from, to), to);
     }
 }

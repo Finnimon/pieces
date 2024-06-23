@@ -1,6 +1,6 @@
 package com.gitgud.pieces.view.render.fight;
 
-import com.gitgud.pieces.view.render.Hud;
+import com.gitgud.engine.view.Hud;
 
 
 public class AvailableActionsRender extends Hud

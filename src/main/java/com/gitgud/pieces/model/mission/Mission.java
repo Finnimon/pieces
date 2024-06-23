@@ -88,9 +88,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
     
     public void setPlayerAgentPosition(Tile playerAgentPosition)
     {
-        gridMap.place(this.playerAgentPosition, null);
         this.playerAgentPosition = playerAgentPosition;
-        gridMap.place(playerAgentPosition, playerAgent);
     }
     
     

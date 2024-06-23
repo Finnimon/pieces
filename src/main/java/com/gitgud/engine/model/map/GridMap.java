@@ -17,7 +17,7 @@ import java.util.TreeMap;
  * @Since: 13.06.2024
  * @Version: 2.0
  */
-public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> implements RectangularGraph<Tile, GridMappable>
+public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> extends WeightedGraph<Tile, GridMappableType> implements RectangularGraph<Tile, GridMappableType>
 {
     //    private final float tileSpacing;
     
@@ -28,7 +28,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     private int height;
     
     
-    //    public GridMap(TreeMap<Tile, GridMappable> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges,
+    //    public GridMap(TreeMap<Tile, GridMappableType> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges,
     //                   float tileSpacing)
     //    {
     //        super(vertices, edges);
@@ -37,7 +37,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     //    }
     
     
-    public GridMap(TreeMap<Tile, GridMappable> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges)
+    public GridMap(TreeMap<Tile, GridMappableType> vertices, TreeMap<Tile, HashSet<WeightedEdge<Tile>>> edges)
     {
         super(vertices, edges);
         //        this.tileSpacing = 1;
@@ -186,7 +186,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     @Override
     public void updateDimensions()
     {
-        TreeMap<Tile, GridMappable> vertices = this.getVertices();
+        TreeMap<Tile, GridMappableType> vertices = this.getVertices();
         if (vertices.isEmpty())
         {
             width = 0;
@@ -245,7 +245,7 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
     
     
     @Override
-    public GridMappable get(double x, double y)
+    public GridMappableType get(double x, double y)
     {
         return get(getVertex(x, y));
     }
@@ -263,5 +263,13 @@ public class GridMap<GridMappable> extends WeightedGraph<Tile, GridMappable> imp
         
         
         return tileGrid;
+    }
+    
+    
+    public GridMappableType moveElement(Tile from, Tile to)
+    {
+        GridMappableType element = clearVertex(from);
+        place(to, element);
+        return element;
     }
 }

@@ -15,7 +15,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 
-public class ActionChoiceRender extends Group implements Render<ActionChoice<?, ?, ?>>
+public class ActionChoiceRender extends Group implements Render<ActionChoice<?, ?, ?,?>>
 {
     public static final int WIDTH = 90;
     
@@ -23,7 +23,7 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
     public static final double OPACITY = 0.6;
     
     
-    public ActionChoiceRender(ActionChoice<?, ?, ?> actionChoice)
+    public ActionChoiceRender(ActionChoice<?, ?, ?,?> actionChoice)
     {
         super();
         
@@ -32,7 +32,7 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
     
     
     @Override
-    public void render(ActionChoice<?, ?, ?> data)
+    public void render(ActionChoice<?, ?, ?,?> data)
     {
         Label description = new Label(data.description());
         description.setFont(Font.font( 20));

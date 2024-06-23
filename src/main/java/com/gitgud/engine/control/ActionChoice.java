@@ -5,12 +5,13 @@ import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.Describable;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Named;
+import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.HudRender;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 
-public abstract class ActionChoice<ActionAwaiterType extends ActionAwaiterController<ModelType, GridMappableType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable> implements Named, Describable
+public abstract class ActionChoice<ActionAwaiterType extends ActionAwaiterController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements Named, Describable
 {
     private final String name;
     

@@ -10,7 +10,7 @@ import javafx.concurrent.Task;
 
 
 //todo render as scene
-public class MissionController extends ActionAwaiterController<Mission, GameObject>
+public class MissionController extends ActionAwaiterController<Mission, GameObject, MissionRender>
 {
     
     
@@ -31,9 +31,9 @@ public class MissionController extends ActionAwaiterController<Mission, GameObje
     
     
     @Override
-    public Task<ActionChoice<ActionAwaiterController<Mission, GameObject>, Mission, GameObject>> getActionChoiceTask()
+    public Task<ActionChoice<ActionAwaiterController<Mission, GameObject, MissionRender>, Mission, GameObject, MissionRender>> getActionChoiceTask()
     {
-        return null;
+        return null;//todo
     }
     
     

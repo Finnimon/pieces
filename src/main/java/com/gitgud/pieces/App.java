@@ -1,15 +1,12 @@
 package com.gitgud.pieces;
 
-import com.gitgud.engine.control.ActionAwaiterController;
-import com.gitgud.engine.control.ActionChoice;
 import com.gitgud.engine.control.StageController;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.engine.view.ActionChoiceRender;
 import com.gitgud.engine.view.GridMapRender;
+import com.gitgud.pieces.control.JsonParser;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameobjects.AssetLocator;
 import com.gitgud.pieces.model.gameobjects.Faction;
@@ -31,12 +28,14 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+
 
 
 public class App extends Application
@@ -113,7 +112,7 @@ public class App extends Application
     public static void finnTest(Stage stage)
     {
         addTestGridMapRenderToStage(stage);
-        
+//        finnGsonTest();
     }
     
     
@@ -123,16 +122,19 @@ public class App extends Application
         
         GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
         
-        Group group = new Group();
+        AnchorPane group = new AnchorPane();
         gridMapRender=new GridMapRender<GridMappable>(Missions.FIRST.getGridMap(), 90);
         ScrollPane scrollPane = new ScrollPane(gridMapRender);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         group.getChildren().add(scrollPane);
+        scrollPane.setMaxWidth(1000);
         PlayerAgent playerAgent=new PlayerAgent(Faction.PINK);
         gridMapRender.addGridMappable(playerAgent,Missions.FIRST.getGridMap().getVertex(0, 0));
         
         Scene scene = new Scene(group);
+        group.setMinWidth(1200);
+        AnchorPane.setLeftAnchor(scrollPane, 200d);
         stage.setScene(scene);
         stage.sizeToScene();
         stage.centerOnScreen();
@@ -142,12 +144,19 @@ public class App extends Application
         gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().getVertex(0, 0));
         group.getChildren().add(testRender);
         
-        Gson gson =new Gson();
+    }
+    
+    private static final void finnGsonTest()
+    {
+        
+        GridMap<GameObject> testMap = TestStuff.getTestMap(12, 12);
+        Gson gson = JsonParser.getInstance().getGson();
+        
         String json= gson.toJson(testMap, GridMap.class);
         System.out.println(json);
         GridMap<GameObject> gridMap = gson.fromJson(json, GridMap.class);
+        System.out.println(gridMap==testMap);
     }
-    
     
     private void initialize(Stage stage)
     {

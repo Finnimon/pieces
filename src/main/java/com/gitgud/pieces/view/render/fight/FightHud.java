@@ -1,7 +1,7 @@
 package com.gitgud.pieces.view.render.fight;
 
 import com.gitgud.pieces.model.fight.Fight;
-import com.gitgud.pieces.view.render.Hud;
+import com.gitgud.engine.view.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 

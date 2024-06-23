@@ -1,23 +1,20 @@
 package com.gitgud.pieces.view.render.mission.MissionRender;
 
 import com.gitgud.engine.model.gameobjects.GameObject;
-import com.gitgud.engine.model.gameobjects.GridMappable;
-import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.GridMapRender;
-import com.gitgud.engine.view.HudRender;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.render.Hud;
+import com.gitgud.engine.view.Hud;
 import com.gitgud.pieces.view.render.mission.MissionHud;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 
 
-public class MissionRender extends AnchorPane implements HudRender<Mission>
+public class MissionRender extends AnchorPane implements ActionContextRender<Mission,GameObject>
 {
     
     
@@ -42,7 +39,7 @@ public class MissionRender extends AnchorPane implements HudRender<Mission>
     private final Mission mission;
     
     
-    private final GridMapRender<GridMappable> gridMapRender;
+    private final GridMapRender<GameObject> gridMapRender;
     
     
     private final MissionHud missionHud;
@@ -133,5 +130,12 @@ public class MissionRender extends AnchorPane implements HudRender<Mission>
     public Hud<Mission> getHud()
     {
         return this.missionHud;
+    }
+    
+    
+    @Override
+    public GridMapRender<GameObject> getGridMapRender()
+    {
+        return this.gridMapRender;
     }
 }

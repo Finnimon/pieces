@@ -12,7 +12,7 @@ import javafx.concurrent.Task;
 
 
 //todo render as scene
-public class FightController extends ActionAwaiterController<Fight, FightAgent>
+public class FightController extends ActionAwaiterController<Fight, FightAgent,FightRender>
 {
     
     
@@ -34,7 +34,7 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent>
     
     
     @Override
-    public Task<ActionChoice<ActionAwaiterController<Fight, FightAgent>, Fight, FightAgent>> getActionChoiceTask()
+    public Task<ActionChoice<ActionAwaiterController<Fight, FightAgent, FightRender>, Fight, FightAgent, FightRender>> getActionChoiceTask()
     {
         return null;//todo
     }
