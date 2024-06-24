@@ -1,5 +1,7 @@
 package com.gitgud.pieces.view;
 
+import com.gitgud.net.ClientController;
+import com.gitgud.net.ServerController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -54,6 +56,11 @@ import javafx.stage.Stage;
             Text text = new Text(SERVER_LOBY_INFO);
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsServer();
+
+            if(ServerController.getInstance().getServer().isConnected())
+            {
+                stage.setScene(STest.ceateSTest());
+            }
             return new Scene(root);
         }
 
@@ -64,6 +71,11 @@ import javafx.stage.Stage;
             Text text = new Text(CLIENT_SERVER_INFO);
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsClient(stringServerAddress);
+
+            if(ClientController.getInstance().getClient().isConnected())
+            {
+                stage.setScene(STest.ceateSTest());
+            }
 
             return new Scene(root);
         }
