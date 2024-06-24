@@ -34,4 +34,9 @@ public class ServerController {
             instance = new ServerController(new Server(socket));
         }
     }
+
+    public Server getServer()
+    {
+        return server;
+    }
 }

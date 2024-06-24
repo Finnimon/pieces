@@ -33,4 +33,9 @@ public class ClientController {
             instance = new ClientController(new Client(socket));
         }
     }
+
+    public Client getClient()
+    {
+        return client;
+    }
 }
