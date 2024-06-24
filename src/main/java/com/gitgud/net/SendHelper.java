@@ -6,6 +6,7 @@ public class SendHelper {
     public static String ParseToSendReadyString(Serializable message)
     {
 
+        return null;
 
     }
 }
