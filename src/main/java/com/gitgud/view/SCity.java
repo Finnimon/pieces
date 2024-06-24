@@ -1,6 +1,4 @@
 package com.gitgud.view;
-
-
 import com.opencsv.exceptions.CsvException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -60,8 +58,9 @@ public class SCity {
                 int finalJ = j;
                 int finalI = i;
                 switch (map[i][j]) {
-                    case 0 ->
-                            pane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(0), new Insets(0))));
+                    case 0 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(0), new Insets(0))));
+                    }
                     case 1 -> {
                         pane.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0))));
                         pane.setOnMouseEntered(e -> {
@@ -120,12 +119,42 @@ public class SCity {
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SWrought.createWroughtScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Schmiede"));
                     }
                     case 3 -> {
                         pane.setBackground(new Background(new BackgroundFill(Color.ROSYBROWN, new CornerRadii(0), new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(STale.createTaleScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Hauptquatier"));
+                    }
+                    case 4 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(STavern.createTavernScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Schenke"));
+                    }
+                    case 5 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(SMagicAmplifier.createMAScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Magieverstärker"));
+                    }
+                    case 6 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.TURQUOISE, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(SBasisCamp.createBasiscampScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Basiscamp"));
+                    }
+                    case 7 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.TOMATO, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(SFactionCamps.createFactionCampsScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Fraktionscamp"));
                     }
                 }
                 grid.add(pane, j, i);
@@ -139,6 +168,7 @@ public class SCity {
         getGridCell(grid, playerX - 1, playerY).setBorder(new Border(new BorderStroke(Color.LIGHTGREEN, BorderStrokeStyle.SOLID,
                 new CornerRadii(4), new BorderWidths(3))));
         grid.setAlignment(Pos.CENTER);
+        stage.setScene(scene);
         return scene;
     }
 

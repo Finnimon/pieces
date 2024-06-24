@@ -1,4 +1,5 @@
 package com.gitgud.view;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -59,7 +60,8 @@ public class SMainMenue {
         //buttonsArray[0].setOnAction(e -> stage.setScene(oldGameScene)); TODO: zurück ins alte Spiel
         buttonsArray[1].setOnAction(e -> stage.setScene(SDifficulty.createDifficultyScene(stage)));
         //buttonsArray[2].setOnAction(e -> stage.setScene(settings)) TODO: brauchen wir überhaupt Settings?
-        buttonsArray[3].setOnAction(e -> stage.setScene(null));
+        // Anwendung komplett beenden
+        buttonsArray[3].setOnAction(e -> Platform.exit());
         buttonsArray[4].setOnAction(e -> stage.setScene(SMission.createMissionScene(stage)));
 
         root.getChildren().add(hauptmenueText);
