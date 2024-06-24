@@ -60,6 +60,7 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         super.advance();
         
         handleInteractions();
+        
         System.out.println("MissionController.advance()");
     }
     

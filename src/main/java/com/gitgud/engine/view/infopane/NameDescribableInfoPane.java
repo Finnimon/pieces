@@ -23,6 +23,6 @@ public class NameDescribableInfoPane<Type extends Named & Describable> extends I
     
     private static <T extends Named & Describable> String getString(T type)
     {
-        return type.name() + Strings.LINE_BREAK + type.description();
+        return type.name().replace(Strings.LINE_BREAK, Strings.TABULATOR) + Strings.LINE_BREAK + type.description();
     }
 }

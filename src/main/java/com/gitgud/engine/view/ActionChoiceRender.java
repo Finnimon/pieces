@@ -4,6 +4,7 @@ import com.gitgud.engine.control.ActionChoice;
 import com.gitgud.engine.utility.Strings;
 import com.gitgud.engine.view.events.AppendRemoveNodeOnMouseEvent;
 import com.gitgud.engine.view.infopane.InfoPane;
+import com.gitgud.engine.view.infopane.NameDescribableInfoPane;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -56,8 +57,8 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
         
         getChildren().add(stackPane);
         
-        String infoPaneString = data.name() + Strings.LINE_BREAK + data.description();
-        InfoPane<?> infoPane=new InfoPane<>(infoPaneString);
+        
+        InfoPane<?> infoPane=new NameDescribableInfoPane<>(data);
         
         AppendRemoveNodeOnMouseEvent.add(this,infoPane);
         this.addEventHandler(KeyEvent.KEY_TYPED, data.getKeyEventHandler(String.valueOf(data.name().charAt(0))));//todo
