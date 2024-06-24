@@ -48,7 +48,6 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends G
     @Override
     public void render(GridMappableType data)
     {
-        
         rectangle.setFill(new ImagePattern(data.getSprite()));
         
         AppendRemoveNodeOnMouseEvent.add(this, new GridMappableInfoPane<>(data));

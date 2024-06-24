@@ -9,18 +9,12 @@ import com.gitgud.pieces.utility.Strings;
 import com.gitgud.pieces.utility.services.AssetParser;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.view.GridMapRender;
-import com.gitgud.pieces.control.JsonParser;
 import com.gitgud.pieces.control.MissionController;
-import com.gitgud.pieces.model.fight.Spell;
-import com.gitgud.pieces.model.gameobjects.AssetLocator;
 import com.gitgud.pieces.model.gameobjects.Faction;
-import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
-import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectable;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.testing.Missions;
 import com.gitgud.pieces.testing.TestStuff;
-import com.gitgud.pieces.utility.gsonSerialization.*;
 import com.gitgud.pieces.view.SMainMenue;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,6 +25,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -143,19 +138,7 @@ public class App extends Application
         gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().verticeSet().last());
         
     }
-    
-    
-    private static final void finnGsonTest()
-    {
-        
-        GridMap<GameObject> testMap = TestStuff.getTestMap(12, 12);
-        Gson gson = JsonParser.getInstance().getGson();
-        
-        String json = gson.toJson(testMap, GridMap.class);
-        System.out.println(json);
-        GridMap<GameObject> gridMap = gson.fromJson(json, GridMap.class);
-        System.out.println(gridMap == testMap);
-    }
+
     
     
     private void initialize(Stage stage)

@@ -3,8 +3,6 @@ package com.gitgud.pieces.model.mission;
 import com.gitgud.engine.model.action.Action;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GameObject;
-import com.gitgud.engine.model.gameobjects.GridMappable;
-import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.MissionController;
@@ -59,7 +57,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
     private void addAvailableMovementActions(HashSet<Action<MissionController>> actions)
     {
         Tile from = getPlayerAgentPosition();
-        Collection<Tile> inMovementRangeTiles = getPlayerAgent().getInRangeTiles(getGridMap(), from);
+        Collection<Tile> inMovementRangeTiles = getPlayerAgent().findPosibleMovementTargets(getGridMap(), from);
         
         for (Tile tile : inMovementRangeTiles)
         {

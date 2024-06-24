@@ -4,6 +4,7 @@ import com.gitgud.engine.model.action.*;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
 
@@ -28,8 +29,10 @@ public final class ToActionChoice<AwaitingType extends ActionAwaitingController<
         ToAction<AwaitingType,Tile> action = getAction();
         
         Color color = determineHighlightColor(action);
+        RenderType render = actionAwaiter.getRender();
+        Node node= render.getGridMapRender().addHighLight(action.getTo(), color, getMouseEventHandler());
+        render.getHud().registerChoice( node);
         
-        actionAwaiter.getRender().getGridMapRender().addHighLight(action.getTo(),color,getMouseEventHandler());
     }
     
     

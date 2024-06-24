@@ -2,6 +2,7 @@ package com.gitgud.pieces.view.render.mission.MissionRender;
 
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
@@ -127,7 +128,7 @@ public class MissionRender extends AnchorPane implements ActionContextRender<Mis
     
     
     @Override
-    public Hud<Mission> getHud()
+    public ActionContextHud<Mission> getHud()
     {
         return this.missionHud;
     }

@@ -13,7 +13,6 @@ import com.gitgud.pieces.model.mission.MissionMovementAction;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -33,7 +32,7 @@ public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingControl
     toActionChoices(GridMovable gridMovable, Tile position, AAType actionAwaiter)
     {
         GridMap<GMType> gridMap=actionAwaiter.getModel().getGridMap();
-        Collection<Tile> inRangeTiles= gridMovable.getInRangeTiles(gridMap, position);
+        Collection<Tile> inRangeTiles= gridMovable.findPosibleMovementTargets(gridMap, position);
         List<ToActionChoice<AAType, MType, GMType,RType>> toActionChoices=new ArrayList<>();
         
         for (Tile to: inRangeTiles)

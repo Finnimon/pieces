@@ -1,10 +1,14 @@
-package com.gitgud.pieces.control;
+package com.gitgud.pieces.utility.gsonSerialization;
 
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.utility.gsonSerialization.TileAdapter;
+import com.gitgud.pieces.model.fight.Spell;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.utility.Strings;
+import com.gitgud.pieces.utility.services.AssetParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import javafx.geometry.Point2D;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 
 public class JsonParser
@@ -17,9 +21,10 @@ public class JsonParser
         registerAdapters(builder);
         gson = builder.create();
     }
-    private void registerAdapters(GsonBuilder builder)
+    private void registerAdapters(GsonBuilder gsonBuilder)
     {
-        builder.registerTypeHierarchyAdapter(Tile.class, new TileAdapter());
+        gsonBuilder.registerTypeAdapter(FightAgent.class, new FightAgentSerializer());
+        gsonBuilder.registerTypeAdapter(Spell.class, new SpellSerializer());
     }
     
     public static JsonParser getInstance()

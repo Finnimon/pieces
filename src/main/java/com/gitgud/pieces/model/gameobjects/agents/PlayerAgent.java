@@ -10,7 +10,7 @@ public class PlayerAgent extends Agent
     private static final boolean IS_FLYING = false;
     
     
-    private static final int MOVEMENT_RANGE = 8;
+    private static final int MOVEMENT_RANGE = 7;
     
     
     private static final String NAME_SUFFIX = " King";

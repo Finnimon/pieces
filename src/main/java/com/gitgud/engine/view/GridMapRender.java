@@ -6,6 +6,7 @@ import com.gitgud.engine.model.map.Tile;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -103,7 +104,6 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     
     public void relocateGridMappable(Type gridMappable, Tile next)
     {
-        System.out.println(gridMappable.getClass());
         GridMappableRender<?> gridMappableRender = gridMappableRenders.get(gridMappable);
         gridMappableRender.setX(next.getX() * tileSize);
         gridMappableRender.setY(next.getY() * tileSize);
@@ -127,7 +127,6 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
         gridMappableGroup.getChildren().add(render);
         
         gridMappableRenders.put(gridMappable, render);
-        System.out.println(gridMappable.getClass());
     }
     
     
@@ -138,24 +137,27 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
      * @param color        the color of the highlight
      * @param eventHandler the eventHandler for a {@link MouseEvent#MOUSE_CLICKED}
      */
-    public void addHighLight(Tile tile, Color color, EventHandler<MouseEvent> eventHandler)
+    public Rectangle addHighLight(Tile tile, Color color, EventHandler<MouseEvent> eventHandler)
     {
         Rectangle rectangle = SpriteHelper.createRectangle(color, tile, tileSize);
         rectangle.setOpacity(HIGHLIGHT_OPACITY);
         highLightGroup.getChildren().add(rectangle);
         highLightRectangles.put(tile, rectangle);
         
+        
         if (eventHandler == null)
         {
-            return;
+            return rectangle;
         }
         
         rectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);//todo hand unhandled events to nodes beneath inccase of info???
+        rectangle.cursorProperty().set(Cursor.HAND);
+        return rectangle;
     }
     
-    public void addHighLight(Tile tile, Color color)
+    public Rectangle addHighLight(Tile tile, Color color)
     {
-        addHighLight(tile, color, null);
+        return addHighLight(tile, color, null);
     }
     
     

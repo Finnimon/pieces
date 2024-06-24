@@ -137,13 +137,50 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
                 continue;
             }
             
-            Collection<Tile> neighbors = getNeighbors(tile);
-            
-            for (Tile neighbor : neighbors.stream().filter(n -> n.getTerrain().isTraversable()).toList())
-            {
-                addEdge(tile, new WeightedEdge<>(neighbor, (float) tile.distance(neighbor)));
-            }
+            connectNeighbors(tile);
         }
+    }
+    
+    
+    private void connectNeighbors(Tile tile)
+    {
+        
+        Collection<Tile> neighbors = getNeighbors(tile);
+        Collection<Tile> traversableNeighbors = neighbors.stream().filter(n -> n.getTerrain().isTraversable()).toList();
+        
+        for (Tile neighbor : traversableNeighbors)
+        {
+            double distance = tile.distance(neighbor);
+            
+            if (!checkShouldEdgeBeAdded(tile, neighbor))
+            {
+                continue;
+            }
+            
+            addEdge(tile, new WeightedEdge<>(neighbor, (float) distance));
+        }
+    }
+    
+    
+    /**
+     * Example:
+     * 1O0
+     * O10
+     * 001
+     * the traversable 1s are not seen as connected as the non-Traversable 0s are also converging at the same point
+     *
+     * @param tile
+     * @param neighbor
+     * @return
+     */
+    private boolean checkShouldEdgeBeAdded(Tile tile, Tile neighbor)
+    {
+        double x = tile.getX();
+        double y = tile.getY();
+        double neighborX = neighbor.getX();
+        double neighborY = neighbor.getY();
+        return getVertex(neighborX, y).getTerrain().isTraversable() || getVertex(x,
+                                                                                 neighborY).getTerrain().isTraversable();
     }
     
     

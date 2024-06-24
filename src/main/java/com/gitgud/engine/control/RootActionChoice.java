@@ -33,7 +33,7 @@ public class RootActionChoice<ActionAwaiterType extends ActionAwaitingController
     public void show(ActionAwaiterType actionAwaiter)
     {
         RootActionChoiceRender render=new RootActionChoiceRender(this);
-        actionAwaiter.getRender().getHud().getChildren().add(render);
+        actionAwaiter.getRender().getHud().addChoice(render);
     }
     
     

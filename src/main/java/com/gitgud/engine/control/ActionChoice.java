@@ -11,8 +11,11 @@ import com.gitgud.engine.view.HudRender;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+
+import java.util.Objects;
 
 
 public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements Named, Describable
@@ -68,7 +71,8 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
     public void select()
     {
         ActionAwaiterType actionAwaiterType = getAwaiter();
-        actionAwaiterType.getRender().getHud().updateRender();
+        actionAwaiterType.getRender().getHud().clearChoices();
+        
         if (action != null)
         {
             action.enAct(actionAwaiterType);
@@ -120,11 +124,43 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
     {
         return event ->
         {
+            if (event == null)
+            {
+                return;
+            }
             if (event.getEventType() != MouseEvent.MOUSE_CLICKED)
             {
                 return;
             }
             if (event.getButton() != MouseButton.PRIMARY)
+            {
+                return;
+            }
+            
+            event.consume();
+            select();
+        };
+    }
+    
+    
+    public EventHandler<KeyEvent> getKeyEventHandler(String character)
+    {
+        if (character == null)
+        {
+            throw new IllegalArgumentException("Character cannot be null");
+        }
+        
+        return event ->
+        {
+            if (event == null)
+            {
+                return;
+            }
+            if (event.getEventType() != KeyEvent.KEY_TYPED)
+            {
+                return;
+            }
+            if (!Objects.equals(event.getCharacter(), character))
             {
                 return;
             }

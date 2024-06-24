@@ -25,7 +25,7 @@ public abstract class ActionAwaitingController
     
     protected void hightlightActivePosition()
     {
-        getRender().getGridMapRender().addHighLight(getActivePosition(), Color.BLUE);
+        getRender().getGridMapRender().addHighLight(getActivePosition(), Color.BLUE).toBack();
     }
     
     

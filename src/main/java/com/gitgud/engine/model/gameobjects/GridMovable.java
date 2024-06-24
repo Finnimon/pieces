@@ -1,11 +1,13 @@
 package com.gitgud.engine.model.gameobjects;
 
+import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -29,18 +31,49 @@ public interface GridMovable extends GridMappable
     
     default boolean canMoveTo(GridMap<?> gridMap, Tile position, Tile target)
     {
-        return getInRangeTiles(gridMap, position).contains(target);
+        return findPosibleMovementTargets(gridMap, position).contains(target);
     }
     
     
-    default Collection<Tile> getInRangeTiles(GridMap<?> gridMap, Tile position)
+    default Collection<Tile> findPosibleMovementTargets(GridMap<?> gridMap, Tile position)
     {
+        Collection<Tile> result;
         if (isFlying())
         {
-            return getInAbsoluteRangeTiles(gridMap, position);
+            result = getInAbsoluteRangeTiles(gridMap, position);
+        }
+        else
+        {
+            result = getInNonFlyingRangeTiles(gridMap, position);
         }
         
-        return getInNonFlyingRangeTiles(gridMap, position);
+        
+        return result;
+    }
+    
+    
+    private void filterMovementTargetResult(Collection<Tile> result, Tile position, GridMap<?> gridMap)
+    {
+        HashSet<Tile> inValids = new HashSet<>();
+        inValids.add(position);
+        
+        for (Tile tile : result)
+        {
+            if (tile.getTerrain().isTraversable())
+            {
+                inValids.add(tile);
+                continue;
+            }
+            
+            if (gridMap.get(tile) == null || gridMap.get(tile) instanceof Interactable)
+            {
+                continue;
+            }
+            
+            inValids.add(tile);
+        }
+        
+        result.removeAll(inValids);
     }
     
     

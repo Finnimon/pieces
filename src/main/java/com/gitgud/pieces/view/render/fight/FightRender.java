@@ -1,5 +1,6 @@
 package com.gitgud.pieces.view.render.fight;
 
+import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.pieces.model.fight.Fight;
@@ -59,7 +60,7 @@ public class FightRender extends Group implements ActionContextRender<Fight,Figh
     
     
     @Override
-    public Hud<Fight> getHud()
+    public ActionContextHud<Fight> getHud()
     {
         return this.fightHud;
     }
