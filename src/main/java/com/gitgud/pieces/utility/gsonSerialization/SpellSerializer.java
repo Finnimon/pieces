@@ -1,58 +1,50 @@
 package com.gitgud.pieces.utility.gsonSerialization;
 
 
-import com.gitgud.engine.utility.modification.Modifier;
+
 import com.gitgud.pieces.model.fight.Spell;
-import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.fight.SpellType;
 import com.google.gson.*;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 
-
-public class SpellSerializer implements JsonSerializer<Spell>
+public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<Spell>
 {
     private static final String TYPE = "type";
-    
-    
+
+
     private static final String MODIFIER = "modifier";
-    
-    
-    private static final String ATTACK = "FightAgentAttackModifier";
-    
-    
-    private static final String DEFENCE = "FightAgentDefenceModifier";
-    
-    
-    private static final String HEALTH = "FightAgentHealthModifier";
-    
-    
-    private static final String MANA = "FightAgentManaModifier";
-    
-    
+
+
+
     @Override
-    public JsonElement serialize(Spell src, Type type, JsonSerializationContext context)
+    public JsonElement serialize (Spell src, Type type, JsonSerializationContext context)
     {
         JsonObject jsonObject = new JsonObject();
+
         Field[] fields = src.getClass().getDeclaredFields();
-        
+
         try
         {
             for (Field field : fields)
             {
                 field.setAccessible(true);
-                
+
                 switch (field.getName())
                 {
-                    case TYPE:
+                    case TYPE :
                         jsonObject.add(TYPE, context.serialize(src.getType().getAsString()));
                         break;
-                    
-                    case MODIFIER:
-                        serializeModifier(jsonObject, src, context);
+
+                    case MODIFIER :
+                        jsonObject.add(MODIFIER, context.serialize(src.getModifier(), com.gitgud.engine.utility.modification.Modifier.class));
                         break;
-                    
-                    default:
+
+                    default :
                         jsonObject.add(field.getName(), context.serialize(field.get(src)));
                 }
             }
@@ -61,39 +53,45 @@ public class SpellSerializer implements JsonSerializer<Spell>
         {
             throw new RuntimeException(e);
         }
-        
+
         return jsonObject;
     }
-    
-    
-    private void serializeModifier(JsonObject jsonObject, Spell src, JsonSerializationContext context)
+
+
+    @Override
+    public Spell deserialize (JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-        JsonObject modifierCollection = new JsonObject();
-        
-        Gson gson = new Gson();
-        
-        for (Modifier<FightAgent> modifier : src.getModifier().getModifiers())
+        JsonObject jsonObject = src.getAsJsonObject();
+
+        Spell spell = SilentObjectCreator.create(Spell.class);
+
+        Field[] fields = spell.getClass().getDeclaredFields();
+
+        for (Field field : fields)
         {
-            switch (modifier.getClass().getSimpleName())
+            field.setAccessible(true);
+
+            try
             {
-                case ATTACK:
-                    modifierCollection.add(ATTACK, gson.toJsonTree(modifier));
-                    break;
-                
-                case DEFENCE:
-                    modifierCollection.add(DEFENCE, gson.toJsonTree(modifier));
-                    break;
-                
-                case HEALTH:
-                    modifierCollection.add(HEALTH, gson.toJsonTree(modifier));
-                    break;
-                
-                case MANA:
-                    modifierCollection.add(MANA, gson.toJsonTree(modifier));
-                    break;
+                switch (field.getName())
+                {
+                    case TYPE :
+                        field.set(spell, SpellType.fromString(jsonObject.get(TYPE).getAsString()));
+                        break;
+
+                    case MODIFIER :
+                        field.set(spell, context.deserialize(jsonObject.get(MODIFIER), com.gitgud.engine.utility.modification.Modifier.class));
+                        break;
+
+                    default :
+                        field.set(spell, context.deserialize(jsonObject.get(field.getName()), field.getType()));
+                }
+            } catch (IllegalAccessException e)
+            {
+                throw new RuntimeException(e);
             }
         }
-        
-        jsonObject.add(MODIFIER, modifierCollection);
+
+        return spell;
     }
 }
