@@ -1,0 +1,1 @@
+{"type":"pawn","faction":"monochrome","isRangedAttacker":true,"rank":3,"meleeDamage":4,"rangedDamage":4,"rangedAttackRange":1,"remainingRangedAttacks":4,"physicalDefence":2,"magicDefence":4,"evadeChance":4.0,"maxHealth":8,"maxMana":6,"health":4,"mana":2,"initiative":4,"accuracy":7.0,"isFlying":false,"movementRange":5}

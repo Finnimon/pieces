@@ -53,7 +53,7 @@ public class SMainMenue
         buttonsArray[1].setOnAction(e -> stage.setScene(SDifficulty.createDifficultyScene(stage)));
         //buttonsArray[2].setOnAction(e -> stage.setScene(settings)) TODO: brauchen wir überhaupt Settings?
         buttonsArray[3].setOnAction(e -> stage.setScene(null));
-        buttonsArray[4].setOnAction(e -> stage.setScene(SMission.createMissionScene(stage)));
+        buttonsArray[4].setOnAction(e -> stage.setScene(SArena.createArenaScene(stage)));
         
         
         //getChildren()-Methode gibt eine Liste der direkten untergeordneten Knoten des aktuellen Knotens zurück
