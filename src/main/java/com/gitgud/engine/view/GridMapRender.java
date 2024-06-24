@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class GridMapRender<Type extends GridMappable> extends Group implements Render<GridMap<Type>>
 {
-    public static final double HIGHLIGHT_OPACITY = 0.3;
+    public static final double HIGHLIGHT_OPACITY = 0.2;
     
     
     private final int tileSize;
