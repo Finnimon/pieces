@@ -31,8 +31,7 @@ import javafx.stage.Stage;
             Button continuoToLobby = new Button(SEARCH_GAME);
 
             continuoToLobby.setOnAction(e -> {
-                if(serverTextField.hasProperties())
-                {
+
                     if (isServer.isSelected())
                     {
                         stage.setScene(CreateServerLobby(stage));
@@ -41,7 +40,7 @@ import javafx.stage.Stage;
                         stage.setScene(CreateClientLobby(stage, serverTextField.getCharacters()));
 
                     }
-                }
+
             });
 
             vBox.getChildren().addAll(serverTextField, isServer, continuoToLobby);
