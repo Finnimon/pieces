@@ -1,17 +1,20 @@
 package com.gitgud.net;
+import org.zeromq.ZFrame;
 import org.zeromq.ZMQ;
+import org.zeromq.ZMsg;
+
+import java.io.Serializable;
+import java.util.LinkedList;
+
 public class Server extends Thread{
 
+    public static final int TIME_TO_WAIT_WHILE_RECEVING_MESSAGE = 50;
+    private LinkedList<Serializable> messageQueue;
     private final ZMQ.Socket socket;
 
     public Server(ZMQ.Socket socket)
     {
         this.socket = socket;
-    }
-
-    public ZMQ.Socket getSocket()
-    {
-        return socket;
     }
 
     public void closeSocket()
@@ -23,19 +26,36 @@ public class Server extends Thread{
     public void run()
     {
         ServerController.getInstance().initialize();
-        waitForRequest();
+        socket.bind("tcp://*:8332");
+        try
+        {
+            waitForRequest();
 
+        } catch (InterruptedException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
 
-    private void waitForRequest()
+    private void waitForRequest()throws InterruptedException
     {
+        String recMessage;
+        do
+        {
+            recMessage = socket.recvStr();
+            Thread.sleep(TIME_TO_WAIT_WHILE_RECEVING_MESSAGE);
+        } while (recMessage == null);
+        messageQueue.add(recMessage);
 
-        sendAck();
     }
 
-    private void sendAck()
+    public LinkedList<Serializable> getMessageQueue()
     {
-
+        return messageQueue;
+    }
+    public Serializable getLatestUnprecedentedMessage()
+    {
+        return messageQueue.remove();
     }
 }
