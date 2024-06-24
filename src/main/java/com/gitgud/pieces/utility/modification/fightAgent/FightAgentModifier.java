@@ -3,6 +3,7 @@ package com.gitgud.pieces.utility.modification.fightAgent;
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -41,13 +42,13 @@ public class FightAgentModifier extends Modifier<FightAgent>
     }
     
     
-    public Collection<Modifier<FightAgent>> getModifiers()
+    public ArrayList<Modifier<FightAgent>> getModifiers()
     {
-        return this.modifiers;
+        return (ArrayList<Modifier<FightAgent>>) this.modifiers;
     }
     
     
-    public static FightAgent applyModifiers(FightAgent fightAgent, Collection<Modifier<FightAgent>> modifiers)
+    public static FightAgent applyModifiers (FightAgent fightAgent, Collection<Modifier<FightAgent>> modifiers)
     {
         return Modifier.applyModifiers(fightAgent, modifiers);
     }
