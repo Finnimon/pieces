@@ -1,7 +1,10 @@
 package com.gitgud.engine.view;
 
 import com.gitgud.engine.control.ActionChoice;
+import com.gitgud.engine.utility.Strings;
 import com.gitgud.engine.view.events.AppendRemoveNodeOnMouseEvent;
+import com.gitgud.engine.view.infopane.InfoPane;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -17,42 +20,45 @@ import javafx.scene.text.Font;
 
 public class ActionChoiceRender extends Group implements Render<ActionChoice<?, ?, ?,?>>
 {
-    public static final int WIDTH = 90;
+    public static final int SIZE = 40;
     
     
-    public static final double OPACITY = 0.6;
+    private static final double OPACITY = 0.6;
+    
+    
+    private static final int FONT_SIZE = 12;
     
     
     public ActionChoiceRender(ActionChoice<?, ?, ?,?> actionChoice)
     {
-        super();
-        
         render(actionChoice);
     }
     
     
     @Override
     public void render(ActionChoice<?, ?, ?,?> data)
-    {
-        Label description = new Label(data.description());
-        description.setFont(Font.font( 20));
-        description.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        
-        StackPane stackPane = new StackPane();
+    {   StackPane stackPane = new StackPane();
         Label label = new Label(data.name());
-        label.setFont(Font.font( 20));
+        label.setFont(Font.font( FONT_SIZE));
         Circle circle = new Circle();
         circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
         circle.radiusProperty().bind(label.widthProperty());
         
         stackPane.getChildren().addAll(circle, label);
-        
+        label.setPrefWidth(SIZE);
+        label.setMinWidth(SIZE);
+        label.setMaxWidth(SIZE);
         label.setAlignment(javafx.geometry.Pos.CENTER);
         circle.setOpacity(OPACITY);
         
         getChildren().add(stackPane);
-        this.addEventHandler(MouseEvent.ANY, new AppendRemoveNodeOnMouseEvent(this, description));
+        
+        String infoPaneString = data.name() + Strings.LINE_BREAK + data.description();
+        InfoPane infoPane=new InfoPane<>(infoPaneString);
+        
+        AppendRemoveNodeOnMouseEvent.add(this,infoPane);
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, data.getMouseEventHandler());
     }
     
     

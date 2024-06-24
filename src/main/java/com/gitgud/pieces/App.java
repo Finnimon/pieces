@@ -7,14 +7,15 @@ import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.pieces.control.JsonParser;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.fight.Spell;
 import com.gitgud.pieces.model.gameobjects.AssetLocator;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectable;
+import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.testing.Missions;
-import com.gitgud.pieces.testing.TestActionChoice;
 import com.gitgud.pieces.testing.TestStuff;
 import com.gitgud.pieces.utility.gsonSerialization.*;
 import com.gitgud.pieces.view.SMainMenue;
@@ -23,8 +24,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -37,12 +36,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 
-
 public class App extends Application
 {
     
     
-    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png";
+    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\black_king.png";
     
     
     public static final String APP_TITLE = "Pieces";
@@ -111,8 +109,22 @@ public class App extends Application
     
     public static void finnTest(Stage stage)
     {
-        addTestGridMapRenderToStage(stage);
-//        finnGsonTest();
+        testMissionController();
+        //        addTestGridMapRenderToStage(stage);
+        //        finnGsonTest();
+    }
+    
+    
+    private static void testMissionController()
+    {
+        Stage stage = StageController.getInstance().getStage();
+        Mission mission = Missions.FIRST;
+        MissionController missionController = new MissionController(mission);
+        Scene scene = new Scene(missionController.getRender());
+
+        stage.setScene(scene);
+        stage.show();
+        missionController.start();
     }
     
     
@@ -123,14 +135,14 @@ public class App extends Application
         GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
         
         AnchorPane group = new AnchorPane();
-        gridMapRender=new GridMapRender<GridMappable>(Missions.FIRST.getGridMap(), 90);
+        gridMapRender = new GridMapRender<GridMappable>(Missions.FIRST.getGridMap(), 90);
         ScrollPane scrollPane = new ScrollPane(gridMapRender);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         group.getChildren().add(scrollPane);
         scrollPane.setMaxWidth(1000);
-        PlayerAgent playerAgent=new PlayerAgent(Faction.PINK);
-        gridMapRender.addGridMappable(playerAgent,Missions.FIRST.getGridMap().getVertex(0, 0));
+        PlayerAgent playerAgent = new PlayerAgent(Faction.PINK);
+        gridMapRender.addGridMappable(playerAgent, Missions.FIRST.getGridMap().getVertex(0, 0));
         
         Scene scene = new Scene(group);
         group.setMinWidth(1200);
@@ -140,11 +152,11 @@ public class App extends Application
         stage.centerOnScreen();
         
         gridMapRender.relocateGridMappable(playerAgent, Missions.FIRST.getGridMap().getVertex(5, 5));
-        Node testRender = new TestActionChoice().getNode();
         gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().getVertex(0, 0));
-        group.getChildren().add(testRender);
+        gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().verticeSet().last());
         
     }
+    
     
     private static final void finnGsonTest()
     {
@@ -152,15 +164,16 @@ public class App extends Application
         GridMap<GameObject> testMap = TestStuff.getTestMap(12, 12);
         Gson gson = JsonParser.getInstance().getGson();
         
-        String json= gson.toJson(testMap, GridMap.class);
+        String json = gson.toJson(testMap, GridMap.class);
         System.out.println(json);
         GridMap<GameObject> gridMap = gson.fromJson(json, GridMap.class);
-        System.out.println(gridMap==testMap);
+        System.out.println(gridMap == testMap);
     }
+    
     
     private void initialize(Stage stage)
     {
-        stage.initStyle(StageStyle.UTILITY);
+        stage.initStyle(StageStyle.DECORATED);
         stage.setResizable(false);
         stage.centerOnScreen();
         StageController.initialize(stage);
@@ -189,5 +202,6 @@ public class App extends Application
         finnTest(stage);
         //        delfiMain(stage);
         stage.show();
+        
     }
 }

@@ -59,7 +59,6 @@ public class MissionRender extends AnchorPane implements ActionContextRender<Mis
     {
         setDimensions();
         
-        
         ObservableList<Node> children = getChildren();
         
         children.clear();
@@ -67,6 +66,7 @@ public class MissionRender extends AnchorPane implements ActionContextRender<Mis
         addGridMapRender(children);
         
         children.add(missionHud);
+        
         renderPlayerAgent();
     }
     
@@ -135,7 +135,7 @@ public class MissionRender extends AnchorPane implements ActionContextRender<Mis
     
     @Override
     public GridMapRender<GameObject> getGridMapRender()
-    {
+    {;
         return this.gridMapRender;
     }
 }

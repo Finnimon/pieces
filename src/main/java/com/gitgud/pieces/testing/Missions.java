@@ -21,7 +21,7 @@ public interface Missions
     
     private static Mission create(GridMap<GameObject> gridMap)
     {
-        Tile startingPosition = gridMap.getVertex(0);
+        Tile startingPosition = gridMap.verticeSet().stream().filter(tile -> tile.getTerrain().isTraversable()).findFirst().get();
         return new Mission(gridMap, startingPosition, new FightAgent[0]);
     }
 }

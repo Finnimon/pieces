@@ -2,8 +2,6 @@ package com.gitgud.engine.control;
 
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 
-import java.util.Observable;
-
 
 public class InterActionController
 {
@@ -15,7 +13,7 @@ public class InterActionController
     
     }
     
-    public static InterActionController getInstance()
+    private static InterActionController getInstance()
     {
         if (instance == null)
         {
@@ -25,11 +23,22 @@ public class InterActionController
         return instance;
     }
     
-    public Interactable addFlag(Interactable interactable)
+    public static Interactable setFlag(Interactable interactable)
     {
-        Interactable oldInteractable=this.interactable;
-        this.interactable=interactable;
+        Interactable oldInteractable=getInstance().interactable;
+        getInstance().interactable=interactable;
         return oldInteractable;
     }
     
+    public static boolean hasFlag()
+    {
+        return getInstance().interactable!=null;
+    }
+    
+    public static Interactable clearFlag()
+    {
+        Interactable oldInteractable=getInstance().interactable;
+        getInstance().interactable=null;
+        return oldInteractable;
+    }
 }

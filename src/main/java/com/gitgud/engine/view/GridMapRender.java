@@ -8,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -104,6 +103,7 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     
     public void relocateGridMappable(Type gridMappable, Tile next)
     {
+        System.out.println(gridMappable.getClass());
         GridMappableRender<?> gridMappableRender = gridMappableRenders.get(gridMappable);
         gridMappableRender.setX(next.getX() * tileSize);
         gridMappableRender.setY(next.getY() * tileSize);
@@ -118,17 +118,16 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     }
     
     
-    
-    
     public void addGridMappable(Type gridMappable, Tile tile)
     {
         double x = tile.getX() * tileSize;
         double y = tile.getY() * tileSize;
-        GridMappableRender<Type> render = new GridMappableRender<>(gridMappable,x,y, tileSize);
+        GridMappableRender<Type> render = new GridMappableRender<>(gridMappable, x, y, tileSize);
         
         gridMappableGroup.getChildren().add(render);
         
         gridMappableRenders.put(gridMappable, render);
+        System.out.println(gridMappable.getClass());
     }
     
     
@@ -143,10 +142,20 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     {
         Rectangle rectangle = SpriteHelper.createRectangle(color, tile, tileSize);
         rectangle.setOpacity(HIGHLIGHT_OPACITY);
-        EventType<MouseEvent> eventType = new EventType<>(MouseEvent.MOUSE_CLICKED);
-        rectangle.addEventHandler(eventType, eventHandler);
         highLightGroup.getChildren().add(rectangle);
         highLightRectangles.put(tile, rectangle);
+        
+        if (eventHandler == null)
+        {
+            return;
+        }
+        
+        rectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);//todo hand unhandled events to nodes beneath inccase of info???
+    }
+    
+    public void addHighLight(Tile tile, Color color)
+    {
+        addHighLight(tile, color, null);
     }
     
     
@@ -158,7 +167,7 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     }
     
     
-    public void removeAllHighLights()
+    public void clearHighLights()
     {
         highLightGroup.getChildren().clear();
         highLightRectangles.clear();

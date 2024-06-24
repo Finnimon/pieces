@@ -1,15 +1,14 @@
 package com.gitgud.pieces.view.render.fight;
 
+import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.engine.view.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 
-public class FightHud extends Hud<Fight>
+public class FightHud extends ActionContextHud<Fight>
 {
-    private final AvailableActionsRender availableActionsRender;
-    
     
     private final FightTimeLineRender fightTimeLineRender;
     
@@ -17,7 +16,6 @@ public class FightHud extends Hud<Fight>
     public FightHud(Fight data)
     {
         super(data);
-        this.availableActionsRender = new AvailableActionsRender(data);
         this.fightTimeLineRender = new FightTimeLineRender(data);
     }
     

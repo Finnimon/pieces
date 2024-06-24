@@ -1,12 +1,12 @@
 package com.gitgud.engine.model.action;
 
-import com.gitgud.engine.control.ActionAwaiterController;
+import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
 
 
-public interface AttackAction<FighterType extends com.gitgud.engine.model.gameobjects.agent.Fighter,AwaiterType extends ActionAwaiterController<ActionAwaiterModel<FighterType>, FighterType, ActionContextRender<ActionAwaiterModel<FighterType>, FighterType>>> extends FromToAction<AwaiterType, Tile>
+public interface AttackAction<FighterType extends com.gitgud.engine.model.gameobjects.agent.Fighter,AwaiterType extends ActionAwaitingController<ActionAwaiterModel<FighterType>, FighterType, ActionContextRender<ActionAwaiterModel<FighterType>, FighterType>>> extends FromToAction<AwaiterType, Tile>
 {
     @Override
     default void enAct(AwaiterType awaiter)

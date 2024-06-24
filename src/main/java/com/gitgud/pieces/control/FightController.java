@@ -1,18 +1,17 @@
 package com.gitgud.pieces.control;
 
 
-import com.gitgud.engine.control.ActionAwaiterController;
+import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.control.ActionChoice;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
-import javafx.concurrent.Task;
 
 
 //todo render as scene
-public class FightController extends ActionAwaiterController<Fight, FightAgent,FightRender>
+public class FightController extends ActionAwaitingController<Fight, FightAgent,FightRender>
 {
     
     
@@ -34,7 +33,7 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent,F
     
     
     @Override
-    public Task<ActionChoice<ActionAwaiterController<Fight, FightAgent, FightRender>, Fight, FightAgent, FightRender>> getActionChoiceTask()
+    public ActionChoice<ActionAwaitingController<Fight, FightAgent, FightRender>, Fight, FightAgent, FightRender> getActionChoice()
     {
         return null;//todo
     }
@@ -56,4 +55,6 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent,F
     {
         return getModel().isFinished();
     }
+    
+    
 }

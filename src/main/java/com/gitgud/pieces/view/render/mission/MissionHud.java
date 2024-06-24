@@ -1,17 +1,19 @@
 package com.gitgud.pieces.view.render.mission;
 
+import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.engine.view.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
 
-public class MissionHud extends Hud<Mission>
+public class MissionHud extends ActionContextHud<Mission>
 {
     //add all relevant attributes here
     public MissionHud(Mission data)
     {
         super(data);
+        render(data);
     }
     
     
@@ -27,11 +29,6 @@ public class MissionHud extends Hud<Mission>
     @Override
     public void updateRender()
     {
-        //you can update the render here
-        //see Hud.java for available super methods. You can actually get the data from the super class with getData()
-        //for example:
-        //render(getData());
-        //dont call render in your updateRender() method
-        // as render is meant to only be called in the constructor
+        super.updateRender();
     }
 }
