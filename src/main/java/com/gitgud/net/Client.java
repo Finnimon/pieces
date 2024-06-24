@@ -1,7 +1,5 @@
 package com.gitgud.net;
 
-import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
 
@@ -14,13 +12,13 @@ public class Client extends Thread {
     private LinkedList<Serializable> messageQueue;
 
     private final String SERVER_ADRESS = "172.0.0.1";
-    private final static int REQUEST_TIMEOUT = 2500;                  //  msecs, (> 1000!)
-    private final static int REQUEST_RETRIES = 3;                     //  Before we abandon
 
+    private boolean currentlySending;
 
     public Client(ZMQ.Socket socket)
     {
         this.socket = socket;
+        currentlySending = false;
     }
 
     public void closeSocket()
@@ -30,16 +28,16 @@ public class Client extends Thread {
 
     public void addMessage(Serializable message)
     {
-        messageQueue.add(message);
+        this.messageQueue.add(message);
     }
 
     @Override
     public void run()
     {
+        currentlySending = true;
         ClientController.getInstance().initialize();
-        initComunikation(messageQueue);
-
-        while (true) // todo ?
+        initComunikation();
+        while (true)
         {
             if (messageQueue.isEmpty())
             {
@@ -47,7 +45,10 @@ public class Client extends Thread {
             } else
             {
                 sendData();
-
+            }
+            if(currentlySending)
+            {
+                break;
             }
         }
     }
@@ -55,22 +56,16 @@ public class Client extends Thread {
     private void sendData()
     {
         socket.send(messageQueue.removeFirst().toString());
-        try (ZContext context = new ZContext())
-        {
-            int sequence = 0;
-            int retriesLeft = REQUEST_RETRIES;
-            ZMQ.Poller poller = context.createPoller(1);
-            poller.register(socket, ZMQ.Poller.POLLIN);
-            while (retriesLeft > 0)
-            {
-                String data = messageQueue.removeFirst().toString().format("%d", ++sequence);
-                socket.send(data);
-            }
-        }
+
     }
 
-    private <T> void initComunikation(T message)
+    private void initComunikation()
     {
         socket.connect("tcp://" + SERVER_ADRESS + ":8332");
+    }
+    public void stopSending()
+    {
+        currentlySending = false;
+        closeSocket();
     }
 }
