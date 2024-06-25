@@ -1,7 +1,6 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.net.ClientController;
-import com.gitgud.net.ServerController;
+import com.gitgud.net.ServerClientController;
 import com.gitgud.pieces.control.Net.ArenaController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -35,7 +34,7 @@ import javafx.stage.Stage;
 
                     if (isServer.isSelected())
                     {
-                        stage.setScene(CreateServerLobby(stage));
+                        stage.setScene(CreateServerLobby(stage, serverTextField.getCharacters()));
                     } else
                     {
                         stage.setScene(CreateClientLobby(stage, serverTextField.getCharacters()));
@@ -49,14 +48,15 @@ import javafx.stage.Stage;
             return ArenaScene;
         }
 
-        private static Scene CreateServerLobby(Stage stage)
+        private static Scene CreateServerLobby(Stage stage, CharSequence serverAddress)
         {
+            String stringServerAddress = serverAddress.toString();
             Group root =new Group();
             Text text = new Text(SERVER_LOBY_INFO);
             root.getChildren().add(text);
-            ArenaController.InitialiseArenaAsServer();
+            ArenaController.InitialiseArenaAsServer(stringServerAddress);
 
-            if(ServerController.getInstance().getServer().isConnected())
+            if(ServerClientController.getInstance().getServer().isConnected())
             {
                 stage.setScene(STest.ceateSTest());
             }
@@ -75,7 +75,7 @@ import javafx.stage.Stage;
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsClient(stringServerAddress);
 
-            if(ClientController.getInstance().getClient().isConnected())
+            if(ServerClientController.getInstance().getClient().isConnected())
             {
                 stage.setScene(STest.ceateSTest());
             }

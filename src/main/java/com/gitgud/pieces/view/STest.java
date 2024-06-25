@@ -1,7 +1,6 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.net.ClientController;
-import com.gitgud.net.ServerController;
+import com.gitgud.net.ServerClientController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -11,8 +10,8 @@ public class STest {
     {
         Group root= new Group();
         Scene testScene= new Scene(root);
-        ClientController.getInstance().getClient().addMessage("fhfhfh");
-        Text text= new Text(ServerController.getInstance().getServer().getLatestUnprecedentedMessage().toString());
+        ServerClientController.getInstance().getClient().addMessage("fhfhfh");
+        Text text= new Text(ServerClientController.getInstance().getServer().getLatestUnprecedentedMessage().toString());
 
         root.getChildren().add(text);
         return testScene;
