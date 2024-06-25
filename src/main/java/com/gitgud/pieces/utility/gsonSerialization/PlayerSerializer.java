@@ -38,8 +38,7 @@ public class PlayerSerializer implements JsonSerializer<Player>, JsonDeserialize
         HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = new HashMap<>();
         ArrayList<FightAgentType> fightAgentTypes = new ArrayList<>();
 
-
-
+        return null;
     }
 
     @Override
