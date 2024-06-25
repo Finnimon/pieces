@@ -24,9 +24,9 @@ public class FightAgentDirector implements Director<FightAgent>
     }
     
     
-    public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int rank)
+    public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level)
     {
-        return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + rank;
+        return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + level;
     }
     
     public static Allegiance getAllegiance(int type)

@@ -3,6 +3,7 @@ package com.gitgud.engine.model.gameobjects;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
 
@@ -45,6 +46,12 @@ public interface Sprite
     static String urlFromFilePath(String filePath) throws MalformedURLException
     {
         return new File(filePath).toURI().toURL().toString();
+    }
+    
+    
+    public default Image getImage()
+    {
+        return new Image(getSpriteUrl());
     }
     
     

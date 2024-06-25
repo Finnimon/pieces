@@ -16,7 +16,7 @@ public class KnightBuilder extends FightAgentBuilder
     private static final String DESCRIPTION = "A knight is a person who is able to move," + Strings.LINE_BREAK + "ignoring obstacles and attack.";
     
     
-    private static final boolean IS_FLYING = true;
+    private static final boolean IS_FLYING = true; //
     
     
     private static final int MOVEMENT_RANGE = 7;

@@ -1,28 +1,61 @@
 package com.gitgud.pieces.view.render.fight;
 
+import com.gitgud.engine.model.gameobjects.Sprite;
+import com.gitgud.engine.view.GridMappableRender;
 import com.gitgud.engine.view.UpdatableRender;
 import com.gitgud.pieces.model.fight.Fight;
-import javafx.scene.layout.BorderPane;
+import com.gitgud.pieces.model.fight.FightTimeLine;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
+import java.util.TreeSet;
 
 
-public class FightTimeLineRender extends BorderPane implements UpdatableRender<Fight>
+public class FightTimeLineRender extends HBox implements UpdatableRender<FightTimeLine>
 {
-    private final Fight fight;
+    private final FightTimeLine fightTimeLine;
     
     
-    public FightTimeLineRender(Fight fight)
+    public FightTimeLineRender(FightTimeLine fightTimeLine)
     {
-        this.fight = fight;
+        this.fightTimeLine = fightTimeLine;
         
-        render(fight);
+        render(fightTimeLine);
     }
     
     
     @Override
-    public void render(Fight data)
+    public void render(FightTimeLine data)
     {
-    
+        TreeSet<FightAgent> current=data.current();
+        TreeSet<FightAgent> next=data.next();
+        int currentSize=current.size();
+        
+        ArrayList<FightAgent> fightAgents = new ArrayList<>();
+        fightAgents.addAll(current);
+        fightAgents.addAll(next);
+        
+        for(int i=0;i<fightAgents.size();i++)
+        {
+            FightAgent fightAgent = fightAgents.get(i);
+            GridMappableRender<FightAgent> render= new GridMappableRender<>(fightAgent);
+            if (i==currentSize)
+            {
+            
+            }
+            
+            
+            
+            this.getChildren().add(render);
+        }
     }
+    
+    private static Rectangle borderRectangle=new Rectangle();
     
     
     @Override
@@ -33,9 +66,9 @@ public class FightTimeLineRender extends BorderPane implements UpdatableRender<F
     
     
     @Override
-    public Fight getData()
+    public FightTimeLine getData()
     {
-        return null;
+        return fightTimeLine;
     }
     
 }

@@ -61,7 +61,19 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
             }
         };
     }
-    
+    public static <AAType extends ActionAwaitingController<MType, GType, RType>, MType extends ActionAwaiterModel<GType>, GType extends GridMappable, RType extends ActionContextRender<MType, GType>> ActionChoice<AAType, MType, GType, RType> returnToRoot(
+            String name, String description, AAType actionAwaiter)
+    {
+        return new ActionChoice<>(name, description, actionAwaiter, Action.rootReturn())
+        {
+            @Override
+            public void show(AAType actionAwaiter)
+            {
+                throw new UnsupportedOperationException(
+                        "This should never be called for ActionChoice.empty() Choice, \n\r as it is simply meant to do nothing but advance the awaiter."); //should never be called because the action is not null
+            }
+        };
+    }
     
     protected Action<ActionAwaiterType> getAction()
     {
