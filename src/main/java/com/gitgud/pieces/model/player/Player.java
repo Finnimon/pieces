@@ -1,6 +1,5 @@
 package com.gitgud.pieces.model.player;
 
-import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.pieces.model.fight.SpellBook;
 
 
@@ -13,6 +12,6 @@ import com.gitgud.pieces.model.fight.SpellBook;
  * @since 19.04.2022
  */
 public record Player(String name, Difficulty difficulty, Army army, Wallet wallet, ArtefactPouch artefactPouch,
-                     SpellBook spellbook) implements Named
+                     SpellBook spellBook)
 {
 }
