@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view.render;
+package com.gitgud.engine.view;
 
 import com.gitgud.engine.view.UpdatableRender;
 import javafx.scene.Group;

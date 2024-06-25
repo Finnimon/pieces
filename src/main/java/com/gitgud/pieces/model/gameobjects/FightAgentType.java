@@ -2,12 +2,17 @@ package com.gitgud.pieces.model.gameobjects;
 
 public enum FightAgentType
 {
-    PAWN("pawn", "src/main/resources/com/gitgud/gameObjectTypes/fightAgentTypes/pawn.json"), ROOK("rook",
-                                                                                                  "src/main/resources/com/gitgud/gameObjectTypes/fightAgentTypes/rook.json"), BISHOP(
-        "bishop", "src/main/resources/com/gitgud/gameObjectTypes/fightAgentTypes/bishop.json"), KNIGHT("knight",
-                                                                                                       "src/main/resources/com/gitgud/gameObjectTypes/fightAgentTypes/knight.json"), QUEEN(
-        "queen", "src/main/resources/com/gitgud/gameObjectTypes/fightAgentTypes/queen.json"), KING("king",
-                                                                                                   "src/main/resources/com/gitgud/gameObjectTypes/fightAgentTypes/king.json");
+    PAWN("pawn"), ROOK("rook"), BISHOP("bishop"), KNIGHT("knight"), QUEEN("queen");
+    //    , KING("king");
+    
+    
+    public static final String DOT_JSON = ".json";
+    
+    
+    public static final String DIRECTORY_FILEPATH = "src\\main\\resources\\com\\gitgud\\gameObjectTypes\\fightAgentTypes\\";
+    
+    
+    public static final int TYPE_MULTIPLIER = 100;
     
     
     private final String type;
@@ -16,22 +21,10 @@ public enum FightAgentType
     private final String assetUrl;
     
     
-    FightAgentType(String type, String assetUrl)
+    FightAgentType(String type)
     {
         this.type = type;
-        this.assetUrl = assetUrl;
-    }
-    
-    
-    public String getAsString()
-    {
-        return this.type;
-    }
-    
-    
-    public String getAssetUrl()
-    {
-        return this.assetUrl;
+        this.assetUrl = DIRECTORY_FILEPATH + type + DOT_JSON;
     }
     
     
@@ -45,5 +38,23 @@ public enum FightAgentType
             }
         }
         return null;
+    }
+    
+    
+    public int typeToInt()
+    {
+        return this.ordinal() * TYPE_MULTIPLIER;
+    }
+    
+    
+    public String getAsString()
+    {
+        return this.type;
+    }
+    
+    
+    public String getAssetUrl()
+    {
+        return this.assetUrl;
     }
 }

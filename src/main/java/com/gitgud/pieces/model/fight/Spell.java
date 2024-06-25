@@ -1,18 +1,22 @@
 package com.gitgud.pieces.model.fight;
 
 import com.gitgud.engine.model.gameobjects.Describable;
+import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.model.gameobjects.Sprite;
+import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
+import java.util.List;
+
 
 /**
  * A Spell to be used in {@link Fight} by either {@link Player} or {@link FightAgent} on a {@link FightAgent}
  */
-public final class Spell implements Sprite, Describable, Named
+public final class Spell implements Sprite, Describable, Named, Leveler
 {
     private final String name;
     
@@ -29,10 +33,13 @@ public final class Spell implements Sprite, Describable, Named
     private final FightAgentModifier modifier;
     
     
-    private final int manaCost;
-    
-    
     private final float successChance;
+    
+    
+    private int level;
+    
+    
+    private int manaCost;
     
     
     /**
@@ -45,7 +52,7 @@ public final class Spell implements Sprite, Describable, Named
      * @param successChance
      */
     public Spell(String name, String description, String spriteFilePath, SpellType type, FightAgentModifier modifier,
-                 int manaCost, float successChance)
+                 int level, int manaCost, float successChance)
     {
         this.name = name;
         this.description = description;
@@ -54,6 +61,42 @@ public final class Spell implements Sprite, Describable, Named
         this.modifier = modifier;
         this.manaCost = manaCost;
         this.successChance = successChance;
+        this.level = level;
+    }
+    
+    
+    @Override
+    public int getLevel()
+    {
+        return level;
+    }
+    
+    
+    @Override
+    public int levelUp()
+    {
+        manaCost = manaCost / level * (level++);
+        
+        List<Modifier<FightAgent>> modifiers = modifier.getModifiers();
+        if (level == 1)
+        {
+            modifiers.addAll(modifiers);
+            
+            return level;
+        }
+        addAllOriginalModifiers(modifiers);
+        
+        
+        return level;
+    }
+    
+    
+    private void addAllOriginalModifiers(List<Modifier<FightAgent>> modifiers)
+    {
+        for (int i = 0; i < modifiers.size() - level - 1; i++)
+        {
+            modifiers.add(modifiers.get(i));
+        }
     }
     
     

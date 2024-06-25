@@ -27,12 +27,6 @@ public class ActiveGameController
     
     public static ActiveGameController getInstance()
     {
-        if (instance == null)
-        {
-            throw new IllegalStateException();
-        }
-        
-        
         return instance;
     }
     
@@ -55,7 +49,7 @@ public class ActiveGameController
     }
     
     
-    public void initialize(ActiveGame activeGame)
+    public static void initialize(ActiveGame activeGame)
     {
         if (instance != null)
         {

@@ -1,12 +1,22 @@
 package com.gitgud.pieces.model.gameobjects.agents;
 
+import com.gitgud.engine.model.gameobjects.GridMappable;
+import com.gitgud.engine.model.gameobjects.GridMovable;
+import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Attack;
 import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.DamageType;
 import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Defence;
+import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 
 
 /**
@@ -17,7 +27,7 @@ import com.gitgud.pieces.model.gameobjects.FightAgentType;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-public class FightAgent extends Fighter implements Comparable<FightAgent>
+public class FightAgent extends Fighter implements Comparable<FightAgent>, Leveler
 {
     private final FightAgentType type;
     
@@ -25,10 +35,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     private final Faction faction;
     
     
+    private final Allegiance allegiance;
+    
+    
     private final boolean isRangedAttacker;
     
     
-    private final int rank;
+    private final int level;
     
     
     private int meleeDamage;
@@ -71,15 +84,16 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     
     
     public FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
-                      FightAgentType type, Faction faction, int rank, int meleeDamage, int rangedDamage,
-                      int rangedAttackRange, int remainingRangedAttacks, boolean isRangedAttacker, int physicalDefence,
-                      int magicDefence, float evadeChance, int maxHealth, int maxMana, int health, int mana,
-                      int initiative, float accuracy)
+                      FightAgentType type, Faction faction, Allegiance allegiance, int level, int meleeDamage,
+                      int rangedDamage, int rangedAttackRange, int remainingRangedAttacks, boolean isRangedAttacker,
+                      int physicalDefence, int magicDefence, float evadeChance, int maxHealth, int maxMana, int health,
+                      int mana, int initiative, float accuracy)
     {
         super(name, description, spriteUrl, isFlying, movementRange);
         this.type = type;
         this.faction = faction;
-        this.rank = rank;
+        this.allegiance = allegiance;
+        this.level = level;
         this.meleeDamage = meleeDamage;
         this.rangedDamage = rangedDamage;
         this.rangedAttackRange = rangedAttackRange;
@@ -94,12 +108,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
         this.mana = mana;
         this.initiative = initiative;
         this.accuracy = accuracy;
-    }
-    
-    
-    public static FightAgent create(FightAgentType type, Faction faction, int rank)
-    {
-        return null;
     }
     
     
@@ -268,7 +276,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     @Override
     public Defence getDefenceTo(DamageType damageType)
     {
-        int defenceValue = damageType != DamageType.MAGIC ? getPhysicalDefence() : getMagicDefence();
+        int defenceValue = (damageType == DamageType.PHYSICAL) ? getPhysicalDefence() : getMagicDefence();
         
         
         return new Defence(defenceValue, getEvadeChance(), damageType);
@@ -278,22 +286,48 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     @Override
     public Attack createAttack(float distance) throws IllegalArgumentException
     {
-        boolean isMelee = Float.isNaN(distance);
+        boolean isMelee = Float.isNaN(distance) || distance <= Math.sqrt(2) + 0.01;
         
         if (!isMelee && !canAttackRangedAtDistance(distance))
         {
             throw new IllegalArgumentException("Cannot attack at distance " + distance);
         }
         
+        System.out.println("ismelee: " + isMelee);
+        int attackValue = isMelee ? getMeleeDamage() : calculateRangedAttackDamage(distance);
         if (!isMelee)
         {
             remainingRangedAttacks--;
         }
-        
-        int attackValue = isMelee ? getMeleeDamage() : calculateRangedAttackDamage(distance);
-        
+        System.out.println("\n-------------------------\n" + this + " attacking with " + attackValue +" "+getMeleeDamage()+ " damage. " + remainingRangedAttacks + " remaining ranged attacks\n-------------------------\n");
         
         return new Attack(attackValue, getAccuracy(), DamageType.PHYSICAL);
+    }
+    
+    
+    public boolean canAttackAtDistance(float distance)
+    {
+        float floatingPointNumberComparisonAdjuster = 0.01f;
+        distance -= floatingPointNumberComparisonAdjuster;
+        
+        boolean attackIsMelee = distance <= Math.sqrt(2) || Float.isNaN(distance);
+        
+        if (attackIsMelee)
+        {
+            return true;
+        }
+        
+        boolean isRangedAttacker = this.isRangedAttacker;
+        
+        boolean attackIsInRangerange = isRangedAttacker && canAttackRangedAtDistance(distance);
+        
+        if (attackIsInRangerange)
+        {
+            return true;
+        }
+        
+        return false;
+        
     }
     
     
@@ -305,7 +339,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     
     private boolean canAttackRangedAtDistance(float distance)
     {
-        return getRemainingRangedAttacks() > 0 && getRangedAttackRange() >= Math.round(distance);
+        return getRemainingRangedAttacks() > 0 && getRangedAttackRange() >= distance - 0.01f;
     }
     
     
@@ -321,9 +355,16 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     }
     
     
-    public int getRank()
+    public int getLevel()
     {
-        return rank;
+        return level;
+    }
+    
+    
+    @Override
+    public int levelUp()
+    {
+        return 0;//todo
     }
     
     
@@ -344,7 +385,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
         }
         
         
-        comparison = this.getRank() - o.getRank();
+        comparison = this.getLevel() - o.getLevel();
         
         if (comparison != 0)
         {
@@ -356,4 +397,59 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     }
     
     
+    public Allegiance getAllegiance()
+    {
+        return allegiance;
+    }
+    
+    
+    @Override
+    public Collection<Tile> findAttackableTiles(GridMap gridMap, Tile position)
+    {
+        HashSet<Tile> attackableTiles = new HashSet<Tile>(gridMap.getNeighbors(position));
+        
+        boolean canAttackRanged = isRangedAttacker && remainingRangedAttacks > 0;
+        if (!canAttackRanged)
+        {
+            return filterAttackableTiles(gridMap, attackableTiles);
+        }
+        attackableTiles.addAll(GridMovable.getInAbsoluteRangeTiles(gridMap, position, getRangedAttackRange()));
+        
+        return filterAttackableTiles(gridMap, attackableTiles);
+    }
+    
+    
+    private Collection<Tile> filterAttackableTiles(GridMap<GridMappable> gridMap, Collection<Tile> attackableTiles)
+    {
+        Iterator<Tile> iterator = attackableTiles.iterator();
+        iterator.forEachRemaining(tile ->
+                                  {
+                                      if (tile == null)
+                                      {
+                                          iterator.remove();
+                                          return;
+                                      }
+                                      
+                                      GridMappable gridMappable = gridMap.get(tile);
+                                      
+                                      if (gridMappable == null)
+                                      {
+                                          iterator.remove();
+                                          return;
+                                      }
+                                      
+                                      if (!(gridMappable instanceof FightAgent))
+                                      {
+                                          iterator.remove();
+                                          return;
+                                      }
+                                      
+                                      FightAgent other = (FightAgent) gridMappable;
+                                      if (other.getAllegiance() == allegiance)
+                                      {
+                                          iterator.remove();
+                                      }
+                                  });
+        return attackableTiles;
+    }
 }

@@ -39,7 +39,6 @@ public record Defence(int defence, float evasionChance, DamageType damageType)
             return 0;
         }
         
-        
-        return attack.damage() - defence();
+        return attack.damage() / defence();
     }
 }

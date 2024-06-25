@@ -1,66 +1,18 @@
 package com.gitgud.pieces.view.render.fight;
 
-import com.gitgud.engine.view.GridMapRender;
-import com.gitgud.engine.view.HudRender;
+import com.gitgud.engine.view.*;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import com.gitgud.pieces.view.render.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 
-public class FightRender extends Group implements HudRender<Fight>
+public class FightRender extends BaseActionContextRender<Fight, FightAgent,FightHud>
 {
-    private final static int TILE_SIZE = 200;
-    
-    
-    private final Fight fight;
-    
-    
-    private final GridMapRender<FightAgent> gridMapRender;
-    
-    
-    private final FightHud fightHud;
-    
-    
-    public FightRender(Fight fight)
+    public FightRender(Fight data)
     {
-        this.fight = fight;
-        this.gridMapRender = new GridMapRender<>(fight.getGridMap(), TILE_SIZE);
-        this.fightHud = new FightHud(fight);
-        
-        render(fight);
-    }
-    
-    
-    @Override
-    public void updateRender()
-    {
-        fightHud.updateRender();
-    }
-    
-    
-    @Override
-    public void render(Fight data)
-    {
-        ObservableList<Node> children = getChildren();
-        
-        children.add(gridMapRender);
-        children.add(fightHud);
-    }
-    
-    
-    @Override
-    public Fight getData()
-    {
-        return fight;
-    }
-    
-    
-    @Override
-    public Hud<Fight> getHud()
-    {
-        return this.fightHud;
+        super(data, new FightHud(data));
     }
 }

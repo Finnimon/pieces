@@ -1,5 +1,6 @@
 package com.gitgud.pieces.testing;
 
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
@@ -9,18 +10,18 @@ import com.gitgud.pieces.model.mission.Mission;
 
 public interface Missions
 {
-    Mission FIRST = create(getTestMap(20, 12));
+    Mission FIRST = create(getTestMap(12, 12));
     
     
-    private static GridMap<Interactable> getTestMap(int width, int height)
+    public static <GOType extends GameObject> GridMap<GOType> getTestMap(int width, int height)
     {
         return GridMap.create(TestStuff.booleanArray(width, height));
     }
     
     
-    private static Mission create(GridMap<Interactable> gridMap)
+    private static Mission create(GridMap<GameObject> gridMap)
     {
-        Tile startingPosition = gridMap.getVertex(0);
+        Tile startingPosition = gridMap.verticeSet().stream().filter(tile -> tile.getTerrain().isTraversable()).findFirst().get();
         return new Mission(gridMap, startingPosition, new FightAgent[0]);
     }
 }

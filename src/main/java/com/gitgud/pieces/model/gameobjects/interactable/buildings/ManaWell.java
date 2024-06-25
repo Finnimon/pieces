@@ -19,7 +19,7 @@ public class ManaWell extends GridMappableBuilding
     
     
     //todo
-    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/manawell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/ManaWell.png";
     
     
     public ManaWell()

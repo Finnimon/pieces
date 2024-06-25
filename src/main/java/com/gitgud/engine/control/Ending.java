@@ -1,6 +1,6 @@
 package com.gitgud.engine.control;
 
-public interface Ending
+public interface Ending extends Advancing
 {
     /**
      * If isFinished returns true, then {@link #end()} will be called.

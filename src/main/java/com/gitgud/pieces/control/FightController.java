@@ -1,17 +1,20 @@
 package com.gitgud.pieces.control;
 
 
-import com.gitgud.engine.control.ActionAwaiterController;
-import com.gitgud.engine.control.ActionChoice;
+import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.control.actionChoice.*;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 //todo render as scene
-public class FightController extends ActionAwaiterController<Fight, FightAgent>
+public class FightController extends ActionAwaitingController<Fight, FightAgent,FightRender>
 {
     
     
@@ -22,19 +25,59 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent>
     
     
     @Override
-    public Tile getActivePosition()
+    public void advance()
     {
-        Fight fight = this.getModel();
-        return fight.getGridMap().getVertex(fight.getFightTimeLine().getActiveFightAgent());
+        getModel().getFightTimeLine().advance();
+        super.advance();
     }
     
     
     @Override
-    public ActionChoice<FightController, Fight, FightAgent> getActionChoice()
+    public Tile getActivePosition()
+    {
+        Fight fight = this.getModel();
+        FightAgent activeFightAgent = fight.getFightTimeLine().getActiveFightAgent();
+        return fight.getGridMap().getVertex(activeFightAgent);
+    }
+    
+    
+    @Override
+    public ActionChoice<FightController, Fight, FightAgent, FightRender> getActionChoice()
+    {
+        List<ActionChoice<FightController, Fight, FightAgent, FightRender>> choices = new ArrayList<>();
+        
+        choices.add(getMovementChoiceRoot());
+        choices.add(getAttackRootChoice());
+//        choices.add(getSpellRootChoice());
+        choices.add(getSkipTurnChoice());
+        
+        return new RootActionChoice<>("root", "root", choices, this);//todo
+    }
+    
+    public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getMovementChoiceRoot()
+    {
+        Tile position=getActivePosition();
+        
+        FightAgent activeFightAgent = getModel().getFightTimeLine().getActiveFightAgent();
+        
+        
+        return new MovementRootChoice<>(this,activeFightAgent, position);
+    }
+    
+    public AttackRootChoice<FightController, Fight, FightAgent, FightRender> getAttackRootChoice()
+    {
+        Tile position=getActivePosition();
+        
+        FightAgent activeFightAgent = getModel().getFightTimeLine().getActiveFightAgent();
+        
+        
+        return new AttackRootChoice<>(this,activeFightAgent);//todo
+    }
+    
+    public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getSpellRootChoice()
     {
         return null;//todo
     }
-    
     
     @Override
     public void end()
@@ -52,4 +95,6 @@ public class FightController extends ActionAwaiterController<Fight, FightAgent>
     {
         return getModel().isFinished();
     }
+    
+    
 }
