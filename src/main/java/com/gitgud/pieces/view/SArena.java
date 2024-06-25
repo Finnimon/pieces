@@ -1,7 +1,6 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.net.ClientController;
-import com.gitgud.net.ServerController;
+import com.gitgud.net.ServerClientController;
 import com.gitgud.pieces.control.Net.ArenaController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -56,7 +55,7 @@ import javafx.stage.Stage;
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsServer();
 
-            if(ServerController.getInstance().getServer().isConnected())
+            if(ServerClientController.getInstance().getServer().isConnected())
             {
                 stage.setScene(STest.ceateSTest());
             }
@@ -75,7 +74,7 @@ import javafx.stage.Stage;
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsClient(stringServerAddress);
 
-            if(ClientController.getInstance().getClient().isConnected())
+            if(ServerClientController.getInstance().getClient().isConnected())
             {
                 stage.setScene(STest.ceateSTest());
             }

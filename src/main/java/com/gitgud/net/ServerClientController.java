@@ -8,9 +8,7 @@ public class ServerClientController {
     private final Server server;
     private final Client client;
     private static ServerClientController instance = null;
-    private static final ZContext context = new ZContext();//todo should not work. Only one ZContext is allowed.
-    // Is it possible to use just one Controller Singleton Class for Server and Client?
-    // Then there would also just be one of the two?
+    private static final ZContext context = new ZContext();
 
     public ServerClientController(Server server, Client client)
     {
