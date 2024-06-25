@@ -8,8 +8,12 @@ import java.util.LinkedList;
 public class Server extends Thread{
 
     public static final int TIME_TO_WAIT_WHILE_RECEVING_MESSAGE = 50;
+    public static final String TCP_8332 = "tcp://*:8332";
     private LinkedList<Serializable> messageQueue;
     private final ZMQ.Socket socket;
+    private boolean currentlyReceiving;
+
+    private boolean isConnected = false;
 
     public Server(ZMQ.Socket socket)
     {
@@ -24,15 +28,19 @@ public class Server extends Thread{
     @Override
     public void run()
     {
+        currentlyReceiving = true;
         ServerController.getInstance().initialize();
-        socket.bind("tcp://*:8332");
-        try
+        socket.bind(TCP_8332);
+        while(currentlyReceiving)
         {
-            waitForRequest();
+            try
+            {
+                waitForRequest();
 
-        } catch (InterruptedException e)
-        {
-            throw new RuntimeException(e);
+            } catch (InterruptedException e)
+            {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -46,15 +54,27 @@ public class Server extends Thread{
             Thread.sleep(TIME_TO_WAIT_WHILE_RECEVING_MESSAGE);
         } while (recMessage == null);
         messageQueue.add(recMessage);
-
+        checkStatus();
     }
 
-    public LinkedList<Serializable> getMessageQueue()
+    private void checkStatus()
     {
-        return messageQueue;
+        isConnected = true;
     }
+
     public Serializable getLatestUnprecedentedMessage()
     {
         return messageQueue.remove();
+    }
+    public void stopReceiving()
+    {
+        isConnected = false;
+        currentlyReceiving = false;
+        closeSocket();
+    }
+
+    public boolean isConnected()
+    {
+        return isConnected;
     }
 }

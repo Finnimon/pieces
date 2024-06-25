@@ -14,6 +14,8 @@ public class Client extends Thread {
 
     private boolean currentlySending;
 
+    private boolean isConnected = false;
+
     public Client(ZMQ.Socket socket)
     {
         this.socket = socket;
@@ -61,9 +63,11 @@ public class Client extends Thread {
     private void initComunikation()
     {
         socket.connect("tcp://" + serverAddress + ":8332");
+        isConnected = true;
     }
     public void stopSending()
     {
+        isConnected = false;
         currentlySending = false;
         closeSocket();
     }
@@ -71,5 +75,14 @@ public class Client extends Thread {
     public void setServerAddress(String serverAddress)
     {
         this.serverAddress = serverAddress;
+    }
+    public boolean isConnected()
+    {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected)
+    {
+        isConnected = connected;
     }
 }
