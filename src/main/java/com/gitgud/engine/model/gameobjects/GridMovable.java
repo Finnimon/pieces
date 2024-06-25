@@ -6,10 +6,7 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 
 /**
@@ -23,6 +20,16 @@ import java.util.TreeSet;
  */
 public interface GridMovable extends GridMappable
 {
+    static ArrayList<Tile> getInAbsoluteRangeTiles(GridMap<?> gridMap, Tile position, int range)
+    {
+        List<Tile> tiles = gridMap.verticeSet().stream().filter(
+                otherVertex -> position.distance(otherVertex) <= range).toList();
+        
+        return new ArrayList<>(tiles.stream().filter(tile -> tile.getTerrain().isTraversable()).filter(
+                x -> !x.equals(position)).toList());
+    }
+    
+    
     int getMovementRange();
     
     
@@ -31,69 +38,65 @@ public interface GridMovable extends GridMappable
     
     default boolean canMoveTo(GridMap<?> gridMap, Tile position, Tile target)
     {
-        return findPosibleMovementTargets(gridMap, position).contains(target);
+        return findPossibleMovementTargets(gridMap, position).contains(target);
     }
     
     
-    default Collection<Tile> findPosibleMovementTargets(GridMap<?> gridMap, Tile position)
+    default ArrayList<Tile> findPossibleMovementTargets(GridMap<?> gridMap, Tile position)
     {
-        Collection<Tile> result;
+        ArrayList<Tile> result;
         if (isFlying())
         {
-            result = getInAbsoluteRangeTiles(gridMap, position);
+            result = getInAbsoluteRangeTiles(gridMap, position, getMovementRange());
         }
         else
         {
             result = getInNonFlyingRangeTiles(gridMap, position);
         }
         
+        filterMovementTargetResult(result, position, gridMap);
         
         return result;
     }
     
     
-    private void filterMovementTargetResult(Collection<Tile> result, Tile position, GridMap<?> gridMap)
+    private void filterMovementTargetResult(ArrayList<Tile> result, Tile position, GridMap<?> gridMap)
     {
-        HashSet<Tile> inValids = new HashSet<>();
-        inValids.add(position);
+        ArrayList<Tile> inValidTiles = new ArrayList<>();
+        Iterator<Tile> iterator = result.iterator();
         
-        for (Tile tile : result)
-        {
-            if (tile.getTerrain().isTraversable())
-            {
-                inValids.add(tile);
-                continue;
-            }
-            
-            if (gridMap.get(tile) == null || gridMap.get(tile) instanceof Interactable)
-            {
-                continue;
-            }
-            
-            inValids.add(tile);
-        }
-        
-        result.removeAll(inValids);
+        iterator.forEachRemaining(tile ->
+                                  {
+                                      if (tile == null)
+                                      {
+                                          inValidTiles.add(tile);
+                                          return;
+                                      }
+                                      
+                                      if (!tile.getTerrain().isTraversable())
+                                      {
+                                          inValidTiles.add(tile);
+                                          return;
+                                      }
+                                      
+                                      Object object = gridMap.get(tile);
+                                      if (object != null && !(object instanceof Interactable))
+                                      {
+                                          inValidTiles.add(tile);
+                                          return;
+                                      }
+                                  });
+        result.removeAll(inValidTiles);
     }
     
     
-    private Collection<Tile> getInNonFlyingRangeTiles(GridMap<?> gridMap, Tile position)
+    private ArrayList<Tile> getInNonFlyingRangeTiles(GridMap<?> gridMap, Tile position)
     {
         Graph<Tile, ?, WeightedEdge<Tile>> graph = gridMap.subGraph(position, getMovementRange());
         TreeSet<Tile> tiles = graph.verticeSet();
         tiles.remove(position);
         
-        return tiles;
-    }
-    
-    
-    private Collection<Tile> getInAbsoluteRangeTiles(GridMap<?> gridMap, Tile position)
-    {
-        List<Tile> tiles = gridMap.verticeSet().stream().filter(
-                otherVertex -> position.distance(otherVertex) <= getMovementRange()).toList();
-        
-        return tiles.stream().filter(tile -> tile.getTerrain().isTraversable()).filter(
-                x -> !x.equals(position)).toList();
+        return new ArrayList<>(tiles);
     }
     
 }

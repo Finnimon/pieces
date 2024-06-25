@@ -1,10 +1,13 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.*;
+import com.gitgud.engine.control.actionChoice.ActionChoice;
+import com.gitgud.engine.control.actionChoice.MovementRootChoice;
+import com.gitgud.engine.control.actionChoice.RootActionChoice;
+import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.engine.utility.Strings;
 import com.gitgud.pieces.model.gameobjects.interactable.FightTrigger;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.MissionEnder;
 import com.gitgud.pieces.model.mission.Mission;
@@ -42,15 +45,16 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     {
         RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice = new MovementRootChoice<>(
                 this, getModel().getPlayerAgent(), getModel().getPlayerAgentPosition());
-        ActionChoice<MissionController, Mission, GameObject, MissionRender> empty = ActionChoice.empty("Skip"+ Strings.LINE_BREAK +"Turn",
-                                                                                                       "Skip this turn.",
-                                                                                                       this);
+        ActionChoice<MissionController, Mission, GameObject, MissionRender> skipTurnChoice = getSkipTurnChoice();
         
         List<ActionChoice<MissionController, Mission, GameObject, MissionRender>> choices = List.of(rootToActionChoice,
-                                                                                                    empty);
+                                                                                                    skipTurnChoice);
         
         return new RootActionChoice<>("root", "root", choices, this);
     }
+    
+    
+    
     
     
     @Override

@@ -1,5 +1,6 @@
-package com.gitgud.engine.control;
+package com.gitgud.engine.control.actionChoice;
 
+import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.action.Action;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.Describable;
@@ -94,7 +95,7 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
     }
     
     
-    public Node getNode()
+    public ActionChoiceRender getNode()
     {
         return new ActionChoiceRender(this);
     }

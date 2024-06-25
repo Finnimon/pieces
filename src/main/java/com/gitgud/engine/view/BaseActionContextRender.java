@@ -4,12 +4,13 @@ import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
+import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 
-public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, HudType extends ActionContextHud<MType>> extends AnchorPane implements ActionContextRender<MType, GMType>
+public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, HudType extends ActionContextHud<MType>> extends StackPane implements ActionContextRender<MType, GMType>
 {
     
     public static final double MINIMUM_GRID_MAP_SCROLL_PANE_SIDE_ANCHOR = 200d;
@@ -33,15 +34,14 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
     private final GridMapRender<GMType> gridMapRender;
     
     
-    public BaseActionContextRender(MType data, int tileSize, double gridMapRenderSideAnchor,
-                                   double gridMapRenderBottomAnchor, HudType hud)
+    public BaseActionContextRender(MType data, int tileSize, HudType hud)
     {
         this.data = data;
         this.hud = hud;
         this.gridMapRender = new GridMapRender<>(data.getGridMap(), tileSize);
         gridMapRenderScrollPane = new ScrollPane();
         
-        addGridMapRender(gridMapRenderSideAnchor, gridMapRenderBottomAnchor);
+        addGridMapRender();
         
         
         render(data);
@@ -50,47 +50,35 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
     
     public BaseActionContextRender(MType data, HudType hud)
     {
-        this(data, determineOptimumTileSize(data.getGridMap(), DEFAULT_GRID_MAP_SCROLL_PANE_BOTTOM_ANCHOR,
-                                            MINIMUM_GRID_MAP_SCROLL_PANE_SIDE_ANCHOR),
-             MINIMUM_GRID_MAP_SCROLL_PANE_SIDE_ANCHOR, DEFAULT_GRID_MAP_SCROLL_PANE_BOTTOM_ANCHOR, hud);
+        this(data, determineOptimumTileSize(data.getGridMap()), hud);
     }
     
     
-    private static int determineOptimumTileSize(GridMap<?> gridMap, double minBottomAnchor, double minSideAnchor)
+    private static int determineOptimumTileSize(GridMap<?> gridMap)
     {
         int width = gridMap.getWidth();
         int height = gridMap.getHeight();
         
-        if (width == height&&height<20)
+        if (width == height && height < 20)
         {
-            return  1000 / width;
+            return 1000 / height;
         }
         
         return TILE_SIZE_DEFAULT_VALUE;
     }
     
     
-    private void addGridMapRender(double gridMapRenderSideAnchor, double gridMapRenderBottomAnchor)
+    private void addGridMapRender()
     {
         gridMapRenderScrollPane.setContent(gridMapRender);
         
         gridMapRenderScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         gridMapRenderScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        gridMapRenderScrollPane.setMaxWidth(1000);
+        gridMapRenderScrollPane.setMaxHeight(1000);
+        setAlignment(gridMapRenderScrollPane, Pos.TOP_CENTER);
         
-        setLeftAnchor(gridMapRenderScrollPane, gridMapRenderSideAnchor);
-        //        setRightAnchor(gridMapRenderScrollPane, gridMapRenderSideAnchor);
-        
-        setBottomAnchor(gridMapRenderScrollPane, gridMapRenderBottomAnchor);
-        ;
         getChildren().add(gridMapRenderScrollPane);
-    }
-    
-    
-    private void setDimensions(int width, int height)
-    {
-        setMinSize(width, height);
-        setPrefSize(width, height);
-        setMaxSize(width, height);
     }
     
     
@@ -111,12 +99,17 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
     @Override
     public void render(MType data)
     {
+        getChildren().add(hud);
+        setAlignment(hud,Pos.TOP_LEFT);
         Stage stage = StageController.getInstance().getStage();
+        
         stage.getScene().setRoot(this);
+        
         if (stage.isFullScreen())
         {
             return;
         }
+        
         stage.setFullScreen(true);
     }
     

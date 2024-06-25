@@ -534,6 +534,7 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     private void applyDamageScalar(float damageModifier)
     {
         meleeDamage = Math.round(meleeDamage * damageModifier);
+        System.out.println("meleeDamage: " + meleeDamage);
         rangedDamage = Math.round(rangedDamage * damageModifier);
         
         accuracy = accuracy * damageModifier;
@@ -549,12 +550,13 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     
     protected void adjustValuesByLevel()
     {
-        float level = this.level;
-        float scalar = level;
-        level--;
-        scalar /= level;
+        float scalar=level;
+        
+        
+        
         scaleValues(scalar);
         levelUpSpellsIfNeeded();
+        System.out.println("damage: " + meleeDamage);
     }
     
     
@@ -569,8 +571,8 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
         meleeDamage = Math.round(meleeDamage * scalar);
         rangedDamage = Math.round(rangedDamage * scalar);
         
-        physicalDefence = Math.round(physicalDefence * scalar);
-        magicDefence = Math.round(magicDefence * scalar);
+        physicalDefence = Math.round(physicalDefence );
+        magicDefence = Math.round(magicDefence);
         
         initiative = Math.round(initiative * scalar);
     }

@@ -25,7 +25,7 @@ public class KnightBuilder extends FightAgentBuilder
     private static final FightAgentType TYPE = FightAgentType.KNIGHT;
     
     
-    private static final int MELEE_DAMAGE = 10;
+    private static final int MELEE_DAMAGE = 20;
     
     
     private static final int RANGED_DAMAGE = 0;
@@ -40,7 +40,7 @@ public class KnightBuilder extends FightAgentBuilder
     private static final boolean IS_RANGED_ATTACKER = false;
     
     
-    private static final int PHYSICAL_DEFENCE = 5;
+    private static final int PHYSICAL_DEFENCE = 1;
     
     
     private static final int MAGIC_DEFENCE = 0;
@@ -74,7 +74,9 @@ public class KnightBuilder extends FightAgentBuilder
         Allegiance allegiance = FightAgentDirector.getAllegiance(type);
         Faction faction = FightAgentDirector.getFaction(type);
         int level=FightAgentDirector.getLevel(type);
+        int testType= FightAgentDirector.calculateType(allegiance, fightAgentType, faction, level);
         
+        assert testType == type : "Type mismatch. " + type + " != " + testType;
         
         String name =Named.formatString(faction.name()) + NAME_SUFFIX;
         setName(name);

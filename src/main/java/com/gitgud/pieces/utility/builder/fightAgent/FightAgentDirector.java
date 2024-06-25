@@ -47,6 +47,7 @@ public class FightAgentDirector implements Director<FightAgent>
     
     public static Faction getFaction(int type)
     {
+        type -= getAllegiance(type).typeToInt();
         type -= getFightAgentType(type).typeToInt();
         type /= Faction.TYPE_MULTIPLIER;
         
@@ -56,6 +57,7 @@ public class FightAgentDirector implements Director<FightAgent>
     
     public static int getLevel(int type)
     {
+        type -= getAllegiance(type).typeToInt();
         type -= getFightAgentType(type).typeToInt();
         type -= getFaction(type).typeToInt();
         

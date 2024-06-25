@@ -1,8 +1,10 @@
 package com.gitgud.engine.control;
 
+import com.gitgud.engine.control.actionChoice.ActionChoice;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.engine.utility.Strings;
 import com.gitgud.engine.view.ActionContextRender;
 import javafx.scene.paint.Color;
 
@@ -14,13 +16,14 @@ public abstract class ActionAwaitingController
     public ActionAwaitingController(ModelType model, RenderType render)
     {
         super(model, render);
+        start();
     }
     
     
     public abstract Tile getActivePosition();
     
     
-    public abstract <AAType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>> ActionChoice<AAType, ModelType, GridMappableType,RenderType>getActionChoice();
+    public abstract <AAType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>> ActionChoice<AAType, ModelType, GridMappableType,RenderType> getActionChoice();
     
     
     protected void hightlightActivePosition()
@@ -28,7 +31,7 @@ public abstract class ActionAwaitingController
         System.out.println("TODO: Hightlighting in com\\gitgud\\engine\\control\\ActionAwaitingController#hightlightActivePosition()");
         
         //todo fix currently not working as it blocks the InfoPane event for the active Agent underneath the highlight
-//        getRender().getGridMapRender().addHighLight(getActivePosition(), Color.BLUE).toBack();
+        getRender().getGridMapRender().addHighLight(getActivePosition()).toBack();
     }
     
     
@@ -50,5 +53,10 @@ public abstract class ActionAwaitingController
         getActionChoice().show(this);
         
          hightlightActivePosition();
+    }
+    
+    protected <AAType extends ActionAwaitingController<ModelType, GridMappableType,RenderType>>ActionChoice<AAType, ModelType, GridMappableType, RenderType> getSkipTurnChoice()
+    {
+        return (ActionChoice<AAType, ModelType, GridMappableType, RenderType>) ActionChoice.empty("Skip" + Strings.LINE_BREAK + "Turn", "Skip this turn.", this);
     }
 }

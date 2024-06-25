@@ -1,6 +1,9 @@
 package com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic;
 
 
+import com.gitgud.engine.model.action.types.Applicable;
+import com.gitgud.engine.model.gameobjects.agent.Fighter;
+
 import static com.gitgud.pieces.utility.Core.roll;
 
 
@@ -16,7 +19,7 @@ import static com.gitgud.pieces.utility.Core.roll;
  * @see Defender#defend(Attack)
  * @since 16.04.2024
  */
-public record Attack(int damage, float accuracy, DamageType damageType)
+public record Attack(int damage, float accuracy, DamageType damageType) implements Applicable<Fighter>
 {
     /**
      * Determines if the Attack hits. Has a Chance of {@link #accuracy}.
@@ -30,5 +33,20 @@ public record Attack(int damage, float accuracy, DamageType damageType)
     public boolean doesHit()
     {
         return roll(accuracy);
+    }
+    
+    
+    @Override
+    public Fighter apply(Fighter fighter)
+    {
+        if (!doesHit())
+        {
+            return fighter;
+        }
+        
+        fighter.defend(this);
+        
+        
+        return fighter;
     }
 }

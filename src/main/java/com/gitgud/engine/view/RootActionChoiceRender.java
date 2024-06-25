@@ -1,7 +1,7 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.engine.control.ActionChoice;
-import com.gitgud.engine.control.RootActionChoice;
+import com.gitgud.engine.control.actionChoice.ActionChoice;
+import com.gitgud.engine.control.actionChoice.RootActionChoice;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -24,17 +24,27 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
         this.getChildren().add(anchorPane);
         
         
-        double spacer=0d;
+        double topAnchor=0d;
         ObservableList<Node> children = anchorPane.getChildren();
         
         for (ActionChoice<?,?,?,?> actionChoice : data.getChoices())
         {
-            Node render= actionChoice.getNode();
-            children.add(render);
-            
-            AnchorPane.setTopAnchor(render, spacer);
-            
-            spacer+=ActionChoiceRender.SIZE*2;
+            //topAnchor size is updated with each actionChoice
+            topAnchor = renderActionChoice(actionChoice, children, topAnchor);
         }
+    }
+    
+    
+    private static double renderActionChoice(ActionChoice<?, ?, ?, ?> actionChoice, ObservableList<Node> children, double spacer)
+    {
+        ActionChoiceRender render= actionChoice.getNode();
+        children.add(render);
+        
+        AnchorPane.setTopAnchor(render, spacer);
+        
+        spacer +=ActionChoiceRender.SIZE*2;
+        
+        
+        return spacer;
     }
 }

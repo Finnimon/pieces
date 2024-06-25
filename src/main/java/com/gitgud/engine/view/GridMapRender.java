@@ -160,6 +160,11 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
         return addHighLight(tile, color, null);
     }
     
+    public Rectangle addHighLight(Tile tile)
+    {
+        return addHighLight(tile, Color.BLUE);
+    }
+    
     
     public void removeHighLight(Tile tile)
     {

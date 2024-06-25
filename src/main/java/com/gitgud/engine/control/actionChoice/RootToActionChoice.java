@@ -1,5 +1,6 @@
-package com.gitgud.engine.control;
+package com.gitgud.engine.control.actionChoice;
 
+import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.view.ActionContextRender;
@@ -7,7 +8,7 @@ import com.gitgud.engine.view.ActionContextRender;
 import java.util.List;
 
 
-public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,RenderType extends ActionContextRender<ModelType,GridMappableType>> extends ActionChoice<ActionAwaitingType, ModelType, GridMappableType,RenderType>
+public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,RenderType extends ActionContextRender<ModelType,GridMappableType>> extends ActionChoice<ActionAwaitingType, ModelType, GridMappableType,RenderType> implements RootChoice
 {
     private final List<ToActionChoice<ActionAwaitingType,ModelType,GridMappableType,RenderType>> toActionChoices;
     
@@ -26,5 +27,10 @@ public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingControl
         {
             actionChoice.show(actionAwaiter);
         }
+    }
+    
+    public boolean isEmpty()
+    {
+        return toActionChoices.isEmpty();
     }
 }

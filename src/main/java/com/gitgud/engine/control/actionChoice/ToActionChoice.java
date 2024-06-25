@@ -1,5 +1,6 @@
-package com.gitgud.engine.control;
+package com.gitgud.engine.control.actionChoice;
 
+import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.action.*;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
@@ -8,7 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 
 
-public final class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>,ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType,GridMappableType>> extends ActionChoice<AwaitingType, ModelType, GridMappableType, RenderType>
+public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>,ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType,GridMappableType>> extends ActionChoice<AwaitingType, ModelType, GridMappableType, RenderType>
 {
     public ToActionChoice(String name, String description,AwaitingType awaiter,  ToAction<AwaitingType, Tile> action)
     {
@@ -31,7 +32,7 @@ public final class ToActionChoice<AwaitingType extends ActionAwaitingController<
         Color color = determineHighlightColor(action);
         RenderType render = actionAwaiter.getRender();
         Node node= render.getGridMapRender().addHighLight(action.getTo(), color, getMouseEventHandler());
-        render.getHud().registerChoice( node);
+        render.getHud().registerChoice(node);
         
     }
     

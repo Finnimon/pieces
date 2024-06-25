@@ -10,10 +10,10 @@ import com.gitgud.pieces.model.mission.Mission;
 
 public interface Missions
 {
-    Mission FIRST = create(getTestMap(20, 12));
+    Mission FIRST = create(getTestMap(12, 12));
     
     
-    private static GridMap<GameObject> getTestMap(int width, int height)
+    public static <GOType extends GameObject> GridMap<GOType> getTestMap(int width, int height)
     {
         return GridMap.create(TestStuff.booleanArray(width, height));
     }

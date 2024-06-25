@@ -7,10 +7,13 @@ import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.view.GridMapRender;
+import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.MissionController;
+import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.testing.Fights;
 import com.gitgud.pieces.testing.Missions;
 import com.gitgud.pieces.testing.TestStuff;
 import com.gitgud.pieces.utility.Strings;
@@ -22,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -92,9 +96,8 @@ public class App extends Application
     
     public static void finnTest(Stage stage)
     {
-        testMissionController();
-        
-        System.out.println(stage.getWidth());
+        testFightController();
+        //        testMissionController();
         //        addTestGridMapRenderToStage(stage);
         //        finnGsonTest();
     }
@@ -116,10 +119,6 @@ public class App extends Application
         mission.getGridMap().place(mission.getGridMap().getVertex(3, 2),
                                    new FightAgentDirector(new KnightBuilder()).make(311));
         MissionController missionController = new MissionController(mission);
-        Scene scene = new Scene(missionController.getRender());
-        
-        stage.setScene(scene);
-        stage.show();
         missionController.start();
     }
     
@@ -154,10 +153,19 @@ public class App extends Application
     }
     
     
+    private static void testFightController()
+    {
+        Stage stage = StageController.getInstance().getStage();
+        Fight fight = Fights.getTestFight();
+        FightController fightController = new FightController(fight);
+        fightController.start();
+    }
+    
+    
     private void initialize(Stage stage)
     {
         stage.initStyle(StageStyle.DECORATED);
-        stage.setResizable(false);
+        stage.setScene(new Scene(new Group()));
         stage.setFullScreen(true);
         StageController.initialize(stage);
         setTitleAndIcon();

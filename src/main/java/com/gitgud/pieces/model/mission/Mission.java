@@ -57,7 +57,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
     private void addAvailableMovementActions(HashSet<Action<MissionController>> actions)
     {
         Tile from = getPlayerAgentPosition();
-        Collection<Tile> inMovementRangeTiles = getPlayerAgent().findPosibleMovementTargets(getGridMap(), from);
+        Collection<Tile> inMovementRangeTiles = getPlayerAgent().findPossibleMovementTargets(getGridMap(), from);
         
         for (Tile tile : inMovementRangeTiles)
         {
