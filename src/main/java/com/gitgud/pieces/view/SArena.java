@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 
                     if (isServer.isSelected())
                     {
-                        stage.setScene(CreateServerLobby(stage));
+                        stage.setScene(CreateServerLobby(stage, serverTextField.getCharacters()));
                     } else
                     {
                         stage.setScene(CreateClientLobby(stage, serverTextField.getCharacters()));
@@ -48,12 +48,13 @@ import javafx.stage.Stage;
             return ArenaScene;
         }
 
-        private static Scene CreateServerLobby(Stage stage)
+        private static Scene CreateServerLobby(Stage stage, CharSequence serverAddress)
         {
+            String stringServerAddress = serverAddress.toString();
             Group root =new Group();
             Text text = new Text(SERVER_LOBY_INFO);
             root.getChildren().add(text);
-            ArenaController.InitialiseArenaAsServer();
+            ArenaController.InitialiseArenaAsServer(stringServerAddress);
 
             if(ServerClientController.getInstance().getServer().isConnected())
             {

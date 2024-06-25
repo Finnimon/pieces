@@ -9,9 +9,9 @@ import java.util.LinkedList;
 public class Client extends Thread {
     private final ZMQ.Socket socket;
 
-    private LinkedList<Serializable> messageQueue;
+    private LinkedList<Serializable> messageQueue = new LinkedList<>();
 
-    private String serverAddress = "tcp://172.0.0.1:5555";
+    private String serverAddress;
 
     private boolean currentlySending;
 
@@ -30,7 +30,14 @@ public class Client extends Thread {
 
     public void addMessage(Serializable message)
     {
-        this.messageQueue.add(message);
+        try
+        {
+            this.messageQueue.add(message);
+        }
+        catch (NullPointerException e)
+        {
+            addMessage(-1);
+        }
     }
 
     @Override
@@ -62,7 +69,7 @@ public class Client extends Thread {
 
     private void initComunikation()
     {
-        socket.connect("tcp://" + serverAddress + ":8332");
+        socket.connect("tcp://" + serverAddress + ":5555");
 
         isConnected = true;
     }

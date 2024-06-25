@@ -11,23 +11,17 @@ public class ArenaController {
     {
         Client client = ServerClientController.getInstance().getClient();
         client.setServerAddress(serverAddress);
-
         client.start();
-        try
-        {
-            client.addMessage(InetAddress.getLocalHost().getHostAddress());
-        }
-        catch (UnknownHostException e)
-        {
-            throw new RuntimeException();
-        }
+
         Server server = ServerClientController.getInstance().getServer();
         server.start();
     }
-    public static void InitialiseArenaAsServer()
+    public static void InitialiseArenaAsServer(String serverAddress)
     {
         Server server = ServerClientController.getInstance().getServer();
         server.start();
-
+        Client client = ServerClientController.getInstance().getClient();
+        client.setServerAddress(serverAddress);
+        client.start();
     }
 }
