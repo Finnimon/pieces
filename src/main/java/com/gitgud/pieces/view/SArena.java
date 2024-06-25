@@ -2,6 +2,7 @@ package com.gitgud.pieces.view;
 
 import com.gitgud.net.ClientController;
 import com.gitgud.net.ServerController;
+import com.gitgud.pieces.control.Net.ArenaController;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -48,8 +49,7 @@ import javafx.stage.Stage;
             return ArenaScene;
         }
 
-        private static Scene
-        CreateServerLobby(Stage stage)
+        private static Scene CreateServerLobby(Stage stage)
         {
             Group root =new Group();
             Text text = new Text(SERVER_LOBY_INFO);
@@ -59,6 +59,10 @@ import javafx.stage.Stage;
             if(ServerController.getInstance().getServer().isConnected())
             {
                 stage.setScene(STest.ceateSTest());
+            }
+            else
+            {
+                return new Scene(root);
             }
             return new Scene(root);
         }

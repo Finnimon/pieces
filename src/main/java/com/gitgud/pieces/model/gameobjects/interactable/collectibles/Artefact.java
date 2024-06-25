@@ -65,7 +65,7 @@ public class Artefact extends GameObject implements Collectible, Leveler
     public void addToInventory()
     {
         ArtefactPouch artefactPouch = ActiveGameController.getInstance().get().getPlayer().artefactPouch();
-        Artefact[] equippedArtifacts = artefactPouch.getEquippedArtifacts();
+        Artefact[] equippedArtifacts = artefactPouch.getEquippedArtefacts();
         
         Core.insertAtFirstNullIndex(equippedArtifacts, this);
         

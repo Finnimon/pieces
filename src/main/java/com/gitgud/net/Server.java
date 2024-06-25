@@ -1,14 +1,16 @@
 package com.gitgud.net;
+
 import org.zeromq.ZMQ;
 
 
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Server extends Thread{
+public class Server extends Thread {
 
-    public static final int TIME_TO_WAIT_WHILE_RECEVING_MESSAGE = 50;
-    public static final String TCP_8332 = "tcp://*:8332";
+    public static final int TIME_TO_WAIT_WHILE_RECEIVING_MESSAGE = 50;
+    public static final String TCP_8332 = "tcp://172.0.0.1:5555";
+    public static final int FAIL_CODE = -1;
     private LinkedList<Serializable> messageQueue;
     private final ZMQ.Socket socket;
     private boolean currentlyReceiving;
@@ -29,9 +31,8 @@ public class Server extends Thread{
     public void run()
     {
         currentlyReceiving = true;
-        ServerController.getInstance().initialize();
-        socket.bind(TCP_8332);
-        while(currentlyReceiving)
+        //socket.bind(TCP_8332);
+        while (currentlyReceiving)
         {
             try
             {
@@ -45,13 +46,13 @@ public class Server extends Thread{
     }
 
 
-    private void waitForRequest()throws InterruptedException
+    private void waitForRequest() throws InterruptedException
     {
         String recMessage;
         do
         {
             recMessage = socket.recvStr();
-            Thread.sleep(TIME_TO_WAIT_WHILE_RECEVING_MESSAGE);
+            Thread.sleep(TIME_TO_WAIT_WHILE_RECEIVING_MESSAGE);
         } while (recMessage == null);
         messageQueue.add(recMessage);
         checkStatus();
@@ -64,8 +65,17 @@ public class Server extends Thread{
 
     public Serializable getLatestUnprecedentedMessage()
     {
-        return messageQueue.remove();
+        try
+        {
+            return messageQueue.remove();
+        }
+        catch(NullPointerException e)
+        {
+            return FAIL_CODE;
+        }
+
     }
+
     public void stopReceiving()
     {
         isConnected = false;

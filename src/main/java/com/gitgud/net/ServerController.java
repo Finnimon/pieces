@@ -8,31 +8,21 @@ public class ServerController {
 
     private final Server server;
     private static ServerController instance = null;
+    private static final ZContext context = new ZContext();
 
     public ServerController(Server server)
     {
         this.server = server;
     }
+
     public static ServerController getInstance()
     {
         if (instance == null)
         {
-            throw new IllegalStateException();
+                ZMQ.Socket socket = context.createSocket(SocketType.REP);
+                instance = new ServerController(new Server(socket));
         }
         return instance;
-    }
-
-    public void initialize()
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        try (ZContext context = new ZContext())
-        {
-            ZMQ.Socket socket = context.createSocket(SocketType.REP);
-            instance = new ServerController(new Server(socket));
-        }
     }
 
     public Server getServer()

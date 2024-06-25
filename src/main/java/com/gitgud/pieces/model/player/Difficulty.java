@@ -8,20 +8,43 @@ import com.gitgud.pieces.utility.modification.fightAgent.FightAgentDefenceModifi
 
 public enum Difficulty
 {
-    EASY(new FightAgentAttackModifier(0, 0, 0)), MEDIUM(new FightAgentDefenceModifier(2, 0, 1.2f)), HARD(
-        new FightAgentAttackModifier(2, 3, 2f));
-    
-    
-    Modifier<FightAgent> modifier;
+    EASY(new FightAgentAttackModifier(0, 0, 0)),
+
+    MEDIUM(new FightAgentDefenceModifier(2, 0, 1.2f)),
+
+    HARD(new FightAgentAttackModifier(2, 3, 2f));
+
+
+    private final Modifier<FightAgent> modifier;
     
     
     Difficulty(Modifier<FightAgent> fightAgentAttackModifier)
     {
+        this.modifier = fightAgentAttackModifier;
     }
     
     
-    public Modifier<FightAgent> getFightAgentAttackModifier()
+    public Modifier<FightAgent> getFightAgentAttackModifier ()
     {
         return modifier;
+    }
+
+
+    public String getAsString ()
+    {
+        return this.toString();
+    }
+
+
+    public static Difficulty fromString (String string)
+    {
+        for (Difficulty difficulty : Difficulty.values())
+        {
+            if (string.equalsIgnoreCase(difficulty.toString()))
+            {
+                return difficulty;
+            }
+        }
+        return null;
     }
 }

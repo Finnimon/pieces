@@ -1,6 +1,7 @@
 package com.gitgud.net;
 
 import org.zeromq.ZMQ;
+import org.zeromq.ZMQException;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -10,7 +11,7 @@ public class Client extends Thread {
 
     private LinkedList<Serializable> messageQueue;
 
-    private String serverAddress = null;
+    private String serverAddress = "tcp://172.0.0.1:5555";
 
     private boolean currentlySending;
 
@@ -36,7 +37,6 @@ public class Client extends Thread {
     public void run()
     {
         currentlySending = true;
-        ClientController.getInstance().initialize();
         initComunikation();
         while (true)
         {
@@ -63,8 +63,10 @@ public class Client extends Thread {
     private void initComunikation()
     {
         socket.connect("tcp://" + serverAddress + ":8332");
+
         isConnected = true;
     }
+
     public void stopSending()
     {
         isConnected = false;

@@ -15,10 +15,10 @@ import java.util.ArrayList;
  */
 public class ArtefactPouch
 {
-    private final int MAX_ARTIFACTS = 3;
+    private final int MAX_ARTEFACTS = 3;
     
     
-    private final Artefact[] equippedArtefacts = new Artefact[MAX_ARTIFACTS];
+    private final Artefact[] equippedArtefacts = new Artefact[MAX_ARTEFACTS];
     
     
     private final ArrayList<Artefact> allOwnedArtefacts = new ArrayList<>();
@@ -29,19 +29,19 @@ public class ArtefactPouch
     }
     
     
-    public int getMAX_ARTIFACTS()
+    public int getMAX_ARTEFACTS()
     {
-        return MAX_ARTIFACTS;
+        return MAX_ARTEFACTS;
     }
     
     
-    public Artefact[] getEquippedArtifacts()
+    public Artefact[] getEquippedArtefacts ()
     {
         return equippedArtefacts;
     }
     
     
-    public ArrayList<Artefact> getAllOwnedArtefacts()
+    public ArrayList<Artefact> getAllOwnedArtefacts ()
     {
         return allOwnedArtefacts;
     }

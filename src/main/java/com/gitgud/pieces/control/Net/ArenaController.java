@@ -1,9 +1,10 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.control.Net;
 
 import com.gitgud.net.Client;
 import com.gitgud.net.ClientController;
 import com.gitgud.net.Server;
 import com.gitgud.net.ServerController;
+import org.zeromq.ZMQException;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -12,8 +13,9 @@ public class ArenaController {
     public static void InitialiseArenaAsClient(String serverAddress)
     {
         Client client = ClientController.getInstance().getClient();
-        client.start();
         client.setServerAddress(serverAddress);
+
+        client.start();
         try
         {
             client.addMessage(InetAddress.getLocalHost().getHostAddress());
@@ -27,10 +29,8 @@ public class ArenaController {
     }
     public static void InitialiseArenaAsServer()
     {
-        Server server= ServerController.getInstance().getServer();
+        Server server = ServerController.getInstance().getServer();
         server.start();
-        Client client = ClientController.getInstance().getClient();
-        client.start();
-        client.setServerAddress(server.getLatestUnprecedentedMessage().toString());
+
     }
 }
