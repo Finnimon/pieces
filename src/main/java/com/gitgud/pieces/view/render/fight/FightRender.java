@@ -9,11 +9,12 @@ import com.gitgud.engine.view.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 
-public class FightRender extends Group implements ActionContextRender<Fight,FightAgent>
+public class FightRender extends AnchorPane implements ActionContextRender<Fight,FightAgent>
 {
-    private final static int TILE_SIZE = 200;
+    private final static int TILE_SIZE = 90;
     
     
     private final Fight fight;

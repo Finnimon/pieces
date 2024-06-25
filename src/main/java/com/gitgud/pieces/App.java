@@ -5,8 +5,6 @@ import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Sprite;
-import com.gitgud.pieces.utility.Strings;
-import com.gitgud.pieces.utility.services.AssetParser;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.pieces.control.MissionController;
@@ -15,6 +13,10 @@ import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.testing.Missions;
 import com.gitgud.pieces.testing.TestStuff;
+import com.gitgud.pieces.utility.Strings;
+import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
+import com.gitgud.pieces.utility.builder.fightAgent.KnightBuilder;
+import com.gitgud.pieces.utility.services.AssetParser;
 import com.gitgud.pieces.view.SMainMenue;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,9 +31,7 @@ import javafx.stage.StageStyle;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.util.Arrays;
 
 
 public class App extends Application
@@ -47,7 +47,7 @@ public class App extends Application
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
         launch();
-
+        
     }
     
     
@@ -57,33 +57,31 @@ public class App extends Application
         stage.setWidth(1000);
         stage.setScene(SMainMenue.createMainMenueScene(stage));
     }
-
     
     
-    
-    public static void jsonTestFinnK (String[] args) throws IOException, ClassNotFoundException
+    public static void jsonTestFinnK(String[] args) throws IOException, ClassNotFoundException
     {
         // FightAgent --- OK
         // Modifier --- OK
         // Spell --- OK
-
+        
         // Insert resources here
         JsonArray fightAgentTypes = AssetParser.parseJsonArray(Strings.FIGHT_AGENT_TYPES);
         // Insert Json Objects here
-
+        
         // Register type adapters
         GsonBuilder gsonBuilder = new GsonBuilder();
         // insert type adapters here
-
+        
         Gson gson = gsonBuilder.create();
-
+        
         // Deserialization
-
+        
         // Serialization
-
+        
         // Test output
-
-
+        
+        
         // Write Json file
         FileOutputStream writableFile = new FileOutputStream("src/main/resources/com/gitgud/gameObjectTypes/test.json");
         // Insert Json objects to write here
@@ -95,6 +93,8 @@ public class App extends Application
     public static void finnTest(Stage stage)
     {
         testMissionController();
+        
+        System.out.println(stage.getWidth());
         //        addTestGridMapRenderToStage(stage);
         //        finnGsonTest();
     }
@@ -104,9 +104,20 @@ public class App extends Application
     {
         Stage stage = StageController.getInstance().getStage();
         Mission mission = Missions.FIRST;
+        GridMap<GameObject> gridMap = mission.getGridMap();
+        
+        String debugString = new String();
+        
+        FightAgentDirector director = new FightAgentDirector(new KnightBuilder());
+        debugString += FightAgentDirector.getFaction(311);
+        debugString += FightAgentDirector.getLevel(311);
+        debugString += FightAgentDirector.getFightAgentType(311);
+        System.out.println(debugString);
+        mission.getGridMap().place(mission.getGridMap().getVertex(3, 2),
+                                   new FightAgentDirector(new KnightBuilder()).make(311));
         MissionController missionController = new MissionController(mission);
         Scene scene = new Scene(missionController.getRender());
-
+        
         stage.setScene(scene);
         stage.show();
         missionController.start();
@@ -141,14 +152,13 @@ public class App extends Application
         gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().verticeSet().last());
         
     }
-
     
     
     private void initialize(Stage stage)
     {
         stage.initStyle(StageStyle.DECORATED);
         stage.setResizable(false);
-        stage.centerOnScreen();
+        stage.setFullScreen(true);
         StageController.initialize(stage);
         setTitleAndIcon();
     }

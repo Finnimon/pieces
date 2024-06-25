@@ -28,10 +28,10 @@ public class MissionRender extends AnchorPane implements ActionContextRender<Mis
     private static final int TILE_SIZE = 90;
     
     
-    private static final int WIDTH = 1800;
+    public static final int WIDTH = 1800;
     
     
-    private static final int HEIGHT = 1000;
+    public static final int HEIGHT = 1200;
     
     
     public static final double GRID_MAP_SCROLL_PANE_LEFT_ANCHOR = 200.0;
@@ -128,7 +128,7 @@ public class MissionRender extends AnchorPane implements ActionContextRender<Mis
     
     
     @Override
-    public ActionContextHud<Mission> getHud()
+    public MissionHud getHud()
     {
         return this.missionHud;
     }

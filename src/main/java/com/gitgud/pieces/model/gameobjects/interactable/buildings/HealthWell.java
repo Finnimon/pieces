@@ -18,7 +18,7 @@ public class HealthWell extends GridMappableBuilding
     
     
     //todo
-    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/healthwell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/HealthWell.png";
     
     
     public HealthWell()

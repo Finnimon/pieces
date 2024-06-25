@@ -6,4 +6,7 @@ public interface Strings
     
     
     String TABULATOR = "\t";
+    
+    
+    String FILE_SEPERATOR = "\\";
 }

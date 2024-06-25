@@ -1,6 +1,7 @@
 package com.gitgud.pieces.model.gameobjects.agents;
 
 
+import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.model.gameobjects.agent.Agent;
 import com.gitgud.pieces.model.gameobjects.Faction;
 
@@ -36,16 +37,13 @@ public class PlayerAgent extends Agent
     
     public PlayerAgent(Faction faction)
     {
-        super(determinrName(faction), DESCRIPTION, determineSpriteUrl(faction), IS_FLYING, MOVEMENT_RANGE);
+        super(determineName(faction), DESCRIPTION, determineSpriteUrl(faction), IS_FLYING, MOVEMENT_RANGE);
     }
     
     
-    private static String determinrName(Faction faction)
+    private static String determineName(Faction faction)
     {
-        String name = faction.name().substring(1).toLowerCase();
-        char firstChar = (faction.name().charAt(0));
-        
-        return firstChar + name + NAME_SUFFIX;
+        return Named.formatString(faction.name()) + NAME_SUFFIX;
     }
     
     

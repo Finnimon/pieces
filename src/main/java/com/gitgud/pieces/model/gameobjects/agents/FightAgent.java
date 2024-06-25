@@ -1,9 +1,11 @@
 package com.gitgud.pieces.model.gameobjects.agents;
 
+import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Attack;
 import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.DamageType;
 import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Defence;
+import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
@@ -17,7 +19,7 @@ import com.gitgud.pieces.model.gameobjects.FightAgentType;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-public class FightAgent extends Fighter implements Comparable<FightAgent>
+public class FightAgent extends Fighter implements Comparable<FightAgent>, Leveler
 {
     private final FightAgentType type;
     
@@ -25,10 +27,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     private final Faction faction;
     
     
+    private final Allegiance allegiance;
+    
+    
     private final boolean isRangedAttacker;
     
     
-    private final int rank;
+    private final int level;
     
     
     private int meleeDamage;
@@ -71,7 +76,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     
     
     public FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
-                      FightAgentType type, Faction faction, int rank, int meleeDamage, int rangedDamage,
+                      FightAgentType type, Faction faction, Allegiance allegiance, int level, int meleeDamage, int rangedDamage,
                       int rangedAttackRange, int remainingRangedAttacks, boolean isRangedAttacker, int physicalDefence,
                       int magicDefence, float evadeChance, int maxHealth, int maxMana, int health, int mana,
                       int initiative, float accuracy)
@@ -79,7 +84,8 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
         super(name, description, spriteUrl, isFlying, movementRange);
         this.type = type;
         this.faction = faction;
-        this.rank = rank;
+        this.allegiance = allegiance;
+        this.level = level;
         this.meleeDamage = meleeDamage;
         this.rangedDamage = rangedDamage;
         this.rangedAttackRange = rangedAttackRange;
@@ -94,12 +100,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
         this.mana = mana;
         this.initiative = initiative;
         this.accuracy = accuracy;
-    }
-    
-    
-    public static FightAgent create(FightAgentType type, Faction faction, int rank)
-    {
-        return null;
     }
     
     
@@ -321,9 +321,16 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     }
     
     
-    public int getRank()
+    public int getLevel()
     {
-        return rank;
+        return level;
+    }
+    
+    
+    @Override
+    public int levelUp()
+    {
+        return 0;//todo
     }
     
     
@@ -344,7 +351,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
         }
         
         
-        comparison = this.getRank() - o.getRank();
+        comparison = this.getLevel() - o.getLevel();
         
         if (comparison != 0)
         {
@@ -356,4 +363,8 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>
     }
     
     
+    public Allegiance getAllegiance()
+    {
+        return allegiance;
+    }
 }

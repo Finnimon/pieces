@@ -8,6 +8,11 @@ import java.util.HashMap;
 
 public class ResourceCost
 {
+    
+    
+    public static final int DEFAULT_MULTIPLIER = 1;
+    
+    
     private final HashMap<ResourceType, Long> resourceCostMap;
     
     
@@ -40,8 +45,7 @@ public class ResourceCost
     
     public boolean isResourceCostCoveredByWallet()
     {
-        int defaultMultiplier = 1;
-        return isResourceCostCoveredByWallet(defaultMultiplier);
+        return isResourceCostCoveredByWallet(DEFAULT_MULTIPLIER);
     }
     
     
@@ -58,7 +62,23 @@ public class ResourceCost
     
     public void deductResourceCostFromWallet()
     {
-        int defaultMultiplier = 1;
-        deductResourceCostFromWallet(defaultMultiplier);
+        deductResourceCostFromWallet(DEFAULT_MULTIPLIER);
+    }
+    
+    
+    public void addResourceCostToWallet(int multiplier)
+    {
+        for (ResourceType resourceType : resourceCostMap.keySet())
+        {
+            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+            walletResourceMap.put(resourceType,
+                                  walletResourceMap.get(resourceType) + resourceCostMap.get(resourceType) * multiplier);
+        }
+    }
+    
+    
+    public void addResourceCostToWallet()
+    {
+        addResourceCostToWallet(DEFAULT_MULTIPLIER);
     }
 }

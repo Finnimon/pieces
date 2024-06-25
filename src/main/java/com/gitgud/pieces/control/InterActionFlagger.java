@@ -35,13 +35,16 @@ public class InterActionFlagger implements Runnable
         while (mission != null && !mission.isFinished())
         //        while (activeGame.getGameState() == GameState.MISSION || (inMissionFight = activeGame.getGameState() == GameState.MISSION_FIGHT))
         {
-            if (!newCheckNeeded)
-            {
-                continue;
+            synchronized (this){
+                if (!newCheckNeeded)
+                {
+                    continue;
+                }
+                System.out.println("InterActionFlagger.run()");
+                
+                newCheckNeeded = false;
+                setFlagIfNeeded(mission);
             }
-            
-            newCheckNeeded = false;
-            setFlagIfNeeded(mission);
         }
         
         InterActionController.clearFlag();
@@ -75,5 +78,6 @@ public class InterActionFlagger implements Runnable
     public void newCheck()
     {
         newCheckNeeded = true;
+        setFlagIfNeeded(mission);
     }
 }

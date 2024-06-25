@@ -10,13 +10,13 @@ import javafx.scene.Node;
 public class FightHud extends ActionContextHud<Fight>
 {
     
-    private final FightTimeLineRender fightTimeLineRender;
+//    private final FightTimeLineRender fightTimeLineRender;
     
     
     public FightHud(Fight data)
     {
         super(data);
-        this.fightTimeLineRender = new FightTimeLineRender(data);
+//        this.fightTimeLineRender = new FightTimeLineRender(data);
     }
     
     
@@ -25,13 +25,14 @@ public class FightHud extends ActionContextHud<Fight>
     {
         ObservableList<Node> children = getChildren();
         children.clear();
-        //tdo
+        //todo
     }
     
     
     @Override
     public void updateRender()
     {
+        super.updateRender();
         //todo
     }
 }

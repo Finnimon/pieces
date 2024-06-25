@@ -26,7 +26,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     {
         super(mission, new MissionRender(mission));
         interActionFlagger = new InterActionFlagger(mission);
-        new Thread(interActionFlagger).start();
     }
     
     
@@ -57,7 +56,9 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void advance()
     {
+        
         super.advance();
+        
         
         handleInteractions();
         
@@ -67,20 +68,26 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     
     private void handleInteractions()
     {
+        
         interActionFlagger.newCheck();
+        
         if (!InterActionController.hasFlag())
         {
             return;
         }
+        System.out.println("MissionController.handleInteractions()");
         
         Interactable interactable = InterActionController.clearFlag();
         
+        
         if (interactable instanceof FightTrigger || interactable instanceof MissionEnder)
-        //            interActionFlagger.wait();
+        //            interActionFlagger.wait();>
         
         {
             interactable.interact(getModel().getGridMap());
         }
+        
+        getRender().getGridMapRender().removeGridMappable((GameObject) interactable);
     }
     
     

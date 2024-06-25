@@ -25,6 +25,8 @@ public abstract class ActionAwaitingController
     
     protected void hightlightActivePosition()
     {
+        System.out.println("TODO: Hightlighting in com\\gitgud\\engine\\control\\ActionAwaitingController#hightlightActivePosition()");
+        
         //todo fix currently not working as it blocks the InfoPane event for the active Agent underneath the highlight
 //        getRender().getGridMapRender().addHighLight(getActivePosition(), Color.BLUE).toBack();
     }
@@ -47,7 +49,6 @@ public abstract class ActionAwaitingController
         getRender().getGridMapRender().clearHighLights();
         getActionChoice().show(this);
         
-        System.out.println("TODO: Hightlighting in com\\gitgud\\engine\\control\\ActionAwaitingController#hightlightActivePosition()");
-        hightlightActivePosition();
+         hightlightActivePosition();
     }
 }
