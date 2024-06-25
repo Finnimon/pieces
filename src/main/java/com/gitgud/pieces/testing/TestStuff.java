@@ -91,7 +91,7 @@ public class TestStuff
 
 
         // Deserialization
-        FightAgent fightAgent = gson.fromJson(fightAgentJson, FightAgent.class);
+        // FightAgent fightAgent = gson.fromJson(fightAgentJson, FightAgent.class);
         // Serialization
 
 
