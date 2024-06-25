@@ -16,22 +16,13 @@ public class ClientController {
     {
         if (instance == null)
         {
-            throw new IllegalStateException();
+            try (ZContext context = new ZContext())
+            {
+                ZMQ.Socket socket = context.createSocket(SocketType.CLIENT);
+                instance = new ClientController(new Client(socket));
+            }
         }
         return instance;
-    }
-
-    public void initialize()
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        try (ZContext context = new ZContext())
-        {
-            ZMQ.Socket socket = context.createSocket(SocketType.CLIENT);
-            instance = new ClientController(new Client(socket));
-        }
     }
 
     public Client getClient()

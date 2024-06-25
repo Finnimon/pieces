@@ -13,26 +13,19 @@ public class ServerController {
     {
         this.server = server;
     }
+
     public static ServerController getInstance()
     {
         if (instance == null)
         {
-            throw new IllegalStateException();
+            try (ZContext context = new ZContext())
+            {
+
+                ZMQ.Socket socket = context.createSocket(SocketType.REP);
+                instance = new ServerController(new Server(socket));
+            }
         }
         return instance;
-    }
-
-    public void initialize()
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        try (ZContext context = new ZContext())
-        {
-            ZMQ.Socket socket = context.createSocket(SocketType.REP);
-            instance = new ServerController(new Server(socket));
-        }
     }
 
     public Server getServer()
