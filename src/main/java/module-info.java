@@ -17,4 +17,6 @@ module com.gitgud.pieces {
     exports com.gitgud.engine.model.gameobjects to com.google.gson;
     exports com.gitgud.engine.model.gameobjects.agent to com.google.gson;
     exports com.gitgud.engine.model.gameobjects.interactable to com.google.gson;
+    exports com.gitgud.pieces.control;
+    opens com.gitgud.pieces.control to javafx.fxml;
 }

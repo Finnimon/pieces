@@ -1,4 +1,4 @@
-package com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic;
+package com.gitgud.engine.model.attackDefenseLogic;
 
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 

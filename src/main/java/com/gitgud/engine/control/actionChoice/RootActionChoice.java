@@ -1,7 +1,7 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.RootActionChoiceRender;

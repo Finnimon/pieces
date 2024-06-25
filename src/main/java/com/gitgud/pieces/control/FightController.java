@@ -7,6 +7,7 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
 
 import java.util.ArrayList;
@@ -14,13 +15,15 @@ import java.util.List;
 
 
 //todo render as scene
-public class FightController extends ActionAwaitingController<Fight, FightAgent,FightRender>
+public class FightController extends ActionAwaitingController<Fight, FightAgent, FightRender>
 {
+    private final EnemyAi enemyAi;
     
     
     public FightController(Fight fight)
     {
         super(fight, new FightRender(fight));
+        enemyAi = new EnemyAi(this);
     }
     
     
@@ -28,7 +31,22 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     public void advance()
     {
         getModel().getFightTimeLine().advance();
-        super.advance();
+        if (tryEnd())
+        {
+            return;
+        }
+        
+        getRender().getGridMapRender().clearHighLights();
+        
+        if (getActiveFightAgent().getAllegiance() == enemyAi.getEnemyAllegiance())
+        {
+            enemyAi.act();
+        }
+        else//theoretically nesting avoidable, but want to rule out undefinied behavior
+        {
+            getActionChoice().show(this);
+            hightlightActivePosition();
+        }
     }
     
     
@@ -36,7 +54,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     public Tile getActivePosition()
     {
         Fight fight = this.getModel();
-        FightAgent activeFightAgent = fight.getFightTimeLine().getActiveFightAgent();
+        FightAgent activeFightAgent = getActiveFightAgent();
         return fight.getGridMap().getVertex(activeFightAgent);
     }
     
@@ -48,36 +66,52 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         
         choices.add(getMovementChoiceRoot());
         choices.add(getAttackRootChoice());
-//        choices.add(getSpellRootChoice());
+        choices.add(getSpellRootChoice());
         choices.add(getSkipTurnChoice());
         
         return new RootActionChoice<>("root", "root", choices, this);//todo
     }
     
+    
     public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getMovementChoiceRoot()
     {
-        Tile position=getActivePosition();
+        Tile position = getActivePosition();
         
-        FightAgent activeFightAgent = getModel().getFightTimeLine().getActiveFightAgent();
+        FightAgent activeFightAgent = getActiveFightAgent();
         
         
-        return new MovementRootChoice<>(this,activeFightAgent, position);
+        return new MovementRootChoice<>(this, activeFightAgent, position);
     }
+    
     
     public AttackRootChoice<FightController, Fight, FightAgent, FightRender> getAttackRootChoice()
     {
-        Tile position=getActivePosition();
+        Tile position = getActivePosition();
         
-        FightAgent activeFightAgent = getModel().getFightTimeLine().getActiveFightAgent();
+        FightAgent activeFightAgent = getActiveFightAgent();
         
         
-        return new AttackRootChoice<>(this,activeFightAgent);//todo
+        return new AttackRootChoice<>(this, activeFightAgent);//todo
     }
+    
     
     public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getSpellRootChoice()
     {
-        return null;//todo
+        FightAgent agent = getActiveFightAgent();
+        if (!(agent instanceof SpellCasterFightAgent spellCasterFightAgent))
+        {
+            return new RootToActionChoice<>("Magic", "Cast Spells, available to you", this, new ArrayList<>());
+        }
+        
+        throw new RuntimeException("not implemented");
     }
+    
+    
+    private FightAgent getActiveFightAgent()
+    {
+        return getModel().getFightTimeLine().getActiveFightAgent();
+    }
+    
     
     @Override
     public void end()

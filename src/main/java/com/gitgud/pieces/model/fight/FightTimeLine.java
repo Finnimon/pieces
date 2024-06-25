@@ -1,7 +1,7 @@
 package com.gitgud.pieces.model.fight;
 
 
-import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Defender;
+import com.gitgud.engine.model.attackDefenseLogic.Defender;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 import java.util.Collection;

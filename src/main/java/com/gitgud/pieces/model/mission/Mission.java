@@ -1,11 +1,12 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.engine.model.action.Action;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.Action;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.MissionController;
+import com.gitgud.pieces.control.action.MissionMovementAction;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 

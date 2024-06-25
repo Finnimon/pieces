@@ -1,4 +1,4 @@
-package com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic;
+package com.gitgud.engine.model.attackDefenseLogic;
 
 /**
  * All Objects using {@link Attack} to attack {@link Defender} must implement this interface

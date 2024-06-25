@@ -6,6 +6,7 @@ import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.TerrainType;
 import com.gitgud.engine.view.GridMapRender;
+import com.gitgud.pieces.control.EnemyAi;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.fight.Fight;
@@ -111,6 +112,10 @@ public class TestStuff
     
     public static void lindigTest(Stage stage)
     {
+        for (int i = 0; i < 20; i++)
+        {
+            System.out.println(EnemyAi.randomInt(i, i+1)+"     "+i);
+        }
         testFightController();
         //        testMissionController();
         //        addTestGridMapRenderToStage(stage);

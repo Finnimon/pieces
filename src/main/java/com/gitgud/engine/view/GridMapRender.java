@@ -102,6 +102,12 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     }
     
     
+    public GridMappableRender<Type> getGridMappableRender(Type gridMappable)
+    {
+        return gridMappableRenders.get(gridMappable);
+    }
+    
+    
     public void relocateGridMappable(Type gridMappable, Tile next)
     {
         GridMappableRender<?> gridMappableRender = gridMappableRenders.get(gridMappable);

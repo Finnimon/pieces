@@ -2,7 +2,7 @@ package com.gitgud.pieces.control.actionChoices;
 
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.control.actionChoice.ToActionChoice;
-import com.gitgud.engine.model.action.ToAction;
+import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.model.fight.Fight;

@@ -1,9 +1,9 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
-import com.gitgud.engine.model.action.TileMovementAction;
-import com.gitgud.engine.model.action.ToAction;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.TileMovementAction;
+import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.GridMovable;
 import com.gitgud.engine.model.map.GridMap;
@@ -12,7 +12,7 @@ import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.control.actionChoices.FightMovementChoice;
-import com.gitgud.pieces.model.mission.MissionMovementAction;
+import com.gitgud.pieces.control.action.MissionMovementAction;
 
 import java.util.ArrayList;
 import java.util.Collection;
