@@ -8,6 +8,7 @@ public class ServerController {
 
     private final Server server;
     private static ServerController instance = null;
+    private static final ZContext context = new ZContext();
 
     public ServerController(Server server)
     {
@@ -18,12 +19,8 @@ public class ServerController {
     {
         if (instance == null)
         {
-            try (ZContext context = new ZContext())
-            {
-
                 ZMQ.Socket socket = context.createSocket(SocketType.REP);
                 instance = new ServerController(new Server(socket));
-            }
         }
         return instance;
     }

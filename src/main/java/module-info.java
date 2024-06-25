@@ -4,8 +4,9 @@ module com.gitgud.pieces {
     requires com.google.gson;
     requires jdk.unsupported;
     requires com.opencsv;
-    
-    
+    requires jeromq;
+
+
     opens com.gitgud.pieces to javafx.fxml;
     opens com.gitgud.pieces.utility.modification.fightAgent to com.google.gson;
     opens com.gitgud.pieces.model.gameobjects.agents to com.google.gson;

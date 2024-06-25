@@ -7,7 +7,7 @@ import org.zeromq.ZMQ;
 public class ClientController {
     private final Client client;
     private static ClientController instance = null;
-
+    private static final ZContext context = new ZContext();
     public ClientController(Client client)
     {
         this.client = client;
@@ -16,11 +16,10 @@ public class ClientController {
     {
         if (instance == null)
         {
-            try (ZContext context = new ZContext())
-            {
+
                 ZMQ.Socket socket = context.createSocket(SocketType.CLIENT);
                 instance = new ClientController(new Client(socket));
-            }
+
         }
         return instance;
     }

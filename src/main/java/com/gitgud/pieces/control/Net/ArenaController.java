@@ -31,9 +31,6 @@ public class ArenaController {
     {
         Server server = ServerController.getInstance().getServer();
         server.start();
-        Client client = ClientController.getInstance().getClient();
-        client.setServerAddress(server.getLatestUnprecedentedMessage().toString());
-        client.start();
 
     }
 }

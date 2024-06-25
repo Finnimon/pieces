@@ -8,7 +8,7 @@ import java.util.LinkedList;
 
 public class Server extends Thread {
 
-    public static final int TIME_TO_WAIT_WHILE_RECEVING_MESSAGE = 50;
+    public static final int TIME_TO_WAIT_WHILE_RECEIVING_MESSAGE = 50;
     public static final String TCP_8332 = "tcp://172.0.0.1:5555";
     public static final int FAIL_CODE = -1;
     private LinkedList<Serializable> messageQueue;
@@ -31,7 +31,7 @@ public class Server extends Thread {
     public void run()
     {
         currentlyReceiving = true;
-        socket.bind(TCP_8332);
+        //socket.bind(TCP_8332);
         while (currentlyReceiving)
         {
             try
@@ -52,7 +52,7 @@ public class Server extends Thread {
         do
         {
             recMessage = socket.recvStr();
-            Thread.sleep(TIME_TO_WAIT_WHILE_RECEVING_MESSAGE);
+            Thread.sleep(TIME_TO_WAIT_WHILE_RECEIVING_MESSAGE);
         } while (recMessage == null);
         messageQueue.add(recMessage);
         checkStatus();

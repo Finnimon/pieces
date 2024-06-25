@@ -11,7 +11,7 @@ public class Client extends Thread {
 
     private LinkedList<Serializable> messageQueue;
 
-    private String serverAddress = null;
+    private String serverAddress = "tcp://172.0.0.1:5555";
 
     private boolean currentlySending;
 
