@@ -156,6 +156,20 @@ public class SCity {
                         pane.setOnMouseClicked(e -> stage.setScene(SFactionCamps.createFactionCampsScene(stage)));
                         Tooltip.install(pane, new Tooltip("Fraktionscamp"));
                     }
+                    case 8 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(SMarketplace.createMarketplaceScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Marktplatz"));
+                    }
+                    case 9 -> {
+                        pane.setBackground(new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(0), new Insets(0))));
+                        pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
+                        pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
+                        pane.setOnMouseClicked(e -> stage.setScene(STrainingCamp.createTrainingCampScene(stage)));
+                        Tooltip.install(pane, new Tooltip("Trainingscamp"));
+                    }
                 }
                 grid.add(pane, j, i);
                 if (j == playerY && i == playerX) {
