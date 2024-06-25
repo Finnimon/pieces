@@ -14,7 +14,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import static com.gitgud.pieces.testing.TestStuff.finnTest;
+import static com.gitgud.pieces.testing.TestStuff.lindigTest;
 
 
 public class App extends Application
@@ -59,7 +59,7 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {//call your main here
         initialize(stage);
-        finnTest(stage);
+        lindigTest(stage);
         //        delfiMain(stage);
         stage.show();
     }

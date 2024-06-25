@@ -3,7 +3,6 @@ package com.gitgud.pieces.testing;
 import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
-import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.TerrainType;
 import com.gitgud.engine.view.GridMapRender;
@@ -15,30 +14,22 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.model.player.Difficulty;
-import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.Strings;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 import com.gitgud.pieces.utility.builder.fightAgent.KnightBuilder;
-import com.gitgud.pieces.utility.gsonSerialization.SilentObjectCreator;
 import com.gitgud.pieces.utility.services.AssetParser;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.Arrays;
-import java.util.HashMap;
 
 
 public class TestStuff
@@ -118,7 +109,7 @@ public class TestStuff
     }
     
     
-    public static void finnTest(Stage stage)
+    public static void lindigTest(Stage stage)
     {
         testFightController();
         //        testMissionController();
