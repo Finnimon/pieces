@@ -13,7 +13,7 @@ public class PawnBuilder extends FightAgentBuilder
     private static final String NAME_SUFFIX = " Pawn";
 
 
-    private static final String DESCRIPTION = "A is a small figur," + Strings.LINE_BREAK + "he is the best at dodging.";
+    private static final String DESCRIPTION = "A Pawn is a small figure," + Strings.LINE_BREAK + "he is the best at dodging.";
 
 
     private static final boolean IS_FLYING = false; //
@@ -68,7 +68,7 @@ public class PawnBuilder extends FightAgentBuilder
     @Override
     public void tryBuild(int type)
     {
-        FightAgentType fightAgentType =FightAgentType.KNIGHT;
+        FightAgentType fightAgentType =FightAgentType.PAWN;
         Allegiance allegiance = FightAgentDirector.getAllegiance(type);
         Faction faction = FightAgentDirector.getFaction(type);
         int level=FightAgentDirector.getLevel(type);
@@ -130,6 +130,6 @@ public class PawnBuilder extends FightAgentBuilder
     @Override
     public boolean canBuild(int type)
     {
-        return FightAgentDirector.getFightAgentType(type) == FightAgentType.KNIGHT;
+        return FightAgentDirector.getFightAgentType(type) == FightAgentType.PAWN;
     }
 }

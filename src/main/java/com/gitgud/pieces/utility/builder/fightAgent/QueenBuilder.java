@@ -13,7 +13,7 @@ public class QueenBuilder extends FightAgentBuilder
     private static final String NAME_SUFFIX = " Queen";
 
 
-    private static final String DESCRIPTION = "A Queen is the Strongest upon all," + Strings.LINE_BREAK + "destroys the Enemies.";
+    private static final String DESCRIPTION = "A Queen is the STRONGEST off all," + Strings.LINE_BREAK + "destroys the Enemies.";
 
 
     private static final boolean IS_FLYING = false; //
@@ -68,7 +68,7 @@ public class QueenBuilder extends FightAgentBuilder
     @Override
     public void tryBuild(int type)
     {
-        FightAgentType fightAgentType =FightAgentType.KNIGHT;
+        FightAgentType fightAgentType =FightAgentType.QUEEN;
         Allegiance allegiance = FightAgentDirector.getAllegiance(type);
         Faction faction = FightAgentDirector.getFaction(type);
         int level=FightAgentDirector.getLevel(type);
@@ -130,6 +130,6 @@ public class QueenBuilder extends FightAgentBuilder
     @Override
     public boolean canBuild(int type)
     {
-        return FightAgentDirector.getFightAgentType(type) == FightAgentType.KNIGHT;
+        return FightAgentDirector.getFightAgentType(type) == FightAgentType.QUEEN;
     }
 }

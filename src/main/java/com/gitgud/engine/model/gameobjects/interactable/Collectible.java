@@ -1,20 +1,24 @@
 package com.gitgud.engine.model.gameobjects.interactable;
 
 
+import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
 
-public interface Collectible extends Interactable
+public interface Collectible<AAType extends ActionAwaitingController<Mission, GameObject, MissionRender>> extends Interactable<AAType>
 {
     @Override
-    default void interact(GridMap gridMap)
+    default void interact(AAType missionController)
     {
-        collect(gridMap);
+        collect(missionController);
     }
     
     
-    private void collect(GridMap gridMap)
+    private void collect(AAType missionController)
     {
         if (!isCollectionPossible())
         {
@@ -23,7 +27,7 @@ public interface Collectible extends Interactable
         
         
         addToInventory();
-        removeFromMap(gridMap);
+        removeFromMap(missionController.getModel().getGridMap());
     }
     
     
@@ -36,9 +40,9 @@ public interface Collectible extends Interactable
     }
     
     
-    private void removeFromMap(GridMap<Interactable> gridMap)
+    private void removeFromMap(GridMap gridMap)
     {
-        Tile vertex = gridMap.getVertex(this);
+        Tile vertex = (Tile) gridMap.getVertex( this);
         
         if (vertex == null)
         {
@@ -46,7 +50,7 @@ public interface Collectible extends Interactable
         }
         
         
-        gridMap.place(vertex, null);
+        gridMap.clearVertex(vertex);
     }
     
     

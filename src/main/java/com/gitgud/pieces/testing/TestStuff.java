@@ -11,6 +11,7 @@ import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.model.player.Difficulty;
@@ -111,8 +112,8 @@ public class TestStuff
     
     public static void lindigTest(Stage stage)
     {
-        testFightController();
-        //        testMissionController();
+//        testFightController();
+                testMissionController();
         //        addTestGridMapRenderToStage(stage);
         //        finnGsonTest();
     }
@@ -120,20 +121,8 @@ public class TestStuff
     
     private static void testMissionController()
     {
-        Stage stage = StageController.getInstance().getStage();
-        Mission mission = Missions.FIRST;
-        GridMap<GameObject> gridMap = mission.getGridMap();
-        
-        String debugString = new String();
-        
-        FightAgentDirector director = new FightAgentDirector(new KnightBuilder());
-        debugString += FightAgentDirector.getFaction(311);
-        debugString += FightAgentDirector.getLevel(311);
-        debugString += FightAgentDirector.getFightAgentType(311);
-        System.out.println(debugString);
-        mission.getGridMap().place(mission.getGridMap().getVertex(3, 2),
-                                   new FightAgentDirector(new KnightBuilder()).make(311));
-        MissionController missionController = new MissionController(mission);
+        Mission mission= Missions.getMission(new FightAgent[]{});
+        MissionController missionController=new MissionController(mission);
         missionController.start();
     }
     

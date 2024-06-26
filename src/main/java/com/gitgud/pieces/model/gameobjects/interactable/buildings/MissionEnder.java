@@ -3,9 +3,10 @@ package com.gitgud.pieces.model.gameobjects.interactable.buildings;
 import com.gitgud.engine.model.gameobjects.interactable.GridMappableBuilding;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.MissionController;
 
 
-public class MissionEnder extends GridMappableBuilding
+public class MissionEnder extends GridMappableBuilding<MissionController>
 {
     private static final String NAME = "Portal Home";
     
@@ -25,15 +26,15 @@ public class MissionEnder extends GridMappableBuilding
     /**
      * Sets the mission as finished
      *
-     * @param gridMap the mission controller in whose data this interactable was triggered
+     * @param missionController the mission controller in whose data this interactable was triggered
      * @Owner: Finn L.
      * @Author. Finn L
      * @Since: 12.06.2024
      * @Version: 1.1
      */
     @Override
-    public void interact(GridMap gridMap)
+    public void interact(MissionController missionController)
     {
-        ActiveGameController.getInstance().get().getMission().setFinished(true);
+        missionController.getModel().setFinished(true);
     }
 }

@@ -20,6 +20,9 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
     void updateDimensions();
     
     
+    Element place(int x, int y, Element element);
+    
+    
     boolean isValid();
     
     

@@ -1,15 +1,16 @@
 package com.gitgud.pieces.control;
 
-import com.gitgud.engine.control.*;
+import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.control.InterActionController;
+import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.actionChoice.ActionChoice;
 import com.gitgud.engine.control.actionChoice.MovementRootChoice;
 import com.gitgud.engine.control.actionChoice.RootActionChoice;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.model.gameobjects.GameObject;
+import com.gitgud.engine.model.gameobjects.interactable.Collectible;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.pieces.model.gameobjects.interactable.FightTrigger;
-import com.gitgud.pieces.model.gameobjects.interactable.buildings.MissionEnder;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
@@ -54,7 +55,13 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     }
     
     
-    
+    @Override
+    public void start()
+    {
+        ActiveGameController.getInstance().get().setMission(getModel());
+        super.start();
+        StageController.getInstance().getStage().show();
+    }
     
     
     @Override
@@ -81,17 +88,14 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         }
         System.out.println("MissionController.handleInteractions()");
         
-        Interactable interactable = InterActionController.clearFlag();
+        Interactable<MissionController> interactable = InterActionController.clearFlag();
         
+        interactable.interact(this);
         
-        if (interactable instanceof FightTrigger || interactable instanceof MissionEnder)
-        //            interActionFlagger.wait();>
-        
+        if (interactable instanceof Collectible<MissionController>)
         {
-            interactable.interact(getModel().getGridMap());
+            getRender().getGridMapRender().removeGridMappable((GameObject) interactable);
         }
-        
-        getRender().getGridMapRender().removeGridMappable((GameObject) interactable);
     }
     
     

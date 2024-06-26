@@ -23,7 +23,7 @@ public interface SpellCaster
         
         for (Spell spell : getSpellbook().spells())
         {
-            targets.put(spell, extracted(spell, fight));
+//            targets.put(spell, extracted(spell, fight));
             
             
         }
@@ -31,23 +31,23 @@ public interface SpellCaster
     }
     
     
-    private HashSet<Tile> extracted(Spell spell, Fight fight)
-    {
-        GridMap<FightAgent> gridMap = fight.getGridMap();
-        
-        HashSet<Tile> targets = new HashSet<>();
-        boolean friendlyTargeting = spell.getType().getIsFriendlyTargeting();
-        
-        Player thisPlayer = ActiveGameController.getInstance().get().getPlayer();
-        
-        HashMap<Player, HashSet<FightAgent>> ownershipMap = fight.getOwnershipMap();
-        for (Player player : fight.getOwnershipMap().keySet())
-        {
-            throw new RuntimeException("Not Implemented");
-        }
-        
-        return targets;
-    }
+//    private HashSet<Tile> extracted(Spell spell, Fight fight)
+//    {
+//        GridMap<FightAgent> gridMap = fight.getGridMap();
+//
+//        HashSet<Tile> targets = new HashSet<>();
+//        boolean friendlyTargeting = spell.getType().getIsFriendlyTargeting();
+//
+//        Player thisPlayer = ActiveGameController.getInstance().get().getPlayer();
+//
+//        HashMap<Player, HashSet<FightAgent>> ownershipMap = fight.getOwnershipMap();
+//        for (Player player : fight.getOwnershipMap().keySet())
+//        {
+//            throw new RuntimeException("Not Implemented");
+//        }
+//
+//        return targets;
+//    }
     
     
 }

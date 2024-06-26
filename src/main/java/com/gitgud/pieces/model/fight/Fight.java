@@ -7,10 +7,11 @@ import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import com.gitgud.pieces.model.player.Player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeSet;
 
 
 /**
@@ -27,9 +28,6 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     private final GridMap<FightAgent> gridMap;
     
     
-    private final HashMap<Player, HashSet<FightAgent>> ownershipMap;
-    
-    
     //todo render at bottom of screen
     private final FightTimeLine fightTimeLine;
     
@@ -38,18 +36,16 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     private int turn = 0;
     
     
-    public Fight(GridMap<FightAgent> gridMap, HashMap<Player, HashSet<FightAgent>> ownershipMap,
-                 FightTimeLine fightTimeLine)
+    public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
     {
         this.gridMap = gridMap;
-        this.ownershipMap = ownershipMap;
         this.fightTimeLine = fightTimeLine;
     }
     
     
-    public Fight(GridMap<FightAgent> gridMap, HashMap<Player, HashSet<FightAgent>> ownershipMap)
+    public Fight(GridMap<FightAgent> gridMap)
     {
-        this(gridMap, ownershipMap, FightTimeLine.create(gridMap.nonNullElements()));
+        this(gridMap, FightTimeLine.create(gridMap.nonNullElements()));
     }
     
     
@@ -59,19 +55,13 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     }
     
     
-    public HashMap<Player, HashSet<FightAgent>> getOwnershipMap()
-    {
-        return ownershipMap;
-    }
-    
-    
     public int getTurn()
     {
         return turn;
     }
     
     
-    public int increaseTurn()
+    public int incrementTurn()
     {
         return ++turn;
     }
@@ -86,20 +76,28 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     public void end()
     {
         ActiveGame activeGame = ActiveGameController.getInstance().get();
-        FightAgent[] survivingAgents = (FightAgent[]) ownershipMap.get(activeGame.getPlayer()).stream().filter(
-                x -> !x.isDead()).toArray();
+        
+        FightAgent[] survivingAgents;
+        TreeSet<FightAgent> survivingAgentsTreeSet = fightTimeLine.current();
+        survivingAgentsTreeSet.addAll(fightTimeLine.next());
+        
+        survivingAgents = survivingAgentsTreeSet.stream().filter(
+                fightAgent -> !fightAgent.isDead() && fightAgent.getAllegiance() == Allegiance.BLACK).toArray(
+                FightAgent[]::new);
+        
         if (activeGame.getGameState() == GameState.MISSION_FIGHT)
         {
             FightAgent[] activeFightAgents = activeGame.getMission().getActiveFightAgents();
             System.arraycopy(survivingAgents, 0, activeFightAgents, 0, survivingAgents.length);
+            return;
         }
-        else
+        
+        
+        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
+        
+        for (FightAgent fightAgent : survivingAgents)
         {
-            HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
-            for (FightAgent fightAgent : survivingAgents)
-            {
-                baseCampStash.get(fightAgent.getType()).add(fightAgent);
-            }
+            baseCampStash.get(fightAgent.getType()).add(fightAgent);
         }
         
     }
@@ -108,22 +106,23 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     public boolean isFinished()
     {
         
-        for (Player player : ownershipMap.keySet())
+        ArrayList<FightAgent> survivingAgents = new ArrayList<>(fightTimeLine.current());
+        survivingAgents.addAll(fightTimeLine.next());
+        
+        survivingAgents.stream().filter(x -> !x.isDead()).findFirst();
+        
+        Allegiance allegiance = survivingAgents.get(0).getAllegiance();
+        
+        for (FightAgent fightAgent : survivingAgents)
         {
-            boolean anyAlive = false;
-            
-            for (FightAgent fightAgent : ownershipMap.get(player))
+            if (fightAgent.getAllegiance() != allegiance)
             {
-                anyAlive = anyAlive || !fightAgent.isDead();
-            }
-            
-            if (!anyAlive)
-            {
-                return true;
+                return false;
             }
         }
+        ;
         
-        return false;
+        return true;
         
     }
 }

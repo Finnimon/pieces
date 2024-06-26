@@ -13,7 +13,7 @@ public class RookBuilder extends FightAgentBuilder
     private static final String NAME_SUFFIX = " Rook";
 
 
-    private static final String DESCRIPTION = "A Rook is not fast," + Strings.LINE_BREAK + "but Deathly in distance..";
+    private static final String DESCRIPTION = "A Rook is not fast," + Strings.LINE_BREAK + "but deadly in distance..";
 
 
     private static final boolean IS_FLYING = false; //
@@ -28,7 +28,7 @@ public class RookBuilder extends FightAgentBuilder
     private static final int MELEE_DAMAGE = 3;
 
 
-    private static final int RANGED_DAMAGE = 15;
+    private static final int RANGED_DAMAGE = 35;
 
 
     private static final int RANGED_ATTACK_RANGE = 10;
@@ -69,7 +69,7 @@ public class RookBuilder extends FightAgentBuilder
     @Override
     public void tryBuild(int type)
     {
-        FightAgentType fightAgentType =FightAgentType.KNIGHT;
+        FightAgentType fightAgentType =FightAgentType.ROOK;
         Allegiance allegiance = FightAgentDirector.getAllegiance(type);
         Faction faction = FightAgentDirector.getFaction(type);
         int level=FightAgentDirector.getLevel(type);
@@ -131,6 +131,6 @@ public class RookBuilder extends FightAgentBuilder
     @Override
     public boolean canBuild(int type)
     {
-        return FightAgentDirector.getFightAgentType(type) == FightAgentType.KNIGHT;
+        return FightAgentDirector.getFightAgentType(type) == FightAgentType.ROOK;
     }
 }

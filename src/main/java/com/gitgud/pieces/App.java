@@ -21,7 +21,7 @@ public class App extends Application
 {
     
     
-    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\sprites\\agents\\blackAndWhite\\black_king.png";
+    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\black_king.png";
     
     
     public static final String APP_TITLE = "Pieces";

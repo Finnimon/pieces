@@ -3,11 +3,12 @@ package com.gitgud.pieces.model.gameobjects.interactable.collectibles;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.model.gameobjects.interactable.Collectible;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.ResourceCost;
 import com.gitgud.pieces.model.player.ResourceType;
 
 
-public class ResourceCollectible extends GameObject implements Collectible
+public class ResourceCollectible extends GameObject implements Collectible<MissionController>
 {
     
     

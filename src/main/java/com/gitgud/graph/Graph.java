@@ -109,6 +109,12 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         return vertices.put(vertex, element);
     }
     
+    public Element place(int index, Element element)
+    {
+        Vertex vertex = getVertex(index);
+        
+        return place(vertex, element);
+    }
     
     /**
      * Gets the {@link Element} on {@param vertex}
@@ -382,4 +388,5 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     {
         return vertices.put(vertex, null);
     }
+    
 }

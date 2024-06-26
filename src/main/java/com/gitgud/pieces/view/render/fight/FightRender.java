@@ -15,4 +15,5 @@ public class FightRender extends BaseActionContextRender<Fight, FightAgent,Fight
     {
         super(data, new FightHud(data));
     }
+    
 }

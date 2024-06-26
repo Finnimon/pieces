@@ -66,6 +66,7 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
         
         if (event.getEventType() == addEvent && !parent.getChildren().contains(appendix))
         {
+            parent.toFront();
             parent.getChildren().add(appendix);
             double x = event.getX();
             double y = event.getY();

@@ -39,8 +39,6 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
         this.gridMapRender = new GridMapRender<>(data.getGridMap(), tileSize);
         gridMapRenderScrollPane = new ScrollPane();
         
-        addGridMapRender();
-        
         
         render(data);
     }
@@ -80,6 +78,7 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
         gridMapRenderScrollPane.setFitToWidth(true);
         setAlignment(gridMapRenderScrollPane, Pos.CENTER);
         
+        gridMapRenderScrollPane.setVvalue(1);
         getChildren().add(gridMapRenderScrollPane);
     }
     
@@ -101,18 +100,12 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
     @Override
     public void render(MType data)
     {
+        
+        addGridMapRender();
+        
         getChildren().add(hud);
-        setAlignment(hud, Pos.TOP_LEFT);
         Stage stage = StageController.getInstance().getStage();
-        
         stage.getScene().setRoot(this);
-        
-        if (stage.isFullScreen())
-        {
-            return;
-        }
-        
-        stage.setFullScreen(true);
     }
     
     

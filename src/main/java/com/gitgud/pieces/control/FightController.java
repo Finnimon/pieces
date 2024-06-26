@@ -6,9 +6,11 @@ import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.actionChoice.*;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
+import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.fight.FightRender;
 
 import java.util.ArrayList;
@@ -31,14 +33,18 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     @Override
     public void advance()
     {
-        getModel().getFightTimeLine().advance();
         
-        getRender().getGridMapRender().clearHighLights();
-        
-        if (tryEnd())
+        Fight fight = this.getModel();
+        fight.getFightTimeLine().advance();
+        fight.incrementTurn();
+        if(tryEnd())
         {
             return;
         }
+        FightRender render = getRender();
+        render.updateRender();
+        render.getGridMapRender().clearHighLights();
+        
         
         if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
         {
@@ -119,9 +125,21 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     {
         ActiveGame activeGame = ActiveGameController.getInstance().get();
         
+        System.out.println(activeGame.getGameState());
         getModel().end();//todo
         
         activeGame.setFight(null);
+        Mission mission = activeGame.getMission();
+        if (mission != null)
+        {
+            new MissionController(mission).start();
+            return;
+        }
+        
+        StageController.getInstance().getStage().close();
+        
+        City city = activeGame.getCity();
+        new CityController(city).start();
     }
     
     
@@ -135,6 +153,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     @Override
     public void start()
     {
+        ActiveGameController.getInstance().get().setFight(this.getModel());
         StageController.getInstance().getStage().show();
         if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
         {

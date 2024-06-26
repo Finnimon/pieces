@@ -22,7 +22,7 @@ public class BishopBuilder extends FightAgentBuilder
     private static final int MOVEMENT_RANGE = 3;
 
 
-    private static final FightAgentType TYPE = FightAgentType.KNIGHT;
+    private static final FightAgentType TYPE = FightAgentType.BISHOP;
 
 
     private static final int MELEE_DAMAGE = 5;
@@ -68,7 +68,7 @@ public class BishopBuilder extends FightAgentBuilder
     @Override
     public void tryBuild(int type)
     {
-        FightAgentType fightAgentType =FightAgentType.KNIGHT;
+        FightAgentType fightAgentType =FightAgentType.BISHOP;
         Allegiance allegiance = FightAgentDirector.getAllegiance(type);
         Faction faction = FightAgentDirector.getFaction(type);
         int level=FightAgentDirector.getLevel(type);
@@ -130,6 +130,6 @@ public class BishopBuilder extends FightAgentBuilder
     @Override
     public boolean canBuild(int type)
     {
-        return FightAgentDirector.getFightAgentType(type) == FightAgentType.KNIGHT;
+        return FightAgentDirector.getFightAgentType(type) == FightAgentType.BISHOP;
     }
 }

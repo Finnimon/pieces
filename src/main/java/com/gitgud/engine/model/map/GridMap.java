@@ -236,6 +236,13 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     
     
     @Override
+    public GridMappableType place(int x, int y, GridMappableType gridMappableType)
+    {
+        return place(calculateIndex(x, y), gridMappableType);
+    }
+    
+    
+    @Override
     public boolean isValid()
     {
         for (Tile tile : verticeSet())

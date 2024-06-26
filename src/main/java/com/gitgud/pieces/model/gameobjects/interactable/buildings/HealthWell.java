@@ -1,15 +1,14 @@
 package com.gitgud.pieces.model.gameobjects.interactable.buildings;
 
 import com.gitgud.engine.model.gameobjects.interactable.GridMappableBuilding;
-import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 
 import java.util.List;
 
 
-public class HealthWell extends GridMappableBuilding
+public class HealthWell extends GridMappableBuilding<MissionController>
 {
     private final static String NAME = "Health Well";
     
@@ -18,7 +17,7 @@ public class HealthWell extends GridMappableBuilding
     
     
     //todo
-    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/HealthWell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/buildings/HealthWell.png";
     
     
     public HealthWell()
@@ -34,9 +33,9 @@ public class HealthWell extends GridMappableBuilding
     
     
     @Override
-    public void interact(GridMap gridMap)
+    public void interact(MissionController missionController)
     {
-        Mission mission = ActiveGameController.getInstance().get().getMission();
+        Mission mission = missionController.getModel();
         healFightFigures(mission.getActiveFightAgents());
         healFightFigures(mission.getDiscardedFightAgents());
     }

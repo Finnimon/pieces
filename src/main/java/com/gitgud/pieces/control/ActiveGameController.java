@@ -1,6 +1,7 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.testing.TestAssets;
 
 
 /**
@@ -27,6 +28,10 @@ public class ActiveGameController
     
     public static ActiveGameController getInstance()
     {
+        if (instance == null)
+        {
+            initialize();
+        }
         return instance;
     }
     
@@ -45,7 +50,7 @@ public class ActiveGameController
     
     public static void initialize()
     {
-        //todo default method
+        initialize(TestAssets.getTestActiveGame());//todo!!!
     }
     
     

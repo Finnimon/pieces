@@ -169,7 +169,7 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
             {
                 return;
             }
-            if (event.getEventType() != KeyEvent.KEY_TYPED)
+            if (event.getEventType() != KeyEvent.KEY_PRESSED)
             {
                 return;
             }

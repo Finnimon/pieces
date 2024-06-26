@@ -4,13 +4,14 @@ package com.gitgud.pieces.model.gameobjects.interactable.buildings;
 import com.gitgud.engine.model.gameobjects.interactable.GridMappableBuilding;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 
 import java.util.List;
 
 
-public class ManaWell extends GridMappableBuilding
+public class ManaWell extends GridMappableBuilding<MissionController>
 {
     private final static String NAME = "Mana Well";
     
@@ -19,7 +20,7 @@ public class ManaWell extends GridMappableBuilding
     
     
     //todo
-    private static final String SPRITE_URL = "src/main/resources/com/gitgud/sprites/interactables/ManaWell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/buildings/ManaWell.png";
     
     
     public ManaWell()
@@ -35,10 +36,9 @@ public class ManaWell extends GridMappableBuilding
     
     
     @Override
-    public void interact(GridMap gridMap)
+    public void interact(MissionController missionController)
     {
-        Mission mission = ActiveGameController.getInstance().get().getMission();
-        
+        Mission mission=missionController.getModel();
         replenishFightFiguresMana(mission.getActiveFightAgents());
         replenishFightFiguresMana(mission.getDiscardedFightAgents());
     }
