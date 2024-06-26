@@ -1,8 +1,8 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.action.Action;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.Action;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.Describable;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Named;
@@ -182,4 +182,7 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
             select();
         };
     }
+    
+    
+    
 }

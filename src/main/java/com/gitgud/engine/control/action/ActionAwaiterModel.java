@@ -1,4 +1,4 @@
-package com.gitgud.engine.model.action;
+package com.gitgud.engine.control.action;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;

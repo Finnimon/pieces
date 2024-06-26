@@ -1,4 +1,4 @@
-package com.gitgud.engine.model.action;
+package com.gitgud.engine.control.action;
 
 import javafx.event.Event;
 import javafx.event.EventTarget;

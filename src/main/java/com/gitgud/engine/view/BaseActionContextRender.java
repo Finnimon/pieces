@@ -1,7 +1,7 @@
 package com.gitgud.engine.view;
 
 import com.gitgud.engine.control.StageController;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import javafx.geometry.Pos;
@@ -13,13 +13,11 @@ import javafx.stage.Stage;
 public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, HudType extends ActionContextHud<MType>> extends StackPane implements ActionContextRender<MType, GMType>
 {
     
-    public static final double MINIMUM_GRID_MAP_SCROLL_PANE_SIDE_ANCHOR = 200d;
+    
+    public static final int TILE_SIZE_DEFAULT_VALUE = 50;
     
     
-    public static final double DEFAULT_GRID_MAP_SCROLL_PANE_BOTTOM_ANCHOR = 100d;
-    
-    
-    public static final int TILE_SIZE_DEFAULT_VALUE = 90;
+    public static final int MAX_GRIDMAP_SIZE = 1000;
     
     
     private final MType data;
@@ -59,10 +57,11 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
         int width = gridMap.getWidth();
         int height = gridMap.getHeight();
         
-        if (width == height && height < 20)
+        if (width < 20)
         {
-            return 1000 / height;
+            return MAX_GRIDMAP_SIZE / width;
         }
+        
         
         return TILE_SIZE_DEFAULT_VALUE;
     }
@@ -74,9 +73,12 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
         
         gridMapRenderScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         gridMapRenderScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        gridMapRenderScrollPane.setMaxWidth(1000);
-        gridMapRenderScrollPane.setMaxHeight(1000);
-        setAlignment(gridMapRenderScrollPane, Pos.TOP_CENTER);
+        gridMapRenderScrollPane.setPannable(true);
+        
+        gridMapRenderScrollPane.setMaxSize(MAX_GRIDMAP_SIZE, MAX_GRIDMAP_SIZE);
+        
+        gridMapRenderScrollPane.setFitToWidth(true);
+        setAlignment(gridMapRenderScrollPane, Pos.CENTER);
         
         getChildren().add(gridMapRenderScrollPane);
     }
@@ -100,7 +102,7 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
     public void render(MType data)
     {
         getChildren().add(hud);
-        setAlignment(hud,Pos.TOP_LEFT);
+        setAlignment(hud, Pos.TOP_LEFT);
         Stage stage = StageController.getInstance().getStage();
         
         stage.getScene().setRoot(this);

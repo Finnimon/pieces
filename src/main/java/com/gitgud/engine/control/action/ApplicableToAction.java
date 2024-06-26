@@ -1,7 +1,7 @@
-package com.gitgud.engine.model.action;
+package com.gitgud.engine.control.action;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.action.types.Applicable;
+import com.gitgud.engine.control.action.types.Applicable;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;

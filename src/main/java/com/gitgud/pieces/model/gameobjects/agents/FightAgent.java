@@ -4,9 +4,9 @@ import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.GridMovable;
 import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
-import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Attack;
-import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.DamageType;
-import com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic.Defence;
+import com.gitgud.engine.model.attackDefenseLogic.Attack;
+import com.gitgud.engine.model.attackDefenseLogic.DamageType;
+import com.gitgud.engine.model.attackDefenseLogic.Defence;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.fight.Allegiance;
@@ -293,13 +293,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
             throw new IllegalArgumentException("Cannot attack at distance " + distance);
         }
         
-        System.out.println("ismelee: " + isMelee);
+        
         int attackValue = isMelee ? getMeleeDamage() : calculateRangedAttackDamage(distance);
         if (!isMelee)
         {
             remainingRangedAttacks--;
         }
-        System.out.println("\n-------------------------\n" + this + " attacking with " + attackValue +" "+getMeleeDamage()+ " damage. " + remainingRangedAttacks + " remaining ranged attacks\n-------------------------\n");
+        
         
         return new Attack(attackValue, getAccuracy(), DamageType.PHYSICAL);
     }

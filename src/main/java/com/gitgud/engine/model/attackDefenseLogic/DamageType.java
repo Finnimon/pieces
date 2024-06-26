@@ -1,4 +1,4 @@
-package com.gitgud.engine.model.gameobjects.agent.attackDefenseLogic;
+package com.gitgud.engine.model.attackDefenseLogic;
 
 /**
  * All types of damage as used by {@link Attack}

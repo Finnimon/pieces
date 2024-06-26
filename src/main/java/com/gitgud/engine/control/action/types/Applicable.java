@@ -1,4 +1,4 @@
-package com.gitgud.engine.model.action.types;
+package com.gitgud.engine.control.action.types;
 
 public interface Applicable<T>
 {

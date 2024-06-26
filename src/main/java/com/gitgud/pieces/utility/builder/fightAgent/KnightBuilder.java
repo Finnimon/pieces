@@ -19,7 +19,7 @@ public class KnightBuilder extends FightAgentBuilder
     private static final boolean IS_FLYING = true; //
     
     
-    private static final int MOVEMENT_RANGE = 7;
+    private static final int MOVEMENT_RANGE = 6;
     
     
     private static final FightAgentType TYPE = FightAgentType.KNIGHT;
@@ -58,7 +58,7 @@ public class KnightBuilder extends FightAgentBuilder
     private static final int INITIATIVE = 100;
     
     
-    private static final float ACCURACY = 0.5f;
+    private static final float ACCURACY = 0.9f;
     
     
     public KnightBuilder()

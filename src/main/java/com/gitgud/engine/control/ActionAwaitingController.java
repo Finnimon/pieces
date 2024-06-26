@@ -1,12 +1,11 @@
 package com.gitgud.engine.control;
 
 import com.gitgud.engine.control.actionChoice.ActionChoice;
-import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.utility.Strings;
 import com.gitgud.engine.view.ActionContextRender;
-import javafx.scene.paint.Color;
 
 
 public abstract class ActionAwaitingController
@@ -16,7 +15,6 @@ public abstract class ActionAwaitingController
     public ActionAwaitingController(ModelType model, RenderType render)
     {
         super(model, render);
-        start();
     }
     
     
@@ -52,7 +50,7 @@ public abstract class ActionAwaitingController
         getRender().getGridMapRender().clearHighLights();
         getActionChoice().show(this);
         
-         hightlightActivePosition();
+        hightlightActivePosition();
     }
     
     protected <AAType extends ActionAwaitingController<ModelType, GridMappableType,RenderType>>ActionChoice<AAType, ModelType, GridMappableType, RenderType> getSkipTurnChoice()

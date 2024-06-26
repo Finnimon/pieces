@@ -1,6 +1,6 @@
 package com.gitgud.pieces.model.fight;
 
-import com.gitgud.engine.model.action.ActionAwaiterModel;
+import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.activeGame.ActiveGame;

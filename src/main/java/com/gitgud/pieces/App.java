@@ -57,10 +57,11 @@ public class App extends Application
     
     @Override
     public void start(Stage stage) throws IOException
-    {//call your main here
-        //initialize(stage);
-        //lindigTest(stage);
-                delfiMain(stage);
+    {
+        //call your main here
+        initialize(stage);
+        lindigTest(stage);
+//        delfiMain(stage);
         stage.show();
     }
     

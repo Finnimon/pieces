@@ -1,8 +1,9 @@
 package com.gitgud.pieces.control.actionChoices;
 
+import com.gitgud.engine.control.action.TileMovementAction;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.control.actionChoice.ToActionChoice;
-import com.gitgud.engine.model.action.ToAction;
+import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.model.fight.Fight;
@@ -22,7 +23,7 @@ public class FightMovementChoice extends ToActionChoice<FightController, Fight, 
     @Override
     public void select()
     {
-        FightController fightController = (FightController) getAwaiter();
+        FightController fightController = getAwaiter();
         FightRender fightRender= fightController.getRender();
         fightRender.getHud().clearChoices();
         fightRender.getGridMapRender().clearHighLights();
@@ -42,5 +43,12 @@ public class FightMovementChoice extends ToActionChoice<FightController, Fight, 
         fightController.getRender().getHud().clearChoices();
         
         attackRootChoice.show(fightController);
+    }
+    
+    
+    @Override
+    public TileMovementAction<FightController, Fight, FightAgent, FightRender> getAction()
+    {
+        return (TileMovementAction<FightController, Fight, FightAgent, FightRender>) super.getAction();
     }
 }
