@@ -70,7 +70,7 @@ public class EnemyAi
             return false;
         }
         
-        List<ActionChoice> choices = rootChoice.getChoices();
+        List<ActionChoice<?,?,?,?>> choices = rootChoice.getChoices();
         
         selectRandomChoice(choices);
         
@@ -78,11 +78,20 @@ public class EnemyAi
     }
     
     
-    private void selectRandomChoice(List<ActionChoice> choices)
+    private void selectRandomChoice(List<ActionChoice<?,?,?,?>> choices)
     {
         int index = randomInt(0, choices.size() - 1);
         
-        choices.get(index).select();
+        ActionChoice<?,?,?,?> actionChoice= choices.get(index);
+        actionChoice.select();
+        
+        if (!(actionChoice instanceof RootChoice rootChoice))
+        {
+            actionChoice.select();
+            return;
+        }
+        
+        selectRandomChoice(rootChoice.getChoices());
     }
     
     
