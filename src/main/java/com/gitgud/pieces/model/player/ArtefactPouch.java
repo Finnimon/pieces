@@ -18,14 +18,16 @@ public class ArtefactPouch
     private final int MAX_ARTEFACTS = 3;
     
     
-    private final Artefact[] equippedArtefacts = new Artefact[MAX_ARTEFACTS];
+    private final Artefact[] equippedArtefacts;
     
     
-    private final ArrayList<Artefact> allOwnedArtefacts = new ArrayList<>();
+    private final ArrayList<Artefact> allOwnedArtefacts ;
     
     
     public ArtefactPouch()
     {
+         equippedArtefacts= new Artefact[MAX_ARTEFACTS];
+         allOwnedArtefacts = new ArrayList<>();
     }
     
     

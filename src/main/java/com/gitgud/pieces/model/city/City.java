@@ -53,6 +53,19 @@ public class City
     }
     
     
+    public City()
+    {
+        headQuarter=new HeadQuarter();
+        blackSmith=null;
+        market=null;
+        magicEnhancer=null;
+        trainingGrounds=null;
+        monoChromeFactionCamp=null;
+        pinkFactionCamp=null;
+        greenFactionCamp=null;
+    }
+    
+    
     private void validateFactionCamps()
     {
     }

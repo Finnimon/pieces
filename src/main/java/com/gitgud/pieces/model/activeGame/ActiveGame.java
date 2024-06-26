@@ -29,7 +29,7 @@ public class ActiveGame
     private Fight fight;
     
     
-    private ActiveGame(Player player, City city, Mission mission, Fight fight)
+    public ActiveGame(Player player, City city, Mission mission, Fight fight)
     {
         this.player = player;
         this.city = city;

@@ -23,6 +23,10 @@ public class FightAgentDirector implements Director<FightAgent>
         this.builder = builder;
     }
     
+    public  FightAgentDirector()
+    {
+        this(new KnightBuilder());
+    }
     
     public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level)
     {

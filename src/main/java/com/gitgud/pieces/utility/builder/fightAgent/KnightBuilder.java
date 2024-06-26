@@ -43,7 +43,7 @@ public class KnightBuilder extends FightAgentBuilder
     private static final int PHYSICAL_DEFENCE = 1;
     
     
-    private static final int MAGIC_DEFENCE = 0;
+    private static final int MAGIC_DEFENCE = 1;
     
     
     private static final float EVADE_CHANCE = 0.2f;
