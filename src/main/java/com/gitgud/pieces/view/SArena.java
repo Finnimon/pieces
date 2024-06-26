@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -51,7 +52,7 @@ import javafx.stage.Stage;
         private static Scene CreateServerLobby(Stage stage, CharSequence serverAddress)
         {
             String stringServerAddress = serverAddress.toString();
-            Group root =new Group();
+            HBox root =new HBox();
             Text text = new Text(SERVER_LOBY_INFO);
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsServer(stringServerAddress);
@@ -70,15 +71,18 @@ import javafx.stage.Stage;
         private static Scene CreateClientLobby(Stage stage, CharSequence serverAddress)
         {
             String stringServerAddress = serverAddress.toString();
-            Group root =new Group();
+            HBox root =new HBox();
             Text text = new Text(CLIENT_SERVER_INFO);
             root.getChildren().add(text);
             ArenaController.InitialiseArenaAsClient(stringServerAddress);
+
 
             if(ServerClientController.getInstance().getClient().isConnected())
             {
                 stage.setScene(STest.ceateSTest());
             }
+
+
 
             return new Scene(root);
         }

@@ -1,10 +1,6 @@
 package com.gitgud.pieces.control.Net;
 
 import com.gitgud.net.*;
-import org.zeromq.ZMQException;
-
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 public class ArenaController {
     public static void InitialiseArenaAsClient(String serverAddress)
@@ -23,5 +19,7 @@ public class ArenaController {
         Client client = ServerClientController.getInstance().getClient();
         client.setServerAddress(serverAddress);
         client.start();
+
+
     }
 }
