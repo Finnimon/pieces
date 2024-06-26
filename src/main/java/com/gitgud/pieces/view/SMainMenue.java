@@ -62,7 +62,7 @@ public class SMainMenue {
         //buttonsArray[2].setOnAction(e -> stage.setScene(settings)) TODO: brauchen wir überhaupt Settings?
         // Anwendung komplett beenden
         buttonsArray[3].setOnAction(e -> Platform.exit());
-        buttonsArray[4].setOnAction(e -> stage.setScene(SMission.createMissionScene(stage)));
+        buttonsArray[4].setOnAction(e -> stage.setScene(SArena.createArenaScene(stage)));
 
         root.getChildren().add(hauptmenueText);
         //getChildren()-Methode gibt eine Liste der direkten untergeordneten Knoten des aktuellen Knotens zurück
