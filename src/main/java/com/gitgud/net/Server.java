@@ -8,9 +8,9 @@ import java.util.LinkedList;
 
 public class Server extends Thread {
 
-    public static final int TIME_TO_WAIT_WHILE_RECEIVING_MESSAGE = 50;
-    public static final String TCP_8332 = "tcp://172.0.0.1:5555";
-    public static final int FAIL_CODE = -1;
+    private static final int TIME_TO_WAIT_WHILE_RECEIVING_MESSAGE = 50;
+    private static final String TCP_8332 = "tcp://172.0.0.1:5555";
+    private static final int FAIL_CODE = -1;
     private LinkedList<Serializable> messageQueue;
     private final ZMQ.Socket socket;
     private boolean currentlyReceiving;
