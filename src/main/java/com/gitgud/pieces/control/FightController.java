@@ -2,6 +2,7 @@ package com.gitgud.pieces.control;
 
 
 import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.actionChoice.*;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
@@ -17,13 +18,13 @@ import java.util.List;
 //todo render as scene
 public class FightController extends ActionAwaitingController<Fight, FightAgent, FightRender>
 {
-    private final EnemyAi enemyAi;
+    private final EnemyAlgorithm enemyAlgorithm;
     
     
     public FightController(Fight fight)
     {
         super(fight, new FightRender(fight));
-        enemyAi = new EnemyAi(this);
+        enemyAlgorithm = new EnemyAlgorithm(this);
     }
     
     
@@ -31,22 +32,22 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     public void advance()
     {
         getModel().getFightTimeLine().advance();
+        
+        getRender().getGridMapRender().clearHighLights();
+        
         if (tryEnd())
         {
             return;
         }
         
-        getRender().getGridMapRender().clearHighLights();
+        if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
+        {
+            enemyAlgorithm.act();
+            return;
+        }
         
-        if (getActiveFightAgent().getAllegiance() == enemyAi.getEnemyAllegiance())
-        {
-            enemyAi.act();
-        }
-        else//theoretically nesting avoidable, but want to rule out undefinied behavior
-        {
-            getActionChoice().show(this);
-            hightlightActivePosition();
-        }
+        getActionChoice().show(this);
+        hightlightActivePosition();
     }
     
     
@@ -131,4 +132,14 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     }
     
     
+    @Override
+    public void start()
+    {
+        StageController.getInstance().getStage().show();
+        if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
+        {
+            enemyAlgorithm.act();
+        }
+            super.start();
+    }
 }

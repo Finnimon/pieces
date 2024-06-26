@@ -15,7 +15,6 @@ public abstract class ActionAwaitingController
     public ActionAwaitingController(ModelType model, RenderType render)
     {
         super(model, render);
-        start();
     }
     
     
@@ -51,7 +50,7 @@ public abstract class ActionAwaitingController
         getRender().getGridMapRender().clearHighLights();
         getActionChoice().show(this);
         
-         hightlightActivePosition();
+        hightlightActivePosition();
     }
     
     protected <AAType extends ActionAwaitingController<ModelType, GridMappableType,RenderType>>ActionChoice<AAType, ModelType, GridMappableType, RenderType> getSkipTurnChoice()

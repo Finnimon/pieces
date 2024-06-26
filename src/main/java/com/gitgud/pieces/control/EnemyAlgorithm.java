@@ -2,6 +2,7 @@ package com.gitgud.pieces.control;
 
 
 import com.gitgud.engine.control.actionChoice.*;
+import com.gitgud.pieces.control.actionChoices.FightMovementChoice;
 import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
@@ -10,12 +11,12 @@ import com.gitgud.pieces.view.render.fight.FightRender;
 import java.util.List;
 
 
-public class EnemyAi
+public class EnemyAlgorithm
 {
     private final FightController fightController;
     private final Allegiance enemyAllegiance = Allegiance.WHITE;
     
-    public EnemyAi(FightController fightController)
+    public EnemyAlgorithm(FightController fightController)
     {
         this.fightController = fightController;
     }
@@ -29,6 +30,8 @@ public class EnemyAi
     
     public void act()
     {
+        
+        System.out.println("enemyAlgorithm.act()");
         ActionChoice<FightController, Fight, FightAgent, FightRender> actionChoice = fightController.getActionChoice();
         
         if (!(actionChoice instanceof RootActionChoice<FightController, Fight, FightAgent, FightRender> rootActionChoice))
@@ -83,15 +86,34 @@ public class EnemyAi
         int index = randomInt(0, choices.size() - 1);
         
         ActionChoice<?,?,?,?> actionChoice= choices.get(index);
-        actionChoice.select();
         
-        if (!(actionChoice instanceof RootChoice rootChoice))
+        
+        if (actionChoice instanceof RootChoice rootChoice)
         {
-            actionChoice.select();
+            selectRandomChoice(rootChoice.getChoices());
+            
             return;
         }
         
-        selectRandomChoice(rootChoice.getChoices());
+        
+        if (actionChoice instanceof FightMovementChoice)
+        {
+            selectFightMovementChoice((FightMovementChoice) actionChoice);
+            
+            return;
+        }
+        
+        actionChoice.select();
+    }
+    
+    
+    private void selectFightMovementChoice(FightMovementChoice actionChoice)
+    {
+        actionChoice.getAction().enAct(fightController);
+        
+        fightController.getRender().getHud().clearChoices();
+        tryRootChoice(fightController.getAttackRootChoice());
+        fightController.advance();
     }
     
     

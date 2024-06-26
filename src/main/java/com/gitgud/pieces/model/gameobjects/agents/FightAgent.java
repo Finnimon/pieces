@@ -293,13 +293,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
             throw new IllegalArgumentException("Cannot attack at distance " + distance);
         }
         
-        System.out.println("ismelee: " + isMelee);
+        
         int attackValue = isMelee ? getMeleeDamage() : calculateRangedAttackDamage(distance);
         if (!isMelee)
         {
             remainingRangedAttacks--;
         }
-        System.out.println("\n-------------------------\n" + this + " attacking with " + attackValue +" "+getMeleeDamage()+ " damage. " + remainingRangedAttacks + " remaining ranged attacks\n-------------------------\n");
+        
         
         return new Attack(attackValue, getAccuracy(), DamageType.PHYSICAL);
     }

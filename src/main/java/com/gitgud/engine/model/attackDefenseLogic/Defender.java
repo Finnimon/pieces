@@ -22,10 +22,6 @@ public interface Defender extends Health
     
     private void takeDamage(int damage)
     {
-        System.out.println("Defender.takeDamage(" + damage + ")");
-        
-        System.out.println(getHealth() +"-"+ damage);
-        System.out.println(getDefenceTo(DamageType.PHYSICAL).defence());
         setHealth(getHealth() - damage);
     }
     

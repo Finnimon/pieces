@@ -34,7 +34,7 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     
     public void advance()
-    {System.out.println("\n\n\n timelinesize "+current.size());
+    {
         TreeSet<FightAgent> fightTimeLine = current();
         TreeSet<FightAgent> nextTimeLine = next();
         removeDeadFightFigures(fightTimeLine);
@@ -68,7 +68,7 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     private static Comparator<FightAgent> getComparator()
     {
-        return (o1, o2) ->o2.compareTo(o1);
+        return Comparator.reverseOrder();
     }
     
 }
