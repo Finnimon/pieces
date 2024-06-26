@@ -1,8 +1,7 @@
 package com.gitgud.pieces.model.gameobjects.interactable.buildings;
 
 import com.gitgud.engine.model.gameobjects.interactable.GridMappableBuilding;
-import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.engine.utility.Strings;
 import com.gitgud.pieces.control.MissionController;
 
 
@@ -11,15 +10,15 @@ public class MissionEnder extends GridMappableBuilding<MissionController>
     private static final String NAME = "Portal Home";
     
     
-    private static final String DESCRIPTION = "This portal leads the Black King home to his City";
+    private static final String DESCRIPTION = "This portal leads you back home,"+ Strings.LINE_BREAK +" to your Kingdom of Ruins.";
     
     
-    private static final String SPRITE_URL = "";//todo !!!!
+    private static final String SPRITE_FILEPATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\interactable\\buildings\\MissionEnder.png";
     
     
     public MissionEnder()
     {
-        super(NAME, DESCRIPTION, SPRITE_URL);
+        super(NAME, DESCRIPTION, SPRITE_FILEPATH);
     }
     
     

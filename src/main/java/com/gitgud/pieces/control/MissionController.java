@@ -11,6 +11,8 @@ import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Collectible;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
@@ -67,13 +69,13 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void advance()
     {
-        
-        super.advance();
-        
-        
         handleInteractions();
         
-        System.out.println("MissionController.advance()");
+        if (tryEnd())
+        {
+            return;
+        }
+        super.advance();
     }
     
     
@@ -92,18 +94,25 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         
         interactable.interact(this);
         
-        if (interactable instanceof Collectible<MissionController>)
+        if (!(interactable instanceof Collectible<MissionController>))
         {
-            getRender().getGridMapRender().removeGridMappable((GameObject) interactable);
+            return;
         }
+        getRender().getGridMapRender().removeGridMappable((GameObject) interactable);
     }
     
     
     @Override
     public void end()
     {
-        ActiveGameController.getInstance().get().setMission(null);
+        ActiveGame activeGame = ActiveGameController.getInstance().get();
         
+        activeGame.setMission(null);
+        
+        City city = activeGame.getCity();
+        
+        getModel().returnFightAgentsToPool();
+        new CityController(city).start();
     }
     
     

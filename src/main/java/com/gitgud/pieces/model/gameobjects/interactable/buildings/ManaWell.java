@@ -2,13 +2,9 @@ package com.gitgud.pieces.model.gameobjects.interactable.buildings;
 
 
 import com.gitgud.engine.model.gameobjects.interactable.GridMappableBuilding;
-import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
-
-import java.util.List;
 
 
 public class ManaWell extends GridMappableBuilding<MissionController>
@@ -29,16 +25,23 @@ public class ManaWell extends GridMappableBuilding<MissionController>
     }
     
     
-    private void replenishFightFiguresMana(FightAgent[] fightFigures)
+    private void replenishFightFiguresMana(FightAgent[] fightAgents)
     {
-        List.of(fightFigures).forEach(fightFigure -> fightFigure.setMana(fightFigure.getMaxMana()));
+        for (FightAgent agent : fightAgents)
+        {
+            if (agent == null)
+            {
+                continue;
+            }
+            agent.setMana(agent.getMaxMana());
+        }
     }
     
     
     @Override
     public void interact(MissionController missionController)
     {
-        Mission mission=missionController.getModel();
+        Mission mission = missionController.getModel();
         replenishFightFiguresMana(mission.getActiveFightAgents());
         replenishFightFiguresMana(mission.getDiscardedFightAgents());
     }

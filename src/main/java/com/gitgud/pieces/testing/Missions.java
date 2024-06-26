@@ -12,6 +12,7 @@ import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.HealthWell;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.ManaWell;
+import com.gitgud.pieces.model.gameobjects.interactable.buildings.MissionEnder;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.Portal;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectable;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigger;
@@ -58,11 +59,15 @@ public interface Missions
         index=997;gameObject=getRandomResourceCollectible();;gridMap.place(index, gameObject);
         index=770;gameObject=getRandomResourceCollectible();;gridMap.place(index, gameObject);
         index=816;gameObject=getRandomResourceCollectible();;gridMap.place(index, gameObject);
-
-        Tile portalTile = gridMap.verticeSet().stream().filter(t -> t.getTerrain().isTraversable()).findFirst().orElse(null);
-        index=730;gameObject=new Portal(portalTile);
+        
+        
+        
+        Tile portalTile= gridMap.verticeSet().stream().filter(t -> t.getTerrain().isTraversable()&&gridMap.get(t)==null).findFirst().orElse(null);
+        gameObject=new MissionEnder();
+        gridMap.place(portalTile, gameObject);
+        portalTile = gridMap.verticeSet().stream().filter(t -> t.getTerrain().isTraversable()&&gridMap.get(t)==null).findFirst().orElse(null);
+        index=728;gameObject=new Portal(portalTile);
         gridMap.place(index, gameObject);
-
         index=554; gameObject=new ManaWell();
         gridMap.place(index, gameObject);
         index=601; gameObject=new HealthWell();
@@ -72,6 +77,8 @@ public interface Missions
         gridMap.place(index, gameObject);
         index=740; gameObject=getRandomFightAgentCollectable();
         gridMap.place(index, gameObject);
+        
+        
 //
 //        index=749; gameObject=new FightTrigger()
         

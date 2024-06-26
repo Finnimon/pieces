@@ -1,6 +1,7 @@
 package com.gitgud.engine.view;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
+import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import javafx.collections.ObservableList;
@@ -133,6 +134,14 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
         gridMappableGroup.getChildren().add(render);
         
         gridMappableRenders.put(gridMappable, render);
+        
+        if (!(gridMappable instanceof Interactable<?>))
+        {
+            return;
+        }
+        
+        render.toBack();
+        
     }
     
     

@@ -112,8 +112,8 @@ public class TestStuff
     
     public static void lindigTest(Stage stage)
     {
-//        testFightController();
-                testMissionController();
+        testFightController();
+//                testMissionController();
         //        addTestGridMapRenderToStage(stage);
         //        finnGsonTest();
     }

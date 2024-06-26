@@ -5,13 +5,14 @@ import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.control.action.MissionMovementAction;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.*;
 
 
 public class Mission implements ActionAwaiterModel<GameObject>
@@ -115,4 +116,17 @@ public class Mission implements ActionAwaiterModel<GameObject>
     }
     
     
+    public void returnFightAgentsToPool()
+    {
+        ArrayList<FightAgent> fightAgents = new ArrayList<>();
+        for (int i = 0; i < activeFightAgents.length; i++)
+        {
+            fightAgents.add(activeFightAgents[i]);
+            fightAgents.add(discardedFightAgents[i]);
+        }
+        
+        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = ActiveGameController.getInstance().get().getPlayer().army().baseCampStash();
+        
+        fightAgents.stream().filter(Objects::nonNull).forEach(fA -> baseCampStash.get(fA.getType()).add(fA));
+    }
 }
