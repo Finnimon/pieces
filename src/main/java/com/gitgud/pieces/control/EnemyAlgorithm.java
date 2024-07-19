@@ -11,12 +11,12 @@ import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
+import javafx.beans.property.IntegerProperty;
 import javafx.concurrent.Task;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +29,7 @@ public class EnemyAlgorithm
     private final FightController fightController;
     
     
-    private final Allegiance enemyAllegiance = Allegiance.WHITE;
+    public static final Allegiance ENEMY_ALLEGIANCE = Allegiance.WHITE;
     
     
     public EnemyAlgorithm(FightController fightController)
@@ -114,24 +114,29 @@ public class EnemyAlgorithm
     }
     
     
-    private void selectFightMovementChoice(FightMovementChoice actionChoice)
+    private synchronized void selectFightMovementChoice(FightMovementChoice actionChoice)
     {
-        actionChoice.getAction().enAct(fightController);
+        IntegerProperty turnProperty = fightController.getModel().getTurnProperty();
+        int turn=turnProperty.getValue();
+        
+        actionChoice.select();
+        if (turn!=turnProperty.getValue())
+            return;
+        
         fightController.getRender().getHud().clearChoices();
+        
         RootChoice attackRootChoice = fightController.getAttackRootChoice();
         if (attackRootChoice.isEmpty())
         {
-            fightController.advance();
             return;
         }
-        select(chooseRandomChoice(attackRootChoice.getChoices()));
-        fightController.advance();
+        ((ActionChoice)attackRootChoice.getChoices().get(0)).select();
     }
     
     
     public Allegiance getEnemyAllegiance()
     {
-        return enemyAllegiance;
+        return ENEMY_ALLEGIANCE;
     }
     
     

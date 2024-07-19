@@ -124,10 +124,9 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     @Override
     public void end()
     {
-        ActiveGame activeGame = ActiveGameController.getInstance().get();
         getModel().end();
         
-        activeGame.setFight(null);
+        ActiveGameController.getInstance().get().setFight(null);
         
         GameFlow.startNextSceneController();
     }

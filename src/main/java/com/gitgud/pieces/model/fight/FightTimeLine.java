@@ -62,10 +62,6 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     public FightAgent getActiveFightAgent()
     {
-        if (current.first()==null||current.first().isDead())
-            
-            System.out.println("\r\n\n--------------------  null in timeline   --------------------\n\n\r");
-        
         return current.first();
     }
     

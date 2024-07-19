@@ -91,17 +91,17 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         {
             FightAgent[] activeFightAgents = activeGame.getMission().getActiveFightAgents();
             System.arraycopy(survivingAgents, 0, activeFightAgents, 0, survivingAgents.length);
-            return;
+//            return;
         }
-        
-        
-        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
-        
-        for (FightAgent fightAgent : survivingAgents)
-        {
-            baseCampStash.get(fightAgent.getType()).add(fightAgent);
-        }
-        
+//
+//
+//        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
+//
+//        for (FightAgent fightAgent : survivingAgents)
+//        {
+//            baseCampStash.get(fightAgent.getType()).add(fightAgent);
+//        }
+//
     }
     
     

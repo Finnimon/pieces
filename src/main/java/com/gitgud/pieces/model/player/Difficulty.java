@@ -1,12 +1,18 @@
 package com.gitgud.pieces.model.player;
 
+import com.gitgud.engine.control.action.types.Applicable;
+import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.utility.modification.Modifier;
+import com.gitgud.pieces.control.EnemyAlgorithm;
+import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigger;
+import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentAttackModifier;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentDefenceModifier;
 
 
-public enum Difficulty
+public enum Difficulty implements Applicable<Fight>
 {
     EASY(new FightAgentAttackModifier(0, 0, 0)),
     
@@ -24,6 +30,19 @@ public enum Difficulty
     }
     
     
+    public static Difficulty fromString(String string)
+    {
+        for (Difficulty difficulty : Difficulty.values())
+        {
+            if (string.equalsIgnoreCase(difficulty.toString()))
+            {
+                return difficulty;
+            }
+        }
+        return null;
+    }
+    
+    
     public Modifier<FightAgent> getFightAgentAttackModifier()
     {
         return modifier;
@@ -36,15 +55,13 @@ public enum Difficulty
     }
     
     
-    public static Difficulty fromString(String string)
+    @Override
+    public Fight apply(Fight fight)
     {
-        for (Difficulty difficulty : Difficulty.values())
-        {
-            if (string.equalsIgnoreCase(difficulty.toString()))
-            {
-                return difficulty;
-            }
-        }
-        return null;
+        fight.getGridMap().nonNullElements().stream()
+                .filter(x->x.getAllegiance()== EnemyAlgorithm.ENEMY_ALLEGIANCE)
+                .forEach(modifier::modify);
+        return fight;
     }
+    
 }
