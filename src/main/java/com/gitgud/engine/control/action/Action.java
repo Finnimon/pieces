@@ -13,7 +13,7 @@ public interface Action<Awaiter extends ActionAwaitingController>
             @Override
             public void enAct(AAType awaiter)
             {
-                awaiter.getActionChoice().select();
+                awaiter.showRootAction();
             }
         };
     }

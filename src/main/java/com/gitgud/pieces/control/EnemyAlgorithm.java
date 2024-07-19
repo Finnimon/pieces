@@ -89,7 +89,7 @@ public class EnemyAlgorithm
         {
             return actionChoice;
         }
-        
+        //choose random choice will recursively choose randomly if it cannot choose the first choice, because it is an empty root choice
         return chooseRandomChoice(rootChoice.getChoices());
     }
     
@@ -135,7 +135,7 @@ public class EnemyAlgorithm
         
         HashMap<Tile, FightMovementChoice> to = new HashMap<>();
         
-        choices.stream().forEach(x -> to.put(x.getAction().getTo(), x));
+        choices.forEach(x -> to.put(x.getAction().getTo(), x));
         
         Set<Tile> allTiles = gridMap.verticeSet();
         
@@ -145,7 +145,6 @@ public class EnemyAlgorithm
         double currentShortestDistance = Double.MAX_VALUE;
         FightMovementChoice bestChoice = null;
         
-        if (agent==null) System.out.println(from);
         for (Tile tile : allTiles)
         {
             FightAgent otherAgent = gridMap.get(tile);

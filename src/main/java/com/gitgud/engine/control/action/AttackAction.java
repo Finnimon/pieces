@@ -22,29 +22,31 @@ public interface AttackAction<AwaiterType extends ActionAwaitingController<Model
     @Override
     default void enAct(AwaiterType awaiter)
     {
-        GridMap<FighterType> gridMap = awaiter.getModel().getGridMap();
-        Tile from = getFrom();
-        Tile to = getTo();
-        float distance = (float) from.distance(to);
-        FighterType attacked = gridMap.get(to);
-        
-        int takenDamage = attacked.getHealth();
-        gridMap.get(from).attack(attacked, distance);
-        takenDamage -= attacked.getHealth();
-        
-        
-        GridMapRender<FighterType> gridMapRender = awaiter.getRender().getGridMapRender();
-        
-        renderTakenDamage(takenDamage, awaiter);
-        
-        if (!attacked.isDead())
-        {
-            return;
+        synchronized (this){
+            GridMap<FighterType> gridMap = awaiter.getModel().getGridMap();
+            Tile from = getFrom();
+            Tile to = getTo();
+            float distance = (float) from.distance(to);
+            FighterType attacked = gridMap.get(to);
+            
+            int takenDamage = attacked.getHealth();
+            gridMap.get(from).attack(attacked, distance);
+            takenDamage -= attacked.getHealth();
+            
+            
+            GridMapRender<FighterType> gridMapRender = awaiter.getRender().getGridMapRender();
+            
+            renderTakenDamage(takenDamage, awaiter);
+            
+            if (!attacked.isDead())
+            {
+                return;
+            }
+            
+            
+            gridMap.clearVertex(to);
+            gridMapRender.removeGridMappable(attacked);
         }
-        
-        
-        gridMap.clearVertex(to);
-        gridMapRender.removeGridMappable(attacked);
     }
     
     

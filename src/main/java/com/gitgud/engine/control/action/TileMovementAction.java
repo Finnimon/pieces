@@ -36,7 +36,7 @@ public class TileMovementAction<Awaiter extends ActionAwaitingController<ModelTy
     
     
     @Override
-    public void enAct(Awaiter awaiter)
+    public synchronized void enAct(Awaiter awaiter)
     {
         awaiter.getRender().getGridMapRender().relocateGridMappable(
                 awaiter.getModel().getGridMap().moveElement(from, to), to);

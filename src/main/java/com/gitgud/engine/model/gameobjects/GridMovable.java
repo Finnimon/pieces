@@ -7,6 +7,7 @@ import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 
 /**
@@ -48,13 +49,14 @@ public interface GridMovable extends GridMappable
         if (isFlying())
         {
             result = getInAbsoluteRangeTiles(gridMap, position, getMovementRange());
+            
+            filterMovementTargetResult(result, position, gridMap);
         }
         else
         {
             result = getInNonFlyingRangeTiles(gridMap, position);
         }
         
-        filterMovementTargetResult(result, position, gridMap);
         
         return result;
     }
@@ -91,11 +93,17 @@ public interface GridMovable extends GridMappable
     
     private ArrayList<Tile> getInNonFlyingRangeTiles(GridMap<?> gridMap, Tile position)
     {
-        Graph<Tile, ?, WeightedEdge<Tile>> graph = gridMap.subGraph(position, getMovementRange(), Objects::nonNull, x->!(x instanceof GridMovable));
+        Predicate<Tile> filter = filter(gridMap);
+        Graph<Tile, ?, WeightedEdge<Tile>> graph = gridMap.subGraph(position, getMovementRange(), filter, filter);
         TreeSet<Tile> tiles = graph.verticeSet();
         tiles.remove(position);
         
         return new ArrayList<>(tiles);
+    }
+    
+    private Predicate<Tile> filter(GridMap<?> gridMap)
+    {
+        return tile -> gridMap.get(tile) == null;
     }
     
 }

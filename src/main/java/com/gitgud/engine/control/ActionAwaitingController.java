@@ -48,15 +48,21 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
             return;
         }
         getRender().getGridMapRender().clearHighLights();
-        executeActionChoiceTask(actionChoice -> actionChoice.show(this));
+        showRootAction();
         hightlightActivePosition();
+    }
+    
+    
+    public void showRootAction()
+    {
+        executeActionChoiceTask(actionChoice -> actionChoice.show(this));
     }
     
     
     public void start()
     {
         getRender().show();
-        executeActionChoiceTask(actionChoice -> actionChoice.show(this));
+        showRootAction();
     }
     
     
@@ -80,7 +86,7 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
     }
     
     
-    protected void executeActionChoiceTask(Consumer<ActionChoice> onSucceeded)
+    public void executeActionChoiceTask(Consumer<ActionChoice> onSucceeded)
     {
         Task<ActionChoice> task = actionChoiceTask();
         task.setOnSucceeded(x ->

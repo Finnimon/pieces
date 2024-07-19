@@ -19,6 +19,23 @@ import javafx.scene.input.MouseEvent;
 import java.util.Objects;
 
 
+/**
+ * <para>Actions are contained by this class. It is used to structure possible Actions in the game as a tree.</para>
+ * <para>This class can act as a Leaf and is extended for parent functionalities</para>
+ *
+ * @param <ActionAwaiterType>
+ * @param <ModelType>
+ * @param <GridMappableType>
+ * @param <RenderType>
+ * @see RootChoice
+ * @see Action
+ * @see RootActionChoice
+ * @see ActionChoiceRender
+ * @author Finn Lindig
+ * @Owner: Finn Lindig
+ * @version  1.1
+ * @since 28.06.2024
+ */
 public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements Named, Describable
 {
     private final String name;
