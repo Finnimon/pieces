@@ -70,20 +70,20 @@ public class KnightBuilder extends FightAgentBuilder
     @Override
     public void tryBuild(int type)
     {
-        FightAgentType fightAgentType =FightAgentType.KNIGHT;
+        FightAgentType fightAgentType = FightAgentType.KNIGHT;
         Allegiance allegiance = FightAgentDirector.getAllegiance(type);
         Faction faction = FightAgentDirector.getFaction(type);
-        int level=FightAgentDirector.getLevel(type);
-        int testType= FightAgentDirector.calculateType(allegiance, fightAgentType, faction, level);
+        int level = FightAgentDirector.getLevel(type);
+        int testType = FightAgentDirector.calculateType(allegiance, fightAgentType, faction, level);
         
         assert testType == type : "Type mismatch. " + type + " != " + testType;
         
-        String name =Named.formatString(faction.name()) + NAME_SUFFIX;
+        String name = Named.formatString(faction.name()) + NAME_SUFFIX;
         setName(name);
         
         setDescription(DESCRIPTION);
         
-        String spriteFilePath= determineSpriteFilePath(faction, allegiance, fightAgentType);
+        String spriteFilePath = determineSpriteFilePath(faction, allegiance, fightAgentType);
         setSpriteFilePath(spriteFilePath);
         
         setFaction(faction);
@@ -126,7 +126,6 @@ public class KnightBuilder extends FightAgentBuilder
         
         setAllegiance(allegiance);
     }
-    
     
     
     @Override

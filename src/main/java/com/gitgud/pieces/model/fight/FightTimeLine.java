@@ -20,7 +20,7 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     public static FightTimeLine create(Collection<FightAgent> fightAgents)
     {
-        Comparator<FightAgent> comparator=getComparator();
+        Comparator<FightAgent> comparator = getComparator();
         
         TreeSet<FightAgent> current = new TreeSet<>(comparator);
         

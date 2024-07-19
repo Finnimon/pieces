@@ -2,8 +2,6 @@ package com.gitgud.pieces.view.render.city;
 
 import com.gitgud.engine.view.Render;
 import com.gitgud.pieces.model.city.City;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 

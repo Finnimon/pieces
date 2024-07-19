@@ -2,11 +2,9 @@ package com.gitgud.pieces.view.render.fight;
 
 import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.fight.Fight;
-import com.gitgud.engine.view.Hud;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 
@@ -20,6 +18,7 @@ public class FightHud extends ActionContextHud<Fight>
     {
         super(data);
         this.fightTimeLineRender = new FightTimeLineRender(data.getFightTimeLine());
+        render(data);
     }
     
     

@@ -7,6 +7,7 @@ import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     
     //todo render next to timeline?
-    private int turn = 0;
+    private SimpleIntegerProperty turn = new SimpleIntegerProperty(0);
     
     
     public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
@@ -55,7 +56,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     }
     
     
-    public int getTurn()
+    public SimpleIntegerProperty getTurnProperty()
     {
         return turn;
     }
@@ -63,7 +64,9 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     public int incrementTurn()
     {
-        return ++turn;
+        System.out.println(getFightTimeLine().getActiveFightAgent().getAllegiance());
+        getFightTimeLine().advance();
+        return turn.add(1).get();
     }
     
     
@@ -120,7 +123,6 @@ public class Fight implements ActionAwaiterModel<FightAgent>
                 return false;
             }
         }
-        ;
         
         return true;
         

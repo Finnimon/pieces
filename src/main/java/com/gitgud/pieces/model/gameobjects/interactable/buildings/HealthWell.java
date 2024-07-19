@@ -5,8 +5,6 @@ import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 
-import java.util.List;
-
 
 public class HealthWell extends GridMappableBuilding<MissionController>
 {
@@ -26,9 +24,17 @@ public class HealthWell extends GridMappableBuilding<MissionController>
     }
     
     
-    private void healFightFigures(FightAgent[] fightFigures)
+    private void healFightFigures(FightAgent[] fightAgents)
     {
-        List.of(fightFigures).forEach(fightFigure -> fightFigure.setHealth(fightFigure.getMaxHealth()));
+        for (FightAgent fighAgent : fightAgents)
+        {
+            if (fighAgent == null)
+            {
+                continue;
+            }
+            
+            fighAgent.setHealth(fighAgent.getMaxHealth());
+        }
     }
     
     

@@ -35,7 +35,8 @@ public class InterActionFlagger implements Runnable
         while (mission != null && !mission.isFinished())
         //        while (activeGame.getGameState() == GameState.MISSION || (inMissionFight = activeGame.getGameState() == GameState.MISSION_FIGHT))
         {
-            synchronized (this){
+            synchronized (this)
+            {
                 if (!newCheckNeeded)
                 {
                     continue;
@@ -74,6 +75,7 @@ public class InterActionFlagger implements Runnable
         
         InterActionController.setFlag((Interactable) gameObject);
     }
+    
     
     public void newCheck()
     {

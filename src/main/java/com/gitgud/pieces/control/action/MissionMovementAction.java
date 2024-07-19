@@ -13,7 +13,7 @@ public class MissionMovementAction extends TileMovementAction<MissionController,
     
     public void enAct(MissionController awaiter)
     {
-        Mission mission=awaiter.getModel();
+        Mission mission = awaiter.getModel();
         mission.setPlayerAgentPosition(getTo());
         awaiter.getRender().getGridMapRender().relocateGridMappable(mission.getPlayerAgent(), getTo());
     }

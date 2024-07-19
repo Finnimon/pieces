@@ -1,18 +1,19 @@
 package com.gitgud.pieces.model.gameobjects.agents;
 
+import com.gitgud.engine.model.attackDefenseLogic.Attack;
+import com.gitgud.engine.model.attackDefenseLogic.DamageType;
+import com.gitgud.engine.model.attackDefenseLogic.Defence;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.GridMovable;
 import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
-import com.gitgud.engine.model.attackDefenseLogic.Attack;
-import com.gitgud.engine.model.attackDefenseLogic.DamageType;
-import com.gitgud.engine.model.attackDefenseLogic.Defence;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
+import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     private final boolean isRangedAttacker;
     
     
-    private final int level;
+    private int level;
     
     
     private int meleeDamage;
@@ -319,14 +320,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         
         boolean isRangedAttacker = this.isRangedAttacker;
         
-        boolean attackIsInRangerange = isRangedAttacker && canAttackRangedAtDistance(distance);
-        
-        if (attackIsInRangerange)
-        {
-            return true;
-        }
-        
-        return false;
+        return isRangedAttacker && canAttackRangedAtDistance(distance);
         
     }
     
@@ -364,7 +358,15 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     @Override
     public int levelUp()
     {
-        return 0;//todo
+        level++;
+        
+        FightAgentDirector director = new FightAgentDirector();
+        int typeInt = director.calculateType(this);
+        
+        FightAgent nextLevelFightAgent = director.make(typeInt);
+        //thjis copy vals
+        
+        return level;//todo
     }
     
     
@@ -438,13 +440,12 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
                                           return;
                                       }
                                       
-                                      if (!(gridMappable instanceof FightAgent))
+                                      if (!(gridMappable instanceof FightAgent other))
                                       {
                                           iterator.remove();
                                           return;
                                       }
                                       
-                                      FightAgent other = (FightAgent) gridMappable;
                                       if (other.getAllegiance() == allegiance)
                                       {
                                           iterator.remove();

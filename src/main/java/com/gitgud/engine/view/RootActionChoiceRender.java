@@ -8,10 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 
-public class RootActionChoiceRender extends Group implements Render<RootActionChoice<?,?,?,?>>
+public class RootActionChoiceRender extends Group implements Render<RootActionChoice<?, ?, ?, ?>>
 {
     private final AnchorPane anchorPane = new AnchorPane();
-    public RootActionChoiceRender(RootActionChoice<?,?,?,?> rootActionChoice)
+    
+    
+    public RootActionChoiceRender(RootActionChoice<?, ?, ?, ?> rootActionChoice)
     {
         render(rootActionChoice);
     }
@@ -24,10 +26,10 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
         this.getChildren().add(anchorPane);
         
         
-        double topAnchor=0d;
+        double topAnchor = 0d;
         ObservableList<Node> children = anchorPane.getChildren();
         
-        for (ActionChoice<?,?,?,?> actionChoice : data.getChoices())
+        for (ActionChoice<?, ?, ?, ?> actionChoice : data.getChoices())
         {
             //topAnchor size is updated with each actionChoice
             topAnchor = renderActionChoice(actionChoice, children, topAnchor);
@@ -35,14 +37,15 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
     }
     
     
-    private static double renderActionChoice(ActionChoice<?, ?, ?, ?> actionChoice, ObservableList<Node> children, double spacer)
+    private static double renderActionChoice(ActionChoice<?, ?, ?, ?> actionChoice, ObservableList<Node> children,
+                                             double spacer)
     {
-        ActionChoiceRender render= actionChoice.getNode();
+        ActionChoiceRender render = actionChoice.getNode();
         children.add(render);
         
         AnchorPane.setTopAnchor(render, spacer);
         
-        spacer +=ActionChoiceRender.SIZE*2;
+        spacer += ActionChoiceRender.SIZE * 2;
         
         
         return spacer;

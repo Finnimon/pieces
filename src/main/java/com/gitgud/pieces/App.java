@@ -61,8 +61,8 @@ public class App extends Application
         //call your main here
         initialize(stage);
         lindigTest(stage);
-//        delfiMain(stage);
-        stage.show();
+        //        delfiMain(stage);
+//        stage.show();
     }
     
     
@@ -73,5 +73,6 @@ public class App extends Application
         stage.setFullScreen(true);
         StageController.initialize(stage);
         setTitleAndIcon(stage);
+        stage.show();
     }
 }

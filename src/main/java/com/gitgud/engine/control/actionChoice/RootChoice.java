@@ -5,7 +5,11 @@ import java.util.List;
 
 public interface RootChoice<ChoiceType>
 {
-    public boolean isEmpty();
+    default boolean isEmpty()
+    {
+        return getChoices().isEmpty();
+    }
     
-    public List<ChoiceType> getChoices();
+    
+    List<ChoiceType> getChoices();
 }

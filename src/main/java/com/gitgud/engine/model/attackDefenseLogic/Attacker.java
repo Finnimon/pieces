@@ -19,7 +19,10 @@ public interface Attacker
     
     Attack createAttack(float distance);
     
+    
     int getRemainingRangedAttacks();
+    
+    
     void setRemainingRangedAttacks(int remainingRangedAttacks);
     
 }

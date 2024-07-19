@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public  abstract class ActionContextHud<ModelType> extends Hud<ModelType>
+public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
 {
     private final List<Node> choices;
+    
+    
     public ActionContextHud(ModelType data)
     {
         super(data);
-        choices=new ArrayList<>();
+        choices = new ArrayList<>();
     }
     
     
@@ -33,10 +35,12 @@ public  abstract class ActionContextHud<ModelType> extends Hud<ModelType>
         BorderPane.setAlignment(choiceNode, Pos.TOP_LEFT);
     }
     
+    
     public void registerChoice(Node choiceNode)
     {
         choices.add(choiceNode);
     }
+    
     
     public void clearChoices()
     {

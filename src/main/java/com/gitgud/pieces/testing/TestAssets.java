@@ -9,7 +9,6 @@ import com.gitgud.pieces.model.fight.SpellBook;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.model.player.*;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 
@@ -24,7 +23,7 @@ public interface TestAssets
     
     static ActiveGame getTestActiveGame()
     {
-        return new ActiveGame(getTestPlayer(), new City(), Missions.getMission(new FightAgent[]{null,null,null,null,null}), null);
+        return new ActiveGame(getTestPlayer(), new City(), Missions.MISSION0, null);
     }
     
     

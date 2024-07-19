@@ -1,6 +1,7 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.testing.TestAssets;
 
 
@@ -36,12 +37,6 @@ public class ActiveGameController
     }
     
     
-    public ActiveGame get()
-    {
-        return activeGame;
-    }
-    
-    
     public static void reset()
     {
         instance = null;
@@ -56,10 +51,24 @@ public class ActiveGameController
     
     public static void initialize(ActiveGame activeGame)
     {
-        if (instance != null)
+        if (isInitialized())
         {
             return;
         }
         instance = new ActiveGameController(activeGame);
+    }
+    
+    
+    public static boolean isInitialized()
+    {
+        return instance != null;
+    }
+    
+    
+    
+    
+    public ActiveGame get()
+    {
+        return activeGame;
     }
 }

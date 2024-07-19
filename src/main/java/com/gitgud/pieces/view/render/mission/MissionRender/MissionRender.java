@@ -1,18 +1,23 @@
 package com.gitgud.pieces.view.render.mission.MissionRender;
 
 import com.gitgud.engine.model.gameobjects.GameObject;
+import com.gitgud.engine.model.gameobjects.interactable.Interactable;
+import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
-import com.gitgud.engine.view.*;
+import com.gitgud.engine.view.BaseActionContextRender;
+import com.gitgud.engine.view.GridMapRender;
+import com.gitgud.engine.view.GridMappableRender;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
+import com.gitgud.pieces.model.mission.InteractionChecker;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionHud;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 
-public class MissionRender extends BaseActionContextRender<Mission, GameObject,MissionHud>
+public class MissionRender extends BaseActionContextRender<Mission, GameObject, MissionHud>
 {
     
     public MissionRender(Mission mission)
@@ -20,6 +25,33 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject,M
         super(mission, new MissionHud(mission));
     }
     
+    
+    public void addInteractionHandlers(MissionController missionController)
+    {
+        GridMapRender<GameObject> gridMapRender = getGridMapRender();
+        GridMap<GameObject> gridMap=getData().getGridMap();
+        for (GameObject gameObject : getData().getGridMap().nonNullElements())
+        {
+            if (!(gameObject instanceof Interactable interactable)) continue;
+            GridMappableRender<GameObject> interactableRender = gridMapRender.getGridMappableRender(gameObject);
+            
+            interactableRender.addEventHandler(MouseEvent.MOUSE_CLICKED,interactableEventHandler(interactable,missionController,gridMap.getVertex(gameObject)));
+        }
+    }
+    
+    private EventHandler<MouseEvent> interactableEventHandler(Interactable interactable,MissionController missionController,Tile tile)
+    {
+        return
+        mouseEvent->
+        {
+            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY))
+                return;
+            
+            mouseEvent.consume();
+            
+            InteractionChecker.interactIfPossible(missionController,tile);
+        };
+    }
     
     
     @Override

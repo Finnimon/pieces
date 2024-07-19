@@ -1,20 +1,31 @@
 package com.gitgud.pieces.control;
 
 
-import com.gitgud.engine.control.actionChoice.*;
+import com.gitgud.engine.control.actionChoice.ActionChoice;
+import com.gitgud.engine.control.actionChoice.RootChoice;
+import com.gitgud.engine.model.map.GridMap;
+import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.FightMovementChoice;
+import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
 import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
+import static com.gitgud.pieces.control.FightController.*;
 
 
 public class EnemyAlgorithm
 {
     private final FightController fightController;
+    
+    
     private final Allegiance enemyAllegiance = Allegiance.WHITE;
+    
     
     public EnemyAlgorithm(FightController fightController)
     {
@@ -28,81 +39,68 @@ public class EnemyAlgorithm
     }
     
     
-    public void act()
+    public void act(RootChoice actionChoice)
     {
-        
-        System.out.println("enemyAlgorithm.act()");
-        ActionChoice<FightController, Fight, FightAgent, FightRender> actionChoice = fightController.getActionChoice();
-        
-        if (!(actionChoice instanceof RootActionChoice<FightController, Fight, FightAgent, FightRender> rootActionChoice))
-        {
-            actionChoice.select();
-            return;
-        }
-        
-        List<ActionChoice<FightController, Fight, FightAgent, FightRender>> actionChoices = rootActionChoice.getChoices();
-        
-        RootToActionChoice<FightController, Fight, FightAgent, FightRender> movementChoices = (RootToActionChoice<FightController, Fight, FightAgent, FightRender>) actionChoices.get(
-                0);
-        AttackRootChoice<FightController, Fight, FightAgent, FightRender> attackChoices = (AttackRootChoice<FightController, Fight, FightAgent, FightRender>) actionChoices.get(
-                1);
-        RootToActionChoice<FightController, Fight, FightAgent, FightRender> spellChoices = (RootToActionChoice<FightController, Fight, FightAgent, FightRender>) actionChoices.get(
-                2);
-        ActionChoice<FightController, Fight, FightAgent, FightRender> skipTurnChoice = actionChoices.get(3);
-        
-        
-        if (tryRootChoice(attackChoices))
-        {
-            return;
-        }
-        
-        if (tryRootChoice(movementChoices))
-        {
-            return;
-        }
-        
-        
-        skipTurnChoice.select();
+        //        Task<Boolean> waitTask = new Task<>()
+        //        {
+        //            @Override
+        //            protected Boolean call() throws Exception
+        //            {
+        //                wait(100);
+        //                return true;
+        //            }
+        //        };
+        //        waitTask.setOnSucceeded(x -> selectActionChoice(actionChoice));
+        //        ExecutorService exec = Executors.newSingleThreadExecutor();
+        //        exec.execute(waitTask);
+        //        exec.shutdown();
+        ActionChoice choice = choose(actionChoice);
+        select(choice);
     }
     
     
-    private boolean tryRootChoice(RootChoice rootChoice)
+    private ActionChoice choose(RootChoice rootChoice)
     {
-        if (rootChoice.isEmpty())
-        {
-            return false;
-        }
+        List<ActionChoice<FightController, Fight, FightAgent, FightRender>> actionChoices = rootChoice.getChoices();
         
-        List<ActionChoice<?,?,?,?>> choices = rootChoice.getChoices();
+        MovementRootChoice movementChoices = (MovementRootChoice) actionChoices.get(MOVEMENT_CHOICE_INDEX);
+        RootChoice attackChoices = (RootChoice) actionChoices.get(ATTACK_CHOICE_INDEX);
+        RootChoice spellChoices = (RootChoice) actionChoices.get(SPELL_CHOICE_INDEX);
+        ActionChoice<FightController, Fight, FightAgent, FightRender> skipTurnChoice = actionChoices.get(
+                SKIP_TURN_CHOICE_INDEX);
         
-        selectRandomChoice(choices);
+        ActionChoice choice = null;
         
-        return true;
+        if (!attackChoices.isEmpty()) return chooseRandomChoice(attackChoices.getChoices());
+        
+        if (!movementChoices.isEmpty()) return determineBestMovementChoice(movementChoices.getChoices());
+        
+        return skipTurnChoice;
     }
     
     
-    private void selectRandomChoice(List<ActionChoice<?,?,?,?>> choices)
+    private ActionChoice chooseRandomChoice(List<ActionChoice<?, ?, ?, ?>> choices)
     {
         int index = randomInt(0, choices.size() - 1);
         
-        ActionChoice<?,?,?,?> actionChoice= choices.get(index);
+        ActionChoice<?, ?, ?, ?> actionChoice = choices.get(index);
         
-        
-        if (actionChoice instanceof RootChoice rootChoice)
+        if (!(actionChoice instanceof RootChoice rootChoice))
         {
-            selectRandomChoice(rootChoice.getChoices());
-            
-            return;
+            return actionChoice;
         }
         
-        
-        if (actionChoice instanceof FightMovementChoice)
+        return chooseRandomChoice(rootChoice.getChoices());
+    }
+    
+    
+    private void select(ActionChoice actionChoice)
+    {
+        if (actionChoice instanceof FightMovementChoice fightMovementChoice)
         {
-            selectFightMovementChoice((FightMovementChoice) actionChoice);
-            
+            selectFightMovementChoice(fightMovementChoice);
             return;
         }
-        
         actionChoice.select();
     }
     
@@ -110,9 +108,14 @@ public class EnemyAlgorithm
     private void selectFightMovementChoice(FightMovementChoice actionChoice)
     {
         actionChoice.getAction().enAct(fightController);
-        
         fightController.getRender().getHud().clearChoices();
-        tryRootChoice(fightController.getAttackRootChoice());
+        RootChoice attackRootChoice = fightController.getAttackRootChoice();
+        if (attackRootChoice.isEmpty())
+        {
+            fightController.advance();
+            return;
+        }
+        select(chooseRandomChoice(attackRootChoice.getChoices()));
         fightController.advance();
     }
     
@@ -122,8 +125,41 @@ public class EnemyAlgorithm
         return enemyAllegiance;
     }
     
-    private boolean selectBestMovementChoice()
+    
+    private FightMovementChoice determineBestMovementChoice(List<FightMovementChoice> choices)
     {
-        return false;
+        GridMap<FightAgent> gridMap = fightController.getModel().getGridMap();
+        
+        Tile from = choices.getFirst().getAction().getFrom();
+        FightAgent agent = gridMap.get(from);
+        
+        HashMap<Tile, FightMovementChoice> to = new HashMap<>();
+        
+        choices.stream().forEach(x -> to.put(x.getAction().getTo(), x));
+        
+        Set<Tile> allTiles = gridMap.verticeSet();
+        
+        allTiles.remove(from);
+        allTiles.removeAll(to.keySet());
+        
+        double currentShortestDistance = Double.MAX_VALUE;
+        FightMovementChoice bestChoice = null;
+        
+        if (agent==null) System.out.println(from);
+        for (Tile tile : allTiles)
+        {
+            FightAgent otherAgent = gridMap.get(tile);
+            if (otherAgent == null || agent.getAllegiance() == otherAgent.getAllegiance()) continue;
+            
+            for (Tile toTile : to.keySet())
+            {
+                double distance = toTile.distance(tile);
+                if (distance > currentShortestDistance) continue;
+                bestChoice = to.get(toTile);
+                currentShortestDistance = distance;
+            }
+        }
+        
+        return bestChoice;
     }
 }

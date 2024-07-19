@@ -3,22 +3,19 @@ package com.gitgud.pieces.testing;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
+import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import com.gitgud.pieces.model.player.Player;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigger;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
-import com.gitgud.pieces.utility.builder.fightAgent.KnightBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-
-import static com.gitgud.pieces.testing.Missions.getTestMap;
 
 
 public interface Fights
@@ -26,27 +23,72 @@ public interface Fights
     // FightAgent DEFAULT_FIGHT_AGENT=new FightAgent("Name", "Description")//todo
     
     
-    public static Fight getTestFight()
+    Fight FIGHT1 = getFight1();
+    
+    
+    Fight FIGHT2 = getFight2();
+    
+    
+    static Fight getFight1()
     {
-        GridMap<FightAgent> fightTestMap = getTestMap(12, 12);
-        FightAgentDirector director = new FightAgentDirector(new KnightBuilder());
-        HashSet<FightAgent> fightAgents = new HashSet<>();
+        GridMap<FightAgent> gridMap = mapFromBoolMap("src/main/resources/com/gitgud/maps/FightMap1");
+        FightAgentDirector director = new FightAgentDirector();
+        ArrayList<FightAgent> agents = new ArrayList<>();
+        //Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.PAWN, Faction.MONOCHROME, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.PINK, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.GREEN, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.PAWN, Faction.PINK, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.BLACK, FightAgentType.PAWN, Faction.PINK, 1)));
         
-        for (int i = 0; i < 6; i++)
-        {
-            int type = 1000*(i%2)+100*(i%5) + 10 * (i % 3) + 5;
-            if(2==(i%5))
-            {
-                type+=100;
-            }
-            FightAgent fightAgent = director.make(type);
-            fightAgents.add(fightAgent);
-            Tile tile= fightTestMap.verticeSet().stream().filter(t -> t.getTerrain().isTraversable()&&fightTestMap.get(t)==null).findFirst().get();
-            fightTestMap.place(tile, fightAgent);
-        }
         
-        return new Fight(fightTestMap);
+        gridMap.place(3, 1, agents.get(0));
+        gridMap.place(0, 0, agents.get(1));
+        gridMap.place(11, 0, agents.get(2));
+        gridMap.place(8, 1, agents.get(3));
+        gridMap.place(6, 3, agents.get(4));
+        gridMap.place(9, 3, agents.get(5));
+        
+        return new Fight(gridMap);
     }
+    
+    
+    static Fight getFight2()
+    {
+        GridMap<FightAgent> gridMap = mapFromBoolMap("src/main/resources/com/gitgud/maps/FightMap1");
+        FightAgentDirector director = new FightAgentDirector();
+        ArrayList<FightAgent> agents = new ArrayList<>();
+        //Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.QUEEN, Faction.MONOCHROME, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.MONOCHROME, 2)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.GREEN, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
+        agents.add(director.make(
+                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.PINK, 1)));
+        
+        gridMap.place(3, 1, agents.get(0));
+        gridMap.place(0, 0, agents.get(1));
+        gridMap.place(11, 0, agents.get(2));
+        gridMap.place(8, 1, agents.get(3));
+        gridMap.place(6, 3, agents.get(4));
+        
+        
+        return new Fight(gridMap);
+    }
+    
+    
+    FightTrigger FIGHT_TRIGGER1 = new FightTrigger(FIGHT1);
     
     
     static boolean[][] readMapFile(String path)
@@ -54,19 +96,19 @@ public interface Fights
         List<String> lines;
         try
         {
-            lines=Files.readAllLines(Path.of(path));
+            lines = Files.readAllLines(Path.of(path));
         }
         catch (IOException e)
         {
             throw new RuntimeException(e);
         }
-        boolean[][] map=new boolean[lines.size()][lines.get(0).length()];
+        boolean[][] map = new boolean[lines.size()][lines.get(0).length()];
         for (int y = 0; y < lines.size(); y++)
         {
-            String line=lines.get(y);
+            String line = lines.get(y);
             for (int x = 0; x < line.length(); x++)
             {
-                map[y][x]=line.charAt(x)=='1';
+                map[y][x] = line.charAt(x) == '1';
             }
         }
         return map;
@@ -75,7 +117,7 @@ public interface Fights
     
     static <GMType extends GridMappable> GridMap<GMType> mapFromBoolMap(String path)
     {
-        boolean[][] map=readMapFile(path);
+        boolean[][] map = readMapFile(path);
         
         return GridMap.create(map);
     }

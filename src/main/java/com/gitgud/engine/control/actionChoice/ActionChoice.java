@@ -61,6 +61,8 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
             }
         };
     }
+    
+    
     public static <AAType extends ActionAwaitingController<MType, GType, RType>, MType extends ActionAwaiterModel<GType>, GType extends GridMappable, RType extends ActionContextRender<MType, GType>> ActionChoice<AAType, MType, GType, RType> returnToRoot(
             String name, String description, AAType actionAwaiter)
     {
@@ -75,6 +77,7 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
         };
     }
     
+    
     protected Action<ActionAwaiterType> getAction()
     {
         return action;
@@ -83,17 +86,17 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
     
     public void select()
     {
-        ActionAwaiterType actionAwaiterType = getAwaiter();
-        actionAwaiterType.getRender().getHud().clearChoices();
+        ActionAwaiterType awaiter = getAwaiter();
+        awaiter.getRender().getHud().clearChoices();
         
         if (action != null)
         {
-            action.enAct(actionAwaiterType);
-            actionAwaiterType.advance();
+            action.enAct(awaiter);
+            awaiter.advance();
             return;
         }
         
-        show(actionAwaiterType);
+        show(awaiter);
     }
     
     
@@ -182,7 +185,6 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
             select();
         };
     }
-    
     
     
 }

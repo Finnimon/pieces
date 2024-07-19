@@ -22,15 +22,11 @@ public interface Action<Awaiter extends ActionAwaitingController>
     void enAct(Awaiter awaiter);
     
     
-    static<Awaiter extends ActionAwaitingController> Action<Awaiter> empty()
+    static <Awaiter extends ActionAwaitingController> Action<Awaiter> empty()
     {
-        return new Action<Awaiter>()
+        return awaiter ->
         {
-            @Override
-            public void enAct(Awaiter awaiter)
-            {
-                //do nothing
-            }
+            //do nothing
         };
     }
 }

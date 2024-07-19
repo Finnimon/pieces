@@ -4,15 +4,14 @@ import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.control.InterActionController;
 import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.actionChoice.ActionChoice;
-import com.gitgud.engine.control.actionChoice.MovementRootChoice;
 import com.gitgud.engine.control.actionChoice.RootActionChoice;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.model.gameobjects.GameObject;
-import com.gitgud.engine.model.gameobjects.interactable.Collectible;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
-import com.gitgud.pieces.model.city.City;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigger;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
@@ -31,7 +30,9 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     public MissionController(Mission mission)
     {
         super(mission, new MissionRender(mission));
+        getRender().addInteractionHandlers(this);
         interActionFlagger = new InterActionFlagger(mission);
+        System.out.println("new mc");
     }
     
     
@@ -42,17 +43,17 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     }
     
     
-    @SuppressWarnings("unchecked")
     @Override
     public ActionChoice<MissionController, Mission, GameObject, MissionRender> getActionChoice()
     {
+        System.out.println("action choice started");
         RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice = new MovementRootChoice<>(
                 this, getModel().getPlayerAgent(), getModel().getPlayerAgentPosition());
         ActionChoice<MissionController, Mission, GameObject, MissionRender> skipTurnChoice = getSkipTurnChoice();
         
         List<ActionChoice<MissionController, Mission, GameObject, MissionRender>> choices = List.of(rootToActionChoice,
                                                                                                     skipTurnChoice);
-        
+        System.out.println("action choice done");
         return new RootActionChoice<>("root", "root", choices, this);
     }
     
@@ -60,45 +61,49 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void start()
     {
-        ActiveGameController.getInstance().get().setMission(getModel());
+        System.out.println("MissionController start");
         super.start();
-        StageController.getInstance().getStage().show();
     }
     
     
     @Override
     public void advance()
     {
-        handleInteractions();
+        System.out.println("Advance");
+        if (handleInteractions())
+        {
+            return;
+        }
         
         if (tryEnd())
         {
             return;
         }
+        
         super.advance();
     }
     
     
-    private void handleInteractions()
+    private boolean handleInteractions()
     {
         
         interActionFlagger.newCheck();
         
         if (!InterActionController.hasFlag())
         {
-            return;
+            return false;
         }
-        System.out.println("MissionController.handleInteractions()");
         
         Interactable<MissionController> interactable = InterActionController.clearFlag();
+        if (interactable instanceof FightTrigger)
+        {
+            interactable.interact(this);
+            return true;
+        }
         
         interactable.interact(this);
         
-        if (!(interactable instanceof Collectible<MissionController>))
-        {
-            return;
-        }
-        getRender().getGridMapRender().removeGridMappable((GameObject) interactable);
+        return false;
     }
     
     
@@ -109,10 +114,9 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         
         activeGame.setMission(null);
         
-        City city = activeGame.getCity();
-        
         getModel().returnFightAgentsToPool();
-        new CityController(city).start();
+        
+        GameFlow.startNextSceneController();
     }
     
     

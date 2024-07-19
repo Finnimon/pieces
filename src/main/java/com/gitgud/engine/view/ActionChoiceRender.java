@@ -1,7 +1,6 @@
 package com.gitgud.engine.view;
 
 import com.gitgud.engine.control.actionChoice.ActionChoice;
-import com.gitgud.engine.control.actionChoice.RootActionChoice;
 import com.gitgud.engine.control.actionChoice.RootChoice;
 import com.gitgud.engine.view.events.AppendRemoveNodeOnMouseEvent;
 import com.gitgud.engine.view.infopane.InfoPane;
@@ -17,7 +16,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 
-public class ActionChoiceRender extends Group implements Render<ActionChoice<?, ?, ?,?>>
+public class ActionChoiceRender extends Group implements Render<ActionChoice<?, ?, ?, ?>>
 {
     public static final int SIZE = 50;
     
@@ -28,17 +27,18 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
     private static final int FONT_SIZE = 15;
     
     
-    public ActionChoiceRender(ActionChoice<?, ?, ?,?> actionChoice)
+    public ActionChoiceRender(ActionChoice<?, ?, ?, ?> actionChoice)
     {
         render(actionChoice);
     }
     
     
     @Override
-    public void render(ActionChoice<?, ?, ?,?> data)
-    {   StackPane stackPane = new StackPane();
+    public void render(ActionChoice<?, ?, ?, ?> data)
+    {
+        StackPane stackPane = new StackPane();
         Label label = new Label(data.name());
-        label.setFont(Font.font( FONT_SIZE));
+        label.setFont(Font.font(FONT_SIZE));
         Circle circle = new Circle();
         circle.setFill(Color.WHITE);
         circle.setStroke(Color.BLACK);
@@ -54,21 +54,18 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
         getChildren().add(stackPane);
         
         
-        InfoPane<?> infoPane=new NameDescribableInfoPane<>(data);
+        InfoPane<?> infoPane = new NameDescribableInfoPane<>(data);
         
-        AppendRemoveNodeOnMouseEvent.add(this,infoPane);
-        
-        
-        
+        AppendRemoveNodeOnMouseEvent.add(this, infoPane);
         
         
         if (!(data instanceof RootChoice rootChoice))
         {
-             addSelectionEventHandling(data);
-             return;
+            addSelectionEventHandling(data);
+            return;
         }
         
-        if(!rootChoice.isEmpty())
+        if (!rootChoice.isEmpty())
         {
             addSelectionEventHandling(data);
             return;
@@ -80,7 +77,8 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
     
     private void addSelectionEventHandling(ActionChoice<?, ?, ?, ?> data)
     {
-        this.addEventHandler(KeyEvent.KEY_PRESSED, data.getKeyEventHandler(String.valueOf(data.name().charAt(0))));//todo
+        this.addEventHandler(KeyEvent.KEY_PRESSED,
+                             data.getKeyEventHandler(String.valueOf(data.name().charAt(0))));//todo
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, data.getMouseEventHandler());
         cursorProperty().set(Cursor.HAND);
     }

@@ -2,7 +2,6 @@ package com.gitgud.pieces.view.render.mission;
 
 import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.engine.view.Hud;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 

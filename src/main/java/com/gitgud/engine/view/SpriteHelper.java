@@ -30,7 +30,7 @@ public class SpriteHelper
                 continue;
             }
             
-            Image image = new Image(sprite.getSpriteUrl());
+            Image image = sprite.getSprite();
             
             patterns.put(sprite, new ImagePattern(image));
         }

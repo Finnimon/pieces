@@ -63,12 +63,12 @@ public class SGridMap implements IDimentions
                         rectangle.setFill(Color.WHEAT);
                     }
                     rectangle.setOnMouseClicked(moveRequestEvent ->
-                    {
-                        if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
-                        {
-                            moveRequest(tile);
-                        }
-                    });
+                                                {
+                                                    if (moveRequestEvent.getButton() == MouseButton.SECONDARY)
+                                                    {
+                                                        moveRequest(tile);
+                                                    }
+                                                });
                     tilesGroup.getChildren().add(rectangle);
                 }
             }
@@ -97,7 +97,7 @@ public class SGridMap implements IDimentions
             AnchorPane.setTopAnchor(gameObjectContainer, (tile.getY() * TILE_SPACING));
             AnchorPane.setLeftAnchor(gameObjectContainer, (tile.getX() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
-
+            
             Image gameObjektSprite = new Image(element.getSpriteUrl());
             ImageView viewGameObjektSprite = new ImageView(gameObjektSprite);
             
@@ -116,7 +116,8 @@ public class SGridMap implements IDimentions
             gameObjektGroup.getChildren().add(gameObjectContainer);
         }
     }
-
+    
+    
     /**
      * THis Method creates the top menu
      *
@@ -149,6 +150,8 @@ public class SGridMap implements IDimentions
             menu.getChildren().add(box);
         }
     }
+    
+    
     protected static void moveRequest(Tile tile)
     {
         //todo

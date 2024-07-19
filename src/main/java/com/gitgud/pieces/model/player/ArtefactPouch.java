@@ -21,13 +21,13 @@ public class ArtefactPouch
     private final Artefact[] equippedArtefacts;
     
     
-    private final ArrayList<Artefact> allOwnedArtefacts ;
+    private final ArrayList<Artefact> allOwnedArtefacts;
     
     
     public ArtefactPouch()
     {
-         equippedArtefacts= new Artefact[MAX_ARTEFACTS];
-         allOwnedArtefacts = new ArrayList<>();
+        equippedArtefacts = new Artefact[MAX_ARTEFACTS];
+        allOwnedArtefacts = new ArrayList<>();
     }
     
     
@@ -37,13 +37,13 @@ public class ArtefactPouch
     }
     
     
-    public Artefact[] getEquippedArtefacts ()
+    public Artefact[] getEquippedArtefacts()
     {
         return equippedArtefacts;
     }
     
     
-    public ArrayList<Artefact> getAllOwnedArtefacts ()
+    public ArrayList<Artefact> getAllOwnedArtefacts()
     {
         return allOwnedArtefacts;
     }

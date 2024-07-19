@@ -25,14 +25,15 @@ public enum ResourceType
         
         return null;
     }
-
-    public String getAsString ()
+    
+    
+    public String getAsString()
     {
         return this.toString();
     }
-
-
-    public static ResourceType fromString (String string)
+    
+    
+    public static ResourceType fromString(String string)
     {
         for (ResourceType resourceType : ResourceType.values())
         {

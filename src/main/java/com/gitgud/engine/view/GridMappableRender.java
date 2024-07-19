@@ -24,6 +24,7 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends G
         render(gridMappable);
     }
     
+    
     public GridMappableRender(GridMappableType gridMappable, double x, double y)
     {
         this(gridMappable, x, y, gridMappable.getSprite().getWidth(), gridMappable.getSprite().getHeight());
@@ -35,11 +36,14 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends G
         this(gridMappable, 0, 0);
     }
     
-    public GridMappableRender(GridMappableType gridMappable,double x, double y ,double size)
+    
+    public GridMappableRender(GridMappableType gridMappable, double x, double y, double size)
     {
         this(gridMappable, x, y, size, size);
     }
-    public GridMappableRender(GridMappableType gridMappable,double size)
+    
+    
+    public GridMappableRender(GridMappableType gridMappable, double size)
     {
         this(gridMappable, 0, 0, size);
     }
@@ -54,10 +58,13 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends G
         getChildren().add(rectangle);
     }
     
+    
     public final void setX(double x)
     {
         rectangle.setX(x);
     }
+    
+    
     public final void setY(double y)
     {
         rectangle.setY(y);

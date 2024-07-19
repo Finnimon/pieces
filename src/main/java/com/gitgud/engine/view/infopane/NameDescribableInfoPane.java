@@ -21,6 +21,7 @@ public class NameDescribableInfoPane<Type extends Named & Describable> extends I
         super(getString(type));
     }
     
+    
     private static <T extends Named & Describable> String getString(T type)
     {
         return type.name().replace(Strings.LINE_BREAK, Strings.TABULATOR) + Strings.LINE_BREAK + type.description();

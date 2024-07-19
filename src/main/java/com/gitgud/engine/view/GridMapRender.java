@@ -6,7 +6,6 @@ import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -165,15 +164,18 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
             return rectangle;
         }
         
-        rectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);//todo hand unhandled events to nodes beneath inccase of info???
+        rectangle.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                                  eventHandler);//todo hand unhandled events to nodes beneath inccase of info???
         rectangle.cursorProperty().set(Cursor.HAND);
         return rectangle;
     }
+    
     
     public Rectangle addHighLight(Tile tile, Color color)
     {
         return addHighLight(tile, color, null);
     }
+    
     
     public Rectangle addHighLight(Tile tile)
     {

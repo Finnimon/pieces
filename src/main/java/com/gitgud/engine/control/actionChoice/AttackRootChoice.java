@@ -30,7 +30,7 @@ public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingControlle
     }
     
     
-    public AttackRootChoice(ActionAwaitingType fightController,FighterType fighterType)
+    public AttackRootChoice(ActionAwaitingType fightController, FighterType fighterType)
     {
         super(NAME, DESCRIPTION, fightController, toActionChoices(fightController, fighterType));
     }
@@ -40,13 +40,13 @@ public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingControlle
             AAType actionAwaiter, FType fighterType)
     {
         List<ToActionChoice<AAType, MType, FType, RType>> toActionChoices = new ArrayList<>();
-        Tile position=actionAwaiter.getActivePosition();
-        Collection<Tile> attackableTiles = fighterType.findAttackableTiles(actionAwaiter.getModel().getGridMap(), position);
+        Tile position = actionAwaiter.getActivePosition();
+        Collection<Tile> attackableTiles = fighterType.findAttackableTiles(actionAwaiter.getModel().getGridMap(),
+                                                                           position);
         
-        for (Tile attackableTile: attackableTiles
-             )
+        for (Tile attackableTile : attackableTiles)
         {
-            ToAction<AAType,Tile> action = new AttackAction<AAType, MType, FType, RType>()
+            ToAction<AAType, Tile> action = new AttackAction<>()
             {
                 @Override
                 public Tile getTo()
@@ -63,7 +63,7 @@ public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingControlle
             };
             
             
-            toActionChoices.add(new ToActionChoice<>(NAME,DESCRIPTION,actionAwaiter,action));
+            toActionChoices.add(new ToActionChoice<>(NAME, DESCRIPTION, actionAwaiter, action));
         }
         
         return toActionChoices;

@@ -23,15 +23,18 @@ public class FightAgentDirector implements Director<FightAgent>
         this.builder = builder;
     }
     
-    public  FightAgentDirector()
+    
+    public FightAgentDirector()
     {
         this(new KnightBuilder());
     }
+    
     
     public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level)
     {
         return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + level;
     }
+    
     
     public static Allegiance getAllegiance(int type)
     {
@@ -40,9 +43,10 @@ public class FightAgentDirector implements Director<FightAgent>
         return Allegiance.values()[type];
     }
     
+    
     public static FightAgentType getFightAgentType(int type)
     {
-        type-= getAllegiance(type).typeToInt();
+        type -= getAllegiance(type).typeToInt();
         type /= FightAgentType.TYPE_MULTIPLIER;
         
         return FightAgentType.values()[type];
@@ -103,14 +107,15 @@ public class FightAgentDirector implements Director<FightAgent>
     @Override
     public int calculateType(FightAgent fightAgent)
     {
-        return calculateType(fightAgent.getAllegiance(),fightAgent.getType(), fightAgent.getFaction(), fightAgent.getLevel());
+        return calculateType(fightAgent.getAllegiance(), fightAgent.getType(), fightAgent.getFaction(),
+                             fightAgent.getLevel());
     }
     
     
     @Override
     public Builder<FightAgent> getSuitedBuilder(int type)
     {
-        FightAgentType fightAgentType= getFightAgentType(type);
+        FightAgentType fightAgentType = getFightAgentType(type);
         
         if (fightAgentType == null)
         {

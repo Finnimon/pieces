@@ -19,7 +19,10 @@ public class HeadQuarter extends CityBuilding
     
     
     private static final String SIXTH_MISSION_JSON_FILE_PATH = "first_mission.json";
-    private static Mission mission = Missions.FIRST;
+    
+    
+    private static final Mission mission = Missions.FIRST;
+    
     
     public HeadQuarter(String name, String description, String spriteFilePath, int level)
     {

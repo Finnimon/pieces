@@ -14,15 +14,15 @@ public class SpellCasterFightAgent extends FightAgent implements SpellCaster
     
     
     public SpellCasterFightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
-                                 FightAgentType fightAgentType, Faction faction, Allegiance allegiance, int rank, int meleeDamage,
-                                 int rangedDamage, int rangedAttackRange, int remainingRangedAttacks,
+                                 FightAgentType fightAgentType, Faction faction, Allegiance allegiance, int rank,
+                                 int meleeDamage, int rangedDamage, int rangedAttackRange, int remainingRangedAttacks,
                                  boolean isRangedAttacker, int physicalDefence, int magicDefence, float evadeChance,
                                  int maxHealth, int maxMana, int health, int mana, int initiative, float accuracy,
                                  SpellBook spellBook)
     {
-        super(name, description, spriteUrl, isFlying, movementRange, fightAgentType, faction, allegiance, rank, meleeDamage,
-              rangedDamage, rangedAttackRange, remainingRangedAttacks, isRangedAttacker, physicalDefence, magicDefence,
-              evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
+        super(name, description, spriteUrl, isFlying, movementRange, fightAgentType, faction, allegiance, rank,
+              meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, isRangedAttacker, physicalDefence,
+              magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
         this.spellBook = spellBook;
     }
     

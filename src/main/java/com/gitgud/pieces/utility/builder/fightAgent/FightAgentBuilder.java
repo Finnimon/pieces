@@ -438,11 +438,6 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     
     public FightAgent result()
     {
-//        if (StackWalker.getInstance().getCallerClass() != FightAgentDirector.class)
-//        {
-//            throw new IllegalCallerException("Can only be called from" + FightAgentDirector.class);
-//        }
-        
         adjustValuesByFaction();
         adjustValuesByLevel();
         
@@ -534,7 +529,6 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     private void applyDamageScalar(float damageModifier)
     {
         meleeDamage = Math.round(meleeDamage * damageModifier);
-        System.out.println("meleeDamage: " + meleeDamage);
         rangedDamage = Math.round(rangedDamage * damageModifier);
         
         accuracy = accuracy * damageModifier;
@@ -550,13 +544,11 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     
     protected void adjustValuesByLevel()
     {
-        float scalar=level;
-        
+        float scalar = level;
         
         
         scaleValues(scalar);
         levelUpSpellsIfNeeded();
-        System.out.println("damage: " + meleeDamage);
     }
     
     
@@ -571,7 +563,7 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
         meleeDamage = Math.round(meleeDamage * scalar);
         rangedDamage = Math.round(rangedDamage * scalar);
         
-        physicalDefence = Math.round(physicalDefence );
+        physicalDefence = Math.round(physicalDefence);
         magicDefence = Math.round(magicDefence);
         
         initiative = Math.round(initiative * scalar);

@@ -26,7 +26,8 @@ public class ResourceCollectible extends GameObject implements Collectible<Missi
     
     public ResourceCollectible(int resourceValue, ResourceType resourceType)
     {
-        super(Named.formatString(resourceType.name()), determineDescription(resourceValue,resourceType), determineSpriteFilePath(resourceType));
+        super(Named.formatString(resourceType.name()), determineDescription(resourceValue, resourceType),
+              determineSpriteFilePath(resourceType));
         this.resourceValue = resourceValue;
         this.resourceType = resourceType;
     }

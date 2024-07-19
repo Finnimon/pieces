@@ -1,6 +1,7 @@
 package com.gitgud.graph;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 
 /**
@@ -109,12 +110,14 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         return vertices.put(vertex, element);
     }
     
+    
     public Element place(int index, Element element)
     {
         Vertex vertex = getVertex(index);
         
         return place(vertex, element);
     }
+    
     
     /**
      * Gets the {@link Element} on {@param vertex}
@@ -282,7 +285,8 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
      * @param range
      * @return
      */
-    public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range)
+    public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range, Predicate<Vertex> fromEdgeFilter,
+                                                 Predicate<Vertex> toEdgeFilter)
     {
         Graph<Vertex, Element, Edge> subGraph = new Graph<>();
         
@@ -295,10 +299,12 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         
         subGraph.edges.put(root, new HashSet<>());
         
-        HashSet<Edge> rootEdges = getEdges(root);
-        
         for (Edge edge : getEdges(root))
         {
+            Vertex current = edge.getTo();
+            
+            if (!toEdgeFilter.test(current)) continue;
+            
             double weight = determineWeight(edge);
             
             if (weight > range)
@@ -306,25 +312,35 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
                 continue;
             }
             
-            
-            Vertex current = edge.getTo();
-            
             subGraph.vertices.put(current, get(current));
             subGraph.edges.put(current, new HashSet<>());
             subGraph.addEdge(root, edge);
             
             double remainingRange = range - weight;
             
-            if (remainingRange <= 0)
+            if (remainingRange <= 0|| !fromEdgeFilter.test(current))
             {
                 continue;
             }
             
-            subGraph.addAll(subGraph(current, remainingRange));
+            subGraph.addAll(subGraph(current, remainingRange,fromEdgeFilter,toEdgeFilter));
         }
         
         
         return subGraph;
+    }
+    
+    public Graph<Vertex, Element, Edge> subGraph(Vertex start, float range, Predicate<Vertex> fromEdgeFilter,
+                                                 Predicate<Vertex> toEdgeFilter)
+    {
+        return subGraph(start, (double) range,fromEdgeFilter,toEdgeFilter);
+    }
+    
+    
+    public Graph<Vertex, Element, Edge> subGraph(Vertex start, int range, Predicate<Vertex> fromEdgeFilter,
+                                                 Predicate<Vertex> toEdgeFilter)
+    {
+        return subGraph(start, (double) range,fromEdgeFilter,toEdgeFilter);
     }
     
     
@@ -340,17 +356,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         }
     }
     
-    
-    public Graph<Vertex, Element, Edge> subGraph(Vertex start, float range)
-    {
-        return subGraph(start, (double) range);
-    }
-    
-    
-    public Graph<Vertex, Element, Edge> subGraph(Vertex start, int range)
-    {
-        return subGraph(start, (double) range);
-    }
     
     
     /**

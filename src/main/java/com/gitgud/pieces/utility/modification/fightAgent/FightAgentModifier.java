@@ -48,7 +48,7 @@ public class FightAgentModifier extends Modifier<FightAgent>
     }
     
     
-    public static FightAgent applyModifiers (FightAgent fightAgent, Collection<Modifier<FightAgent>> modifiers)
+    public static FightAgent applyModifiers(FightAgent fightAgent, Collection<Modifier<FightAgent>> modifiers)
     {
         return Modifier.applyModifiers(fightAgent, modifiers);
     }

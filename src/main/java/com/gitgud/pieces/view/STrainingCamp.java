@@ -9,15 +9,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class STrainingCamp {
-    public static Scene createTrainingCampScene(Stage stage) {
+
+public class STrainingCamp
+{
+    public static Scene createTrainingCampScene(Stage stage)
+    {
         VBox layout = new VBox(50);
         layout.setAlignment(Pos.CENTER);
         Label description = new Label("Hier können die Werte der Einheiten verbessert werden");
         HBox units = new HBox(20);
         units.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout);
-        for (FightAgentType unit : FightAgentType.values()) {
+        for (FightAgentType unit : FightAgentType.values())
+        {
             VBox vbox = new VBox(20);
             vbox.setAlignment(Pos.CENTER);
             Button upgrade = new Button("Upgrade");

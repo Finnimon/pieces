@@ -35,7 +35,7 @@ public interface AttackAction<AwaiterType extends ActionAwaitingController<Model
         
         GridMapRender<FighterType> gridMapRender = awaiter.getRender().getGridMapRender();
         
-        renderTakenDamage(takenDamage,awaiter);
+        renderTakenDamage(takenDamage, awaiter);
         
         if (!attacked.isDead())
         {
@@ -50,18 +50,18 @@ public interface AttackAction<AwaiterType extends ActionAwaitingController<Model
     
     private void renderTakenDamage(int takenDamage, AwaiterType awaiter)
     {
-        Label damage = new Label(Integer.toString(takenDamage) + " DAMAGE");
+        Label damage = new Label(takenDamage + " DAMAGE");
         damage.setFont(new Font(40));
         damage.setVisible(false);
         damage.setBackground(InfoPane.DEFAULT_BACKGROUND);
-        ObservableList<Node> awaiterChildren= awaiter.getRender().getChildren();
+        ObservableList<Node> awaiterChildren = awaiter.getRender().getChildren();
         awaiterChildren.add(damage);
         damage.setAlignment(Pos.CENTER);
         
-        KeyFrame keyFrame=new KeyFrame(Duration.seconds(1), e -> awaiterChildren.remove(damage));
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), e -> awaiterChildren.remove(damage));
         
         damage.setVisible(true);
-        Timeline timeline=new Timeline(keyFrame);
+        Timeline timeline = new Timeline(keyFrame);
         timeline.play();
     }
     

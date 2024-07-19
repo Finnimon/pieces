@@ -80,10 +80,9 @@ public interface GridMovable extends GridMappable
                                       }
                                       
                                       Object object = gridMap.get(tile);
-                                      if (object != null && !(object instanceof Interactable))
+                                      if (object != null)
                                       {
                                           inValidTiles.add(tile);
-                                          return;
                                       }
                                   });
         result.removeAll(inValidTiles);
@@ -92,7 +91,7 @@ public interface GridMovable extends GridMappable
     
     private ArrayList<Tile> getInNonFlyingRangeTiles(GridMap<?> gridMap, Tile position)
     {
-        Graph<Tile, ?, WeightedEdge<Tile>> graph = gridMap.subGraph(position, getMovementRange());
+        Graph<Tile, ?, WeightedEdge<Tile>> graph = gridMap.subGraph(position, getMovementRange(), Objects::nonNull, x->!(x instanceof GridMovable));
         TreeSet<Tile> tiles = graph.verticeSet();
         tiles.remove(position);
         

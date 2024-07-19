@@ -2,24 +2,36 @@ package com.gitgud.pieces.control;
 
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.actionChoice.*;
 import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
-import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
-import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.fight.FightRender;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 
-//todo render as scene
 public class FightController extends ActionAwaitingController<Fight, FightAgent, FightRender>
 {
+    
+    
+    public static final int MOVEMENT_CHOICE_INDEX = 0;
+    
+    
+    public static final int ATTACK_CHOICE_INDEX = 1;
+    
+    
+    public static final int SPELL_CHOICE_INDEX = 2;
+    
+    
+    public static final int SKIP_TURN_CHOICE_INDEX = 3;
+    
+    
     private final EnemyAlgorithm enemyAlgorithm;
     
     
@@ -33,27 +45,17 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     @Override
     public void advance()
     {
-        
         Fight fight = this.getModel();
-        fight.getFightTimeLine().advance();
         fight.incrementTurn();
-        if(tryEnd())
+        if (tryEnd())
         {
             return;
         }
         FightRender render = getRender();
         render.updateRender();
         render.getGridMapRender().clearHighLights();
-        
-        
-        if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
-        {
-            enemyAlgorithm.act();
-            return;
-        }
-        
-        getActionChoice().show(this);
         hightlightActivePosition();
+        executeActionChoiceTask(onSucceeded());
     }
     
     
@@ -71,11 +73,10 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     {
         List<ActionChoice<FightController, Fight, FightAgent, FightRender>> choices = new ArrayList<>();
         
-        choices.add(getMovementChoiceRoot());
-        choices.add(getAttackRootChoice());
-        choices.add(getSpellRootChoice());
-        choices.add(getSkipTurnChoice());
-        
+        choices.add(MOVEMENT_CHOICE_INDEX, getMovementChoiceRoot());
+        choices.add(ATTACK_CHOICE_INDEX, getAttackRootChoice());
+        choices.add(SPELL_CHOICE_INDEX, getSpellRootChoice());
+        choices.add(SKIP_TURN_CHOICE_INDEX, getSkipTurnChoice());
         return new RootActionChoice<>("root", "root", choices, this);//todo
     }
     
@@ -96,7 +97,6 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         Tile position = getActivePosition();
         
         FightAgent activeFightAgent = getActiveFightAgent();
-        
         
         return new AttackRootChoice<>(this, activeFightAgent);//todo
     }
@@ -129,17 +129,8 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         getModel().end();//todo
         
         activeGame.setFight(null);
-        Mission mission = activeGame.getMission();
-        if (mission != null)
-        {
-            new MissionController(mission).start();
-            return;
-        }
         
-        StageController.getInstance().getStage().close();
-        
-        City city = activeGame.getCity();
-        new CityController(city).start();
+        GameFlow.startNextSceneController();
     }
     
     
@@ -153,12 +144,23 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     @Override
     public void start()
     {
-        ActiveGameController.getInstance().get().setFight(this.getModel());
-        StageController.getInstance().getStage().show();
-        if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
+        getRender().show();
+        executeActionChoiceTask(onSucceeded());
+    }
+    
+    
+    private Consumer<ActionChoice> onSucceeded()
+    {
+        return actionChoice ->
         {
-            enemyAlgorithm.act();
-        }
-            super.start();
+            if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
+            {
+                System.out.println("enemyAlgorithm.act((RootChoice) actionChoice)");
+                enemyAlgorithm.act((RootChoice) actionChoice);
+                return;
+            }
+            hightlightActivePosition();
+            actionChoice.show(this);
+        };
     }
 }

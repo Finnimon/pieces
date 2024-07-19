@@ -13,16 +13,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class SMarketplace {
-    public static Scene createMarketplaceScene(Stage stage) {
+
+public class SMarketplace
+{
+    public static Scene createMarketplaceScene(Stage stage)
+    {
         HBox hbox = new HBox(50);
         VBox text = new VBox(50);
         text.setAlignment(Pos.CENTER);
         hbox.setAlignment(Pos.CENTER);
         Label description = new Label("Hier können Ressourcen gekauft bzw. getauscht werden");
         Scene scene = new Scene(text);
-
-        for (ResourceType resource : ResourceType.values()) {
+        
+        for (ResourceType resource : ResourceType.values())
+        {
             VBox vbox = new VBox(20);
             vbox.setAlignment(Pos.CENTER);
             ComboBox anzahlToTrade = new ComboBox();
@@ -36,19 +40,25 @@ public class SMarketplace {
             anzahlToTrade.setValue(0);
             Button trade = new Button("Trade");
             Button buy = new Button("Buy");
-            buy.setOnAction(e -> {
-                System.out.println("Buying " + anzahlToBuy.getValue() + " " + resource.name());
-            });
-            trade.setOnAction(e -> {
-                System.out.println("Trading " + anzahlToTrade.getValue() + " " + resource.name() + " for " + resourceToTrade.getValue());
-            });
-            vbox.getChildren().addAll( new Label("Trade " + resource.name() + " for:"), resourceToTrade, new Label("How many?"), anzahlToTrade, trade, new Label("or buy"), anzahlToBuy, buy);
+            buy.setOnAction(e ->
+                            {
+                                System.out.println("Buying " + anzahlToBuy.getValue() + " " + resource.name());
+                            });
+            trade.setOnAction(e ->
+                              {
+                                  System.out.println(
+                                          "Trading " + anzahlToTrade.getValue() + " " + resource.name() + " for " + resourceToTrade.getValue());
+                              });
+            vbox.getChildren().addAll(new Label("Trade " + resource.name() + " for:"), resourceToTrade,
+                                      new Label("How many?"), anzahlToTrade, trade, new Label("or buy"), anzahlToBuy,
+                                      buy);
             hbox.getChildren().add(vbox);
         }
         Button button = new Button("Fortfahren");
-        button.setOnAction(e -> {
-            SCity.createCityScene(stage);
-        });
+        button.setOnAction(e ->
+                           {
+                               SCity.createCityScene(stage);
+                           });
         text.getChildren().addAll(description, hbox, button);
         text.setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGRAY, null, null)));
         stage.setScene(scene);

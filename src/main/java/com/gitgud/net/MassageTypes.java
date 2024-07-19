@@ -1,4 +1,5 @@
 package com.gitgud.net;
 
-public enum MassageTypes {
+public enum MassageTypes
+{
 }
