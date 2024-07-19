@@ -11,10 +11,15 @@ import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
+import javafx.concurrent.Task;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.gitgud.pieces.control.FightController.*;
 
@@ -39,23 +44,27 @@ public class EnemyAlgorithm
     }
     
     
-    public void act(RootChoice actionChoice)
+    public synchronized void act(RootChoice actionChoice)
     {
-        //        Task<Boolean> waitTask = new Task<>()
-        //        {
-        //            @Override
-        //            protected Boolean call() throws Exception
-        //            {
-        //                wait(100);
-        //                return true;
-        //            }
-        //        };
-        //        waitTask.setOnSucceeded(x -> selectActionChoice(actionChoice));
-        //        ExecutorService exec = Executors.newSingleThreadExecutor();
-        //        exec.execute(waitTask);
-        //        exec.shutdown();
-        ActionChoice choice = choose(actionChoice);
-        select(choice);
+        fightController.getRender().getHud().clearChoices();
+        Task<ActionChoice> task = chooseTask(actionChoice);
+        task.setOnSucceeded(x -> select(task.getValue()));
+        ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+        exec.schedule(task, 1200, TimeUnit.MILLISECONDS);
+        exec.shutdown();
+    }
+    
+    
+    Task<ActionChoice> chooseTask(RootChoice rootChoice)
+    {
+        return new Task<>()
+        {
+            @Override
+            protected ActionChoice call() throws InterruptedException
+            {
+                return choose(rootChoice);
+            }
+        };
     }
     
     

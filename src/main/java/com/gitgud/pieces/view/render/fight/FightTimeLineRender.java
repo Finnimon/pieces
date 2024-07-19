@@ -1,6 +1,7 @@
 package com.gitgud.pieces.view.render.fight;
 
 import com.gitgud.engine.view.UpdatableRender;
+import com.gitgud.engine.view.infopane.InfoPane;
 import com.gitgud.pieces.model.fight.FightTimeLine;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import javafx.collections.ObservableList;
@@ -21,7 +22,7 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     public static final int HEIGHT = 50;
     
     
-    private static final Rectangle BORDER_RECTANGLE = new Rectangle(5, HEIGHT, Color.BLACK);
+    private static final Rectangle SEP_RECTANGLE = new Rectangle(5, HEIGHT, Color.BLACK);
     
     
     private final FightTimeLine fightTimeLine;
@@ -30,6 +31,8 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     public FightTimeLineRender(FightTimeLine fightTimeLine)
     {
         super(HEIGHT);
+        setBackground(InfoPane.DEFAULT_BACKGROUND);
+        
         this.fightTimeLine = fightTimeLine;
         
         render(fightTimeLine);
@@ -50,13 +53,19 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
         
         for (FightAgent fightAgent : fightAgents)
         {
-            ImageView imageView = new ImageView();
-            imageView.setFitHeight(HEIGHT);
-            imageView.setPreserveRatio(true);
-            imageView.setImage(fightAgent.getSprite());
-            if (children.size() == currentSize) this.getChildren().add(BORDER_RECTANGLE);
-            this.getChildren().add(imageView);
+            if (children.size() == currentSize) this.getChildren().add(SEP_RECTANGLE);
+            addFightAgent(fightAgent);
         }
+    }
+    
+    
+    private void addFightAgent(FightAgent fightAgent)
+    {
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(HEIGHT);
+        imageView.setPreserveRatio(true);
+        imageView.setImage(fightAgent.getSprite());
+        getChildren().add(imageView);
     }
     
     

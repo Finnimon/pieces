@@ -87,6 +87,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         
         FightAgent activeFightAgent = getActiveFightAgent();
         
+        System.out.println("Position: " + position+"\nActive: " + activeFightAgent);
         
         return new MovementRootChoice<>(this, activeFightAgent, position);
     }
@@ -124,9 +125,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     public void end()
     {
         ActiveGame activeGame = ActiveGameController.getInstance().get();
-        
-        System.out.println(activeGame.getGameState());
-        getModel().end();//todo
+        getModel().end();
         
         activeGame.setFight(null);
         
@@ -155,7 +154,6 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         {
             if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
             {
-                System.out.println("enemyAlgorithm.act((RootChoice) actionChoice)");
                 enemyAlgorithm.act((RootChoice) actionChoice);
                 return;
             }

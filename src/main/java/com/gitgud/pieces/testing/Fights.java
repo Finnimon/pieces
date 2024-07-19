@@ -45,8 +45,7 @@ public interface Fights
                 FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
         agents.add(director.make(
                 FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.PAWN, Faction.PINK, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.BLACK, FightAgentType.PAWN, Faction.PINK, 1)));
+
         
         
         gridMap.place(3, 1, agents.get(0));
@@ -54,7 +53,6 @@ public interface Fights
         gridMap.place(11, 0, agents.get(2));
         gridMap.place(8, 1, agents.get(3));
         gridMap.place(6, 3, agents.get(4));
-        gridMap.place(9, 3, agents.get(5));
         
         return new Fight(gridMap);
     }

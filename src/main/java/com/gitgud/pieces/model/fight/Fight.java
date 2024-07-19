@@ -64,7 +64,6 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     public int incrementTurn()
     {
-        System.out.println(getFightTimeLine().getActiveFightAgent().getAllegiance());
         getFightTimeLine().advance();
         return turn.add(1).get();
     }

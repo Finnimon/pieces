@@ -53,11 +53,9 @@ public final class GameFlow
     public static void startNextSceneController()
     {
         setStageToLoadScreen();
-        System.out.println("startNextSceneController");
         Task<Startable> task = NEXT_SCENE_CONTROLLER_TASK;
         task.setOnSucceeded(x -> task.getValue().start());
         Executors.newSingleThreadExecutor().execute(task);
-        System.out.println("startNextSceneController");
     }
     
     

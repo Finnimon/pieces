@@ -37,8 +37,8 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     {
         TreeSet<FightAgent> fightTimeLine = current();
         TreeSet<FightAgent> nextTimeLine = next();
-        removeDeadFightFigures(fightTimeLine);
-        removeDeadFightFigures(nextTimeLine);
+        removeDeadFightAgents(fightTimeLine);
+        removeDeadFightAgents(nextTimeLine);
         
         nextTimeLine.add(fightTimeLine.removeFirst());
         
@@ -52,7 +52,7 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     }
     
     
-    public void removeDeadFightFigures(TreeSet<FightAgent> fightAgentTreeSet)
+    public void removeDeadFightAgents(TreeSet<FightAgent> fightAgentTreeSet)
     {
         TreeSet<FightAgent> deadFigures = fightAgentTreeSet.stream().filter(Defender::isDead).collect(
                 Collectors.toCollection(TreeSet::new));
@@ -62,6 +62,10 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     public FightAgent getActiveFightAgent()
     {
+        if (current.first()==null||current.first().isDead())
+            
+            System.out.println("\r\n\n--------------------  null in timeline   --------------------\n\n\r");
+        
         return current.first();
     }
     

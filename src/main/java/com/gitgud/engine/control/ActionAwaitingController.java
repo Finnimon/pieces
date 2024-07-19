@@ -30,9 +30,6 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
     
     protected void hightlightActivePosition()
     {
-        System.out.println(
-                "TODO: Hightlighting in com\\gitgud\\engine\\control\\ActionAwaitingController#hightlightActivePosition()");
-        
         //todo fix currently not working as it blocks the InfoPane event for the active Agent underneath the highlight
         Tile tile = getActivePosition();
         if (tile==null) return;

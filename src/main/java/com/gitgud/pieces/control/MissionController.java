@@ -32,7 +32,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         super(mission, new MissionRender(mission));
         getRender().addInteractionHandlers(this);
         interActionFlagger = new InterActionFlagger(mission);
-        System.out.println("new mc");
     }
     
     
@@ -46,14 +45,13 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public ActionChoice<MissionController, Mission, GameObject, MissionRender> getActionChoice()
     {
-        System.out.println("action choice started");
         RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice = new MovementRootChoice<>(
                 this, getModel().getPlayerAgent(), getModel().getPlayerAgentPosition());
         ActionChoice<MissionController, Mission, GameObject, MissionRender> skipTurnChoice = getSkipTurnChoice();
         
         List<ActionChoice<MissionController, Mission, GameObject, MissionRender>> choices = List.of(rootToActionChoice,
                                                                                                     skipTurnChoice);
-        System.out.println("action choice done");
+
         return new RootActionChoice<>("root", "root", choices, this);
     }
     
@@ -61,7 +59,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void start()
     {
-        System.out.println("MissionController start");
         super.start();
     }
     
@@ -69,7 +66,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void advance()
     {
-        System.out.println("Advance");
         if (handleInteractions())
         {
             return;
