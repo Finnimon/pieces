@@ -29,12 +29,30 @@ public class ResourceCost
     }
     
     
+    public ResourceCost multiple(int multiplier)
+    {
+        HashMap<ResourceType, Long> newResourceCostMap = new HashMap<>();
+        for (ResourceType resourceType : resourceCostMap.keySet())
+        {
+            newResourceCostMap.put(resourceType, resourceCostMap.get(resourceType) * multiplier);
+        }
+        return new ResourceCost(newResourceCostMap);
+    }
+    
+    
     public boolean isResourceCostCoveredByWallet(int multiplier)
     {
+        return multiple(multiplier).isResourceCostCoveredByWallet();
+    }
+    
+    
+    public boolean isResourceCostCoveredByWallet()
+    {
+        
         HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
-            if (walletResourceMap.get(resourceType) < resourceCostMap.get(resourceType) * multiplier)
+            if (walletResourceMap.get(resourceType) < resourceCostMap.get(resourceType))
             {
                 return false;
             }
@@ -43,42 +61,36 @@ public class ResourceCost
     }
     
     
-    public boolean isResourceCostCoveredByWallet()
-    {
-        return isResourceCostCoveredByWallet(DEFAULT_MULTIPLIER);
-    }
-    
-    
     public void deductResourceCostFromWallet(int multiplier)
     {
-        for (ResourceType resourceType : resourceCostMap.keySet())
-        {
-            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
-            walletResourceMap.put(resourceType,
-                                  walletResourceMap.get(resourceType) - resourceCostMap.get(resourceType) * multiplier);
-        }
+        multiple(multiplier).deductResourceCostFromWallet();
     }
     
     
     public void deductResourceCostFromWallet()
     {
-        deductResourceCostFromWallet(DEFAULT_MULTIPLIER);
+        for (ResourceType resourceType : resourceCostMap.keySet())
+        {
+            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+            walletResourceMap.put(resourceType,
+                                  walletResourceMap.get(resourceType) - resourceCostMap.get(resourceType));
+        }
     }
     
     
     public void addResourceCostToWallet(int multiplier)
     {
-        for (ResourceType resourceType : resourceCostMap.keySet())
-        {
-            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
-            walletResourceMap.put(resourceType,
-                                  walletResourceMap.get(resourceType) + resourceCostMap.get(resourceType) * multiplier);
-        }
+        multiple(multiplier).addResourceCostToWallet();
     }
     
     
     public void addResourceCostToWallet()
     {
-        addResourceCostToWallet(DEFAULT_MULTIPLIER);
+        for (ResourceType resourceType : resourceCostMap.keySet())
+        {
+            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+            walletResourceMap.put(resourceType,
+                                  walletResourceMap.get(resourceType) + resourceCostMap.get(resourceType));
+        }
     }
 }
