@@ -2,6 +2,9 @@ package com.gitgud.pieces.model.player;
 
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.pieces.model.fight.SpellBook;
+import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+
+import java.util.HashSet;
 
 
 /**
@@ -12,7 +15,7 @@ import com.gitgud.pieces.model.fight.SpellBook;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
-public record Player(String name, Difficulty difficulty, Army army, Wallet wallet, ArtefactPouch artefactPouch,
+public record Player(String name, Difficulty difficulty, HashSet<FightAgent> army, Wallet wallet, ArtefactPouch artefactPouch,
                      SpellBook spellbook) implements Named
 {
 }

@@ -34,20 +34,15 @@ public interface TestAssets
     }
     
     
-    static Army testArmy()
+    static HashSet<FightAgent> testArmy()
     {
-        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = new HashMap<>();
-        for (FightAgentType type : FightAgentType.values())
-        {
-            baseCampStash.put(type, new HashSet<>());
-        }
         
         HashSet<FightAgent> fightAgents = new HashSet<>();
         
         createFightAgents(fightAgents, Allegiance.BLACK);
         
         
-        return new Army(baseCampStash);
+        return fightAgents;
     }
     
     

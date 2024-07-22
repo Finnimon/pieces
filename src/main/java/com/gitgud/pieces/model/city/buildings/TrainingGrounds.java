@@ -56,8 +56,7 @@ public class TrainingGrounds extends CityBuilding
     
     private Collection<FightAgent> getTrainableFightAgents()
     {
-        return ActiveGameController.getInstance().get().getPlayer().army().baseCampStash().values().stream().flatMap(
-                Collection::stream).collect(Collectors.toCollection(ArrayList::new)).stream().toList();
+        return ActiveGameController.getInstance().get().getPlayer().army();
     }
     
     

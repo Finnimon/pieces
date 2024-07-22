@@ -106,7 +106,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     @Override
     public FightAgent changeValue(FightAgent value)
     {
-        ActiveGameController.getInstance().get().getPlayer().army().baseCampStash().get(value.getType()).add(value);
+        ActiveGameController.getInstance().get().getPlayer().army().add(value);
         return value;
     }
     

@@ -109,7 +109,7 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         
         activeGame.setMission(null);
         
-        getModel().returnFightAgentsToPool();
+        getModel().returnFightAgentsToArmy();
         
         GameFlow.showNextScene();
     }

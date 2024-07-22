@@ -116,17 +116,13 @@ public class Mission implements ActionAwaiterModel<GameObject>
     }
     
     
-    public void returnFightAgentsToPool()
+    public void returnFightAgentsToArmy()
     {
-        ArrayList<FightAgent> fightAgents = new ArrayList<>();
+        Collection<FightAgent> fightAgents =ActiveGameController.getInstance().get().getPlayer().army();
         for (int i = 0; i < activeFightAgents.length; i++)
         {
             fightAgents.add(activeFightAgents[i]);
             fightAgents.add(discardedFightAgents[i]);
         }
-        
-        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = ActiveGameController.getInstance().get().getPlayer().army().baseCampStash();
-        
-        fightAgents.stream().filter(Objects::nonNull).forEach(fA -> baseCampStash.get(fA.getType()).add(fA));
     }
 }
