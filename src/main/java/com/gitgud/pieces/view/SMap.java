@@ -166,8 +166,8 @@ public class SMap
                 continue;
             }
             VBox gameObjectContainer = new VBox();
-            AnchorPane.setTopAnchor(gameObjectContainer, (tile.getX() * TILE_SPACING));
-            AnchorPane.setLeftAnchor(gameObjectContainer, (tile.getY() * TILE_SPACING));
+            AnchorPane.setTopAnchor(gameObjectContainer, (double)(tile.getX() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (double)(tile.getY() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
             gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
             

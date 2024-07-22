@@ -94,8 +94,8 @@ public class SGridMap implements IDimentions
                 continue;
             }
             VBox gameObjectContainer = new VBox();
-            AnchorPane.setTopAnchor(gameObjectContainer, (tile.getY() * TILE_SPACING));
-            AnchorPane.setLeftAnchor(gameObjectContainer, (tile.getX() * TILE_SPACING));
+            AnchorPane.setTopAnchor(gameObjectContainer, (double)(tile.getY() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (double)(tile.getX() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
             
             Image gameObjektSprite = new Image(element.getSpriteUrl());

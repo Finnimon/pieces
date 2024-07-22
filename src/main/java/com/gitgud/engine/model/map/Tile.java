@@ -14,7 +14,7 @@ import com.gitgud.graph.Vertex2D;
  * @Since: 13.06.2024
  * @Version: 2.0
  */
-public class Tile extends Vertex2D implements Sprite
+public class Tile implements Vertex2D, Sprite
 {
     
     
@@ -36,6 +36,12 @@ public class Tile extends Vertex2D implements Sprite
     private int index;
     
     
+    private final int x;
+    
+    
+    private final int y;
+    
+    
     /**
      * Creates a new instance of {@code Point2D}.
      *
@@ -43,9 +49,10 @@ public class Tile extends Vertex2D implements Sprite
      * @param y       the y coordinate of the point
      * @param terrain
      */
-    public Tile(double x, double y, Terrain terrain, int index)
+    public Tile(int x, int y, Terrain terrain, int index)
     {
-        super(x, y);
+        this.x = x;
+        this.y = y;
         this.terrain = terrain;
         spriteFilePath = determineSpriteFilePath();
         this.index = index;
@@ -115,5 +122,19 @@ public class Tile extends Vertex2D implements Sprite
         stringBuilder.append(DOT_PNG);
         
         return stringBuilder.toString();
+    }
+    
+    
+    @Override
+    public int getX()
+    {
+        return x;
+    }
+    
+    
+    @Override
+    public int getY()
+    {
+        return y;
     }
 }
