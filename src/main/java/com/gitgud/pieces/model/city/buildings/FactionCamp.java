@@ -2,24 +2,21 @@ package com.gitgud.pieces.model.city.buildings;
 
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.ResourceCost;
+import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
+import static com.gitgud.pieces.model.city.buildings.CityConstants.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
 {
-    
-    
-    private static final ResourceCost LEVEL_UP_RESOURCE_COST = new ResourceCost(ResourceType.PLATINUM, 100);
-    
-    
-    private static final Faction DEFAULT_FACTION = Faction.MONOCHROME;
-    
-    
     private static final String DEFAULT_DESCRIPTION = "Pieces of it's faction can be recruited here.";
     
     
@@ -39,40 +36,52 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     }
     
     
-    public static FactionCamp create(Faction faction, int level)
+    public FactionCamp(Faction faction, int level)
     {
-        return new FactionCamp(faction + NAME, DEFAULT_DESCRIPTION, level, faction);
+        this(faction + NAME, DEFAULT_DESCRIPTION, level, faction);
     }
     
     
-    public static FactionCamp create(Faction faction)
+    public FactionCamp(Faction faction)
     {
-        return create(faction, STARTING_LEVEL);
+        this(faction, STARTING_LEVEL);
     }
     
     
-    public HashMap<FightAgent, ResourceCost> loadRecruitableFightAgentsWithCost()
+    public Faction getFaction()
     {
-        
+        return faction;
+    }
+    
+    
+    public ResourceCost getLevelUpResourceCost()
+    {
+        return LEVEL_UP_RESOURCE_COST.multiple(getLevel());
+    }
+    
+    
+    public FightAgent[] getRecruitableFightAgentsWithCost()
+    {
+        FightAgent[] recruitableFightAgents=new FightAgent[FightAgentType.values().length];
         int level = getLevel();
         Faction faction = getFaction();
         
         FightAgentDirector director = new FightAgentDirector();
         
+        for (FightAgentType type: FightAgentType.values())
+        {
+            recruitableFightAgents[type.ordinal()]=(director.make(Allegiance.BLACK, type, faction, level));
+        }
         
-        return null;
+        return recruitableFightAgents;
     }
     
     
     @Override
     public boolean isTransactionPossible(FightAgent fightAgent)
     {
-        ResourceCost resourceCost = loadRecruitableFightAgentsWithCost().get(fightAgent);
-        if (resourceCost == null)
-        {
-            return false;
-        }
-        
+        ResourceCost resourceCost =getResourceCost(fightAgent);
+        if (resourceCost == null) return false;
         return resourceCost.isResourceCostCoveredByWallet();
     }
     
@@ -80,11 +89,12 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     @Override
     public void deductCostFromInventory(FightAgent fightAgent)
     {
-        ResourceCost resourceCost = loadRecruitableFightAgentsWithCost().get(fightAgent);
+        ResourceCost resourceCost = getResourceCost(fightAgent);
         if (resourceCost == null)
         {
             throw new IllegalArgumentException(AGENT_NOT_AVAILABLE);
         }
+        resourceCost.deductResourceCostFromWallet();
     }
     
     
@@ -93,12 +103,6 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     {
         ActiveGameController.getInstance().get().getPlayer().army().add(value);
         return value;
-    }
-    
-    
-    public Faction getFaction()
-    {
-        return faction;
     }
     
     
@@ -114,5 +118,23 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
         
         
         return super.levelUp();
+    }
+    
+    
+    public ResourceCost getResourceCost(FightAgent fightAgent)
+    {
+        ResourceCost baseCost;
+        FightAgentType type=fightAgent.getType();
+        
+        baseCost = switch (type)
+        {
+            case PAWN -> PAWN_COST;
+            case KNIGHT -> KNIGHT_COST;
+            case ROOK -> ROOK_COST;
+            case BISHOP -> BISHOP_COST;
+            case QUEEN -> QUEEN_COST;
+        };
+        
+        return baseCost.multiple(getLevel());
     }
 }
