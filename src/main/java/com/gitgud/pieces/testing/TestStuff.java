@@ -103,9 +103,6 @@ public class TestStuff
         // Insert Json objects to write here
         // writableFile.write(hashMapToJson.getBytes());
         writableFile.close();
-        
-        System.out.println(Difficulty.EASY.name());
-        
     }
     
     

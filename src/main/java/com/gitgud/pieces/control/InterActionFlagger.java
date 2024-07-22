@@ -30,8 +30,6 @@ public class InterActionFlagger implements Runnable
     @Override
     public void run()
     {
-        boolean inMissionFight = false;
-        
         while (mission != null && !mission.isFinished())
         //        while (activeGame.getGameState() == GameState.MISSION || (inMissionFight = activeGame.getGameState() == GameState.MISSION_FIGHT))
         {
@@ -41,7 +39,6 @@ public class InterActionFlagger implements Runnable
                 {
                     continue;
                 }
-                System.out.println("InterActionFlagger.run()");
                 
                 newCheckNeeded = false;
                 setFlagIfNeeded(mission);

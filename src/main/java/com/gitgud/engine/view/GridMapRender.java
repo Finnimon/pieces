@@ -110,7 +110,6 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     
     public void relocateGridMappable(Type gridMappable, Tile next)
     {
-        System.out.println("\r\n\n-------------------- Relocating " + gridMappable.name() + " --------------------\n\n\r");
         GridMappableRender<?> gridMappableRender = gridMappableRenders.get(gridMappable);
         gridMappableRender.setX(next.getX() * tileSize);
         gridMappableRender.setY(next.getY() * tileSize);

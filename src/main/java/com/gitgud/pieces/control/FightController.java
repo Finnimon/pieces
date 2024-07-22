@@ -86,8 +86,6 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         
         FightAgent activeFightAgent = getActiveFightAgent();
         
-        System.out.println("Position: " + position+"\nActive: " + activeFightAgent);
-        
         return new MovementRootChoice<>(this, activeFightAgent, position);
     }
     
