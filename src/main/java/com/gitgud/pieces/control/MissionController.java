@@ -2,7 +2,6 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.control.InterActionController;
-import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.actionChoice.ActionChoice;
 import com.gitgud.engine.control.actionChoice.RootActionChoice;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
@@ -112,7 +111,7 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         
         getModel().returnFightAgentsToPool();
         
-        GameFlow.startNextSceneController();
+        GameFlow.showNextScene();
     }
     
     

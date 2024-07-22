@@ -5,7 +5,6 @@ import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.control.actionChoice.*;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
@@ -128,7 +127,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         
         ActiveGameController.getInstance().get().setFight(null);
         
-        GameFlow.startNextSceneController();
+        GameFlow.showNextScene();
     }
     
     

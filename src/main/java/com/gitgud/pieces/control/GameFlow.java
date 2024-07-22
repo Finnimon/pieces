@@ -16,21 +16,24 @@ import static com.gitgud.pieces.control.ActiveGameController.isInitialized;
 
 public final class GameFlow
 {
-    private static final Task<Startable> NEXT_SCENE_CONTROLLER_TASK = new Task<Startable>()
-    {
-        @Override
-        protected Startable call() throws Exception
-        {
-            return getNextSceneController();
-        }
-    };
-    
-    
     /**
      * Private Constructor for static class
      */
     private GameFlow()
     {
+    }
+    
+    
+    private static Task<Startable> nextSceneControllerTask()
+    {
+        return new Task<Startable>()
+        {
+            @Override
+            protected Startable call() throws Exception
+            {
+                return getNextSceneController();
+            }
+        };
     }
     
     
@@ -46,14 +49,14 @@ public final class GameFlow
         JsonParser.getInstance();
         StageController.initialize(stage);
         
-        startNextSceneController();
+        showNextScene();
     }
     
     
-    public static void startNextSceneController()
+    public static void showNextScene()
     {
         setStageToLoadScreen();
-        Task<Startable> task = NEXT_SCENE_CONTROLLER_TASK;
+        Task<Startable> task = nextSceneControllerTask();
         task.setOnSucceeded(x -> task.getValue().start());
         Executors.newSingleThreadExecutor().execute(task);
     }

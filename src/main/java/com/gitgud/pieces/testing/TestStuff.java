@@ -10,7 +10,6 @@ import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.GameFlow;
 import com.gitgud.pieces.control.MissionController;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
@@ -113,7 +112,7 @@ public class TestStuff
     public static void lindigTest(Stage stage)
     {
         ActiveGameController.getInstance();
-        GameFlow.startNextSceneController();
+        GameFlow.showNextScene();
 //        testFightController();
 //        testMissionController();
         //        addTestGridMapRenderToStage(stage);
