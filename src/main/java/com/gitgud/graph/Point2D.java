@@ -3,7 +3,10 @@ package com.gitgud.graph;
 public interface Point2D
 {
     int getX();
+    
+    
     int getY();
+    
     
     default double distance(Point2D other)
     {

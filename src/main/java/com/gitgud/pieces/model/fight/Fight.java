@@ -3,16 +3,13 @@ package com.gitgud.pieces.model.fight;
 import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.EnemyAlgorithm;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
-import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.TreeSet;
 
 
 /**
@@ -34,7 +31,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     
     //todo render next to timeline?
-    private SimpleIntegerProperty turn = new SimpleIntegerProperty(0);
+    private final SimpleIntegerProperty turn = new SimpleIntegerProperty(0);
     
     
     public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
@@ -79,39 +76,21 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     {
         ActiveGame activeGame = ActiveGameController.getInstance().get();
         
-        FightAgent[] survivingAgents;
-        TreeSet<FightAgent> survivingAgentsTreeSet = fightTimeLine.current();
-        survivingAgentsTreeSet.addAll(fightTimeLine.next());
-        
-        survivingAgents = survivingAgentsTreeSet.stream().filter(
-                fightAgent -> !fightAgent.isDead() && fightAgent.getAllegiance() == Allegiance.BLACK).toArray(
-                FightAgent[]::new);
+        ArrayList<FightAgent> fightAgents = getAllNonDeadAgents();
+        fightAgents.removeIf(fa -> fa.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE);
         
         if (activeGame.getGameState() == GameState.MISSION_FIGHT)
         {
             FightAgent[] activeFightAgents = activeGame.getMission().getActiveFightAgents();
-            System.arraycopy(survivingAgents, 0, activeFightAgents, 0, survivingAgents.length);
-//            return;
+            fightAgents.toArray(activeFightAgents);
         }
-//
-//
-//        HashMap<FightAgentType, HashSet<FightAgent>> baseCampStash = activeGame.getPlayer().army().baseCampStash();
-//
-//        for (FightAgent fightAgent : survivingAgents)
-//        {
-//            baseCampStash.get(fightAgent.getType()).add(fightAgent);
-//        }
-//
     }
     
     
     public boolean isFinished()
     {
         
-        ArrayList<FightAgent> survivingAgents = new ArrayList<>(fightTimeLine.current());
-        survivingAgents.addAll(fightTimeLine.next());
-        
-        survivingAgents.stream().filter(x -> !x.isDead()).findFirst();
+        ArrayList<FightAgent> survivingAgents = getAllNonDeadAgents();
         
         Allegiance allegiance = survivingAgents.get(0).getAllegiance();
         
@@ -125,5 +104,13 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         
         return true;
         
+    }
+    
+    
+    private ArrayList<FightAgent> getAllNonDeadAgents()
+    {
+        ArrayList<FightAgent> survivingAgents = new ArrayList<>(fightTimeLine.current());
+        survivingAgents.addAll(fightTimeLine.next());
+        return survivingAgents;
     }
 }

@@ -45,7 +45,6 @@ public interface Fights
                 FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
         agents.add(director.make(
                 FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.PAWN, Faction.PINK, 1)));
-
         
         
         gridMap.place(3, 1, agents.get(0));

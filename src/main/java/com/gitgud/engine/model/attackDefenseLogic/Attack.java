@@ -1,6 +1,7 @@
 package com.gitgud.engine.model.attackDefenseLogic;
 
 
+import com.gitgud.engine.control.GridMovableController;
 import com.gitgud.engine.control.action.types.Applicable;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
 

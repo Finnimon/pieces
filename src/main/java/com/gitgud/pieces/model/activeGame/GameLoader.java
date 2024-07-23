@@ -32,9 +32,9 @@ public class GameLoader
     
     public List<File> getLoadableSaveFiles()
     {
-        File[] saveFiles= SAVE_FILE_DIR.listFiles();
+        File[] saveFiles = SAVE_FILE_DIR.listFiles();
         //saveFiles is always a readable Directory as Ensured by the Constructor
-        return Arrays.stream(saveFiles).filter(file->file.getName().endsWith(JSON)||file.canWrite()).toList();
+        return Arrays.stream(saveFiles).filter(file -> file.getName().endsWith(JSON) || file.canWrite()).toList();
     }
     
     
@@ -50,7 +50,7 @@ public class GameLoader
             
             if (name.equals(NEW_GAME_FILENAME)) continue;
             
-            names.add(name.substring(0,name.length()-JSON.length()));
+            names.add(name.substring(0, name.length() - JSON.length()));
         }
         
         

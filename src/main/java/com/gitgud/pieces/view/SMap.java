@@ -7,6 +7,7 @@ import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.event.Event;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -124,8 +125,8 @@ public class SMap
             for (Tile tile : gridMap.verticeSet())
             {
                 Rectangle rectangle = new Rectangle();
-                int xPosition = (int) tile.getX();
-                int yPosition = (int) tile.getY();
+                int xPosition = tile.getX();
+                int yPosition = tile.getY();
                 rectangle.setX(xPosition * TILE_SPACING);
                 rectangle.setY(yPosition * TILE_SPACING);
                 rectangle.setWidth(TILE_DIMENSIONS);
@@ -166,8 +167,8 @@ public class SMap
                 continue;
             }
             VBox gameObjectContainer = new VBox();
-            AnchorPane.setTopAnchor(gameObjectContainer, (double)(tile.getX() * TILE_SPACING));
-            AnchorPane.setLeftAnchor(gameObjectContainer, (double)(tile.getY() * TILE_SPACING));
+            AnchorPane.setTopAnchor(gameObjectContainer, (double) (tile.getX() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.getY() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
             gameObjectContainer.addEventHandler(MouseEvent.MOUSE_CLICKED, Event::consume);
             
@@ -194,12 +195,12 @@ public class SMap
         
         Wallet wallet = player.wallet();
         
-        HashMap<ResourceType, Long> resourceMap = wallet.resourceMap();
+        HashMap<ResourceType, SimpleLongProperty> resourceMap = wallet.resourceMap();
         
         for (ResourceType key : resourceMap.keySet())
         {
-            long value = resourceMap.get(key);
-            Label ValueShow = new Label(Long.toString(value));
+            SimpleLongProperty value = resourceMap.get(key);
+            Label ValueShow = new Label(Long.toString(value.getValue()));
             HBox box = new HBox();
             
             Image image = new Image(key.getSpriteUrl());

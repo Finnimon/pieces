@@ -1,12 +1,14 @@
 package com.gitgud.engine.model.gameobjects;
 
-import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 
 
@@ -100,6 +102,7 @@ public interface GridMovable extends GridMappable
         
         return new ArrayList<>(tiles);
     }
+    
     
     private Predicate<Tile> filter(GridMap<?> gridMap)
     {

@@ -7,7 +7,6 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.utility.Strings;
 import com.gitgud.engine.view.ActionContextRender;
 import javafx.concurrent.Task;
-import javafx.scene.Parent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,7 +31,7 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
     {
         //todo fix currently not working as it blocks the InfoPane event for the active Agent underneath the highlight
         Tile tile = getActivePosition();
-        if (tile==null) return;
+        if (tile == null) return;
         getRender().getGridMapRender().addHighLight(tile);
     }
     
@@ -47,6 +46,7 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
         getRender().getGridMapRender().clearHighLights();
         showRootAction();
         hightlightActivePosition();
+        getRender().updateRender();
     }
     
     
@@ -86,10 +86,7 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
     public void executeActionChoiceTask(Consumer<ActionChoice> onSucceeded)
     {
         Task<ActionChoice> task = actionChoiceTask();
-        task.setOnSucceeded(x ->
-                            {
-                                onSucceeded.accept(task.getValue());
-                            });
+        task.setOnSucceeded(x -> onSucceeded.accept(task.getValue()));
         ExecutorService exec = Executors.newSingleThreadExecutor();
         exec.execute(task);
         exec.shutdown();

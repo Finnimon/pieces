@@ -6,6 +6,8 @@ import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.utility.gsonSerialization.JsonParser;
 import javafx.concurrent.Task;
+import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.util.concurrent.Executors;
@@ -16,6 +18,11 @@ import static com.gitgud.pieces.control.ActiveGameController.isInitialized;
 
 public final class GameFlow
 {
+    
+    
+    private static final Group LOADING_ROOT = new Group(new Label("Loading..."));
+    
+    
     /**
      * Private Constructor for static class
      */
@@ -39,7 +46,9 @@ public final class GameFlow
     
     public static void setStageToLoadScreen()
     {
-        //todo
+        Stage stage = StageController.getInstance().getStage();
+        stage.getScene().setRoot(LOADING_ROOT);
+        stage.show();
     }
     
     

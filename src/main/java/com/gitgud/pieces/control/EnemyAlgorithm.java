@@ -50,7 +50,7 @@ public class EnemyAlgorithm
         Task<ActionChoice> task = chooseTask(actionChoice);
         task.setOnSucceeded(x -> select(task.getValue()));
         ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
-        exec.schedule(task, 1200, TimeUnit.MILLISECONDS);
+        exec.schedule(task, 500, TimeUnit.MILLISECONDS);
         exec.shutdown();
     }
     
@@ -117,11 +117,10 @@ public class EnemyAlgorithm
     private synchronized void selectFightMovementChoice(FightMovementChoice actionChoice)
     {
         IntegerProperty turnProperty = fightController.getModel().getTurnProperty();
-        int turn=turnProperty.getValue();
+        int turn = turnProperty.getValue();
         
         actionChoice.select();
-        if (turn!=turnProperty.getValue())
-            return;
+        if (turn != turnProperty.getValue()) return;
         
         fightController.getRender().getHud().clearChoices();
         
@@ -130,7 +129,7 @@ public class EnemyAlgorithm
         {
             return;
         }
-        ((ActionChoice)attackRootChoice.getChoices().get(0)).select();
+        ((ActionChoice) attackRootChoice.getChoices().get(0)).select();
     }
     
     

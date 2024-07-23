@@ -106,8 +106,7 @@ public class FightAgentDirector implements Director<FightAgent>
     
     public FightAgent make(Allegiance allegiance, FightAgentType type, Faction faction, int level)
     {
-        return make(calculateType(allegiance, type, faction,
-                                  level));
+        return make(calculateType(allegiance, type, faction, level));
     }
     
     

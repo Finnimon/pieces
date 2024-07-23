@@ -5,14 +5,14 @@ import com.gitgud.engine.model.gameobjects.interactable.Collectible;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.utility.Strings;
-import com.gitgud.pieces.control.FightController;
+import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.GameFlow;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.model.mission.Mission;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.TreeSet;
+import java.util.*;
 
 
 public class FightTrigger extends GameObject implements Collectible<MissionController>
@@ -37,11 +37,13 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     private final Tile[] startingPositions;
     
     
+    private MissionController missionController = null;
+    
+    
     public FightTrigger(Fight fight, Tile[] startingPositions)
     {
         super(NAME, DESCRIPTION, DEFAULT_SPRITE_FILE_PATH);
         this.fight = fight;
-        FightAgent fightAgent = fight.getGridMap().nonNullElements().stream().findFirst().orElse(null);
         this.startingPositions = startingPositions;
     }
     
@@ -97,20 +99,14 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     {
         FightAgent fightAgent = fight.getGridMap().nonNullElements().stream().findFirst().orElse(null);
         
-        if (fightAgent == null)
-        {
-            return DEFAULT_SPRITE_FILE_PATH;
-        }
-        
-        
-        return fightAgent.getSpriteFilePath();
+        return fightAgent == null ? DEFAULT_SPRITE_FILE_PATH : fightAgent.getSpriteFilePath();
     }
     
     
     @Override
     public void collect(MissionController awaiter)
     {
-        prepareFight(awaiter);
+        missionController = awaiter;
         Collectible.super.collect(awaiter);
     }
     
@@ -118,12 +114,13 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     @Override
     public void addToInventory()
     {
-        FightController fightController = new FightController(fight);
-        fightController.start();
+        prepareFight(missionController);
+        ActiveGameController.getInstance().get().setFight(fight);
+        GameFlow.showNextScene();
     }
     
     
-    private Fight prepareFight(MissionController missionController)
+    private void prepareFight(MissionController missionController)
     {
         FightAgent[] activeFightAgents = missionController.getModel().getActiveFightAgents();
         GridMap<FightAgent> gridMap = fight.getGridMap();
@@ -141,7 +138,13 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
             gridMap.place(position, fightAgent);
             current.add(fightAgent);
         }
-        
-        return fight;
+    }
+    
+    
+    @Override
+    public boolean isCollectionPossible()
+    {
+        Mission mission = ActiveGameController.getInstance().get().getMission();
+        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::nonNull);
     }
 }

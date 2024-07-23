@@ -1,6 +1,8 @@
 package com.gitgud.pieces.model.player;
 
 
+import javafx.beans.property.SimpleLongProperty;
+
 import java.util.HashMap;
 
 
@@ -12,7 +14,7 @@ import java.util.HashMap;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
-public record Wallet(HashMap<ResourceType, Long> resourceMap)
+public record Wallet(HashMap<ResourceType, SimpleLongProperty> resourceMap)
 {
 
 }

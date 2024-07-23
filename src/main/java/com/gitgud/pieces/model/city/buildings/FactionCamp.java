@@ -6,13 +6,9 @@ import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
-import static com.gitgud.pieces.model.city.buildings.CityConstants.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import static com.gitgud.pieces.model.city.buildings.CityConstants.*;
 
 
 public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
@@ -62,15 +58,15 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     
     public FightAgent[] getRecruitableFightAgentsWithCost()
     {
-        FightAgent[] recruitableFightAgents=new FightAgent[FightAgentType.values().length];
+        FightAgent[] recruitableFightAgents = new FightAgent[FightAgentType.values().length];
         int level = getLevel();
         Faction faction = getFaction();
         
         FightAgentDirector director = new FightAgentDirector();
         
-        for (FightAgentType type: FightAgentType.values())
+        for (FightAgentType type : FightAgentType.values())
         {
-            recruitableFightAgents[type.ordinal()]=(director.make(Allegiance.BLACK, type, faction, level));
+            recruitableFightAgents[type.ordinal()] = (director.make(Allegiance.BLACK, type, faction, level));
         }
         
         return recruitableFightAgents;
@@ -80,7 +76,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     @Override
     public boolean isTransactionPossible(FightAgent fightAgent)
     {
-        ResourceCost resourceCost =getResourceCost(fightAgent);
+        ResourceCost resourceCost = getResourceCost(fightAgent);
         if (resourceCost == null) return false;
         return resourceCost.isResourceCostCoveredByWallet();
     }
@@ -124,7 +120,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     public ResourceCost getResourceCost(FightAgent fightAgent)
     {
         ResourceCost baseCost;
-        FightAgentType type=fightAgent.getType();
+        FightAgentType type = fightAgent.getType();
         
         baseCost = switch (type)
         {

@@ -14,7 +14,7 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
 {
     
     
-    public static final int TILE_SIZE_DEFAULT_VALUE = 50;
+    public static final int MINIMUM_TILE_SIZE = 50;
     
     
     public static final int MAX_GRIDMAP_SIZE = 1000;
@@ -52,16 +52,9 @@ public class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, G
     
     private static int determineOptimumTileSize(GridMap<?> gridMap)
     {
-        int width = gridMap.getWidth();
-        int height = gridMap.getHeight();
+        int calculatedTileSize = MAX_GRIDMAP_SIZE / gridMap.getWidth();
         
-        if (width < 20)
-        {
-            return MAX_GRIDMAP_SIZE / width;
-        }
-        
-        
-        return TILE_SIZE_DEFAULT_VALUE;
+        return Math.max(calculatedTileSize, MINIMUM_TILE_SIZE);
     }
     
     

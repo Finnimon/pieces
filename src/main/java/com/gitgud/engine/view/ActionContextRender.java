@@ -13,6 +13,7 @@ public interface ActionContextRender<ModelType extends ActionAwaiterModel<GridMa
     @Override
     ActionContextHud<ModelType> getHud();
     
+    
     default void show()
     {
         StageController.getInstance().getStage().getScene().setRoot((Parent) this);

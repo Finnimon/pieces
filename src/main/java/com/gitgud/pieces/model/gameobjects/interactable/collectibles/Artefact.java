@@ -5,6 +5,7 @@ import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.interactable.Collectible;
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.ArtefactPouch;
 import com.gitgud.pieces.utility.Core;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
-public class Artefact extends GameObject implements Collectible, Leveler
+public class Artefact extends GameObject implements Collectible<MissionController>, Leveler
 {
     private final ArtefactType artefactType;
     

@@ -1,7 +1,6 @@
 package com.gitgud.pieces.view.render.fight;
 
 import com.gitgud.engine.view.UpdatableRender;
-import com.gitgud.engine.view.infopane.InfoPane;
 import com.gitgud.pieces.model.fight.FightTimeLine;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import javafx.collections.ObservableList;
@@ -31,12 +30,11 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     public FightTimeLineRender(FightTimeLine fightTimeLine)
     {
         super(HEIGHT);
-        setBackground(InfoPane.DEFAULT_BACKGROUND);
-        
+        //        setBackground(InfoPane.DEFAULT_BACKGROUND);
+        setPickOnBounds(false);
         this.fightTimeLine = fightTimeLine;
         
         render(fightTimeLine);
-        this.visibleProperty().setValue(true);
     }
     
     

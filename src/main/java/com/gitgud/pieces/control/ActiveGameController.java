@@ -1,12 +1,11 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.pieces.model.activeGame.ActiveGame;
-import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.testing.TestAssets;
 
 
 /**
- * Stores all global data and handles GameState/Flow
+ * Stores all global data and determines GameState
  *
  * @author Finn L.
  * @Owner: Finn L.
@@ -63,8 +62,6 @@ public class ActiveGameController
     {
         return instance != null;
     }
-    
-    
     
     
     public ActiveGame get()

@@ -8,11 +8,12 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.control.action.MissionMovementAction;
-import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 
 public class Mission implements ActionAwaiterModel<GameObject>
@@ -118,11 +119,10 @@ public class Mission implements ActionAwaiterModel<GameObject>
     
     public void returnFightAgentsToArmy()
     {
-        Collection<FightAgent> fightAgents =ActiveGameController.getInstance().get().getPlayer().army();
-        for (int i = 0; i < activeFightAgents.length; i++)
-        {
-            fightAgents.add(activeFightAgents[i]);
-            fightAgents.add(discardedFightAgents[i]);
-        }
+        Collection<FightAgent> fightAgents = ActiveGameController.getInstance().get().getPlayer().army();
+        HashSet<FightAgent> returningAgents = new HashSet<>(List.of(activeFightAgents));
+        returningAgents.addAll(List.of(discardedFightAgents));
+        returningAgents.remove(null);
+        fightAgents.addAll(returningAgents);
     }
 }

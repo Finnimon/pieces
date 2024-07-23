@@ -9,16 +9,18 @@ public class InteractionChecker
 {
     private static boolean isInterActionPossible(Mission mission, Tile tile)
     {
-        return mission.getPlayerAgentPosition().distance(tile)<=Math.sqrt(2)+0.01;
+        return mission.getGridMap().getNeighbors(tile).contains(mission.getPlayerAgentPosition());
     }
+    
+    
     public static void interactIfPossible(MissionController missionController, Tile tile)
     {
-        if (!(missionController.getModel().getGridMap().get(tile)instanceof Interactable interactable))
-            return;
+        if (!(missionController.getModel().getGridMap().get(tile) instanceof Interactable interactable)) return;
         
         if (isInterActionPossible(missionController.getModel(), tile))
         {
             interactable.interact(missionController);
+            missionController.advance();
         }
     }
 }

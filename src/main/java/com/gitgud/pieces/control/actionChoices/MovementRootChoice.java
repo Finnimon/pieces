@@ -14,7 +14,6 @@ import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.control.action.MissionMovementAction;
-import com.gitgud.pieces.control.actionChoices.FightMovementChoice;
 
 import java.util.ArrayList;
 import java.util.Collection;

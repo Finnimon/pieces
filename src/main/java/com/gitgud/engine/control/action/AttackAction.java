@@ -22,7 +22,8 @@ public interface AttackAction<AwaiterType extends ActionAwaitingController<Model
     @Override
     default void enAct(AwaiterType awaiter)
     {
-        synchronized (this){
+        synchronized (this)
+        {
             GridMap<FighterType> gridMap = awaiter.getModel().getGridMap();
             Tile from = getFrom();
             Tile to = getTo();

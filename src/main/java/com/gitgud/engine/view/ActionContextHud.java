@@ -2,7 +2,6 @@ package com.gitgud.engine.view;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
         registerChoice(choiceNode);
         getChildren().add(choiceNode);
         
-        BorderPane.setAlignment(choiceNode, Pos.TOP_LEFT);
+        setAlignment(choiceNode, Pos.TOP_LEFT);
     }
     
     

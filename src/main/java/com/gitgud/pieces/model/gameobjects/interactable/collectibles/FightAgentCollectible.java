@@ -3,6 +3,7 @@ package com.gitgud.pieces.model.gameobjects.interactable.collectibles;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Collectible;
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.utility.Core;
@@ -11,35 +12,35 @@ import java.util.Arrays;
 import java.util.Objects;
 
 
-public class FightAgentCollectable extends GameObject implements Collectible
+public class FightAgentCollectible extends GameObject implements Collectible<MissionController>
 {
-    private final FightAgent fightFigure;
+    private final FightAgent fightAgent;
     
     
-    public FightAgentCollectable(FightAgent fightFigure)
+    public FightAgentCollectible(FightAgent fightAgent)
     {
-        super("Resting " + fightFigure.name(), fightFigure.description() + "\r\nThey would like to join your army",
-              fightFigure.getSpriteFilePath());
-        this.fightFigure = fightFigure;
+        super("Resting " + fightAgent.name(), fightAgent.description() + "\r\nThey would like to join your army",
+              fightAgent.getSpriteFilePath());
+        this.fightAgent = fightAgent;
     }
     
     
     @Override
     public void addToInventory()
     {
-        FightAgent fightFigure = getFightFigure();
+        FightAgent fightAgent = getFightAgent();
         Mission mission = ActiveGameController.getInstance().get().getMission();
         
         FightAgent[] activeFightAgents = mission.getActiveFightAgents();
-        Core.insertAtFirstNullIndex(activeFightAgents, fightFigure);
+        Core.insertAtFirstNullIndex(activeFightAgents, fightAgent);
         
-        if (Arrays.asList(activeFightAgents).contains(fightFigure))
+        if (Arrays.asList(activeFightAgents).contains(fightAgent))
         {
             return;
         }
         
         FightAgent[] discardedFightAgents = mission.getDiscardedFightAgents();
-        Core.insertAtFirstNullIndex(discardedFightAgents, fightFigure);
+        Core.insertAtFirstNullIndex(discardedFightAgents, fightAgent);
     }
     
     
@@ -52,8 +53,8 @@ public class FightAgentCollectable extends GameObject implements Collectible
     }
     
     
-    public FightAgent getFightFigure()
+    public FightAgent getFightAgent()
     {
-        return fightFigure;
+        return fightAgent;
     }
 }

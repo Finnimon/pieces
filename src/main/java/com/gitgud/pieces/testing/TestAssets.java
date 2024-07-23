@@ -11,6 +11,7 @@ import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.*;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
+import javafx.beans.property.SimpleLongProperty;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -64,11 +65,11 @@ public interface TestAssets
     
     static Wallet testWallet()
     {
-        HashMap<ResourceType, Long> resourceMap = new HashMap<>();
+        HashMap<ResourceType, SimpleLongProperty> resourceMap = new HashMap<>();
         
         for (ResourceType type : ResourceType.values())
         {
-            resourceMap.put(type, 10L);
+            resourceMap.put(type, new SimpleLongProperty(10));
         }
         
         return new Wallet(resourceMap);

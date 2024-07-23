@@ -9,6 +9,7 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -94,8 +95,8 @@ public class SGridMap implements IDimentions
                 continue;
             }
             VBox gameObjectContainer = new VBox();
-            AnchorPane.setTopAnchor(gameObjectContainer, (double)(tile.getY() * TILE_SPACING));
-            AnchorPane.setLeftAnchor(gameObjectContainer, (double)(tile.getX() * TILE_SPACING));
+            AnchorPane.setTopAnchor(gameObjectContainer, (double) (tile.getY() * TILE_SPACING));
+            AnchorPane.setLeftAnchor(gameObjectContainer, (double) (tile.getX() * TILE_SPACING));
             gameObjectContainer.setPrefSize(TILE_DIMENSIONS, TILE_DIMENSIONS);
             
             Image gameObjektSprite = new Image(element.getSpriteUrl());
@@ -132,11 +133,11 @@ public class SGridMap implements IDimentions
         
         Wallet wallet = player.wallet();
         
-        HashMap<ResourceType, Long> resourceMap = wallet.resourceMap();
+        HashMap<ResourceType, SimpleLongProperty> resourceMap = wallet.resourceMap();
         
         for (ResourceType key : resourceMap.keySet())
         {
-            long value = resourceMap.get(key);
+            Long value = resourceMap.get(key).getValue();
             Label ValueShow = new Label(Long.toString(value));
             HBox box = new HBox();
             

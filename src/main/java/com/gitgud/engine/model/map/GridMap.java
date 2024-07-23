@@ -230,8 +230,8 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
             height = 0;
             return;
         }
-        width = (int) Math.round(vertices.lastKey().getX() + 1);
-        height = (int) Math.round(vertices.lastKey().getY() + 1);
+        width = Math.round(vertices.lastKey().getX() + 1);
+        height = Math.round(vertices.lastKey().getY() + 1);
     }
     
     
@@ -302,7 +302,7 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
         
         for (Tile tile : verticeSet())
         {
-            tileGrid[(int) tile.getY()][(int) tile.getX()] = tile;
+            tileGrid[tile.getY()][tile.getX()] = tile;
         }
         
         

@@ -2,17 +2,13 @@ package com.gitgud.pieces.model;
 
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.player.ResourceType;
+import javafx.beans.property.SimpleLongProperty;
 
 import java.util.HashMap;
 
 
 public class ResourceCost
 {
-    
-    
-    public static final int DEFAULT_MULTIPLIER = 1;
-    
-    
     private final HashMap<ResourceType, Long> resourceCostMap;
     
     
@@ -49,10 +45,10 @@ public class ResourceCost
     public boolean isResourceCostCoveredByWallet()
     {
         
-        HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+        HashMap<ResourceType, SimpleLongProperty> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
-            if (walletResourceMap.get(resourceType) < resourceCostMap.get(resourceType))
+            if (walletResourceMap.get(resourceType).getValue() < resourceCostMap.get(resourceType))
             {
                 return false;
             }
@@ -69,12 +65,7 @@ public class ResourceCost
     
     public void deductResourceCostFromWallet()
     {
-        for (ResourceType resourceType : resourceCostMap.keySet())
-        {
-            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
-            walletResourceMap.put(resourceType,
-                                  walletResourceMap.get(resourceType) - resourceCostMap.get(resourceType));
-        }
+        multiple(-1).deductResourceCostFromWallet();
     }
     
     
@@ -88,9 +79,9 @@ public class ResourceCost
     {
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
-            HashMap<ResourceType, Long> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
-            walletResourceMap.put(resourceType,
-                                  walletResourceMap.get(resourceType) + resourceCostMap.get(resourceType));
+            HashMap<ResourceType, SimpleLongProperty> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+            SimpleLongProperty valueProperty = walletResourceMap.get(resourceType);
+            valueProperty.setValue(valueProperty.getValue() + resourceCostMap.get(resourceType));
         }
     }
 }

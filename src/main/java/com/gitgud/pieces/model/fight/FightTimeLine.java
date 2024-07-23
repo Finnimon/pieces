@@ -7,7 +7,6 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 
 /**
@@ -54,9 +53,7 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     public void removeDeadFightAgents(TreeSet<FightAgent> fightAgentTreeSet)
     {
-        TreeSet<FightAgent> deadFigures = fightAgentTreeSet.stream().filter(Defender::isDead).collect(
-                Collectors.toCollection(TreeSet::new));
-        fightAgentTreeSet.removeAll(deadFigures);
+        fightAgentTreeSet.removeIf(Defender::isDead);
     }
     
     

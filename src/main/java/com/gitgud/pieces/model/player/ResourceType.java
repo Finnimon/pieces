@@ -1,29 +1,20 @@
 package com.gitgud.pieces.model.player;
 
-import java.io.File;
-import java.net.MalformedURLException;
+import com.gitgud.engine.model.gameobjects.Sprite;
 
 
-public enum ResourceType
+public enum ResourceType implements Sprite
 {
     IRON, COPPER, SILVER, GOLD, PLATINUM, REDSTONE;
     
     
-    public String getSpriteUrl()
+    public static final String DIR_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\player\\resourceType\\";
+    
+    
+    @Override
+    public String getSpriteFilePath()
     {
-        try
-        {
-            return new File(
-                    "src\\main\\resources\\com\\gitgud\\sprites\\resources\\" + this.name().toLowerCase().trim() + ".png").toURI().toURL().toString();
-            
-        }
-        catch (MalformedURLException e)
-        {
-            e.printStackTrace();
-        }
-        
-        
-        return null;
+        return DIR_PATH + name() + DOT_PNG;
     }
     
     

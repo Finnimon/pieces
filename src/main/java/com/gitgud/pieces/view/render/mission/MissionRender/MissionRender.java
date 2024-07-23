@@ -26,31 +26,33 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     }
     
     
+    public static EventHandler<MouseEvent> interactableEventHandler(Interactable interactable,
+                                                                    MissionController missionController, Tile tile)
+    {
+        return mouseEvent ->
+        {
+            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY)) return;
+            
+            mouseEvent.consume();
+            
+            InteractionChecker.interactIfPossible(missionController, tile);
+        };
+    }
+    
+    
     public void addInteractionHandlers(MissionController missionController)
     {
         GridMapRender<GameObject> gridMapRender = getGridMapRender();
-        GridMap<GameObject> gridMap=getData().getGridMap();
+        GridMap<GameObject> gridMap = getData().getGridMap();
         for (GameObject gameObject : getData().getGridMap().nonNullElements())
         {
             if (!(gameObject instanceof Interactable interactable)) continue;
             GridMappableRender<GameObject> interactableRender = gridMapRender.getGridMappableRender(gameObject);
             
-            interactableRender.addEventHandler(MouseEvent.MOUSE_CLICKED,interactableEventHandler(interactable,missionController,gridMap.getVertex(gameObject)));
+            interactableRender.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                                               interactableEventHandler(interactable, missionController,
+                                                                        gridMap.getVertex(gameObject)));
         }
-    }
-    
-    private EventHandler<MouseEvent> interactableEventHandler(Interactable interactable,MissionController missionController,Tile tile)
-    {
-        return
-        mouseEvent->
-        {
-            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY))
-                return;
-            
-            mouseEvent.consume();
-            
-            InteractionChecker.interactIfPossible(missionController,tile);
-        };
     }
     
     

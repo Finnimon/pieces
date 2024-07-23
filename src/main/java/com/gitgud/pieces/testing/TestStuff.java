@@ -14,7 +14,6 @@ import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.model.player.Difficulty;
 import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.Strings;
 import com.gitgud.pieces.utility.services.AssetParser;
@@ -110,8 +109,8 @@ public class TestStuff
     {
         ActiveGameController.getInstance();
         GameFlow.showNextScene();
-//        testFightController();
-//        testMissionController();
+        //        testFightController();
+        //        testMissionController();
         //        addTestGridMapRenderToStage(stage);
         //        finnGsonTest();
     }
@@ -161,7 +160,7 @@ public class TestStuff
         Fight fight = Fights.getFight1();
         FightController fightController = new FightController(fight);
         fightController.start();
-//        stage.show();
+        //        stage.show();
     }
     
     

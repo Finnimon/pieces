@@ -52,7 +52,7 @@ public class SpriteHelper
     
     public static Rectangle createRectangle(Paint pattern, Tile tile, int tileSize)
     {
-        return SpriteHelper.createRectangle(pattern, (int) (tileSize * tile.getX()), (int) (tileSize * tile.getY()),
+        return SpriteHelper.createRectangle(pattern, tileSize * tile.getX(), tileSize * tile.getY(),
                                             tileSize, tileSize);
         
     }

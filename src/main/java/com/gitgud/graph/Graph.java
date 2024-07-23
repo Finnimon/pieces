@@ -318,29 +318,30 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
             
             double remainingRange = range - weight;
             
-            if (remainingRange <= 0|| !fromEdgeFilter.test(current))
+            if (remainingRange <= 0 || !fromEdgeFilter.test(current))
             {
                 continue;
             }
             
-            subGraph.addAll(subGraph(current, remainingRange,fromEdgeFilter,toEdgeFilter));
+            subGraph.addAll(subGraph(current, remainingRange, fromEdgeFilter, toEdgeFilter));
         }
         
         
         return subGraph;
     }
     
+    
     public Graph<Vertex, Element, Edge> subGraph(Vertex start, float range, Predicate<Vertex> fromEdgeFilter,
                                                  Predicate<Vertex> toEdgeFilter)
     {
-        return subGraph(start, (double) range,fromEdgeFilter,toEdgeFilter);
+        return subGraph(start, (double) range, fromEdgeFilter, toEdgeFilter);
     }
     
     
     public Graph<Vertex, Element, Edge> subGraph(Vertex start, int range, Predicate<Vertex> fromEdgeFilter,
                                                  Predicate<Vertex> toEdgeFilter)
     {
-        return subGraph(start, (double) range,fromEdgeFilter,toEdgeFilter);
+        return subGraph(start, (double) range, fromEdgeFilter, toEdgeFilter);
     }
     
     
@@ -355,7 +356,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
             return ((WeightedEdge<?>) edge).getWeight();
         }
     }
-    
     
     
     /**

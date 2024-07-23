@@ -2,13 +2,14 @@ package com.gitgud.pieces.view.render.mission;
 
 import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.view.render.player.WalletRender;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 
 
 public class MissionHud extends ActionContextHud<Mission>
 {
-    //add all relevant attributes here
     public MissionHud(Mission data)
     {
         super(data);
@@ -19,9 +20,11 @@ public class MissionHud extends ActionContextHud<Mission>
     @Override
     public void render(Mission data)
     {
-        //todo add all relevant data to getChilden();
+        setPickOnBounds(false);
         ObservableList<Node> children = getChildren();
-        children.clear();//ensures that nothing, but this class, is left in the group
+        WalletRender walletRender = new WalletRender();
+        setAlignment(walletRender, Pos.TOP_RIGHT);
+        children.add(walletRender);
     }
     
     

@@ -11,7 +11,7 @@ import com.gitgud.pieces.model.gameobjects.interactable.buildings.HealthWell;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.ManaWell;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.MissionEnder;
 import com.gitgud.pieces.model.gameobjects.interactable.buildings.Portal;
-import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectable;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectible;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigger;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.ResourceCollectible;
 import com.gitgud.pieces.model.mission.Mission;
@@ -124,7 +124,7 @@ public interface Missions
     }
     
     
-    private static FightAgentCollectable getRandomFightAgentCollectable()
+    private static FightAgentCollectible getRandomFightAgentCollectable()
     {
         FightAgentDirector director = new FightAgentDirector();
         
@@ -133,7 +133,7 @@ public interface Missions
                                                                                        (float) Math.random() * (Faction.values().length - 1))],
                                                                                1));
         
-        return new FightAgentCollectable(fightAgent);
+        return new FightAgentCollectible(fightAgent);
     }
     
     

@@ -27,13 +27,13 @@ import java.util.Objects;
  * @param <ModelType>
  * @param <GridMappableType>
  * @param <RenderType>
+ * @author Finn Lindig
+ * @version 1.1
+ * @Owner: Finn Lindig
  * @see RootChoice
  * @see Action
  * @see RootActionChoice
  * @see ActionChoiceRender
- * @author Finn Lindig
- * @Owner: Finn Lindig
- * @version  1.1
  * @since 28.06.2024
  */
 public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements Named, Describable
