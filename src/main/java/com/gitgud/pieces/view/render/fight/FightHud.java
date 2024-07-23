@@ -5,6 +5,7 @@ import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.fight.Fight;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 
 
@@ -28,9 +29,7 @@ public class FightHud extends ActionContextHud<Fight>
         ObservableList<Node> children = getChildren();
         children.clear();
         children.add(fightTimeLineRender);
-        ReadOnlyDoubleProperty stageWidth = StageController.getInstance().getStage().getScene().widthProperty();
-        ReadOnlyDoubleProperty fightTimeLineWidth = fightTimeLineRender.widthProperty();
-        fightTimeLineRender.translateXProperty().bind(stageWidth.subtract(fightTimeLineWidth).divide(2));
+        setAlignment(fightTimeLineRender, Pos.TOP_CENTER);
         //todo
     }
     

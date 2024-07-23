@@ -26,7 +26,7 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     }
     
     
-    public static EventHandler<MouseEvent> interactableEventHandler(Interactable interactable,
+    public static EventHandler<MouseEvent> interactableEventHandler(Interactable<MissionController> interactable,
                                                                     MissionController missionController, Tile tile)
     {
         return mouseEvent ->

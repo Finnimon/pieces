@@ -8,6 +8,9 @@ import com.gitgud.pieces.utility.gsonSerialization.JsonParser;
 import javafx.concurrent.Task;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.concurrent.Executors;
@@ -19,36 +22,11 @@ import static com.gitgud.pieces.control.ActiveGameController.isInitialized;
 public final class GameFlow
 {
     
-    
-    private static final Group LOADING_ROOT = new Group(new Label("Loading..."));
-    
-    
     /**
      * Private Constructor for static class
      */
     private GameFlow()
     {
-    }
-    
-    
-    private static Task<Startable> nextSceneControllerTask()
-    {
-        return new Task<Startable>()
-        {
-            @Override
-            protected Startable call() throws Exception
-            {
-                return getNextSceneController();
-            }
-        };
-    }
-    
-    
-    public static void setStageToLoadScreen()
-    {
-        Stage stage = StageController.getInstance().getStage();
-        stage.getScene().setRoot(LOADING_ROOT);
-        stage.show();
     }
     
     
@@ -66,9 +44,44 @@ public final class GameFlow
     {
         setStageToLoadScreen();
         Task<Startable> task = nextSceneControllerTask();
-        task.setOnSucceeded(x -> task.getValue().start());
         Executors.newSingleThreadExecutor().execute(task);
     }
+    
+    private static Task<Startable> nextSceneControllerTask()
+    {
+        Task<Startable> task= new Task<Startable>()
+        {
+            @Override
+            protected Startable call() throws Exception
+            {
+                return getNextSceneController();
+            }
+            
+            
+            @Override
+            protected void succeeded()
+            {
+                getValue().start();
+            }
+        };
+        
+        return task;
+    }
+    
+    
+    public static void setStageToLoadScreen()
+    {
+        Stage stage = StageController.getInstance().getStage();
+        Label label= new Label("Loading...");
+        label.setFont(new Font(100));
+        StackPane pane = new StackPane(label);
+        StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
+        stage.getScene().setRoot(pane);
+        stage.show();
+    }
+    
+    
+
     
     
     public static Startable getNextSceneController()

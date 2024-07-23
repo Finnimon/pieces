@@ -48,22 +48,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     
     
     @Override
-    public void start()
-    {
-        super.start();
-        
-        for (FightAgent fa : getModel().getActiveFightAgents())
-        {
-            if (fa == null)
-            {
-                continue;
-            }
-            System.out.println(fa.name());
-        }
-    }
-    
-    
-    @Override
     public void advance()
     {
         if (tryEnd())
@@ -78,14 +62,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void end()
     {
-        for (FightAgent fa : getModel().getActiveFightAgents())
-        {
-            if (fa == null)
-            {
-                continue;
-            }
-            System.out.println(fa.name());
-        }
         ActiveGame activeGame = ActiveGameController.getInstance().get();
         
         activeGame.setMission(null);

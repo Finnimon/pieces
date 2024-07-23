@@ -3,25 +3,23 @@ package com.gitgud.pieces.view.render.fight;
 import com.gitgud.engine.view.UpdatableRender;
 import com.gitgud.pieces.model.fight.FightTimeLine;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
+import com.gitgud.pieces.view.Constants;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 
 public class FightTimeLineRender extends HBox implements UpdatableRender<FightTimeLine>
 {
     
     
-    public static final int HEIGHT = 50;
+    private static final int HEIGHT = 50;
     
-    
-    private static final Rectangle SEP_RECTANGLE = new Rectangle(5, HEIGHT, Color.BLACK);
+    private static final int SPACING=5;
     
     
     private final FightTimeLine fightTimeLine;
@@ -29,10 +27,12 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     
     public FightTimeLineRender(FightTimeLine fightTimeLine)
     {
-        super(HEIGHT);
-        //        setBackground(InfoPane.DEFAULT_BACKGROUND);
-        setPickOnBounds(false);
+        super(SPACING);
         this.fightTimeLine = fightTimeLine;
+        setMouseTransparent(true);
+        setBackground(Constants.SEMI_TRANSPARENT_BACKGROUND);
+        setMaxHeight(HEIGHT);
+        setMaxWidth(Region.USE_PREF_SIZE);
         
         render(fightTimeLine);
     }
@@ -41,19 +41,11 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     @Override
     public void render(FightTimeLine data)
     {
-        TreeSet<FightAgent> current = data.current();
-        int currentSize = current.size();
-        
         ArrayList<FightAgent> fightAgents = new ArrayList<>();
-        fightAgents.addAll(current);
+        fightAgents.addAll(data.current());
         fightAgents.addAll(data.next());
-        ObservableList<Node> children = getChildren();
         
-        for (FightAgent fightAgent : fightAgents)
-        {
-            if (children.size() == currentSize) this.getChildren().add(SEP_RECTANGLE);
-            addFightAgent(fightAgent);
-        }
+        fightAgents.forEach(this::addFightAgent);
     }
     
     
@@ -63,6 +55,7 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
         imageView.setFitHeight(HEIGHT);
         imageView.setPreserveRatio(true);
         imageView.setImage(fightAgent.getSprite());
+        
         getChildren().add(imageView);
     }
     

@@ -75,4 +75,6 @@ public class Portal extends GridMappableBuilding<MissionController>
     {
         return destination;
     }
+    
+//todo? fallback    private static final GameObject ExitPortal=new GameObject("Exit Portal","This portal seems to be closed as of now",SPRITE_FILEPATH);
 }

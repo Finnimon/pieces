@@ -11,7 +11,7 @@ import com.gitgud.engine.model.map.GridMap;
  * @Owner: Finn K.
  * @since 22.04.2022
  */
-public abstract class GameObject implements GridMappable
+public class GameObject implements GridMappable
 {
     private final String name;
     

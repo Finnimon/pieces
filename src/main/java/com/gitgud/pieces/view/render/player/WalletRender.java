@@ -1,20 +1,18 @@
 package com.gitgud.pieces.view.render.player;
 
 import com.gitgud.engine.view.Render;
-import com.gitgud.engine.view.infopane.InfoPane;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
+import com.gitgud.pieces.view.Constants;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 import java.util.HashMap;
@@ -45,6 +43,7 @@ public class WalletRender extends VBox implements Render<Wallet>
     @Override
     public void render(Wallet data)
     {
+        setBackground(Constants.SEMI_TRANSPARENT_BACKGROUND);
         setMaxWidth(MAX_WIDTH);
         setMaxHeight((ICON_HEIGHT +getSpacing())*ResourceType.values().length);
         setMouseTransparent(true);
@@ -76,7 +75,7 @@ public class WalletRender extends VBox implements Render<Wallet>
         hBox.getChildren().addAll(imageView, label);
         hBox.setMaxHeight(ICON_HEIGHT);
         hBox.maxWidthProperty().setValue(MAX_WIDTH);
-
+        hBox.setBorder(Constants.BLACK_SQUARE_BORDER);
         getChildren().add(hBox);
     }
 }

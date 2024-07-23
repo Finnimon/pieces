@@ -76,7 +76,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     {
         ActiveGame activeGame = ActiveGameController.getInstance().get();
         
-        ArrayList<FightAgent> fightAgents = getAllNonDeadAgents();
+        ArrayList<FightAgent> fightAgents = fightTimeLine.getAllAgents();
         fightAgents.removeIf(fa -> fa.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE);
         
         if (activeGame.getGameState() == GameState.MISSION_FIGHT)
@@ -90,7 +90,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     public boolean isFinished()
     {
         
-        ArrayList<FightAgent> survivingAgents = getAllNonDeadAgents();
+        ArrayList<FightAgent> survivingAgents = fightTimeLine.getAllAgents();
         
         Allegiance allegiance = survivingAgents.get(0).getAllegiance();
         
@@ -104,13 +104,5 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         
         return true;
         
-    }
-    
-    
-    private ArrayList<FightAgent> getAllNonDeadAgents()
-    {
-        ArrayList<FightAgent> survivingAgents = new ArrayList<>(fightTimeLine.current());
-        survivingAgents.addAll(fightTimeLine.next());
-        return survivingAgents;
     }
 }
