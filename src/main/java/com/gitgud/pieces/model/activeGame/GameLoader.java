@@ -42,16 +42,20 @@ public class GameLoader
     {
         File[] saveFiles = SAVE_FILE_DIR.listFiles();
         //saveFiles is always a readable Directory as Ensured by the Constructor
-        return Arrays.stream(saveFiles).filter(file -> file.getName().endsWith(
-                JsonParser.DOT_JSON) || file.canWrite()).toList();
+        return Arrays.stream(saveFiles)
+                     .filter(file -> file.getName().endsWith(JsonParser.DOT_JSON) || file.canWrite())
+                     .toList();
     }
     
     
     public List<String> getLoadableSaveFileNames(File[] saveFiles)
     {
-        List<String> names = Arrays.stream(saveFiles).filter(File::canRead).map(File::getName).filter(
-                name -> !name.equals(NEW_GAME_FILENAME)).map(
-                name -> name.substring(0, name.length() - JsonParser.DOT_JSON.length())).collect(Collectors.toList());
+        List<String> names = Arrays.stream(saveFiles)
+                                   .filter(File::canRead)
+                                   .map(File::getName)
+                                   .filter(name -> !name.equals(NEW_GAME_FILENAME))
+                                   .map(name -> name.substring(0, name.length() - JsonParser.DOT_JSON.length()))
+                                   .collect(Collectors.toList());
         
         return names;
     }
@@ -88,7 +92,7 @@ public class GameLoader
     private ActiveGame loadActiveGame(String saveFileName)
     {
         File saveFile = getSaveFile(saveFileName);
-        return JsonParser.getInstance().parseJson(saveFile,ActiveGame.class);
+        return JsonParser.getInstance().parseJson(saveFile, ActiveGame.class);
     }
     
     

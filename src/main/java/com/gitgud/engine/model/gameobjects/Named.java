@@ -7,9 +7,6 @@ public interface Named
     String WHITESPACE = " ";
     
     
-    String name();
-    
-    
     static String formatString(String string)
     {
         String[] array = string.split(WHITESPACE);
@@ -20,4 +17,7 @@ public interface Named
         }
         return String.join(WHITESPACE, array);
     }
+    
+    
+    String name();
 }

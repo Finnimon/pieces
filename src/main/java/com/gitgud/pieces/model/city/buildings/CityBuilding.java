@@ -16,13 +16,13 @@ import com.gitgud.engine.model.gameobjects.Sprite;
  */
 public abstract class CityBuilding implements Describable, Named, Sprite, Leveler
 {
+    private static final String SPRITE_FILE_PATH_PREFIX = "com\\gitgud\\pieces\\model\\city\\buildings\\";
+    
+    
     private final String name;
     
     
     private final String description;
-    
-    
-    private static final String SPRITE_FILE_PATH_PREFIX = "com\\gitgud\\pieces\\model\\city\\buildings\\";
     
     
     private final String spriteFilePath;

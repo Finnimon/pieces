@@ -13,8 +13,10 @@ public class STest
         Group root = new Group();
         Scene testScene = new Scene(root);
         ServerClientController.getInstance().getClient().addMessage("fhfhfh");
-        Text text = new Text(
-                ServerClientController.getInstance().getServer().getLatestUnprecedentedMessage().toString());
+        Text text = new Text(ServerClientController.getInstance()
+                                                   .getServer()
+                                                   .getLatestUnprecedentedMessage()
+                                                   .toString());
         
         root.getChildren().add(text);
         return testScene;

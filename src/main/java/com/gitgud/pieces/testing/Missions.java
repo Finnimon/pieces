@@ -24,6 +24,15 @@ public interface Missions
     Mission FIRST = create(Fights.mapFromBoolMap("src/main/resources/com/gitgud/maps/MissionMap1"));
     
     
+    Mission MISSION0 = Missions.MISSION1(new FightAgent[]{
+            new FightAgentDirector().make(412),
+            null,
+            null,
+            null,
+            null
+    });
+    
+    
     static <GOType extends GameObject> GridMap<GOType> getTestMap(int width, int height)
     {
         return GridMap.create(TestStuff.booleanArray(width, height));
@@ -32,14 +41,13 @@ public interface Missions
     
     private static Mission create(GridMap<GameObject> gridMap)
     {
-        Tile startingPosition = gridMap.verticeSet().stream().filter(
-                tile -> tile.getTerrain().isTraversable()).findFirst().get();
+        Tile startingPosition = gridMap.verticeSet()
+                                       .stream()
+                                       .filter(tile -> tile.getTerrain().isTraversable())
+                                       .findFirst()
+                                       .get();
         return new Mission(gridMap, startingPosition, new FightAgent[0]);
     }
-    
-    
-    Mission MISSION0 = Missions.MISSION1(
-            new FightAgent[]{ new FightAgentDirector().make(412), null, null, null, null });
     
     
     static Mission MISSION1(FightAgent[] fightAgents)
@@ -50,7 +58,7 @@ public interface Missions
         int index = 202;
         GameObject gameObject = new ResourceCollectible(200, ResourceType.IRON);
         gridMap.place(index, gameObject);
-
+        
         index = 427;
         gameObject = getRandomResourceCollectible();
         gridMap.place(index, gameObject);
@@ -81,14 +89,20 @@ public interface Missions
         index = 816;
         gameObject = getRandomResourceCollectible();
         gridMap.place(index, gameObject);
-
-
-        Tile portalTile = gridMap.verticeSet().stream().filter(
-                t -> t.getTerrain().isTraversable() && gridMap.get(t) == null).findFirst().orElse(null);
+        
+        
+        Tile portalTile = gridMap.verticeSet()
+                                 .stream()
+                                 .filter(t -> t.getTerrain().isTraversable() && gridMap.get(t) == null)
+                                 .findFirst()
+                                 .orElse(null);
         gameObject = new MissionEnder();
         gridMap.place(portalTile, gameObject);
-        portalTile = gridMap.verticeSet().stream().filter(
-                t -> t.getTerrain().isTraversable() && gridMap.get(t) == null).findFirst().orElse(null);
+        portalTile = gridMap.verticeSet()
+                            .stream()
+                            .filter(t -> t.getTerrain().isTraversable() && gridMap.get(t) == null)
+                            .findFirst()
+                            .orElse(null);
         index = 728;
         gameObject = new Portal(portalTile);
         gridMap.place(index, gameObject);
@@ -98,17 +112,17 @@ public interface Missions
         index = 601;
         gameObject = new HealthWell();
         gridMap.place(index, gameObject);
-
+        
         index = 365;
         gameObject = getRandomFightAgentCollectable();
         gridMap.place(index, gameObject);
         index = 740;
         gameObject = getRandomFightAgentCollectable();
         gridMap.place(index, gameObject);
-
+        
         gridMap.place(1, 31, new FightTrigger(Fights.FIGHT1));
-//        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
-
+        //        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
+        
         
         return new Mission(gridMap, startingPosition, fightAgents);
     }
@@ -117,8 +131,8 @@ public interface Missions
     private static ResourceCollectible getRandomResourceCollectible()
     {
         int value = Math.round((float) Math.random() * 1000);
-        ResourceType resourceType = ResourceType.values()[Math.round(
-                (float) Math.random() * (ResourceType.values().length - 1))];
+        ResourceType resourceType = ResourceType.values()[Math.round((float) Math.random() *
+                                                                     (ResourceType.values().length - 1))];
         return new ResourceCollectible(value, resourceType);
     }
     
@@ -127,9 +141,11 @@ public interface Missions
     {
         FightAgentDirector director = new FightAgentDirector();
         
-        FightAgent fightAgent = director.make(FightAgentDirector.calculateType(Allegiance.BLACK, FightAgentType.QUEEN,
-                                                                               Faction.values()[Math.round(
-                                                                                       (float) Math.random() * (Faction.values().length - 1))],
+        FightAgent fightAgent = director.make(FightAgentDirector.calculateType(Allegiance.BLACK,
+                                                                               FightAgentType.QUEEN,
+                                                                               Faction.values()[Math.round((float) Math.random() *
+                                                                                                           (Faction.values().length -
+                                                                                                            1))],
                                                                                1));
         
         return new FightAgentCollectible(fightAgent);

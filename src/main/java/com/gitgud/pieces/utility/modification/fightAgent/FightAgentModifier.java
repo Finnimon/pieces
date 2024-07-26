@@ -18,6 +18,12 @@ public class FightAgentModifier extends Modifier<FightAgent>
     }
     
     
+    public static FightAgent applyModifiers(FightAgent fightAgent, Collection<Modifier<FightAgent>> modifiers)
+    {
+        return Modifier.applyModifiers(fightAgent, modifiers);
+    }
+    
+    
     @Override
     public FightAgent modify(FightAgent fightAgent)
     {
@@ -45,11 +51,5 @@ public class FightAgentModifier extends Modifier<FightAgent>
     public ArrayList<Modifier<FightAgent>> getModifiers()
     {
         return (ArrayList<Modifier<FightAgent>>) this.modifiers;
-    }
-    
-    
-    public static FightAgent applyModifiers(FightAgent fightAgent, Collection<Modifier<FightAgent>> modifiers)
-    {
-        return Modifier.applyModifiers(fightAgent, modifiers);
     }
 }

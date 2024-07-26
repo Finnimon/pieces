@@ -46,12 +46,22 @@ public class SMarketplace
                             });
             trade.setOnAction(e ->
                               {
-                                  System.out.println(
-                                          "Trading " + anzahlToTrade.getValue() + " " + resource.name() + " for " + resourceToTrade.getValue());
+                                  System.out.println("Trading " +
+                                                     anzahlToTrade.getValue() +
+                                                     " " +
+                                                     resource.name() +
+                                                     " for " +
+                                                     resourceToTrade.getValue());
                               });
-            vbox.getChildren().addAll(new Label("Trade " + resource.name() + " for:"), resourceToTrade,
-                                      new Label("How many?"), anzahlToTrade, trade, new Label("or buy"), anzahlToBuy,
-                                      buy);
+            vbox.getChildren()
+                .addAll(new Label("Trade " + resource.name() + " for:"),
+                        resourceToTrade,
+                        new Label("How many?"),
+                        anzahlToTrade,
+                        trade,
+                        new Label("or buy"),
+                        anzahlToBuy,
+                        buy);
             hbox.getChildren().add(vbox);
         }
         Button button = new Button("Fortfahren");

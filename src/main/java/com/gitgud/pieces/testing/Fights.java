@@ -29,22 +29,35 @@ public interface Fights
     Fight FIGHT2 = getFight2();
     
     
+    FightTrigger FIGHT_TRIGGER1 = new FightTrigger(FIGHT1);
+    
+    
     static Fight getFight1()
     {
         GridMap<FightAgent> gridMap = mapFromBoolMap("src/main/resources/com/gitgud/maps/FightMap1");
         FightAgentDirector director = new FightAgentDirector();
         ArrayList<FightAgent> agents = new ArrayList<>();
         //Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.PAWN, Faction.MONOCHROME, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.PINK, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.GREEN, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.PAWN, Faction.PINK, 1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.PAWN,
+                                                                  Faction.MONOCHROME,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.ROOK,
+                                                                  Faction.PINK,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.ROOK,
+                                                                  Faction.GREEN,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.KNIGHT,
+                                                                  Faction.MONOCHROME,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.PAWN,
+                                                                  Faction.PINK,
+                                                                  1)));
         
         
         gridMap.place(3, 1, agents.get(0));
@@ -63,16 +76,26 @@ public interface Fights
         FightAgentDirector director = new FightAgentDirector();
         ArrayList<FightAgent> agents = new ArrayList<>();
         //Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.QUEEN, Faction.MONOCHROME, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.MONOCHROME, 2)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.ROOK, Faction.GREEN, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
-        agents.add(director.make(
-                FightAgentDirector.calculateType(Allegiance.WHITE, FightAgentType.KNIGHT, Faction.PINK, 1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.QUEEN,
+                                                                  Faction.MONOCHROME,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.ROOK,
+                                                                  Faction.MONOCHROME,
+                                                                  2)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.ROOK,
+                                                                  Faction.GREEN,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.KNIGHT,
+                                                                  Faction.MONOCHROME,
+                                                                  1)));
+        agents.add(director.make(FightAgentDirector.calculateType(Allegiance.WHITE,
+                                                                  FightAgentType.KNIGHT,
+                                                                  Faction.PINK,
+                                                                  1)));
         
         gridMap.place(3, 1, agents.get(0));
         gridMap.place(0, 0, agents.get(1));
@@ -83,9 +106,6 @@ public interface Fights
         
         return new Fight(gridMap);
     }
-    
-    
-    FightTrigger FIGHT_TRIGGER1 = new FightTrigger(FIGHT1);
     
     
     static boolean[][] readMapFile(String path)

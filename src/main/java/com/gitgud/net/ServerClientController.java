@@ -7,16 +7,16 @@ import org.zeromq.ZMQ;
 
 public class ServerClientController
 {
-    private final Server server;
-    
-    
-    private final Client client;
+    private static final ZContext context = new ZContext();
     
     
     private static ServerClientController instance = null;
     
     
-    private static final ZContext context = new ZContext();
+    private final Server server;
+    
+    
+    private final Client client;
     
     
     public ServerClientController(Server server, Client client)

@@ -20,9 +20,29 @@ public class SpellCasterFightAgent extends FightAgent implements SpellCaster
                                  int maxHealth, int maxMana, int health, int mana, int initiative, float accuracy,
                                  SpellBook spellBook)
     {
-        super(name, description, spriteUrl, isFlying, movementRange, fightAgentType, faction, allegiance, rank,
-              meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks, isRangedAttacker, physicalDefence,
-              magicDefence, evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy);
+        super(name,
+              description,
+              spriteUrl,
+              isFlying,
+              movementRange,
+              fightAgentType,
+              faction,
+              allegiance,
+              rank,
+              meleeDamage,
+              rangedDamage,
+              rangedAttackRange,
+              remainingRangedAttacks,
+              isRangedAttacker,
+              physicalDefence,
+              magicDefence,
+              evadeChance,
+              maxHealth,
+              maxMana,
+              health,
+              mana,
+              initiative,
+              accuracy);
         this.spellBook = spellBook;
     }
     

@@ -1,16 +1,16 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.pieces.control.StageController;
 import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 
 
-public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, HudType extends ActionContextHud<MType>> extends StackPane implements ActionContextRender<MType, GMType>
+public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, HudType extends ActionContextHud<MType>> extends
+                                                                                                                                                              StackPane implements
+                                                                                                                                                                        ActionContextRender<MType, GMType>
 {
     public static final int MINIMUM_TILE_SIZE = 50;
     

@@ -45,7 +45,11 @@ public class ResourceCost
     public boolean isResourceCostCoveredByWallet()
     {
         
-        HashMap<ResourceType, SimpleLongProperty> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+        HashMap<ResourceType, SimpleLongProperty> walletResourceMap = ActiveGameController.getInstance()
+                                                                                          .get()
+                                                                                          .getPlayer()
+                                                                                          .wallet()
+                                                                                          .resourceMap();
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
             if (walletResourceMap.get(resourceType).getValue() < resourceCostMap.get(resourceType))
@@ -79,7 +83,11 @@ public class ResourceCost
     {
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
-            HashMap<ResourceType, SimpleLongProperty> walletResourceMap = ActiveGameController.getInstance().get().getPlayer().wallet().resourceMap();
+            HashMap<ResourceType, SimpleLongProperty> walletResourceMap = ActiveGameController.getInstance()
+                                                                                              .get()
+                                                                                              .getPlayer()
+                                                                                              .wallet()
+                                                                                              .resourceMap();
             SimpleLongProperty valueProperty = walletResourceMap.get(resourceType);
             valueProperty.setValue(valueProperty.getValue() + resourceCostMap.get(resourceType));
         }

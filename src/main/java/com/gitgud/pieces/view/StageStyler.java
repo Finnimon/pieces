@@ -4,20 +4,15 @@ import com.gitgud.pieces.model.activeGame.GameLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class StageStyler
@@ -47,14 +42,14 @@ public class StageStyler
         MenuItem menuItem = new Menu("Save");
         
         menuItem.setOnAction(e ->
-                         {
-                             e.consume();
-                             System.out.println("save");
-                             new GameLoader().save();
-                         });
+                             {
+                                 e.consume();
+                                 System.out.println("save");
+                                 new GameLoader().save();
+                             });
         
         ArrayList<Menu> menuArrayList = new ArrayList<>();
-        Menu menu=new Menu("File");
+        Menu menu = new Menu("File");
         menu.getItems().add(menuItem);
         menuBar.getMenus().add(menu);
         return menuBar;

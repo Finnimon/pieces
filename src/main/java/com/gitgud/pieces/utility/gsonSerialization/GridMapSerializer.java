@@ -10,8 +10,8 @@ import java.lang.reflect.Type;
 public class GridMapSerializer implements JsonSerializer<GridMap<GridMappable>>, JsonDeserializer<GridMap<GridMappable>>
 {
     @Override
-    public GridMap<GridMappable> deserialize(JsonElement src, Type type,
-                                             JsonDeserializationContext context) throws JsonParseException
+    public GridMap<GridMappable> deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws
+                                                                                                             JsonParseException
     {
         JsonArray rows = new JsonArray();
         

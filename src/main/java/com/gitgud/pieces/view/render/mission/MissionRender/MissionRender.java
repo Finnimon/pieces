@@ -51,7 +51,8 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
             GridMappableRender<GameObject> interactableRender = gridMapRender.getGridMappableRender(gameObject);
             
             interactableRender.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                                               interactableEventHandler(interactable, missionController,
+                                               interactableEventHandler(interactable,
+                                                                        missionController,
                                                                         gridMap.getVertex(gameObject)));
         }
     }

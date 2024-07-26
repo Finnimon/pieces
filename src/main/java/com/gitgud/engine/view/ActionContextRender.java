@@ -1,11 +1,10 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.pieces.control.StageController;
 import com.gitgud.engine.control.action.ActionAwaiterModel;
-import javafx.scene.Parent;
 
 
-public interface ActionContextRender<ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> extends HudRender<ModelType>
+public interface ActionContextRender<ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> extends
+                                                                                                                                                                        HudRender<ModelType>
 {
     GridMapRender<GridMappableType> getGridMapRender();
     
@@ -13,5 +12,6 @@ public interface ActionContextRender<ModelType extends ActionAwaiterModel<GridMa
     @Override
     ActionContextHud<ModelType> getHud();
     
-     void show();
+    
+    void show();
 }

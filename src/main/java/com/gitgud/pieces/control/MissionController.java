@@ -8,7 +8,6 @@ import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
-import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
@@ -37,7 +36,9 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     public ActionChoice<MissionController, Mission, GameObject, MissionRender> getActionChoice()
     {
         RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice = new MovementRootChoice<>(
-                this, getModel().getPlayerAgent(), getModel().getPlayerAgentPosition());
+                this,
+                getModel().getPlayerAgent(),
+                getModel().getPlayerAgentPosition());
         ActionChoice<MissionController, Mission, GameObject, MissionRender> skipTurnChoice = getSkipTurnChoice();
         
         List<ActionChoice<MissionController, Mission, GameObject, MissionRender>> choices = List.of(rootToActionChoice,

@@ -12,7 +12,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class WalletRender extends VBox implements Render<Wallet>
     {
         setBackground(Constants.SEMI_TRANSPARENT_BACKGROUND);
         setMaxWidth(MAX_WIDTH);
-        setMaxHeight((ICON_HEIGHT +getSpacing())*ResourceType.values().length);
+        setMaxHeight((ICON_HEIGHT + getSpacing()) * ResourceType.values().length);
         setMouseTransparent(true);
         HashMap<ResourceType, SimpleLongProperty> resourceMap = data.resourceMap();
         for (ResourceType resourceType : ResourceType.values())
@@ -63,7 +64,7 @@ public class WalletRender extends VBox implements Render<Wallet>
         
         StringBinding stringBinding = valueProperty.asString();
         Label label = new Label();
-        label.setMinWidth(MAX_WIDTH-getSpacing() - ICON_HEIGHT);
+        label.setMinWidth(MAX_WIDTH - getSpacing() - ICON_HEIGHT);
         label.setPrefHeight(ICON_HEIGHT);
         label.textProperty().bind(stringBinding);
         label.contentDisplayProperty().set(ContentDisplay.RIGHT);

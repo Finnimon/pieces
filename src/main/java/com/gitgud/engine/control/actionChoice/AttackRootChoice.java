@@ -13,7 +13,8 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, FighterType, RenderType>, ModelType extends ActionAwaiterModel<FighterType>, FighterType extends Fighter, RenderType extends ActionContextRender<ModelType, FighterType>> extends RootToActionChoice<ActionAwaitingType, ModelType, FighterType, RenderType>
+public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, FighterType, RenderType>, ModelType extends ActionAwaiterModel<FighterType>, FighterType extends Fighter, RenderType extends ActionContextRender<ModelType, FighterType>> extends
+                                                                                                                                                                                                                                                                       RootToActionChoice<ActionAwaitingType, ModelType, FighterType, RenderType>
 {
     
     

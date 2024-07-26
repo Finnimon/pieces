@@ -19,7 +19,9 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
 {
     
     
-    public static final String DESCRIPTION = "An Enemy Encampment is in Sight." + Strings.LINE_BREAK + "Do you dare attack?";
+    public static final String DESCRIPTION = "An Enemy Encampment is in Sight." +
+                                             Strings.LINE_BREAK +
+                                             "Do you dare attack?";
     
     
     public static final String NAME = "Enemy";
@@ -79,9 +81,13 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
         
         while (startingPositions.size() < MINIMUM_STARTING_POSITION_COUNT)
         {
-            Tile startingPosition = gridMap.verticeSet().stream().filter(
-                    t -> t.getTerrain().isTraversable() && gridMap.get(t) == null && !startingPositions.contains(
-                            t)).findFirst().orElse(null);
+            Tile startingPosition = gridMap.verticeSet()
+                                           .stream()
+                                           .filter(t -> t.getTerrain().isTraversable() &&
+                                                        gridMap.get(t) == null &&
+                                                        !startingPositions.contains(t))
+                                           .findFirst()
+                                           .orElse(null);
             
             
             startingPositions.add(startingPosition);
@@ -111,7 +117,7 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     
     private void prepareFight()
     {
-        FightAgent[] activeFightAgents = ActiveGameController.getInstance().get().getMission().getActiveFightAgents();;
+        FightAgent[] activeFightAgents = ActiveGameController.getInstance().get().getMission().getActiveFightAgents();
         GridMap<FightAgent> gridMap = fight.getGridMap();
         TreeSet<FightAgent> current = fight.getFightTimeLine().current();
         

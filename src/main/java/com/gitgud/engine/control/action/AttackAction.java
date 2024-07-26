@@ -17,7 +17,8 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 
 
-public interface AttackAction<AwaiterType extends ActionAwaitingController<ModelType, FighterType, RenderType>, ModelType extends ActionAwaiterModel<FighterType>, FighterType extends Fighter, RenderType extends ActionContextRender<ModelType, FighterType>> extends FromToAction<AwaiterType, Tile>
+public interface AttackAction<AwaiterType extends ActionAwaitingController<ModelType, FighterType, RenderType>, ModelType extends ActionAwaiterModel<FighterType>, FighterType extends Fighter, RenderType extends ActionContextRender<ModelType, FighterType>> extends
+                                                                                                                                                                                                                                                                FromToAction<AwaiterType, Tile>
 {
     @Override
     default void enAct(AwaiterType awaiter)

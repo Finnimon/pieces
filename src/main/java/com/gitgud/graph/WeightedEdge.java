@@ -5,12 +5,6 @@ public class WeightedEdge<Vertex> extends Edge<Vertex>
     private final float weight;
     
     
-    public float getWeight()
-    {
-        return weight;
-    }
-    
-    
     public WeightedEdge(Vertex end, float weight)
     {
         super(end);
@@ -22,6 +16,12 @@ public class WeightedEdge<Vertex> extends Edge<Vertex>
     {
         super(vertex);
         weight = 1;
+    }
+    
+    
+    public float getWeight()
+    {
+        return weight;
     }
     
     

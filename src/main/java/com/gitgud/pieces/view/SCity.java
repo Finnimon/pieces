@@ -38,7 +38,8 @@ public class SCity
     public static Scene createCityScene(Stage stage)
     {
         GridPane grid = new GridPane();
-        Scene scene = new Scene(grid, Constants.DEFAULT_WIDTH * Constants.MAP_DIMENSION,
+        Scene scene = new Scene(grid,
+                                Constants.DEFAULT_WIDTH * Constants.MAP_DIMENSION,
                                 Constants.DEFAULT_WIDTH * Constants.MAP_DIMENSION);
         int[][] map = new int[Constants.MAP_DIMENSION][Constants.MAP_DIMENSION];
         
@@ -75,18 +76,21 @@ public class SCity
                 {
                     case 0 ->
                     {
-                        pane.setBackground(new Background(
-                                new BackgroundFill(Color.LIGHTGREEN, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                     }
                     case 1 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e ->
                                                {
-                                                   if ((Math.abs(finalJ - playerY) == 1 && Math.abs(
-                                                           finalI - playerX) == 0) || (Math.abs(
-                                                           finalJ - playerY) == 0 && Math.abs(finalI - playerX) == 1))
+                                                   if ((Math.abs(finalJ - playerY) == 1 &&
+                                                        Math.abs(finalI - playerX) == 0) ||
+                                                       (Math.abs(finalJ - playerY) == 0 &&
+                                                        Math.abs(finalI - playerX) == 1))
                                                    {
                                                        grid.setCursor(Cursor.HAND);
                                                    }
@@ -97,9 +101,10 @@ public class SCity
                                               });
                         pane.setOnMouseClicked(e ->
                                                {
-                                                   if ((Math.abs(finalJ - playerY) == 1 && Math.abs(
-                                                           finalI - playerX) == 0) || (Math.abs(
-                                                           finalJ - playerY) == 0 && Math.abs(finalI - playerX) == 1))
+                                                   if ((Math.abs(finalJ - playerY) == 1 &&
+                                                        Math.abs(finalI - playerX) == 0) ||
+                                                       (Math.abs(finalJ - playerY) == 0 &&
+                                                        Math.abs(finalI - playerX) == 1))
                                                    {
                                                        grid.getChildren().removeAll(rect);
                                                        try
@@ -120,41 +125,49 @@ public class SCity
                                                        playerX = finalI;
                                                        try
                                                        {
-                                                           if (playerX < Constants.MAP_DIMENSION - 1 && map[playerX + 1][playerY] == 1)
+                                                           if (playerX < Constants.MAP_DIMENSION - 1 &&
+                                                               map[playerX + 1][playerY] == 1)
                                                            {
-                                                               getGridCell(grid, playerX + 1, playerY).setBorder(
-                                                                       new Border(new BorderStroke(Color.LIGHTGREEN,
-                                                                                                   BorderStrokeStyle.SOLID,
-                                                                                                   new CornerRadii(4),
-                                                                                                   new BorderWidths(
-                                                                                                           3))));
+                                                               getGridCell(grid,
+                                                                           playerX + 1,
+                                                                           playerY).setBorder(new Border(new BorderStroke(
+                                                                       Color.LIGHTGREEN,
+                                                                       BorderStrokeStyle.SOLID,
+                                                                       new CornerRadii(4),
+                                                                       new BorderWidths(3))));
                                                            }
                                                            if (playerX > 0 && map[playerX - 1][playerY] == 1)
                                                            {
-                                                               getGridCell(grid, playerX - 1, playerY).setBorder(
-                                                                       new Border(new BorderStroke(Color.LIGHTGREEN,
-                                                                                                   BorderStrokeStyle.SOLID,
-                                                                                                   new CornerRadii(4),
-                                                                                                   new BorderWidths(
-                                                                                                           3))));
+                                                               getGridCell(grid,
+                                                                           playerX - 1,
+                                                                           playerY).setBorder(new Border(new BorderStroke(
+                                                                       Color.LIGHTGREEN,
+                                                                       BorderStrokeStyle.SOLID,
+                                                                       new CornerRadii(4),
+                                                                       new BorderWidths(3))));
                                                            }
-                                                           if (playerY < Constants.MAP_DIMENSION - 1 && map[playerX][playerY + 1] == 1)
+                                                           if (playerY < Constants.MAP_DIMENSION - 1 &&
+                                                               map[playerX][playerY + 1] == 1)
                                                            {
-                                                               getGridCell(grid, playerX, playerY + 1).setBorder(
-                                                                       new Border(new BorderStroke(Color.LIGHTGREEN,
-                                                                                                   BorderStrokeStyle.SOLID,
-                                                                                                   new CornerRadii(4),
-                                                                                                   new BorderWidths(
-                                                                                                           3))));
+                                                               getGridCell(grid,
+                                                                           playerX,
+                                                                           playerY +
+                                                                           1).setBorder(new Border(new BorderStroke(
+                                                                       Color.LIGHTGREEN,
+                                                                       BorderStrokeStyle.SOLID,
+                                                                       new CornerRadii(4),
+                                                                       new BorderWidths(3))));
                                                            }
                                                            if (playerY > 0 && map[playerX][playerY - 1] == 1)
                                                            {
-                                                               getGridCell(grid, playerX, playerY - 1).setBorder(
-                                                                       new Border(new BorderStroke(Color.LIGHTGREEN,
-                                                                                                   BorderStrokeStyle.SOLID,
-                                                                                                   new CornerRadii(4),
-                                                                                                   new BorderWidths(
-                                                                                                           3))));
+                                                               getGridCell(grid,
+                                                                           playerX,
+                                                                           playerY -
+                                                                           1).setBorder(new Border(new BorderStroke(
+                                                                       Color.LIGHTGREEN,
+                                                                       BorderStrokeStyle.SOLID,
+                                                                       new CornerRadii(4),
+                                                                       new BorderWidths(3))));
                                                            }
                                                        }
                                                        catch (NullPointerException ex)
@@ -168,8 +181,9 @@ public class SCity
                     }
                     case 2 ->
                     {
-                        pane.setBackground(new Background(
-                                new BackgroundFill(Color.BLANCHEDALMOND, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.BLANCHEDALMOND,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SWrought.createWroughtScene(stage)));
@@ -177,8 +191,9 @@ public class SCity
                     }
                     case 3 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.ROSYBROWN, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.ROSYBROWN,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(STale.createTaleScene(stage)));
@@ -186,8 +201,9 @@ public class SCity
                     }
                     case 4 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.LIGHTPINK, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.LIGHTPINK,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(STavern.createTavernScene(stage)));
@@ -195,8 +211,9 @@ public class SCity
                     }
                     case 5 ->
                     {
-                        pane.setBackground(new Background(
-                                new BackgroundFill(Color.BLUEVIOLET, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.BLUEVIOLET,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SMagicAmplifier.createMAScene(stage)));
@@ -204,8 +221,9 @@ public class SCity
                     }
                     case 6 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.TURQUOISE, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.TURQUOISE,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SBasisCamp.createBasiscampScene(stage)));
@@ -213,8 +231,9 @@ public class SCity
                     }
                     case 7 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.TOMATO, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.TOMATO,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SFactionCamps.createFactionCampsScene(stage)));
@@ -222,8 +241,9 @@ public class SCity
                     }
                     case 8 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.DARKGRAY, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.DARKGRAY,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(SMarketplace.createMarketplaceScene(stage)));
@@ -231,8 +251,9 @@ public class SCity
                     }
                     case 9 ->
                     {
-                        pane.setBackground(
-                                new Background(new BackgroundFill(Color.DEEPPINK, new CornerRadii(0), new Insets(0))));
+                        pane.setBackground(new Background(new BackgroundFill(Color.DEEPPINK,
+                                                                             new CornerRadii(0),
+                                                                             new Insets(0))));
                         pane.setOnMouseEntered(e -> scene.setCursor(Cursor.HAND));
                         pane.setOnMouseExited(e -> scene.setCursor(Cursor.DEFAULT));
                         pane.setOnMouseClicked(e -> stage.setScene(STrainingCamp.createTrainingCampScene(stage)));
@@ -248,8 +269,10 @@ public class SCity
             }
         }
         
-        getGridCell(grid, playerX - 1, playerY).setBorder(new Border(
-                new BorderStroke(Color.LIGHTGREEN, BorderStrokeStyle.SOLID, new CornerRadii(4), new BorderWidths(3))));
+        getGridCell(grid, playerX - 1, playerY).setBorder(new Border(new BorderStroke(Color.LIGHTGREEN,
+                                                                                      BorderStrokeStyle.SOLID,
+                                                                                      new CornerRadii(4),
+                                                                                      new BorderWidths(3))));
         grid.setAlignment(Pos.CENTER);
         stage.setScene(scene);
         return scene;
@@ -260,8 +283,10 @@ public class SCity
     {
         for (Node node : pane.getChildren())
         {
-            if (GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) == x && GridPane.getColumnIndex(
-                    node) != null && GridPane.getColumnIndex(node) == y)
+            if (GridPane.getRowIndex(node) != null &&
+                GridPane.getRowIndex(node) == x &&
+                GridPane.getColumnIndex(node) != null &&
+                GridPane.getColumnIndex(node) == y)
             {
                 return (Pane) node;
             }

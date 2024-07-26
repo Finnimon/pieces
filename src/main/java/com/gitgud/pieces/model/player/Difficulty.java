@@ -55,8 +55,11 @@ public enum Difficulty implements Applicable<Fight>
     @Override
     public Fight apply(Fight fight)
     {
-        fight.getGridMap().nonNullElements().stream().filter(
-                x -> x.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE).forEach(modifier::modify);
+        fight.getGridMap()
+             .nonNullElements()
+             .stream()
+             .filter(x -> x.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE)
+             .forEach(modifier::modify);
         return fight;
     }
     

@@ -15,12 +15,6 @@ public enum SpellType
     }
     
     
-    public String getAsString()
-    {
-        return this.type;
-    }
-    
-    
     public static SpellType fromString(String string)
     {
         for (SpellType t : SpellType.values())
@@ -31,6 +25,12 @@ public enum SpellType
             }
         }
         return null;
+    }
+    
+    
+    public String getAsString()
+    {
+        return this.type;
     }
     
     

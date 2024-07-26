@@ -36,7 +36,9 @@ import java.util.Objects;
  * @see ActionChoiceRender
  * @since 28.06.2024
  */
-public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements Named, Describable
+public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements
+                                                                                                                                                                                                                                                                                                    Named,
+                                                                                                                                                                                                                                                                                                    Describable
 {
     private final String name;
     

@@ -6,7 +6,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -50,13 +49,6 @@ public class StageController
     }
     
     
-    public void setRoot(Node node)
-    {
-        StackPane stackPane= getInnerStackPane();
-        stackPane.getChildren().set(0, node);
-    }
-    
-    
     private StackPane getInnerStackPane()
     {
         return (StackPane) ((Pane) stage.getScene().getRoot()).getChildren().get(ROOT_INDEX);
@@ -66,6 +58,13 @@ public class StageController
     public Parent getRoot()
     {
         return (Parent) getInnerStackPane().getChildren().getFirst();
+    }
+    
+    
+    public void setRoot(Node node)
+    {
+        StackPane stackPane = getInnerStackPane();
+        stackPane.getChildren().set(0, node);
     }
     
     

@@ -9,7 +9,9 @@ import com.gitgud.engine.view.RootActionChoiceRender;
 import java.util.List;
 
 
-public class RootActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType> implements RootChoice
+public class RootActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
+                                                                                                                                                                                                                                                                                               ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType> implements
+                                                                                                                                                                                                                                                                                                                                                                        RootChoice
 {
     private final List<ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType>> choices;
     

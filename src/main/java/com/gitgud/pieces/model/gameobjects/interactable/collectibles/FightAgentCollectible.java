@@ -19,7 +19,8 @@ public class FightAgentCollectible extends GameObject implements Collectible<Mis
     
     public FightAgentCollectible(FightAgent fightAgent)
     {
-        super("Resting " + fightAgent.name(), fightAgent.description() + "\r\nThey would like to join your army",
+        super("Resting " + fightAgent.name(),
+              fightAgent.description() + "\r\nThey would like to join your army",
               fightAgent.getSpriteFilePath());
         this.fightAgent = fightAgent;
     }
@@ -48,8 +49,8 @@ public class FightAgentCollectible extends GameObject implements Collectible<Mis
     public boolean isCollectionPossible()
     {
         Mission mission = ActiveGameController.getInstance().get().getMission();
-        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::isNull) || Arrays.stream(
-                mission.getDiscardedFightAgents()).anyMatch(Objects::isNull);
+        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::isNull) ||
+               Arrays.stream(mission.getDiscardedFightAgents()).anyMatch(Objects::isNull);
     }
     
     

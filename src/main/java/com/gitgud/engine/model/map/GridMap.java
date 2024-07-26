@@ -17,7 +17,8 @@ import java.util.TreeMap;
  * @Since: 13.06.2024
  * @Version: 2.0
  */
-public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> extends WeightedGraph<Tile, GridMappableType> implements RectangularGraph<Tile, GridMappableType>
+public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> extends WeightedGraph<Tile, GridMappableType> implements
+                                                                                                                                              RectangularGraph<Tile, GridMappableType>
 {
     //    private final float tileSpacing;
     
@@ -179,8 +180,8 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
         double y = tile.getY();
         double neighborX = neighbor.getX();
         double neighborY = neighbor.getY();
-        return getVertex(neighborX, y).getTerrain().isTraversable() || getVertex(x,
-                                                                                 neighborY).getTerrain().isTraversable();
+        return getVertex(neighborX, y).getTerrain().isTraversable() ||
+               getVertex(x, neighborY).getTerrain().isTraversable();
     }
     
     

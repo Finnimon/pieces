@@ -15,7 +15,11 @@ import java.util.HashSet;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
-public record Player(String name, Difficulty difficulty, HashSet<FightAgent> army, Wallet wallet,
-                     ArtefactPouch artefactPouch, SpellBook spellbook) implements Named
+public record Player(String name,
+                     Difficulty difficulty,
+                     HashSet<FightAgent> army,
+                     Wallet wallet,
+                     ArtefactPouch artefactPouch,
+                     SpellBook spellbook) implements Named
 {
 }

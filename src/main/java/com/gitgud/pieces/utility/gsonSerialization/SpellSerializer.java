@@ -37,8 +37,9 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
                         break;
                     
                     case MODIFIER:
-                        jsonObject.add(MODIFIER, context.serialize(src.getModifier(),
-                                                                   com.gitgud.engine.utility.modification.Modifier.class));
+                        jsonObject.add(MODIFIER,
+                                       context.serialize(src.getModifier(),
+                                                         com.gitgud.engine.utility.modification.Modifier.class));
                         break;
                     
                     default:
@@ -77,8 +78,9 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
                         break;
                     
                     case MODIFIER:
-                        field.set(spell, context.deserialize(jsonObject.get(MODIFIER),
-                                                             com.gitgud.engine.utility.modification.Modifier.class));
+                        field.set(spell,
+                                  context.deserialize(jsonObject.get(MODIFIER),
+                                                      com.gitgud.engine.utility.modification.Modifier.class));
                         break;
                     
                     default:

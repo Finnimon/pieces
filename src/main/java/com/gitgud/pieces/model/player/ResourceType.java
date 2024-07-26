@@ -11,19 +11,6 @@ public enum ResourceType implements Sprite
     public static final String DIR_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\player\\resourceType\\";
     
     
-    @Override
-    public String getSpriteFilePath()
-    {
-        return DIR_PATH + name() + DOT_PNG;
-    }
-    
-    
-    public String getAsString()
-    {
-        return this.toString();
-    }
-    
-    
     public static ResourceType fromString(String string)
     {
         for (ResourceType resourceType : ResourceType.values())
@@ -34,5 +21,18 @@ public enum ResourceType implements Sprite
             }
         }
         return null;
+    }
+    
+    
+    @Override
+    public String getSpriteFilePath()
+    {
+        return DIR_PATH + name() + DOT_PNG;
+    }
+    
+    
+    public String getAsString()
+    {
+        return this.toString();
     }
 }

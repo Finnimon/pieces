@@ -14,7 +14,9 @@ public class PawnBuilder extends FightAgentBuilder
     private static final String NAME_SUFFIX = " Pawn";
     
     
-    private static final String DESCRIPTION = "A Pawn is a small figure," + Strings.LINE_BREAK + "he is the best at dodging.";
+    private static final String DESCRIPTION = "A Pawn is a small figure," +
+                                              Strings.LINE_BREAK +
+                                              "he is the best at dodging.";
     
     
     private static final boolean IS_FLYING = false; //

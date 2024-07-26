@@ -63,8 +63,8 @@ public class FightAgentSerializer implements JsonSerializer<FightAgent>, JsonDes
     
     
     @Override
-    public FightAgent deserialize(JsonElement src, Type type,
-                                  JsonDeserializationContext context) throws JsonParseException
+    public FightAgent deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws
+                                                                                                  JsonParseException
     {
         JsonObject jsonObject = src.getAsJsonObject();
         

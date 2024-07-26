@@ -19,9 +19,6 @@ public interface Action<Awaiter extends ActionAwaitingController>
     }
     
     
-    void enAct(Awaiter awaiter);
-    
-    
     static <Awaiter extends ActionAwaitingController> Action<Awaiter> empty()
     {
         return awaiter ->
@@ -29,4 +26,7 @@ public interface Action<Awaiter extends ActionAwaitingController>
             //do nothing
         };
     }
+    
+    
+    void enAct(Awaiter awaiter);
 }

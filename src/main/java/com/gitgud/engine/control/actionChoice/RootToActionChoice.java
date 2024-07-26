@@ -8,7 +8,9 @@ import com.gitgud.engine.view.ActionContextRender;
 import java.util.List;
 
 
-public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends ActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType> implements RootChoice<ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>>
+public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
+                                                                                                                                                                                                                                                                                                  ActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType> implements
+                                                                                                                                                                                                                                                                                                                                                                            RootChoice<ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>>
 {
     private final List<ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>> toActionChoices;
     

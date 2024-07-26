@@ -40,8 +40,10 @@ public record Core()
     
     public static void replaceFirstOccurrence(Object[] objects, Object object, Object replacement)
     {
-        IntStream.range(0, objects.length).filter(i -> objects[i] == object).findFirst().ifPresent(
-                i -> objects[i] = replacement);
+        IntStream.range(0, objects.length)
+                 .filter(i -> objects[i] == object)
+                 .findFirst()
+                 .ifPresent(i -> objects[i] = replacement);
     }
     
     

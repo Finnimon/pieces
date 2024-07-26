@@ -24,19 +24,9 @@ public class JsonParser
     
     private JsonParser()
     {
-        GsonBuilder gsonBuilder=FxGson.fullBuilder();
+        GsonBuilder gsonBuilder = FxGson.fullBuilder();
         prepareBuilder(gsonBuilder);
         gson = gsonBuilder.create();
-    }
-    
-    private synchronized void prepareBuilder(GsonBuilder gsonBuilder)
-    {
-        GsonPolymorphAdapter gameObjectTypeAdapterFactory= new GsonPolymorphAdapter(
-                GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
-                GameObject.class.getClassLoader(),
-                "com.gitgud");
-        gsonBuilder.setPrettyPrinting().enableComplexMapKeySerialization();
-        gsonBuilder.registerTypeAdapterFactory(gameObjectTypeAdapterFactory);
     }
     
     
@@ -47,6 +37,16 @@ public class JsonParser
             instance = new JsonParser();
         }
         return instance;
+    }
+    
+    
+    private synchronized void prepareBuilder(GsonBuilder gsonBuilder)
+    {
+        GsonPolymorphAdapter gameObjectTypeAdapterFactory = new GsonPolymorphAdapter(GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
+                                                                                     GameObject.class.getClassLoader(),
+                                                                                     "com.gitgud");
+        gsonBuilder.setPrettyPrinting().enableComplexMapKeySerialization();
+        gsonBuilder.registerTypeAdapterFactory(gameObjectTypeAdapterFactory);
     }
     
     

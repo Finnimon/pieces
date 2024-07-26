@@ -102,8 +102,12 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     protected static String determineSpriteFilePath(Faction faction, Allegiance allegiance,
                                                     FightAgentType fightAgentType)
     {
-        return "%s%s%s%s_%s%s".formatted(SPRITE_FILEPATH_DIRECTORY, faction.name().toLowerCase(),
-                                         Strings.FILE_SEPERATOR, allegiance, fightAgentType.name(), Sprite.DOT_PNG);
+        return "%s%s%s%s_%s%s".formatted(SPRITE_FILEPATH_DIRECTORY,
+                                         faction.name().toLowerCase(),
+                                         Strings.FILE_SEPERATOR,
+                                         allegiance,
+                                         fightAgentType.name(),
+                                         Sprite.DOT_PNG);
     }
     
     
@@ -456,19 +460,57 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     
     private FightAgent getFightAgentResult()
     {
-        return new FightAgent(name, description, spriteFilePath, isFlying, movementRange, type, faction, allegiance,
-                              level, meleeDamage, rangedDamage, rangedAttackRange, remainingRangedAttacks,
-                              isRangedAttacker, physicalDefence, magicDefence, evadeChance, maxHealth, maxMana, health,
-                              mana, initiative, accuracy);
+        return new FightAgent(name,
+                              description,
+                              spriteFilePath,
+                              isFlying,
+                              movementRange,
+                              type,
+                              faction,
+                              allegiance,
+                              level,
+                              meleeDamage,
+                              rangedDamage,
+                              rangedAttackRange,
+                              remainingRangedAttacks,
+                              isRangedAttacker,
+                              physicalDefence,
+                              magicDefence,
+                              evadeChance,
+                              maxHealth,
+                              maxMana,
+                              health,
+                              mana,
+                              initiative,
+                              accuracy);
     }
     
     
     private SpellCasterFightAgent getSpellCasterFightAgentResult()
     {
-        return new SpellCasterFightAgent(name, description, spriteFilePath, isFlying, movementRange, type, faction,
-                                         allegiance, level, meleeDamage, rangedDamage, rangedAttackRange,
-                                         remainingRangedAttacks, isRangedAttacker, physicalDefence, magicDefence,
-                                         evadeChance, maxHealth, maxMana, health, mana, initiative, accuracy,
+        return new SpellCasterFightAgent(name,
+                                         description,
+                                         spriteFilePath,
+                                         isFlying,
+                                         movementRange,
+                                         type,
+                                         faction,
+                                         allegiance,
+                                         level,
+                                         meleeDamage,
+                                         rangedDamage,
+                                         rangedAttackRange,
+                                         remainingRangedAttacks,
+                                         isRangedAttacker,
+                                         physicalDefence,
+                                         magicDefence,
+                                         evadeChance,
+                                         maxHealth,
+                                         maxMana,
+                                         health,
+                                         mana,
+                                         initiative,
+                                         accuracy,
                                          spellBook);
     }
     

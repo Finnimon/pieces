@@ -40,10 +40,17 @@ public class SReborn
         playerBox.setMinWidth(stage.getWidth() / (content.length + 1));
         try
         {
-            playerBox.setBackground(new Background(new BackgroundImage(
-                    new Image(Sprite.urlFromFilePath("src/main/resources/com/gitgud/playerSpritee/PlayerSprite.png")),
-                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                    new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false))));
+            playerBox.setBackground(new Background(new BackgroundImage(new Image(Sprite.urlFromFilePath(
+                    "src/main/resources/com/gitgud/playerSpritee/PlayerSprite.png")),
+                                                                       BackgroundRepeat.NO_REPEAT,
+                                                                       BackgroundRepeat.NO_REPEAT,
+                                                                       BackgroundPosition.CENTER,
+                                                                       new BackgroundSize(BackgroundSize.AUTO,
+                                                                                          BackgroundSize.AUTO,
+                                                                                          false,
+                                                                                          false,
+                                                                                          true,
+                                                                                          false))));
         }
         catch (MalformedURLException e)
         {

@@ -19,6 +19,21 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
     }
     
     
+    private static double renderActionChoice(ActionChoice<?, ?, ?, ?> actionChoice, ObservableList<Node> children,
+                                             double spacer)
+    {
+        ActionChoiceRender render = actionChoice.getNode();
+        children.add(render);
+        
+        AnchorPane.setTopAnchor(render, spacer);
+        
+        spacer += ActionChoiceRender.SIZE * 2;
+        
+        
+        return spacer;
+    }
+    
+    
     @Override
     public void render(RootActionChoice<?, ?, ?, ?> data)
     {
@@ -34,20 +49,5 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
             //topAnchor size is updated with each actionChoice
             topAnchor = renderActionChoice(actionChoice, children, topAnchor);
         }
-    }
-    
-    
-    private static double renderActionChoice(ActionChoice<?, ?, ?, ?> actionChoice, ObservableList<Node> children,
-                                             double spacer)
-    {
-        ActionChoiceRender render = actionChoice.getNode();
-        children.add(render);
-        
-        AnchorPane.setTopAnchor(render, spacer);
-        
-        spacer += ActionChoiceRender.SIZE * 2;
-        
-        
-        return spacer;
     }
 }

@@ -13,7 +13,10 @@ import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
 
-public abstract class ActionAwaitingController<ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends Controller<ModelType, RenderType> implements Ending, Startable
+public abstract class ActionAwaitingController<ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
+                                                                                                                                                                                                                   Controller<ModelType, RenderType> implements
+                                                                                                                                                                                                                                                     Ending,
+                                                                                                                                                                                                                                                     Startable
 {
     public ActionAwaitingController(ModelType model, RenderType render)
     {
@@ -65,8 +68,11 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
     
     protected <AAType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>> ActionChoice<AAType, ModelType, GridMappableType, RenderType> getSkipTurnChoice()
     {
-        return (ActionChoice<AAType, ModelType, GridMappableType, RenderType>) ActionChoice.empty(
-                "Skip" + Strings.LINE_BREAK + "Turn", "Skip this turn.", this);
+        return (ActionChoice<AAType, ModelType, GridMappableType, RenderType>) ActionChoice.empty("Skip" +
+                                                                                                  Strings.LINE_BREAK +
+                                                                                                  "Turn",
+                                                                                                  "Skip this turn.",
+                                                                                                  this);
     }
     
     

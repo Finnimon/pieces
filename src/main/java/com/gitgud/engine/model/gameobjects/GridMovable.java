@@ -25,11 +25,15 @@ public interface GridMovable extends GridMappable
 {
     static ArrayList<Tile> getInAbsoluteRangeTiles(GridMap<?> gridMap, Tile position, int range)
     {
-        List<Tile> tiles = gridMap.verticeSet().stream().filter(
-                otherVertex -> position.distance(otherVertex) <= range).toList();
+        List<Tile> tiles = gridMap.verticeSet()
+                                  .stream()
+                                  .filter(otherVertex -> position.distance(otherVertex) <= range)
+                                  .toList();
         
-        return new ArrayList<>(tiles.stream().filter(tile -> tile.getTerrain().isTraversable()).filter(
-                x -> !x.equals(position)).toList());
+        return new ArrayList<>(tiles.stream()
+                                    .filter(tile -> tile.getTerrain().isTraversable())
+                                    .filter(x -> !x.equals(position))
+                                    .toList());
     }
     
     

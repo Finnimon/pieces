@@ -6,7 +6,8 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
 
 
-public class TileMovementAction<Awaiter extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements FromToAction<Awaiter, Tile>
+public class TileMovementAction<Awaiter extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements
+                                                                                                                                                                                                                                                                                       FromToAction<Awaiter, Tile>
 {
     private final Tile from;
     
@@ -38,7 +39,8 @@ public class TileMovementAction<Awaiter extends ActionAwaitingController<ModelTy
     @Override
     public synchronized void enAct(Awaiter awaiter)
     {
-        awaiter.getRender().getGridMapRender().relocateGridMappable(
-                awaiter.getModel().getGridMap().moveElement(from, to), to);
+        awaiter.getRender()
+               .getGridMapRender()
+               .relocateGridMappable(awaiter.getModel().getGridMap().moveElement(from, to), to);
     }
 }

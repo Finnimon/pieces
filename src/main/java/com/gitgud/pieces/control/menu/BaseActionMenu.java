@@ -18,7 +18,7 @@ public class BaseActionMenu implements ActionMenu
     private final Consumer<Event> action;
     
     
-    public BaseActionMenu(String name,Predicate<GameState> condition, Consumer<Event> action)
+    public BaseActionMenu(String name, Predicate<GameState> condition, Consumer<Event> action)
     {
         this.name = name;
         this.condition = condition;

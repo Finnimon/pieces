@@ -18,10 +18,10 @@ public class Server extends Thread
     private static final int FAIL_CODE = -1;
     
     
-    private LinkedList<Serializable> messageQueue;
-    
-    
     private final ZMQ.Socket socket;
+    
+    
+    private LinkedList<Serializable> messageQueue;
     
     
     private boolean currentlyReceiving;

@@ -18,19 +18,16 @@ public class Tile implements Vertex2D, Sprite
 {
     
     
-    private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\engine\\model\\map\\tile\\";
-    
-    
     public static final String WHITE = "\\white";
     
     
     public static final String BLACK = "\\black";
     
     
+    private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\engine\\model\\map\\tile\\";
+    
+    
     private final Terrain terrain;
-    
-    
-    private int index;
     
     
     private final int x;
@@ -39,29 +36,20 @@ public class Tile implements Vertex2D, Sprite
     private final int y;
     
     
+    private int index;
+    
+    
     /**
      * Creates a new instance of {@code Point2D}.
      *
-     * @param x       the x coordinate of the point
-     * @param y       the y coordinate of the point
+     * @param x the x coordinate of the point
+     * @param y the y coordinate of the point
      */
     public Tile(int x, int y, Terrain terrain, int index)
     {
         this.x = x;
         this.y = y;
         this.terrain = terrain;
-        this.index = index;
-    }
-    
-    
-    public int getIndex()
-    {
-        return index;
-    }
-    
-    
-    public void setIndex(int index)
-    {
         this.index = index;
     }
     
@@ -81,6 +69,18 @@ public class Tile implements Vertex2D, Sprite
     public static Tile create(int x, int y, int width)
     {
         return create(x, y, new Terrain(TerrainType.TRAVERSABLE), width);
+    }
+    
+    
+    public int getIndex()
+    {
+        return index;
+    }
+    
+    
+    public void setIndex(int index)
+    {
+        this.index = index;
     }
     
     

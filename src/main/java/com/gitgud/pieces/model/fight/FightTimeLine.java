@@ -6,7 +6,6 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.TreeSet;
 
 

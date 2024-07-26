@@ -111,11 +111,10 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     public void fixTimeLine()
     {
-        TreeSet<FightAgent> current= getFightTimeLine().current();
+        TreeSet<FightAgent> current = getFightTimeLine().current();
         
-        Collection<FightAgent> nonNullElements=gridMap.nonNullElements();
-        if (nonNullElements.containsAll(current))
-            return;
+        Collection<FightAgent> nonNullElements = gridMap.nonNullElements();
+        if (nonNullElements.containsAll(current)) return;
         
         current.clear();
         fightTimeLine.next().clear();

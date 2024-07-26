@@ -18,8 +18,7 @@ public class MainMenu implements OptionMenu
     
     public static MainMenu create()
     {
-        Menu[] options = new Menu[]
-        {
+        Menu[] options = new Menu[]{
         };
         
         return new MainMenu("Main Menu", options);

@@ -8,7 +8,8 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
 
 
-public interface ApplicableToAction<ActionAwaiterControllerType extends ActionAwaitingController<ModelType, TargetType, RenderType>, ApplicableType extends Applicable<TargetType>, TargetType extends GridMappable, ModelType extends ActionAwaiterModel<TargetType>, RenderType extends ActionContextRender<ModelType, TargetType>> extends ToAction<ActionAwaiterControllerType, Tile>
+public interface ApplicableToAction<ActionAwaiterControllerType extends ActionAwaitingController<ModelType, TargetType, RenderType>, ApplicableType extends Applicable<TargetType>, TargetType extends GridMappable, ModelType extends ActionAwaiterModel<TargetType>, RenderType extends ActionContextRender<ModelType, TargetType>> extends
+                                                                                                                                                                                                                                                                                                                                      ToAction<ActionAwaiterControllerType, Tile>
 {
     @Override
     default void enAct(ActionAwaiterControllerType awaiter)

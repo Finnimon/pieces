@@ -29,6 +29,8 @@ public interface IDimentions
     int NUMBER_OF_UNITS = 5;
     
     
-    String MOVE_TRANSITION_INFO = "Press 1 to skip the turn and get more steps on the next turn,\n" + "Press 2 to skip the turn and regenerate a little mana,\n" + "Press 3 to skip turn and heal your units,";
+    String MOVE_TRANSITION_INFO = "Press 1 to skip the turn and get more steps on the next turn,\n" +
+                                  "Press 2 to skip the turn and regenerate a little mana,\n" +
+                                  "Press 3 to skip turn and heal your units,";
     
 }

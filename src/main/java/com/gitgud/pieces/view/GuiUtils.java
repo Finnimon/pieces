@@ -75,10 +75,16 @@ public class GuiUtils
         {
             System.out.println(e.getMessage());
         }
-        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true,
+        BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO,
+                                                           BackgroundSize.AUTO,
+                                                           false,
+                                                           false,
+                                                           true,
                                                            false);
-        BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT,
-                                                         BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        BackgroundImage background = new BackgroundImage(backgroundImage,
+                                                         BackgroundRepeat.NO_REPEAT,
+                                                         BackgroundRepeat.NO_REPEAT,
+                                                         BackgroundPosition.CENTER,
                                                          backgroundSize);
         vbox.setBackground(new Background(background));
         

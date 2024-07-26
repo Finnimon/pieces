@@ -45,7 +45,10 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
     public static void add(Group parent, Node Appendix, EventType<MouseEvent> addEvent,
                            EventType<MouseEvent> removeEvent, MouseButton mouseButton)
     {
-        EventHandler<MouseEvent> handler = new AppendRemoveNodeOnMouseEvent(parent, Appendix, addEvent, removeEvent,
+        EventHandler<MouseEvent> handler = new AppendRemoveNodeOnMouseEvent(parent,
+                                                                            Appendix,
+                                                                            addEvent,
+                                                                            removeEvent,
                                                                             mouseButton);
         parent.addEventHandler(addEvent, handler);
         parent.addEventHandler(removeEvent, handler);

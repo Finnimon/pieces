@@ -26,10 +26,10 @@ import static com.gitgud.pieces.control.FightController.*;
 
 public class EnemyAlgorithm
 {
-    private final FightController fightController;
-    
-    
     public static final Allegiance ENEMY_ALLEGIANCE = Allegiance.WHITE;
+    
+    
+    private final FightController fightController;
     
     
     public EnemyAlgorithm(FightController fightController)

@@ -41,6 +41,7 @@ public final class GameFlow
         Executors.newSingleThreadExecutor().execute(task);
     }
     
+    
     private static Task<Startable> nextSceneControllerTask()
     {
         return new Task<>()
@@ -63,17 +64,14 @@ public final class GameFlow
     
     public static void setStageToLoadScreen()
     {
-        Label label= new Label("Loading...");
+        Label label = new Label("Loading...");
         label.setFont(new Font(100));
         StackPane pane = new StackPane(label);
         StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
-        StageController stageController=StageController.getInstance();
+        StageController stageController = StageController.getInstance();
         stageController.setRoot(pane);
         stageController.show();
     }
-    
-    
-
     
     
     public static Startable getNextSceneController()
@@ -88,6 +86,7 @@ public final class GameFlow
             case ARENA_FIGHT -> throw new RuntimeException();
         };
     }
+    
     
     private static ActiveGame getActiveGame()
     {

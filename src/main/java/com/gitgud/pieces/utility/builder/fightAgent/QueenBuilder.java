@@ -14,7 +14,9 @@ public class QueenBuilder extends FightAgentBuilder
     private static final String NAME_SUFFIX = " Queen";
     
     
-    private static final String DESCRIPTION = "A Queen is the STRONGEST off all," + Strings.LINE_BREAK + "destroys the Enemies.";
+    private static final String DESCRIPTION = "A Queen is the STRONGEST off all," +
+                                              Strings.LINE_BREAK +
+                                              "destroys the Enemies.";
     
     
     private static final boolean IS_FLYING = false; //

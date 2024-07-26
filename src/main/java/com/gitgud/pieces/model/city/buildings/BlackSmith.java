@@ -13,10 +13,13 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     private final static ResourceCost COST_PER_LEVEL = new ResourceCost(REQUIRED_RESOURCE, 10);
     
     
+    private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " +
+                                              COST_PER_LEVEL +
+                                              REQUIRED_RESOURCE +
+                                              " per Level ";
+    
+    
     private static final String NAME = "BlackSmith";
-    
-    
-    private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " + COST_PER_LEVEL + REQUIRED_RESOURCE + " per Level ";
     
     
     public BlackSmith(int level)

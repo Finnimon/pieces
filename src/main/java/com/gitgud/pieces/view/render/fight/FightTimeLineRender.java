@@ -7,8 +7,6 @@ import com.gitgud.pieces.view.Constants;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
@@ -19,7 +17,8 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     
     private static final int HEIGHT = 50;
     
-    private static final int SPACING=5;
+    
+    private static final int SPACING = 5;
     
     
     private final FightTimeLine fightTimeLine;

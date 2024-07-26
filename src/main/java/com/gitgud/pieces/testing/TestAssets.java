@@ -30,7 +30,11 @@ public interface TestAssets
     
     static Player getTestPlayer()
     {
-        return new Player("TestPlayer", Difficulty.EASY, testArmy(), testWallet(), testArtefactPouch(),
+        return new Player("TestPlayer",
+                          Difficulty.EASY,
+                          testArmy(),
+                          testWallet(),
+                          testArtefactPouch(),
                           testSpellBook());
     }
     
@@ -51,15 +55,23 @@ public interface TestAssets
     {
         FightAgentDirector director = new FightAgentDirector();
         
-        fightAgents.add(director.make(
-                FightAgentDirector.calculateType(allegiance, FightAgentType.KNIGHT, Faction.MONOCHROME, 1)));
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.KNIGHT,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
         
-        fightAgents.add(director.make(
-                FightAgentDirector.calculateType(allegiance, FightAgentType.PAWN, Faction.MONOCHROME, 1)));
-        fightAgents.add(director.make(
-                FightAgentDirector.calculateType(allegiance, FightAgentType.QUEEN, Faction.MONOCHROME, 1)));
-        fightAgents.add(director.make(
-                FightAgentDirector.calculateType(allegiance, FightAgentType.ROOK, Faction.MONOCHROME, 1)));
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.PAWN,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.QUEEN,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.ROOK,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
     }
     
     

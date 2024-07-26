@@ -45,8 +45,11 @@ public class Portal extends GridMappableBuilding<MissionController>
         
         GridMapRender<GameObject> gridMapRender = missionController.getRender().getGridMapRender();
         
-        Tile position = gridMap.getNeighbors(destination).stream().filter(
-                tile -> tile.getTerrain().isTraversable() && gridMap.get(tile) == null).findFirst().orElse(null);
+        Tile position = gridMap.getNeighbors(destination)
+                               .stream()
+                               .filter(tile -> tile.getTerrain().isTraversable() && gridMap.get(tile) == null)
+                               .findFirst()
+                               .orElse(null);
         
         missionController.getRender().getGridMapRender().relocateGridMappable(playerAgent, position);
         
@@ -76,5 +79,5 @@ public class Portal extends GridMappableBuilding<MissionController>
         return destination;
     }
     
-//todo? fallback    private static final GameObject ExitPortal=new GameObject("Exit Portal","This portal seems to be closed as of now",SPRITE_FILEPATH);
+    //todo? fallback    private static final GameObject ExitPortal=new GameObject("Exit Portal","This portal seems to be closed as of now",SPRITE_FILEPATH);
 }

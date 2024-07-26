@@ -14,7 +14,9 @@ public class BishopBuilder extends FightAgentBuilder
     private static final String NAME_SUFFIX = " Bishop";
     
     
-    private static final String DESCRIPTION = "A Bishop is a strong Mage," + Strings.LINE_BREAK + "overcoming his Physical form.";
+    private static final String DESCRIPTION = "A Bishop is a strong Mage," +
+                                              Strings.LINE_BREAK +
+                                              "overcoming his Physical form.";
     
     
     private static final boolean IS_FLYING = false; //

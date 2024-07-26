@@ -20,7 +20,8 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends RootToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>
+public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
+                                                                                                                                                                                                                                                                                                  RootToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>
 {
     private static final String NAME = "Move";
     
@@ -56,7 +57,10 @@ public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingControl
             if (actionAwaiter instanceof FightController)
             {
                 ToActionChoice<AAType, MType, GMType, RType> fightMovementChoice = (ToActionChoice<AAType, MType, GMType, RType>) new FightMovementChoice(
-                        NAME, DESCRIPTION, (FightController) actionAwaiter, (ToAction<FightController, Tile>) action);
+                        NAME,
+                        DESCRIPTION,
+                        (FightController) actionAwaiter,
+                        (ToAction<FightController, Tile>) action);
                 toActionChoices.add(fightMovementChoice);
                 continue;
             }

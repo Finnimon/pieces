@@ -9,7 +9,7 @@ public class InteractionChecker
 {
     private static boolean isInterActionPossible(Mission mission, Tile tile)
     {
-        return mission.getPlayerAgentPosition().distance(tile)<=Math.sqrt(2);
+        return mission.getPlayerAgentPosition().distance(tile) <= Math.sqrt(2);
     }
     
     
