@@ -1,30 +1,14 @@
 package com.gitgud.pieces.model.city.buildings;
 
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.testing.Missions;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HeadQuarter extends CityBuilding
 {
-    private static final String FIRST_MISSION_JSON_FILE_PATH = "first_mission.json";
-    
-    
-    private static final String SECOND_MISSION_JSON_FILE_PATH = "first_mission.json";
-    
-    
-    private static final String THIRD_MISSION_JSON_FILE_PATH = "first_mission.json";
-    
-    
-    private static final String FOURTH_MISSION_JSON_FILE_PATH = "first_mission.json";
-    
-    
-    private static final String SIXTH_MISSION_JSON_FILE_PATH = "first_mission.json";
-    
-    
-    private static final Mission mission = Missions.FIRST;
-    
-    
-    public HeadQuarter(String name, String description, String spriteFilePath, int level)
+    public HeadQuarter(String name, String description, int level)
     {
         super(name, description, level);
     }
@@ -33,5 +17,24 @@ public class HeadQuarter extends CityBuilding
     public HeadQuarter()
     {
         super("HeadQuarter", "Select missions here", 1);
+    }
+    
+    
+    public List<Mission> getAvailableMissions()
+    {
+        return getAllMissions().subList(0, getLevel());
+    }
+    
+    
+    public List<Mission> getAllMissions()
+    {
+        ArrayList<Mission> missions = new ArrayList<>();
+        for (Missions mission : Missions.values())
+        {
+            missions.add(mission.ordinal(), mission.getMission());
+        }
+        
+        
+        return missions;
     }
 }

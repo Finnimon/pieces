@@ -1,16 +1,21 @@
 package com.gitgud.pieces.utility.gsonSerialization;
 
 import com.gitgud.engine.model.gameobjects.GameObject;
-import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.github.ruediste.polymorphicGson.GsonPolymorphAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapterFactory;
 import org.hildan.fxgson.FxGson;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 
 public class JsonParser
 {
+    public static final String DOT_JSON = ".json";
+    
+    
     private static JsonParser instance = null;
     
     
@@ -24,20 +29,14 @@ public class JsonParser
         gson = gsonBuilder.create();
     }
     
-    private void prepareBuilder(GsonBuilder gsonBuilder)
+    private synchronized void prepareBuilder(GsonBuilder gsonBuilder)
     {
         GsonPolymorphAdapter gameObjectTypeAdapterFactory= new GsonPolymorphAdapter(
                 GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
                 GameObject.class.getClassLoader(),
                 "com.gitgud");
-//
-//        GsonPolymorphAdapter fightAgentTypeAdapterFactory= new GsonPolymorphAdapter(
-//                GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
-//                GameObject.class.getClassLoader(),
-//                "com.gitgud.pieces.model.gameobjects.agents");
         gsonBuilder.setPrettyPrinting().enableComplexMapKeySerialization();
         gsonBuilder.registerTypeAdapterFactory(gameObjectTypeAdapterFactory);
-//        gsonBuilder.registerTypeAdapterFactory(fightAgentTypeAdapterFactory);
     }
     
     
@@ -54,5 +53,20 @@ public class JsonParser
     public Gson getGson()
     {
         return gson;
+    }
+    
+    
+    public <T> T parseJson(File jsonFile, Class<T> clazz)
+    {
+        FileReader reader;
+        try
+        {
+            reader = new FileReader(jsonFile);
+        }
+        catch (FileNotFoundException e)
+        {
+            throw new IllegalArgumentException("File not found: " + jsonFile, e);
+        }
+        return gson.fromJson(reader, clazz);
     }
 }

@@ -56,19 +56,21 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     }
     
     
-    public FightAgent[] getRecruitableFightAgentsWithCost()
+    public FightAgent[][] getRecruitableFightAgentsWithCost()
     {
-        FightAgent[] recruitableFightAgents = new FightAgent[FightAgentType.values().length];
-        int level = getLevel();
+        int buildingLevel = getLevel();
+        FightAgent[][] recruitableFightAgents = new FightAgent[buildingLevel][FightAgentType.values().length];
+        
         Faction faction = getFaction();
         
         FightAgentDirector director = new FightAgentDirector();
-        
-        for (FightAgentType type : FightAgentType.values())
+        for (int level = 1; level <= buildingLevel; level++)
         {
-            recruitableFightAgents[type.ordinal()] = (director.make(Allegiance.BLACK, type, faction, level));
+            for (FightAgentType type : FightAgentType.values())
+            {
+                recruitableFightAgents[level][type.ordinal()] = (director.make(Allegiance.BLACK, type, faction, level));
+            }
         }
-        
         return recruitableFightAgents;
     }
     
@@ -131,6 +133,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
             case QUEEN -> QUEEN_COST;
         };
         
-        return baseCost.multiple(getLevel());
+        int fightAgentLevel = fightAgent.getLevel();
+        return baseCost.multiple(fightAgentLevel * fightAgentLevel);
     }
 }

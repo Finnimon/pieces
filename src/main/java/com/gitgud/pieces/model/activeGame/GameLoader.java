@@ -11,8 +11,6 @@ import javafx.concurrent.Task;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -24,9 +22,6 @@ public class GameLoader
     
     
     public static final String NEW_GAME_FILENAME = "NEW_GAME.json";
-    
-    
-    public static final String DOT_JSON = ".json";
     
     
     private static final String SAVE_FILES_DIR = "src/main/resources/com/gitgud/pieces/model/activeGame/saveFilesDir";//todo
@@ -47,7 +42,8 @@ public class GameLoader
     {
         File[] saveFiles = SAVE_FILE_DIR.listFiles();
         //saveFiles is always a readable Directory as Ensured by the Constructor
-        return Arrays.stream(saveFiles).filter(file -> file.getName().endsWith(DOT_JSON) || file.canWrite()).toList();
+        return Arrays.stream(saveFiles).filter(file -> file.getName().endsWith(
+                JsonParser.DOT_JSON) || file.canWrite()).toList();
     }
     
     
@@ -55,7 +51,7 @@ public class GameLoader
     {
         List<String> names = Arrays.stream(saveFiles).filter(File::canRead).map(File::getName).filter(
                 name -> !name.equals(NEW_GAME_FILENAME)).map(
-                name -> name.substring(0, name.length() - DOT_JSON.length())).collect(Collectors.toList());
+                name -> name.substring(0, name.length() - JsonParser.DOT_JSON.length())).collect(Collectors.toList());
         
         return names;
     }
@@ -91,21 +87,8 @@ public class GameLoader
     
     private ActiveGame loadActiveGame(String saveFileName)
     {
-        Gson gson = JsonParser.getInstance().getGson();
-        
         File saveFile = getSaveFile(saveFileName);
-        ActiveGame activeGame;
-        String string;
-        try
-        {
-            string = Files.readString(saveFile.toPath(), StandardCharsets.UTF_8);
-        }
-        catch (IOException e)
-        {
-            throw new IllegalArgumentException(e);
-        }
-        activeGame = gson.fromJson(string, ActiveGame.class);
-        return activeGame;
+        return JsonParser.getInstance().parseJson(saveFile,ActiveGame.class);
     }
     
     
@@ -174,6 +157,6 @@ public class GameLoader
     
     private File getSaveFile(String fileName)
     {
-        return new File(SAVE_FILES_DIR + Strings.FILE_SEPERATOR + fileName + DOT_JSON);
+        return new File(SAVE_FILES_DIR + Strings.FILE_SEPERATOR + fileName + JsonParser.DOT_JSON);
     }
 }

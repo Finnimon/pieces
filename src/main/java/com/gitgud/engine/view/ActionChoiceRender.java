@@ -8,7 +8,6 @@ import com.gitgud.engine.view.infopane.NameDescribableInfoPane;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -59,7 +58,7 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
         AppendRemoveNodeOnMouseEvent.add(this, infoPane);
         
         
-        if (!(data instanceof RootChoice rootChoice))
+        if (!(data instanceof RootChoice<?> rootChoice))
         {
             addSelectionEventHandling(data);
             return;
@@ -77,8 +76,6 @@ public class ActionChoiceRender extends Group implements Render<ActionChoice<?, 
     
     private void addSelectionEventHandling(ActionChoice<?, ?, ?, ?> data)
     {
-        this.addEventHandler(KeyEvent.KEY_PRESSED,
-                             data.getKeyEventHandler(String.valueOf(data.name().charAt(0))));//todo
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, data.getMouseEventHandler());
         cursorProperty().set(Cursor.HAND);
     }

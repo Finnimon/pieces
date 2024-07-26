@@ -106,7 +106,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         FightAgent agent = getActiveFightAgent();
         if (!(agent instanceof SpellCasterFightAgent spellCasterFightAgent))
         {
-            return new RootToActionChoice<>("Magic", "Cast Spells, available to you", this, new ArrayList<>());
+            return new RootToActionChoice<>("Spells", "Cast Spells, available to you", this, new ArrayList<>());
         }
         
         throw new RuntimeException("not implemented");

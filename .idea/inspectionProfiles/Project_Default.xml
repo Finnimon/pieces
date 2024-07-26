@@ -10,7 +10,7 @@
       <option name="DONT_REPORT_TRUE_ASSERT_STATEMENTS" value="false" />
     </inspection_tool>
     <inspection_tool class="JavadocDeclaration" enabled="true" level="WARNING" enabled_by_default="true">
-      <option name="ADDITIONAL_TAGS" value="Owner:,Since:,Version:,Author:" />
+      <option name="ADDITIONAL_TAGS" value="Owner:,Since:,Version:,Author:,Precondition:,Postcondition:" />
     </inspection_tool>
   </profile>
 </component>

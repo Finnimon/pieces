@@ -7,6 +7,7 @@ module com.gitgud.pieces {
     requires jeromq;
     requires org.hildan.fxgson;
     requires com.github.ruediste.polymorphicGson;
+    requires org.jetbrains.annotations;
     
     
     opens com.gitgud.pieces to javafx.fxml;
