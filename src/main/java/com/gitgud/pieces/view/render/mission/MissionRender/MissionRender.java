@@ -8,6 +8,7 @@ import com.gitgud.engine.view.BaseActionContextRender;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.engine.view.GridMappableRender;
 import com.gitgud.pieces.control.MissionController;
+import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.InteractionChecker;
 import com.gitgud.pieces.model.mission.Mission;
@@ -26,7 +27,7 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     }
     
     
-    public static EventHandler<MouseEvent> interactableEventHandler(Interactable<MissionController> interactable,
+    public static EventHandler<MouseEvent> interactableEventHandler(Interactable<?> interactable,
                                                                     MissionController missionController, Tile tile)
     {
         return mouseEvent ->
@@ -34,7 +35,6 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
             if (!mouseEvent.getButton().equals(MouseButton.PRIMARY)) return;
             
             mouseEvent.consume();
-            
             InteractionChecker.interactIfPossible(missionController, tile);
         };
     }
@@ -46,7 +46,8 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
         GridMap<GameObject> gridMap = getData().getGridMap();
         for (GameObject gameObject : getData().getGridMap().nonNullElements())
         {
-            if (!(gameObject instanceof Interactable interactable)) continue;
+            if (!(gameObject instanceof Interactable<?> interactable)) continue;
+            
             GridMappableRender<GameObject> interactableRender = gridMapRender.getGridMappableRender(gameObject);
             
             interactableRender.addEventHandler(MouseEvent.MOUSE_CLICKED,
@@ -87,4 +88,10 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
         getGridMapRender().relocateGridMappable(playerAgent, playerAgentPosition);
     }
     
+    
+    @Override
+    public void show()
+    {
+        StageController.getInstance().setRoot(this);
+    }
 }

@@ -84,16 +84,4 @@ public class ActiveGame
     {
         this.fight = fight;
     }
-    
-    
-    public GameState getGameState()
-    {
-        boolean mission = this.getMission() != null;
-        boolean fight = this.getFight() != null;
-        
-        
-        return GameState.getGameState(mission, fight);
-    }
-    
-    
 }

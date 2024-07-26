@@ -53,6 +53,21 @@
             <artifactId>jeromq</artifactId>
             <version>0.5.3</version>
         </dependency>
+        <dependency>
+            <groupId>com.gitgud</groupId>
+            <artifactId>pieces</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hildan.fxgson</groupId>
+            <artifactId>fx-gson</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ruediste</groupId>
+            <artifactId>polymorphic-gson</artifactId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
 
     <build>

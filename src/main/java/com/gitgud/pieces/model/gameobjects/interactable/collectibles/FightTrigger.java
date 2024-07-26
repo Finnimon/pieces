@@ -37,9 +37,6 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     private final Tile[] startingPositions;
     
     
-    private MissionController missionController = null;
-    
-    
     public FightTrigger(Fight fight, Tile[] startingPositions)
     {
         super(NAME, DESCRIPTION, DEFAULT_SPRITE_FILE_PATH);
@@ -104,25 +101,17 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     
     
     @Override
-    public void collect(MissionController awaiter)
-    {
-        missionController = awaiter;
-        Collectible.super.collect(awaiter);
-    }
-    
-    
-    @Override
     public void addToInventory()
     {
-        prepareFight(missionController);
+        prepareFight();
         ActiveGameController.getInstance().get().setFight(fight);
         GameFlow.showNextScene();
     }
     
     
-    private void prepareFight(MissionController missionController)
+    private void prepareFight()
     {
-        FightAgent[] activeFightAgents = missionController.getModel().getActiveFightAgents();
+        FightAgent[] activeFightAgents = ActiveGameController.getInstance().get().getMission().getActiveFightAgents();;
         GridMap<FightAgent> gridMap = fight.getGridMap();
         TreeSet<FightAgent> current = fight.getFightTimeLine().current();
         

@@ -1,7 +1,7 @@
 package com.gitgud.pieces;
 
 
-import com.gitgud.engine.control.StageController;
+import com.gitgud.pieces.control.StageController;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.view.SMainMenue;
 import javafx.application.Application;
@@ -50,7 +50,7 @@ public class App extends Application
         }
         catch (MalformedURLException ignore)
         {
-            //do nothing only sets the icon
+            //do nothing only sets the icon, so you can ignore the exception and just move on
         }
     }
     

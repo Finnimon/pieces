@@ -5,18 +5,32 @@ module com.gitgud.pieces {
     requires jdk.unsupported;
     requires com.opencsv;
     requires jeromq;
+    requires org.hildan.fxgson;
+    requires com.github.ruediste.polymorphicGson;
     
     
     opens com.gitgud.pieces to javafx.fxml;
     opens com.gitgud.pieces.utility.modification.fightAgent to com.google.gson;
+    opens com.gitgud.engine.model.map to com.google.gson;
+    opens com.gitgud.graph to com.google.gson;
+    opens com.gitgud.engine.control to com.google.gson;
+    opens com.gitgud.engine.view to com.google.gson;
     opens com.gitgud.pieces.model.gameobjects.agents to com.google.gson;
     opens com.gitgud.engine.model.gameobjects.agent to com.google.gson;
     opens com.gitgud.engine.model.gameobjects to com.google.gson;
+    opens com.gitgud.pieces.model.player to com.google.gson;
+    opens com.gitgud.pieces.model.activeGame to com.google.gson;
+    opens com.gitgud.pieces.model.fight to com.google.gson;
+    opens com.gitgud.pieces.model.gameobjects to com.google.gson;
+    opens com.gitgud.engine.model.gameobjects.interactable to com.google.gson;
+    opens com.gitgud.pieces.model.gameobjects.interactable.collectibles to com.google.gson;
+    opens com.gitgud.pieces.model.city to com.google.gson;
+    opens com.gitgud.pieces.model.city.buildings to com.google.gson;
+    opens com.gitgud.pieces.model.mission to com.google.gson;
+    opens com.gitgud.pieces.model.gameobjects.interactable.buildings to com.google.gson;
     exports com.gitgud.pieces;
-    exports com.gitgud.pieces.model.gameobjects to com.google.gson;
-    exports com.gitgud.engine.model.gameobjects to com.google.gson;
-    exports com.gitgud.engine.model.gameobjects.agent to com.google.gson;
-    exports com.gitgud.engine.model.gameobjects.interactable to com.google.gson;
     exports com.gitgud.pieces.control;
     opens com.gitgud.pieces.control to javafx.fxml;
+    exports com.gitgud.pieces.view;
+    opens com.gitgud.pieces.view to javafx.fxml;
 }

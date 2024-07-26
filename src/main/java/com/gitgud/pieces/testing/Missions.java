@@ -50,7 +50,7 @@ public interface Missions
         int index = 202;
         GameObject gameObject = new ResourceCollectible(200, ResourceType.IRON);
         gridMap.place(index, gameObject);
-        
+
         index = 427;
         gameObject = getRandomResourceCollectible();
         gridMap.place(index, gameObject);
@@ -81,8 +81,8 @@ public interface Missions
         index = 816;
         gameObject = getRandomResourceCollectible();
         gridMap.place(index, gameObject);
-        
-        
+
+
         Tile portalTile = gridMap.verticeSet().stream().filter(
                 t -> t.getTerrain().isTraversable() && gridMap.get(t) == null).findFirst().orElse(null);
         gameObject = new MissionEnder();
@@ -98,18 +98,17 @@ public interface Missions
         index = 601;
         gameObject = new HealthWell();
         gridMap.place(index, gameObject);
-        
+
         index = 365;
         gameObject = getRandomFightAgentCollectable();
         gridMap.place(index, gameObject);
         index = 740;
         gameObject = getRandomFightAgentCollectable();
         gridMap.place(index, gameObject);
-        
+
         gridMap.place(1, 31, new FightTrigger(Fights.FIGHT1));
-        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
-        //
-        //        index=749; gameObject=new FightTrigger()
+//        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
+
         
         return new Mission(gridMap, startingPosition, fightAgents);
     }

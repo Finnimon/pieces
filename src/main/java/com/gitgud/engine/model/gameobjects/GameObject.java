@@ -1,6 +1,7 @@
 package com.gitgud.engine.model.gameobjects;
 
 import com.gitgud.engine.model.map.GridMap;
+import com.github.ruediste.polymorphicGson.GsonPolymorph;
 
 
 /**
@@ -11,6 +12,7 @@ import com.gitgud.engine.model.map.GridMap;
  * @Owner: Finn K.
  * @since 22.04.2022
  */
+@GsonPolymorph
 public class GameObject implements GridMappable
 {
     private final String name;

@@ -1,9 +1,7 @@
 package com.gitgud.pieces.view.render.fight;
 
-import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.view.ActionContextHud;
 import com.gitgud.pieces.model.fight.Fight;
-import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -23,6 +21,12 @@ public class FightHud extends ActionContextHud<Fight>
     }
     
     
+    protected FightTimeLineRender getFightTimeLineRender()
+    {
+        return fightTimeLineRender;
+    }
+    
+    
     @Override
     public void render(Fight data)
     {
@@ -30,7 +34,6 @@ public class FightHud extends ActionContextHud<Fight>
         children.clear();
         children.add(fightTimeLineRender);
         setAlignment(fightTimeLineRender, Pos.TOP_CENTER);
-        //todo
     }
     
     

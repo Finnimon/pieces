@@ -63,6 +63,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     {
         Fight fight = this.getModel();
         FightAgent activeFightAgent = getActiveFightAgent();
+        
         return fight.getGridMap().getVertex(activeFightAgent);
     }
     
@@ -139,6 +140,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     @Override
     public void start()
     {
+        getModel().fixTimeLine();
         getRender().show();
         executeActionChoiceTask(onSucceeded());
     }

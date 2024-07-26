@@ -16,23 +16,15 @@ public record FightTimeLine(TreeSet<FightAgent> current, TreeSet<FightAgent> nex
     
     public static FightTimeLine create(Collection<FightAgent> fightAgents)
     {
-        Comparator<FightAgent> comparator = getComparator();
-        TreeSet<FightAgent> current = new TreeSet<>(comparator);
-        current.addAll(fightAgents);
-        TreeSet<FightAgent> next = new TreeSet<>(comparator);
+        TreeSet<FightAgent> current = new TreeSet<>(fightAgents);
+        TreeSet<FightAgent> next = new TreeSet<>();
         
         
         return new FightTimeLine(current, next);
     }
     
     
-    private static Comparator<FightAgent> getComparator()
-    {
-        return Comparator.reverseOrder();
-    }
-    
-    
-    public void advance()
+    public synchronized void advance()
     {
         TreeSet<FightAgent> fightTimeLine = current();
         TreeSet<FightAgent> nextTimeLine = next();

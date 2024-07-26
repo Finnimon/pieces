@@ -14,6 +14,7 @@ import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
+import com.github.ruediste.polymorphicGson.GsonPolymorph;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -28,6 +29,7 @@ import java.util.Iterator;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
+@GsonPolymorph
 public class FightAgent extends Fighter implements Comparable<FightAgent>, Leveler
 {
     private final FightAgentType type;
@@ -379,7 +381,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         }
         
         
-        int comparison = this.getInitiative() - o.getInitiative();
+        int comparison = o.getInitiative() - this.getInitiative();
         
         if (comparison != 0)
         {
@@ -387,7 +389,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         }
         
         
-        comparison = this.getLevel() - o.getLevel();
+        comparison = o.getLevel() - this.getLevel();
         
         if (comparison != 0)
         {

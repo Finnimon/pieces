@@ -1,7 +1,10 @@
 package com.gitgud.pieces.control;
 
 import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.testing.TestAssets;
+
+import static com.gitgud.pieces.model.activeGame.GameState.*;
 
 
 /**
@@ -28,7 +31,7 @@ public class ActiveGameController
     
     public static ActiveGameController getInstance()
     {
-        if (instance == null)
+        if (!isInitialized())
         {
             initialize();
         }
@@ -58,9 +61,30 @@ public class ActiveGameController
     }
     
     
-    public static boolean isInitialized()
+    private static boolean isInitialized()
     {
         return instance != null;
+    }
+    
+    
+    public static GameState getGameState()
+    {
+        if (!isInitialized()) return GameState.NOT_LOADED;
+        
+        return getInitializedGameState();
+    }
+    
+    
+    private static GameState getInitializedGameState()
+    {
+        ActiveGame activeGame = instance.get();
+        boolean isMission = activeGame.getMission() != null;
+        boolean isFight = activeGame.getFight() != null;
+        
+        if (isMission && isFight) return MISSION_FIGHT;
+        if (isMission) return MISSION;
+        if (isFight) return ARENA_FIGHT;
+        return CITY;
     }
     
     

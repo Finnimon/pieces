@@ -1,6 +1,8 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.engine.control.StageController;
+import com.gitgud.engine.model.map.Terrain;
+import com.gitgud.engine.model.map.Tile;
+import com.gitgud.pieces.control.StageController;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
@@ -10,34 +12,38 @@ import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.GameFlow;
 import com.gitgud.pieces.control.MissionController;
+import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.model.activeGame.GameLoader;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
+import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigger;
 import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.Strings;
-import com.gitgud.pieces.utility.services.AssetParser;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.gitgud.pieces.utility.gsonSerialization.JsonParser;
+import com.google.gson.*;
+import com.google.gson.stream.JsonWriter;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.hildan.fxgson.FxGson;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+
+import static com.gitgud.pieces.testing.Missions.MISSION0;
 
 
 public class TestStuff
 {
-    // Main method for testing
-    public static void main(String[] args) throws IOException, ClassNotFoundException
+    public static void main(String[] args)
     {
-        jsonTestFinnK(args);
     }
-    
     
     public static <T extends GridMappable> GridMap<T> getTestMap(int width, int height)
     {
@@ -71,54 +77,73 @@ public class TestStuff
     }
     
     
-    public static void jsonTestFinnK(String[] args) throws IOException, ClassNotFoundException
-    {
-        // FightAgent --- OK
-        // Modifier --- OK
-        // Spell --- OK
-        
-        // Insert resources here
-        JsonArray fightAgentTypes = AssetParser.parseJsonArray(Strings.FIGHT_AGENT_TYPES);
-        // Insert Json Objects here
-        JsonObject fightAgentJson = fightAgentTypes.get(0).getAsJsonObject();
-        
-        // Register type adapters
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        // insert type adapters here
-        
-        Gson gson = gsonBuilder.create();
-        
-        
-        // Deserialization
-        // FightAgent fightAgent = gson.fromJson(fightAgentJson, FightAgent.class);
-        // Serialization
-        
-        
-        // Test output
-        
-        
-        // Write Json file
-        FileOutputStream writableFile = new FileOutputStream("src/main/resources/com/gitgud/gameObjectTypes/test.json");
-        // Insert Json objects to write here
-        // writableFile.write(hashMapToJson.getBytes());
-        writableFile.close();
-    }
+//    public static void jsonTestFinnK(String[] args) throws IOException, ClassNotFoundException
+//    {
+//        // FightAgent --- OK
+//        // Modifier --- OK
+//        // Spell --- OK
+//
+//        // Insert resources here
+//        JsonArray fightAgentTypes = AssetParser.parseJsonArray(Strings.FIGHT_AGENT_TYPES);
+//        // Insert Json Objects here
+//        JsonObject fightAgentJson = fightAgentTypes.get(0).getAsJsonObject();
+//
+//        // Register type adapters
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        // insert type adapters here
+//
+//        Gson gson = gsonBuilder.create();
+//
+//
+//        // Deserialization
+//        // FightAgent fightAgent = gson.fromJson(fightAgentJson, FightAgent.class);
+//        // Serialization
+//
+//
+//        // Test output
+//
+//
+//        // Write Json file
+//        FileOutputStream writableFile = new FileOutputStream("src/main/resources/com/gitgud/gameObjectTypes/test.json");
+//        // Insert Json objects to write here
+//        // writableFile.write(hashMapToJson.getBytes());
+//        writableFile.close();
+//    }
     
     
     public static void lindigTest(Stage stage)
     {
-        ActiveGameController.getInstance();
-        GameFlow.showNextScene();
-        //        testFightController();
-        //        testMissionController();
-        //        addTestGridMapRenderToStage(stage);
-        //        finnGsonTest();
+//        ActiveGameController.initialize();
+        lindigJsonTest();
+//        ActiveGameController.getInstance();
+//        GameFlow.showNextScene();
+    }
+    
+    private static void lindigJsonTest()
+    {
+        GameLoader gameLoader=new GameLoader();
+//        gameLoader.save();
+        gameLoader.loadSaveFile("TestPlayer");
+//        GameFlow.showNextScene();
+//        Gson gson = FxGson.create();
+//        JsonElement jsonElement= gson.toJsonTree(object);;
+//        System.out.println(jsonElement.toString());
+//        Object object2 = gson.fromJson(jsonElement.getAsJsonObject().get(name), object.getClass());
+//        try
+//        {
+//            Files.writeString(new File("src/" + name + ".json").toPath(), jsonElement.getAsJsonObject().toString());
+//        }
+//        catch (IOException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//        System.out.println("success");
     }
     
     
     private static void testMissionController()
     {
-        Mission mission = Missions.MISSION0;
+        Mission mission = MISSION0;
         MissionController missionController = new MissionController(mission);
         missionController.start();
     }
@@ -152,16 +177,4 @@ public class TestStuff
         gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().verticeSet().last());
         
     }
-    
-    
-    private static void testFightController()
-    {
-        Stage stage = StageController.getInstance().getStage();
-        Fight fight = Fights.getFight1();
-        FightController fightController = new FightController(fight);
-        fightController.start();
-        //        stage.show();
-    }
-    
-    
 }

@@ -1,22 +1,16 @@
 package com.gitgud.pieces.control;
 
-import com.gitgud.engine.control.StageController;
 import com.gitgud.engine.control.Startable;
 import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.activeGame.GameState;
 import com.gitgud.pieces.utility.gsonSerialization.JsonParser;
 import javafx.concurrent.Task;
-import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.concurrent.Executors;
-
-import static com.gitgud.pieces.control.ActiveGameController.getInstance;
-import static com.gitgud.pieces.control.ActiveGameController.isInitialized;
 
 
 public final class GameFlow
@@ -49,10 +43,10 @@ public final class GameFlow
     
     private static Task<Startable> nextSceneControllerTask()
     {
-        Task<Startable> task= new Task<Startable>()
+        return new Task<>()
         {
             @Override
-            protected Startable call() throws Exception
+            protected Startable call()
             {
                 return getNextSceneController();
             }
@@ -64,20 +58,18 @@ public final class GameFlow
                 getValue().start();
             }
         };
-        
-        return task;
     }
     
     
     public static void setStageToLoadScreen()
     {
-        Stage stage = StageController.getInstance().getStage();
         Label label= new Label("Loading...");
         label.setFont(new Font(100));
         StackPane pane = new StackPane(label);
         StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
-        stage.getScene().setRoot(pane);
-        stage.show();
+        StageController stageController=StageController.getInstance();
+        stageController.setRoot(pane);
+        stageController.show();
     }
     
     
@@ -86,21 +78,19 @@ public final class GameFlow
     
     public static Startable getNextSceneController()
     {
-        if (!isInitialized())
-        {
-            //todo new MainMenuController().start();
-            throw new RuntimeException();
-        }
-        
-        ActiveGame activeGame = getInstance().get();
-        GameState gameState = activeGame.getGameState();
-        
+        GameState gameState = ActiveGameController.getGameState();
         return switch (gameState)
         {
-            case CITY -> new CityController(activeGame.getCity());
-            case MISSION -> new MissionController(activeGame.getMission());
-            case MISSION_FIGHT -> new FightController(activeGame.getFight());
+            case NOT_LOADED -> throw new RuntimeException("Not implemented");
+            case CITY -> new CityController(getActiveGame().getCity());
+            case MISSION -> new MissionController(getActiveGame().getMission());
+            case MISSION_FIGHT -> new FightController(getActiveGame().getFight());
             case ARENA_FIGHT -> throw new RuntimeException();
         };
+    }
+    
+    private static ActiveGame getActiveGame()
+    {
+        return ActiveGameController.getInstance().get();
     }
 }

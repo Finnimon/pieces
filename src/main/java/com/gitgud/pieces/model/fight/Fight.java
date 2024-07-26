@@ -10,6 +10,8 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.TreeSet;
 
 
 /**
@@ -79,7 +81,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         ArrayList<FightAgent> fightAgents = fightTimeLine.getAllAgents();
         fightAgents.removeIf(fa -> fa.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE);
         
-        if (activeGame.getGameState() == GameState.MISSION_FIGHT)
+        if (ActiveGameController.getGameState() == GameState.MISSION_FIGHT)
         {
             FightAgent[] activeFightAgents = activeGame.getMission().getActiveFightAgents();
             fightAgents.toArray(activeFightAgents);
@@ -104,5 +106,19 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         
         return true;
         
+    }
+    
+    
+    public void fixTimeLine()
+    {
+        TreeSet<FightAgent> current= getFightTimeLine().current();
+        
+        Collection<FightAgent> nonNullElements=gridMap.nonNullElements();
+        if (nonNullElements.containsAll(current))
+            return;
+        
+        current.clear();
+        fightTimeLine.next().clear();
+        current.addAll(nonNullElements);
     }
 }

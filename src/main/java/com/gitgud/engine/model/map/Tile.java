@@ -30,9 +30,6 @@ public class Tile implements Vertex2D, Sprite
     private final Terrain terrain;
     
     
-    private final String spriteFilePath;
-    
-    
     private int index;
     
     
@@ -47,14 +44,12 @@ public class Tile implements Vertex2D, Sprite
      *
      * @param x       the x coordinate of the point
      * @param y       the y coordinate of the point
-     * @param terrain
      */
     public Tile(int x, int y, Terrain terrain, int index)
     {
         this.x = x;
         this.y = y;
         this.terrain = terrain;
-        spriteFilePath = determineSpriteFilePath();
         this.index = index;
     }
     
@@ -98,7 +93,7 @@ public class Tile implements Vertex2D, Sprite
     @Override
     public String getSpriteFilePath()
     {
-        return spriteFilePath;
+        return determineSpriteFilePath();
     }
     
     

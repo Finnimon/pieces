@@ -140,7 +140,6 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
         }
         
         render.toBack();
-        
     }
     
     
