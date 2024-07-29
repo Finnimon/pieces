@@ -8,14 +8,7 @@ public interface Action<Awaiter extends ActionAwaitingController>
 {
     static <AAType extends ActionAwaitingController> Action<AAType> rootReturn()
     {
-        return new Action<AAType>()
-        {
-            @Override
-            public void enAct(AAType awaiter)
-            {
-                awaiter.showRootAction();
-            }
-        };
+        return ActionAwaitingController::showRootAction;
     }
     
     

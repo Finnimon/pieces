@@ -173,7 +173,7 @@ public class Game
             return new Task<>()
             {
                 @Override
-                protected ActiveGame call() throws Exception
+                protected ActiveGame call()
                 {
                     return loadActiveGame(saveFileName);
                 }

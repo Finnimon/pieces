@@ -49,18 +49,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     
     
     @Override
-    public void advance()
-    {
-        if (tryEnd())
-        {
-            return;
-        }
-        
-        super.advance();
-    }
-    
-    
-    @Override
     public void end()
     {
         ActiveGameController.getInstance().get().setMission(null);

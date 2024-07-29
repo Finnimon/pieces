@@ -39,6 +39,6 @@ public record Defence(int defence, float evasionChance, DamageType damageType)
             return 0;
         }
         
-        return attack.damage() / defence();
+        return Math.round(attack.damage() * ((100f-defence())/100));
     }
 }

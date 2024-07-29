@@ -38,4 +38,12 @@ public class HeadQuarter extends CityBuilding
         
         return missions;
     }
+    
+    
+    @Override
+    public int levelUp()
+    {
+        incrementLevel();
+        return getLevel();
+    }
 }

@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
 import com.gitgud.net.ServerClientController;
 import javafx.scene.Group;

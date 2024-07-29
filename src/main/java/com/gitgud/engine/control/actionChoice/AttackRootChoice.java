@@ -1,7 +1,7 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.control.action.ActionAwaiterModel;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.control.action.AttackAction;
 import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;

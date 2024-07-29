@@ -12,11 +12,10 @@ public class FightAgentHealthModifier extends Modifier<FightAgent>
     private final int maxHealthModifier;
     
     
-    public FightAgentHealthModifier(int healthModifier, int maxHealthModifier, int healthModifier1,
-                                    int maxHealthModifier1)
+    public FightAgentHealthModifier(int healthModifier, int maxHealthModifier)
     {
-        this.healthModifier = healthModifier1;
-        this.maxHealthModifier = maxHealthModifier1;
+        this.healthModifier = healthModifier;
+        this.maxHealthModifier = maxHealthModifier;
     }
     
     

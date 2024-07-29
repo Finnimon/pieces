@@ -5,23 +5,31 @@ import com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact;
 import com.gitgud.pieces.model.player.ResourceType;
 
 
+/**
+ * This class represents the BlackSmith. It has functionality to upgrade an {@link com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact}
+ * @author Finn L.
+ * @version 1.0
+ * @Owner: Finn L.
+ * @since 25.07.2024
+ */
 public class BlackSmith extends CityBuilding implements Transactor<Artefact>
 {
-    private static final ResourceType REQUIRED_RESOURCE = ResourceType.PLATINUM;
     
     
-    private final static ResourceCost COST_PER_LEVEL = new ResourceCost(REQUIRED_RESOURCE, 10);
+    private final static ResourceCost COST_PER_LEVEL = new ResourceCost(ResourceType.PLATINUM, 10000);
     
     
     private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " +
                                               COST_PER_LEVEL +
-                                              REQUIRED_RESOURCE +
                                               " per Level ";
     
     
     private static final String NAME = "BlackSmith";
     
-    
+    public BlackSmith()
+    {
+        this(STARTING_LEVEL);
+    }
     public BlackSmith(int level)
     {
         super(NAME, DESCRIPTION, level);
@@ -31,7 +39,7 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     @Override
     public boolean isTransactionPossible(Artefact artefact)
     {
-        return artefact.getLevel() < getLevel() && COST_PER_LEVEL.isResourceCostCoveredByWallet(artefact.getLevel());
+        return artefact.getLevel() <= getLevel() && COST_PER_LEVEL.isResourceCostCoveredByWallet(artefact.getLevel());
     }
     
     
@@ -47,8 +55,6 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     {
         value.levelUp();
         
-        
         return value;
     }
-    
 }

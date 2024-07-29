@@ -1,6 +1,6 @@
 package com.gitgud.engine.view;
 
-import com.gitgud.engine.control.action.ActionAwaiterModel;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import javafx.geometry.Pos;

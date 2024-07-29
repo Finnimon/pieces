@@ -1,11 +1,14 @@
 package com.gitgud.engine.utility.modification;
 
+import com.gitgud.engine.model.DisApplicable;
+import com.github.ruediste.polymorphicGson.GsonPolymorph;
+
 import java.util.Collection;
 
-
-public abstract class Modifier<T>
+@GsonPolymorph
+public abstract class Modifier<T> implements DisApplicable<T>
 {
-    public static <T> T applyModifiers(T object, Collection<Modifier<T>> modifier)
+    public static  <T> T applyModifiers(T object, Collection<Modifier<T>> modifier)
     {
         for (Modifier<T> m : modifier)
         {
@@ -33,4 +36,18 @@ public abstract class Modifier<T>
      * @return demodified object
      */
     public abstract T demodify(T t);
+    
+    
+    @Override
+    public T apply(T t)
+    {
+        return modify(t);
+    }
+    
+    
+    @Override
+    public T disApply(T t)
+    {
+        return demodify(t);
+    }
 }

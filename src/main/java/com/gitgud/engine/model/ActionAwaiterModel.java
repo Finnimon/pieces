@@ -1,10 +1,10 @@
-package com.gitgud.engine.control.action;
+package com.gitgud.engine.model;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 
 
-public interface ActionAwaiterModel<GridMappableType extends GridMappable>
+public interface ActionAwaiterModel<GridMappableType extends GridMappable> extends Turning
 {
     GridMap<GridMappableType> getGridMap();
 }

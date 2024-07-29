@@ -1,6 +1,6 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.engine.control.action.ActionAwaiterModel;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
@@ -9,10 +9,9 @@ import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarter;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
+import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 
 public class Mission implements ActionAwaiterModel<GameObject>
@@ -37,6 +36,8 @@ public class Mission implements ActionAwaiterModel<GameObject>
     
     private boolean finished = false;
     
+    private final SimpleIntegerProperty turn;
+    
     
     public Mission(GridMap<GameObject> gridMap, Tile startingPosition, FightAgent[] activeFightAgents, int index)
     {
@@ -58,6 +59,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
         this.playerAgentPosition = playerAgentPosition;
         this.activeFightAgents = activeFightAgents;
         this.discardedFightAgents = discardedFightAgents;
+        this.turn = new SimpleIntegerProperty(0);
     }
     
     
@@ -122,15 +124,23 @@ public class Mission implements ActionAwaiterModel<GameObject>
     public void returnFightAgentsToArmy()
     {
         Collection<FightAgent> fightAgents = ActiveGameController.getInstance().get().getPlayer().army();
-        HashSet<FightAgent> returningAgents = new HashSet<>(List.of(activeFightAgents));
-        returningAgents.addAll(List.of(discardedFightAgents));
-        returningAgents.remove(null);
-        fightAgents.addAll(returningAgents);
+        fightAgents.addAll(getFightAgents());
     }
     
     
-    public int getIndex()
+    @Override
+    public SimpleIntegerProperty turnProperty()
     {
-        return index;
+        return turn;
+    }
+    
+    
+    public Collection<FightAgent> getFightAgents()
+    {
+        HashSet<FightAgent> fightAgents = new HashSet<>();
+        fightAgents.addAll(Arrays.asList(activeFightAgents));
+        fightAgents.addAll(Arrays.asList(discardedFightAgents));
+        fightAgents.removeIf(Objects::isNull);
+        return fightAgents;
     }
 }

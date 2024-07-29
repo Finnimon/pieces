@@ -4,6 +4,7 @@ import com.gitgud.engine.model.gameobjects.Describable;
 import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.model.gameobjects.Sprite;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
@@ -28,7 +29,7 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
     private final String spriteFilePath;
     
     
-    private int level;
+    private final SimpleIntegerProperty level;
     
     
     public CityBuilding(String name, String description, int level)
@@ -36,42 +37,34 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
         this.name = name;
         this.description = description;
         this.spriteFilePath = SPRITE_FILE_PATH_PREFIX + name + DOT_PNG;
-        this.level = level;
+        this.level = new SimpleIntegerProperty(level);
     }
     
     
     @Override
-    public String name()
+    public final String name()
     {
         return name;
     }
     
     
     @Override
-    public String description()
+    public final String description()
     {
         return description;
     }
     
     
     @Override
-    public String getSpriteFilePath()
+    public final String getSpriteFilePath()
     {
         return spriteFilePath;
     }
     
     
     @Override
-    public int getLevel()
+    public final SimpleIntegerProperty levelProperty()
     {
-        return level;
-    }
-    
-    
-    @Override
-    public int levelUp()
-    {
-        level++;
         return level;
     }
 }

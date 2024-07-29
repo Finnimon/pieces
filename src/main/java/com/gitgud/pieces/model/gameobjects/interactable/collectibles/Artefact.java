@@ -8,10 +8,8 @@ import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.ArtefactPouch;
-import com.gitgud.pieces.utility.Core;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
-
-import java.util.ArrayList;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
@@ -24,41 +22,24 @@ import java.util.ArrayList;
  */
 public class Artefact extends GameObject implements Collectible<MissionController>, Leveler
 {
-    private final ArtefactType artefactType;
+    private final SimpleIntegerProperty level;
     
     
-    private Modifier<FightAgent> modifier;
+    private Modifier<FightAgent> disApplicable;
     
     
-    private int level;
-    
-    
-    public Artefact(ArtefactType artefactType, Modifier<FightAgent> modifier, int level)
+    public Artefact(String name, String description, String spriteFilePath, Modifier<FightAgent> disApplicable,
+                    int level)
     {
-        super(artefactType.name(), artefactType.getDescription(), artefactType.getSpriteUrl());
-        this.artefactType = artefactType;
-        this.modifier = modifier;
-        this.level = level;
-    }
-    
-    
-    public ArtefactType getArtifactType()
-    {
-        return artefactType;
+        super(name, description, spriteFilePath);
+        this.disApplicable = disApplicable;
+        this.level = new SimpleIntegerProperty(level);
     }
     
     
     public Modifier<FightAgent> getModifier()
     {
-        return modifier;
-    }
-    
-    
-    @Override
-    public String getSpriteFilePath()
-    {
-        //todo
-        return null;
+        return disApplicable;
     }
     
     
@@ -66,31 +47,31 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     public void addToInventory()
     {
         ArtefactPouch artefactPouch = ActiveGameController.getInstance().get().getPlayer().artefactPouch();
-        Artefact[] equippedArtifacts = artefactPouch.getEquippedArtefacts();
         
-        Core.insertAtFirstNullIndex(equippedArtifacts, this);
-        
-        artefactPouch.getAllOwnedArtefacts().add(this);
+        artefactPouch.addArtefact(this);
     }
     
     
     @Override
-    public int getLevel()
+    public SimpleIntegerProperty levelProperty()
     {
         return level;
     }
     
-    
     @Override
     public int levelUp()
     {
-        ArrayList<Modifier<FightAgent>> modifierList = new ArrayList<>();
-        modifierList.add(modifier);
-        modifier = new FightAgentModifier(modifierList);
-        modifierList.add(modifierList.getLast());
-        
-        return level++;
+        FightAgentModifier fightAgentModifier = (FightAgentModifier) getModifier();
+        fightAgentModifier.getModifiers().addAll(fightAgentModifier.getModifiers());
+        return Leveler.super.levelUp();
+    }
+    
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Artefact other))
+            return false;
+        return other.name().equals(name())&&other.getLevel()==getLevel();
     }
 }
-
-

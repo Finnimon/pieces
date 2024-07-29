@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 
 /**
- * Global Object that stores the Player's current abilities artifacts etc for use in city, mission and fight
+ * Global Object that stores the Player's current abilities artifacts etc. for use in city, mission and fight
  *
  * @author Finn L.
  * @version 1.0

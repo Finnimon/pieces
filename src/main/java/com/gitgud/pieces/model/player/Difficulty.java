@@ -1,6 +1,6 @@
 package com.gitgud.pieces.model.player;
 
-import com.gitgud.engine.control.action.types.Applicable;
+import com.gitgud.engine.model.Applicable;
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.EnemyAlgorithm;
 import com.gitgud.pieces.model.fight.Fight;

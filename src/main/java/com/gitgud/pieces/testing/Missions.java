@@ -16,6 +16,7 @@ import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightTrigge
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.ResourceCollectible;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.model.player.ResourceType;
+import com.gitgud.pieces.utility.artefacts.Artefacts;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 
 
@@ -97,8 +98,9 @@ public interface Missions
         gridMap.place(index, gameObject);
         
         gridMap.place(1, 31, new FightTrigger(Fights.FIGHT1));
-        //        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
+                gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
         
+        gridMap.place(2, 31, Artefacts.BLOODY_SWORD.createArtefact());
         
         return new Mission(gridMap, startingPosition, fightAgents, 1);
     }

@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import javafx.geometry.Pos;

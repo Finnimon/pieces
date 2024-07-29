@@ -366,12 +366,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         return type;
     }
     
-    
-    public int getLevel()
-    {
-        return levelProperty.get();
-    }
-    
+   
     
     @Override
     public int levelUp()
@@ -384,6 +379,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         //thjis copy vals
         
         return getLevel();//todo
+    }
+    
+    
+    @Override
+    public SimpleIntegerProperty levelProperty()
+    {
+        return levelProperty;
     }
     
     

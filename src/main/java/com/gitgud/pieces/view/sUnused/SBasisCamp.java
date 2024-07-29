@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

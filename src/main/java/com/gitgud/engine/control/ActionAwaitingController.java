@@ -1,7 +1,7 @@
 package com.gitgud.engine.control;
 
-import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.control.actionChoice.ActionChoice;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.utility.Strings;
@@ -49,6 +49,7 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
         {
             return;
         }
+        getModel().incrementTurn();
         getRender().getGridMapRender().clearHighLights();
         showRootAction();
         hightlightActivePosition();

@@ -16,10 +16,11 @@ import static com.gitgud.pieces.utility.gsonSerialization.JsonParser.DOT_JSON;
 
 /**
  * <p>Asset Locator for Mission JSON files.
- * <p>All Mission JSON files are located in src\main\resources\com\gitgud\pieces\model\city\buildings\MissionSelection
+ * <p>src\main\resources\com\gitgud\pieces\model\city\buildings\headQuarter\MissionSelection\TUTORIAL.json
  *
  * @author Finn L.
  * @version 1.0
+ * @Owner: Finn L.
  * @since 26.07.2024
  */
 enum MissionSelection implements Describable, Sprite
@@ -48,15 +49,9 @@ enum MissionSelection implements Describable, Sprite
     }
     
     
-    public static void main(String[] args)
-    {
-        System.out.println(TUTORIAL.getJsonFilePath());
-    }
-    
-    
     /**
-     * Determines the asset FilePath for this mission, using the class name
-     *
+     * <p>Determines the asset FilePath for this mission.
+     * <p>The returned path should always be a readable JSON file. If it is not, please see to it, that all needed resource files are available.
      * @return the json file path for this mission
      */
     @NotNull

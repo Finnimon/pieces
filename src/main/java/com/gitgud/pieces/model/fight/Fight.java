@@ -1,6 +1,6 @@
 package com.gitgud.pieces.model.fight;
 
-import com.gitgud.engine.control.action.ActionAwaiterModel;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.EnemyAlgorithm;
@@ -15,12 +15,12 @@ import java.util.TreeSet;
 
 
 /**
- * The Object in which a Fight or online Fight Takes place
+ * The Object in which a Fight takes place
  *
  * @author Finn L.
  * @Owner: Finn L.
- * @Since: 16.04.2024
- * @Version: 1.0
+ * @since  16.05.2024
+ * @version  2.0
  */
 public class Fight implements ActionAwaiterModel<FightAgent>
 {
@@ -33,7 +33,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     
     //todo render next to timeline?
-    private final SimpleIntegerProperty turn = new SimpleIntegerProperty(0);
+    private final SimpleIntegerProperty turn = new SimpleIntegerProperty(1);
     
     
     public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
@@ -55,16 +55,17 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     }
     
     
-    public SimpleIntegerProperty getTurnProperty()
+    @Override
+    public SimpleIntegerProperty turnProperty()
     {
         return turn;
     }
     
     
-    public int incrementTurn()
+    public void incrementTurn()
     {
         getFightTimeLine().advance();
-        return turn.add(1).get();
+        ActionAwaiterModel.super.incrementTurn();
     }
     
     
@@ -79,10 +80,11 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         ActiveGame activeGame = ActiveGameController.getInstance().get();
         
         ArrayList<FightAgent> fightAgents = fightTimeLine.getAllAgents();
-        fightAgents.removeIf(fa -> fa.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE);
+        fightAgents.removeIf(fa -> fa == null || fa.getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE);
         
         if (ActiveGameController.getGameState() == GameState.MISSION_FIGHT)
         {
+            ActiveGameController.getInstance().get().getMission().setFinished(fightAgents.isEmpty());
             FightAgent[] activeFightAgents = activeGame.getMission().getActiveFightAgents();
             fightAgents.toArray(activeFightAgents);
         }

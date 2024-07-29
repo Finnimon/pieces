@@ -89,16 +89,18 @@ public class TestStuff
     public static void lindigTest(Stage stage)
     {
         ActiveGameController.initialize();
-        //        lindigJsonTest();
-        ActiveGameController.getInstance();
-        Game.Flow.showNextScene();
+                lindigJsonTest();
+//        ActiveGameController.getInstance();
+//        Game.Flow.showNextScene();
     }
     
     
     private static void lindigJsonTest()
     {
-        Game.Saver.save();
+//        Game.Saver.save();
+//        Game.Flow.showNextScene();
         Game.Loader.load("TestPlayer");
+//        Game.Loader.load("TestPlayer");
         //        GameFlow.showNextScene();
         //        Gson gson = FxGson.create();
         //        JsonElement jsonElement= gson.toJsonTree(object);;

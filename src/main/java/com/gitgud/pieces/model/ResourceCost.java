@@ -25,12 +25,24 @@ public class ResourceCost
     }
     
     
+    public HashMap<ResourceType, Long> getResourceCostMap()
+    {
+        return resourceCostMap;
+    }
+    
+    
     public ResourceCost multiple(int multiplier)
+    {
+        return multiple((double) multiplier);
+    }
+    
+    
+    public ResourceCost multiple(double multiplier)
     {
         HashMap<ResourceType, Long> newResourceCostMap = new HashMap<>();
         for (ResourceType resourceType : resourceCostMap.keySet())
         {
-            newResourceCostMap.put(resourceType, resourceCostMap.get(resourceType) * multiplier);
+            newResourceCostMap.put(resourceType, Math.round(resourceCostMap.get(resourceType) * multiplier));
         }
         return new ResourceCost(newResourceCostMap);
     }

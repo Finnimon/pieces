@@ -1,5 +1,6 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
+import com.gitgud.pieces.view.GuiUtils;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;

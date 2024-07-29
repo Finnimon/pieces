@@ -277,18 +277,29 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
+    public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range, Predicate<Vertex> fromEdgeFilter,
+                                                 Predicate<Vertex> toEdgeFilter)
+    {
+        return subGraph(root, range, fromEdgeFilter, toEdgeFilter, new HashMap<>());
+    }
+    
+    
     /**
      * Sub graphs indexing will be lost. This is to ensure that the original indexing is intact.
      * Use non Indexed methods on the returned SubGraph.
      *
      * @param root
      * @param range
+     * @param fromEdgeFilter
+     * @param toEdgeFilter
+     * @param weights
      * @return
      */
     public Graph<Vertex, Element, Edge> subGraph(Vertex root, double range, Predicate<Vertex> fromEdgeFilter,
-                                                 Predicate<Vertex> toEdgeFilter)
+                                                 Predicate<Vertex> toEdgeFilter, HashMap<Vertex, Double> weights)
     {
         Graph<Vertex, Element, Edge> subGraph = new Graph<>();
+        
         
         if (!this.containsVertex(root))
         {
@@ -296,7 +307,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         }
         
         subGraph.vertices.put(root, get(root)); //adds current root Element
-        
+        weights.put(root, range);
         subGraph.edges.put(root, new HashSet<>());
         
         for (Edge edge : getEdges(root))
@@ -325,6 +336,9 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
             {
                 continue;
             }
+            
+            if (weights.containsKey(current)&&weights.get(current)<remainingRange)
+                continue;
             
             subGraph.addAll(subGraph(current, remainingRange, fromEdgeFilter, toEdgeFilter));
         }

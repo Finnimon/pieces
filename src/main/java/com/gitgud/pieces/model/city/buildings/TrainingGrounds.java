@@ -2,8 +2,9 @@ package com.gitgud.pieces.model.city.buildings;
 
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.gitgud.pieces.utility.modification.fightAgent.FightAgentAttackModifier;
+import com.gitgud.pieces.utility.modification.fightAgent.FightAgentHealthModifier;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 
 
 /**
- * A {@link CityBuilding} with the option to train {@link FightAgent}s of a specified {@link Faction}
+ * A {@link CityBuilding} with the option to train {@link FightAgent}s
  *
  * @author Finn L.
  * @Owner: Finn L.
@@ -35,6 +36,14 @@ public class TrainingGrounds extends CityBuilding
         super(NAME, description, level);
         modifiers = new ArrayList<>();
         getModifiers().add(modifier);
+    }
+    
+    
+    public TrainingGrounds()
+    {
+        this(STARTING_LEVEL,
+             new FightAgentModifier(List.of(new FightAgentAttackModifier(2, 0, 1.001f),
+                                            new FightAgentHealthModifier(10, 1))));
     }
     
     

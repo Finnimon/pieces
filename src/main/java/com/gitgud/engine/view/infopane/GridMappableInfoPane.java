@@ -1,9 +1,9 @@
 package com.gitgud.engine.view.infopane;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 
 
 public class GridMappableInfoPane<Type extends GridMappable> extends NameDescribableInfoPane<Type>
@@ -12,17 +12,20 @@ public class GridMappableInfoPane<Type extends GridMappable> extends NameDescrib
     public GridMappableInfoPane(Type gridMappable)
     {
         super(gridMappable);
-        Rectangle spriteRectangle = spriteRectangle(gridMappable);
-        
-        getChildren().add(spriteRectangle);
+        ImageView imageView = spriteNode(gridMappable);
+        getChildren().add(imageView);
+        imageView.toBack();
+        imageView.opacityProperty().set(0.5);
+        setAlignment(imageView, Pos.TOP_RIGHT);
     }
     
     
-    private Rectangle spriteRectangle(Type gridMappable)
+    private ImageView spriteNode(Type gridMappable)
     {
         Image image = gridMappable.getSprite();
-        Rectangle rectangle = new Rectangle(image.getWidth(), image.getHeight(), new ImagePattern(image));
-        rectangle.setOpacity(0.5);
-        return rectangle;
+        ImageView imageView = new ImageView(image);
+        imageView.maxHeight(5);
+        imageView.setPreserveRatio(true);
+        return imageView;
     }
 }

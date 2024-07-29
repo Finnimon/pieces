@@ -132,4 +132,22 @@ public class Tile implements Vertex2D, Sprite
     {
         return y;
     }
+    
+    
+    @Override
+    public int hashCode()
+    {
+        return index;
+    }
+    
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (!(obj instanceof Tile tile))
+        {
+            return false;
+        }
+        return hashCode() == tile.hashCode()&&tile.terrain.terrainType().equals(terrain.terrainType())&&tile.x==x&&tile.y==y;
+    }
 }

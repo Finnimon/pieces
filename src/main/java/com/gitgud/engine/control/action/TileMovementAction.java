@@ -1,6 +1,7 @@
 package com.gitgud.engine.control.action;
 
 import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;

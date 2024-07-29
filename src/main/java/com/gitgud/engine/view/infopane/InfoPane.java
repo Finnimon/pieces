@@ -31,6 +31,8 @@ public class InfoPane<Type> extends StackPane
         setBorder(border);
         getChildren().add(label);
         this.label = label;
+        this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        this.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
     }
     
     

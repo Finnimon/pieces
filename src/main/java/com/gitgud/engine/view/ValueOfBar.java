@@ -3,13 +3,7 @@ package com.gitgud.engine.view;
 import com.gitgud.engine.model.attackDefenseLogic.Health;
 import javafx.beans.binding.NumberExpressionBase;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.Region;
-
-import java.util.List;
 
 
 public class ValueOfBar extends ProgressBar
@@ -39,7 +33,7 @@ public class ValueOfBar extends ProgressBar
     public static ValueOfBar healthBar(Health health)
     {
         ValueOfBar valueOfBar = new ValueOfBar(health.healthProperty(), health.maxHealthProperty());
-        valueOfBar.setStyle("-fx-accent: red");
+        valueOfBar.setStyle("-fx-accent: #ff0000");
         
         return valueOfBar;
     }
@@ -48,23 +42,5 @@ public class ValueOfBar extends ProgressBar
     private void init()
     {
         progressProperty().bind(value.divide(max));
-        addNumberLabels();
-    }
-    
-    
-    private void addNumberLabels()
-    {
-        ObservableList<Node> children = getChildren();
-        List<Label> labels = List.of(numberBoundLabel(value), new Label("/"), numberBoundLabel(max));
-        children.addAll(labels);
-    }
-    
-    
-    private Label numberBoundLabel(NumberExpressionBase numberExpressionBase)
-    {
-        Label label = new Label();
-        label.textProperty().bind(numberExpressionBase.asString());
-        label.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        return label;
     }
 }

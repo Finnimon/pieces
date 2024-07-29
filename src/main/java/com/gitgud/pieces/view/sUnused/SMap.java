@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;

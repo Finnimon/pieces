@@ -57,10 +57,10 @@ public class City
     public City()
     {
         headQuarter = new HeadQuarter();
-        blackSmith = null;
-        market = null;
-        magicEnhancer = null;
-        trainingGrounds = null;
+        blackSmith = new BlackSmith();
+        market = new Market();
+        magicEnhancer = new MagicEnhancer();
+        trainingGrounds = new TrainingGrounds();
         monoChromeFactionCamp = new FactionCamp(Faction.MONOCHROME);
         pinkFactionCamp = new FactionCamp(Faction.PINK);
         greenFactionCamp = new FactionCamp(Faction.GREEN);

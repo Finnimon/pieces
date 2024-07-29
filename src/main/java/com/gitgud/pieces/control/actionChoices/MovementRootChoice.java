@@ -1,7 +1,7 @@
 package com.gitgud.pieces.control.actionChoices;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.control.action.ActionAwaiterModel;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.control.action.TileMovementAction;
 import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;

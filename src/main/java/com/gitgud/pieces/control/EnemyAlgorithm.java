@@ -3,6 +3,7 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.actionChoice.ActionChoice;
 import com.gitgud.engine.control.actionChoice.RootChoice;
+import com.gitgud.engine.control.actionChoice.ToActionChoice;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.FightMovementChoice;
@@ -104,7 +105,6 @@ public class EnemyAlgorithm
         {
             return actionChoice;
         }
-        //choose random choice will recursively choose randomly if it cannot choose the first choice, because it is an empty root choice
         return chooseRandomChoice(rootChoice.getChoices());
     }
     
@@ -122,7 +122,7 @@ public class EnemyAlgorithm
     
     private synchronized void selectFightMovementChoice(FightMovementChoice actionChoice)
     {
-        IntegerProperty turnProperty = fightController.getModel().getTurnProperty();
+        IntegerProperty turnProperty = fightController.getModel().turnProperty();
         int turn = turnProperty.getValue();
         
         actionChoice.select();
@@ -133,12 +133,12 @@ public class EnemyAlgorithm
         
         fightController.getRender().getHud().clearChoices();
         
-        RootChoice attackRootChoice = fightController.getAttackRootChoice();
+        RootChoice<ToActionChoice<FightController, Fight, FightAgent, FightRender>> attackRootChoice = fightController.getAttackRootChoice();
         if (attackRootChoice.isEmpty())
         {
             return;
         }
-        ((ActionChoice) attackRootChoice.getChoices().get(0)).select();
+        attackRootChoice.getChoices().get(0).select();
     }
     
     

@@ -1,5 +1,6 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
+import com.gitgud.pieces.view.GuiUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view;
+package com.gitgud.pieces.view.sUnused;
 
 import com.gitgud.pieces.model.fight.SpellType;
 import javafx.geometry.Pos;

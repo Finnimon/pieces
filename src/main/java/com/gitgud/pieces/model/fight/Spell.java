@@ -1,16 +1,14 @@
 package com.gitgud.pieces.model.fight;
 
+import com.gitgud.engine.model.Applicable;
 import com.gitgud.engine.model.gameobjects.Describable;
 import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.model.gameobjects.Sprite;
-import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
-import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
-
-import java.util.List;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
@@ -30,16 +28,16 @@ public final class Spell implements Sprite, Describable, Named, Leveler
     private final SpellType type;
     
     
-    private final FightAgentModifier modifier;
+    private final Applicable<FightAgent> applicable;
     
     
     private final float successChance;
     
     
-    private int level;
+    private SimpleIntegerProperty level;
     
     
-    private int manaCost;
+    private SimpleIntegerProperty manaCost;
     
     
     /**
@@ -47,56 +45,39 @@ public final class Spell implements Sprite, Describable, Named, Leveler
      * @param description
      * @param spriteFilePath
      * @param type
-     * @param modifier
+     * @param applicable
      * @param manaCost
      * @param successChance
      */
-    public Spell(String name, String description, String spriteFilePath, SpellType type, FightAgentModifier modifier,
+    public Spell(String name, String description, String spriteFilePath, SpellType type, Applicable<FightAgent> applicable,
                  int level, int manaCost, float successChance)
     {
         this.name = name;
         this.description = description;
         this.spriteFilePath = spriteFilePath;
         this.type = type;
-        this.modifier = modifier;
-        this.manaCost = manaCost;
+        this.applicable = applicable;
+        this.manaCost =new SimpleIntegerProperty( manaCost);
         this.successChance = successChance;
-        this.level = level;
+        this.level = new SimpleIntegerProperty(level);
+        this.manaCost.bind(this.manaCost.subtract(levelProperty()));
     }
     
-    
-    @Override
-    public int getLevel()
-    {
-        return level;
-    }
     
     
     @Override
     public int levelUp()
     {
-        manaCost = manaCost / level * (level++);
+        incrementLevel();
         
-        List<Modifier<FightAgent>> modifiers = modifier.getModifiers();
-        if (level == 1)
-        {
-            modifiers.addAll(modifiers);
-            
-            return level;
-        }
-        addAllOriginalModifiers(modifiers);
-        
-        
-        return level;
+        return getLevel();
     }
     
     
-    private void addAllOriginalModifiers(List<Modifier<FightAgent>> modifiers)
+    @Override
+    public SimpleIntegerProperty levelProperty()
     {
-        for (int i = 0; i < modifiers.size() - level - 1; i++)
-        {
-            modifiers.add(modifiers.get(i));
-        }
+        return level;
     }
     
     
@@ -133,15 +114,15 @@ public final class Spell implements Sprite, Describable, Named, Leveler
     }
     
     
-    public FightAgentModifier getModifier()
+    public Applicable<FightAgent> getApplicable()
     {
-        return modifier;
+        return applicable;
     }
     
     
     public int getManaCost()
     {
-        return manaCost;
+        return manaCost.getValue();
     }
     
     
@@ -150,4 +131,9 @@ public final class Spell implements Sprite, Describable, Named, Leveler
         return successChance;
     }
     
+    
+    public SimpleIntegerProperty manaCostProperty()
+    {
+        return manaCost;
+    }
 }
