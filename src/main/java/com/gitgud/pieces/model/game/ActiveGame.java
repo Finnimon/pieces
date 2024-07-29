@@ -1,4 +1,4 @@
-package com.gitgud.pieces.model.activeGame;
+package com.gitgud.pieces.model.game;
 
 import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.fight.Fight;

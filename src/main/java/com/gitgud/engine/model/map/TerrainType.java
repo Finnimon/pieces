@@ -12,7 +12,8 @@ package com.gitgud.engine.model.map;
 public enum TerrainType
 {
     //todo icon binding
-    TRAVERSABLE, NON_TRAVERSABLE;
+    TRAVERSABLE,
+    NON_TRAVERSABLE;
     
     
     public static TerrainType getCorrespondingTerrainType(String terrainTypeIndex)

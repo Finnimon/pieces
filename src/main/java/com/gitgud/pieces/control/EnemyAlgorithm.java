@@ -80,9 +80,15 @@ public class EnemyAlgorithm
         
         ActionChoice choice = null;
         
-        if (!attackChoices.isEmpty()) return chooseRandomChoice(attackChoices.getChoices());
+        if (!attackChoices.isEmpty())
+        {
+            return chooseRandomChoice(attackChoices.getChoices());
+        }
         
-        if (!movementChoices.isEmpty()) return determineBestMovementChoice(movementChoices.getChoices());
+        if (!movementChoices.isEmpty())
+        {
+            return determineBestMovementChoice(movementChoices.getChoices());
+        }
         
         return skipTurnChoice;
     }
@@ -120,7 +126,10 @@ public class EnemyAlgorithm
         int turn = turnProperty.getValue();
         
         actionChoice.select();
-        if (turn != turnProperty.getValue()) return;
+        if (turn != turnProperty.getValue())
+        {
+            return;
+        }
         
         fightController.getRender().getHud().clearChoices();
         
@@ -161,12 +170,18 @@ public class EnemyAlgorithm
         for (Tile tile : allTiles)
         {
             FightAgent otherAgent = gridMap.get(tile);
-            if (otherAgent == null || agent.getAllegiance() == otherAgent.getAllegiance()) continue;
+            if (otherAgent == null || agent.getAllegiance() == otherAgent.getAllegiance())
+            {
+                continue;
+            }
             
             for (Tile toTile : to.keySet())
             {
                 double distance = toTile.distance(tile);
-                if (distance > currentShortestDistance) continue;
+                if (distance > currentShortestDistance)
+                {
+                    continue;
+                }
                 bestChoice = to.get(toTile);
                 currentShortestDistance = distance;
             }

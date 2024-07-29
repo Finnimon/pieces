@@ -15,7 +15,10 @@ public class InteractionChecker
     
     public static void interactIfPossible(MissionController missionController, Tile tile)
     {
-        if (!(missionController.getModel().getGridMap().get(tile) instanceof Interactable interactable)) return;
+        if (!(missionController.getModel().getGridMap().get(tile) instanceof Interactable interactable))
+        {
+            return;
+        }
         
         if (isInterActionPossible(missionController.getModel(), tile))
         {

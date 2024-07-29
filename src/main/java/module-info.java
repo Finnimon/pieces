@@ -20,7 +20,7 @@ module com.gitgud.pieces {
     opens com.gitgud.engine.model.gameobjects.agent to com.google.gson;
     opens com.gitgud.engine.model.gameobjects to com.google.gson;
     opens com.gitgud.pieces.model.player to com.google.gson;
-    opens com.gitgud.pieces.model.activeGame to com.google.gson;
+    opens com.gitgud.pieces.model.game to com.google.gson;
     opens com.gitgud.pieces.model.fight to com.google.gson;
     opens com.gitgud.pieces.model.gameobjects to com.google.gson;
     opens com.gitgud.engine.model.gameobjects.interactable to com.google.gson;
@@ -34,4 +34,7 @@ module com.gitgud.pieces {
     opens com.gitgud.pieces.control to javafx.fxml;
     exports com.gitgud.pieces.view;
     opens com.gitgud.pieces.view to javafx.fxml;
+    opens com.gitgud.pieces.model.city.buildings.headQuarter to com.google.gson;
+    exports com.gitgud.pieces.control.game;
+    opens com.gitgud.pieces.control.game to com.google.gson, javafx.fxml;
 }

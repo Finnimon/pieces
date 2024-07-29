@@ -1,6 +1,6 @@
 package com.gitgud.pieces.control.menu;
 
-import com.gitgud.pieces.model.activeGame.GameState;
+import com.gitgud.pieces.model.game.GameState;
 import javafx.event.Event;
 
 import java.util.function.Consumer;

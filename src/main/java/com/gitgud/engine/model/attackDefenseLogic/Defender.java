@@ -1,11 +1,8 @@
 package com.gitgud.engine.model.attackDefenseLogic;
 
-import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-
-
 /**
  * All Objects using {@link Defence} to defend from {@link Attacker} must implement this interface.
- * implemented by {@link FightAgent}
+ * implemented by {@link com.gitgud.engine.model.gameobjects.agent.Fighter}
  *
  * @author Finn L.
  * @Owner: Finn L.

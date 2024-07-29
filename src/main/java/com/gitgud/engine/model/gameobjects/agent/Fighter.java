@@ -17,5 +17,4 @@ public abstract class Fighter extends Agent implements Attacker, Defender
     
     
     public abstract Collection<Tile> findAttackableTiles(GridMap gridMap, Tile position);
-    
 }

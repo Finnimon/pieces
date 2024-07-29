@@ -2,6 +2,7 @@ package com.gitgud.engine.model.gameobjects.agent;
 
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMovable;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
@@ -17,27 +18,34 @@ public abstract class Agent extends GameObject implements GridMovable
     private final boolean isFlying;
     
     
-    private int movementRange;
+    private final SimpleIntegerProperty movementRangeProperty;
     
     
     public Agent(String name, String description, String spriteUrl, boolean isFlying, int movementRange)
     {
         super(name, description, spriteUrl);
         this.isFlying = isFlying;
-        this.movementRange = movementRange;
+        this.movementRangeProperty = new SimpleIntegerProperty(movementRange);
+    }
+    
+    
+    @Override
+    public SimpleIntegerProperty movementRangeProperty()
+    {
+        return movementRangeProperty;
     }
     
     
     @Override
     public int getMovementRange()
     {
-        return movementRange;
+        return movementRangeProperty.getValue();
     }
     
     
     public void setMovementRange(int movementRange)
     {
-        this.movementRange = movementRange;
+        movementRangeProperty.setValue(movementRange);
     }
     
     

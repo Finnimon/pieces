@@ -60,6 +60,7 @@ public class App extends Application
     {
         //call your main here
         initialize(stage);
+        
         lindigTest(stage);
         //        delfiMain(stage);
         //        stage.show();

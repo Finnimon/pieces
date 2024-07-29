@@ -1,5 +1,6 @@
-package com.gitgud.pieces.model.city.buildings;
+package com.gitgud.pieces.model.city.buildings.headQuarter;
 
+import com.gitgud.pieces.model.city.buildings.CityBuilding;
 import com.gitgud.pieces.model.mission.Mission;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class HeadQuarter extends CityBuilding
     public List<Mission> getAllMissions()
     {
         ArrayList<Mission> missions = new ArrayList<>();
-        for (Missions mission : Missions.values())
+        for (MissionSelection mission : MissionSelection.values())
         {
             missions.add(mission.ordinal(), mission.getMission());
         }

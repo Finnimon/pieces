@@ -3,7 +3,10 @@ package com.gitgud.pieces.model.fight;
 
 public enum SpellType
 {
-    HEAL("heal"), DAMAGE("damage"), BUFF("buff"), DEBUFF("debuff");
+    HEAL("heal"),
+    DAMAGE("damage"),
+    BUFF("buff"),
+    DEBUFF("debuff");
     
     
     private final String type;

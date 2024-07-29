@@ -79,7 +79,10 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     public boolean isTransactionPossible(FightAgent fightAgent)
     {
         ResourceCost resourceCost = getResourceCost(fightAgent);
-        if (resourceCost == null) return false;
+        if (resourceCost == null)
+        {
+            return false;
+        }
         return resourceCost.isResourceCostCoveredByWallet();
     }
     

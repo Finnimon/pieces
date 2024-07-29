@@ -1,6 +1,6 @@
 package com.gitgud.pieces.view;
 
-import com.gitgud.pieces.model.activeGame.GameLoader;
+import com.gitgud.pieces.control.game.Game;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -45,7 +45,7 @@ public class StageStyler
                              {
                                  e.consume();
                                  System.out.println("save");
-                                 new GameLoader().save();
+                                 Game.Saver.save();
                              });
         
         ArrayList<Menu> menuArrayList = new ArrayList<>();

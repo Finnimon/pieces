@@ -4,6 +4,7 @@ import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.graph.Graph;
 import com.gitgud.graph.WeightedEdge;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,6 +39,9 @@ public interface GridMovable extends GridMappable
     
     
     int getMovementRange();
+    
+    
+    SimpleIntegerProperty movementRangeProperty();
     
     
     boolean isFlying();

@@ -5,7 +5,9 @@ import java.util.Objects;
 
 public enum Faction
 {
-    MONOCHROME("monochrome"), PINK("pink"), GREEN("green");
+    MONOCHROME("monochrome"),
+    PINK("pink"),
+    GREEN("green");
     
     
     public static final int TYPE_MULTIPLIER = 10;

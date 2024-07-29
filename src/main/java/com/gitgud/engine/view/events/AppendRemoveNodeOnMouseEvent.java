@@ -2,15 +2,15 @@ package com.gitgud.engine.view.events;
 
 import javafx.event.EventHandler;
 import javafx.event.EventType;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 
 public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
 {
-    private final Group parent;
+    private final Pane parent;
     
     
     private final Node appendix;
@@ -25,7 +25,7 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
     private final MouseButton mouseButton;
     
     
-    public AppendRemoveNodeOnMouseEvent(Group parent, Node appendix, EventType<MouseEvent> addEvent,
+    public AppendRemoveNodeOnMouseEvent(Pane parent, Node appendix, EventType<MouseEvent> addEvent,
                                         EventType<MouseEvent> removeEvent, MouseButton mouseButton)
     {
         this.parent = parent;
@@ -36,13 +36,13 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
     }
     
     
-    public AppendRemoveNodeOnMouseEvent(Group parent, Node appendix)
+    public AppendRemoveNodeOnMouseEvent(Pane parent, Node appendix)
     {
         this(parent, appendix, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED, MouseButton.SECONDARY);
     }
     
     
-    public static void add(Group parent, Node Appendix, EventType<MouseEvent> addEvent,
+    public static void add(Pane parent, Node Appendix, EventType<MouseEvent> addEvent,
                            EventType<MouseEvent> removeEvent, MouseButton mouseButton)
     {
         EventHandler<MouseEvent> handler = new AppendRemoveNodeOnMouseEvent(parent,
@@ -55,7 +55,7 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
     }
     
     
-    public static void add(Group parent, Node Appendix)
+    public static void add(Pane parent, Node Appendix)
     {
         add(parent, Appendix, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED, MouseButton.SECONDARY);
     }

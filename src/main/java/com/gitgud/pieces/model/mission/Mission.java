@@ -1,13 +1,12 @@
 package com.gitgud.pieces.model.mission;
 
-import com.gitgud.engine.control.action.Action;
 import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.control.MissionController;
-import com.gitgud.pieces.control.action.MissionMovementAction;
+import com.gitgud.pieces.model.city.City;
+import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarter;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 
@@ -18,54 +17,47 @@ import java.util.List;
 
 public class Mission implements ActionAwaiterModel<GameObject>
 {
-    //todo render
+    private final int index;
+    
+    
     private final GridMap<GameObject> gridMap;
     
     
-    //todo render on top of map at playerAgentPosition
     private final PlayerAgent playerAgent;
     
     
     private final FightAgent[] activeFightAgents;
     
     
-    //todo render only in selction screen
     private final FightAgent[] discardedFightAgents;
     
     
-    //todo render position for the playeragentsprite
     private Tile playerAgentPosition;
     
     
     private boolean finished = false;
     
     
-    public Mission(GridMap<GameObject> gridMap, Tile startingPosition, FightAgent[] activeFightAgents)
+    public Mission(GridMap<GameObject> gridMap, Tile startingPosition, FightAgent[] activeFightAgents, int index)
     {
-        this(gridMap, new PlayerAgent(), startingPosition, activeFightAgents, new FightAgent[activeFightAgents.length]);
+        this(index,
+             gridMap,
+             new PlayerAgent(),
+             startingPosition,
+             activeFightAgents,
+             new FightAgent[activeFightAgents.length]);
     }
     
     
-    public Mission(GridMap<GameObject> gridMap, PlayerAgent playerAgent, Tile playerAgentPosition,
+    public Mission(int index, GridMap<GameObject> gridMap, PlayerAgent playerAgent, Tile playerAgentPosition,
                    FightAgent[] activeFightAgents, FightAgent[] discardedFightAgents)
     {
+        this.index = index;
         this.gridMap = gridMap;
         this.playerAgent = playerAgent;
         this.playerAgentPosition = playerAgentPosition;
         this.activeFightAgents = activeFightAgents;
         this.discardedFightAgents = discardedFightAgents;
-    }
-    
-    
-    private void addAvailableMovementActions(HashSet<Action<MissionController>> actions)
-    {
-        Tile from = getPlayerAgentPosition();
-        Collection<Tile> inMovementRangeTiles = getPlayerAgent().findPossibleMovementTargets(getGridMap(), from);
-        
-        for (Tile tile : inMovementRangeTiles)
-        {
-            actions.add(new MissionMovementAction(from, tile));
-        }
     }
     
     
@@ -117,6 +109,16 @@ public class Mission implements ActionAwaiterModel<GameObject>
     }
     
     
+    public void end()
+    {
+        returnFightAgentsToArmy();
+        City city = ActiveGameController.getInstance().get().getCity();
+        HeadQuarter headQuarter = city.getHeadQuarter();
+        while (index > headQuarter.getLevel())
+            headQuarter.levelUp();
+    }
+    
+    
     public void returnFightAgentsToArmy()
     {
         Collection<FightAgent> fightAgents = ActiveGameController.getInstance().get().getPlayer().army();
@@ -124,5 +126,11 @@ public class Mission implements ActionAwaiterModel<GameObject>
         returningAgents.addAll(List.of(discardedFightAgents));
         returningAgents.remove(null);
         fightAgents.addAll(returningAgents);
+    }
+    
+    
+    public int getIndex()
+    {
+        return index;
     }
 }

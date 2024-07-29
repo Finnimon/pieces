@@ -303,7 +303,10 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
         {
             Vertex current = edge.getTo();
             
-            if (!toEdgeFilter.test(current)) continue;
+            if (!toEdgeFilter.test(current))
+            {
+                continue;
+            }
             
             double weight = determineWeight(edge);
             

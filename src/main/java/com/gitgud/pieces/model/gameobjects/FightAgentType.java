@@ -2,7 +2,11 @@ package com.gitgud.pieces.model.gameobjects;
 
 public enum FightAgentType
 {
-    PAWN("pawn"), ROOK("rook"), BISHOP("bishop"), KNIGHT("knight"), QUEEN("queen");
+    PAWN("pawn"),
+    ROOK("rook"),
+    BISHOP("bishop"),
+    KNIGHT("knight"),
+    QUEEN("queen");
     //    , KING("king");
     
     

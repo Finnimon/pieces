@@ -7,7 +7,7 @@ import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
+import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 
@@ -63,13 +63,11 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public void end()
     {
-        ActiveGame activeGame = ActiveGameController.getInstance().get();
-        
-        activeGame.setMission(null);
+        ActiveGameController.getInstance().get().setMission(null);
         
         getModel().returnFightAgentsToArmy();
         
-        GameFlow.showNextScene();
+        Game.Flow.showNextScene();
     }
     
     

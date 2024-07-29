@@ -4,8 +4,8 @@ import com.gitgud.engine.control.action.ActionAwaiterModel;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.EnemyAlgorithm;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
-import com.gitgud.pieces.model.activeGame.GameState;
+import com.gitgud.pieces.model.game.ActiveGame;
+import com.gitgud.pieces.model.game.GameState;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -114,7 +114,10 @@ public class Fight implements ActionAwaiterModel<FightAgent>
         TreeSet<FightAgent> current = getFightTimeLine().current();
         
         Collection<FightAgent> nonNullElements = gridMap.nonNullElements();
-        if (nonNullElements.containsAll(current)) return;
+        if (nonNullElements.containsAll(current))
+        {
+            return;
+        }
         
         current.clear();
         fightTimeLine.next().clear();

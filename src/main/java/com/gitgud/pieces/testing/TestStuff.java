@@ -1,19 +1,13 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.TerrainType;
-import com.gitgud.engine.view.GridMapRender;
+import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
-import com.gitgud.pieces.model.activeGame.GameLoader;
-import com.gitgud.pieces.model.gameobjects.Faction;
-import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
+import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.utility.Core;
-import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import static com.gitgud.pieces.testing.Missions.MISSION0;
@@ -94,18 +88,17 @@ public class TestStuff
     
     public static void lindigTest(Stage stage)
     {
-        //        ActiveGameController.initialize();
-        lindigJsonTest();
-        //        ActiveGameController.getInstance();
-        //        GameFlow.showNextScene();
+        ActiveGameController.initialize();
+        //        lindigJsonTest();
+        ActiveGameController.getInstance();
+        Game.Flow.showNextScene();
     }
     
     
     private static void lindigJsonTest()
     {
-        GameLoader gameLoader = new GameLoader();
-        //        gameLoader.save();
-        gameLoader.loadSaveFile("TestPlayer");
+        Game.Saver.save();
+        Game.Loader.load("TestPlayer");
         //        GameFlow.showNextScene();
         //        Gson gson = FxGson.create();
         //        JsonElement jsonElement= gson.toJsonTree(object);;
@@ -128,35 +121,5 @@ public class TestStuff
         Mission mission = MISSION0;
         MissionController missionController = new MissionController(mission);
         missionController.start();
-    }
-    
-    
-    private static void addTestGridMapRenderToStage(Stage stage)
-    {
-        GridMap<GameObject> testMap = TestStuff.getTestMap(12, 12);
-        
-        GridMapRender<GridMappable> gridMapRender = new GridMapRender<>(testMap, 90);
-        
-        AnchorPane group = new AnchorPane();
-        gridMapRender = new GridMapRender<GridMappable>(Missions.FIRST.getGridMap(), 90);
-        ScrollPane scrollPane = new ScrollPane(gridMapRender);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        group.getChildren().add(scrollPane);
-        scrollPane.setMaxWidth(1000);
-        PlayerAgent playerAgent = new PlayerAgent(Faction.PINK);
-        gridMapRender.addGridMappable(playerAgent, Missions.FIRST.getGridMap().getVertex(0, 0));
-        
-        Scene scene = new Scene(group);
-        group.setMinWidth(1200);
-        AnchorPane.setLeftAnchor(scrollPane, 200d);
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.centerOnScreen();
-        
-        gridMapRender.relocateGridMappable(playerAgent, Missions.FIRST.getGridMap().getVertex(5, 5));
-        gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().getVertex(0, 0));
-        gridMapRender.addGridMappable(new PlayerAgent(), Missions.FIRST.getGridMap().verticeSet().last());
-        
     }
 }

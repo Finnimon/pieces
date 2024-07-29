@@ -1,26 +1,23 @@
 package com.gitgud.engine.view;
 
+import com.gitgud.engine.model.attackDefenseLogic.Defender;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.view.events.AppendRemoveNodeOnMouseEvent;
 import com.gitgud.engine.view.infopane.GridMappableInfoPane;
-import javafx.scene.Group;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Rectangle;
+import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
 
-public class GridMappableRender<GridMappableType extends GridMappable> extends Group implements Render<GridMappableType>
+public class GridMappableRender<GridMappableType extends GridMappable> extends StackPane implements Render<GridMappableType>
 {
-    private final Rectangle rectangle;
-    
     
     public GridMappableRender(GridMappableType gridMappable, double x, double y, double width, double height)
     {
-        rectangle = new Rectangle();
-        
-        rectangle.setX(x);
-        rectangle.setY(y);
-        rectangle.setWidth(width);
-        rectangle.setHeight(height);
+        setSize(width, height);
+        setX(x);
+        setY(y);
         render(gridMappable);
     }
     
@@ -52,21 +49,58 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends G
     @Override
     public void render(GridMappableType data)
     {
-        rectangle.setFill(new ImagePattern(data.getSprite()));
+        ImageView image = new ImageView(data.getSprite());
+        image.setPreserveRatio(true);
+        image.fitHeightProperty().bind(this.heightProperty());
+        image.maxWidth(this.widthProperty().get());
         
         AppendRemoveNodeOnMouseEvent.add(this, new GridMappableInfoPane<>(data));
-        getChildren().add(rectangle);
+        getChildren().add(image);
+        setAlignment(image, Pos.TOP_CENTER);
+        
+        if (!(data instanceof Defender defender))
+        {
+            return;
+        }
+        renderDefender(defender, image);
+    }
+    
+    
+    private void renderDefender(Defender defender, ImageView image)
+    {
+        ValueOfBar valueOfBar = ValueOfBar.healthBar(defender);
+        getChildren().add(valueOfBar);
+        image.fitHeightProperty().unbind();
+        image.fitHeightProperty().bind(heightProperty().subtract(valueOfBar.heightProperty()));
+        valueOfBar.setMaxHeight(Region.USE_PREF_SIZE);
+        valueOfBar.setMinHeight(Region.USE_PREF_SIZE);
+        valueOfBar.setMaxWidth(Region.USE_PREF_SIZE);
+        valueOfBar.setMinWidth(Region.USE_PREF_SIZE);
+        valueOfBar.prefWidthProperty().bind(this.widthProperty());
+        valueOfBar.prefHeightProperty().bind(this.heightProperty().divide(8));
+        setAlignment(valueOfBar, Pos.BOTTOM_CENTER);
     }
     
     
     public final void setX(double x)
     {
-        rectangle.setX(x);
+        this.setTranslateX(x);
     }
     
     
     public final void setY(double y)
     {
-        rectangle.setY(y);
+        setTranslateY(y);
+    }
+    
+    
+    private void setSize(double width, double height)
+    {
+        setMaxWidth(width);
+        setPrefWidth(width);
+        setMinWidth(width);
+        setMaxHeight(height);
+        setPrefHeight(height);
+        setMinHeight(height);
     }
 }

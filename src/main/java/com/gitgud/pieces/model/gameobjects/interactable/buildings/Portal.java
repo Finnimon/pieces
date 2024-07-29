@@ -57,7 +57,10 @@ public class Portal extends GridMappableBuilding<MissionController>
         mission.setPlayerAgentPosition(position);
         
         
-        if (gridMap.get(destination) instanceof Portal) return;
+        if (gridMap.get(destination) instanceof Portal)
+        {
+            return;
+        }
         
         //add new Portal on the other side otherwise
         Tile newDestination = gridMap.getVertex(this);

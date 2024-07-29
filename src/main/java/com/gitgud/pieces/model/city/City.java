@@ -1,6 +1,7 @@
 package com.gitgud.pieces.model.city;
 
 import com.gitgud.pieces.model.city.buildings.*;
+import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarter;
 import com.gitgud.pieces.model.gameobjects.Faction;
 
 
@@ -60,19 +61,56 @@ public class City
         market = null;
         magicEnhancer = null;
         trainingGrounds = null;
-        monoChromeFactionCamp = null;
-        pinkFactionCamp = null;
-        greenFactionCamp = null;
+        monoChromeFactionCamp = new FactionCamp(Faction.MONOCHROME);
+        pinkFactionCamp = new FactionCamp(Faction.PINK);
+        greenFactionCamp = new FactionCamp(Faction.GREEN);
     }
     
     
-    private void validateFactionCamps()
+    public BlackSmith getBlackSmith()
     {
+        return blackSmith;
     }
     
     
-    private boolean validateFactionCamp(FactionCamp factionCamp, Faction faction)
+    public FactionCamp getMonoChromeFactionCamp()
     {
-        return factionCamp.getFaction().equals(faction);
+        return monoChromeFactionCamp;
+    }
+    
+    
+    public FactionCamp getPinkFactionCamp()
+    {
+        return pinkFactionCamp;
+    }
+    
+    
+    public FactionCamp getGreenFactionCamp()
+    {
+        return greenFactionCamp;
+    }
+    
+    
+    public HeadQuarter getHeadQuarter()
+    {
+        return headQuarter;
+    }
+    
+    
+    public MagicEnhancer getMagicEnhancer()
+    {
+        return magicEnhancer;
+    }
+    
+    
+    public Market getMarket()
+    {
+        return market;
+    }
+    
+    
+    public TrainingGrounds getTrainingGrounds()
+    {
+        return trainingGrounds;
     }
 }

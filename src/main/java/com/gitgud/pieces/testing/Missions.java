@@ -21,33 +21,9 @@ import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 
 public interface Missions
 {
-    Mission FIRST = create(Fights.mapFromBoolMap("src/main/resources/com/gitgud/maps/MissionMap1"));
-    
-    
     Mission MISSION0 = Missions.MISSION1(new FightAgent[]{
-            new FightAgentDirector().make(412),
-            null,
-            null,
-            null,
-            null
+            new FightAgentDirector().make(412), null, null, null, null
     });
-    
-    
-    static <GOType extends GameObject> GridMap<GOType> getTestMap(int width, int height)
-    {
-        return GridMap.create(TestStuff.booleanArray(width, height));
-    }
-    
-    
-    private static Mission create(GridMap<GameObject> gridMap)
-    {
-        Tile startingPosition = gridMap.verticeSet()
-                                       .stream()
-                                       .filter(tile -> tile.getTerrain().isTraversable())
-                                       .findFirst()
-                                       .get();
-        return new Mission(gridMap, startingPosition, new FightAgent[0]);
-    }
     
     
     static Mission MISSION1(FightAgent[] fightAgents)
@@ -124,7 +100,7 @@ public interface Missions
         //        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
         
         
-        return new Mission(gridMap, startingPosition, fightAgents);
+        return new Mission(gridMap, startingPosition, fightAgents, 1);
     }
     
     

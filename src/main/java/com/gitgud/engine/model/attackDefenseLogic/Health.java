@@ -1,11 +1,11 @@
 package com.gitgud.engine.model.attackDefenseLogic;
 
-import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
  * Objects that have a health stat.
- * implemented by {@link FightAgent}
+ * implemented by {@link Defender}
  *
  * @author Finn L.
  * @Owner: Finn L.
@@ -18,4 +18,13 @@ public interface Health
     
     
     void setHealth(int health);
+    
+    
+    int getMaxHealth();
+    
+    
+    SimpleIntegerProperty healthProperty();
+    
+    
+    SimpleIntegerProperty maxHealthProperty();
 }

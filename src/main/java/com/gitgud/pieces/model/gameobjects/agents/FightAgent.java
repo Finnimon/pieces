@@ -15,6 +15,8 @@ import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 import com.github.ruediste.polymorphicGson.GsonPolymorph;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -44,46 +46,46 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     private final boolean isRangedAttacker;
     
     
-    private int level;
+    private final SimpleIntegerProperty levelProperty;
     
     
-    private int meleeDamage;
+    private final SimpleIntegerProperty meleeDamage;
     
     
-    private int rangedDamage;
+    private final SimpleIntegerProperty rangedDamage;
     
     
-    private int rangedAttackRange;
+    private final SimpleIntegerProperty rangedAttackRange;
     
     
-    private int remainingRangedAttacks;
+    private final SimpleIntegerProperty remainingRangedAttacks;
     
     
-    private int physicalDefence;
+    private final SimpleIntegerProperty physicalDefence;
     
     
-    private int magicDefence;
+    private final SimpleIntegerProperty magicDefence;
     
     
-    private float evadeChance;
+    private final SimpleFloatProperty evadeChance;
     
     
-    private int maxHealth;
+    private final SimpleIntegerProperty maxHealth;
     
     
-    private int maxMana;
+    private final SimpleIntegerProperty maxMana;
     
     
-    private int health;
+    private final SimpleIntegerProperty health;
     
     
-    private int mana;
+    private final SimpleIntegerProperty mana;
     
     
-    private int initiative;
+    private final SimpleIntegerProperty initiative;
     
     
-    private float accuracy;
+    private final SimpleFloatProperty accuracy;
     
     
     public FightAgent(String name, String description, String spriteUrl, boolean isFlying, int movementRange,
@@ -96,45 +98,45 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         this.type = type;
         this.faction = faction;
         this.allegiance = allegiance;
-        this.level = level;
-        this.meleeDamage = meleeDamage;
-        this.rangedDamage = rangedDamage;
-        this.rangedAttackRange = rangedAttackRange;
-        this.remainingRangedAttacks = remainingRangedAttacks;
+        this.levelProperty = new SimpleIntegerProperty(level);
+        this.meleeDamage = new SimpleIntegerProperty(meleeDamage);
+        this.rangedDamage = new SimpleIntegerProperty(rangedDamage);
+        this.rangedAttackRange = new SimpleIntegerProperty(rangedAttackRange);
+        this.remainingRangedAttacks = new SimpleIntegerProperty(remainingRangedAttacks);
         this.isRangedAttacker = isRangedAttacker;
-        this.physicalDefence = physicalDefence;
-        this.magicDefence = magicDefence;
-        this.evadeChance = evadeChance;
-        this.maxHealth = maxHealth;
-        this.maxMana = maxMana;
-        this.health = health;
-        this.mana = mana;
-        this.initiative = initiative;
-        this.accuracy = accuracy;
+        this.physicalDefence = new SimpleIntegerProperty(physicalDefence);
+        this.magicDefence = new SimpleIntegerProperty(magicDefence);
+        this.evadeChance = new SimpleFloatProperty(evadeChance);
+        this.maxHealth = new SimpleIntegerProperty(maxHealth);
+        this.maxMana = new SimpleIntegerProperty(maxMana);
+        this.health = new SimpleIntegerProperty(health);
+        this.mana = new SimpleIntegerProperty(mana);
+        this.initiative = new SimpleIntegerProperty(initiative);
+        this.accuracy = new SimpleFloatProperty(accuracy);
     }
     
     
     public int getMana()
     {
-        return mana;
+        return mana.get();
     }
     
     
     public void setMana(int mana)
     {
-        this.mana = mana;
+        this.mana.setValue(mana);
     }
     
     
     public float getEvadeChance()
     {
-        return evadeChance;
+        return evadeChance.get();
     }
     
     
     public void setEvadeChance(float evadeChance)
     {
-        this.evadeChance = evadeChance;
+        this.evadeChance.setValue(evadeChance);
     }
     
     
@@ -146,133 +148,147 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     public int getMeleeDamage()
     {
-        return meleeDamage;
+        return meleeDamage.get();
     }
     
     
     public void setMeleeDamage(int meleeDamage)
     {
-        this.meleeDamage = meleeDamage;
+        this.meleeDamage.setValue(meleeDamage);
     }
     
     
     public int getRangedDamage()
     {
-        return rangedDamage;
+        return rangedDamage.get();
     }
     
     
     public void setRangedDamage(int rangedDamage)
     {
-        this.rangedDamage = rangedDamage;
+        this.rangedDamage.setValue(rangedDamage);
     }
     
     
     public int getRemainingRangedAttacks()
     {
-        return remainingRangedAttacks;
+        return remainingRangedAttacks.get();
     }
     
     
     public void setRemainingRangedAttacks(int remainingRangedAttacks)
     {
-        this.remainingRangedAttacks = remainingRangedAttacks;
+        this.remainingRangedAttacks.setValue(remainingRangedAttacks);
     }
     
     
     public int getPhysicalDefence()
     {
-        return physicalDefence;
+        return physicalDefence.get();
     }
     
     
     public void setPhysicalDefence(int physicalDefence)
     {
-        this.physicalDefence = physicalDefence;
+        this.physicalDefence.setValue(physicalDefence);
     }
     
     
     public int getMagicDefence()
     {
-        return magicDefence;
+        return magicDefence.get();
     }
     
     
     public void setMagicDefence(int magicDefence)
     {
-        this.magicDefence = magicDefence;
+        this.magicDefence.setValue(magicDefence);
     }
     
     
     public int getMaxHealth()
     {
-        return maxHealth;
+        return maxHealth.get();
     }
     
     
     public void setMaxHealth(int maxHealth)
     {
-        this.maxHealth = maxHealth;
+        this.maxHealth.setValue(maxHealth);
     }
     
     
-    public int getHealth()
+    @Override
+    public SimpleIntegerProperty healthProperty()
     {
         return health;
     }
     
     
+    @Override
+    public SimpleIntegerProperty maxHealthProperty()
+    {
+        return maxHealth;
+    }
+    
+    
+    public int getHealth()
+    {
+        return health.get();
+    }
+    
+    
     public void setHealth(int health)
     {
-        this.health = health;
+        this.health.setValue(health);
     }
     
     
     public int getRangedAttackRange()
     {
-        return rangedAttackRange;
+        return rangedAttackRange.get();
     }
     
     
     public void setRangedAttackRange(int rangedAttackRange)
     {
-        this.rangedAttackRange = rangedAttackRange;
+        this.rangedAttackRange.setValue(rangedAttackRange);
     }
     
     
     public int getMaxMana()
     {
-        return maxMana;
+        return maxMana.get();
     }
     
     
     public void setMaxMana(int maxMana)
     {
-        this.maxMana = maxMana;
+        this.maxMana.setValue(maxMana);
     }
     
     
     public int getInitiative()
     {
-        return initiative;
+        return initiative.get();
     }
     
     
     public void setInitiative(int initative)
     {
-        this.initiative = initative;
+        this.initiative.setValue(initative);
     }
     
     
     public float getAccuracy()
     {
-        return accuracy;
+        return accuracy.get();
     }
     
     
     public void setAccuracy(float accuracy)
     {
-        this.accuracy = accuracy;
+        this.accuracy.setValue(accuracy);
     }
     
     
@@ -300,7 +316,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         int attackValue = isMelee ? getMeleeDamage() : calculateRangedAttackDamage(distance);
         if (!isMelee)
         {
-            remainingRangedAttacks--;
+            setRemainingRangedAttacks(getRemainingRangedAttacks() - 1);
         }
         
         
@@ -353,22 +369,21 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     public int getLevel()
     {
-        return level;
+        return levelProperty.get();
     }
     
     
     @Override
     public int levelUp()
     {
-        level++;
-        
+        levelProperty.set(getLevel() + 1);
         FightAgentDirector director = new FightAgentDirector();
         int typeInt = director.calculateType(this);
         
         FightAgent nextLevelFightAgent = director.make(typeInt);
         //thjis copy vals
         
-        return level;//todo
+        return getLevel();//todo
     }
     
     
@@ -412,14 +427,16 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     {
         HashSet<Tile> attackableTiles = new HashSet<Tile>(gridMap.getNeighbors(position));
         
-        boolean canAttackRanged = isRangedAttacker && remainingRangedAttacks > 0;
-        if (!canAttackRanged)
+        boolean canAttackRanged = isRangedAttacker && getRemainingRangedAttacks() > 0;
+        if (canAttackRanged)
+        
         {
-            return filterAttackableTiles(gridMap, attackableTiles);
+            attackableTiles.addAll(GridMovable.getInAbsoluteRangeTiles(gridMap, position, getRangedAttackRange()));
         }
-        attackableTiles.addAll(GridMovable.getInAbsoluteRangeTiles(gridMap, position, getRangedAttackRange()));
+        
         
         return filterAttackableTiles(gridMap, attackableTiles);
+        
     }
     
     

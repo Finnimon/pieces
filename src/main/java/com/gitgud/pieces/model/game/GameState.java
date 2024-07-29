@@ -1,8 +1,12 @@
-package com.gitgud.pieces.model.activeGame;
+package com.gitgud.pieces.model.game;
 
 public enum GameState
 {
-    NOT_LOADED, CITY, MISSION, MISSION_FIGHT, ARENA_FIGHT
+    NOT_LOADED,
+    CITY,
+    MISSION,
+    MISSION_FIGHT,
+    ARENA_FIGHT
     //
     //
     //    public static GameState getGameState(boolean isMission, boolean isFight)

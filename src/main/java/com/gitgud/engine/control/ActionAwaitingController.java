@@ -34,7 +34,10 @@ public abstract class ActionAwaitingController<ModelType extends ActionAwaiterMo
     {
         //todo fix currently not working as it blocks the InfoPane event for the active Agent underneath the highlight
         Tile tile = getActivePosition();
-        if (tile == null) return;
+        if (tile == null)
+        {
+            return;
+        }
         getRender().getGridMapRender().addHighLight(tile);
     }
     

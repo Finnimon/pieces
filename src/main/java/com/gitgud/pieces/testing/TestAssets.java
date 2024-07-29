@@ -2,10 +2,10 @@ package com.gitgud.pieces.testing;
 
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.pieces.model.activeGame.ActiveGame;
 import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.SpellBook;
+import com.gitgud.pieces.model.game.ActiveGame;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;

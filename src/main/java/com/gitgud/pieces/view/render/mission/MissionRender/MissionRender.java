@@ -32,7 +32,10 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     {
         return mouseEvent ->
         {
-            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY)) return;
+            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY))
+            {
+                return;
+            }
             
             mouseEvent.consume();
             InteractionChecker.interactIfPossible(missionController, tile);
@@ -46,7 +49,10 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
         GridMap<GameObject> gridMap = getData().getGridMap();
         for (GameObject gameObject : getData().getGridMap().nonNullElements())
         {
-            if (!(gameObject instanceof Interactable<?> interactable)) continue;
+            if (!(gameObject instanceof Interactable<?> interactable))
+            {
+                continue;
+            }
             
             GridMappableRender<GameObject> interactableRender = gridMapRender.getGridMappableRender(gameObject);
             

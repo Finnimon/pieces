@@ -5,7 +5,12 @@ import com.gitgud.engine.model.gameobjects.Sprite;
 
 public enum ResourceType implements Sprite
 {
-    IRON, COPPER, SILVER, GOLD, PLATINUM, REDSTONE;
+    IRON,
+    COPPER,
+    SILVER,
+    GOLD,
+    PLATINUM,
+    REDSTONE;
     
     
     public static final String DIR_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\player\\resourceType\\";
