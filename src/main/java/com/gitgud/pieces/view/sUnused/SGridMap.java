@@ -25,6 +25,16 @@ import javafx.scene.shape.Rectangle;
 import java.util.HashMap;
 
 
+/**
+ * Offers Methods for rendering a GridMap
+ *
+ * @author Julius R.
+ * @Owner: Julius R.
+ * @Since: 01.05.2024
+ * @Version: 1.0
+ * @deprecated
+ * replaced by {@link com.gitgud.engine.view.GridMapRender}
+ */
 public class SGridMap implements IDimentions
 {
     /**
@@ -34,6 +44,8 @@ public class SGridMap implements IDimentions
      * @Owner: Julius R.
      * @Since: 01.05.2024
      * @Version: 1.0
+     * @deprecated
+     * replaced by {@link com.gitgud.engine.view.GridMapRender}
      */
     protected static void createFieldOfTiles(Group tilesGroup, GridMap gridMap)
     {
@@ -42,7 +54,7 @@ public class SGridMap implements IDimentions
             {
                 for (int j = 0; j < gridMap.getWidth(); j++)
                 {
-                    Tile tile = gridMap.getVertex(i, j);
+                    Tile tile = (Tile) gridMap.getVertex(i, j);
                     
                     Rectangle rectangle = new Rectangle();
                     double xPosition = tile.getX();

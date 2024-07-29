@@ -176,10 +176,10 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
      */
     private boolean checkShouldEdgeBeAdded(Tile tile, Tile neighbor)
     {
-        double x = tile.getX();
-        double y = tile.getY();
-        double neighborX = neighbor.getX();
-        double neighborY = neighbor.getY();
+        int x = tile.getX();
+        int y = tile.getY();
+        int neighborX = neighbor.getX();
+        int neighborY = neighbor.getY();
         return getVertex(neighborX, y).getTerrain().isTraversable() ||
                getVertex(x, neighborY).getTerrain().isTraversable();
     }
@@ -240,59 +240,6 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     public GridMappableType place(int x, int y, GridMappableType gridMappableType)
     {
         return place(calculateIndex(x, y), gridMappableType);
-    }
-    
-    
-    @Override
-    public boolean isValid()
-    {
-        for (Tile tile : verticeSet())
-        {
-            if (!isVertexValid(tile))
-            {
-                return false;
-            }
-        }
-        
-        
-        return true;
-    }
-    
-    
-    @Override
-    public boolean isVertexValid(Tile vertex)
-    {
-        int index = vertex.getIndex();
-        
-        boolean isValid = getVertex(index) == vertex;
-        
-        if (!isValid)
-        {
-            return false;
-        }
-        
-        double x = vertex.getX();
-        double y = vertex.getY();
-        
-        isValid = Math.round(x + y * width) != index;
-        //        isValid = Math.round((x + y * width) / tileSpacing) != index;
-        
-        
-        return isValid;
-    }
-    
-    
-    @Override
-    public Tile getVertex(double x, double y)
-    {
-        return getVertex(calculateIndex(x, y));
-    }
-    
-    
-    @Override
-    public GridMappableType get(double x, double y)
-    {
-        return get(getVertex(x, y));
     }
     
     

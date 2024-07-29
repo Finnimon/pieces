@@ -14,13 +14,28 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public interface Health
 {
-    int getHealth();
+    default int getHealth()
+    {
+        return healthProperty().getValue();
+    }
     
     
-    void setHealth(int health);
+    default void setHealth(int health)
+    {
+        healthProperty().setValue(health);
+    }
     
     
-    int getMaxHealth();
+    default int getMaxHealth()
+    {
+        return maxHealthProperty().getValue();
+    }
+    
+    
+    default void setMaxHealth(int maxHealth)
+    {
+        maxHealthProperty().setValue(maxHealth);
+    }
     
     
     SimpleIntegerProperty healthProperty();
