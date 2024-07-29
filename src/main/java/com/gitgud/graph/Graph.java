@@ -362,7 +362,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     }
     
     
-    private float determineWeight(Edge edge)
+    private double determineWeight(Edge edge)
     {
         if (!(edge instanceof WeightedEdge<?>))
         {

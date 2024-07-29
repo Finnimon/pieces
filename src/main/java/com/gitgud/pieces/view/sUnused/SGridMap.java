@@ -35,6 +35,7 @@ import java.util.HashMap;
  * @deprecated
  * replaced by {@link com.gitgud.engine.view.GridMapRender}
  */
+@Deprecated
 public class SGridMap implements IDimentions
 {
     /**
@@ -98,6 +99,7 @@ public class SGridMap implements IDimentions
      * @Since: 01.05.2024
      * @Version: 1.0
      */
+    @Deprecated
     protected static <T extends GridMappable> void createFieldOfGameObjects(Group gameObjektGroup, GridMap<T> gridMap)
     {
         for (Tile tile : gridMap.verticeSet())
