@@ -19,7 +19,7 @@ public record Defence(int defence, float evasionChance, DamageType damageType)
 {
     public int calculateDamage(Attack attack)
     {
-        if (!attack.doesHit() || doesEvade())
+        if (doesEvade())
         {
             return 0;
         }

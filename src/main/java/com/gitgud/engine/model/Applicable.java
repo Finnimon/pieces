@@ -1,6 +1,9 @@
 package com.gitgud.engine.model;
 
 
+import org.jetbrains.annotations.NotNull;
+
+
 /**
  * Objects that can be applied
  *
@@ -12,5 +15,5 @@ package com.gitgud.engine.model;
 
 public interface Applicable<T>
 {
-    T apply(T t);
+    T apply(@NotNull T t);
 }

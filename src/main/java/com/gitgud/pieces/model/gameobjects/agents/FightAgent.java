@@ -274,26 +274,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
-     * Getter for {@link #remainingRangedAttacks} value
-     *
-     * @return {@link #remainingRangedAttacks} value
-     */
-    public int getRemainingRangedAttacks()
-    {
-        return remainingRangedAttacks.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #remainingRangedAttacks} value
-     */
-    public void setRemainingRangedAttacks(int remainingRangedAttacks)
-    {
-        this.remainingRangedAttacks.setValue(remainingRangedAttacks);
-    }
-    
-    
-    /**
      * <p>Determines whether this {@link FightAgent} can attack at the given distance.
      * <p>Based on {@link #isRangedAttacker}, {@link #getRemainingRangedAttacks} and the {@link #rangedAttackRange}
      *
@@ -344,6 +324,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     private void decrementRemainingRangedAttacks()
     {
         setRemainingRangedAttacks(getRemainingRangedAttacks() - 1);
+    }
+    
+    
+    @Override
+    public SimpleIntegerProperty remainingRangedAttacksProperty()
+    {
+        return remainingRangedAttacks;
     }
     
     

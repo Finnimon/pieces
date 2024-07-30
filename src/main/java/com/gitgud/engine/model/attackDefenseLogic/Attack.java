@@ -3,6 +3,7 @@ package com.gitgud.engine.model.attackDefenseLogic;
 
 import com.gitgud.engine.model.Applicable;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
+import org.jetbrains.annotations.NotNull;
 
 import static com.gitgud.pieces.utility.Core.roll;
 
@@ -19,10 +20,10 @@ import static com.gitgud.pieces.utility.Core.roll;
  * @see Defender#defend(Attack)
  * @since 16.04.2024
  */
-public record Attack(int damage, float accuracy, DamageType damageType) implements Applicable<Fighter>
+public record Attack(int damage, float accuracy, DamageType damageType) implements Applicable<Defender>
 {
     @Override
-    public Fighter apply(Fighter fighter)
+    public Defender apply(@NotNull Defender fighter)
     {
         if (!doesHit())
         {

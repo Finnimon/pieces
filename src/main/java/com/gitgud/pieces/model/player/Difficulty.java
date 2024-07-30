@@ -7,6 +7,7 @@ import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentAttackModifier;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentDefenceModifier;
+import org.jetbrains.annotations.NotNull;
 
 
 public enum Difficulty implements Applicable<Fight>
@@ -53,7 +54,7 @@ public enum Difficulty implements Applicable<Fight>
     
     
     @Override
-    public Fight apply(Fight fight)
+    public Fight apply(@NotNull Fight fight)
     {
         fight.getGridMap()
              .nonNullElements()
