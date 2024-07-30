@@ -8,6 +8,15 @@ import com.gitgud.engine.model.map.Tile;
 import java.util.Collection;
 
 
+/**
+ * An Agent that also offers attack and defense capabilities.
+ *
+ * @Owner: Finn L.
+ * @Author: Finn L.
+ * @Since: 12.06.2024
+ * @Version: 1.0
+ */
+
 public abstract class Fighter extends Agent implements Attacker, Defender
 {
     public Fighter(String name, String description, String spriteUrl, boolean isFlying, int movementRange)

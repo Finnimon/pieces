@@ -16,25 +16,35 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public abstract class Agent extends GameObject implements GridMovable
 {
+    /**
+     * Whether the agent can fly.
+     * @see GridMovable
+     */
     private final boolean isFlying;
     
     
+    /**
+     * The movement range of the agent.
+     */
     private final SimpleIntegerProperty movementRangeProperty;
     
     
-    public Agent(String name, String description, String spriteUrl, boolean isFlying, int movementRange)
+    /**
+     * Calls the constructor of {@link GameObject#GameObject(String, String, String)} and assigns values to {@link #isFlying} and {@link #movementRangeProperty}.
+     * @see GameObject#GameObject(String, String, String)  GameObject
+     * @param name The name of the agent.
+     * @param description The description of the agent.
+     * @param spriteFilePath The sprite file path of the agent.
+     * @param isFlying Whether the agent can fly.
+     * @param movementRange The movement range of the agent.
+     */
+    public Agent(String name, String description, String spriteFilePath, boolean isFlying, int movementRange)
     {
-        super(name, description, spriteUrl);
+        super(name, description, spriteFilePath);
         this.isFlying = isFlying;
         this.movementRangeProperty = new SimpleIntegerProperty(movementRange);
     }
     
-    
-    @Override
-    public int getMovementRange()
-    {
-        return movementRangeProperty.getValue();
-    }
     
     
     @Override
@@ -48,12 +58,6 @@ public abstract class Agent extends GameObject implements GridMovable
     public boolean isFlying()
     {
         return isFlying;
-    }
-    
-    
-    public void setMovementRange(int movementRange)
-    {
-        movementRangeProperty.setValue(movementRange);
     }
     
     

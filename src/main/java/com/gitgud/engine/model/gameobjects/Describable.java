@@ -10,5 +10,9 @@ package com.gitgud.engine.model.gameobjects;
  */
 public interface Describable
 {
+    /**
+     * Getter for an Objects description.
+     * @return The description.
+     */
     String description();
 }

@@ -16,15 +16,30 @@ import org.jetbrains.annotations.NotNull;
 @GsonPolymorph
 public class GameObject implements GridMappable
 {
+    /**
+     * The name of the GameObject.
+     */
     private final String name;
     
     
+    /**
+     * The description of the GameObject.
+     */
     private final String description;
     
     
+    /**
+     * The path to the sprite of the GameObject.
+     */
     private final String spriteFilePath;
     
     
+    /**
+     * Default Constructor that assigns all properties.
+     * @param name The name of the GameObject.
+     * @param description The description of the GameObject.
+     * @param spriteFilePath The path to the sprite of the GameObject.
+     */
     public GameObject(@NotNull String name, @NotNull String description, @NotNull String spriteFilePath)
     {
         this.name = name;
