@@ -9,6 +9,7 @@ import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
+import org.jetbrains.annotations.NotNull;
 
 
 public class FightMovementChoice extends ToActionChoice<FightController, Fight, FightAgent, FightRender>
@@ -46,7 +47,7 @@ public class FightMovementChoice extends ToActionChoice<FightController, Fight, 
     
     
     @Override
-    public TileMovementAction<FightController, Fight, FightAgent, FightRender> getAction()
+    public @NotNull TileMovementAction<FightController, Fight, FightAgent, FightRender> getAction()
     {
         return (TileMovementAction<FightController, Fight, FightAgent, FightRender>) super.getAction();
     }

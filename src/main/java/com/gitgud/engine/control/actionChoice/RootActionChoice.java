@@ -10,31 +10,56 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 
-public class RootActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType,
-        RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
-        RenderType extends ActionContextRender<ModelType, GridMappableType>>
-        extends ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType> implements RootChoice
+/**
+ * RootChoice that contains multiple unspecified ActionChoices
+ *
+ * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
+ * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
+ * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
+ * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
+ * @author Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @see RootChoice
+ * @since 28.06.2024
+ */
+public class RootActionChoice<AaType extends ActionAwaitingController<MType, GmType, RType>,
+        MType extends ActionAwaiterModel<GmType>, GmType extends GridMappable,
+        RType extends ActionContextRender<MType, GmType>>
+        extends ActionChoice<AaType, MType, GmType, RType>
+        implements RootChoice<ActionChoice<AaType, MType, GmType, RType>>
 {
-    private final List<ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType>> choices;
+    /**
+     * The child Choices of this RootChoice
+     */
+    private final List<ActionChoice<AaType, MType, GmType, RType>> choices;
     
     
-    public RootActionChoice(String name, String description,
-                            List<ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType>> choices,
-                            ActionAwaiterType actionAwaiterType)
+    /**
+     * Creates a new RootToActionChoice and sets all attributes.
+     *
+     * @param name        The name of this ActionChoice
+     * @param description The description of this ActionChoice
+     * @param awaiter     The targeted {@link ActionAwaitingController}.
+     * @param choices     The child choices for this RootChoice.
+     */
+    public RootActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter,
+                            @NotNull List<ActionChoice<AaType, MType, GmType, RType>> choices)
     {
-        super(name, description, actionAwaiterType);
+        super(name, description, awaiter);
         this.choices = choices;
     }
     
     
-    public List<ActionChoice<ActionAwaiterType, ModelType, GridMappableType, RenderType>> getChoices()
+    @Override
+    public @NotNull List<ActionChoice<AaType, MType, GmType, RType>> getChildren()
     {
         return choices;
     }
     
     
     @Override
-    public void show(@NotNull ActionAwaiterType actionAwaiter)
+    public void show(@NotNull AaType actionAwaiter)
     {
         RootActionChoiceRender render = new RootActionChoiceRender(this);
         actionAwaiter.getRender().getHud().addChoice(render);

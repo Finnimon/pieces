@@ -11,10 +11,10 @@ import com.gitgud.engine.view.ActionContextRender;
  * Default implementation for Moving {@link com.gitgud.engine.model.gameobjects.GridMovable}s on a
  * {@link com.gitgud.engine.model.map.GridMap}
  *
- * @param <AaType>
- * @param <MType>
- * @param <GmType>
- * @param <RType>
+ * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
+ * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
+ * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
+ * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 30.05.2024

@@ -71,7 +71,7 @@ public class EnemyAlgorithm
     
     private ActionChoice choose(RootChoice rootChoice)
     {
-        List<ActionChoice<FightController, Fight, FightAgent, FightRender>> actionChoices = rootChoice.getChoices();
+        List<ActionChoice<FightController, Fight, FightAgent, FightRender>> actionChoices = rootChoice.getChildren();
         
         MovementRootChoice movementChoices = (MovementRootChoice) actionChoices.get(MOVEMENT_CHOICE_INDEX);
         RootChoice attackChoices = (RootChoice) actionChoices.get(ATTACK_CHOICE_INDEX);
@@ -83,12 +83,12 @@ public class EnemyAlgorithm
         
         if (!attackChoices.isEmpty())
         {
-            return chooseRandomChoice(attackChoices.getChoices());
+            return chooseRandomChoice(attackChoices.getChildren());
         }
         
         if (!movementChoices.isEmpty())
         {
-            return determineBestMovementChoice(movementChoices.getChoices());
+            return determineBestMovementChoice(movementChoices.getChildren());
         }
         
         return skipTurnChoice;
@@ -105,7 +105,7 @@ public class EnemyAlgorithm
         {
             return actionChoice;
         }
-        return chooseRandomChoice(rootChoice.getChoices());
+        return chooseRandomChoice(rootChoice.getChildren());
     }
     
     
@@ -139,7 +139,7 @@ public class EnemyAlgorithm
         {
             return;
         }
-        attackRootChoice.getChoices().get(0).select();
+        attackRootChoice.getChildren().get(0).select();
     }
     
     

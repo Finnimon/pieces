@@ -10,6 +10,7 @@ import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     
     
     @Override
-    public ActionChoice<FightController, Fight, FightAgent, FightRender> getActionChoice()
+    public @NotNull ActionChoice<FightController, Fight, FightAgent, FightRender> getActionChoice()
     {
         List<ActionChoice<FightController, Fight, FightAgent, FightRender>> choices = new ArrayList<>();
         
@@ -78,7 +79,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         choices.add(ATTACK_CHOICE_INDEX, getAttackRootChoice());
         choices.add(SPELL_CHOICE_INDEX, getSpellRootChoice());
         choices.add(SKIP_TURN_CHOICE_INDEX, getSkipTurnChoice());
-        return new RootActionChoice<>("root", "root", choices, this);//todo
+        return new RootActionChoice<>("root", "root", this, choices);//todo
     }
     
     

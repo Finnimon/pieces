@@ -1,6 +1,7 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.control.action.Action;
 import com.gitgud.engine.control.action.AttackAction;
 import com.gitgud.engine.control.action.TileMovementAction;
 import com.gitgud.engine.control.action.ToAction;
@@ -8,28 +9,43 @@ import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
 
-public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>,
-        ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
-        RenderType extends ActionContextRender<ModelType, GridMappableType>>
-        extends ActionChoice<AwaitingType, ModelType, GridMappableType, RenderType>
+/**
+ * A targeted ActionChoice whose {@link com.gitgud.engine.control.action.Action} is a {@link ToAction}.
+ *
+ * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
+ * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
+ * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
+ * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
+ */
+public class ToActionChoice<AaType extends ActionAwaitingController<MType, GmType, RType>,
+        MType extends ActionAwaiterModel<GmType>, GmType extends GridMappable,
+        RType extends ActionContextRender<MType, GmType>>
+        extends ActionChoice<AaType, MType, GmType, RType>
 {
-    public ToActionChoice(String name, String description, AwaitingType awaiter, ToAction<AwaitingType, Tile> action)
+    public ToActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter,
+                          @NotNull ToAction<AaType, Tile> action)
     {
         super(name, description, awaiter, action);
     }
     
     
-    private static <AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>,
-            ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
-            RenderType extends ActionContextRender<ModelType, GridMappableType>> Color determineHighlightColor(
-            ToAction<AwaitingType, Tile> action)
+    /**
+     * Determines the highlight color of the {@link ActionChoice} if it is shown on a
+     * {@link com.gitgud.engine.view.GridMapRender} as a
+     * {@link com.gitgud.engine.view.GridMapRender#addHighLight(Tile, Color, EventHandler)}
+     *
+     * @return The proper Highlight color for this {@link ActionChoice}
+     */
+    private @NotNull Color determineHighlightColor()
     {
         Color color = Color.BLUE;
+        Action<AaType> action = getAction();
         if (action instanceof AttackAction)
         {
             color = Color.RED;
@@ -41,21 +57,26 @@ public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelT
         return color;
     }
     
-    
+
     @Override
-    protected ToAction<AwaitingType, Tile> getAction()
+    protected @NotNull ToAction<AaType, Tile> getAction()
     {
-        return (ToAction<AwaitingType, Tile>) super.getAction();
+        return (ToAction<AaType, Tile>) super.getAction();
     }
     
     
+    /**
+     * Shows this {@link ActionChoice} on a {@link com.gitgud.engine.view.GridMapRender} as a clickable highlight.
+     *
+     * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     */
     @Override
-    public void show(@NotNull AwaitingType actionAwaiter)
+    public void show(@NotNull AaType actionAwaiter)
     {
-        ToAction<AwaitingType, Tile> action = getAction();
+        ToAction<AaType, Tile> action = getAction();
         
-        Color color = determineHighlightColor(action);
-        RenderType render = actionAwaiter.getRender();
+        Color color = determineHighlightColor();
+        RType render = actionAwaiter.getRender();
         Node node = render.getGridMapRender().addHighLight(action.getTo(), color, getMouseEventHandler());
         render.getHud().registerChoice(node);
     }

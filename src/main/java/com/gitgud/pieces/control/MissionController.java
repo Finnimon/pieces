@@ -10,6 +10,7 @@ import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
 import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     
     
     @Override
-    public ActionChoice<MissionController, Mission, GameObject, MissionRender> getActionChoice()
+    public @NotNull ActionChoice<MissionController, Mission, GameObject, MissionRender> getActionChoice()
     {
         RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice =
                 new MovementRootChoice<>(
@@ -45,7 +46,7 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         List<ActionChoice<MissionController, Mission, GameObject, MissionRender>> choices = List.of(rootToActionChoice,
                                                                                                     skipTurnChoice);
         
-        return new RootActionChoice<>("root", "root", choices, this);
+        return new RootActionChoice<>("root", "root", this, choices);
     }
     
     

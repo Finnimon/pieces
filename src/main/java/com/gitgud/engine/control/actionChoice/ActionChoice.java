@@ -19,10 +19,10 @@ import org.jetbrains.annotations.NotNull;
  * <p>Actions are contained by this class. It is used to structure possible Actions in the game as a tree.
  * <p>This class can act as a Leaf and is extended for parent functionalities
  *
- * @param <AaType>
- * @param <MType>
- * @param <GmType>
- * @param <RType>
+ * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
+ * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
+ * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
+ * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
  * @author Finn L.
  * @version 1.1
  * @Owner: Finn L.
@@ -62,12 +62,26 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
     private final Action<AaType> action;
     
     
+    /**
+     * <p>Default Constructor for {@link RootChoice}s
+     * <p>Defaults to {@link #ActionChoice(String, String, ActionAwaitingController, Action)} with null as action
+     *
+     * @see #ActionChoice(String, String, ActionAwaitingController, Action)  ActionChoice
+     */
     public ActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter)
     {
         this(name, description, awaiter, null);
     }
     
     
+    /**
+     * Creates and returns a new {@link ActionChoice} with the specified name, description, and action.
+     *
+     * @param name        The name of the {@link ActionChoice}.
+     * @param description The description of the {@link ActionChoice}.
+     * @param awaiter     The targeted {@link ActionAwaitingController}.
+     * @param action      The action to be enacted if {@link #select()} is called.
+     */
     public ActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter,
                         Action<AaType> action)
     {
@@ -78,6 +92,14 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
     }
     
     
+    /**
+     * Creates and returns an ActionChoice that does nothing but advancing the targeted {@link ActionAwaitingController}
+     *
+     * @param name          The name for the returned action
+     * @param description   The description for the returned action
+     * @param actionAwaiter The targeted {@link ActionAwaitingController}
+     * @return The {@link ActionChoice} that advances the targeted {@link ActionAwaitingController}
+     */
     public static <AAType extends ActionAwaitingController<MType, GType, RType>,
             MType extends ActionAwaiterModel<GType>, GType extends GridMappable,
             RType extends ActionContextRender<MType, GType>> @NotNull ActionChoice<AAType, MType, GType, RType> empty(
@@ -98,8 +120,9 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
     
     /**
      * Creates and returns an ActionChoice that returns to the absolute current {@link RootChoice} of the game
-     * @param name The name for the returned action
-     * @param description The description for the returned action
+     *
+     * @param name          The name for the returned action
+     * @param description   The description for the returned action
      * @param actionAwaiter The targeted {@link ActionAwaitingController}
      * @return The {@link ActionChoice} that returns to the absolute {@link RootChoice}
      */
@@ -225,8 +248,8 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
     
     
     /**
-     * <p>If this is a rootChoice, it's choices will be displayed.
-     * <p>Else it's Node will be shown in the {@link com.gitgud.engine.view.ActionContextHud}
+     * <p>If this is a {@link  RootChoice}, it's choices will be displayed.
+     * <p>In other cases this will show the ActionChoice as one of the choices in a {@link  RootChoice}
      *
      * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
      */

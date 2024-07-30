@@ -76,7 +76,7 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
             ImagePattern currentPattern = gridMapTiles.get(tile);
             
             Rectangle rectangle = SpriteHelper.createRectangle(currentPattern, tile, tileSize);
-            
+            rectangle.setSmooth(false);
             children.add(rectangle);
         }
     }

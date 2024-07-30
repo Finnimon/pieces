@@ -2,6 +2,7 @@ package com.gitgud.engine.control.action;
 
 import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.ActionAwaiterModel;
+import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
@@ -12,10 +13,10 @@ import com.gitgud.engine.view.GridMapRender;
 /**
  * Implements {@link FromToAction} to attack a {@link Tile} on the {@link GridMap}
  *
- * @param <AaType>
- * @param <MType>
- * @param <FType>
- * @param <RType>
+ * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
+ * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
+ * @param <FType> The type of the {@link Fighter} this Action can be applied to.
+ * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
  * @see Fighter
  * @author Finn L.
  * @Owner: Finn L.

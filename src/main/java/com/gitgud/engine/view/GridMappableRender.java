@@ -65,6 +65,7 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends S
         image.setPreserveRatio(true);
         image.fitHeightProperty().bind(this.heightProperty());
         image.maxWidth(this.widthProperty().get());
+        image.setSmooth(false);
         
         AppendRemoveNodeOnMouseEvent.add(this, new GridMappableInfoPane<>(data));
         getChildren().add(image);
