@@ -1,11 +1,16 @@
 package com.gitgud.graph;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 import java.util.function.Predicate;
 
 
 /**
- * The Default graph implementation does not contain Methods for removing Nodes and is neither weighted, nor directed.
+ * <p>The Default base graph implementation .
+ * <p>Is neither weighted, nor directed.
+ * <p>Adjecancies are noted using adjecency Collections
+ * <p>Allows for null Elements but not null vertices
  *
  * @param <Vertex>
  * @param <Element>
@@ -14,38 +19,74 @@ import java.util.function.Predicate;
  * @Owner: Finn L.
  * @Since: 13.06.2024
  * @Version: 2.0
+ * @see com.gitgud.graph.Vertex
+ * @see com.gitgud.graph.Edge
  */
 public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends com.gitgud.graph.Edge<Vertex>>
 {
     public static final float DEFAULT_WEIGHT = 0.9999f;
     
     
+    /**
+     * Vertices with Elements mapped to them
+     */
     private final TreeMap<Vertex, Element> vertices;
     
     
+    /**
+     * The Edges mapped to their from Vertex
+     */
     private final TreeMap<Vertex, HashSet<Edge>> edges;
     
     
-    public Graph(TreeMap<Vertex, Element> vertices, TreeMap<Vertex, HashSet<Edge>> edges)
+    /**
+     * Default Constructor that initializes a non-empty Graph
+     *
+     * @param vertices The Vertex Element mappings for this Graph
+     * @param edges    The Edges for this Graph
+     * @Precondition: All Vertices in {@param edges} are in {@param vertices} also and the other way around and their indexing is intact.
+     * @Postcondition: The Graph will function properly
+     */
+    public Graph(@NotNull TreeMap<Vertex, Element> vertices, @NotNull TreeMap<Vertex, HashSet<Edge>> edges)
     {
         this.vertices = vertices;
         this.edges = edges;
     }
     
     
+    /**
+     * Default Constructor that creates an empty Graph
+     */
     public Graph()
     {
-        this.vertices = new TreeMap<>();
-        this.edges = new TreeMap<>();
+        this(new TreeMap<>(), new TreeMap<>());
     }
     
     
+    /**
+     * <p>Allows direct access to {@link #vertices}.
+     * <p>Should not override to be public.
+     * <p>Careless accessing and changing may create a faulty and non-functional Graph
+     *
+     * @return The graphs {@link Vertex} {@link Element} mappings
+     * @Precondition: The data should never be directly accessed or be made public.
+     * @Postcondition: The Graph will remain intact and functional
+     */
     protected TreeMap<Vertex, Element> getVertices()
     {
         return vertices;
     }
     
     
+    /**
+     * <p>Allows direct access to {@link #edges}.
+     * <p>Should not override to be public.
+     * <p>Careless accessing and changing may create a faulty and non-functional Graph
+     *
+     * @return The graphs {@link Edge}s mapped to their from {@link Vertex}.
+     * @Precondition: This data should never be directly accessed or be made public.
+     * @Postcondition: The Graph will remain intact and functional
+     */
     protected TreeMap<Vertex, HashSet<Edge>> getEdgeMap()
     {
         return edges;
@@ -53,40 +94,51 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Adds a new {@param vertex} with Element and Edges to the Graph and assigns it an index.
+     * Adds a new {@param vertex} with Element and Edges to the Graph and assigns it the next available index.
      * If this already contains {@param vertex} it will return false and do nothing.
      *
-     * @param vertex
-     * @param element
-     * @param edges
-     * @return
+     * @param vertex  The new {@link Vertex}.
+     * @param element The element to be mapped to {@param vertex}.
+     * @param edges   The edges to be drawn from {@param vertex}.
+     * @return If the {@param vertex} was successfully added true or if the Graph already contained it false.
      */
-    public boolean add(Vertex vertex, Element element, HashSet<Edge> edges)
+    public boolean add(@NotNull Vertex vertex, Element element, @NotNull HashSet<Edge> edges)
     {
         if (vertices.containsKey(vertex))
         {
             return false;
         }
-        
-        
-        vertex.setIndex(vertices.size());
-        
+        //updates the vertex index
+        vertex.setIndex(size());
         
         vertices.put(vertex, element);
         addEdges(vertex, edges);
-        
         
         return true;
     }
     
     
-    public boolean add(Vertex vertex, Element element)
+    /**
+     * Override for {@link #add(com.gitgud.graph.Vertex, Object, HashSet)} that draws no Edges
+     *
+     * @param vertex  The new {@link Vertex}.
+     * @param element The element to be mapped to {@param vertex}.
+     * @return If the {@param vertex} was successfully added true or if the Graph already contained it false.
+     * @see #add(com.gitgud.graph.Vertex, Object, HashSet)
+     */
+    public boolean add(@NotNull Vertex vertex, Element element)
     {
         return add(vertex, element, new HashSet<>());
     }
     
-    
-    public boolean add(Vertex vertex)
+    /**
+     * Override for {@link #add(com.gitgud.graph.Vertex, Object)} that maps null to {@param vertex}.
+     *
+     * @param vertex  The new {@link Vertex}.
+     * @return If the {@param vertex} was successfully added true or if the Graph already contained it false.
+     * @see #add(com.gitgud.graph.Vertex, Object)
+    */
+    public boolean add(@NotNull Vertex vertex)
     {
         return add(vertex, null);
     }
@@ -95,22 +147,27 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     /**
      * Places {@param element} at {@param vertex} if this contains {@param vertex}.
      *
-     * @param vertex
-     * @param element
-     * @return the previous Element or null if there was none or if the vertex does not exist.
+     * @param vertex The vertex for {@param element} to be placed or
+     * @param element the {@link Element} to place on {@param  vertex}
+     * @return The {@link Element} previously associated with {@param vertex} or null if it is null or no association is in this graph.
      */
-    public Element place(Vertex vertex, Element element)
+    public Element place(@NotNull Vertex vertex, Element element)
     {
         if (!containsVertex(vertex))
         {
             return null;
         }
         
-        
         return vertices.put(vertex, element);
     }
     
-    
+    /**
+     * Places {@param element} at {@param index} if it is not out of bounds. and returns the previously associated element.
+     *
+     * @param index The {@link Vertex} index for {@param element} to be placed or
+     * @param element the {@link Element} to place on {@param  index}
+     * @return The {@link Element} previously associated with {@link Vertex} at {@param index} or null if it is null or no association is in this graph.
+     */
     public Element place(int index, Element element)
     {
         Vertex vertex = getVertex(index);
@@ -122,7 +179,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     /**
      * Gets the {@link Element} on {@param vertex}
      *
-     * @param vertex
+     * @param vertex The {@link Vertex} whose mapping should be queried.
      * @return {@link Element} mapped to {@param vertex}
      */
     public Element get(Vertex vertex)
@@ -337,8 +394,10 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
                 continue;
             }
             
-            if (weights.containsKey(current)&&weights.get(current)<remainingRange)
+            if (weights.containsKey(current) && weights.get(current) < remainingRange)
+            {
                 continue;
+            }
             
             subGraph.addAll(subGraph(current, remainingRange, fromEdgeFilter, toEdgeFilter));
         }

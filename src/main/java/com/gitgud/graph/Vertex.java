@@ -27,6 +27,13 @@ public interface Vertex extends Comparable<Vertex>
     void setIndex(int index);
     
     
+    /**
+     * Should never override
+     * @param o the object to be compared.
+     * @inheritDoc
+     * @Precondition: Do not override
+     * @Postcondition: Index based operations in the {@link Graph} will function properly
+     */
     @Override
     default int compareTo(Vertex o)
     {

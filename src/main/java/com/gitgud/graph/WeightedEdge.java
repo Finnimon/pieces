@@ -13,7 +13,9 @@ package com.gitgud.graph;
 public class WeightedEdge<Vertex> extends Edge<Vertex>
 {
     
-    
+    /**
+     * The default {@link #weight} if non is assigned
+     */
     private static final int DEFAULT_WEIGHT = 1;
     
     
