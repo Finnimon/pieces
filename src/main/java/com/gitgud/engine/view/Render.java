@@ -5,12 +5,12 @@ import javafx.scene.Node;
 
 
 /**
- * View Objects should usually implement this interface
+ * View Objects should usually implement this interface and also Extend Node
  *
  * @param <ModelType>
  * @author Finn L.
  * @Owner: Finn L.
- * @Since: 16.04.2024
+ * @Since: 30.05.2024
  * @Version: 1.1
  */
 public interface Render<ModelType>

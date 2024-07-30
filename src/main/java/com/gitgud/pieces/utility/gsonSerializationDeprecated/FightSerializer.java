@@ -1,4 +1,4 @@
-package com.gitgud.pieces.utility.gsonSerialization;
+package com.gitgud.pieces.utility.gsonSerializationDeprecated;
 
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.fight.Fight;

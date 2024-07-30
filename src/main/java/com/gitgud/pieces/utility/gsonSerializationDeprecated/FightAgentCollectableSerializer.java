@@ -1,4 +1,4 @@
-package com.gitgud.pieces.utility.gsonSerialization;
+package com.gitgud.pieces.utility.gsonSerializationDeprecated;
 
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.FightAgentCollectible;

@@ -7,6 +7,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 
 
+/**
+ * Allows modification and demodification of an object
+ *
+ * @param <T> The type of Object to be modified and demodified
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 20.04.2024
+ * @Version: 1.0
+ */
 @GsonPolymorph
 public abstract class Modifier<T> implements DisApplicable<T>
 {
@@ -16,7 +25,6 @@ public abstract class Modifier<T> implements DisApplicable<T>
         {
             object = m.modify(object);
         }
-        
         
         return object;
     }
