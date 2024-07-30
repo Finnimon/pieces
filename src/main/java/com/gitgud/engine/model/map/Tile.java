@@ -17,8 +17,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Tile implements Vertex2D, Sprite
 {
-    
-    
     public static final String WHITE = "\\white";
     
     
@@ -28,25 +26,55 @@ public class Tile implements Vertex2D, Sprite
     private static final String DIR_FILE_PATH = "src\\main\\resources\\com\\gitgud\\engine\\model\\map\\tile\\";
     
     
+    /**
+     * The terrain of the {@link Tile}.
+     */
     private final Terrain terrain;
     
     
+    /**
+     * The x coordinate of the {@link Tile}.
+     */
     private final int x;
     
     
+    /**
+     * The y coordinate of the {@link Tile}.
+     */
     private final int y;
     
     
+    /**
+     * The index of the {@link Tile}.
+     *
+     * @see com.gitgud.graph.Vertex
+     */
     private int index;
     
     
     /**
-     * Creates a new instance of {@code Point2D}.
+     * Constructor that assigns all attributes and calculates the index aswell as wraps the {@link TerrainType}.
      *
-     * @param x the x coordinate of the point
-     * @param y the y coordinate of the point
+     * @param x           The x coordinate of the Tile.
+     * @param y           The y coordinate of the Tile.
+     * @param terrainType The TerrainType of the Tiles Terrain.
+     * @param width       The Width of the Enclosing GridMap.
      */
-    public Tile(int x, int y, Terrain terrain, int index)
+    public Tile(int x, int y, @NotNull TerrainType terrainType, int width)
+    {
+        this(x, y, new Terrain(terrainType), x + width * y);
+    }
+    
+    
+    /**
+     * Default Constructor that assigns all attributes.
+     *
+     * @param x       The x coordinate of the Tile.
+     * @param y       The y coordinate of the Tile.
+     * @param terrain The terrain of the Tile.
+     * @param index   The index of the Tile.
+     */
+    public Tile(int x, int y, @NotNull Terrain terrain, int index)
     {
         this.x = x;
         this.y = y;
@@ -55,37 +83,26 @@ public class Tile implements Vertex2D, Sprite
     }
     
     
-    public static Tile create(int x, int y, TerrainType terrainType, int width)
-    {
-        return create(x, y, new Terrain(terrainType), width);
-    }
-    
-    
-    public static Tile create(int x, int y, Terrain terrain, int width)
-    {
-        return new Tile(x, y, terrain, x + width * y);
-    }
-    
-    
-    public static Tile create(int x, int y, int width)
-    {
-        return create(x, y, new Terrain(TerrainType.TRAVERSABLE), width);
-    }
-    
-    
+    @Override
     public int getIndex()
     {
         return index;
     }
     
     
+    @Override
     public void setIndex(int index)
     {
         this.index = index;
     }
     
     
-    public Terrain getTerrain()
+    /**
+     * Getter for the Terrain of the Tile.
+     *
+     * @return The Terrain of the Tile.
+     */
+    public @NotNull Terrain getTerrain()
     {
         return terrain;
     }
@@ -98,7 +115,12 @@ public class Tile implements Vertex2D, Sprite
     }
     
     
-    private String determineSpriteFilePath()
+    /**
+     * Determines the sprite file path of the {@link Tile}.
+     *
+     * @return
+     */
+    private @NotNull String determineSpriteFilePath()
     {
         StringBuilder stringBuilder = new StringBuilder(DIR_FILE_PATH);
         

@@ -2,7 +2,7 @@ package com.gitgud.engine.model.map;
 
 
 /**
- * The Geographic Type of Terrain on a {@link GridMap}
+ * The Type of Terrain on a {@link GridMap}
  *
  * @author Finn L.
  * @Owner: Finn L.
@@ -11,13 +11,6 @@ package com.gitgud.engine.model.map;
  */
 public enum TerrainType
 {
-    //todo icon binding
     TRAVERSABLE,
     NON_TRAVERSABLE;
-    
-    
-    public static TerrainType getCorrespondingTerrainType(String terrainTypeIndex)
-    {
-        return TerrainType.values()[Integer.parseInt(terrainTypeIndex)];
-    }
 }

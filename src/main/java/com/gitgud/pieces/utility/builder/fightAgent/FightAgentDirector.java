@@ -79,11 +79,10 @@ public class FightAgentDirector implements Director<FightAgent>
     {
         return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + level;
     }    @Override
-    public Builder<FightAgent> changeBuilder(Builder<FightAgent> builder)
+    public void changeBuilder(Builder<FightAgent> builder)
     {
         Builder<FightAgent> oldBuilder = this.builder;
         this.builder = builder;
-        return oldBuilder;
     }
     
     

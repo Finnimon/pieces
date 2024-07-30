@@ -6,12 +6,12 @@ import com.gitgud.engine.utility.Strings;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.utility.gsonSerialization.JsonParser;
+import com.gitgud.pieces.utility.JsonParser;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import static com.gitgud.pieces.utility.gsonSerialization.JsonParser.DOT_JSON;
+import static com.gitgud.pieces.utility.JsonParser.DOT_JSON;
 
 
 /**
@@ -83,7 +83,7 @@ enum MissionSelection implements Describable, Sprite
     public Mission getMission()
     {
         File file = new File(getJsonFilePath());
-        return JsonParser.getInstance().parseJson(file, Mission.class);
+        return JsonParser.getInstance().deserializeJsonFile(file, Mission.class);
     }
     
     

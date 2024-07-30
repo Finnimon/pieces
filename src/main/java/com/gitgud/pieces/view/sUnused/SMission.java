@@ -4,7 +4,6 @@ import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.IDimentions;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;

@@ -6,11 +6,12 @@ import javafx.scene.paint.Color;
 
 
 /**
- * @author Delfina
- * @version 1.0
- * @Owner: Delfina
- * @since 15.05.2024
  * Eine Klasse für Konstanten
+ *
+ * @author Delfina, Finn L.
+ * @version 1.1
+ * @Owner: Delfina
+ * @since 15.07.2024
  */
 public class Constants
 {

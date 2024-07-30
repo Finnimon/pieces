@@ -16,7 +16,7 @@ import java.util.List;
  * <p> Please remove from production code.
  *
  * @author Finn L.
- * @version 1.0
+ * @version 1.2
  * @Owner: Finn L.
  * @since 28.07.2024
  */
@@ -77,6 +77,11 @@ public enum Artefacts
     }
     
     
+    /**
+     * Creates an {@link Artefact} with the attributes provided by the Enum.
+     *
+     * @return The created Artefact.
+     */
     public Artefact createArtefact()
     {
         return new Artefact(name, description, spriteFilePath, modifier, level);

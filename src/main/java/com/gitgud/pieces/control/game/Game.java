@@ -6,7 +6,7 @@ import com.gitgud.pieces.control.*;
 import com.gitgud.pieces.model.game.ActiveGame;
 import com.gitgud.pieces.model.game.GameState;
 import com.gitgud.pieces.model.player.Difficulty;
-import com.gitgud.pieces.utility.gsonSerialization.JsonParser;
+import com.gitgud.pieces.utility.JsonParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javafx.concurrent.Task;
@@ -194,7 +194,7 @@ public class Game
         private static ActiveGame loadActiveGame(String saveFileName)
         {
             File saveFile = Saver.getSaveFile(saveFileName);
-            return JsonParser.getInstance().parseJson(saveFile, ActiveGame.class);
+            return JsonParser.getInstance().deserializeJsonFile(saveFile, ActiveGame.class);
         }
     }
     

@@ -9,7 +9,6 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.model.player.ResourceType;
 import com.gitgud.pieces.model.player.Wallet;
-import com.gitgud.pieces.view.IDimentions;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
