@@ -55,41 +55,24 @@ public class StageStyler
     }
     
     
-    private static Menu loadMenu()
+    private static Menu newGameMenu()
     {
-        Menu menu = new Menu("Load");
+        Menu menu = new Menu("New Game");
         
-        Predicate<ActionEvent> predicate = gameStateChecker(GameState.NOT_LOADED);
-        
-        MenuItem load = createMenuItem("Load", e ->
+        MenuItem newGame = createMenuItem("New Game", e ->
         {
-            if (!predicate.test(e))
-            {
-                Game.Saver.save();
-            }
-            //todo Game.Loader.load();
+            //todo            Game.New.start();
         });
         
-        menu.getItems().add(load);
+        menu.getItems().add(newGame);
         return menu;
     }
+    
     
     private static Menu settingsMenu()
     {
         Menu menu = new Menu("Settings");
         //// TODO: 29.07.2024  
-        return menu;
-    }
-    
-    private static Menu newGameMenu()
-    {
-        Menu menu = new Menu("New Game");
-        
-        MenuItem newGame = createMenuItem("New Game", e -> {
-//todo            Game.New.start();
-        });
-        
-        menu.getItems().add(newGame);
         return menu;
     }
     
@@ -113,7 +96,6 @@ public class StageStyler
         {
             if (!predicate.test(e))
             {
-                return;
             }
             //todo Game.Saver.saveAs();
         });
@@ -124,13 +106,23 @@ public class StageStyler
     }
     
     
-    private static Predicate<ActionEvent> gameStateChecker(GameState gameState)
+    private static Menu loadMenu()
     {
-        return e ->
+        Menu menu = new Menu("Load");
+        
+        Predicate<ActionEvent> predicate = gameStateChecker(GameState.NOT_LOADED);
+        
+        MenuItem load = createMenuItem("Load", e ->
         {
-            e.consume();
-            return ActiveGameController.getGameState() == gameState;
-        };
+            if (!predicate.test(e))
+            {
+                Game.Saver.save();
+            }
+            //todo Game.Loader.load();
+        });
+        
+        menu.getItems().add(load);
+        return menu;
     }
     
     
@@ -140,6 +132,16 @@ public class StageStyler
         menuItem.setText(text);
         menuItem.setOnAction(actionEventEventHandler);
         return menuItem;
+    }
+    
+    
+    private static Predicate<ActionEvent> gameStateChecker(GameState gameState)
+    {
+        return e ->
+        {
+            e.consume();
+            return ActiveGameController.getGameState() == gameState;
+        };
     }
     
     //    private static MenuImp

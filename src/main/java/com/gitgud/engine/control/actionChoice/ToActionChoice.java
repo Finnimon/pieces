@@ -1,19 +1,22 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.control.action.AttackAction;
 import com.gitgud.engine.control.action.TileMovementAction;
 import com.gitgud.engine.control.action.ToAction;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 
-public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
-                                                                                                                                                                                                                                                                                        ActionChoice<AwaitingType, ModelType, GridMappableType, RenderType>
+public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>,
+        ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
+        RenderType extends ActionContextRender<ModelType, GridMappableType>>
+        extends ActionChoice<AwaitingType, ModelType, GridMappableType, RenderType>
 {
     public ToActionChoice(String name, String description, AwaitingType awaiter, ToAction<AwaitingType, Tile> action)
     {
@@ -21,7 +24,9 @@ public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelT
     }
     
     
-    private static <AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> Color determineHighlightColor(
+    private static <AwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>,
+            ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
+            RenderType extends ActionContextRender<ModelType, GridMappableType>> Color determineHighlightColor(
             ToAction<AwaitingType, Tile> action)
     {
         Color color = Color.BLUE;
@@ -45,7 +50,7 @@ public class ToActionChoice<AwaitingType extends ActionAwaitingController<ModelT
     
     
     @Override
-    public void show(AwaitingType actionAwaiter)
+    public void show(@NotNull AwaitingType actionAwaiter)
     {
         ToAction<AwaitingType, Tile> action = getAction();
         

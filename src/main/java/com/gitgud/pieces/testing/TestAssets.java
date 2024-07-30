@@ -51,30 +51,6 @@ public interface TestAssets
     }
     
     
-    private static void createFightAgents(HashSet<FightAgent> fightAgents, Allegiance allegiance)
-    {
-        FightAgentDirector director = new FightAgentDirector();
-        
-        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
-                                                                       FightAgentType.KNIGHT,
-                                                                       Faction.MONOCHROME,
-                                                                       1)));
-        
-        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
-                                                                       FightAgentType.PAWN,
-                                                                       Faction.MONOCHROME,
-                                                                       1)));
-        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
-                                                                       FightAgentType.QUEEN,
-                                                                       Faction.MONOCHROME,
-                                                                       1)));
-        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
-                                                                       FightAgentType.ROOK,
-                                                                       Faction.MONOCHROME,
-                                                                       1)));
-    }
-    
-    
     static Wallet testWallet()
     {
         HashMap<ResourceType, SimpleLongProperty> resourceMap = new HashMap<>();
@@ -97,6 +73,30 @@ public interface TestAssets
     static SpellBook testSpellBook()
     {
         return new SpellBook(new HashSet<>());
+    }
+    
+    
+    private static void createFightAgents(HashSet<FightAgent> fightAgents, Allegiance allegiance)
+    {
+        FightAgentDirector director = new FightAgentDirector();
+        
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.KNIGHT,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
+        
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.PAWN,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.QUEEN,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
+        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
+                                                                       FightAgentType.ROOK,
+                                                                       Faction.MONOCHROME,
+                                                                       1)));
     }
     
 }

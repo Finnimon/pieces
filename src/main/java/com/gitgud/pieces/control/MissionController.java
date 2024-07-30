@@ -35,7 +35,8 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     @Override
     public ActionChoice<MissionController, Mission, GameObject, MissionRender> getActionChoice()
     {
-        RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice = new MovementRootChoice<>(
+        RootToActionChoice<MissionController, Mission, GameObject, MissionRender> rootToActionChoice =
+                new MovementRootChoice<>(
                 this,
                 getModel().getPlayerAgent(),
                 getModel().getPlayerAgentPosition());
@@ -49,6 +50,13 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     
     
     @Override
+    public boolean isFinished()
+    {
+        return getModel().isFinished();
+    }
+    
+    
+    @Override
     public void end()
     {
         ActiveGameController.getInstance().get().setMission(null);
@@ -56,13 +64,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         getModel().returnFightAgentsToArmy();
         
         Game.Flow.showNextScene();
-    }
-    
-    
-    @Override
-    public boolean isFinished()
-    {
-        return getModel().isFinished();
     }
     
     

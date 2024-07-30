@@ -84,8 +84,8 @@ public class ModifierSerializer implements JsonSerializer<Modifier<Type>>, JsonD
     
     
     @Override
-    public Modifier<Type> deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws
-                                                                                                      JsonParseException
+    public Modifier<Type> deserialize(JsonElement src, Type type, JsonDeserializationContext context)
+            throws JsonParseException
     {
         Modifier<?> modifier = null;
         

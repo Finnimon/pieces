@@ -98,7 +98,7 @@ public interface Missions
         gridMap.place(index, gameObject);
         
         gridMap.place(1, 31, new FightTrigger(Fights.FIGHT1));
-                gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
+        gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
         
         gridMap.place(2, 31, Artefacts.BLOODY_SWORD.createArtefact());
         

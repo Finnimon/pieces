@@ -11,7 +11,10 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
 
 
 public class Mission implements ActionAwaiterModel<GameObject>
@@ -31,12 +34,13 @@ public class Mission implements ActionAwaiterModel<GameObject>
     private final FightAgent[] discardedFightAgents;
     
     
+    private final SimpleIntegerProperty turn;
+    
+    
     private Tile playerAgentPosition;
     
     
     private boolean finished = false;
-    
-    private final SimpleIntegerProperty turn;
     
     
     public Mission(GridMap<GameObject> gridMap, Tile startingPosition, FightAgent[] activeFightAgents, int index)
@@ -128,13 +132,6 @@ public class Mission implements ActionAwaiterModel<GameObject>
     }
     
     
-    @Override
-    public SimpleIntegerProperty turnProperty()
-    {
-        return turn;
-    }
-    
-    
     public Collection<FightAgent> getFightAgents()
     {
         HashSet<FightAgent> fightAgents = new HashSet<>();
@@ -142,5 +139,12 @@ public class Mission implements ActionAwaiterModel<GameObject>
         fightAgents.addAll(Arrays.asList(discardedFightAgents));
         fightAgents.removeIf(Objects::isNull);
         return fightAgents;
+    }
+    
+    
+    @Override
+    public SimpleIntegerProperty turnProperty()
+    {
+        return turn;
     }
 }

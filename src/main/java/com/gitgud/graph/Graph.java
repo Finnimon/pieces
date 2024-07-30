@@ -40,26 +40,27 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
+     * Default Constructor that creates an empty Graph
+     */
+    public Graph()
+    {
+        this(new TreeMap<>(), new TreeMap<>());
+    }
+    
+    
+    /**
      * Default Constructor that initializes a non-empty Graph
      *
      * @param vertices The Vertex Element mappings for this Graph
      * @param edges    The Edges for this Graph
-     * @Precondition: All Vertices in {@code edges} are in {@code vertices} also and the other way around and their indexing is intact.
+     * @Precondition: All Vertices in {@code edges} are in {@code vertices} also and the other way around and their
+     * indexing is intact.
      * @Postcondition: The Graph will function properly
      */
     public Graph(@NotNull TreeMap<Vertex, Element> vertices, @NotNull TreeMap<Vertex, HashSet<Edge>> edges)
     {
         this.vertices = vertices;
         this.edges = edges;
-    }
-    
-    
-    /**
-     * Default Constructor that creates an empty Graph
-     */
-    public Graph()
-    {
-        this(new TreeMap<>(), new TreeMap<>());
     }
     
     
@@ -79,6 +80,46 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
+     * Gets an unmodifiable mapping of {@link Vertex}es to {@link Edge}s
+     *
+     * @return An unmodifiable mapping of {@link #edges}
+     */
+    public Map<Vertex, Set<Edge>> unmodifiableEdgeMap()
+    {
+        HashMap<Vertex, Set<Edge>> map = new HashMap<>();
+        for (Vertex vertex : verticeSet())
+        {
+            map.put(vertex, (Collections.unmodifiableSet(getEdges(vertex))));
+        }
+        
+        return Collections.unmodifiableMap(map);
+    }
+    
+    
+    /**
+     * Returns all vertices
+     *
+     * @return All {@link Vertex}es
+     */
+    public TreeSet<Vertex> verticeSet()
+    {
+        return new TreeSet<>(vertices.keySet());
+    }
+    
+    
+    /**
+     * Gets all edges from {@code root}
+     *
+     * @param root The root {@link Vertex} for the search
+     * @return All {@link Edge}s from {@code root}
+     */
+    public HashSet<Edge> getEdges(Vertex root)
+    {
+        return getEdgeMap().get(root);
+    }
+    
+    
+    /**
      * <p>Allows direct access to {@link #edges}.
      * <p>Should not override to be public.
      * <p>Careless accessing and changing may create a faulty and non-functional Graph
@@ -94,19 +135,29 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Gets an unmodifiable mapping of {@link Vertex}es to {@link Edge}s
+     * Override for {@link #add(com.gitgud.graph.Vertex, Object)} that maps null to {@code vertex}.
      *
-     * @return An unmodifiable mapping of {@link #edges}
+     * @param vertex The new {@link Vertex}.
+     * @return If the {@code vertex} was successfully added true or if the Graph already contained it false.
+     * @see #add(com.gitgud.graph.Vertex, Object)
      */
-    public Map<Vertex,Set<Edge>> unmodifiableEdgeMap()
+    public boolean add(@NotNull Vertex vertex)
     {
-        HashMap<Vertex,Set<Edge>> map = new HashMap<>();
-        for (Vertex vertex : verticeSet())
-        {
-            map.put(vertex, (Collections.unmodifiableSet(getEdges(vertex))));
-        }
-        
-        return Collections.unmodifiableMap(map);
+        return add(vertex, null);
+    }
+    
+    
+    /**
+     * Override for {@link #add(com.gitgud.graph.Vertex, Object, HashSet)} that draws no Edges
+     *
+     * @param vertex  The new {@link Vertex}.
+     * @param element The element to be mapped to {@code vertex}.
+     * @return If the {@code vertex} was successfully added true or if the Graph already contained it false.
+     * @see #add(com.gitgud.graph.Vertex, Object, HashSet)
+     */
+    public boolean add(@NotNull Vertex vertex, Element element)
+    {
+        return add(vertex, element, new HashSet<>());
     }
     
     
@@ -136,126 +187,55 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Override for {@link #add(com.gitgud.graph.Vertex, Object, HashSet)} that draws no Edges
+     * Determines the number of {@link Vertex}es in this Graph
      *
-     * @param vertex  The new {@link Vertex}.
-     * @param element The element to be mapped to {@code vertex}.
-     * @return If the {@code vertex} was successfully added true or if the Graph already contained it false.
-     * @see #add(com.gitgud.graph.Vertex, Object, HashSet)
+     * @return The number of {@link Vertex}es in this Graph
      */
-    public boolean add(@NotNull Vertex vertex, Element element)
+    public int size()
     {
-        return add(vertex, element, new HashSet<>());
+        return vertices.size();
     }
     
     
     /**
-     * Override for {@link #add(com.gitgud.graph.Vertex, Object)} that maps null to {@code vertex}.
+     * Adds a set of edges from {@code from}
      *
-     * @param vertex The new {@link Vertex}.
-     * @return If the {@code vertex} was successfully added true or if the Graph already contained it false.
-     * @see #add(com.gitgud.graph.Vertex, Object)
+     * @param from  The from {@link Vertex}
+     * @param edges The {@link Edge}s to be drawn from {@code from}
+     * @return Whether any of the {@code edges} were added
      */
-    public boolean add(@NotNull Vertex vertex)
+    public boolean addEdges(Vertex from, Set<Edge> edges)
     {
-        return add(vertex, null);
-    }
-    
-    
-    /**
-     * Places {@code element} at {@code vertex} if this contains {@code vertex}.
-     *
-     * @param vertex  The vertex for {@code element} to be placed or
-     * @param element the {@link Element} to place on {@code vertex}
-     * @return The {@link Element} previously associated with {@code vertex} or null if it is null or no association is in this graph.
-     */
-    public Element place(@NotNull Vertex vertex, Element element)
-    {
-        if (!containsVertex(vertex))
+        if (!containsVertex(from))
         {
-            return null;
+            return false;
         }
         
-        return vertices.put(vertex, element);
-    }
-    
-    
-    /**
-     * Places {@code element} at {@code index} if it is not out of bounds. and returns the previously associated element.
-     *
-     * @param index   The {@link Vertex} index for {@code element} to be placed or
-     * @param element the {@link Element} to place on {@code index}
-     * @return The {@link Element} previously associated with {@link Vertex} at {@code index} or null if it is null or no association is in this graph.
-     */
-    public Element place(int index, Element element)
-    {
-        Vertex vertex = getVertex(index);
+        boolean anyAdded = false;
         
-        return place(vertex, element);
-    }
-    
-    
-    /**
-     * Gets the {@link Element} on {@code vertex}
-     *
-     * @param vertex The {@link Vertex} whose mapping should be queried.
-     * @return {@link Element} mapped to {@code vertex}
-     */
-    public Element get(Vertex vertex)
-    {
-        return vertices.get(vertex);
-    }
-    
-    
-    /**
-     * Gets the {@link Element} at {@code index}
-     *
-     * @param index The Index of the {@link Vertex} which has the {@link Element}
-     * @return The {@link Element} or null if there is none
-     */
-    public Element get(int index)
-    {
-        return get(getVertex(index));
-    }
-    
-    
-    /**
-     * Gets the {@link Vertex} at {@code index}
-     *
-     * @param index The Index of the {@link Vertex}
-     * @return The {@link Vertex} or null if {@code index} is out of bounds
-     */
-    public Vertex getVertex(int index)
-    {
-        if (index >= size())
+        for (Edge edge : edges)
         {
-            return null;
+            boolean edgeAdded = addEdge(from, edge);
+            
+            if (anyAdded || !edgeAdded)
+            {
+                continue;
+            }
+            anyAdded = true;
         }
-        return new ArrayList<>(this.verticeSet()).get(index);
+        return anyAdded;
     }
     
     
     /**
-     * Finds first the {@link Vertex} with {@code element} mapped to it and returns it
+     * Checks if the Graph contains {@code vertex}
      *
-     * @param element The value mapped to the {@link Vertex}.
-     * @return The first {@link Vertex} with {@code element} mapped to it or null if there is none
+     * @param vertex The {@link Vertex} to be checked
+     * @return if the Graph contains {@code vertex}
      */
-    public Vertex getVertex(Element element)
+    public boolean containsVertex(Vertex vertex)
     {
-        return getVertices(element).stream().findFirst().orElse(null);
-    }
-    
-    
-    /**
-     * Gets all Vertices with {@code element} as value.
-     *
-     * @param element The value mapped to the {@link Vertex}es.
-     * @return All {@link Vertex}es with {@code element} mapped to it.
-     */
-    public Collection<Vertex> getVertices(Element element)
-    {
-        return verticeSet().stream().filter(vertex -> get(vertex) == element).toList();
+        return vertices.containsKey(vertex);
     }
     
     
@@ -300,32 +280,102 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Adds a set of edges from {@code from}
+     * Places {@code element} at {@code index} if it is not out of bounds. and returns the previously associated
+     * element.
      *
-     * @param from  The from {@link Vertex}
-     * @param edges The {@link Edge}s to be drawn from {@code from}
-     * @return Whether any of the {@code edges} were added
+     * @param index   The {@link Vertex} index for {@code element} to be placed or
+     * @param element the {@link Element} to place on {@code index}
+     * @return The {@link Element} previously associated with {@link Vertex} at {@code index} or null if it is null
+     * or no association is in this graph.
      */
-    public boolean addEdges(Vertex from, Set<Edge> edges)
+    public Element place(int index, Element element)
     {
-        if (!containsVertex(from))
+        Vertex vertex = getVertex(index);
+        
+        return place(vertex, element);
+    }
+    
+    
+    /**
+     * Gets the {@link Vertex} at {@code index}
+     *
+     * @param index The Index of the {@link Vertex}
+     * @return The {@link Vertex} or null if {@code index} is out of bounds
+     */
+    public Vertex getVertex(int index)
+    {
+        if (index >= size())
         {
-            return false;
+            return null;
+        }
+        return new ArrayList<>(this.verticeSet()).get(index);
+    }
+    
+    
+    /**
+     * Places {@code element} at {@code vertex} if this contains {@code vertex}.
+     *
+     * @param vertex  The vertex for {@code element} to be placed or
+     * @param element the {@link Element} to place on {@code vertex}
+     * @return The {@link Element} previously associated with {@code vertex} or null if it is null or no association
+     * is in this graph.
+     */
+    public Element place(@NotNull Vertex vertex, Element element)
+    {
+        if (!containsVertex(vertex))
+        {
+            return null;
         }
         
-        boolean anyAdded = false;
-        
-        for (Edge edge : edges)
-        {
-            boolean edgeAdded = addEdge(from, edge);
-            
-            if (anyAdded || !edgeAdded)
-            {
-                continue;
-            }
-            anyAdded = true;
-        }
-        return anyAdded;
+        return vertices.put(vertex, element);
+    }
+    
+    
+    /**
+     * Gets the {@link Element} at {@code index}
+     *
+     * @param index The Index of the {@link Vertex} which has the {@link Element}
+     * @return The {@link Element} or null if there is none
+     */
+    public Element get(int index)
+    {
+        return get(getVertex(index));
+    }
+    
+    
+    /**
+     * Gets the {@link Element} on {@code vertex}
+     *
+     * @param vertex The {@link Vertex} whose mapping should be queried.
+     * @return {@link Element} mapped to {@code vertex}
+     */
+    public Element get(Vertex vertex)
+    {
+        return vertices.get(vertex);
+    }
+    
+    
+    /**
+     * Finds first the {@link Vertex} with {@code element} mapped to it and returns it
+     *
+     * @param element The value mapped to the {@link Vertex}.
+     * @return The first {@link Vertex} with {@code element} mapped to it or null if there is none
+     */
+    public Vertex getVertex(Element element)
+    {
+        return getVertices(element).stream().findFirst().orElse(null);
+    }
+    
+    
+    /**
+     * Gets all Vertices with {@code element} as value.
+     *
+     * @param element The value mapped to the {@link Vertex}es.
+     * @return All {@link Vertex}es with {@code element} mapped to it.
+     */
+    public Collection<Vertex> getVertices(Element element)
+    {
+        return verticeSet().stream().filter(vertex -> get(vertex) == element).toList();
     }
     
     
@@ -342,25 +392,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Checks if the Graph contains {@code vertex}
+     * Queries the Graph for all non-null {@link Element}s
      *
-     * @param vertex The {@link Vertex} to be checked
-     * @return if the Graph contains {@code vertex}
+     * @return all non-null {@link Element}s in this Graph
      */
-    public boolean containsVertex(Vertex vertex)
+    public Collection<Element> nonNullElements()
     {
-        return vertices.containsKey(vertex);
-    }
-    
-    
-    /**
-     * Returns all vertices
-     *
-     * @return All {@link Vertex}es
-     */
-    public TreeSet<Vertex> verticeSet()
-    {
-        return new TreeSet<>(vertices.keySet());
+        return elements().stream().filter(Objects::nonNull).toList();
     }
     
     
@@ -376,17 +414,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Queries the Graph for all non-null {@link Element}s
-     *
-     * @return all non-null {@link Element}s in this Graph
-     */
-    public Collection<Element> nonNullElements()
-    {
-        return elements().stream().filter(Objects::nonNull).toList();
-    }
-    
-    
-    /**
      * Gets an unmodifiable mapping of {@link Vertex}es to {@link Element}s
      *
      * @return An unmodifiable mapping of {@link Vertex}es to {@link Element}s
@@ -394,17 +421,6 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     public Map<Vertex, Element> unmodifiableMapping()
     {
         return Collections.unmodifiableMap(vertices);
-    }
-    
-    
-    /**
-     * Determines the number of {@link Vertex}es in this Graph
-     *
-     * @return The number of {@link Vertex}es in this Graph
-     */
-    public int size()
-    {
-        return vertices.size();
     }
     
     
@@ -429,19 +445,8 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * Gets all edges from {@code root}
-     *
-     * @param root The root {@link Vertex} for the search
-     * @return All {@link Edge}s from {@code root}
-     */
-    public HashSet<Edge> getEdges(Vertex root)
-    {
-        return getEdgeMap().get(root);
-    }
-    
-    
-    /**
-     * Defaults to {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate, HashMap)} with a new HashMap for weights
+     * Defaults to {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate, HashMap)} with a new
+     * HashMap for weights
      *
      * @see #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate, HashMap)
      */
@@ -458,10 +463,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
      *
      * @param root           The root {@link Vertex} for the SubGraph
      * @param range          The maximum allowed distance from {@code root} going by adjacency
-     * @param fromEdgeFilter a predicate to filter the {@link Vertex}s whose from edges should not be traversed. This excludes {@code root}
+     * @param fromEdgeFilter a predicate to filter the {@link Vertex}s whose from edges should not be traversed. This
+     *                      excludes {@code root}
      * @param toEdgeFilter   a predicate to filter the {@link Vertex}s whose edges should not be traversed
-     * @param weights        The so far lowest weights from {@code root} of all visited vertices used for recursion only. Should be called with {@code new HashMap()}
-     * @return The SubGraph where all {@link Vertex}es are within {@code range} from {@code root} or an Empty Graph if {@code root} is not in this Graph
+     * @param weights        The so far lowest weights from {@code root} of all visited vertices used for recursion
+     *                       only. Should be called with {@code new HashMap()}
+     * @return The SubGraph where all {@link Vertex}es are within {@code range} from {@code root} or an Empty Graph
+     * if {@code root} is not in this Graph
      */
     private Graph<Vertex, Element, Edge> subGraph(Vertex root, double range, Predicate<Vertex> fromEdgeFilter,
                                                   Predicate<Vertex> toEdgeFilter, HashMap<Vertex, Double> weights)
@@ -519,7 +527,8 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * defaults to {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate)} casting {@code range} to {@code double}
+     * defaults to {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate)} casting {@code range} to
+     * {@code double}
      *
      * @see #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate)
      */
@@ -531,7 +540,8 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * defaults to {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate)} casting {@code range} to {@code double}
+     * defaults to {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate)} casting {@code range} to
+     * {@code double}
      *
      * @see #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate)
      */
@@ -543,7 +553,8 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     
     /**
-     * <p>Determines the Weight of an {@link Edge} for use in {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate, HashMap)}
+     * <p>Determines the Weight of an {@link Edge} for use in
+     * {@link #subGraph(com.gitgud.graph.Vertex, double, Predicate, Predicate, HashMap)}
      * <p>Defaults to {@link #DEFAULT_WEIGHT} if the {@link Edge} does not implement {@link WeightedEdge}
      *
      * @param edge the {@link Edge} whose weight should be determined
@@ -586,5 +597,4 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
             }
         }
     }
-    
 }

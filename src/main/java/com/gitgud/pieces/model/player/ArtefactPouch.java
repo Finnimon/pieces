@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 
 
 /**
@@ -75,7 +74,7 @@ public class ArtefactPouch
             return;
         }
         
-        getAffectableFightAgents().forEach(fA->artefact.getModifier().apply(fA));
+        getAffectableFightAgents().forEach(fA -> artefact.getModifier().apply(fA));
     }
     
     
@@ -112,6 +111,6 @@ public class ArtefactPouch
     {
         Core.replaceFirstOccurrence(equippedArtefacts, artefact, null);
         
-        getAffectableFightAgents().forEach(fA->artefact.getModifier().disApply(fA));
+        getAffectableFightAgents().forEach(fA -> artefact.getModifier().disApply(fA));
     }
 }

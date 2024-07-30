@@ -27,6 +27,15 @@ public class FightAgentCollectible extends GameObject implements Collectible<Mis
     
     
     @Override
+    public boolean isCollectionPossible()
+    {
+        Mission mission = ActiveGameController.getInstance().get().getMission();
+        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::isNull) ||
+               Arrays.stream(mission.getDiscardedFightAgents()).anyMatch(Objects::isNull);
+    }
+    
+    
+    @Override
     public void addToInventory()
     {
         FightAgent fightAgent = getFightAgent();
@@ -42,15 +51,6 @@ public class FightAgentCollectible extends GameObject implements Collectible<Mis
         
         FightAgent[] discardedFightAgents = mission.getDiscardedFightAgents();
         Core.insertAtFirstNullIndex(discardedFightAgents, fightAgent);
-    }
-    
-    
-    @Override
-    public boolean isCollectionPossible()
-    {
-        Mission mission = ActiveGameController.getInstance().get().getMission();
-        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::isNull) ||
-               Arrays.stream(mission.getDiscardedFightAgents()).anyMatch(Objects::isNull);
     }
     
     

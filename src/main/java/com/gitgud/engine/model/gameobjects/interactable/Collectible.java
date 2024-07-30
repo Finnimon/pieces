@@ -29,13 +29,13 @@ public interface Collectible<AAType extends ActionAwaitingController<?, GameObje
     }
     
     
-    void addToInventory();
-    
-    
     default boolean isCollectionPossible()
     {
         return true;
     }
+    
+    
+    void addToInventory();
     
     
     private void removeFromMap(AAType awaiter)

@@ -5,6 +5,7 @@ import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -56,7 +57,7 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
     
     
     @Override
-    public final String getSpriteFilePath()
+    public final @NotNull String getSpriteFilePath()
     {
         return spriteFilePath;
     }

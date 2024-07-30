@@ -1,8 +1,5 @@
 package com.gitgud.graph;
 
-import com.gitgud.engine.model.map.Tile;
-
-
 /**
  * <p>Implemented by {@link Graph}s that should be recangular.
  * <p>This interface allows different operations on the {@link Graph} by assuming it is a Grid of vertices.
@@ -17,21 +14,14 @@ import com.gitgud.engine.model.map.Tile;
 public interface RectangularGraph<Vertex extends Vertex2D, Element>
 {
     /**
-     * <p>Getter for height of the {@link RectangularGraph} assuming that it is rectangular and every {@link Vertex2D} has the same height of 1.
-     * <p>In other words the number of {@link Vertex2D} in the {@link Graph} is equal to {@link #getWidth()} * {@link #getHeight()}
+     * <p>Getter for height of the {@link RectangularGraph} assuming that it is rectangular and every
+     * {@link Vertex2D} has the same height of 1.
+     * <p>In other words the number of {@link Vertex2D} in the {@link Graph} is equal to {@link #getWidth()} *
+     * {@link #getHeight()}
      *
      * @return the height
      */
     int getHeight();
-    
-    
-    /**
-     * <p>Getter for width of the {@link RectangularGraph} assuming that it is rectangular and every {@link Vertex2D} has the same width of 1.
-     * <p>In other words the number of {@link Vertex2D} in the {@link Graph} is equal to {@link #getWidth()} * {@link #getHeight()}
-     *
-     * @return the width
-     */
-    int getWidth();
     
     
     /**
@@ -49,30 +39,6 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
      * @return the previous Element or null if there was none
      */
     Element place(int x, int y, Element element);
-    
-    
-    /**
-     * <p>Checks if {@param vertex} is valid going by its {@link Vertex2D#getX()}, {@link Vertex2D#getY()} and {@link Vertex2D#getIndex()}
-     * <p>{@link Vertex2D#getX()}, {@link Vertex2D#getY()} and {@link Vertex2D#getIndex()}
-     *
-     * @param vertex the {@link Vertex2D} to be checked for validity
-     * @return if the {@param vertex} is valid
-     */
-    default boolean isVertexValid(Vertex vertex)
-    {
-        int index = vertex.getIndex();
-        
-        boolean isValid = ((Graph<?, ?, ?>) this).getVertex(index) == vertex;
-        
-        if (!isValid)
-        {
-            return false;
-        }
-        
-        isValid = calculateIndex(vertex) == index;
-        
-        return isValid;
-    }
     
     
     /**
@@ -96,28 +62,27 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
     
     
     /**
-     * Calculates the proper Index for a {@link Vertex} at the {@link Point2D} ({@param x},{@param y})
+     * <p>Checks if {@param vertex} is valid going by its {@link Vertex2D#getX()}, {@link Vertex2D#getY()} and
+     * {@link Vertex2D#getIndex()}
+     * <p>{@link Vertex2D#getX()}, {@link Vertex2D#getY()} and {@link Vertex2D#getIndex()}
      *
-     * @param x X coordinate
-     * @param y Y coordinate
-     * @return the proper Index for a {@link Vertex} at the {@link Point2D} ({@param x},{@param y})
+     * @param vertex the {@link Vertex2D} to be checked for validity
+     * @return if the {@param vertex} is valid
      */
-    default int calculateIndex(int x, int y)
+    default boolean isVertexValid(Vertex vertex)
     {
-        return x + y * getWidth();
-    }
-    
-    
-    /**
-     * Finds the Vertex at the Point ({@param x},{@param y})
-     *
-     * @param x the x coordinate of the queried {@link Vertex}
-     * @param y the Y coordinate of the queried {@link Vertex}
-     * @return The Vertex at the Point ({@param x},{@param y})
-     */
-    default Vertex getVertex(int x, int y)
-    {
-        return ((Graph<Vertex, Element, ?>) this).getVertex(calculateIndex(x, y));
+        int index = vertex.getIndex();
+        
+        boolean isValid = ((Graph<?, ?, ?>) this).getVertex(index) == vertex;
+        
+        if (!isValid)
+        {
+            return false;
+        }
+        
+        isValid = calculateIndex(vertex) == index;
+        
+        return isValid;
     }
     
     
@@ -135,7 +100,45 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
     
     
     /**
+     * Calculates the proper Index for a {@link Vertex} at the {@link Point2D} ({@param x},{@param y})
+     *
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return the proper Index for a {@link Vertex} at the {@link Point2D} ({@param x},{@param y})
+     */
+    default int calculateIndex(int x, int y)
+    {
+        return x + y * getWidth();
+    }
+    
+    
+    /**
+     * <p>Getter for width of the {@link RectangularGraph} assuming that it is rectangular and every {@link Vertex2D}
+     * has the same width of 1.
+     * <p>In other words the number of {@link Vertex2D} in the {@link Graph} is equal to {@link #getWidth()} *
+     * {@link #getHeight()}
+     *
+     * @return the width
+     */
+    int getWidth();
+    
+    
+    /**
+     * Finds the Vertex at the Point ({@param x},{@param y})
+     *
+     * @param x the x coordinate of the queried {@link Vertex}
+     * @param y the Y coordinate of the queried {@link Vertex}
+     * @return The Vertex at the Point ({@param x},{@param y})
+     */
+    default Vertex getVertex(int x, int y)
+    {
+        return ((Graph<Vertex, Element, ?>) this).getVertex(calculateIndex(x, y));
+    }
+    
+    
+    /**
      * Finds the {@link Element} at the point ({@param x},{@param y}) on this {@link Graph} or null
+     *
      * @param x the x coordinate to query
      * @param y the y coordinate to query
      * @return the {@link Element} at the point ({@param x},{@param y}) on this {@link Graph}
@@ -148,6 +151,7 @@ public interface RectangularGraph<Vertex extends Vertex2D, Element>
     
     /**
      * Gets the Vertices in the Grid as defined by {@link Vertex#getX()} {@link Vertex#getY()}
+     *
      * @return The Vertices of this Graph as a 2D Array/Grid
      */
     Vertex[][] getVertexGrid();

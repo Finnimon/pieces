@@ -9,6 +9,7 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.Player;
 import com.gitgud.pieces.utility.Core;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -34,10 +35,10 @@ public final class Spell implements Sprite, Describable, Named, Leveler
     private final float successChance;
     
     
-    private SimpleIntegerProperty level;
+    private final SimpleIntegerProperty level;
     
     
-    private SimpleIntegerProperty manaCost;
+    private final SimpleIntegerProperty manaCost;
     
     
     /**
@@ -49,20 +50,19 @@ public final class Spell implements Sprite, Describable, Named, Leveler
      * @param manaCost
      * @param successChance
      */
-    public Spell(String name, String description, String spriteFilePath, SpellType type, Applicable<FightAgent> applicable,
-                 int level, int manaCost, float successChance)
+    public Spell(String name, String description, String spriteFilePath, SpellType type,
+                 Applicable<FightAgent> applicable, int level, int manaCost, float successChance)
     {
         this.name = name;
         this.description = description;
         this.spriteFilePath = spriteFilePath;
         this.type = type;
         this.applicable = applicable;
-        this.manaCost =new SimpleIntegerProperty( manaCost);
+        this.manaCost = new SimpleIntegerProperty(manaCost);
         this.successChance = successChance;
         this.level = new SimpleIntegerProperty(level);
         this.manaCost.bind(this.manaCost.subtract(levelProperty()));
     }
-    
     
     
     @Override
@@ -96,7 +96,7 @@ public final class Spell implements Sprite, Describable, Named, Leveler
     
     
     @Override
-    public String getSpriteFilePath()
+    public @NotNull String getSpriteFilePath()
     {
         return spriteFilePath;
     }

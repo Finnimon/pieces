@@ -25,6 +25,12 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
     private final MouseButton mouseButton;
     
     
+    public AppendRemoveNodeOnMouseEvent(Pane parent, Node appendix)
+    {
+        this(parent, appendix, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED, MouseButton.SECONDARY);
+    }
+    
+    
     public AppendRemoveNodeOnMouseEvent(Pane parent, Node appendix, EventType<MouseEvent> addEvent,
                                         EventType<MouseEvent> removeEvent, MouseButton mouseButton)
     {
@@ -36,9 +42,9 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
     }
     
     
-    public AppendRemoveNodeOnMouseEvent(Pane parent, Node appendix)
+    public static void add(Pane parent, Node Appendix)
     {
-        this(parent, appendix, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED, MouseButton.SECONDARY);
+        add(parent, Appendix, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED, MouseButton.SECONDARY);
     }
     
     
@@ -52,12 +58,6 @@ public class AppendRemoveNodeOnMouseEvent implements EventHandler<MouseEvent>
                                                                             mouseButton);
         parent.addEventHandler(addEvent, handler);
         parent.addEventHandler(removeEvent, handler);
-    }
-    
-    
-    public static void add(Pane parent, Node Appendix)
-    {
-        add(parent, Appendix, MouseEvent.MOUSE_PRESSED, MouseEvent.MOUSE_RELEASED, MouseButton.SECONDARY);
     }
     
     

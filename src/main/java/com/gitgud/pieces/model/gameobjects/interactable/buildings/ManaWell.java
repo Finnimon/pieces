@@ -16,12 +16,22 @@ public class ManaWell extends GridMappableBuilding<MissionController>
     
     
     //todo
-    private static final String SPRITE_URL = "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/buildings/ManaWell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable" +
+                                             "/buildings/ManaWell.png";
     
     
     public ManaWell()
     {
         super(NAME, DESCRIPTION, SPRITE_URL);
+    }
+    
+    
+    @Override
+    public void interact(MissionController missionController)
+    {
+        Mission mission = missionController.getModel();
+        replenishFightFiguresMana(mission.getActiveFightAgents());
+        replenishFightFiguresMana(mission.getDiscardedFightAgents());
     }
     
     
@@ -35,15 +45,6 @@ public class ManaWell extends GridMappableBuilding<MissionController>
             }
             agent.setMana(agent.getMaxMana());
         }
-    }
-    
-    
-    @Override
-    public void interact(MissionController missionController)
-    {
-        Mission mission = missionController.getModel();
-        replenishFightFiguresMana(mission.getActiveFightAgents());
-        replenishFightFiguresMana(mission.getDiscardedFightAgents());
     }
 }
 

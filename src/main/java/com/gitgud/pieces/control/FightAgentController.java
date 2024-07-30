@@ -42,12 +42,6 @@ public class FightAgentController extends GridMovableController<FightAgent>
     }
     
     
-    public FightAgent getFightAgent()
-    {
-        return fightAgent;
-    }
-    
-    
     @Override
     public Tile moveTo(Tile tile)
     {
@@ -58,6 +52,12 @@ public class FightAgentController extends GridMovableController<FightAgent>
         //todo update gui method
         
         return oldTile;
+    }
+    
+    
+    public FightAgent getFightAgent()
+    {
+        return fightAgent;
     }
     
     

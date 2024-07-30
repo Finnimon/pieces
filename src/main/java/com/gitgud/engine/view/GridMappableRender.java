@@ -10,8 +10,21 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 
-public class GridMappableRender<GridMappableType extends GridMappable> extends StackPane implements Render<GridMappableType>
+public class GridMappableRender<GridMappableType extends GridMappable> extends StackPane
+        implements Render<GridMappableType>
 {
+    
+    public GridMappableRender(GridMappableType gridMappable)
+    {
+        this(gridMappable, 0, 0);
+    }
+    
+    
+    public GridMappableRender(GridMappableType gridMappable, double x, double y)
+    {
+        this(gridMappable, x, y, gridMappable.getSprite().getWidth(), gridMappable.getSprite().getHeight());
+    }
+    
     
     public GridMappableRender(GridMappableType gridMappable, double x, double y, double width, double height)
     {
@@ -22,27 +35,26 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends S
     }
     
     
-    public GridMappableRender(GridMappableType gridMappable, double x, double y)
+    private void setSize(double width, double height)
     {
-        this(gridMappable, x, y, gridMappable.getSprite().getWidth(), gridMappable.getSprite().getHeight());
+        setMaxWidth(width);
+        setPrefWidth(width);
+        setMinWidth(width);
+        setMaxHeight(height);
+        setPrefHeight(height);
+        setMinHeight(height);
     }
     
     
-    public GridMappableRender(GridMappableType gridMappable)
+    public final void setX(double x)
     {
-        this(gridMappable, 0, 0);
+        this.setTranslateX(x);
     }
     
     
-    public GridMappableRender(GridMappableType gridMappable, double x, double y, double size)
+    public final void setY(double y)
     {
-        this(gridMappable, x, y, size, size);
-    }
-    
-    
-    public GridMappableRender(GridMappableType gridMappable, double size)
-    {
-        this(gridMappable, 0, 0, size);
+        setTranslateY(y);
     }
     
     
@@ -82,25 +94,14 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends S
     }
     
     
-    public final void setX(double x)
+    public GridMappableRender(GridMappableType gridMappable, double size)
     {
-        this.setTranslateX(x);
+        this(gridMappable, 0, 0, size);
     }
     
     
-    public final void setY(double y)
+    public GridMappableRender(GridMappableType gridMappable, double x, double y, double size)
     {
-        setTranslateY(y);
-    }
-    
-    
-    private void setSize(double width, double height)
-    {
-        setMaxWidth(width);
-        setPrefWidth(width);
-        setMinWidth(width);
-        setMaxHeight(height);
-        setPrefHeight(height);
-        setMinHeight(height);
+        this(gridMappable, x, y, size, size);
     }
 }

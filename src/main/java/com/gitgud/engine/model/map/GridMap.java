@@ -10,15 +10,16 @@ import java.util.TreeMap;
 
 
 /**
- * The default Graph for 2D Maps. To ensure proper funcionality maintain rectangularity. it's Vertex {@link Tile} extend {@link javafx.geometry.Point2D}.
+ * The default Graph for 2D Maps. To ensure proper funcionality maintain rectangularity. it's Vertex {@link Tile}
+ * extend {@link javafx.geometry.Point2D}.
  *
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 13.06.2024
  * @Version: 2.0
  */
-public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> extends WeightedGraph<Tile, GridMappableType> implements
-                                                                                                                                              RectangularGraph<Tile, GridMappableType>
+public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable>
+        extends WeightedGraph<Tile, GridMappableType> implements RectangularGraph<Tile, GridMappableType>
 {
     //    private final float tileSpacing;
     
@@ -50,27 +51,6 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     {
         //        this.tileSpacing = 1;
         updateDimensions();
-    }
-    
-    
-    public static <GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> GridMap<GridMappableType> create(
-            TerrainType[][] grid)
-    {
-        GridMap<GridMappableType> gridMap = new GridMap<>();
-        Tile[][] tileGrid = tileGridFromTerrainTypeGrid(grid);
-        gridMap.height = tileGrid.length;
-        gridMap.width = tileGrid[0].length;
-        for (int y = 0; y < gridMap.height; y++)
-        {
-            for (int x = 0; x < gridMap.width; x++)
-            {
-                gridMap.getVertices().put(tileGrid[y][x], null);
-            }
-        }
-        gridMap.drawConcludableEdges();
-        
-        
-        return gridMap;
     }
     
     
@@ -108,6 +88,27 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
         }
         
         return create(terrainGrid);
+    }
+    
+    
+    public static <GridMappableType extends com.gitgud.engine.model.gameobjects.GridMappable> GridMap<GridMappableType> create(
+            TerrainType[][] grid)
+    {
+        GridMap<GridMappableType> gridMap = new GridMap<>();
+        Tile[][] tileGrid = tileGridFromTerrainTypeGrid(grid);
+        gridMap.height = tileGrid.length;
+        gridMap.width = tileGrid[0].length;
+        for (int y = 0; y < gridMap.height; y++)
+        {
+            for (int x = 0; x < gridMap.width; x++)
+            {
+                gridMap.getVertices().put(tileGrid[y][x], null);
+            }
+        }
+        gridMap.drawConcludableEdges();
+        
+        
+        return gridMap;
     }
     
     
@@ -163,28 +164,6 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     }
     
     
-    /**
-     * Example:
-     * 1O0
-     * O10
-     * 001
-     * the traversable 1s are not seen as connected as the non-Traversable 0s are also converging at the same point
-     *
-     * @param tile
-     * @param neighbor
-     * @return
-     */
-    private boolean checkShouldEdgeBeAdded(Tile tile, Tile neighbor)
-    {
-        int x = tile.getX();
-        int y = tile.getY();
-        int neighborX = neighbor.getX();
-        int neighborY = neighbor.getY();
-        return getVertex(neighborX, y).getTerrain().isTraversable() ||
-               getVertex(x, neighborY).getTerrain().isTraversable();
-    }
-    
-    
     public Collection<Tile> getNeighbors(Tile tile)
     {
         HashSet<Tile> neighbors = new HashSet<>();
@@ -207,10 +186,25 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     }
     
     
-    @Override
-    public int getWidth()
+    /**
+     * Example:
+     * 1O0
+     * O10
+     * 001
+     * the traversable 1s are not seen as connected as the non-Traversable 0s are also converging at the same point
+     *
+     * @param tile
+     * @param neighbor
+     * @return
+     */
+    private boolean checkShouldEdgeBeAdded(Tile tile, Tile neighbor)
     {
-        return width;
+        int x = tile.getX();
+        int y = tile.getY();
+        int neighborX = neighbor.getX();
+        int neighborY = neighbor.getY();
+        return getVertex(neighborX, y).getTerrain().isTraversable() ||
+               getVertex(x, neighborY).getTerrain().isTraversable();
     }
     
     
@@ -240,6 +234,13 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     public GridMappableType place(int x, int y, GridMappableType gridMappableType)
     {
         return place(calculateIndex(x, y), gridMappableType);
+    }
+    
+    
+    @Override
+    public int getWidth()
+    {
+        return width;
     }
     
     

@@ -8,9 +8,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 
 
-public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, HudType extends ActionContextHud<MType>> extends
-                                                                                                                                                              StackPane implements
-                                                                                                                                                                        ActionContextRender<MType, GMType>
+public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable,
+        HudType extends ActionContextHud<MType>>
+        extends StackPane implements ActionContextRender<MType, GMType>
 {
     public static final int MINIMUM_TILE_SIZE = 50;
     
@@ -30,6 +30,12 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
     private final GridMapRender<GMType> gridMapRender;
     
     
+    public BaseActionContextRender(MType data, HudType hud)
+    {
+        this(data, determineOptimumTileSize(data.getGridMap()), hud);
+    }
+    
+    
     public BaseActionContextRender(MType data, int tileSize, HudType hud)
     {
         this.data = data;
@@ -42,17 +48,19 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
     }
     
     
-    public BaseActionContextRender(MType data, HudType hud)
-    {
-        this(data, determineOptimumTileSize(data.getGridMap()), hud);
-    }
-    
-    
     private static int determineOptimumTileSize(GridMap<?> gridMap)
     {
         int calculatedTileSize = MAX_GRIDMAP_SIZE / gridMap.getWidth();
         
         return Math.max(calculatedTileSize, MINIMUM_TILE_SIZE);
+    }
+    
+    
+    @Override
+    public void render(MType data)
+    {
+        addGridMapRender();
+        getChildren().add(hud);
     }
     
     
@@ -85,14 +93,6 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
     public HudType getHud()
     {
         return hud;
-    }
-    
-    
-    @Override
-    public void render(MType data)
-    {
-        addGridMapRender();
-        getChildren().add(hud);
     }
     
     

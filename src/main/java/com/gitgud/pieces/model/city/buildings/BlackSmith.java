@@ -6,7 +6,9 @@ import com.gitgud.pieces.model.player.ResourceType;
 
 
 /**
- * This class represents the BlackSmith. It has functionality to upgrade an {@link com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact}
+ * This class represents the BlackSmith. It has functionality to upgrade an
+ * {@link com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact}
+ *
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.
@@ -26,10 +28,13 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     
     private static final String NAME = "BlackSmith";
     
+    
     public BlackSmith()
     {
         this(STARTING_LEVEL);
     }
+    
+    
     public BlackSmith(int level)
     {
         super(NAME, DESCRIPTION, level);

@@ -29,15 +29,15 @@ public class WalletRender extends VBox implements Render<Wallet>
     public static final int MAX_WIDTH = 200;
     
     
-    public WalletRender(Wallet wallet)
-    {
-        render(wallet);
-    }
-    
-    
     public WalletRender()
     {
         this(ActiveGameController.getInstance().get().getPlayer().wallet());
+    }
+    
+    
+    public WalletRender(Wallet wallet)
+    {
+        render(wallet);
     }
     
     

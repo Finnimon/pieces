@@ -13,14 +13,16 @@ import com.gitgud.engine.control.ActionAwaitingController;
  * @Owner: Finn L.
  * @Since: 30.05.2024
  * @Version: 1.0
+ * @see com.gitgud.engine.control.actionChoice.ActionChoice
+ * @see ActionAwaitingController
  */
 public interface Action<Awaiter extends ActionAwaitingController>
 {
     /**
-     * Creates an empty action that does nothing
+     * Creates an action that will return to the {@link ActionAwaitingController#showRootAction()}
      *
      * @param <AAType>> the type of the {@link ActionAwaitingController} this Action can be applied to
-     * @return an empty action
+     * @return an action that will return to the {@link ActionAwaitingController#showRootAction()}
      */
     static <AAType extends ActionAwaitingController<?, ?, ?>> Action<AAType> rootReturn()
     {
@@ -34,7 +36,7 @@ public interface Action<Awaiter extends ActionAwaitingController>
      * @param <AAType> the type of the {@link ActionAwaitingController} this Action can be applied to
      * @return an empty action
      */
-    static <AAType extends ActionAwaitingController> Action<AAType> empty()
+    static <AAType extends ActionAwaitingController<?, ?, ?>> Action<AAType> empty()
     {
         return AAType ->
         {

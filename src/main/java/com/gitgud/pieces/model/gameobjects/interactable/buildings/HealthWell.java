@@ -15,12 +15,22 @@ public class HealthWell extends GridMappableBuilding<MissionController>
     
     
     //todo
-    private static final String SPRITE_URL = "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/buildings/HealthWell.png";
+    private static final String SPRITE_URL = "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable" +
+                                             "/buildings/HealthWell.png";
     
     
     public HealthWell()
     {
         super(NAME, DESCRIPTION, SPRITE_URL);
+    }
+    
+    
+    @Override
+    public void interact(MissionController missionController)
+    {
+        Mission mission = missionController.getModel();
+        healFightFigures(mission.getActiveFightAgents());
+        healFightFigures(mission.getDiscardedFightAgents());
     }
     
     
@@ -35,15 +45,6 @@ public class HealthWell extends GridMappableBuilding<MissionController>
             
             fighAgent.setHealth(fighAgent.getMaxHealth());
         }
-    }
-    
-    
-    @Override
-    public void interact(MissionController missionController)
-    {
-        Mission mission = missionController.getModel();
-        healFightFigures(mission.getActiveFightAgents());
-        healFightFigures(mission.getDiscardedFightAgents());
     }
     
 }

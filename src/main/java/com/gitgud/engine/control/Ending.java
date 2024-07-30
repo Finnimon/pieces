@@ -20,8 +20,8 @@ public interface Ending extends Advancing
     }
     
     
-    void end();
-    
-    
     boolean isFinished();
+    
+    
+    void end();
 }

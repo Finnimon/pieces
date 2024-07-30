@@ -5,10 +5,11 @@ import com.github.ruediste.polymorphicGson.GsonPolymorph;
 
 import java.util.Collection;
 
+
 @GsonPolymorph
 public abstract class Modifier<T> implements DisApplicable<T>
 {
-    public static  <T> T applyModifiers(T object, Collection<Modifier<T>> modifier)
+    public static <T> T applyModifiers(T object, Collection<Modifier<T>> modifier)
     {
         for (Modifier<T> m : modifier)
         {
@@ -29,15 +30,6 @@ public abstract class Modifier<T> implements DisApplicable<T>
     public abstract T modify(T t);
     
     
-    /**
-     * May only demodify a clone of the original object
-     *
-     * @param t object to be demodified
-     * @return demodified object
-     */
-    public abstract T demodify(T t);
-    
-    
     @Override
     public T apply(T t)
     {
@@ -50,4 +42,13 @@ public abstract class Modifier<T> implements DisApplicable<T>
     {
         return demodify(t);
     }
+    
+    
+    /**
+     * May only demodify a clone of the original object
+     *
+     * @param t object to be demodified
+     * @return demodified object
+     */
+    public abstract T demodify(T t);
 }

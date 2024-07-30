@@ -8,51 +8,68 @@ import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.view.ActionChoiceRender;
 import com.gitgud.engine.view.ActionContextRender;
-import com.gitgud.engine.view.HudRender;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
- * <para>Actions are contained by this class. It is used to structure possible Actions in the game as a tree.</para>
- * <para>This class can act as a Leaf and is extended for parent functionalities</para>
+ * <p>Actions are contained by this class. It is used to structure possible Actions in the game as a tree.
+ * <p>This class can act as a Leaf and is extended for parent functionalities
  *
- * @param <ActionAwaiterType>
- * @param <ModelType>
- * @param <GridMappableType>
- * @param <RenderType>
- * @author Finn Lindig
+ * @param <AaType>
+ * @param <MType>
+ * @param <GmType>
+ * @param <RType>
+ * @author Finn L.
  * @version 1.1
- * @Owner: Finn Lindig
+ * @Owner: Finn L.
  * @see RootChoice
  * @see Action
  * @see RootActionChoice
  * @see ActionChoiceRender
+ * @see ActionAwaitingController
  * @since 28.06.2024
  */
-public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements
-                                                                                                                                                                                                                                                                                                    Named,
-                                                                                                                                                                                                                                                                                                    Describable
+public abstract class ActionChoice<AaType extends ActionAwaitingController<MType, GmType, RType>,
+        MType extends ActionAwaiterModel<GmType>, GmType extends GridMappable,
+        RType extends ActionContextRender<MType, GmType>>
+        implements Named, Describable
 {
+    /**
+     * The name of the Action
+     */
     private final String name;
     
     
-    private final ActionAwaiterType awaiter;
-    
-    
+    /**
+     * The description of the Action
+     */
     private final String description;
     
     
-    private final Action<ActionAwaiterType> action;
+    /**
+     * The targeted {@link ActionAwaitingController}
+     */
+    private final AaType awaiter;
     
     
-    public ActionChoice(String name, String description, ActionAwaiterType awaiter, Action<ActionAwaiterType> action)
+    /**
+     * The action to be enacted if it is chosen or null to indicate a rootAction
+     */
+    private final Action<AaType> action;
+    
+    
+    public ActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter)
+    {
+        this(name, description, awaiter, null);
+    }
+    
+    
+    public ActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter,
+                        Action<AaType> action)
     {
         this.name = name;
         this.awaiter = awaiter;
@@ -61,101 +78,98 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
     }
     
     
-    public ActionChoice(String name, String description, ActionAwaiterType awaiter)
-    {
-        this(name, description, awaiter, null);
-    }
-    
-    
-    public static <AAType extends ActionAwaitingController<MType, GType, RType>, MType extends ActionAwaiterModel<GType>, GType extends GridMappable, RType extends ActionContextRender<MType, GType>> ActionChoice<AAType, MType, GType, RType> empty(
-            String name, String description, AAType actionAwaiter)
+    public static <AAType extends ActionAwaitingController<MType, GType, RType>,
+            MType extends ActionAwaiterModel<GType>, GType extends GridMappable,
+            RType extends ActionContextRender<MType, GType>> @NotNull ActionChoice<AAType, MType, GType, RType> empty(
+            @NotNull String name, @NotNull String description, @NotNull AAType actionAwaiter)
     {
         return new ActionChoice<>(name, description, actionAwaiter, Action.empty())
         {
             @Override
-            public void show(AAType actionAwaiter)
+            public void show(@NotNull AAType actionAwaiter)
             {
                 throw new UnsupportedOperationException(
-                        "This should never be called for ActionChoice.empty() Choice, \n\r as it is simply meant to do nothing but advance the awaiter."); //should never be called because the action is not null
+                        "This should never be called for ActionChoice.empty() Choice, \n\r as it is simply meant to " +
+                        "do nothing but advance the awaiter."); //should never be called because the action is not null
             }
         };
     }
     
     
-    public static <AAType extends ActionAwaitingController<MType, GType, RType>, MType extends ActionAwaiterModel<GType>, GType extends GridMappable, RType extends ActionContextRender<MType, GType>> ActionChoice<AAType, MType, GType, RType> returnToRoot(
-            String name, String description, AAType actionAwaiter)
+    /**
+     * Creates and returns an ActionChoice that returns to the absolute current {@link RootChoice} of the game
+     * @param name The name for the returned action
+     * @param description The description for the returned action
+     * @param actionAwaiter The targeted {@link ActionAwaitingController}
+     * @return The {@link ActionChoice} that returns to the absolute {@link RootChoice}
+     */
+    public static <AAType extends ActionAwaitingController<MType, GType, RType>,
+            MType extends ActionAwaiterModel<GType>, GType extends GridMappable,
+            RType extends ActionContextRender<MType, GType>> @NotNull ActionChoice<AAType, MType, GType, RType> returnToRoot(
+            @NotNull String name, @NotNull String description, @NotNull AAType actionAwaiter)
     {
         return new ActionChoice<>(name, description, actionAwaiter, Action.rootReturn())
         {
             @Override
-            public void show(AAType actionAwaiter)
+            public void show(@NotNull AAType actionAwaiter)
             {
                 throw new UnsupportedOperationException(
-                        "This should never be called for ActionChoice.empty() Choice, \n\r as it is simply meant to do nothing but advance the awaiter."); //should never be called because the action is not null
+                        "This should never be called for ActionChoice.rootReturn() Choice, \n\r as it is simply meant" +
+                        " to " +
+                        "do nothing but advance the awaiter."); //should never be called because the action is not null
             }
         };
     }
     
     
-    protected Action<ActionAwaiterType> getAction()
+    /**
+     * Getter for the {@link #action} of this {@link ActionChoice}
+     *
+     * @return {@link #action}
+     */
+    protected Action<AaType> getAction()
     {
         return action;
     }
     
     
-    public void select()
-    {
-        ActionAwaiterType awaiter = getAwaiter();
-        awaiter.getRender().getHud().clearChoices();
-        
-        if (action != null)
-        {
-            action.enAct(awaiter);
-            awaiter.advance();
-            return;
-        }
-        
-        show(awaiter);
-    }
-    
-    
-    public abstract void show(ActionAwaiterType actionAwaiter);
-    
-    
-    private ObservableList<Node> getHudChildren(ActionAwaiterType actionAwaiter)
-    {
-        HudRender<ModelType> render = actionAwaiter.getRender();
-        return render.getHud().getChildren();
-    }
-    
-    
-    public ActionChoiceRender getNode()
+    /**
+     * Creates and returns a usable {@link Node} for the {@link ActionChoice}
+     *
+     * @return A {@link ActionChoiceRender} of this {@link ActionChoice}
+     */
+    public @NotNull ActionChoiceRender getNode()
     {
         return new ActionChoiceRender(this);
     }
     
     
+    /**
+     * @inheritDoc
+     */
     @Override
-    public String description()
+    public @NotNull String description()
     {
         return this.description;
     }
     
     
+    /**
+     * @inheritDoc
+     */
     @Override
-    public String name()
+    public @NotNull String name()
     {
         return this.name;
     }
     
     
-    public ActionAwaiterType getAwaiter()
-    {
-        return awaiter;
-    }
-    
-    
-    public EventHandler<MouseEvent> getMouseEventHandler()
+    /**
+     * Creates an EventHandler for the {@link ActionChoiceRender}
+     *
+     * @return an EventHandler that can be added to the {@link ActionChoiceRender}
+     */
+    public @NotNull EventHandler<MouseEvent> getMouseEventHandler()
     {
         return event ->
         {
@@ -178,32 +192,43 @@ public abstract class ActionChoice<ActionAwaiterType extends ActionAwaitingContr
     }
     
     
-    public EventHandler<KeyEvent> getKeyEventHandler(String character)
+    /**
+     * <p>Selects this action choice.
+     * <p>If this is a rootChoice, it's choices will be displayed.
+     * <p>Else {@code action.enAct(awaiter)} will be called.
+     */
+    public void select()
     {
-        if (character == null)
+        AaType awaiter = getAwaiter();
+        awaiter.getRender().getHud().clearChoices();
+        
+        if (action != null)
         {
-            throw new IllegalArgumentException("Character cannot be null");
+            action.enAct(awaiter);
+            awaiter.advance();
+            return;
         }
         
-        return event ->
-        {
-            if (event == null)
-            {
-                return;
-            }
-            if (event.getEventType() != KeyEvent.KEY_PRESSED)
-            {
-                return;
-            }
-            if (!Objects.equals(event.getCharacter(), character))
-            {
-                return;
-            }
-            
-            event.consume();
-            select();
-        };
+        show(awaiter);
     }
     
     
+    /**
+     * Getter for the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     *
+     * @return the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     */
+    public AaType getAwaiter()
+    {
+        return awaiter;
+    }
+    
+    
+    /**
+     * <p>If this is a rootChoice, it's choices will be displayed.
+     * <p>Else it's Node will be shown in the {@link com.gitgud.engine.view.ActionContextHud}
+     *
+     * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     */
+    public abstract void show(@NotNull AaType actionAwaiter);
 }

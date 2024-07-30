@@ -15,7 +15,8 @@ public class MissionEnder extends GridMappableBuilding<MissionController>
                                               " to your Kingdom of Ruins.";
     
     
-    private static final String SPRITE_FILEPATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\interactable\\buildings\\MissionEnder.png";
+    private static final String SPRITE_FILEPATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects" +
+                                                  "\\interactable\\buildings\\MissionEnder.png";
     
     
     public MissionEnder()

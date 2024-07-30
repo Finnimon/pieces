@@ -1,11 +1,11 @@
 package com.gitgud.pieces.control.actionChoices;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.control.action.TileMovementAction;
 import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.control.actionChoice.ToActionChoice;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.GridMovable;
 import com.gitgud.engine.model.map.GridMap;
@@ -20,8 +20,10 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
-                                                                                                                                                                                                                                                                                                  RootToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>
+public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType,
+        RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
+        RenderType extends ActionContextRender<ModelType, GridMappableType>>
+        extends RootToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>
 {
     private static final String NAME = "Move";
     
@@ -35,7 +37,9 @@ public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingControl
     }
     
     
-    private static <AAType extends ActionAwaitingController<MType, GMType, RType>, MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable, RType extends ActionContextRender<MType, GMType>> List<ToActionChoice<AAType, MType, GMType, RType>> toActionChoices(
+    private static <AAType extends ActionAwaitingController<MType, GMType, RType>,
+            MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable,
+            RType extends ActionContextRender<MType, GMType>> List<ToActionChoice<AAType, MType, GMType, RType>> toActionChoices(
             GridMovable gridMovable, Tile position, AAType actionAwaiter)
     {
         GridMap<GMType> gridMap = actionAwaiter.getModel().getGridMap();
@@ -56,7 +60,8 @@ public class MovementRootChoice<ActionAwaitingType extends ActionAwaitingControl
             
             if (actionAwaiter instanceof FightController)
             {
-                ToActionChoice<AAType, MType, GMType, RType> fightMovementChoice = (ToActionChoice<AAType, MType, GMType, RType>) new FightMovementChoice(
+                ToActionChoice<AAType, MType, GMType, RType> fightMovementChoice = (ToActionChoice<AAType, MType,
+                        GMType, RType>) new FightMovementChoice(
                         NAME,
                         DESCRIPTION,
                         (FightController) actionAwaiter,

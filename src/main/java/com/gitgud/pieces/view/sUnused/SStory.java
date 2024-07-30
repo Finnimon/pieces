@@ -56,7 +56,13 @@ public class SStory
             StoryText.setFont(customFont);
         }
         
-        String text = "In einer längst vergangenen Ära, als Magie und Mythen das Land Elaris prägten, herrschte Frieden und Wohlstand. Doch eines unheilvollen Tages, erwachte der dunkle Zauberer Mykanos aus seinem jahrhundertelangen Schlaf. Mit mächtigen, bösartigen Kräften riss er das Licht aus der Welt und verbreitete Schrecken in jeder Ecke des Königreichs. Du, ein Explorer mit verborgenen Kräften, wurdest durch eine uralte Prophezeiung auserwählt, um das Gleichgewicht wiederherzustellen. Deine Reise beginnt in der letzten Bastion des Lichts, der Stadt Elaris, wo die Hoffnung auf Erlösung glimmt und dein Schicksal sich entfaltet.";
+        String text = "In einer längst vergangenen Ära, als Magie und Mythen das Land Elaris prägten, herrschte " +
+                      "Frieden und Wohlstand. Doch eines unheilvollen Tages, erwachte der dunkle Zauberer Mykanos aus" +
+                      " seinem jahrhundertelangen Schlaf. Mit mächtigen, bösartigen Kräften riss er das Licht aus der" +
+                      " Welt und verbreitete Schrecken in jeder Ecke des Königreichs. Du, ein Explorer mit " +
+                      "verborgenen Kräften, wurdest durch eine uralte Prophezeiung auserwählt, um das Gleichgewicht " +
+                      "wiederherzustellen. Deine Reise beginnt in der letzten Bastion des Lichts, der Stadt Elaris, " +
+                      "wo die Hoffnung auf Erlösung glimmt und dein Schicksal sich entfaltet.";
         String[] storyLines = text.split("\\. "); //Der Text wird auf die Kommas aufgesplittet
         
         VBox textBox = new VBox(); // VBox für den Text

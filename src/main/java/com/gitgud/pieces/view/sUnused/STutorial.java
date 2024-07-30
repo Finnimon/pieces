@@ -50,7 +50,10 @@ public class STutorial
             tutorialText.setFont(customFont);
         }
         
-        String text = "Du landest in der Stadt in der es verschiedene Gebäude gibt. Du kannst in jedes Gebäude reingehen um unterschiedlihce Aktionen ausführen zu können. Beisielsweise kannst du Ressourcen kaufen oder Artefakte und deine Einheiten verbessern. Durch Besuchen des schwarzen Gebäudes, landest im Hauptquatier, wo du deine Mission auswählen kannst";
+        String text = "Du landest in der Stadt in der es verschiedene Gebäude gibt. Du kannst in jedes Gebäude " +
+                      "reingehen um unterschiedlihce Aktionen ausführen zu können. Beisielsweise kannst du Ressourcen" +
+                      " kaufen oder Artefakte und deine Einheiten verbessern. Durch Besuchen des schwarzen Gebäudes, " +
+                      "landest im Hauptquatier, wo du deine Mission auswählen kannst";
         String[] tutorialLines = text.split("\\. "); //Der Text wird auf die Kommas aufgesplittet
         
         VBox textBox = new VBox(); // VBox für den Text

@@ -13,7 +13,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
- * Artifacts that can be placed in {@link com.gitgud.engine.model.map.GridMap} and collected by the {@link com.gitgud.pieces.model.player.Player}.
+ * Artifacts that can be placed in {@link com.gitgud.engine.model.map.GridMap} and collected by the
+ * {@link com.gitgud.pieces.model.player.Player}.
  *
  * @author Finn L.
  * @version 1.0
@@ -25,7 +26,7 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     private final SimpleIntegerProperty level;
     
     
-    private Modifier<FightAgent> disApplicable;
+    private final Modifier<FightAgent> disApplicable;
     
     
     public Artefact(String name, String description, String spriteFilePath, Modifier<FightAgent> disApplicable,
@@ -34,12 +35,6 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
         super(name, description, spriteFilePath);
         this.disApplicable = disApplicable;
         this.level = new SimpleIntegerProperty(level);
-    }
-    
-    
-    public Modifier<FightAgent> getModifier()
-    {
-        return disApplicable;
     }
     
     
@@ -53,12 +48,6 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     
     
     @Override
-    public SimpleIntegerProperty levelProperty()
-    {
-        return level;
-    }
-    
-    @Override
     public int levelUp()
     {
         FightAgentModifier fightAgentModifier = (FightAgentModifier) getModifier();
@@ -67,11 +56,26 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     }
     
     
+    public Modifier<FightAgent> getModifier()
+    {
+        return disApplicable;
+    }
+    
+    
+    @Override
+    public SimpleIntegerProperty levelProperty()
+    {
+        return level;
+    }
+    
+    
     @Override
     public boolean equals(Object obj)
     {
         if (!(obj instanceof Artefact other))
+        {
             return false;
-        return other.name().equals(name())&&other.getLevel()==getLevel();
+        }
+        return other.name().equals(name()) && other.getLevel() == getLevel();
     }
 }

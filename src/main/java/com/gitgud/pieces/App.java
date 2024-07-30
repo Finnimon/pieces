@@ -21,7 +21,8 @@ public class App extends Application
 {
     
     
-    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\black_king.png";
+    public static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents" +
+                                           "\\monochrome\\black_king.png";
     
     
     public static final String APP_TITLE = "Pieces";
@@ -38,20 +39,6 @@ public class App extends Application
         stage.setHeight(1000);
         stage.setWidth(1000);
         stage.setScene(SMainMenue.createMainMenueScene(stage));
-    }
-    
-    
-    private static void setTitleAndIcon(Stage stage)
-    {
-        stage.setTitle(APP_TITLE);
-        try
-        {
-            stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
-        }
-        catch (MalformedURLException ignore)
-        {
-            //do nothing only sets the icon, so you can ignore the exception and just move on
-        }
     }
     
     
@@ -74,5 +61,19 @@ public class App extends Application
         stage.setFullScreen(true);
         StageController.initialize(stage);
         setTitleAndIcon(stage);
+    }
+    
+    
+    private static void setTitleAndIcon(Stage stage)
+    {
+        stage.setTitle(APP_TITLE);
+        try
+        {
+            stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
+        }
+        catch (MalformedURLException ignore)
+        {
+            //do nothing only sets the icon, so you can ignore the exception and just move on
+        }
     }
 }

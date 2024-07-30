@@ -7,8 +7,23 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
 
 
-public class TileMovementAction<Awaiter extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> implements
-                                                                                                                                                                                                                                                                                       FromToAction<Awaiter, Tile>
+/**
+ * Default implementation for Moving {@link com.gitgud.engine.model.gameobjects.GridMovable}s on a
+ * {@link com.gitgud.engine.model.map.GridMap}
+ *
+ * @param <AaType>
+ * @param <MType>
+ * @param <GmType>
+ * @param <RType>
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.05.2024
+ * @Version: 1.0
+ */
+public class TileMovementAction<AaType extends ActionAwaitingController<MType, GmType, RType>,
+        MType extends ActionAwaiterModel<GmType>, GmType extends GridMappable,
+        RType extends ActionContextRender<MType, GmType>>
+        implements FromToAction<AaType, Tile>
 {
     private final Tile from;
     
@@ -38,7 +53,7 @@ public class TileMovementAction<Awaiter extends ActionAwaitingController<ModelTy
     
     
     @Override
-    public synchronized void enAct(Awaiter awaiter)
+    public synchronized void enAct(AaType awaiter)
     {
         awaiter.getRender()
                .getGridMapRender()

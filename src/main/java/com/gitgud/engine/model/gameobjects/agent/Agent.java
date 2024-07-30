@@ -6,7 +6,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 
 /**
- * Agents are the most basic controllable unit of the game. They can move on a {@link com.gitgud.engine.model.map.GridMap}
+ * Agents are the most basic controllable unit of the game. They can move on a
+ * {@link com.gitgud.engine.model.map.GridMap}
  *
  * @Owner: Finn L.
  * @Author: Finn L.
@@ -30,6 +31,13 @@ public abstract class Agent extends GameObject implements GridMovable
     
     
     @Override
+    public int getMovementRange()
+    {
+        return movementRangeProperty.getValue();
+    }
+    
+    
+    @Override
     public SimpleIntegerProperty movementRangeProperty()
     {
         return movementRangeProperty;
@@ -37,22 +45,15 @@ public abstract class Agent extends GameObject implements GridMovable
     
     
     @Override
-    public int getMovementRange()
+    public boolean isFlying()
     {
-        return movementRangeProperty.getValue();
+        return isFlying;
     }
     
     
     public void setMovementRange(int movementRange)
     {
         movementRangeProperty.setValue(movementRange);
-    }
-    
-    
-    @Override
-    public boolean isFlying()
-    {
-        return isFlying;
     }
     
     

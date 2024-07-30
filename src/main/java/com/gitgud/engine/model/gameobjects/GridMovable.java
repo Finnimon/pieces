@@ -24,27 +24,7 @@ import java.util.function.Predicate;
  */
 public interface GridMovable extends GridMappable
 {
-    static ArrayList<Tile> getInAbsoluteRangeTiles(GridMap<?> gridMap, Tile position, int range)
-    {
-        List<Tile> tiles = gridMap.verticeSet()
-                                  .stream()
-                                  .filter(otherVertex -> position.distance(otherVertex) <= range)
-                                  .toList();
-        
-        return new ArrayList<>(tiles.stream()
-                                    .filter(tile -> tile.getTerrain().isTraversable())
-                                    .filter(x -> !x.equals(position))
-                                    .toList());
-    }
-    
-    
-    int getMovementRange();
-    
-    
     SimpleIntegerProperty movementRangeProperty();
-    
-    
-    boolean isFlying();
     
     
     default boolean canMoveTo(GridMap<?> gridMap, Tile position, Tile target)
@@ -70,6 +50,26 @@ public interface GridMovable extends GridMappable
         
         return result;
     }
+    
+    
+    boolean isFlying();
+    
+    
+    static ArrayList<Tile> getInAbsoluteRangeTiles(GridMap<?> gridMap, Tile position, int range)
+    {
+        List<Tile> tiles = gridMap.verticeSet()
+                                  .stream()
+                                  .filter(otherVertex -> position.distance(otherVertex) <= range)
+                                  .toList();
+        
+        return new ArrayList<>(tiles.stream()
+                                    .filter(tile -> tile.getTerrain().isTraversable())
+                                    .filter(x -> !x.equals(position))
+                                    .toList());
+    }
+    
+    
+    int getMovementRange();
     
     
     private void filterMovementTargetResult(ArrayList<Tile> result, Tile position, GridMap<?> gridMap)

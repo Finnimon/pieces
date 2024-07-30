@@ -30,12 +30,6 @@ public class Client extends Thread
     }
     
     
-    public void closeSocket()
-    {
-        this.socket.close();
-    }
-    
-    
     public void addMessage(Serializable message)
     {
         try
@@ -72,13 +66,6 @@ public class Client extends Thread
     }
     
     
-    private void sendData()
-    {
-        socket.send(messageQueue.removeFirst().toString());
-        
-    }
-    
-    
     private void initComunikation()
     {
         socket.connect("tcp://" + serverAddress + ":5555");
@@ -87,11 +74,24 @@ public class Client extends Thread
     }
     
     
+    private void sendData()
+    {
+        socket.send(messageQueue.removeFirst().toString());
+        
+    }
+    
+    
     public void stopSending()
     {
         isConnected = false;
         currentlySending = false;
         closeSocket();
+    }
+    
+    
+    public void closeSocket()
+    {
+        this.socket.close();
     }
     
     

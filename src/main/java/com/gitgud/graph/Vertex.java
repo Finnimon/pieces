@@ -14,6 +14,21 @@ public interface Vertex extends Comparable<Vertex>
 {
     
     /**
+     * Should never override
+     *
+     * @param o the object to be compared.
+     * @inheritDoc
+     * @Precondition: Do not override
+     * @Postcondition: Index based operations in the {@link Graph} will function properly
+     */
+    @Override
+    default int compareTo(Vertex o)
+    {
+        return Integer.compare(this.getIndex(), o.getIndex());
+    }
+    
+    
+    /**
      * Getter for the index of this Vertex on its containing {@link Graph}
      *
      * @return the index of this Vertex on its containing {@link Graph}
@@ -25,18 +40,4 @@ public interface Vertex extends Comparable<Vertex>
      * setter for the index of this Vertex on its containing {@link Graph}
      */
     void setIndex(int index);
-    
-    
-    /**
-     * Should never override
-     * @param o the object to be compared.
-     * @inheritDoc
-     * @Precondition: Do not override
-     * @Postcondition: Index based operations in the {@link Graph} will function properly
-     */
-    @Override
-    default int compareTo(Vertex o)
-    {
-        return Integer.compare(this.getIndex(), o.getIndex());
-    }
 }

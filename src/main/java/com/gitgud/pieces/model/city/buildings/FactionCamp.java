@@ -25,10 +25,9 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     private final Faction faction;
     
     
-    private FactionCamp(String name, String description, int level, Faction faction)
+    public FactionCamp(Faction faction)
     {
-        super(name, description, level);
-        this.faction = faction;
+        this(faction, STARTING_LEVEL);
     }
     
     
@@ -38,15 +37,10 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     }
     
     
-    public FactionCamp(Faction faction)
+    private FactionCamp(String name, String description, int level, Faction faction)
     {
-        this(faction, STARTING_LEVEL);
-    }
-    
-    
-    public Faction getFaction()
-    {
-        return faction;
+        super(name, description, level);
+        this.faction = faction;
     }
     
     
@@ -72,6 +66,12 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
             }
         }
         return recruitableFightAgents;
+    }
+    
+    
+    public Faction getFaction()
+    {
+        return faction;
     }
     
     
@@ -107,21 +107,6 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     }
     
     
-    @Override
-    public int levelUp()
-    {
-        if (!LEVEL_UP_RESOURCE_COST.isResourceCostCoveredByWallet(getLevel()))
-        {
-            return getLevel();
-        }
-        
-        LEVEL_UP_RESOURCE_COST.deductResourceCostFromWallet(getLevel());
-        
-        
-        return super.levelUp();
-    }
-    
-    
     public ResourceCost getResourceCost(FightAgent fightAgent)
     {
         ResourceCost baseCost;
@@ -138,5 +123,20 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
         
         int fightAgentLevel = fightAgent.getLevel();
         return baseCost.multiple(fightAgentLevel * fightAgentLevel);
+    }
+    
+    
+    @Override
+    public int levelUp()
+    {
+        if (!LEVEL_UP_RESOURCE_COST.isResourceCostCoveredByWallet(getLevel()))
+        {
+            return getLevel();
+        }
+        
+        LEVEL_UP_RESOURCE_COST.deductResourceCostFromWallet(getLevel());
+        
+        
+        return super.levelUp();
     }
 }

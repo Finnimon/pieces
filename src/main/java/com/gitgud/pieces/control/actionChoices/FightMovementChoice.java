@@ -32,7 +32,8 @@ public class FightMovementChoice extends ToActionChoice<FightController, Fight, 
         
         action.enAct(fightController);
         
-        RootToActionChoice<FightController, Fight, FightAgent, FightRender> attackRootChoice = fightController.getAttackRootChoice();
+        RootToActionChoice<FightController, Fight, FightAgent, FightRender> attackRootChoice =
+                fightController.getAttackRootChoice();
         
         if (attackRootChoice.isEmpty())
         {

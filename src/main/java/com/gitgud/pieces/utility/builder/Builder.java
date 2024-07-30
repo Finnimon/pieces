@@ -9,17 +9,6 @@ public interface Builder<Type>
     
     
     /**
-     * May behave erratically if {@link #canBuild(int type)} returns false.
-     *
-     * @param type the type as int to try to build
-     * @throws NullPointerException       if {@link #canBuild(int type)} returns false.
-     * @throws UnsuitableBuilderException if {@link #canBuild(int type)} returns false.
-     * @throws IllegalArgumentException   if {@link #canBuild(int type)} returns false.
-     */
-    void tryBuild(int type);
-    
-    
-    /**
      * @param type the type as int to build
      * @throws UnsuitableBuilderException if (!{@link #canBuild(int type)})
      */
@@ -35,4 +24,15 @@ public interface Builder<Type>
     
     
     boolean canBuild(int type);
+    
+    
+    /**
+     * May behave erratically if {@link #canBuild(int type)} returns false.
+     *
+     * @param type the type as int to try to build
+     * @throws NullPointerException       if {@link #canBuild(int type)} returns false.
+     * @throws UnsuitableBuilderException if {@link #canBuild(int type)} returns false.
+     * @throws IllegalArgumentException   if {@link #canBuild(int type)} returns false.
+     */
+    void tryBuild(int type);
 }

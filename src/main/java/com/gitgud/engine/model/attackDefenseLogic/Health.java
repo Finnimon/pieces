@@ -26,6 +26,9 @@ public interface Health
     }
     
     
+    SimpleIntegerProperty healthProperty();
+    
+    
     default int getMaxHealth()
     {
         return maxHealthProperty().getValue();
@@ -36,9 +39,6 @@ public interface Health
     {
         maxHealthProperty().setValue(maxHealth);
     }
-    
-    
-    SimpleIntegerProperty healthProperty();
     
     
     SimpleIntegerProperty maxHealthProperty();

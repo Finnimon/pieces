@@ -32,8 +32,7 @@ import java.util.HashMap;
  * @Owner: Julius R.
  * @Since: 01.05.2024
  * @Version: 1.0
- * @deprecated
- * replaced by {@link com.gitgud.engine.view.GridMapRender}
+ * @deprecated replaced by {@link com.gitgud.engine.view.GridMapRender}
  */
 @Deprecated
 public class SGridMap implements IDimentions
@@ -45,8 +44,7 @@ public class SGridMap implements IDimentions
      * @Owner: Julius R.
      * @Since: 01.05.2024
      * @Version: 1.0
-     * @deprecated
-     * replaced by {@link com.gitgud.engine.view.GridMapRender}
+     * @deprecated replaced by {@link com.gitgud.engine.view.GridMapRender}
      */
     protected static void createFieldOfTiles(Group tilesGroup, GridMap gridMap)
     {
@@ -88,6 +86,12 @@ public class SGridMap implements IDimentions
                 }
             }
         }
+    }
+    
+    
+    protected static void moveRequest(Tile tile)
+    {
+        //todo
     }
     
     
@@ -165,12 +169,6 @@ public class SGridMap implements IDimentions
             
             menu.getChildren().add(box);
         }
-    }
-    
-    
-    protected static void moveRequest(Tile tile)
-    {
-        //todo
     }
     
 }

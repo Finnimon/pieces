@@ -21,12 +21,6 @@ public class FightHud extends ActionContextHud<Fight>
     }
     
     
-    protected FightTimeLineRender getFightTimeLineRender()
-    {
-        return fightTimeLineRender;
-    }
-    
-    
     @Override
     public void render(Fight data)
     {
@@ -34,6 +28,12 @@ public class FightHud extends ActionContextHud<Fight>
         children.clear();
         children.add(fightTimeLineRender);
         setAlignment(fightTimeLineRender, Pos.TOP_CENTER);
+    }
+    
+    
+    protected FightTimeLineRender getFightTimeLineRender()
+    {
+        return fightTimeLineRender;
     }
     
     

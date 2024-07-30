@@ -26,6 +26,13 @@ public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
     }
     
     
+    public void clearChoices()
+    {
+        getChildren().removeAll(choices);
+        choices.clear();
+    }
+    
+    
     public void addChoice(Node choiceNode)
     {
         registerChoice(choiceNode);
@@ -38,13 +45,6 @@ public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
     public void registerChoice(Node choiceNode)
     {
         choices.add(choiceNode);
-    }
-    
-    
-    public void clearChoices()
-    {
-        getChildren().removeAll(choices);
-        choices.clear();
     }
     
     

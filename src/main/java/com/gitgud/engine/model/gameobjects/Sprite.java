@@ -1,6 +1,7 @@
 package com.gitgud.engine.model.gameobjects;
 
 import javafx.scene.image.Image;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -26,16 +27,24 @@ public interface Sprite
     
     HashMap<String, Image> loadedImages = new HashMap<>();
     
-    
-    static String urlFromFilePath(String filePath) throws MalformedURLException
+    @NotNull
+    default Image getSprite()
     {
-        return new File(filePath).toURI().toURL().toString();
+        String spriteUrl = getSpriteUrl();
+        Image sprite = loadedImages.get(spriteUrl);
+        
+        if (sprite != null)
+        {
+            return sprite;
+        }
+        sprite = new Image(spriteUrl);
+        loadedImages.put(spriteUrl, sprite);
+        
+        
+        return sprite;
     }
     
-    
-    String getSpriteFilePath();
-    
-    
+    @NotNull
     default String getSpriteUrl()
     {
         try
@@ -52,19 +61,11 @@ public interface Sprite
     }
     
     
-    default Image getSprite()
+    static String urlFromFilePath(String filePath) throws MalformedURLException
     {
-        String spriteUrl = getSpriteUrl();
-        Image sprite = loadedImages.get(spriteUrl);
-        
-        if (sprite != null)
-        {
-            return sprite;
-        }
-        sprite = new Image(spriteUrl);
-        loadedImages.put(spriteUrl, sprite);
-        
-        
-        return sprite;
+        return new File(filePath).toURI().toURL().toString();
     }
+    
+    @NotNull
+    String getSpriteFilePath();
 }

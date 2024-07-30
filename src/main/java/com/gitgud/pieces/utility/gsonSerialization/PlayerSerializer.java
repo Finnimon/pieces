@@ -24,7 +24,8 @@
 //
 //
 //    @Override
-//    public Player deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws JsonParseException
+//    public Player deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws
+//    JsonParseException
 //    {
 //        JsonObject jsonObject = src.getAsJsonObject();
 //

@@ -79,7 +79,8 @@ public class TestStuff
     //
     //
     //        // Write Json file
-    //        FileOutputStream writableFile = new FileOutputStream("src/main/resources/com/gitgud/gameObjectTypes/test.json");
+    //        FileOutputStream writableFile = new FileOutputStream
+    //        ("src/main/resources/com/gitgud/gameObjectTypes/test.json");
     //        // Insert Json objects to write here
     //        // writableFile.write(hashMapToJson.getBytes());
     //        writableFile.close();
@@ -90,18 +91,18 @@ public class TestStuff
     {
         ActiveGameController.initialize();
         Game.Flow.showNextScene();
-//                lindigJsonTest();
-//        ActiveGameController.getInstance();
-//        Game.Flow.showNextScene();
+        //                lindigJsonTest();
+        //        ActiveGameController.getInstance();
+        //        Game.Flow.showNextScene();
     }
     
     
     private static void lindigJsonTest()
     {
-//        Game.Saver.save();
-//        Game.Flow.showNextScene();
+        //        Game.Saver.save();
+        //        Game.Flow.showNextScene();
         Game.Loader.load("TestPlayer");
-//        Game.Loader.load("TestPlayer");
+        //        Game.Loader.load("TestPlayer");
         //        GameFlow.showNextScene();
         //        Gson gson = FxGson.create();
         //        JsonElement jsonElement= gson.toJsonTree(object);;
@@ -109,7 +110,8 @@ public class TestStuff
         //        Object object2 = gson.fromJson(jsonElement.getAsJsonObject().get(name), object.getClass());
         //        try
         //        {
-        //            Files.writeString(new File("src/" + name + ".json").toPath(), jsonElement.getAsJsonObject().toString());
+        //            Files.writeString(new File("src/" + name + ".json").toPath(), jsonElement.getAsJsonObject()
+        //            .toString());
         //        }
         //        catch (IOException e)
         //        {

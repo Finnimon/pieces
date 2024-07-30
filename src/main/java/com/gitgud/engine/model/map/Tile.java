@@ -3,6 +3,7 @@ package com.gitgud.engine.model.map;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.view.GridMapRender;
 import com.gitgud.graph.Vertex2D;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -54,15 +55,15 @@ public class Tile implements Vertex2D, Sprite
     }
     
     
-    public static Tile create(int x, int y, Terrain terrain, int width)
-    {
-        return new Tile(x, y, terrain, x + width * y);
-    }
-    
-    
     public static Tile create(int x, int y, TerrainType terrainType, int width)
     {
         return create(x, y, new Terrain(terrainType), width);
+    }
+    
+    
+    public static Tile create(int x, int y, Terrain terrain, int width)
+    {
+        return new Tile(x, y, terrain, x + width * y);
     }
     
     
@@ -91,7 +92,7 @@ public class Tile implements Vertex2D, Sprite
     
     
     @Override
-    public String getSpriteFilePath()
+    public @NotNull String getSpriteFilePath()
     {
         return determineSpriteFilePath();
     }
@@ -148,6 +149,9 @@ public class Tile implements Vertex2D, Sprite
         {
             return false;
         }
-        return hashCode() == tile.hashCode()&&tile.terrain.terrainType().equals(terrain.terrainType())&&tile.x==x&&tile.y==y;
+        return hashCode() == tile.hashCode() &&
+               tile.terrain.terrainType().equals(terrain.terrainType()) &&
+               tile.x == x &&
+               tile.y == y;
     }
 }

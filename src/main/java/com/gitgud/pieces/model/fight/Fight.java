@@ -18,9 +18,9 @@ import java.util.TreeSet;
  * The Object in which a Fight takes place
  *
  * @author Finn L.
+ * @version 2.0
  * @Owner: Finn L.
- * @since  16.05.2024
- * @version  2.0
+ * @since 16.05.2024
  */
 public class Fight implements ActionAwaiterModel<FightAgent>
 {
@@ -36,16 +36,16 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     private final SimpleIntegerProperty turn = new SimpleIntegerProperty(1);
     
     
+    public Fight(GridMap<FightAgent> gridMap)
+    {
+        this(gridMap, FightTimeLine.create(gridMap.nonNullElements()));
+    }
+    
+    
     public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
     {
         this.gridMap = gridMap;
         this.fightTimeLine = fightTimeLine;
-    }
-    
-    
-    public Fight(GridMap<FightAgent> gridMap)
-    {
-        this(gridMap, FightTimeLine.create(gridMap.nonNullElements()));
     }
     
     

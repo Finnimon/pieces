@@ -9,9 +9,6 @@ import java.util.HashSet;
 
 public interface SpellCaster
 {
-    SpellBook getSpellbook();
-    
-    
     default HashMap<Spell, HashSet<Tile>> getSpellTargets(Fight fight)
     {
         HashMap<Spell, HashSet<Tile>> targets = new HashMap<>();
@@ -25,6 +22,9 @@ public interface SpellCaster
         }
         return null;
     }
+    
+    
+    SpellBook getSpellbook();
     
     
     //    private HashSet<Tile> extracted(Spell spell, Fight fight)

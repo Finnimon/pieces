@@ -14,7 +14,8 @@ import com.gitgud.pieces.utility.builder.Builder;
 
 public abstract class FightAgentBuilder implements Builder<FightAgent>
 {
-    protected static final String SPRITE_FILEPATH_DIRECTORY = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\";
+    protected static final String SPRITE_FILEPATH_DIRECTORY = "src\\main\\resources\\com\\gitgud\\pieces\\model" +
+                                                              "\\gameobjects\\agents\\";
     
     
     private final Class<? extends FightAgent> typeClass;
@@ -99,6 +100,23 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     }
     
     
+    private void validateTypeClass()
+    {
+        if (isKnownTypeClass(typeClass))
+        {
+            return;
+        }
+        
+        throw new IllegalStateException("Unknown type: " + typeClass);
+    }
+    
+    
+    private static boolean isKnownTypeClass(Class<? extends FightAgent> typeClass)
+    {
+        return typeClass == SpellCasterFightAgent.class || typeClass == FightAgent.class;
+    }
+    
+    
     protected static String determineSpriteFilePath(Faction faction, Allegiance allegiance,
                                                     FightAgentType fightAgentType)
     {
@@ -108,12 +126,6 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
                                          allegiance,
                                          fightAgentType.name(),
                                          Sprite.DOT_PNG);
-    }
-    
-    
-    private static boolean isKnownTypeClass(Class<? extends FightAgent> typeClass)
-    {
-        return typeClass == SpellCasterFightAgent.class || typeClass == FightAgent.class;
     }
     
     
@@ -127,17 +139,6 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     {
         this.allegiance = allegiance;
         return this;
-    }
-    
-    
-    private void validateTypeClass()
-    {
-        if (isKnownTypeClass(typeClass))
-        {
-            return;
-        }
-        
-        throw new IllegalStateException("Unknown type: " + typeClass);
     }
     
     
@@ -458,63 +459,6 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     }
     
     
-    private FightAgent getFightAgentResult()
-    {
-        return new FightAgent(name,
-                              description,
-                              spriteFilePath,
-                              isFlying,
-                              movementRange,
-                              type,
-                              faction,
-                              allegiance,
-                              level,
-                              meleeDamage,
-                              rangedDamage,
-                              rangedAttackRange,
-                              remainingRangedAttacks,
-                              isRangedAttacker,
-                              physicalDefence,
-                              magicDefence,
-                              evadeChance,
-                              maxHealth,
-                              maxMana,
-                              health,
-                              mana,
-                              initiative,
-                              accuracy);
-    }
-    
-    
-    private SpellCasterFightAgent getSpellCasterFightAgentResult()
-    {
-        return new SpellCasterFightAgent(name,
-                                         description,
-                                         spriteFilePath,
-                                         isFlying,
-                                         movementRange,
-                                         type,
-                                         faction,
-                                         allegiance,
-                                         level,
-                                         meleeDamage,
-                                         rangedDamage,
-                                         rangedAttackRange,
-                                         remainingRangedAttacks,
-                                         isRangedAttacker,
-                                         physicalDefence,
-                                         magicDefence,
-                                         evadeChance,
-                                         maxHealth,
-                                         maxMana,
-                                         health,
-                                         mana,
-                                         initiative,
-                                         accuracy,
-                                         spellBook);
-    }
-    
-    
     @Override
     public void reset()
     {
@@ -568,6 +512,73 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
     }
     
     
+    protected void adjustValuesByLevel()
+    {
+        float scalar = level;
+        
+        
+        scaleValues(scalar);
+        levelUpSpellsIfNeeded();
+    }
+    
+    
+    private SpellCasterFightAgent getSpellCasterFightAgentResult()
+    {
+        return new SpellCasterFightAgent(name,
+                                         description,
+                                         spriteFilePath,
+                                         isFlying,
+                                         movementRange,
+                                         type,
+                                         faction,
+                                         allegiance,
+                                         level,
+                                         meleeDamage,
+                                         rangedDamage,
+                                         rangedAttackRange,
+                                         remainingRangedAttacks,
+                                         isRangedAttacker,
+                                         physicalDefence,
+                                         magicDefence,
+                                         evadeChance,
+                                         maxHealth,
+                                         maxMana,
+                                         health,
+                                         mana,
+                                         initiative,
+                                         accuracy,
+                                         spellBook);
+    }
+    
+    
+    private FightAgent getFightAgentResult()
+    {
+        return new FightAgent(name,
+                              description,
+                              spriteFilePath,
+                              isFlying,
+                              movementRange,
+                              type,
+                              faction,
+                              allegiance,
+                              level,
+                              meleeDamage,
+                              rangedDamage,
+                              rangedAttackRange,
+                              remainingRangedAttacks,
+                              isRangedAttacker,
+                              physicalDefence,
+                              magicDefence,
+                              evadeChance,
+                              maxHealth,
+                              maxMana,
+                              health,
+                              mana,
+                              initiative,
+                              accuracy);
+    }
+    
+    
     private void applyDamageScalar(float damageModifier)
     {
         meleeDamage = Math.round(meleeDamage * damageModifier);
@@ -581,16 +592,6 @@ public abstract class FightAgentBuilder implements Builder<FightAgent>
         
         maxHealth = Math.round(maxHealth * damageModifier);
         health = maxHealth;
-    }
-    
-    
-    protected void adjustValuesByLevel()
-    {
-        float scalar = level;
-        
-        
-        scaleValues(scalar);
-        levelUpSpellsIfNeeded();
     }
     
     

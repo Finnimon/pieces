@@ -3,6 +3,7 @@ package com.gitgud.engine.view;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.engine.model.map.Tile;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -38,6 +39,17 @@ public class SpriteHelper
     }
     
     
+    public static Rectangle createRectangle(Paint pattern, Tile tile, int tileSize)
+    {
+        return SpriteHelper.createRectangle(pattern,
+                                            tileSize * tile.getX(),
+                                            tileSize * tile.getY(),
+                                            tileSize,
+                                            tileSize);
+        
+    }
+    
+    
     public static Rectangle createRectangle(Paint pattern, int x, int y, int width, int height)
     {
         Rectangle rectangle = new Rectangle();
@@ -49,14 +61,13 @@ public class SpriteHelper
         return rectangle;
     }
     
-    
-    public static Rectangle createRectangle(Paint pattern, Tile tile, int tileSize)
+    public static ImageView createImageView(Tile tile, int width, int height)
     {
-        return SpriteHelper.createRectangle(pattern,
-                                            tileSize * tile.getX(),
-                                            tileSize * tile.getY(),
-                                            tileSize,
-                                            tileSize);
-        
+        ImageView imageView = new ImageView(tile.getSprite());
+        imageView.setSmooth(false);
+        imageView.setFitWidth(width);
+        imageView.setX(tile.getX());
+        imageView.setY(tile.getY());
+        return imageView;
     }
 }

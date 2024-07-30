@@ -62,7 +62,8 @@ public class SDifficulty
         }
         
         
-        buttonsArrayD[0].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage))); //TODO: inwifern werden die Schwierigkeitsgrade dargestellt? Weniger Einheiten die man in den Kampf mitnehmen darf?
+        buttonsArrayD[0].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage))); //TODO: inwifern werden
+        // die Schwierigkeitsgrade dargestellt? Weniger Einheiten die man in den Kampf mitnehmen darf?
         buttonsArrayD[1].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
         buttonsArrayD[2].setOnAction(e -> stage.setScene(SStory.createStoryScene(stage)));
         

@@ -20,21 +20,25 @@ public class FightAgentDirector implements Director<FightAgent>
     private Builder<FightAgent> builder;
     
     
-    public FightAgentDirector(Builder<FightAgent> builder)
-    {
-        this.builder = builder;
-    }
-    
-    
     public FightAgentDirector()
     {
         this(new KnightBuilder());
     }
     
     
-    public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level)
+    public FightAgentDirector(Builder<FightAgent> builder)
     {
-        return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + level;
+        this.builder = builder;
+    }
+    
+    
+    public static int getLevel(int type)
+    {
+        type -= getAllegiance(type).typeToInt();
+        type -= getFightAgentType(type).typeToInt();
+        type -= getFaction(type).typeToInt();
+        
+        return type;
     }
     
     
@@ -65,17 +69,16 @@ public class FightAgentDirector implements Director<FightAgent>
     }
     
     
-    public static int getLevel(int type)
+    public FightAgent make(Allegiance allegiance, FightAgentType type, Faction faction, int level)
     {
-        type -= getAllegiance(type).typeToInt();
-        type -= getFightAgentType(type).typeToInt();
-        type -= getFaction(type).typeToInt();
-        
-        return type;
+        return make(calculateType(allegiance, type, faction, level));
     }
     
     
-    @Override
+    public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level)
+    {
+        return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + level;
+    }    @Override
     public Builder<FightAgent> changeBuilder(Builder<FightAgent> builder)
     {
         Builder<FightAgent> oldBuilder = this.builder;
@@ -106,10 +109,7 @@ public class FightAgentDirector implements Director<FightAgent>
     }
     
     
-    public FightAgent make(Allegiance allegiance, FightAgentType type, Faction faction, int level)
-    {
-        return make(calculateType(allegiance, type, faction, level));
-    }
+
     
     
     @Override

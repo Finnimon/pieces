@@ -49,15 +49,15 @@ public class StageController
     }
     
     
-    private StackPane getInnerStackPane()
-    {
-        return (StackPane) ((Pane) stage.getScene().getRoot()).getChildren().get(ROOT_INDEX);
-    }
-    
-    
     public Parent getRoot()
     {
         return (Parent) getInnerStackPane().getChildren().getFirst();
+    }
+    
+    
+    private StackPane getInnerStackPane()
+    {
+        return (StackPane) ((Pane) stage.getScene().getRoot()).getChildren().get(ROOT_INDEX);
     }
     
     

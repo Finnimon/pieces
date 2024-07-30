@@ -36,12 +36,6 @@ public class Server extends Thread
     }
     
     
-    public void closeSocket()
-    {
-        this.socket.close();
-    }
-    
-    
     @Override
     public void run()
     {
@@ -100,6 +94,12 @@ public class Server extends Thread
         isConnected = false;
         currentlyReceiving = false;
         closeSocket();
+    }
+    
+    
+    public void closeSocket()
+    {
+        this.socket.close();
     }
     
     

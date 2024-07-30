@@ -39,9 +39,9 @@ public class ActiveGameController
     }
     
     
-    public static void reset()
+    private static boolean isInitialized()
     {
-        instance = null;
+        return instance != null;
     }
     
     
@@ -61,9 +61,9 @@ public class ActiveGameController
     }
     
     
-    private static boolean isInitialized()
+    public static void reset()
     {
-        return instance != null;
+        instance = null;
     }
     
     

@@ -25,6 +25,12 @@ public class InfoPane<Type> extends StackPane
     private final Label label;
     
     
+    public InfoPane(String string)
+    {
+        this(new Label(string), DEFAULT_BACKGROUND, DEFAULT_BORDER);
+    }
+    
+    
     public InfoPane(Label label, Background background, Border border)
     {
         setBackground(background);
@@ -33,12 +39,6 @@ public class InfoPane<Type> extends StackPane
         this.label = label;
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         this.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-    }
-    
-    
-    public InfoPane(String string)
-    {
-        this(new Label(string), DEFAULT_BACKGROUND, DEFAULT_BORDER);
     }
     
     

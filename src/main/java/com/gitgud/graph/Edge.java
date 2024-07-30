@@ -2,7 +2,8 @@ package com.gitgud.graph;
 
 /**
  * <p>Represents an edge in a {@link Graph}.
- * <p>This edge is directed and therefore does not need a from vertex. That Information is stored in the containing {@link Graph}.
+ * <p>This edge is directed and therefore does not need a from vertex. That Information is stored in the containing
+ * {@link Graph}.
  *
  * @param <Vertex> The type of {@link Vertex} the {@link Edge} is connected to
  * @author Finn L.
@@ -30,17 +31,6 @@ public class Edge<Vertex>
     
     
     /**
-     * Getter for {@link #to}
-     *
-     * @return {@link #to}
-     */
-    public Vertex getTo()
-    {
-        return to;
-    }
-    
-    
-    /**
      * Reversal of an {@link Edge}
      *
      * @param from the original origin vertex
@@ -49,6 +39,13 @@ public class Edge<Vertex>
     public Edge<Vertex> reverse(Vertex from)
     {
         return new Edge<>(from);
+    }
+    
+    
+    @Override
+    public int hashCode()
+    {
+        return to.hashCode();
     }
     
     
@@ -63,9 +60,13 @@ public class Edge<Vertex>
     }
     
     
-    @Override
-    public int hashCode()
+    /**
+     * Getter for {@link #to}
+     *
+     * @return {@link #to}
+     */
+    public Vertex getTo()
     {
-        return to.hashCode();
+        return to;
     }
 }

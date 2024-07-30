@@ -9,25 +9,40 @@ import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.GridMapRender;
 
 
-public interface AttackAction<
-            AwaiterType extends ActionAwaitingController<ModelType, FighterType, RenderType>,
-            ModelType extends ActionAwaiterModel<FighterType>,
-            FighterType extends Fighter,
-            RenderType extends ActionContextRender<ModelType, FighterType>
-        > extends FromToAction<AwaiterType, Tile>
+/**
+ * Implements {@link FromToAction} to attack a {@link Tile} on the {@link GridMap}
+ *
+ * @param <AaType>
+ * @param <MType>
+ * @param <FType>
+ * @param <RType>
+ * @see Fighter
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.05.2024
+ * @Version: 1.0
+ */
+public interface AttackAction<AaType extends ActionAwaitingController<MType, FType, RType>,
+        MType extends ActionAwaiterModel<FType>, FType extends Fighter, RType extends ActionContextRender<MType, FType>>
+        extends FromToAction<AaType, Tile>
 {
+    /**
+     * Makes the {@link Fighter} at {@link #getFrom()} attack the {@link Fighter} at {@link #getTo()}.
+     *
+     * @param awaiter the {@link ActionAwaitingController} this Action will be enacted upon
+     */
     @Override
-    default void enAct(AwaiterType awaiter)
+    default void enAct(AaType awaiter)
     {
-        GridMap<FighterType> gridMap = awaiter.getModel().getGridMap();
+        GridMap<FType> gridMap = awaiter.getModel().getGridMap();
         Tile from = getFrom();
         Tile to = getTo();
         float distance = (float) from.distance(to);
-        FighterType attacked = gridMap.get(to);
+        FType attacked = gridMap.get(to);
         
         gridMap.get(from).attack(attacked, distance);
         
-        GridMapRender<FighterType> gridMapRender = awaiter.getRender().getGridMapRender();
+        GridMapRender<FType> gridMapRender = awaiter.getRender().getGridMapRender();
         
         if (!attacked.isDead())
         {

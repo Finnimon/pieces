@@ -59,7 +59,8 @@ public class SMap
     private static final int NUMBER_OF_UNITS = 5;
     
     
-    private static final String MOVE_TRANSITION_INFO = "Press 1 to skip the turn and get more steps on the next turn,\n" +
+    private static final String MOVE_TRANSITION_INFO = "Press 1 to skip the turn and get more steps on the next turn," +
+                                                       "\n" +
                                                        "Press 2 to skip the turn and regenerate a little mana,\n" +
                                                        "Press 3 to skip turn and heal your units,";
     
@@ -185,12 +186,6 @@ public class SMap
     }
     
     
-    public static void moveRequest(Rectangle tile)
-    {
-        System.out.println(tile);
-    }
-    
-    
     private static void createTopMenu(HBox menu)
     {
         Player player = ActiveGameController.getInstance().get().getPlayer();
@@ -229,6 +224,12 @@ public class SMap
         createBottomLeftMenu(bottomCentreMenu);
         createBottomCentreMenu(BottomLeftMenu);
         menu.getChildren().addAll(BottomLeftMenu, bottomCentreMenu, bottomRightMenu);
+    }
+    
+    
+    public static void moveRequest(Rectangle tile)
+    {
+        System.out.println(tile);
     }
     
     

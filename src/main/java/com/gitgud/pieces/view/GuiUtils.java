@@ -25,21 +25,21 @@ public class GuiUtils
     public static final String FONT_FILE_PATH = "src/main/resources/com/gitgud/fonts/Font.ttf";
     
     
-    //Methode zur Festlegung der Größe und Schriftart für einen Button
-    public static void setButtonTrait(Button button, Font font)
-    {
-        button.setPrefWidth(Constants.BUTTON_BREITE);
-        button.setPrefHeight(Constants.BUTTON_HOEHE);
-        button.setFont(font);
-    }
-    
-    
     public static void setButtonTraits(Button[] buttons, Font font)
     {
         for (Button button : buttons)
         {
             setButtonTrait(button, font);
         }
+    }
+    
+    
+    //Methode zur Festlegung der Größe und Schriftart für einen Button
+    public static void setButtonTrait(Button button, Font font)
+    {
+        button.setPrefWidth(Constants.BUTTON_BREITE);
+        button.setPrefHeight(Constants.BUTTON_HOEHE);
+        button.setFont(font);
     }
     
     

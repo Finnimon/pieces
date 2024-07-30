@@ -1,9 +1,6 @@
 package com.gitgud.pieces.utility.gsonSerialization;
 
-import com.gitgud.engine.model.Applicable;
-import com.gitgud.engine.model.DisApplicable;
 import com.gitgud.engine.model.gameobjects.GameObject;
-import com.gitgud.engine.utility.modification.Modifier;
 import com.github.ruediste.polymorphicGson.GsonPolymorphAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +30,17 @@ public class JsonParser
     }
     
     
+    private synchronized void prepareBuilder(GsonBuilder gsonBuilder)
+    {
+        GsonPolymorphAdapter gameObjectPolymorphAdapter =
+                new GsonPolymorphAdapter(GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
+                                                                                   GameObject.class.getClassLoader(),
+                                                                                   "com.gitgud");
+        gsonBuilder.setPrettyPrinting().enableComplexMapKeySerialization();
+        gsonBuilder.registerTypeAdapterFactory(gameObjectPolymorphAdapter);
+    }
+    
+    
     public static JsonParser getInstance()
     {
         if (instance == null)
@@ -40,16 +48,6 @@ public class JsonParser
             instance = new JsonParser();
         }
         return instance;
-    }
-    
-    
-    private synchronized void prepareBuilder(GsonBuilder gsonBuilder)
-    {
-        GsonPolymorphAdapter gameObjectPolymorphAdapter = new GsonPolymorphAdapter(GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
-                                                                                     GameObject.class.getClassLoader(),
-                                                                                     "com.gitgud");
-        gsonBuilder.setPrettyPrinting().enableComplexMapKeySerialization();
-        gsonBuilder.registerTypeAdapterFactory(gameObjectPolymorphAdapter);
     }
     
     

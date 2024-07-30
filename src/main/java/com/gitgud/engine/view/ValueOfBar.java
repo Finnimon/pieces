@@ -30,17 +30,17 @@ public class ValueOfBar extends ProgressBar
     }
     
     
+    private void init()
+    {
+        progressProperty().bind(value.divide(max));
+    }
+    
+    
     public static ValueOfBar healthBar(Health health)
     {
         ValueOfBar valueOfBar = new ValueOfBar(health.healthProperty(), health.maxHealthProperty());
         valueOfBar.setStyle("-fx-accent: #ff0000");
         
         return valueOfBar;
-    }
-    
-    
-    private void init()
-    {
-        progressProperty().bind(value.divide(max));
     }
 }

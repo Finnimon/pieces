@@ -30,19 +30,6 @@ public class Market extends CityBuilding
     private Exchange redstoneExchange;
     
     
-    public Market(Exchange platinumExchange, Exchange goldExchange, Exchange silverExchange, Exchange ironExchange,
-                  Exchange copperExchange, Exchange redstoneExchange)
-    {
-        super("Market", "Exchange resources here.", 1);
-        this.platinumExchange = platinumExchange;
-        this.goldExchange = goldExchange;
-        this.silverExchange = silverExchange;
-        this.ironExchange = ironExchange;
-        this.copperExchange = copperExchange;
-        this.redstoneExchange = redstoneExchange;
-    }
-    
-    
     public Market()
     {
         this(new Exchange(new ResourceCost(ResourceType.GOLD, 100L), new ResourceCost(ResourceType.PLATINUM, 5L)),
@@ -54,9 +41,16 @@ public class Market extends CityBuilding
     }
     
     
-    private static Exchange levelUp(Exchange exchange)
+    public Market(Exchange platinumExchange, Exchange goldExchange, Exchange silverExchange, Exchange ironExchange,
+                  Exchange copperExchange, Exchange redstoneExchange)
     {
-        return exchange.changePrice(exchange.getPrice().multiple(PRICE_REDUCTION_PER_LEVEL));
+        super("Market", "Exchange resources here.", 1);
+        this.platinumExchange = platinumExchange;
+        this.goldExchange = goldExchange;
+        this.silverExchange = silverExchange;
+        this.ironExchange = ironExchange;
+        this.copperExchange = copperExchange;
+        this.redstoneExchange = redstoneExchange;
     }
     
     
@@ -106,6 +100,12 @@ public class Market extends CityBuilding
     }
     
     
+    public ResourceCost getLevelUpCost()
+    {
+        return costPerLevel.multiple(getLevel());
+    }
+    
+    
     @Override
     public int levelUp()
     {
@@ -124,8 +124,8 @@ public class Market extends CityBuilding
     }
     
     
-    public ResourceCost getLevelUpCost()
+    private static Exchange levelUp(Exchange exchange)
     {
-        return costPerLevel.multiple(getLevel());
+        return exchange.changePrice(exchange.getPrice().multiple(PRICE_REDUCTION_PER_LEVEL));
     }
 }

@@ -31,19 +31,19 @@ public class TrainingGrounds extends CityBuilding
     private final List<Modifier<FightAgent>> modifiers;
     
     
-    public TrainingGrounds(int level, Modifier<FightAgent> modifier)
-    {
-        super(NAME, description, level);
-        modifiers = new ArrayList<>();
-        getModifiers().add(modifier);
-    }
-    
-    
     public TrainingGrounds()
     {
         this(STARTING_LEVEL,
              new FightAgentModifier(List.of(new FightAgentAttackModifier(2, 0, 1.001f),
                                             new FightAgentHealthModifier(10, 1))));
+    }
+    
+    
+    public TrainingGrounds(int level, Modifier<FightAgent> modifier)
+    {
+        super(NAME, description, level);
+        modifiers = new ArrayList<>();
+        getModifiers().add(modifier);
     }
     
     

@@ -58,6 +58,14 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     }
     
     
+    @Override
+    public void render(GridMap<Type> gridMap)
+    {
+        renderTiles(gridMap);
+        renderGridMappables(gridMap);
+    }
+    
+    
     private void renderTiles(GridMap<Type> gridMap)
     {
         ObservableList<Node> children = this.tileGroup.getChildren();
@@ -94,11 +102,22 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     }
     
     
-    @Override
-    public void render(GridMap<Type> gridMap)
+    public void addGridMappable(Type gridMappable, Tile tile)
     {
-        renderTiles(gridMap);
-        renderGridMappables(gridMap);
+        double x = tile.getX() * tileSize;
+        double y = tile.getY() * tileSize;
+        GridMappableRender<Type> render = new GridMappableRender<>(gridMappable, x, y, tileSize);
+        
+        gridMappableGroup.getChildren().add(render);
+        
+        gridMappableRenders.put(gridMappable, render);
+        
+        if (!(gridMappable instanceof Interactable<?>))
+        {
+            return;
+        }
+        
+        render.toBack();
     }
     
     
@@ -124,22 +143,15 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     }
     
     
-    public void addGridMappable(Type gridMappable, Tile tile)
+    public Rectangle addHighLight(Tile tile)
     {
-        double x = tile.getX() * tileSize;
-        double y = tile.getY() * tileSize;
-        GridMappableRender<Type> render = new GridMappableRender<>(gridMappable, x, y, tileSize);
-        
-        gridMappableGroup.getChildren().add(render);
-        
-        gridMappableRenders.put(gridMappable, render);
-        
-        if (!(gridMappable instanceof Interactable<?>))
-        {
-            return;
-        }
-        
-        render.toBack();
+        return addHighLight(tile, Color.BLUE);
+    }
+    
+    
+    public Rectangle addHighLight(Tile tile, Color color)
+    {
+        return addHighLight(tile, color, null);
     }
     
     
@@ -167,18 +179,6 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
                                   eventHandler);//todo hand unhandled events to nodes beneath inccase of info???
         rectangle.cursorProperty().set(Cursor.HAND);
         return rectangle;
-    }
-    
-    
-    public Rectangle addHighLight(Tile tile, Color color)
-    {
-        return addHighLight(tile, color, null);
-    }
-    
-    
-    public Rectangle addHighLight(Tile tile)
-    {
-        return addHighLight(tile, Color.BLUE);
     }
     
     

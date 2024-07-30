@@ -4,13 +4,16 @@ import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.view.ActionContextRender;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 
-public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType, RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable, RenderType extends ActionContextRender<ModelType, GridMappableType>> extends
-                                                                                                                                                                                                                                                                                                  ActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType> implements
-                                                                                                                                                                                                                                                                                                                                                                            RootChoice<ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>>
+public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, GridMappableType,
+        RenderType>, ModelType extends ActionAwaiterModel<GridMappableType>, GridMappableType extends GridMappable,
+        RenderType extends ActionContextRender<ModelType, GridMappableType>>
+        extends ActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>
+        implements RootChoice<ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>>
 {
     private final List<ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType>> toActionChoices;
     
@@ -30,7 +33,7 @@ public class RootToActionChoice<ActionAwaitingType extends ActionAwaitingControl
     
     
     @Override
-    public void show(ActionAwaitingType actionAwaiter)
+    public void show(@NotNull ActionAwaitingType actionAwaiter)
     {
         for (ToActionChoice<ActionAwaitingType, ModelType, GridMappableType, RenderType> actionChoice : toActionChoices)
         {

@@ -13,7 +13,8 @@
 //
 //
 ///**
-// * Diese Klasse stellt alle Methoden bereit, um Informationen aus externen Spielressourcen an Spielobjekte zu verteilen.
+// * Diese Klasse stellt alle Methoden bereit, um Informationen aus externen Spielressourcen an Spielobjekte zu
+// verteilen.
 // *
 // * @author Finn Maximilian Kramer
 // * @version 1.0
@@ -123,7 +124,8 @@
 //
 //
 //    /**
-//     * Liefert für ein DOT_JSON-Objekt für Attribute mit natürlichen Zahlenwerten eine Abbildung der Attributbezeichnungen auf die Zahlenwerte.
+//     * Liefert für ein DOT_JSON-Objekt für Attribute mit natürlichen Zahlenwerten eine Abbildung der
+//     Attributbezeichnungen auf die Zahlenwerte.
 //     *
 //     * @param object Ein DOT_JSON-Objekt mit Attributen mit natürlichen Zahlenwerten
 //     * @return Gibt ein HashMap<String, Integer>-Objekt zurück.

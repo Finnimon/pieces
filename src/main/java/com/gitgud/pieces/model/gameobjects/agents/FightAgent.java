@@ -112,8 +112,10 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
      * @param level                  The Level of the {@link FightAgent}
      * @param meleeDamage            The melee damage of the {@link FightAgent}
      * @param rangedDamage           The ranged damage of the {@link FightAgent}.
-     * @param rangedAttackRange      The ranged attack range of the {@link FightAgent} 0 if the {@link FightAgent} is not a ranged attacker
-     * @param remainingRangedAttacks The remaining ranged attacks of the {@link FightAgent} 0 if the {@link FightAgent} is not a ranged attacker
+     * @param rangedAttackRange      The ranged attack range of the {@link FightAgent} 0 if the {@link FightAgent} is
+     *                              not a ranged attacker
+     * @param remainingRangedAttacks The remaining ranged attacks of the {@link FightAgent} 0 if the
+     * {@link FightAgent} is not a ranged attacker
      * @param isRangedAttacker       True if the {@link FightAgent} is a ranged attacker
      * @param physicalDefence        The physical defence of the {@link FightAgent}
      * @param magicDefence           The magic defence of the {@link FightAgent}
@@ -155,46 +157,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
-     * Getter for {@link #mana} value
-     *
-     * @return {@link #mana} value
-     */
-    public int getMana()
-    {
-        return mana.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #mana}
-     */
-    public void setMana(int mana)
-    {
-        this.mana.setValue(mana);
-    }
-    
-    
-    /**
-     * Getter for the {@link #evadeChance} value
-     *
-     * @return {@link #evadeChance} value
-     */
-    public float getEvadeChance()
-    {
-        return evadeChance.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #evadeChance} value
-     */
-    public void setEvadeChance(float evadeChance)
-    {
-        this.evadeChance.setValue(evadeChance);
-    }
-    
-    
-    /**
      * Getter for {@link #isRangedAttacker} value
      *
      * @return {@link #isRangedAttacker} value
@@ -205,63 +167,27 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     }
     
     
-    /**
-     * Getter for {@link #meleeDamage} value
-     *
-     * @return {@link #meleeDamage} value
-     */
-    public int getMeleeDamage()
+    @Override
+    public SimpleIntegerProperty healthProperty()
     {
-        return meleeDamage.get();
+        return health;
     }
     
     
-    /**
-     * Setter for {@link #meleeDamage} value
-     */
-    public void setMeleeDamage(int meleeDamage)
+    @Override
+    public SimpleIntegerProperty maxHealthProperty()
     {
-        this.meleeDamage.setValue(meleeDamage);
+        return maxHealth;
     }
     
     
-    /**
-     * Getter for {@link #rangedDamage} value
-     *
-     * @return {@link #meleeDamage} value
-     */
-    public int getRangedDamage()
+    @Override
+    public Defence getDefenceTo(DamageType damageType)
     {
-        return rangedDamage.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #rangedDamage} value
-     */
-    public void setRangedDamage(int rangedDamage)
-    {
-        this.rangedDamage.setValue(rangedDamage);
-    }
-    
-    
-    /**
-     * Getter for {@link #remainingRangedAttacks} value
-     *
-     * @return {@link #remainingRangedAttacks} value
-     */
-    public int getRemainingRangedAttacks()
-    {
-        return remainingRangedAttacks.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #remainingRangedAttacks} value
-     */
-    public void setRemainingRangedAttacks(int remainingRangedAttacks)
-    {
-        this.remainingRangedAttacks.setValue(remainingRangedAttacks);
+        int defenceValue = (damageType == DamageType.PHYSICAL) ? getPhysicalDefence() : getMagicDefence();
+        
+        
+        return new Defence(defenceValue, getEvadeChance(), damageType);
     }
     
     
@@ -297,115 +223,31 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
+     * Getter for the {@link #evadeChance} value
+     *
+     * @return {@link #evadeChance} value
+     */
+    public float getEvadeChance()
+    {
+        return evadeChance.get();
+    }
+    
+    
+    /**
+     * Setter for {@link #evadeChance} value
+     */
+    public void setEvadeChance(float evadeChance)
+    {
+        this.evadeChance.setValue(evadeChance);
+    }
+    
+    
+    /**
      * Setter for {@link #magicDefence} value
      */
     public void setMagicDefence(int magicDefence)
     {
         this.magicDefence.setValue(magicDefence);
-    }
-    
-    
-    @Override
-    public SimpleIntegerProperty healthProperty()
-    {
-        return health;
-    }
-    
-    
-    @Override
-    public SimpleIntegerProperty maxHealthProperty()
-    {
-        return maxHealth;
-    }
-    
-    
-    /**
-     * Getter for {@link #rangedAttackRange}
-     *
-     * @return {@link #rangedAttackRange} value
-     */
-    public int getRangedAttackRange()
-    {
-        return rangedAttackRange.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #rangedAttackRange} value
-     */
-    public void setRangedAttackRange(int rangedAttackRange)
-    {
-        this.rangedAttackRange.setValue(rangedAttackRange);
-    }
-    
-    
-    /**
-     * Getter for {@link #maxMana}
-     *
-     * @return {@link #maxMana} value
-     */
-    public int getMaxMana()
-    {
-        return maxMana.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #maxMana} value
-     */
-    public void setMaxMana(int maxMana)
-    {
-        this.maxMana.setValue(maxMana);
-    }
-    
-    
-    /**
-     * Getter for {@link #initiative}
-     *
-     * @return {@link #initiative} value
-     */
-    public int getInitiative()
-    {
-        return initiative.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #initiative} value
-     */
-    public void setInitiative(int initative)
-    {
-        this.initiative.setValue(initative);
-    }
-    
-    
-    /**
-     * Getter for {@link #accuracy}
-     *
-     * @return {@link #accuracy} value
-     */
-    public float getAccuracy()
-    {
-        return accuracy.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #accuracy} value
-     */
-    public void setAccuracy(float accuracy)
-    {
-        this.accuracy.setValue(accuracy);
-    }
-    
-    
-    @Override
-    public Defence getDefenceTo(DamageType damageType)
-    {
-        int defenceValue = (damageType == DamageType.PHYSICAL) ? getPhysicalDefence() : getMagicDefence();
-        
-        
-        return new Defence(defenceValue, getEvadeChance(), damageType);
     }
     
     
@@ -432,11 +274,55 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
-     * decrements {@link #remainingRangedAttacks} value
+     * Getter for {@link #remainingRangedAttacks} value
+     *
+     * @return {@link #remainingRangedAttacks} value
      */
-    private void decrementRemainingRangedAttacks()
+    public int getRemainingRangedAttacks()
     {
-        setRemainingRangedAttacks(getRemainingRangedAttacks() - 1);
+        return remainingRangedAttacks.get();
+    }
+    
+    
+    /**
+     * Setter for {@link #remainingRangedAttacks} value
+     */
+    public void setRemainingRangedAttacks(int remainingRangedAttacks)
+    {
+        this.remainingRangedAttacks.setValue(remainingRangedAttacks);
+    }
+    
+    
+    /**
+     * <p>Determines whether this {@link FightAgent} can attack at the given distance.
+     * <p>Based on {@link #isRangedAttacker}, {@link #getRemainingRangedAttacks} and the {@link #rangedAttackRange}
+     *
+     * @param distance the distance
+     * @return {@code true} if the {@link FightAgent} can attack, {@code false} otherwise
+     */
+    private boolean canAttackRangedAtDistance(float distance)
+    {
+        return isRangedAttacker && getRemainingRangedAttacks() > 0 && getRangedAttackRange() >= distance - 0.01f;
+    }
+    
+    
+    /**
+     * Getter for {@link #meleeDamage} value
+     *
+     * @return {@link #meleeDamage} value
+     */
+    public int getMeleeDamage()
+    {
+        return meleeDamage.get();
+    }
+    
+    
+    /**
+     * Setter for {@link #meleeDamage} value
+     */
+    public void setMeleeDamage(int meleeDamage)
+    {
+        this.meleeDamage.setValue(meleeDamage);
     }
     
     
@@ -453,15 +339,71 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
-     * <p>Determines whether this {@link FightAgent} can attack at the given distance.
-     * <p>Based on {@link #isRangedAttacker}, {@link #getRemainingRangedAttacks} and the {@link #rangedAttackRange}
-     *
-     * @param distance the distance
-     * @return {@code true} if the {@link FightAgent} can attack, {@code false} otherwise
+     * decrements {@link #remainingRangedAttacks} value
      */
-    private boolean canAttackRangedAtDistance(float distance)
+    private void decrementRemainingRangedAttacks()
     {
-        return isRangedAttacker && getRemainingRangedAttacks() > 0 && getRangedAttackRange() >= distance - 0.01f;
+        setRemainingRangedAttacks(getRemainingRangedAttacks() - 1);
+    }
+    
+    
+    /**
+     * Getter for {@link #accuracy}
+     *
+     * @return {@link #accuracy} value
+     */
+    public float getAccuracy()
+    {
+        return accuracy.get();
+    }
+    
+    
+    /**
+     * Getter for {@link #rangedAttackRange}
+     *
+     * @return {@link #rangedAttackRange} value
+     */
+    public int getRangedAttackRange()
+    {
+        return rangedAttackRange.get();
+    }
+    
+    
+    /**
+     * Getter for {@link #rangedDamage} value
+     *
+     * @return {@link #meleeDamage} value
+     */
+    public int getRangedDamage()
+    {
+        return rangedDamage.get();
+    }
+    
+    
+    /**
+     * Setter for {@link #rangedDamage} value
+     */
+    public void setRangedDamage(int rangedDamage)
+    {
+        this.rangedDamage.setValue(rangedDamage);
+    }
+    
+    
+    /**
+     * Setter for {@link #rangedAttackRange} value
+     */
+    public void setRangedAttackRange(int rangedAttackRange)
+    {
+        this.rangedAttackRange.setValue(rangedAttackRange);
+    }
+    
+    
+    /**
+     * Setter for {@link #accuracy} value
+     */
+    public void setAccuracy(float accuracy)
+    {
+        this.accuracy.setValue(accuracy);
     }
     
     
@@ -493,7 +435,8 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
      * <p>All values are adjusted according to the new level as allocated by the {@link FightAgentDirector}.
      *
      * @return the new level
-     * @Precondition: The {@link ActiveGameController#getGameState()} must not be {@link com.gitgud.pieces.model.game.GameState#NOT_LOADED}
+     * @Precondition: The {@link ActiveGameController#getGameState()} must not be
+     * {@link com.gitgud.pieces.model.game.GameState#NOT_LOADED}
      * @Postcondition: The method does not throw any exceptions. The Players Artefacts are also reapplied.
      * @see FightAgentDirector
      */
@@ -537,6 +480,66 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     }
     
     
+    /**
+     * Getter for {@link #maxMana}
+     *
+     * @return {@link #maxMana} value
+     */
+    public int getMaxMana()
+    {
+        return maxMana.get();
+    }
+    
+    
+    /**
+     * Getter for {@link #mana} value
+     *
+     * @return {@link #mana} value
+     */
+    public int getMana()
+    {
+        return mana.get();
+    }
+    
+    
+    /**
+     * Setter for {@link #mana}
+     */
+    public void setMana(int mana)
+    {
+        this.mana.setValue(mana);
+    }
+    
+    
+    /**
+     * Getter for {@link #initiative}
+     *
+     * @return {@link #initiative} value
+     */
+    public int getInitiative()
+    {
+        return initiative.get();
+    }
+    
+    
+    /**
+     * Setter for {@link #initiative} value
+     */
+    public void setInitiative(int initative)
+    {
+        this.initiative.setValue(initative);
+    }
+    
+    
+    /**
+     * Setter for {@link #maxMana} value
+     */
+    public void setMaxMana(int maxMana)
+    {
+        this.maxMana.setValue(maxMana);
+    }
+    
+    
     @Override
     public SimpleIntegerProperty levelProperty()
     {
@@ -573,17 +576,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     }
     
     
-    /**
-     * Getter for {@link #allegiance}
-     *
-     * @return {@link #allegiance}
-     */
-    public Allegiance getAllegiance()
-    {
-        return allegiance;
-    }
-    
-    
     @Override
     public Collection<Tile> findAttackableTiles(GridMap gridMap, Tile position)
     {
@@ -603,7 +595,8 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
-     * Filters the {@link Tile}s that are in Attack range by whether an attackable other {@link FightAgent} is on the {@link Tile}
+     * Filters the {@link Tile}s that are in Attack range by whether an attackable other {@link FightAgent} is on the
+     * {@link Tile}
      *
      * @param gridMap         The gridmap on which this {@link FightAgent} is located
      * @param attackableTiles The {@link Tile}s that are in Attack range
@@ -640,5 +633,16 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
                                       }
                                   });
         return attackableTiles;
+    }
+    
+    
+    /**
+     * Getter for {@link #allegiance}
+     *
+     * @return {@link #allegiance}
+     */
+    public Allegiance getAllegiance()
+    {
+        return allegiance;
     }
 }

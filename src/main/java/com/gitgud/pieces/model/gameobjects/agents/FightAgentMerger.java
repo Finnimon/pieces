@@ -32,7 +32,7 @@ public class FightAgentMerger
     
     public boolean canMerge()
     {
-        FightAgentDirector fightAgentDirector=new FightAgentDirector();
+        FightAgentDirector fightAgentDirector = new FightAgentDirector();
         return first != second && fightAgentDirector.calculateType(first) == fightAgentDirector.calculateType(second);
     }
     

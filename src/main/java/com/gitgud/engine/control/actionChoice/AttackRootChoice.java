@@ -1,9 +1,9 @@
 package com.gitgud.engine.control.actionChoice;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.control.action.AttackAction;
 import com.gitgud.engine.control.action.ToAction;
+import com.gitgud.engine.model.ActionAwaiterModel;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.view.ActionContextRender;
@@ -13,8 +13,10 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, FighterType, RenderType>, ModelType extends ActionAwaiterModel<FighterType>, FighterType extends Fighter, RenderType extends ActionContextRender<ModelType, FighterType>> extends
-                                                                                                                                                                                                                                                                       RootToActionChoice<ActionAwaitingType, ModelType, FighterType, RenderType>
+public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingController<ModelType, FighterType, RenderType>
+        , ModelType extends ActionAwaiterModel<FighterType>, FighterType extends Fighter,
+        RenderType extends ActionContextRender<ModelType, FighterType>>
+        extends RootToActionChoice<ActionAwaitingType, ModelType, FighterType, RenderType>
 {
     
     
@@ -37,7 +39,9 @@ public class AttackRootChoice<ActionAwaitingType extends ActionAwaitingControlle
     }
     
     
-    public static <AAType extends ActionAwaitingController<MType, FType, RType>, MType extends ActionAwaiterModel<FType>, FType extends Fighter, RType extends ActionContextRender<MType, FType>> List<ToActionChoice<AAType, MType, FType, RType>> toActionChoices(
+    public static <AAType extends ActionAwaitingController<MType, FType, RType>,
+            MType extends ActionAwaiterModel<FType>, FType extends Fighter, RType extends ActionContextRender<MType,
+            FType>> List<ToActionChoice<AAType, MType, FType, RType>> toActionChoices(
             AAType actionAwaiter, FType fighterType)
     {
         List<ToActionChoice<AAType, MType, FType, RType>> toActionChoices = new ArrayList<>();

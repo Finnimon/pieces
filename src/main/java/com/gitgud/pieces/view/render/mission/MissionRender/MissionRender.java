@@ -27,22 +27,6 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     }
     
     
-    public static EventHandler<MouseEvent> interactableEventHandler(Interactable<?> interactable,
-                                                                    MissionController missionController, Tile tile)
-    {
-        return mouseEvent ->
-        {
-            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY))
-            {
-                return;
-            }
-            
-            mouseEvent.consume();
-            InteractionChecker.interactIfPossible(missionController, tile);
-        };
-    }
-    
-    
     public void addInteractionHandlers(MissionController missionController)
     {
         GridMapRender<GameObject> gridMapRender = getGridMapRender();
@@ -64,11 +48,19 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     }
     
     
-    @Override
-    public void updateRender()
+    public static EventHandler<MouseEvent> interactableEventHandler(Interactable<?> interactable,
+                                                                    MissionController missionController, Tile tile)
     {
-        updatePlayerAgentRender();
-        getHud().updateRender();
+        return mouseEvent ->
+        {
+            if (!mouseEvent.getButton().equals(MouseButton.PRIMARY))
+            {
+                return;
+            }
+            
+            mouseEvent.consume();
+            InteractionChecker.interactIfPossible(missionController, tile);
+        };
     }
     
     
@@ -80,11 +72,11 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     }
     
     
-    private void renderPlayerAgent()
+    @Override
+    public void updateRender()
     {
-        PlayerAgent playerAgent = getData().getPlayerAgent();
-        Tile playerAgentPosition = getData().getPlayerAgentPosition();
-        getGridMapRender().addGridMappable(playerAgent, playerAgentPosition);
+        updatePlayerAgentRender();
+        getHud().updateRender();
     }
     
     
@@ -93,6 +85,14 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
         PlayerAgent playerAgent = getData().getPlayerAgent();
         Tile playerAgentPosition = getData().getPlayerAgentPosition();
         getGridMapRender().relocateGridMappable(playerAgent, playerAgentPosition);
+    }
+    
+    
+    private void renderPlayerAgent()
+    {
+        PlayerAgent playerAgent = getData().getPlayerAgent();
+        Tile playerAgentPosition = getData().getPlayerAgentPosition();
+        getGridMapRender().addGridMappable(playerAgent, playerAgentPosition);
     }
     
     

@@ -17,10 +17,12 @@ public class PlayerAgent extends Agent
     private static final String NAME_SUFFIX = " King";
     
     
-    private static final String DESCRIPTION = "Once a just king. Now broken by many defensive battles he marches forth to retake all his lands.";
+    private static final String DESCRIPTION = "Once a just king. Now broken by many defensive battles he marches " +
+                                              "forth to retake all his lands.";
     
     
-    private static final String SPRITE_PATH_PREFIX = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\";
+    private static final String SPRITE_PATH_PREFIX = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects" +
+                                                     "\\agents\\";
     
     
     private static final String SPRITE_PATH_SUFFIX = "\\black_king.png";

@@ -34,7 +34,8 @@ enum MissionSelection implements Describable, Sprite
     THIRD(""),
     FOURTH("Steal the White Queen's riches. " +
            "Many Artefacts and resources are scattered in her Province D1. " +
-           "But be prepared, she is quite powerful and has a lot of Clergymen with her, who will aid her with powerful spells"),
+           "But be prepared, she is quite powerful and has a lot of Clergymen with her, who will aid her with " +
+           "powerful spells"),
     FIFTH("It is time to Attack E1 and destroy the White King's palace. " +
           "There is nothing to gain here, just blood to shed. " +
           "This Mission will be by far the hardest you have faced.");
@@ -46,37 +47,6 @@ enum MissionSelection implements Describable, Sprite
     MissionSelection(String description)
     {
         this.description = description;
-    }
-    
-    
-    /**
-     * <p>Determines the asset FilePath for this mission.
-     * <p>The returned path should always be a readable JSON file. If it is not, please see to it, that all needed resource files are available.
-     * @return the json file path for this mission
-     */
-    @NotNull
-    private String getJsonFilePath()
-    {
-        return com.gitgud.pieces.utility.Strings.SRC_MAIN_RESOURCES +
-               MissionSelection.class.getName().replace(".", Strings.FILE_SEPERATOR) +
-               Strings.FILE_SEPERATOR +
-               this.name() +
-               DOT_JSON;
-    }
-    
-    
-    /**
-     * Loads the corresponding Mission JSON file into a Mission object
-     *
-     * @return the loaded mission
-     * @Precondition: The Mission JSON file must exist and be readable
-     * @Postcondition: No Exceptions will be thrown
-     */
-    @NotNull
-    public Mission getMission()
-    {
-        File file = new File(getJsonFilePath());
-        return JsonParser.getInstance().parseJson(file, Mission.class);
     }
     
     
@@ -102,8 +72,41 @@ enum MissionSelection implements Describable, Sprite
     }
     
     
+    /**
+     * Loads the corresponding Mission JSON file into a Mission object
+     *
+     * @return the loaded mission
+     * @Precondition: The Mission JSON file must exist and be readable
+     * @Postcondition: No Exceptions will be thrown
+     */
+    @NotNull
+    public Mission getMission()
+    {
+        File file = new File(getJsonFilePath());
+        return JsonParser.getInstance().parseJson(file, Mission.class);
+    }
+    
+    
+    /**
+     * <p>Determines the asset FilePath for this mission.
+     * <p>The returned path should always be a readable JSON file. If it is not, please see to it, that all needed
+     * resource files are available.
+     *
+     * @return the json file path for this mission
+     */
+    @NotNull
+    private String getJsonFilePath()
+    {
+        return com.gitgud.pieces.utility.Strings.SRC_MAIN_RESOURCES +
+               MissionSelection.class.getName().replace(".", Strings.FILE_SEPERATOR) +
+               Strings.FILE_SEPERATOR +
+               this.name() +
+               DOT_JSON;
+    }
+    
+    
     @Override
-    public String getSpriteFilePath()
+    public @NotNull String getSpriteFilePath()
     {
         return null;//todo for icon???
     }

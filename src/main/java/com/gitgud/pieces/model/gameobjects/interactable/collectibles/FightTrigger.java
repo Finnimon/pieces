@@ -27,7 +27,8 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     public static final String NAME = "Enemy";
     
     
-    public static final String DEFAULT_SPRITE_FILE_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\white_pawn.png";
+    public static final String DEFAULT_SPRITE_FILE_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model" +
+                                                          "\\gameobjects\\agents\\monochrome\\white_pawn.png";
     
     
     public static final int MINIMUM_STARTING_POSITION_COUNT = 5;
@@ -52,6 +53,14 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
         super(NAME, DESCRIPTION, determineSpriteFilePath(fight));
         this.fight = fight;
         this.startingPositions = determinStartingPositions(fight);
+    }
+    
+    
+    private static String determineSpriteFilePath(Fight fight)
+    {
+        FightAgent fightAgent = fight.getGridMap().nonNullElements().stream().findFirst().orElse(null);
+        
+        return fightAgent == null ? DEFAULT_SPRITE_FILE_PATH : fightAgent.getSpriteFilePath();
     }
     
     
@@ -98,11 +107,11 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
     }
     
     
-    private static String determineSpriteFilePath(Fight fight)
+    @Override
+    public boolean isCollectionPossible()
     {
-        FightAgent fightAgent = fight.getGridMap().nonNullElements().stream().findFirst().orElse(null);
-        
-        return fightAgent == null ? DEFAULT_SPRITE_FILE_PATH : fightAgent.getSpriteFilePath();
+        Mission mission = ActiveGameController.getInstance().get().getMission();
+        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::nonNull);
     }
     
     
@@ -133,13 +142,5 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
             gridMap.place(position, fightAgent);
             current.add(fightAgent);
         }
-    }
-    
-    
-    @Override
-    public boolean isCollectionPossible()
-    {
-        Mission mission = ActiveGameController.getInstance().get().getMission();
-        return Arrays.stream(mission.getActiveFightAgents()).anyMatch(Objects::nonNull);
     }
 }

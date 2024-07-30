@@ -133,7 +133,8 @@ public class EnemyAlgorithm
         
         fightController.getRender().getHud().clearChoices();
         
-        RootChoice<ToActionChoice<FightController, Fight, FightAgent, FightRender>> attackRootChoice = fightController.getAttackRootChoice();
+        RootChoice<ToActionChoice<FightController, Fight, FightAgent, FightRender>> attackRootChoice =
+                fightController.getAttackRootChoice();
         if (attackRootChoice.isEmpty())
         {
             return;

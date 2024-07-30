@@ -15,7 +15,8 @@ import javafx.scene.input.MouseEvent;
 
 public class Portal extends GridMappableBuilding<MissionController>
 {
-    protected static final String SPRITE_FILEPATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\interactable\\Portal.png";
+    protected static final String SPRITE_FILEPATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects" +
+                                                    "\\interactable\\Portal.png";
     
     
     private static final String NAME = "Portal";
@@ -82,5 +83,6 @@ public class Portal extends GridMappableBuilding<MissionController>
         return destination;
     }
     
-    //todo? fallback    private static final GameObject ExitPortal=new GameObject("Exit Portal","This portal seems to be closed as of now",SPRITE_FILEPATH);
+    //todo? fallback    private static final GameObject ExitPortal=new GameObject("Exit Portal","This portal seems to
+    // be closed as of now",SPRITE_FILEPATH);
 }

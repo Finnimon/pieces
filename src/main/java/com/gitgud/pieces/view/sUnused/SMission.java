@@ -71,6 +71,14 @@ public class SMission extends SGridMap implements IDimentions
     }
     
     
+    protected static void createPlayerPosition(Group playerAgentRender)
+    {
+        AnchorPane anchorPane = new AnchorPane();
+        //todo Player position und mögliche bewegungen
+        playerAgentRender.getChildren().add(anchorPane);
+    }
+    
+    
     protected static void createBottomMenu(HBox menu)
     {
         
@@ -110,14 +118,6 @@ public class SMission extends SGridMap implements IDimentions
             
             bottomLeftMenu.getChildren().addAll(unitContainer, viewFightFigureSprite);
         }
-    }
-    
-    
-    protected static void createPlayerPosition(Group playerAgentRender)
-    {
-        AnchorPane anchorPane = new AnchorPane();
-        //todo Player position und mögliche bewegungen
-        playerAgentRender.getChildren().add(anchorPane);
     }
     
 }

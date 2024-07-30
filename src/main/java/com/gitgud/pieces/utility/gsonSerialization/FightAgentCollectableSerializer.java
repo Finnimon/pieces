@@ -7,12 +7,12 @@ import com.google.gson.*;
 import java.lang.reflect.Type;
 
 
-public class FightAgentCollectableSerializer implements JsonSerializer<FightAgentCollectible>,
-                                                        JsonDeserializer<FightAgentCollectible>
+public class FightAgentCollectableSerializer
+        implements JsonSerializer<FightAgentCollectible>, JsonDeserializer<FightAgentCollectible>
 {
     @Override
-    public FightAgentCollectible deserialize(JsonElement src, Type type, JsonDeserializationContext context) throws
-                                                                                                             JsonParseException
+    public FightAgentCollectible deserialize(JsonElement src, Type type, JsonDeserializationContext context)
+            throws JsonParseException
     {
         return new FightAgentCollectible(context.deserialize(src, FightAgent.class));
     }

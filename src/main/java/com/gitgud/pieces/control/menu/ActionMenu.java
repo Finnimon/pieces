@@ -10,12 +10,6 @@ import java.util.function.Predicate;
 
 public interface ActionMenu extends Menu, Selectable
 {
-    Predicate<GameState> condition();
-    
-    
-    Consumer<Event> action();
-    
-    
     @Override
     default void select(Event event)
     {
@@ -26,4 +20,10 @@ public interface ActionMenu extends Menu, Selectable
         event.consume();
         action().accept(event);
     }
+    
+    
+    Predicate<GameState> condition();
+    
+    
+    Consumer<Event> action();
 }

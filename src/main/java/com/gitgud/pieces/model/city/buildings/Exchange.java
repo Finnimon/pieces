@@ -6,6 +6,8 @@ import com.gitgud.pieces.model.ResourceCost;
 public class Exchange
 {
     private final ResourceCost price;
+    
+    
     private final ResourceCost value;
     
     
@@ -14,6 +16,7 @@ public class Exchange
         this.price = price;
         this.value = value;
     }
+    
     
     public void exchange()
     {

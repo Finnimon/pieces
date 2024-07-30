@@ -31,23 +31,6 @@ public class ResourceCost
     }
     
     
-    public ResourceCost multiple(int multiplier)
-    {
-        return multiple((double) multiplier);
-    }
-    
-    
-    public ResourceCost multiple(double multiplier)
-    {
-        HashMap<ResourceType, Long> newResourceCostMap = new HashMap<>();
-        for (ResourceType resourceType : resourceCostMap.keySet())
-        {
-            newResourceCostMap.put(resourceType, Math.round(resourceCostMap.get(resourceType) * multiplier));
-        }
-        return new ResourceCost(newResourceCostMap);
-    }
-    
-    
     public boolean isResourceCostCoveredByWallet(int multiplier)
     {
         return multiple(multiplier).isResourceCostCoveredByWallet();
@@ -70,6 +53,23 @@ public class ResourceCost
             }
         }
         return true;
+    }
+    
+    
+    public ResourceCost multiple(int multiplier)
+    {
+        return multiple((double) multiplier);
+    }
+    
+    
+    public ResourceCost multiple(double multiplier)
+    {
+        HashMap<ResourceType, Long> newResourceCostMap = new HashMap<>();
+        for (ResourceType resourceType : resourceCostMap.keySet())
+        {
+            newResourceCostMap.put(resourceType, Math.round(resourceCostMap.get(resourceType) * multiplier));
+        }
+        return new ResourceCost(newResourceCostMap);
     }
     
     

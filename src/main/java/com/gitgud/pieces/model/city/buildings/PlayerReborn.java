@@ -2,7 +2,6 @@ package com.gitgud.pieces.model.city.buildings;
 
 import com.gitgud.pieces.model.gameobjects.Faction;
 
-import java.util.Arrays;
 import java.util.List;
 
 

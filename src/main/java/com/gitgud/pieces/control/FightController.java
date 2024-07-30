@@ -82,6 +82,36 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     }
     
     
+    @Override
+    public void start()
+    {
+        getModel().fixTimeLine();
+        getRender().show();
+        executeActionChoiceTask(onSucceeded());
+    }
+    
+    
+    private Consumer<ActionChoice> onSucceeded()
+    {
+        return actionChoice ->
+        {
+            if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
+            {
+                enemyAlgorithm.act((RootChoice) actionChoice);
+                return;
+            }
+            hightlightActivePosition();
+            actionChoice.show(this);
+        };
+    }
+    
+    
+    private FightAgent getActiveFightAgent()
+    {
+        return getModel().getFightTimeLine().getActiveFightAgent();
+    }
+    
+    
     public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getMovementChoiceRoot()
     {
         Tile position = getActivePosition();
@@ -114,9 +144,10 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     }
     
     
-    private FightAgent getActiveFightAgent()
+    @Override
+    public boolean isFinished()
     {
-        return getModel().getFightTimeLine().getActiveFightAgent();
+        return getModel().isFinished();
     }
     
     
@@ -128,36 +159,5 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         ActiveGameController.getInstance().get().setFight(null);
         
         Game.Flow.showNextScene();
-    }
-    
-    
-    @Override
-    public boolean isFinished()
-    {
-        return getModel().isFinished();
-    }
-    
-    
-    @Override
-    public void start()
-    {
-        getModel().fixTimeLine();
-        getRender().show();
-        executeActionChoiceTask(onSucceeded());
-    }
-    
-    
-    private Consumer<ActionChoice> onSucceeded()
-    {
-        return actionChoice ->
-        {
-            if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
-            {
-                enemyAlgorithm.act((RootChoice) actionChoice);
-                return;
-            }
-            hightlightActivePosition();
-            actionChoice.show(this);
-        };
     }
 }

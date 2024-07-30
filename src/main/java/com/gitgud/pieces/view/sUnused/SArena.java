@@ -16,7 +16,8 @@ import javafx.stage.Stage;
 public class SArena
 {
     
-    public static final String SERVER_ADDRESS_INPUT_INFO = "Server address seperated by . if IPv4 separated by : IPv6 if you are the client";
+    public static final String SERVER_ADDRESS_INPUT_INFO = "Server address seperated by . if IPv4 separated by : IPv6" +
+                                                           " if you are the client";
     
     
     public static final String SEARCH_GAME = "Search Game";

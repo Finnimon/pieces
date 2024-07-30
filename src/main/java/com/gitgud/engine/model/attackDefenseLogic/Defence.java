@@ -17,6 +17,17 @@ import com.gitgud.pieces.utility.Core;
  */
 public record Defence(int defence, float evasionChance, DamageType damageType)
 {
+    public int calculateDamage(Attack attack)
+    {
+        if (!attack.doesHit() || doesEvade())
+        {
+            return 0;
+        }
+        
+        return Math.round(attack.damage() * ((100f - defence()) / 100));
+    }
+    
+    
     /**
      * Determines if the Attack hits. Has a Chance of {@link #evasionChance()}.
      *
@@ -29,16 +40,5 @@ public record Defence(int defence, float evasionChance, DamageType damageType)
     public boolean doesEvade()
     {
         return Core.roll(evasionChance());
-    }
-    
-    
-    public int calculateDamage(Attack attack)
-    {
-        if (!attack.doesHit() || doesEvade())
-        {
-            return 0;
-        }
-        
-        return Math.round(attack.damage() * ((100f-defence())/100));
     }
 }

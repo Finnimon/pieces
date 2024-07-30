@@ -2,6 +2,7 @@ package com.gitgud.engine.model.gameobjects;
 
 import com.gitgud.engine.model.map.GridMap;
 import com.github.ruediste.polymorphicGson.GsonPolymorph;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -24,7 +25,7 @@ public class GameObject implements GridMappable
     private final String spriteFilePath;
     
     
-    public GameObject(String name, String description, String spriteFilePath)
+    public GameObject(@NotNull String name, @NotNull String description, @NotNull String spriteFilePath)
     {
         this.name = name;
         this.description = description;
@@ -33,21 +34,21 @@ public class GameObject implements GridMappable
     
     
     @Override
-    public String name()
+    public @NotNull String name()
     {
         return name;
     }
     
     
     @Override
-    public String description()
+    public @NotNull String description()
     {
         return description;
     }
     
     
     @Override
-    public String getSpriteFilePath()
+    public @NotNull String getSpriteFilePath()
     {
         return spriteFilePath;
     }

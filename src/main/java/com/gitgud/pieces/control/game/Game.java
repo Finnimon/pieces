@@ -30,7 +30,8 @@ public class Game
     public static final String NEW_GAME_FILENAME = "NEW_GAME";
     
     
-    private static final String SAVE_FILES_DIR = "src/main/resources/com/gitgud/pieces/model/activeGame/saveFilesDir";//todo
+    private static final String SAVE_FILES_DIR =
+            "src/main/resources/com/gitgud/pieces/model/activeGame/saveFilesDir";//todo
     
     
     private static final File SAVE_FILE_DIR = new File(SAVE_FILES_DIR);
@@ -72,6 +73,18 @@ public class Game
         }
         
         
+        public static void setStageToLoadScreen()
+        {
+            Label label = new Label("Loading...");
+            label.setFont(new Font(100));
+            StackPane pane = new StackPane(label);
+            StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
+            StageController stageController = StageController.getInstance();
+            stageController.setRoot(pane);
+            stageController.show();
+        }
+        
+        
         public static void showNextScene()
         {
             setStageToLoadScreen();
@@ -97,18 +110,6 @@ public class Game
                     getValue().start();
                 }
             };
-        }
-        
-        
-        public static void setStageToLoadScreen()
-        {
-            Label label = new Label("Loading...");
-            label.setFont(new Font(100));
-            StackPane pane = new StackPane(label);
-            StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
-            StageController stageController = StageController.getInstance();
-            stageController.setRoot(pane);
-            stageController.show();
         }
         
         
@@ -236,6 +237,22 @@ public class Game
         }
         
         
+        private static String activeGameToString(ActiveGame activeGame, String newPlayerName)
+        {
+            String playerName = activeGame.getPlayer().name();
+            Gson gson = JsonParser.getInstance().getGson();
+            JsonObject jsonElement = gson.toJsonTree(activeGame).getAsJsonObject();
+            changePlayerName(jsonElement, playerName);
+            return jsonElement.toString();
+        }
+        
+        
+        private static File getSaveFile(String fileName)
+        {
+            return new File(SAVE_FILES_DIR + Strings.FILE_SEPERATOR + fileName + JsonParser.DOT_JSON);
+        }
+        
+        
         private static void clearFileAndWriteString(File saveFile, String json)
         {
             saveFile.delete();
@@ -250,22 +267,6 @@ public class Game
             {
                 throw new RuntimeException(e);
             }
-        }
-        
-        
-        private static String activeGameToString(ActiveGame activeGame, String newPlayerName)
-        {
-            String playerName = activeGame.getPlayer().name();
-            Gson gson = JsonParser.getInstance().getGson();
-            JsonObject jsonElement = gson.toJsonTree(activeGame).getAsJsonObject();
-            changePlayerName(jsonElement, playerName);
-            return jsonElement.toString();
-        }
-        
-        
-        private static File getSaveFile(String fileName)
-        {
-            return new File(SAVE_FILES_DIR + Strings.FILE_SEPERATOR + fileName + JsonParser.DOT_JSON);
         }
     }
     
@@ -282,27 +283,6 @@ public class Game
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             executorService.execute(newGameTask(playerName, difficulty));
             executorService.shutdown();
-        }
-        
-        
-        private static void prepareNewGameSaveFile(String playerName, Difficulty difficulty)
-        {
-            ActiveGame activeGame = Loader.loadActiveGame(NEW_GAME_FILENAME);
-            Gson gson = JsonParser.getInstance().getGson();
-            JsonObject jsonObject = gson.toJsonTree(activeGame).getAsJsonObject();
-            JsonObject playerJsonObject = jsonObject.get(PLAYER).getAsJsonObject();
-            changePlayerName(jsonObject, playerName);
-            changeDifficulty(difficulty, playerJsonObject, gson);
-            File saveFile = Saver.getSaveFile(playerName);
-            Saver.clearFileAndWriteString(saveFile, jsonObject.toString());
-        }
-        
-        
-        private static void changeDifficulty(Difficulty difficulty, JsonObject playerJsonObject, Gson gson)
-        {
-            String DIFFICULTY = "difficulty";
-            playerJsonObject.remove(DIFFICULTY);
-            playerJsonObject.addProperty(DIFFICULTY, gson.toJson(difficulty));
         }
         
         
@@ -324,6 +304,27 @@ public class Game
                     Loader.load(playerName);
                 }
             };
+        }
+        
+        
+        private static void prepareNewGameSaveFile(String playerName, Difficulty difficulty)
+        {
+            ActiveGame activeGame = Loader.loadActiveGame(NEW_GAME_FILENAME);
+            Gson gson = JsonParser.getInstance().getGson();
+            JsonObject jsonObject = gson.toJsonTree(activeGame).getAsJsonObject();
+            JsonObject playerJsonObject = jsonObject.get(PLAYER).getAsJsonObject();
+            changePlayerName(jsonObject, playerName);
+            changeDifficulty(difficulty, playerJsonObject, gson);
+            File saveFile = Saver.getSaveFile(playerName);
+            Saver.clearFileAndWriteString(saveFile, jsonObject.toString());
+        }
+        
+        
+        private static void changeDifficulty(Difficulty difficulty, JsonObject playerJsonObject, Gson gson)
+        {
+            String DIFFICULTY = "difficulty";
+            playerJsonObject.remove(DIFFICULTY);
+            playerJsonObject.addProperty(DIFFICULTY, gson.toJson(difficulty));
         }
     }
     

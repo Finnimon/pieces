@@ -1,6 +1,7 @@
 package com.gitgud.pieces.model.player;
 
 import com.gitgud.engine.model.gameobjects.Sprite;
+import org.jetbrains.annotations.NotNull;
 
 
 public enum ResourceType implements Sprite
@@ -30,7 +31,7 @@ public enum ResourceType implements Sprite
     
     
     @Override
-    public String getSpriteFilePath()
+    public @NotNull String getSpriteFilePath()
     {
         return DIR_PATH + name() + DOT_PNG;
     }

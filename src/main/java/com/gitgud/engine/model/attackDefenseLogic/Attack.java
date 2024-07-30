@@ -21,21 +21,6 @@ import static com.gitgud.pieces.utility.Core.roll;
  */
 public record Attack(int damage, float accuracy, DamageType damageType) implements Applicable<Fighter>
 {
-    /**
-     * Determines if the Attack hits. Has a Chance of {@link #accuracy}.
-     *
-     * @return true if the Attack hits.
-     * @Owner: Finn L.
-     * @Author: Finn L.
-     * @Since: 16.04.2024
-     * @Version: 1.0
-     */
-    public boolean doesHit()
-    {
-        return roll(accuracy);
-    }
-    
-    
     @Override
     public Fighter apply(Fighter fighter)
     {
@@ -48,5 +33,20 @@ public record Attack(int damage, float accuracy, DamageType damageType) implemen
         
         
         return fighter;
+    }
+    
+    
+    /**
+     * Determines if the Attack hits. Has a Chance of {@link #accuracy}.
+     *
+     * @return true if the Attack hits.
+     * @Owner: Finn L.
+     * @Author: Finn L.
+     * @Since: 16.04.2024
+     * @Version: 1.0
+     */
+    public boolean doesHit()
+    {
+        return roll(accuracy);
     }
 }

@@ -70,6 +70,38 @@ public interface Fights
     }
     
     
+    static <GMType extends GridMappable> GridMap<GMType> mapFromBoolMap(String path)
+    {
+        boolean[][] map = readMapFile(path);
+        
+        return GridMap.create(map);
+    }
+    
+    
+    static boolean[][] readMapFile(String path)
+    {
+        List<String> lines;
+        try
+        {
+            lines = Files.readAllLines(Path.of(path));
+        }
+        catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
+        boolean[][] map = new boolean[lines.size()][lines.get(0).length()];
+        for (int y = 0; y < lines.size(); y++)
+        {
+            String line = lines.get(y);
+            for (int x = 0; x < line.length(); x++)
+            {
+                map[y][x] = line.charAt(x) == '1';
+            }
+        }
+        return map;
+    }
+    
+    
     static Fight getFight2()
     {
         GridMap<FightAgent> gridMap = mapFromBoolMap("src/main/resources/com/gitgud/maps/FightMap1");
@@ -105,37 +137,5 @@ public interface Fights
         
         
         return new Fight(gridMap);
-    }
-    
-    
-    static boolean[][] readMapFile(String path)
-    {
-        List<String> lines;
-        try
-        {
-            lines = Files.readAllLines(Path.of(path));
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
-        boolean[][] map = new boolean[lines.size()][lines.get(0).length()];
-        for (int y = 0; y < lines.size(); y++)
-        {
-            String line = lines.get(y);
-            for (int x = 0; x < line.length(); x++)
-            {
-                map[y][x] = line.charAt(x) == '1';
-            }
-        }
-        return map;
-    }
-    
-    
-    static <GMType extends GridMappable> GridMap<GMType> mapFromBoolMap(String path)
-    {
-        boolean[][] map = readMapFile(path);
-        
-        return GridMap.create(map);
     }
 }

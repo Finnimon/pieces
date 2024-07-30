@@ -13,7 +13,8 @@ public enum FightAgentType
     public static final String DOT_JSON = ".json";
     
     
-    public static final String DIRECTORY_FILEPATH = "src\\main\\resources\\com\\gitgud\\gameObjectTypes\\fightAgentTypes\\";
+    public static final String DIRECTORY_FILEPATH = "src\\main\\resources\\com\\gitgud\\gameObjectTypes" +
+                                                    "\\fightAgentTypes\\";
     
     
     public static final int TYPE_MULTIPLIER = 100;

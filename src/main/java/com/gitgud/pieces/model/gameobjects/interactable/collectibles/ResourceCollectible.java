@@ -13,7 +13,8 @@ public class ResourceCollectible extends GameObject implements Collectible<Missi
     private static final String DESCRIPTION_INSERT = " Collectible ";
     
     
-    private static final String DIRECTORY_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\interactable\\collectibles\\resourcecollectible\\";
+    private static final String DIRECTORY_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects" +
+                                                 "\\interactable\\collectibles\\resourcecollectible\\";
     
     
     private final long resourceValue;
@@ -32,15 +33,15 @@ public class ResourceCollectible extends GameObject implements Collectible<Missi
     }
     
     
-    private static String determineSpriteFilePath(ResourceType resourceType)
-    {
-        return DIRECTORY_PATH + resourceType.name() + DOT_PNG;
-    }
-    
-    
     private static String determineDescription(int resourceValue, ResourceType resourceType)
     {
         return resourceValue + DESCRIPTION_INSERT + Named.formatString(resourceType.name());
+    }
+    
+    
+    private static String determineSpriteFilePath(ResourceType resourceType)
+    {
+        return DIRECTORY_PATH + resourceType.name() + DOT_PNG;
     }
     
     
