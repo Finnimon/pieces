@@ -18,7 +18,7 @@ public class MissionHud extends ActionContextHud<Mission>
     
     
     @Override
-    public void render(Mission data)
+    public void render(Mission model)
     {
         setPickOnBounds(false);
         ObservableList<Node> children = getChildren();

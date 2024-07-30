@@ -1,9 +1,13 @@
 package com.gitgud.engine.view;
 
-public interface UpdatableRender<DataType> extends Render<DataType>
+/**
+ * Render that can be updated to reflect changes in the Model
+ * @param <ModelType>
+ */
+public interface UpdatableRender<ModelType> extends Render<ModelType>
 {
     void updateRender();
     
     
-    DataType getData();
+    ModelType getModel();
 }

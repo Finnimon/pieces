@@ -16,7 +16,7 @@ public abstract class Hud<DataType> extends StackPane implements UpdatableRender
     }
     
     
-    public DataType getData()
+    public DataType getModel()
     {
         return data;
     }

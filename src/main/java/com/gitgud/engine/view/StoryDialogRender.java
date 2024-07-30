@@ -16,8 +16,8 @@ public class StoryDialogRender extends StackPane implements Render<StoryDialog>
     
     
     @Override
-    public void render(StoryDialog data)
+    public void render(StoryDialog model)
     {
-        getChildren().add(new Label(data.name()));
+        getChildren().add(new Label(model.name()));
     }
 }

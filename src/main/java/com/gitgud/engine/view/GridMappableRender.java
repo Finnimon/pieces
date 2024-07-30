@@ -2,7 +2,7 @@ package com.gitgud.engine.view;
 
 import com.gitgud.engine.model.attackDefenseLogic.Defender;
 import com.gitgud.engine.model.gameobjects.GridMappable;
-import com.gitgud.engine.view.events.AppendRemoveNodeOnMouseEvent;
+import com.gitgud.engine.view.utility.AppendRemoveNodeOnMouseEventHandler;
 import com.gitgud.engine.view.infopane.GridMappableInfoPane;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
@@ -59,19 +59,19 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends S
     
     
     @Override
-    public void render(GridMappableType data)
+    public void render(GridMappableType model)
     {
-        ImageView image = new ImageView(data.getSprite());
+        ImageView image = new ImageView(model.getSprite());
         image.setPreserveRatio(true);
         image.fitHeightProperty().bind(this.heightProperty());
         image.maxWidth(this.widthProperty().get());
         image.setSmooth(false);
         
-        AppendRemoveNodeOnMouseEvent.add(this, new GridMappableInfoPane<>(data));
+        AppendRemoveNodeOnMouseEventHandler.add(this, new GridMappableInfoPane<>(model));
         getChildren().add(image);
         setAlignment(image, Pos.TOP_CENTER);
         
-        if (!(data instanceof Defender defender))
+        if (!(model instanceof Defender defender))
         {
             return;
         }

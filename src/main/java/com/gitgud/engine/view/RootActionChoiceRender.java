@@ -20,7 +20,7 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
     
     
     @Override
-    public void render(RootActionChoice<?, ?, ?, ?> data)
+    public void render(RootActionChoice<?, ?, ?, ?> model)
     {
         AnchorPane anchorPane = new AnchorPane();
         this.getChildren().add(anchorPane);
@@ -29,7 +29,7 @@ public class RootActionChoiceRender extends Group implements Render<RootActionCh
         double topAnchor = 0d;
         ObservableList<Node> children = anchorPane.getChildren();
         
-        for (ActionChoice<?, ?, ?, ?> actionChoice : data.getChildren())
+        for (ActionChoice<?, ?, ?, ?> actionChoice : model.getChildren())
         {
             //topAnchor size is updated with each actionChoice
             topAnchor = renderActionChoice(actionChoice, children, topAnchor);

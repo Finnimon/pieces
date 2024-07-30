@@ -38,11 +38,11 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     
     
     @Override
-    public void render(FightTimeLine data)
+    public void render(FightTimeLine model)
     {
         ArrayList<FightAgent> fightAgents = new ArrayList<>();
-        fightAgents.addAll(data.current());
-        fightAgents.addAll(data.next());
+        fightAgents.addAll(model.current());
+        fightAgents.addAll(model.next());
         
         fightAgents.forEach(this::addFightAgent);
     }
@@ -68,7 +68,7 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     
     
     @Override
-    public FightTimeLine getData()
+    public FightTimeLine getModel()
     {
         return fightTimeLine;
     }

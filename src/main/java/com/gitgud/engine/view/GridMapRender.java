@@ -59,10 +59,10 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     
     
     @Override
-    public void render(GridMap<Type> gridMap)
+    public void render(GridMap<Type> model)
     {
-        renderTiles(gridMap);
-        renderGridMappables(gridMap);
+        renderTiles(model);
+        renderGridMappables(model);
     }
     
     

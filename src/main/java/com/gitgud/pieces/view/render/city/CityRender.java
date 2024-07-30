@@ -14,7 +14,7 @@ public class CityRender extends AnchorPane implements Render<City>
     
     
     @Override
-    public void render(City data)
+    public void render(City model)
     {
     
     }

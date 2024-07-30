@@ -42,13 +42,13 @@ public class WalletRender extends VBox implements Render<Wallet>
     
     
     @Override
-    public void render(Wallet data)
+    public void render(Wallet model)
     {
         setBackground(Constants.SEMI_TRANSPARENT_BACKGROUND);
         setMaxWidth(MAX_WIDTH);
         setMaxHeight((ICON_HEIGHT + getSpacing()) * ResourceType.values().length);
         setMouseTransparent(true);
-        HashMap<ResourceType, SimpleLongProperty> resourceMap = data.resourceMap();
+        HashMap<ResourceType, SimpleLongProperty> resourceMap = model.resourceMap();
         for (ResourceType resourceType : ResourceType.values())
         {
             render(resourceType, resourceMap.get(resourceType));

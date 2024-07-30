@@ -5,7 +5,7 @@ import javafx.scene.Node;
 
 
 /**
- * View Objects should usually implement this interface and also Extend Node
+ * View Objects should usually implement this interface and also Extend {@link javafx.scene.Parent}
  *
  * @param <ModelType>
  * @author Finn L.
@@ -16,13 +16,18 @@ import javafx.scene.Node;
 public interface Render<ModelType>
 {
     /**
-     * This method should always be called upon Object construction
+     * <p>This method should always be called upon Object construction
+     * <p>This method is used to render the model into a Node
      *
-     * @param data the data to be rendered
+     * @param model the model to be rendered
      */
-    void render(ModelType data);
+    void render(ModelType model);
     
     
+    /**
+     * Getter for the Render's children
+     * @return the Render's children
+     */
     ObservableList<Node> getChildren();
     
 }

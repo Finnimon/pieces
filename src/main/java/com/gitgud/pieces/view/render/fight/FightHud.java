@@ -22,7 +22,7 @@ public class FightHud extends ActionContextHud<Fight>
     
     
     @Override
-    public void render(Fight data)
+    public void render(Fight model)
     {
         ObservableList<Node> children = getChildren();
         children.clear();

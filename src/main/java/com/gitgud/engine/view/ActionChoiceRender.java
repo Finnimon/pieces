@@ -2,9 +2,9 @@ package com.gitgud.engine.view;
 
 import com.gitgud.engine.control.actionChoice.ActionChoice;
 import com.gitgud.engine.control.actionChoice.RootChoice;
-import com.gitgud.engine.view.events.AppendRemoveNodeOnMouseEvent;
 import com.gitgud.engine.view.infopane.InfoPane;
 import com.gitgud.engine.view.infopane.NameDescribableInfoPane;
+import com.gitgud.engine.view.utility.AppendRemoveNodeOnMouseEventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +15,14 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 
 
+/**
+ * Render for the {@link ActionChoice}
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.06.2024
+ * @Version: 1.1
+ */
 public class ActionChoiceRender extends StackPane implements Render<ActionChoice<?, ?, ?, ?>>
 {
     public static final int SIZE = 50;
@@ -33,9 +41,9 @@ public class ActionChoiceRender extends StackPane implements Render<ActionChoice
     
     
     @Override
-    public void render(ActionChoice<?, ?, ?, ?> data)
+    public void render(ActionChoice<?, ?, ?, ?> model)
     {
-        Label label = new Label(data.name());
+        Label label = new Label(model.name());
         label.setFont(Font.font(FONT_SIZE));
         Circle circle = new Circle();
         circle.setFill(Color.WHITE);
@@ -53,20 +61,20 @@ public class ActionChoiceRender extends StackPane implements Render<ActionChoice
         setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         
         
-        InfoPane<?> infoPane = new NameDescribableInfoPane<>(data);
+        InfoPane<?> infoPane = new NameDescribableInfoPane<>(model);
         
-        AppendRemoveNodeOnMouseEvent.add(this, infoPane);
+        AppendRemoveNodeOnMouseEventHandler.add(this, infoPane);
         
         
-        if (!(data instanceof RootChoice<?> rootChoice))
+        if (!(model instanceof RootChoice<?> rootChoice))
         {
-            addSelectionEventHandling(data);
+            addSelectionEventHandling(model);
             return;
         }
         
         if (!rootChoice.isEmpty())
         {
-            addSelectionEventHandling(data);
+            addSelectionEventHandling(model);
             return;
         }
         

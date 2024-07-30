@@ -57,7 +57,7 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
     
     
     @Override
-    public void render(MType data)
+    public void render(MType model)
     {
         addGridMapRender();
         getChildren().add(hud);
@@ -104,7 +104,7 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
     
     
     @Override
-    public MType getData()
+    public MType getModel()
     {
         return data;
     }
