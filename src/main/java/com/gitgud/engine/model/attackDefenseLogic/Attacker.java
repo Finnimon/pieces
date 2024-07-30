@@ -11,6 +11,9 @@ import org.jetbrains.annotations.NotNull;
  * @Owner: Finn L.
  * @Since: 16.04.2024
  * @Version: 1.0
+ * @see Attack
+ * @see Defender
+ * @see com.gitgud.engine.model.gameobjects.agent.Fighter
  */
 public interface Attacker
 {

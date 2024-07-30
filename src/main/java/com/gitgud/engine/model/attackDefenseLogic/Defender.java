@@ -2,12 +2,14 @@ package com.gitgud.engine.model.attackDefenseLogic;
 
 /**
  * All Objects using {@link Defence} to defend from {@link Attacker} must implement this interface.
- * implemented by {@link com.gitgud.engine.model.gameobjects.agent.Fighter}
  *
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 16.04.2024
  * @Version: 1.0
+ * @see com.gitgud.engine.model.gameobjects.agent.Fighter
+ * @see Defence
+ * @see Attacker
  */
 public interface Defender extends Health
 {
