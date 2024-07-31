@@ -1,6 +1,6 @@
 package com.gitgud.pieces.control.menu;
 
-
+@Deprecated
 public class MainMenu implements OptionMenu
 {
     private final String name;

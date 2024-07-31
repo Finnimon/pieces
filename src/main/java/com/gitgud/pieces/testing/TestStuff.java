@@ -89,7 +89,7 @@ public class TestStuff
     
     public static void lindigTest(Stage stage)
     {
-        ActiveGameController.initialize();
+        ActiveGameController.testInitialize();
         Game.Flow.showNextScene();
                         lindigJsonTest();
         //        ActiveGameController.getInstance();

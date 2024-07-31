@@ -5,6 +5,12 @@ import com.gitgud.net.Server;
 import com.gitgud.net.ServerClientController;
 
 
+/**
+ * @author Julius Rohe
+ * @Owner: Julius Rohe
+ * @since  23.06.2024
+ * @version 0.1
+ */
 public class ArenaController
 {
     public static void InitialiseArenaAsClient(String serverAddress)

@@ -96,7 +96,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     {
         return actionChoice ->
         {
-            if (getActiveFightAgent().getAllegiance() == enemyAlgorithm.getEnemyAllegiance())
+            if (getActiveFightAgent().getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE)
             {
                 enemyAlgorithm.act((RootChoice) actionChoice);
                 return;

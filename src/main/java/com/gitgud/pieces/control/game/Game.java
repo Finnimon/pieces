@@ -140,11 +140,11 @@ public class Game
             GameState gameState = ActiveGameController.getGameState();
             return switch (gameState)
             {
-                case NOT_LOADED -> throw new RuntimeException("Not implemented");
-                case CITY -> new CityController(getActiveGame().getCity());
+                case NOT_LOADED -> throw new RuntimeException("Not implemented");//MainMenuController.getInstance();//todo not yet implemented
+                case CITY -> new CityController(getActiveGame().getCity());//todo not yet implemented
                 case MISSION -> new MissionController(getActiveGame().getMission());
                 case MISSION_FIGHT -> new FightController(getActiveGame().getFight());
-                case ARENA_FIGHT -> throw new RuntimeException();
+                case ARENA_FIGHT -> throw new RuntimeException(); //todo not yet implemented
             };
         }
         

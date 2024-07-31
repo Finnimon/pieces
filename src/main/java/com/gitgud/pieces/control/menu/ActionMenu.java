@@ -7,7 +7,7 @@ import javafx.event.Event;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-
+@Deprecated
 public interface ActionMenu extends Menu, Selectable
 {
     @Override
