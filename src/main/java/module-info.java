@@ -30,6 +30,7 @@ module com.gitgud.pieces {
     opens com.gitgud.pieces.model.mission to com.google.gson;
     opens com.gitgud.pieces.model.gameobjects.interactable.buildings to com.google.gson;
     opens com.gitgud.pieces.model to com.google.gson;
+    opens com.gitgud.engine.utility.modification to com.google.gson;
     exports com.gitgud.pieces;
     exports com.gitgud.pieces.control;
     opens com.gitgud.pieces.control to javafx.fxml;

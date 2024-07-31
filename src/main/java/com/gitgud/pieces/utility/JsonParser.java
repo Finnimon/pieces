@@ -132,7 +132,7 @@ public class JsonParser
     
     
     /**
-     * Replaces {@code file}'s content with {@code string}.
+     * Replaces/creates {@code file}'s content with {@code string}.
      * @param file The File to be replaced.
      * @param string The String to be written into the File.
      * @return True if the replacement was successful, false otherwise.

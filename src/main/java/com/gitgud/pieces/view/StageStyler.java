@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -85,8 +86,9 @@ public class StageStyler
         
         MenuItem save = createMenuItem("Save", e ->
         {
-            if (!predicate.test(e))
+            if (predicate.test(e))
             {
+                //todo show message
                 return;
             }
             Game.Saver.save();
@@ -94,8 +96,10 @@ public class StageStyler
         
         MenuItem saveAs = createMenuItem("Save As", e ->
         {
-            if (!predicate.test(e))
+            if (predicate.test(e))
             {
+                //todo show message
+                return;
             }
             //todo Game.Saver.saveAs();
         });
@@ -114,10 +118,12 @@ public class StageStyler
         
         MenuItem load = createMenuItem("Load", e ->
         {
-            if (!predicate.test(e))
+            if (predicate.test(e))
             {
-                Game.Saver.save();
+                //todo show message
+                return;
             }
+            //create context menu
             //todo Game.Loader.load();
         });
         

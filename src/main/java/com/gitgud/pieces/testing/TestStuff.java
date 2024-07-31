@@ -91,7 +91,7 @@ public class TestStuff
     {
         ActiveGameController.initialize();
         Game.Flow.showNextScene();
-        //                lindigJsonTest();
+                        lindigJsonTest();
         //        ActiveGameController.getInstance();
         //        Game.Flow.showNextScene();
     }
@@ -99,7 +99,7 @@ public class TestStuff
     
     private static void lindigJsonTest()
     {
-        //        Game.Saver.save();
+//                Game.Saver.save();
         //        Game.Flow.showNextScene();
         Game.Loader.load("TestPlayer");
         //        Game.Loader.load("TestPlayer");
