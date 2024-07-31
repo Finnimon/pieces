@@ -73,24 +73,7 @@ public class Game
         {
             JsonParser.getInstance();
             StageController.initialize(stage);
-            setStageToLoadScreen();
-            ActiveGameController.testInitialize();
             showNextScene();
-        }
-        
-        
-        /**
-         * Sets the stage to a load screen.
-         */
-        private static void setStageToLoadScreen()
-        {
-            Label label = new Label("Loading...");
-            label.setFont(new Font(100));
-            StackPane pane = new StackPane(label);
-            StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
-            StageController stageController = StageController.getInstance();
-            stageController.setRoot(pane);
-            stageController.show();
         }
         
         
@@ -99,7 +82,7 @@ public class Game
          */
         public static void showNextScene()
         {
-            setStageToLoadScreen();
+            Utility.setStageToLoadScreen();
             Task<Startable> task = nextSceneControllerTask();
             Executors.newSingleThreadExecutor().execute(task);
         }
@@ -232,6 +215,7 @@ public class Game
          */
         public static void load(@NotNull String saveFileName)
         {
+            Utility.setStageToLoadScreen();
             Executors.newSingleThreadExecutor().execute(loadGameTask(saveFileName));
         }
         
@@ -551,6 +535,21 @@ public class Game
         private static @NotNull File getSaveFile(@NotNull String fileName)
         {
             return new File(SAVE_FILE_DIR.getPath() + Strings.FILE_SEPERATOR + fileName + JsonParser.DOT_JSON);
+        }
+        
+        
+        /**
+         * Sets the stage to a load screen.
+         */
+        private static void setStageToLoadScreen()
+        {
+            Label label = new Label("Loading...");
+            label.setFont(new Font(100));
+            StackPane pane = new StackPane(label);
+            StackPane.setAlignment(label, javafx.geometry.Pos.CENTER);
+            StageController stageController = StageController.getInstance();
+            stageController.setRoot(pane);
+            stageController.show();
         }
     }
 }
