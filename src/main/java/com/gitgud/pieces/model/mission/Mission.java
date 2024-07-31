@@ -6,7 +6,7 @@ import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.city.City;
-import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarter;
+import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarters;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -119,9 +119,9 @@ public class Mission implements ActionAwaiterModel<GameObject>
     {
         returnFightAgentsToArmy();
         City city = ActiveGameController.getInstance().get().getCity();
-        HeadQuarter headQuarter = city.getHeadQuarter();
-        while (index > headQuarter.getLevel())
-            headQuarter.levelUp();
+        HeadQuarters headQuarters = city.getHeadQuarters();
+        while (index > headQuarters.getLevel())
+            headQuarters.levelUp();
     }
     
     

@@ -1,8 +1,9 @@
 package com.gitgud.pieces.model.city;
 
 import com.gitgud.pieces.model.city.buildings.*;
-import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarter;
+import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarters;
 import com.gitgud.pieces.model.gameobjects.Faction;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -15,48 +16,118 @@ import com.gitgud.pieces.model.gameobjects.Faction;
  */
 public class City
 {
+    /**
+     * The model for the blacksmith.
+     */
     private final BlackSmith blackSmith;
     
     
+    /**
+     * The model for the monoChromeFactionCamp.
+     */
     private final FactionCamp monoChromeFactionCamp;
     
     
+    /**
+     * The model for the pinkFactionCamp.
+     */
     private final FactionCamp pinkFactionCamp;
     
     
+    /**
+     * The model for the greenFactionCamp.
+     */
     private final FactionCamp greenFactionCamp;
     
     
-    private final HeadQuarter headQuarter;
+    /**
+     * The model for the headQuarters.
+     */
+    private final HeadQuarters headQuarters;
     
     
+    /**
+     * The model for the magicEnhancer.
+     */
     private final MagicEnhancer magicEnhancer;
     
     
+    /**
+     * The model for the market.
+     */
     private final Market market;
     
     
+    /**
+     * The model for the trainingGrounds.
+     */
     private final TrainingGrounds trainingGrounds;
     
     
-    public City(BlackSmith blackSmith, FactionCamp monoChromeFactionCamp, FactionCamp pinkFactionCamp,
-                FactionCamp greenFactionCamp, HeadQuarter headQuarter, MagicEnhancer magicEnhancer, Market market,
-                TrainingGrounds trainingGrounds)
+    /**
+     * Creates a new {@link City} and assigns the passed in
+     * {@link com.gitgud.pieces.model.city.buildings.CityBuilding}s.
+     *
+     * @param blackSmith            The model for the blacksmith.
+     * @param monoChromeFactionCamp The model for the monoChromeFactionCamp.
+     * @param pinkFactionCamp       The model for the pinkFactionCamp.
+     * @param greenFactionCamp      The model for the greenFactionCamp.
+     * @param headQuarters          The model for the headQuarters.
+     * @param magicEnhancer         The model for the magicEnhancer.
+     * @param market                The model for the market.
+     * @param trainingGrounds       The model for the trainingGrounds.
+     * @throws IllegalArgumentException If any passed FactionCamps factions do not match their name.
+     * @Precondition: The {@link FactionCamp}s all have the proper Faction.
+     * @Postcondition: No undefined behaviour will occur. No Exceptions will be thrown.
+     */
+    public City(@NotNull BlackSmith blackSmith, @NotNull FactionCamp monoChromeFactionCamp,
+                @NotNull FactionCamp pinkFactionCamp, @NotNull FactionCamp greenFactionCamp,
+                @NotNull HeadQuarters headQuarters, @NotNull MagicEnhancer magicEnhancer, @NotNull Market market,
+                @NotNull TrainingGrounds trainingGrounds)
     {
         this.blackSmith = blackSmith;
         this.monoChromeFactionCamp = monoChromeFactionCamp;
         this.pinkFactionCamp = pinkFactionCamp;
         this.greenFactionCamp = greenFactionCamp;
-        this.headQuarter = headQuarter;
+        this.headQuarters = headQuarters;
         this.magicEnhancer = magicEnhancer;
         this.market = market;
         this.trainingGrounds = trainingGrounds;
+        assertFactionCampNamesMatch();
     }
     
     
+    /**
+     * Asserts that the {@link FactionCamp}s all have the proper Faction.
+     *
+     * @throws IllegalArgumentException If any FactionCamps factions do not match their name.
+     */
+    private void assertFactionCampNamesMatch()
+    {
+        if (!monoChromeFactionCamp.getFaction().equals(Faction.MONOCHROME))
+        {
+            throw new IllegalArgumentException("The monoChromeFactionCamp does not have the proper faction.");
+        }
+        
+        if (!pinkFactionCamp.getFaction().equals(Faction.PINK))
+        {
+            throw new IllegalArgumentException("The pinkFactionCamp does not have the proper faction.");
+        }
+        
+        if (!greenFactionCamp.getFaction().equals(Faction.GREEN))
+        {
+            throw new IllegalArgumentException("The greenFactionCamp does not have the proper faction.");
+        }
+    }
+    
+    
+    /**
+     * Creates a new {@link City} and assigns starting {@link com.gitgud.pieces.model.city.buildings.CityBuilding}s
+     * to it.
+     */
     public City()
     {
-        headQuarter = new HeadQuarter();
+        headQuarters = new HeadQuarters();
         blackSmith = new BlackSmith();
         market = new Market();
         magicEnhancer = new MagicEnhancer();
@@ -67,48 +138,74 @@ public class City
     }
     
     
+    /**
+     * Getter for the blackSmith.
+     * @return The blackSmith.
+     */
     public BlackSmith getBlackSmith()
     {
         return blackSmith;
     }
     
     
+    /**
+     * Getter for the monoChromeFactionCamp.
+     * @return The monoChromeFactionCamp.
+     */
     public FactionCamp getMonoChromeFactionCamp()
     {
         return monoChromeFactionCamp;
     }
     
-    
+    /**
+     * Getter for the pinkFactionCamp.
+     * @return The pinkFactionCamp.
+     */
     public FactionCamp getPinkFactionCamp()
     {
         return pinkFactionCamp;
     }
     
-    
+    /**
+     * Getter for the greenFactionCamp.
+     * @return The greenFactionCamp.
+     */
     public FactionCamp getGreenFactionCamp()
     {
         return greenFactionCamp;
     }
     
-    
-    public HeadQuarter getHeadQuarter()
+    /**
+     * Getter for the headQuarters.
+     * @return The headQuarters.
+     */
+    public HeadQuarters getHeadQuarters()
     {
-        return headQuarter;
+        return headQuarters;
     }
     
-    
+    /**
+     * Getter for the magicEnhancer.
+     * @return The magicEnhancer.
+     */
     public MagicEnhancer getMagicEnhancer()
     {
         return magicEnhancer;
     }
     
-    
+    /**
+     * Getter for the market.
+     * @return The market.
+     */
     public Market getMarket()
     {
         return market;
     }
     
-    
+    /**
+     * Getter for the trainingGrounds.
+     * @return The trainingGrounds.
+     */
     public TrainingGrounds getTrainingGrounds()
     {
         return trainingGrounds;

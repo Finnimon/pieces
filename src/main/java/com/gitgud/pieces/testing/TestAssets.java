@@ -19,8 +19,6 @@ import java.util.HashSet;
 
 public interface TestAssets
 {
-    GridMap<GridMappable> testMap = TestStuff.getTestMap(12, 12);
-    
     
     static ActiveGame getTestActiveGame()
     {

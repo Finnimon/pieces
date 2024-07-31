@@ -7,17 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HeadQuarter extends CityBuilding
+public class HeadQuarters extends CityBuilding
 {
-    public HeadQuarter(String name, String description, int level)
+    public HeadQuarters(String name, String description, int level)
     {
         super(name, description, level);
     }
     
     
-    public HeadQuarter()
+    public HeadQuarters()
     {
-        super("HeadQuarter", "Select missions here", 1);
+        super("HeadQuarters", "Select missions here", 1);
     }
     
     
