@@ -25,41 +25,33 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 
+/**
+ * <p>Static structural control class for the game.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 25.07.2024
+ * @Version: 3.0
+ */
 public class Game
 {
-    public static final String NEW_GAME_FILENAME = "NEW_GAME";
-    
-    
-    private static final String SAVE_FILES_DIR =
-            "src/main/resources/com/gitgud/pieces/model/activeGame/saveFilesDir";//todo
-    
-    
-    private static final File SAVE_FILE_DIR = new File(SAVE_FILES_DIR);
-    
-    
-    private static final String PLAYER = "player";
-    
-    
-    private static final String NAME = "name";
-    
-    
+    /**
+     * Private Constructor to stop instantiation.
+     */
     private Game()
     {
-    }
-    
-    
-    private static void changePlayerName(JsonObject jsonElement, String playerName)
-    {
-        JsonObject player = jsonElement.get(PLAYER).getAsJsonObject();
-        player.remove(NAME);
-        player.addProperty(NAME, playerName);
+        throw new UnsupportedOperationException(this.getClass() + " cannot be instantiated.");
     }
     
     
     public static class Flow
     {
+        /**
+         * Private Constructor to stop instantiation.
+         */
         private Flow()
         {
+            throw new UnsupportedOperationException(this.getClass() + " cannot be instantiated.");
         }
         
         
@@ -113,7 +105,7 @@ public class Game
         }
         
         
-        public static Startable getNextSceneController()
+        private static Startable getNextSceneController()
         {
             GameState gameState = ActiveGameController.getGameState();
             return switch (gameState)
@@ -136,14 +128,18 @@ public class Game
     
     public static class Loader
     {
+        /**
+         * Private Constructor to stop instantiation.
+         */
         private Loader()
         {
+            throw new UnsupportedOperationException(this.getClass() + " cannot be instantiated.");
         }
         
         
         public static List<File> getLoadableSaveFiles()
         {
-            File[] saveFiles = SAVE_FILE_DIR.listFiles();
+            File[] saveFiles = Utility.SAVE_FILE_DIR.listFiles();
             //saveFiles is always a readable Directory as Ensured by the Constructor
             return Arrays.stream(saveFiles)
                          .filter(file -> file.getName().endsWith(JsonParser.DOT_JSON) || file.canWrite())
@@ -157,7 +153,7 @@ public class Game
                                        .filter(File::canRead)
                                        .map(x -> x.getName()
                                                   .substring(0, x.getName().length() - JsonParser.DOT_JSON.length()))
-                                       .filter(name -> !name.equals(NEW_GAME_FILENAME))
+                                       .filter(name -> !name.equals(Utility.NEW_GAME_FILENAME))
                                        .collect(Collectors.toList());
             return names;
         }
@@ -193,7 +189,7 @@ public class Game
         
         private static ActiveGame loadActiveGame(String saveFileName)
         {
-            File saveFile = Saver.getSaveFile(saveFileName);
+            File saveFile = Utility.getSaveFile(saveFileName);
             return JsonParser.getInstance().deserializeJsonFile(saveFile, ActiveGame.class);
         }
     }
@@ -201,8 +197,12 @@ public class Game
     
     public static class Saver
     {
+        /**
+         * Private Constructor to stop instantiation.
+         */
         private Saver()
         {
+            throw new UnsupportedOperationException(this.getClass() + " cannot be instantiated.");
         }
         
         
@@ -231,7 +231,7 @@ public class Game
             ActiveGame activeGame = ActiveGameController.getInstance().get();
             String json = activeGameToString(activeGame, saveFileName);
             
-            File saveFile = getSaveFile(saveFileName);
+            File saveFile = Utility.getSaveFile(saveFileName);
             
             clearFileAndWriteString(saveFile, json);
         }
@@ -242,14 +242,8 @@ public class Game
             String playerName = activeGame.getPlayer().name();
             Gson gson = JsonParser.getInstance().getGson();
             JsonObject jsonElement = gson.toJsonTree(activeGame).getAsJsonObject();
-            changePlayerName(jsonElement, playerName);
+            Utility.changePlayerName(jsonElement, playerName);
             return jsonElement.toString();
-        }
-        
-        
-        private static File getSaveFile(String fileName)
-        {
-            return new File(SAVE_FILES_DIR + Strings.FILE_SEPERATOR + fileName + JsonParser.DOT_JSON);
         }
         
         
@@ -273,11 +267,20 @@ public class Game
     
     public static class New
     {
+        /**
+         * Private Constructor to stop instantiation.
+         */
+        private New()
+        {
+            throw new UnsupportedOperationException(this.getClass() + " cannot be instantiated.");
+        }
+        
+        
         public static void start(String playerName, Difficulty difficulty)
         {
-            if (playerName.equals(NEW_GAME_FILENAME))
+            if (playerName.equals(Utility.NEW_GAME_FILENAME))
             {
-                throw new IllegalArgumentException("playerName cannot be " + NEW_GAME_FILENAME);
+                throw new IllegalArgumentException("playerName cannot be " + Utility.NEW_GAME_FILENAME);
             }
             
             ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -309,13 +312,13 @@ public class Game
         
         private static void prepareNewGameSaveFile(String playerName, Difficulty difficulty)
         {
-            ActiveGame activeGame = Loader.loadActiveGame(NEW_GAME_FILENAME);
+            ActiveGame activeGame = Loader.loadActiveGame(Utility.NEW_GAME_FILENAME);
             Gson gson = JsonParser.getInstance().getGson();
             JsonObject jsonObject = gson.toJsonTree(activeGame).getAsJsonObject();
-            JsonObject playerJsonObject = jsonObject.get(PLAYER).getAsJsonObject();
-            changePlayerName(jsonObject, playerName);
+            JsonObject playerJsonObject = jsonObject.get(Utility.PLAYER).getAsJsonObject();
+            Utility.changePlayerName(jsonObject, playerName);
             changeDifficulty(difficulty, playerJsonObject, gson);
-            File saveFile = Saver.getSaveFile(playerName);
+            File saveFile = Utility.getSaveFile(playerName);
             Saver.clearFileAndWriteString(saveFile, jsonObject.toString());
         }
         
@@ -329,4 +332,41 @@ public class Game
     }
     
     
+    private static class Utility
+    {
+        private static final String NEW_GAME_FILENAME = "NEW_GAME";
+        
+        
+        private static final File SAVE_FILE_DIR = new File(
+                "src\\main\\resources\\com\\gitgud\\pieces\\model\\activeGame\\saveFilesDir");
+        
+        
+        private static final String PLAYER = "player";
+        
+        
+        private static final String NAME = "name";
+        
+        
+        /**
+         * Private Constructor to stop instantiation.
+         */
+        private Utility()
+        {
+            throw new UnsupportedOperationException(this.getClass() + " cannot be instantiated.");
+        }
+        
+        
+        private static void changePlayerName(JsonObject jsonElement, String playerName)
+        {
+            JsonObject player = jsonElement.get(PLAYER).getAsJsonObject();
+            player.remove(NAME);
+            player.addProperty(NAME, playerName);
+        }
+        
+        
+        private static File getSaveFile(String fileName)
+        {
+            return new File(SAVE_FILE_DIR.getPath() + Strings.FILE_SEPERATOR + fileName + JsonParser.DOT_JSON);
+        }
+    }
 }
