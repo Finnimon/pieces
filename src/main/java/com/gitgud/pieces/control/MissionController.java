@@ -15,7 +15,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 
-//todo render as scene
+/**
+ * Controller for the {@link Mission} Scene.
+ *
+ * @author Finn L.
+ * @version 2.0
+ * @Owner: Finn L.
+ * @see Mission
+ * @since 20.06.2024
+ */
 public class MissionController extends ActionAwaitingController<Mission, GameObject, MissionRender>
 {
     

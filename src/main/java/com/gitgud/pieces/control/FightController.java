@@ -17,29 +17,50 @@ import java.util.List;
 import java.util.function.Consumer;
 
 
+/**
+ * {@link ActionAwaitingController} for {@link Fight}s.
+ *
+ * @author Finn L.
+ * @version 2.0
+ * @Owner: Finn L.
+ * @see Fight
+ * @since 20.06.2024
+ */
 public class FightController extends ActionAwaitingController<Fight, FightAgent, FightRender>
 {
-    
-    
+    /**
+     * The index of the root movement choice in the first child layer of the action choice tree.
+     */
     public static final int MOVEMENT_CHOICE_INDEX = 0;
     
     
+    /**
+     * The index of the root attack choice in the first child layer of the action choice tree.
+     */
     public static final int ATTACK_CHOICE_INDEX = 1;
     
     
+    /**
+     * The index of the root spell choice in the first child layer of the action choice tree.
+     */
     public static final int SPELL_CHOICE_INDEX = 2;
     
     
+    /**
+     * The index of the skip turn choice in the first child layer of the action choice tree.
+     */
     public static final int SKIP_TURN_CHOICE_INDEX = 3;
     
     
-    private final EnemyAlgorithm enemyAlgorithm;
-    
-    
+    /**
+     * Constructs the fight controller with the given {@link Fight} and instantiates its {@link FightRender} from the
+     * give {@code fight}.
+     *
+     * @param fight The {@link Fight} to be controlled.
+     */
     public FightController(Fight fight)
     {
         super(fight, new FightRender(fight));
-        enemyAlgorithm = new EnemyAlgorithm(this);
     }
     
     
@@ -61,7 +82,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     
     
     @Override
-    public Tile getActivePosition()
+    public @NotNull Tile getActivePosition()
     {
         Fight fight = this.getModel();
         FightAgent activeFightAgent = getActiveFightAgent();
@@ -92,28 +113,14 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     }
     
     
-    private Consumer<ActionChoice> onSucceeded()
-    {
-        return actionChoice ->
-        {
-            if (getActiveFightAgent().getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE)
-            {
-                enemyAlgorithm.act((RootChoice) actionChoice);
-                return;
-            }
-            hightlightActivePosition();
-            actionChoice.show(this);
-        };
-    }
-    
-    
-    private FightAgent getActiveFightAgent()
-    {
-        return getModel().getFightTimeLine().getActiveFightAgent();
-    }
-    
-    
-    public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getMovementChoiceRoot()
+    /**
+     * <p>Gets the current root movement choice.
+     * <p>Do not call on the JavaFX Application Thread
+     *
+     * @return The current root movement choice.
+     * @see MovementRootChoice
+     */
+    private RootToActionChoice<FightController, Fight, FightAgent, FightRender> getMovementChoiceRoot()
     {
         Tile position = getActivePosition();
         
@@ -123,17 +130,26 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     }
     
     
+    /**
+     * <p>Gets the current root attack choice.
+     *
+     * @return The current root attack choice.
+     * @see AttackRootChoice#AttackRootChoice(ActionAwaitingController, com.gitgud.engine.model.gameobjects.agent.Fighter)
+     */
     public AttackRootChoice<FightController, Fight, FightAgent, FightRender> getAttackRootChoice()
     {
-        Tile position = getActivePosition();
-        
         FightAgent activeFightAgent = getActiveFightAgent();
         
         return new AttackRootChoice<>(this, activeFightAgent);//todo
     }
     
     
-    public RootToActionChoice<FightController, Fight, FightAgent, FightRender> getSpellRootChoice()
+    /**
+     * Gets the current root spell choice.
+     *
+     * @return The current root spell choice.
+     */
+    private RootToActionChoice<FightController, Fight, FightAgent, FightRender> getSpellRootChoice()
     {
         FightAgent agent = getActiveFightAgent();
         if (!(agent instanceof SpellCasterFightAgent spellCasterFightAgent))
@@ -142,6 +158,41 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         }
         
         throw new RuntimeException("not implemented");
+    }
+    
+    
+    /**
+     * Creates a consumer with the following logic:
+     * <p>The consumer for {@link #executeActionChoiceTask(Consumer)}.
+     * <p>Offers the choice to either the player or an {@link EnemyAlgorithm} depending on the active
+     * {@link FightAgent}'s {@link com.gitgud.pieces.model.fight.Allegiance}.
+     *
+     * @return The consumer for {@link #executeActionChoiceTask(Consumer)}.
+     */
+    private @NotNull Consumer<ActionChoice> onSucceeded()
+    {
+        return actionChoice ->
+        {
+            if (getActiveFightAgent().getAllegiance() == EnemyAlgorithm.ENEMY_ALLEGIANCE)
+            {
+                new EnemyAlgorithm(this).act((RootChoice) actionChoice);
+                return;
+            }
+            hightlightActivePosition();
+            actionChoice.show(this);
+        };
+    }
+    
+    
+    /**
+     * Gets the currently active {@link FightAgent} from the {@link Fight}'s
+     * {@link com.gitgud.pieces.model.fight.FightTimeLine}.
+     *
+     * @return The currently active {@link FightAgent}.
+     */
+    private FightAgent getActiveFightAgent()
+    {
+        return getModel().getFightTimeLine().getActiveFightAgent();
     }
     
     
