@@ -3,10 +3,17 @@ package com.gitgud.pieces.model.city.buildings.headQuarters;
 import com.gitgud.pieces.model.city.buildings.CityBuilding;
 import com.gitgud.pieces.model.mission.Mission;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * CityBuilding for selecting missions.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 10.06.2024
+ * @Version: 2.0
+ */
 public class HeadQuarters extends CityBuilding
 {
     public HeadQuarters(String name, String description, int level)
@@ -21,29 +28,12 @@ public class HeadQuarters extends CityBuilding
     }
     
     
-    public List<Mission> getAvailableMissions()
+    /**
+     * Gets all currently available {@link MissionSelection}s, determined by the player's progress.
+     * @return All available {@link MissionSelection}s
+     */
+    public List<MissionSelection> getAvailableMissionSelections()
     {
-        return getAllMissions().subList(0, getLevel());
-    }
-    
-    
-    public List<Mission> getAllMissions()
-    {
-        ArrayList<Mission> missions = new ArrayList<>();
-        for (MissionSelection mission : MissionSelection.values())
-        {
-            missions.add(mission.ordinal(), mission.getMission());
-        }
-        
-        
-        return missions;
-    }
-    
-    
-    @Override
-    public int levelUp()
-    {
-        incrementLevel();
-        return getLevel();
+        return List.of(MissionSelection.values()).subList(0, getLevel());
     }
 }

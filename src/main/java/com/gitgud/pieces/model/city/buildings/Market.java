@@ -134,6 +134,6 @@ public class Market extends CityBuilding
     
     private static Exchange levelUp(Exchange exchange)
     {
-        return exchange.changePrice(exchange.getPrice().multiple(PRICE_REDUCTION_PER_LEVEL));
+        return exchange.differentPrice(exchange.price().multiple(PRICE_REDUCTION_PER_LEVEL));
     }
 }

@@ -3,19 +3,17 @@ package com.gitgud.pieces.model.city.buildings;
 import com.gitgud.pieces.model.ResourceCost;
 
 
-public class Exchange
+/**
+ * Helper class for exchanging resources in a {@link Market}.
+ *
+ * @author Finn L.
+ * @version 1.0
+ * @Owner: Finn L.
+ * @see Market
+ * @since 25.06.2024
+ */
+public record Exchange(ResourceCost price, ResourceCost value)
 {
-    private final ResourceCost price;
-    
-    
-    private final ResourceCost value;
-    
-    
-    public Exchange(ResourceCost price, ResourceCost value)
-    {
-        this.price = price;
-        this.value = value;
-    }
     
     
     public void exchange()
@@ -25,25 +23,13 @@ public class Exchange
     }
     
     
-    public ResourceCost getPrice()
-    {
-        return price;
-    }
-    
-    
-    public ResourceCost getValue()
-    {
-        return value;
-    }
-    
-    
-    public Exchange changeValue(ResourceCost value)
+    public Exchange differentValue(ResourceCost value)
     {
         return new Exchange(price, value);
     }
     
     
-    public Exchange changePrice(ResourceCost price)
+    public Exchange differentPrice(ResourceCost price)
     {
         return new Exchange(price, this.value);
     }

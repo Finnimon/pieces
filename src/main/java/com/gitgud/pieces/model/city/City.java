@@ -17,6 +17,10 @@ import org.jetbrains.annotations.NotNull;
 public class City
 {
     /**
+     * The model for the playerReborn.
+     */
+    private final PlayerReborn playerReborn;
+    /**
      * The model for the blacksmith.
      */
     private final BlackSmith blackSmith;
@@ -80,11 +84,12 @@ public class City
      * @Precondition: The {@link FactionCamp}s all have the proper Faction.
      * @Postcondition: No undefined behaviour will occur. No Exceptions will be thrown.
      */
-    public City(@NotNull BlackSmith blackSmith, @NotNull FactionCamp monoChromeFactionCamp,
+    public City(@NotNull PlayerReborn playerReborn,@NotNull BlackSmith blackSmith, @NotNull FactionCamp monoChromeFactionCamp,
                 @NotNull FactionCamp pinkFactionCamp, @NotNull FactionCamp greenFactionCamp,
                 @NotNull HeadQuarters headQuarters, @NotNull MagicEnhancer magicEnhancer, @NotNull Market market,
                 @NotNull TrainingGrounds trainingGrounds)
     {
+        this.playerReborn=playerReborn;
         this.blackSmith = blackSmith;
         this.monoChromeFactionCamp = monoChromeFactionCamp;
         this.pinkFactionCamp = pinkFactionCamp;
@@ -135,6 +140,7 @@ public class City
         monoChromeFactionCamp = new FactionCamp(Faction.MONOCHROME);
         pinkFactionCamp = new FactionCamp(Faction.PINK);
         greenFactionCamp = new FactionCamp(Faction.GREEN);
+        playerReborn = new PlayerReborn();
     }
     
     
@@ -209,5 +215,15 @@ public class City
     public TrainingGrounds getTrainingGrounds()
     {
         return trainingGrounds;
+    }
+    
+    
+    /**
+     * Getter for the playerReborn.
+     * @return The playerReborn.
+     */
+    public PlayerReborn getPlayerReborn()
+    {
+        return playerReborn;
     }
 }

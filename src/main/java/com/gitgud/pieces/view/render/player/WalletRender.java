@@ -15,34 +15,59 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
 
+/**
+ * Render for the {@link Wallet}
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 10.06.2024
+ * @Version: 1.0
+ */
 public class WalletRender extends VBox implements Render<Wallet>
 {
-    
-    
+    /**
+     * The height of the icons.
+     */
     public static final int ICON_HEIGHT = 21;
     
     
+    /**
+     * The maximum width of the render.
+     */
     public static final int MAX_WIDTH = 200;
     
     
+    /**
+     * Defaults to {@link WalletRender#WalletRender(Wallet)} with the {@code ActiveGameController#getInstance().get()
+     * .getPlayer().wallet()}.
+     *
+     * @Precondition: {@link ActiveGameController#getGameState()}!=
+     * {@link com.gitgud.pieces.model.game.GameState#NOT_LOADED}
+     * @Postcondition: No Exceptions will be thrown.
+     * @see WalletRender#WalletRender(Wallet)
+     */
     public WalletRender()
     {
         this(ActiveGameController.getInstance().get().getPlayer().wallet());
     }
     
     
-    public WalletRender(Wallet wallet)
+    /**
+     * Constructs a new {@link WalletRender} with the given {@link Wallet}
+     */
+    public WalletRender(@NotNull Wallet wallet)
     {
         render(wallet);
     }
     
     
     @Override
-    public void render(Wallet model)
+    public void render(@NotNull Wallet model)
     {
         setBackground(Constants.SEMI_TRANSPARENT_BACKGROUND);
         setMaxWidth(MAX_WIDTH);
@@ -56,7 +81,13 @@ public class WalletRender extends VBox implements Render<Wallet>
     }
     
     
-    private void render(ResourceType resourceType, SimpleLongProperty valueProperty)
+    /**
+     * Helper Method for rendering one of the resources in the {@link Wallet}.
+     *
+     * @param resourceType  The {@link ResourceType}.
+     * @param valueProperty The amount of the resource.
+     */
+    private void render(@NotNull ResourceType resourceType,@NotNull SimpleLongProperty valueProperty)
     {
         ImageView imageView = new ImageView(resourceType.getSprite());
         imageView.setPreserveRatio(true);

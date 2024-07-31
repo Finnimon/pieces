@@ -11,6 +11,14 @@ import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 import static com.gitgud.pieces.model.city.buildings.CityConstants.*;
 
 
+/**
+ * CityBuilding for Recruiting {@link FightAgent}s of a {@link Faction}.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 10.06.2024
+ * @Version: 1.0
+ */
 public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
 {
     private static final String DEFAULT_DESCRIPTION = "Pieces of it's faction can be recruited here.";

@@ -1,49 +1,41 @@
 package com.gitgud.pieces;
 
 
-import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.control.game.Game;
-import com.gitgud.pieces.view.sUnused.SMainMenue;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-
-import static com.gitgud.pieces.testing.TestStuff.lindigTest;
 
 
+/**
+ * The main class of the application.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.07.2024
+ * @Version: 3.0
+ */
 public class App extends Application
 {
-    
-    
-    public static void main(String[] args) throws IOException, ClassNotFoundException
+    public static void main(String[] arguments) throws IOException, ClassNotFoundException
     {
         launch();
     }
     
     
-    public static void delfiMain(Stage stage)
-    {
-        stage.setHeight(1000);
-        stage.setWidth(1000);
-        stage.setScene(SMainMenue.createMainMenueScene(stage));
-    }
-    
-    
+    /**
+     * Starts the application and initializes the game.
+     * <p>
+     * {@inheritDoc}
+     */
     @Override
     public void start(Stage stage) throws IOException
     {
         Game.Flow.initializeGame(stage);
     }
-    
-
     
     
     /**

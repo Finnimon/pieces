@@ -3,7 +3,11 @@ package com.gitgud.pieces.model.city.buildings;
 /**
  * Classes that can change the value of something for a cost.
  *
- * @param <T>
+ * @param <T> The type of value changed.
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 10.06.2024
+ * @Version: 1.0
  */
 public interface Transactor<T>
 {

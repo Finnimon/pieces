@@ -7,9 +7,11 @@ import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.utility.JsonParser;
+import javafx.concurrent.Task;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.concurrent.Executors;
 
 import static com.gitgud.pieces.utility.JsonParser.DOT_JSON;
 
@@ -65,11 +67,39 @@ public enum MissionSelection implements Describable, Sprite
      * @Version: 1.0
      * @see Game.Flow#showNextScene()
      * @since 26.07.2024
+     * @Precondition: The ActiveGameController must be initialized.
+     * @Postcondition: No Exceptions will be thrown.
      */
     public void select()
     {
-        ActiveGameController.getInstance().get().setMission(getMission());
-        Game.Flow.showNextScene();
+        Executors.newSingleThreadExecutor().execute(selectionTask());
+    }
+    
+    
+    /**
+     * Creates a task for the selection of this missionSelection.
+     * <p>Calls getMission().
+     * <p>On success it saves the mission to the {@link ActiveGameController} and starts the next Scene.
+     *
+     * @return The created task.
+     */
+    private Task<Mission> selectionTask()
+    {
+        return new Task<>()
+        {
+            @Override
+            protected Mission call()
+            {
+                return getMission();
+            }
+            
+            @Override
+            protected void succeeded()
+            {
+                ActiveGameController.getInstance().get().setMission(getMission());
+                Game.Flow.showNextScene();
+            }
+        };
     }
     
     
@@ -81,7 +111,7 @@ public enum MissionSelection implements Describable, Sprite
      * @Postcondition: No Exceptions will be thrown
      */
     @NotNull
-    public Mission getMission()
+    private Mission getMission()
     {
         File file = new File(getJsonFilePath());
         return JsonParser.getInstance().deserializeJsonFile(file, Mission.class);
