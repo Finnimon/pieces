@@ -104,6 +104,10 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     
     public void addGridMappable(Type gridMappable, Tile tile)
     {
+        if (gridMappable==null)
+        {
+            return;
+        }
         double x = tile.getX() * tileSize;
         double y = tile.getY() * tileSize;
         GridMappableRender<Type> render = new GridMappableRender<>(gridMappable, x, y, tileSize);
@@ -130,8 +134,8 @@ public class GridMapRender<Type extends GridMappable> extends Group implements R
     public void relocateGridMappable(Type gridMappable, Tile next)
     {
         GridMappableRender<?> gridMappableRender = gridMappableRenders.get(gridMappable);
-        gridMappableRender.setX(next.getX() * tileSize);
-        gridMappableRender.setY(next.getY() * tileSize);
+        gridMappableRender.setTranslateX(next.getX() * tileSize);
+        gridMappableRender.setTranslateY(next.getY() * tileSize);
     }
     
     

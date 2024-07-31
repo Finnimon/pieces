@@ -66,14 +66,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     /**
      * <p>Allows direct access to {@link #vertices}.
-     * <p>Should not override to be public.
      * <p>Careless accessing and changing may create a faulty and non-functional Graph
      *
      * @return The graphs {@link Vertex} {@link Element} mappings
      * @Precondition: The data should never be directly accessed or be made public.
      * @Postcondition: The Graph will remain intact and functional
      */
-    protected TreeMap<Vertex, Element> getVertices()
+    protected final TreeMap<Vertex, Element> getVertices()
     {
         return vertices;
     }
@@ -121,14 +120,13 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
     
     /**
      * <p>Allows direct access to {@link #edges}.
-     * <p>Should not override to be public.
      * <p>Careless accessing and changing may create a faulty and non-functional Graph
      *
      * @return The graphs {@link Edge}s mapped to their from {@link Vertex}.
      * @Precondition: This data should never be directly accessed or be made public.
      * @Postcondition: The Graph will remain intact and functional
      */
-    protected TreeMap<Vertex, HashSet<Edge>> getEdgeMap()
+    protected final TreeMap<Vertex, HashSet<Edge>> getEdgeMap()
     {
         return edges;
     }

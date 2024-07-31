@@ -8,6 +8,16 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.StackPane;
 
 
+/**
+ *
+ * @param <MType>
+ * @param <GMType>
+ * @param <HudType>
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.06.2024
+ * @Version: 1.1
+ */
 public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<GMType>, GMType extends GridMappable,
         HudType extends ActionContextHud<MType>>
         extends StackPane implements ActionContextRender<MType, GMType>
@@ -104,7 +114,7 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
     
     
     @Override
-    public MType getModel()
+    public MType getData()
     {
         return data;
     }

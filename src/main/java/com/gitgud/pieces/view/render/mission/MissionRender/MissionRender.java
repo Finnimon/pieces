@@ -30,8 +30,8 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     public void addInteractionHandlers(MissionController missionController)
     {
         GridMapRender<GameObject> gridMapRender = getGridMapRender();
-        GridMap<GameObject> gridMap = getModel().getGridMap();
-        for (GameObject gameObject : getModel().getGridMap().nonNullElements())
+        GridMap<GameObject> gridMap = getData().getGridMap();
+        for (GameObject gameObject : getData().getGridMap().nonNullElements())
         {
             if (!(gameObject instanceof Interactable<?> interactable))
             {
@@ -82,16 +82,16 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     
     private void updatePlayerAgentRender()
     {
-        PlayerAgent playerAgent = getModel().getPlayerAgent();
-        Tile playerAgentPosition = getModel().getPlayerAgentPosition();
+        PlayerAgent playerAgent = getData().getPlayerAgent();
+        Tile playerAgentPosition = getData().getPlayerAgentPosition();
         getGridMapRender().relocateGridMappable(playerAgent, playerAgentPosition);
     }
     
     
     private void renderPlayerAgent()
     {
-        PlayerAgent playerAgent = getModel().getPlayerAgent();
-        Tile playerAgentPosition = getModel().getPlayerAgentPosition();
+        PlayerAgent playerAgent = getData().getPlayerAgent();
+        Tile playerAgentPosition = getData().getPlayerAgentPosition();
         getGridMapRender().addGridMappable(playerAgent, playerAgentPosition);
     }
     

@@ -8,6 +8,13 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 
+/**
+ *
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.06.2024
+ * @Version: 1.1
+ */
 public class RootActionChoiceRender extends Group implements Render<RootActionChoice<?, ?, ?, ?>>
 {
     private final AnchorPane anchorPane = new AnchorPane();

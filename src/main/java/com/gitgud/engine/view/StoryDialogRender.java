@@ -6,6 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
 
+/**
+ *
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.06.2024
+ * @Version: 1.1
+ */
 public class StoryDialogRender extends StackPane implements Render<StoryDialog>
 {
     public StoryDialogRender(StoryDialog storyDialog)

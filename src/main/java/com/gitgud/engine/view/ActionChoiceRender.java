@@ -13,12 +13,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
  * Render for the {@link ActionChoice}
  *
- * @author Finn L.
+ * @author Julius Rohe, Finn L.
  * @Owner: Finn L.
  * @Since: 30.06.2024
  * @Version: 1.1
@@ -34,7 +35,12 @@ public class ActionChoiceRender extends StackPane implements Render<ActionChoice
     private static final int FONT_SIZE = 15;
     
     
-    public ActionChoiceRender(ActionChoice<?, ?, ?, ?> actionChoice)
+    /**
+     * Renders the {@link ActionChoice}.
+     *
+     * @param actionChoice The {@link ActionChoice} to render.
+     */
+    public ActionChoiceRender(@NotNull ActionChoice<?, ?, ?, ?> actionChoice)
     {
         render(actionChoice);
     }
@@ -82,6 +88,11 @@ public class ActionChoiceRender extends StackPane implements Render<ActionChoice
     }
     
     
+    /**
+     * Adds the event handling for the {@link ActionChoice}.
+     *
+     * @param data The {@link ActionChoice} rendered by this object.
+     */
     private void addSelectionEventHandling(ActionChoice<?, ?, ?, ?> data)
     {
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, data.getMouseEventHandler());

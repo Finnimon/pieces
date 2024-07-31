@@ -6,6 +6,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+/**
+ *
+ * @param <Type>
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.06.2024
+ * @Version: 1.1
+ */
 public class GridMappableInfoPane<Type extends GridMappable> extends NameDescribableInfoPane<Type>
 {
     
@@ -15,7 +23,6 @@ public class GridMappableInfoPane<Type extends GridMappable> extends NameDescrib
         ImageView imageView = spriteNode(gridMappable);
         getChildren().add(imageView);
         imageView.toBack();
-        imageView.opacityProperty().set(0.5);
         setAlignment(imageView, Pos.TOP_RIGHT);
     }
     
@@ -24,7 +31,7 @@ public class GridMappableInfoPane<Type extends GridMappable> extends NameDescrib
     {
         Image image = gridMappable.getSprite();
         ImageView imageView = new ImageView(image);
-        imageView.maxHeight(5);
+        imageView.setFitHeight(20);
         imageView.setPreserveRatio(true);
         return imageView;
     }

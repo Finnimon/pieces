@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ *
+ * @param <ModelType>
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 30.06.2024
+ * @Version: 1.1
+ */
 public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
 {
     private final List<Node> choices;

@@ -8,9 +8,9 @@ import javafx.scene.Node;
  * View Objects should usually implement this interface and also Extend {@link javafx.scene.Parent}
  *
  * @param <ModelType>
- * @author Finn L.
+ * @author Julius Rohe, Finn L.
  * @Owner: Finn L.
- * @Since: 30.05.2024
+ * @Since: 30.06.2024
  * @Version: 1.1
  */
 public interface Render<ModelType>
@@ -26,6 +26,7 @@ public interface Render<ModelType>
     
     /**
      * Getter for the Render's children
+     *
      * @return the Render's children
      */
     ObservableList<Node> getChildren();

@@ -68,7 +68,7 @@ public class FightTimeLineRender extends HBox implements UpdatableRender<FightTi
     
     
     @Override
-    public FightTimeLine getModel()
+    public FightTimeLine getData()
     {
         return fightTimeLine;
     }
