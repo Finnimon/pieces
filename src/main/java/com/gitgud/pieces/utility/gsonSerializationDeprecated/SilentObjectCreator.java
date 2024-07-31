@@ -4,7 +4,7 @@ import sun.reflect.ReflectionFactory;
 
 import java.lang.reflect.Constructor;
 
-
+@Deprecated
 public class SilentObjectCreator
 {
     public static <T> T create(Class<T> clazz)

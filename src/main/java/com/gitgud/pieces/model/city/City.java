@@ -1,7 +1,7 @@
 package com.gitgud.pieces.model.city;
 
 import com.gitgud.pieces.model.city.buildings.*;
-import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarters;
+import com.gitgud.pieces.model.city.buildings.headQuarters.HeadQuarters;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import org.jetbrains.annotations.NotNull;
 

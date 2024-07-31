@@ -18,21 +18,42 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class CityBuilding implements Describable, Named, Sprite, Leveler
 {
+    /**
+     * The dir in which all the sprites are stored.
+     */
     private static final String SPRITE_FILE_PATH_PREFIX = "com\\gitgud\\pieces\\model\\city\\buildings\\";
     
     
+    /**
+     * The name of the building.
+     */
     private final String name;
     
     
+    /**
+     * The description of the building.
+     */
     private final String description;
     
     
+    /**
+     * The path to the sprite of the building.
+     */
     private final String spriteFilePath;
     
     
+    /**
+     * The level of the building.
+     */
     private final SimpleIntegerProperty level;
     
     
+    /**
+     * Assigns all the values for the building and determines the sprite path
+     * @param name
+     * @param description
+     * @param level
+     */
     public CityBuilding(String name, String description, int level)
     {
         this.name = name;

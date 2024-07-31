@@ -104,4 +104,11 @@ public class ResourceCost
             valueProperty.setValue(valueProperty.getValue() + resourceCostMap.get(resourceType));
         }
     }
+    
+    
+    @Override
+    public String toString()
+    {
+        return getResourceCostMap().toString();
+    }
 }

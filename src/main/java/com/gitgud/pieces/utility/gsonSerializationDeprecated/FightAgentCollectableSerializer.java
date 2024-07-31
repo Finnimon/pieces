@@ -6,7 +6,7 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
-
+@Deprecated
 public class FightAgentCollectableSerializer
         implements JsonSerializer<FightAgentCollectible>, JsonDeserializer<FightAgentCollectible>
 {

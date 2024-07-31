@@ -1,4 +1,4 @@
-package com.gitgud.pieces.model.city.buildings.headQuarter;
+package com.gitgud.pieces.model.city.buildings.headQuarters;
 
 import com.gitgud.pieces.model.city.buildings.CityBuilding;
 import com.gitgud.pieces.model.mission.Mission;

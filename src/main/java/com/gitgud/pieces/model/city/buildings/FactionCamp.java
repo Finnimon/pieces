@@ -78,7 +78,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     @Override
     public boolean isTransactionPossible(FightAgent fightAgent)
     {
-        ResourceCost resourceCost = getResourceCost(fightAgent);
+        ResourceCost resourceCost = getCost(fightAgent);
         if (resourceCost == null)
         {
             return false;
@@ -90,7 +90,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
     @Override
     public void deductCostFromInventory(FightAgent fightAgent)
     {
-        ResourceCost resourceCost = getResourceCost(fightAgent);
+        ResourceCost resourceCost = getCost(fightAgent);
         if (resourceCost == null)
         {
             throw new IllegalArgumentException(AGENT_NOT_AVAILABLE);
@@ -106,8 +106,8 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
         return value;
     }
     
-    
-    public ResourceCost getResourceCost(FightAgent fightAgent)
+    @Override
+    public ResourceCost getCost(FightAgent fightAgent)
     {
         ResourceCost baseCost;
         FightAgentType type = fightAgent.getType();

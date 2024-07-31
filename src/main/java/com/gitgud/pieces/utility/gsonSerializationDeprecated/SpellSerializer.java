@@ -8,7 +8,7 @@ import com.google.gson.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-
+@Deprecated
 public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<Spell>
 {
     private static final String TYPE = "type";

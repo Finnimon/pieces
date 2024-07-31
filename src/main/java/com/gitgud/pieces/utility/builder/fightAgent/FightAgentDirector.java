@@ -12,7 +12,7 @@ public class FightAgentDirector implements Director<FightAgent>
 {
     
     
-    public static final int LEVEL1_MONOCHROME_PAWN_TYPE = FightAgentType.PAWN.typeToInt() +
+    private static final int LEVEL1_MONOCHROME_PAWN_TYPE = FightAgentType.PAWN.typeToInt() +
                                                           Faction.MONOCHROME.typeToInt() +
                                                           1;
     

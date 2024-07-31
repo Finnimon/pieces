@@ -5,6 +5,14 @@ import com.gitgud.pieces.model.gameobjects.Faction;
 import java.util.List;
 
 
+/**
+ * CityBuilding where the player can be reborn ie his faction can be changed.
+ *
+ * @author Finn L.
+ * @version 1.0
+ * @Owner: Finn L.
+ * @since 25.06.2024
+ */
 public class PlayerReborn extends CityBuilding
 {
     private static final String DESCRIPTION = "Rebirth your player here.";

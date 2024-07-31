@@ -1,5 +1,6 @@
 package com.gitgud.pieces.utility.gsonSerializationDeprecated;
 
+import com.gitgud.engine.model.map.Terrain;
 import com.gitgud.engine.model.map.Tile;
 import com.google.gson.*;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Deprecated
 public class TileSerializer implements JsonSerializer<Tile>, JsonDeserializer<Tile>
 {
     private static final String X = "x";
@@ -25,8 +26,8 @@ public class TileSerializer implements JsonSerializer<Tile>, JsonDeserializer<Ti
     {
         JsonObject jsonObject = src.getAsJsonObject();
 
-        double x = context.deserialize(jsonObject.get(X), Double.class);
-        double y = context.deserialize(jsonObject.get(Y), Double.class);
+        int x = context.deserialize(jsonObject.get(X), Integer.class);
+        int y = context.deserialize(jsonObject.get(Y), Integer.class);
         Terrain terrain = context.deserialize(jsonObject.get(TERRAIN), Terrain.class);
         int index = context.deserialize(jsonObject.get(INDEX), Integer.class);
 

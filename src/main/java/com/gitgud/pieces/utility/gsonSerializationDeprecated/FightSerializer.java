@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 
-
+@Deprecated
 public class FightSerializer implements JsonSerializer<Fight>, JsonDeserializer<Fight>
 {
     private static final String GRID_MAP = "gridMap";

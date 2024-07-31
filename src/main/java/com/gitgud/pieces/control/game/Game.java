@@ -71,9 +71,10 @@ public class Game
          */
         public static void initializeGame(Stage stage)
         {
-            setStageToLoadScreen();
             JsonParser.getInstance();
             StageController.initialize(stage);
+            setStageToLoadScreen();
+            ActiveGameController.testInitialize();
             showNextScene();
         }
         

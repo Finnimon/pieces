@@ -1,14 +1,14 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.engine.model.gameobjects.GridMappable;
-import com.gitgud.engine.model.map.GridMap;
-import com.gitgud.engine.model.map.TerrainType;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.control.game.Game;
+import com.gitgud.pieces.model.city.buildings.headQuarters.MissionSelection;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.utility.Core;
+import com.gitgud.pieces.utility.JsonParser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 import static com.gitgud.pieces.testing.Missions.MISSION0;
 
@@ -20,73 +20,19 @@ public class TestStuff
     }
     
     
-    
-    //    public static void jsonTestFinnK(String[] args) throws IOException, ClassNotFoundException
-    //    {
-    //        // FightAgent --- OK
-    //        // Modifier --- OK
-    //        // Spell --- OK
-    //
-    //        // Insert resources here
-    //        JsonArray fightAgentTypes = AssetParser.parseJsonArray(Strings.FIGHT_AGENT_TYPES);
-    //        // Insert Json Objects here
-    //        JsonObject fightAgentJson = fightAgentTypes.get(0).getAsJsonObject();
-    //
-    //        // Register type adapters
-    //        GsonBuilder gsonBuilder = new GsonBuilder();
-    //        // insert type adapters here
-    //
-    //        Gson gson = gsonBuilder.create();
-    //
-    //
-    //        // Deserialization
-    //        // FightAgent fightAgent = gson.fromJson(fightAgentJson, FightAgent.class);
-    //        // Serialization
-    //
-    //
-    //        // Test output
-    //
-    //
-    //        // Write Json file
-    //        FileOutputStream writableFile = new FileOutputStream
-    //        ("src/main/resources/com/gitgud/gameObjectTypes/test.json");
-    //        // Insert Json objects to write here
-    //        // writableFile.write(hashMapToJson.getBytes());
-    //        writableFile.close();
-    //    }
-    
-    
     public static void lindigTest(Stage stage)
     {
-//        ActiveGameController.testInitialize();
-//        Game.Flow.showNextScene();
-                        lindigJsonTest();
-        //        ActiveGameController.getInstance();
-        //        Game.Flow.showNextScene();
+        lindigJsonTest();
     }
     
     
     private static void lindigJsonTest()
     {
-//                Game.Saver.save();
-        //        Game.Flow.showNextScene();
+//        ActiveGameController.testInitialize();
+//        Mission mission= MissionSelection.TUTORIAL.getMission();
+////        Game.Saver.save();
         Game.Loader.load("TestPlayer");
-        //        Game.Loader.load("TestPlayer");
-        //        GameFlow.showNextScene();
-        //        Gson gson = FxGson.create();
-        //        JsonElement jsonElement= gson.toJsonTree(object);;
-        //        System.out.println(jsonElement.toString());
-        //        Object object2 = gson.fromJson(jsonElement.getAsJsonObject().get(name), object.getClass());
-        //        try
-        //        {
-        //            Files.writeString(new File("src/" + name + ".json").toPath(), jsonElement.getAsJsonObject()
-        //            .toString());
-        //        }
-        //        catch (IOException e)
-        //        {
-        //            throw new RuntimeException(e);
-        //        }
-        //        System.out.println("success");
+//        JsonParser.getInstance().parseIntoJsonFile(new File("src\\main\\resources\\com\\gitgud\\pieces\\model\\city\\buildings\\headQuarters\\MissionSelection\\TUTORIAL.json"),ActiveGameController.getInstance().get().getMission());
     }
     
     

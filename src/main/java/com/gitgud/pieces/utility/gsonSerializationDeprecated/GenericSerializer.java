@@ -8,7 +8,7 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-
+@Deprecated
 public class GenericSerializer<T> implements JsonSerializer<T>
 {
     

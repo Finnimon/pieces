@@ -4,6 +4,14 @@ import com.gitgud.pieces.model.ResourceCost;
 import com.gitgud.pieces.model.player.ResourceType;
 
 
+/**
+ * CityBuilding where you can buy and sell resources for other resources.
+ 
+ * @author Finn L.
+ * @version 1.0
+ * @Owner: Finn L.
+ * @since 25.06.2024
+ */
 public class Market extends CityBuilding
 {
     private static final double PRICE_REDUCTION_PER_LEVEL = 0.9;

@@ -36,7 +36,7 @@ module com.gitgud.pieces {
     opens com.gitgud.pieces.control to javafx.fxml;
     exports com.gitgud.pieces.view;
     opens com.gitgud.pieces.view to javafx.fxml;
-    opens com.gitgud.pieces.model.city.buildings.headQuarter to com.google.gson;
+    opens com.gitgud.pieces.model.city.buildings.headQuarters to com.google.gson;
     exports com.gitgud.pieces.control.game;
     opens com.gitgud.pieces.control.game to com.google.gson, javafx.fxml;
     exports com.gitgud.pieces.view.sUnused;

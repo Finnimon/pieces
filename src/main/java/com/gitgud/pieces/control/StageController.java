@@ -92,6 +92,15 @@ public class StageController
     
     
     /**
+     * Resets the singleton.
+     */
+    public static void reset()
+    {
+        instance = null;
+    }
+    
+    
+    /**
      * Gets the current editable root of the Scene.
      *
      * @return The current editable root of the Scene.

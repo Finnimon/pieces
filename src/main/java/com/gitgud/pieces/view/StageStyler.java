@@ -1,21 +1,26 @@
 package com.gitgud.pieces.view;
 
+import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.net.MalformedURLException;
 import java.util.function.Predicate;
 
 
@@ -25,12 +30,26 @@ import java.util.function.Predicate;
  */
 public class StageStyler
 {
+    private static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents" +
+                                            "\\monochrome\\black_king.png";
+    
+    
+    private static final String APP_TITLE = "Pieces";
+    
+    
     private StageStyler()
     {
     }
     
     
     public static void style(Stage stage)
+    {
+        initialize(stage);
+        createSceneGraph(stage);
+    }
+    
+    
+    private static void createSceneGraph(Stage stage)
     {
         StackPane stackPane = new StackPane();
         MenuBar menuBar = createMenu();
@@ -73,7 +92,7 @@ public class StageStyler
     private static Menu settingsMenu()
     {
         Menu menu = new Menu("Settings");
-        //// TODO: 29.07.2024  
+        //// TODO: 29.07.2024
         return menu;
     }
     
@@ -150,5 +169,25 @@ public class StageStyler
         };
     }
     
-    //    private static MenuImp
+    
+    private static void initialize(Stage stage)
+    {
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setFullScreen(true);
+        setTitleAndIcon(stage);
+    }
+    
+    
+    private static void setTitleAndIcon(Stage stage)
+    {
+        stage.setTitle(APP_TITLE);
+        try
+        {
+            stage.getIcons().add(new Image(Sprite.urlFromFilePath(ICON_PATH)));
+        }
+        catch (MalformedURLException ignore)
+        {
+            //do nothing only sets the icon, so you can ignore the exception and just move on
+        }
+    }
 }

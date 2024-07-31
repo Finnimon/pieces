@@ -12,17 +12,16 @@ import com.gitgud.pieces.model.player.ResourceType;
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.
- * @since 25.07.2024
+ * @since 25.06.2024
  */
 public class BlackSmith extends CityBuilding implements Transactor<Artefact>
 {
     
     
-    private final static ResourceCost COST_PER_LEVEL = new ResourceCost(ResourceType.PLATINUM, 10000);
+    private final static ResourceCost TRANSACT_COST = new ResourceCost(ResourceType.PLATINUM, 10000);
     
     
-    private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " +
-                                              COST_PER_LEVEL +
+    private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " + TRANSACT_COST +
                                               " per Level ";
     
     
@@ -44,14 +43,21 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     @Override
     public boolean isTransactionPossible(Artefact artefact)
     {
-        return artefact.getLevel() <= getLevel() && COST_PER_LEVEL.isResourceCostCoveredByWallet(artefact.getLevel());
+        return artefact.getLevel() <= getLevel() && getCost(artefact).isResourceCostCoveredByWallet();
     }
     
     
     @Override
     public void deductCostFromInventory(Artefact artefact)
     {
-        COST_PER_LEVEL.deductResourceCostFromWallet(artefact.getLevel());
+        getCost(artefact).deductResourceCostFromWallet();
+    }
+    
+    
+    @Override
+    public ResourceCost getCost(Artefact artefact)
+    {
+        return TRANSACT_COST.multiple(artefact.getLevel());
     }
     
     

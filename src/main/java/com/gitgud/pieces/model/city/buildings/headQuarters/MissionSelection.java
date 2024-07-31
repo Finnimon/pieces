@@ -1,4 +1,4 @@
-package com.gitgud.pieces.model.city.buildings.headQuarter;
+package com.gitgud.pieces.model.city.buildings.headQuarters;
 
 import com.gitgud.engine.model.gameobjects.Describable;
 import com.gitgud.engine.model.gameobjects.Sprite;
@@ -16,14 +16,15 @@ import static com.gitgud.pieces.utility.JsonParser.DOT_JSON;
 
 /**
  * <p>Asset Locator for Mission JSON files.
- * <p>src\main\resources\com\gitgud\pieces\model\city\buildings\headQuarter\MissionSelection\TUTORIAL.json
+ * <p>src\main\resources\com\gitgud\pieces\model\city\buildings\headQuarter\MissionSelection\*.json
  *
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.
+ * @see HeadQuarters
  * @since 26.07.2024
  */
-enum MissionSelection implements Describable, Sprite
+public enum MissionSelection implements Describable, Sprite
 {
     TUTORIAL("This is the tutorial. " + "You will gain a few resources but nothing of much value."),
     FIRST("Take back the rich lands of E1. " +

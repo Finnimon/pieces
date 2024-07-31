@@ -6,7 +6,7 @@ import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.model.city.City;
-import com.gitgud.pieces.model.city.buildings.headQuarter.HeadQuarters;
+import com.gitgud.pieces.model.city.buildings.headQuarters.HeadQuarters;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import javafx.beans.property.SimpleIntegerProperty;
