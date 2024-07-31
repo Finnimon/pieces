@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>Creates a Render of any {@link GridMappable} on the {@link GridMappableRender}.
  * <p>Is Able to Render GridMappable and even those that implement {@link Health} as well.
  *
- * @param <GridMappableType> The type of the {@link GridMappable}
+ * @param <GridMappableType> The type of the {@link GridMappable}.
  * @author Julius Rohe, Finn L.
  * @Owner: Finn L.
  * @Since: 30.05.2024

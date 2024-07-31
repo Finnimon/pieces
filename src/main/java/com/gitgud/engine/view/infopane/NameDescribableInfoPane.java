@@ -16,7 +16,7 @@ import javafx.scene.layout.Border;
  * @Since: 30.06.2024
  * @Version: 1.1
  */
-public class NameDescribableInfoPane<Type extends Named & Describable> extends InfoPane<Type>
+public class NameDescribableInfoPane<Type extends Named & Describable> extends InfoPane
 {
     /**
      * Concat the name and the description of a {@link Named}&{@link Describable} and defaults to {@link InfoPane#InfoPane(String)}.

@@ -67,7 +67,7 @@ public class ActionChoiceRender extends StackPane implements Render<ActionChoice
         setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         
         
-        InfoPane<?> infoPane = new NameDescribableInfoPane<>(model);
+        InfoPane infoPane = new NameDescribableInfoPane<>(model);
         
         AppendRemoveNodeOnMouseEventHandler.add(this, infoPane);
         

@@ -7,13 +7,12 @@ import javafx.scene.paint.Color;
 
 
 /**
- * @param <Type>
  * @author Julius Rohe, Finn L.
  * @Owner: Finn L.
  * @Since: 30.06.2024
  * @Version: 1.1
  */
-public class InfoPane<Type> extends StackPane
+public class InfoPane extends StackPane
 {
     /**
      * The default border around an InfoPane.
