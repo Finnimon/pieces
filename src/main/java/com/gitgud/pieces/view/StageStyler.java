@@ -145,7 +145,7 @@ public class StageStyler
      */
     private static Menu settingsMenu()
     {
-        Menu menu = new Menu("Settings");
+        Menu menu = new Menu("GameSettings");
         //todo
         return menu;
     }

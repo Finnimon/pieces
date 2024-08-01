@@ -84,13 +84,24 @@ public class Translator
     
     
     /**
+     * Translates the given {@code key} according to {@link GameSettings#getLanguage()}.
+     * @param key The key of the translation.
+     * @return The translation of {@code key} in {@link GameSettings#getLanguage()}.
+     */
+    public String translate(@NotNull String key)
+    {
+        return translate(GameSettings.getInstance().getLanguage(), key);
+    }
+    
+    
+    /**
      * Translates the given {@code key} in the given {@code  language}.
      *
      * @param language The target language.
      * @param key      The key of the translation.
      * @return The translation of {@code key} in {@code language}.
      */
-    public String translate(@NotNull String language, @NotNull String key)
+    private String translate(@NotNull String language, @NotNull String key)
     {
         return getLanguage(language).get(key).getAsString();
     }

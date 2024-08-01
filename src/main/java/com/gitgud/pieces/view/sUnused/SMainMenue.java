@@ -67,7 +67,7 @@ public class SMainMenue
         
         //buttonsArray[0].setOnAction(e -> stage.setScene(oldGameScene)); TODO: zurück ins alte Spiel
         buttonsArray[1].setOnAction(e -> stage.setScene(SDifficulty.createDifficultyScene(stage)));
-        //buttonsArray[2].setOnAction(e -> stage.setScene(settings)) TODO: brauchen wir überhaupt Settings?
+        //buttonsArray[2].setOnAction(e -> stage.setScene(settings)) TODO: brauchen wir überhaupt GameSettings?
         // Anwendung komplett beenden
         buttonsArray[3].setOnAction(e -> Platform.exit());
         buttonsArray[4].setOnAction(e -> stage.setScene(SArena.createArenaScene(stage)));

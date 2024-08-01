@@ -3,6 +3,7 @@ package com.gitgud.pieces;
 
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.Game;
+import com.gitgud.pieces.control.GameSettings;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.ActiveGame;
 import com.gitgud.pieces.testing.TestAssets;
