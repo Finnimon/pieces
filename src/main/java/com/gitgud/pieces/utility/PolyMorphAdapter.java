@@ -52,7 +52,7 @@ public class PolyMorphAdapter
         return gameObjectAdapterFactory;
     }
     
-    
+    @NotNull
     protected static RuntimeTypeAdapterFactory<Applicable> getApplicablePolyMorphAdapter()
     {
         RuntimeTypeAdapterFactory<Applicable> applicableAdapterFactory;

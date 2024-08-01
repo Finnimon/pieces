@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane xmlns="http://javafx.com/javafx"
+<StackPane fx:id="saveAsId" xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.gitgud.pieces.view.SaveAs" style="-fx-background-color: grey">
             <VBox prefWidth="500" alignment="CENTER" spacing="50">
