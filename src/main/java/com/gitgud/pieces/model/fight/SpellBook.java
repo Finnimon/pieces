@@ -15,6 +15,4 @@ import java.util.HashSet;
  */
 public record SpellBook(HashSet<Spell> spells)
 {
-
-
 }

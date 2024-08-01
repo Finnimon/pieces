@@ -2,6 +2,7 @@ package com.gitgud.pieces.utility;
 
 import com.gitgud.engine.model.Applicable;
 import com.gitgud.engine.model.DisApplicable;
+import com.gitgud.engine.model.attackDefenseLogic.Attack;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.utility.modification.DurableModifier;
@@ -65,7 +66,8 @@ public class PolyMorphAdapter
                                 .registerSubtype(FightAgentDefenceModifier.class)
                                 .registerSubtype(FightAgentMovementModifier.class)
                                 .registerSubtype(FightAgentManaModifier.class)
-                                .registerSubtype(FightAgentHealthModifier.class);
+                                .registerSubtype(FightAgentHealthModifier.class)
+                                .registerSubtype(Attack.class);
         return applicableAdapterFactory;
     }
     

@@ -7,6 +7,11 @@ import javafx.beans.property.SimpleLongProperty;
 import java.util.HashMap;
 
 
+/**
+ * Core class for monetary interactions.
+ *
+ * @
+ */
 public class ResourceCost
 {
     private final HashMap<ResourceType, Long> resourceCostMap;

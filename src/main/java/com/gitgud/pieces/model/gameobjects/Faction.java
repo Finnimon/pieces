@@ -3,6 +3,15 @@ package com.gitgud.pieces.model.gameobjects;
 import java.util.Objects;
 
 
+/**
+ * The Faction of a {@link com.gitgud.pieces.model.gameobjects.agents.PlayerAgent} or
+ * {@link com.gitgud.pieces.model.gameobjects.agents.FightAgent}
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 16.04.2024
+ * @Version: 1.0
+ */
 public enum Faction
 {
     MONOCHROME("monochrome"),

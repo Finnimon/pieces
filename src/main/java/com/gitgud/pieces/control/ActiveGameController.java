@@ -2,7 +2,6 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.pieces.model.game.ActiveGame;
 import com.gitgud.pieces.model.game.GameState;
-import com.gitgud.pieces.testing.TestAssets;
 import org.jetbrains.annotations.NotNull;
 
 import static com.gitgud.pieces.model.game.GameState.*;
@@ -56,16 +55,6 @@ public class ActiveGameController
     private static boolean isInitialized()
     {
         return instance != null;
-    }
-    
-    
-    /**
-     * <p>Initializes the Singleton with the test data.
-     * <p>Remove from production.
-     */
-    public static void testInitialize()
-    {
-        initialize(TestAssets.getTestActiveGame());//todo!!!
     }
     
     
