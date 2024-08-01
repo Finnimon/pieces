@@ -3,6 +3,7 @@ package com.gitgud.pieces.view;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.Game;
+import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -127,12 +128,7 @@ public class StageStyler
     {
         Menu menu = new Menu("New Game");
         
-        MenuItem newGame = createMenuItem("New Game", e ->
-        {
-            e.consume();
-            //todo show new Screen for Difficulty and Name Selection
-            //Game.New.start();
-        });
+        MenuItem newGame = createMenuItem("New Game", e -> ((Pane) StageController.getInstance().getRoot()).getChildren().add(NewGame.create()));
         
         menu.getItems().add(newGame);
         return menu;
@@ -147,7 +143,10 @@ public class StageStyler
     private static Menu settingsMenu()
     {
         Menu menu = new Menu("GameSettings");
-        //todo
+        menu.getItems()
+            .add(createMenuItem("Settings",
+                                e -> ((Pane) StageController.getInstance().getRoot()).getChildren()
+                                                                                     .add(Settings.create())));
         return menu;
     }
     
@@ -199,18 +198,10 @@ public class StageStyler
     {
         Menu menu = new Menu("Load");
         
-        Predicate<ActionEvent> predicate = gameStateChecker(GameState.NOT_LOADED);
-        
         MenuItem load = createMenuItem("Load", e ->
         {
             e.consume();
-            if (predicate.test(e))
-            {
-                //todo show message want to save before?, then show Game.Loader.getSaveFileNames();....
-            }
-            //create context menu for offering Game.Loader.getSaveFileNames(); and calling Game.Loader.load
-            // (selectedName);
-            //todo Game.Loader.load();
+            ((Pane) StageController.getInstance().getRoot()).getChildren().add(LoadMenu.create());
         });
         
         menu.getItems().add(load);
@@ -242,9 +233,6 @@ public class StageStyler
      */
     private static Predicate<ActionEvent> gameStateChecker(GameState gameState)
     {
-        return e ->
-        {
-            return ActiveGameController.getGameState() == gameState;
-        };
+        return e -> ActiveGameController.getGameState() == gameState;
     }
 }
