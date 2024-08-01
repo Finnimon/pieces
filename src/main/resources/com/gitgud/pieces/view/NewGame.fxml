@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<StackPane fx:id="newGameId" xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.gitgud.pieces.view.NewGame" style="-fx-background-color: grey;">
+    <VBox maxWidth="500"  alignment="CENTER" spacing="20">
+        <Label text="Enter your player name here:" style="--body-font-size: 20"/>
+        <TextField fx:id="nameId"/>
+        <Label text="Difficulty Setting" style="--body-font-size: 20"/>
+        <Slider fx:id="difficultyId" max="2" majorTickUnit="1" minorTickCount="0" showTickMarks="true" snapToTicks="true" prefWidth="500"/>
+        <HBox maxHeight="100" maxWidth="500" prefWidth="500" prefHeight="100" >
+            <Label text="Easy" prefWidth="166.67"/>
+            <Label text="Medium" prefWidth="166.67" alignment="CENTER"/>
+            <Label text="Hard" prefWidth="166.67" alignment="CENTER_RIGHT"/>
+        </HBox>
+        <Button text="Start new game" onAction="#newGameAction" AnchorPane.topAnchor="700" prefHeight="200"
+                prefWidth="500"/>
+        <Button text="Return" prefWidth="500" prefHeight="100" onAction="#returnAction"/>
+    </VBox>
+</StackPane>

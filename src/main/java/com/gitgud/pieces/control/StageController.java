@@ -24,7 +24,7 @@ public class StageController
      * Index of the editable Scene Root within the children of the root of the JavaFX {@link Scene} {@code scene
      * .getRoot().getChildren()}
      */
-    public static final int ROOT_INDEX = 1;
+    public static final int ROOT_INDEX = 0;
     
     
     /**
@@ -125,7 +125,8 @@ public class StageController
     public void setRoot(Parent node)
     {
         StackPane stackPane = getInnerStackPane();
-        stackPane.getChildren().set(0, node);
+        stackPane.getChildren().clear();
+        stackPane.getChildren().add( node);
     }
     
     

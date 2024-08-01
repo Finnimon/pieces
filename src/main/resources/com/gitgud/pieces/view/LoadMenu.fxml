@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gitgud.pieces.view.LoadingButtons?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane fx:id="loadMenuId" xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.gitgud.pieces.view.LoadMenu" style="-fx-background-color: grey">
+    <VBox alignment="CENTER" prefWidth="500" maxWidth="502">
+        <ScrollPane prefViewportHeight="800" prefViewportWidth="502">
+            <LoadingButtons alignment="CENTER" prefWidth="500"/>
+        </ScrollPane>
+
+        <Button text="Return" prefWidth="500" prefHeight="100" onAction="#returnAction"/>
+    </VBox>
+</StackPane>

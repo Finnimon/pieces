@@ -105,10 +105,10 @@ public class JsonParser
     public <T> T deserializeJsonFile(File jsonFile, Class<T> clazz)
     {
         try
-        {
-            FileReader reader = getFileReader(jsonFile);
+        {FileReader reader = getFileReader(jsonFile);
             T t = gson.fromJson(reader, clazz);
             reader.close();
+            
             return t;
         }
         catch (IOException e)

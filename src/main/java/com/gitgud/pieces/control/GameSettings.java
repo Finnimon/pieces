@@ -19,7 +19,7 @@ public class GameSettings
     /**
      * The location of the previous settings file.
      */
-    private static final File PREVOIUS_SETTINGS = new File("src\\main\\resources\\control\\settings.json");
+    private static final File PREVOIUS_SETTINGS = new File("src\\main\\resources\\com\\gitgud\\pieces\\control\\settings.json");
     
     
     /**

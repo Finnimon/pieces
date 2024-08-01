@@ -76,6 +76,9 @@ public class Game
          */
         public static void initializeGame(@NotNull Stage stage)
         {
+            ExecutorService executorService = Executors.newSingleThreadExecutor();
+            executorService.execute(initializeTask(stage));
+            executorService.shutdown();
         }
         
         
@@ -165,11 +168,10 @@ public class Game
         private static Startable getNextSceneController()
         {
             GameState gameState = ActiveGameController.getGameState();
+            System.out.println("GameState");
             return switch (gameState)
             {
-                case NOT_LOADED ->
-                        throw new RuntimeException("Not implemented");//MainMenuController.getInstance();//todo not
-                // yet implemented
+                case NOT_LOADED ->new MainMenuController();
                 case CITY -> new CityController(getActiveGame().getCity());//todo not yet implemented
                 case MISSION -> new MissionController(getActiveGame().getMission());
                 case MISSION_FIGHT -> new FightController(getActiveGame().getFight());
@@ -230,13 +232,13 @@ public class Game
          * <p>Gets all the save file names that can be loaded from directly.
          * <p>Filters out the new game file.
          *
-         * @param saveFiles All the save files that can be loaded from.
          * @return All the save file names that can be loaded from directly.
          * @Precondition: All the save files must be readable and be of the correct format as well as intact SaveFiles.
          * @Postcondition: All returned saveFileNames are names of loadable save files.
          */
-        public static List<String> getLoadableSaveFileNames(@NotNull File[] saveFiles)
+        public static List<String> getLoadableSaveFileNames()
         {
+            File[] saveFiles = Utility.SAVE_FILE_DIR.listFiles();
             List<String> names = Arrays.stream(saveFiles)
                                        .map(x -> x.getName()//format the name and remove suffix
                                                   .substring(0,

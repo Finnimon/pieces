@@ -79,6 +79,7 @@ public class StageStyler
         MenuBar menuBar = createMenu();
         StackPane innerPane = new StackPane();
         stackPane.getChildren().addAll(menuBar, innerPane);
+        menuBar.toFront();
         StackPane.setAlignment(menuBar, Pos.TOP_CENTER);
         innerPane.translateYProperty().bind(menuBar.heightProperty());
         innerPane.getChildren().add(new Pane());

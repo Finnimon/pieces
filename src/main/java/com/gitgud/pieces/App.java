@@ -39,6 +39,7 @@ public class App extends Application
     /**
      * <p> The singletons are reset because garbage collection is not
      * guaranteed.
+     * <p>
      * {@inheritDoc}
      */
     @Override

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane fx:id="mainMenuId" xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.gitgud.pieces.view.MainMenu">
+    <VBox alignment="CENTER" prefWidth="500" spacing="10" style="-fx-background-color: rgba(128,128,128,0.5)">
+        <Button text="Continue" onAction="#continueAction" prefWidth="500" prefHeight="200"/>
+        <Button text="New Game" onAction="#newGameAction" prefWidth="500" prefHeight="200"/>
+        <Button text="Load" onAction="#loadAction" prefWidth="500" prefHeight="200"/>
+        <Button text="Settings" onAction="#settingsAction" prefWidth="500" prefHeight="200"/>
+        <Button text="Exit" onAction="#exitAction" prefWidth="500" prefHeight="200"/>
+    </VBox>
+</StackPane>
