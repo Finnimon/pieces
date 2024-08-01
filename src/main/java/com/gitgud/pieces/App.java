@@ -2,6 +2,8 @@ package com.gitgud.pieces;
 
 
 import com.gitgud.pieces.control.*;
+import com.gitgud.pieces.testing.Missions;
+import com.gitgud.pieces.utility.JsonParser;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -32,6 +34,12 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
+//        JsonParser.getInstance();
+        ActiveGameController.testInitialize();
+        Game.Saver.saveAs("NEW_GAME");
+//        ActiveGameController.getInstance().get().setMission(Missions.MISSION0);
+//        Game.Saver.save();
+//        Game.Loader.load("TestPlayer");
         Game.Flow.initializeGame(stage);
     }
     

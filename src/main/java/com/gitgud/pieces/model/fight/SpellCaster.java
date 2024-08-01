@@ -13,6 +13,7 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.FightController;
 import com.gitgud.pieces.control.action.SpellCasterToAction;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
+import com.github.ruediste.polymorphicGson.GsonPolymorph;
 import javafx.beans.property.SimpleIntegerProperty;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,8 +31,14 @@ import java.util.*;
  * @see SpellBook
  * @since 30.06.2022
  */
+@GsonPolymorph
 public interface SpellCaster extends Named, Describable
 {
+    /**
+     * Returns the rootActionChoice for this Spellcasters possible spells.
+     * @param fightController The fightcontroller to act on.
+     * @return The possible spell rootchoice for this {@link SpellCaster}.
+     */
     default RootActionChoice possibleSpellChoices(FightController fightController)
     {
         HashMap<Spell, HashSet<Tile>> spellsTargets = getSpellsTargets(fightController.getModel());

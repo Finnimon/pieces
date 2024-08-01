@@ -20,7 +20,7 @@ public interface TestAssets
     
     static ActiveGame getTestActiveGame()
     {
-        return new ActiveGame(getTestPlayer(), new City(), Missions.MISSION0, null);
+        return new ActiveGame(getTestPlayer(), new City(), null, null);
     }
     
     

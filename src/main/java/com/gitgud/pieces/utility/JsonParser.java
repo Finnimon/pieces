@@ -1,7 +1,5 @@
 package com.gitgud.pieces.utility;
 
-import com.gitgud.engine.model.gameobjects.GameObject;
-import com.github.ruediste.polymorphicGson.GsonPolymorphAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.hildan.fxgson.FxGson;
@@ -53,16 +51,12 @@ public class JsonParser
      *
      * @param gsonBuilder The Gson Builder to be customized.
      */
-    private synchronized void customizeBuilder(GsonBuilder gsonBuilder)
+    private void customizeBuilder(GsonBuilder gsonBuilder)
     {
-        // Add polymorph support
-        GsonPolymorphAdapter gameObjectPolymorphAdapter =
-                new GsonPolymorphAdapter(GsonPolymorphAdapter.PolymorphStyle.TYPE_PROPERTY,
-                                                                                   GameObject.class.getClassLoader(),
-                                                                                   "com.gitgud");
-        gsonBuilder.registerTypeAdapterFactory(gameObjectPolymorphAdapter);
-        // Add pretty printing and enable complex map key serialization for Graphs
-        gsonBuilder.setPrettyPrinting().enableComplexMapKeySerialization();
+        gsonBuilder.registerTypeAdapterFactory(PolyMorphAdapter.getGameObjectPolyMorphAdapter())
+                   .registerTypeAdapterFactory(PolyMorphAdapter.getApplicablePolyMorphAdapter())
+                   .setPrettyPrinting()
+                   .enableComplexMapKeySerialization();
     }
     
     
@@ -105,7 +99,8 @@ public class JsonParser
     public <T> T deserializeJsonFile(File jsonFile, Class<T> clazz)
     {
         try
-        {FileReader reader = getFileReader(jsonFile);
+        {
+            FileReader reader = getFileReader(jsonFile);
             T t = gson.fromJson(reader, clazz);
             reader.close();
             

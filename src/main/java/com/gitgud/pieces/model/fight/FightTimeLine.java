@@ -33,8 +33,7 @@ public record FightTimeLine(@NotNull TreeSet<FightAgent> current, @NotNull TreeS
      */
     public static FightTimeLine create(@NotNull Collection<FightAgent> fightAgents)
     {
-        fightAgents.removeIf(Objects::isNull);
-        TreeSet<FightAgent> current = new TreeSet<>(fightAgents);
+        TreeSet<FightAgent> current = new TreeSet<>(fightAgents.stream().filter(Objects::nonNull).toList());
         TreeSet<FightAgent> next = new TreeSet<>();
         
         return new FightTimeLine(current, next);

@@ -33,7 +33,6 @@ import java.util.Iterator;
  * @Since: 16.04.2024
  * @Version: 1.0
  */
-@GsonPolymorph
 public class FightAgent extends Fighter implements Comparable<FightAgent>, Leveler
 {
     private final FightAgentType type;

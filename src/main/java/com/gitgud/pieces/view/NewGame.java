@@ -3,20 +3,24 @@ package com.gitgud.pieces.view;
 import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.player.Difficulty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.DragEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 
 
+/**
+ * New game menu of the game.
+ *
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 15.07.2024
+ * @Version: 0.2
+ */
 public class NewGame
 {
     private static final String FXML_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\view\\NewGame.fxml";
@@ -28,8 +32,11 @@ public class NewGame
     
     @FXML
     private Pane newGameId;
+    
+    
     @FXML
     private Slider difficultyId;
+    
     
     public static Pane create()
     {
@@ -44,11 +51,16 @@ public class NewGame
             throw new RuntimeException("Error loading FXML file: " + FXML_PATH, e);
         }
     }
+    
+    
     @FXML
     private void newGameAction()
     {
-        Game.New.start(nameId.textProperty().get(), Difficulty.values()[(int) Math.round(difficultyId.valueProperty().get())]);
+        Game.New.start(nameId.textProperty().get(),
+                       Difficulty.values()[(int) Math.round(difficultyId.valueProperty().get())]);
     }
+    
+    
     @FXML
     private void returnAction()
     {

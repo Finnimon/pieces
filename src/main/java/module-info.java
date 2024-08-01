@@ -9,6 +9,7 @@ module com.gitgud.pieces {
     requires com.github.ruediste.polymorphicGson;
     requires org.jetbrains.annotations;
     requires javafx.media;
+    requires gson.extras;
     
     
     opens com.gitgud.pieces to javafx.fxml;

@@ -172,7 +172,7 @@ public class Game
         private static Startable getNextSceneController()
         {
             GameState gameState = ActiveGameController.getGameState();
-            System.out.println("GameState");
+            
             return switch (gameState)
             {
                 case NOT_LOADED -> new MainMenuController();
@@ -402,6 +402,7 @@ public class Game
             Gson gson = JsonParser.getInstance().getGson();
             JsonObject jsonElement = gson.toJsonTree(activeGame).getAsJsonObject();
             Utility.changePlayerName(jsonElement, newPlayerName);
+            
             return jsonElement.toString();
         }
     }
@@ -572,6 +573,7 @@ public class Game
         private static void changePlayerName(@NotNull JsonObject activeGameJson, @NotNull String playerName)
         {
             JsonObject player = activeGameJson.get(PLAYER_MEMBER_NAME).getAsJsonObject();
+            
             player.remove(NAME_MEMBER_NAME);
             player.addProperty(NAME_MEMBER_NAME, playerName);
         }
