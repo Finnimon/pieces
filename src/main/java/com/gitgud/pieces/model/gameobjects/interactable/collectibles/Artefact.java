@@ -1,9 +1,10 @@
 package com.gitgud.pieces.model.gameobjects.interactable.collectibles;
 
+import com.gitgud.engine.model.Applicable;
+import com.gitgud.engine.model.DisApplicable;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.Leveler;
 import com.gitgud.engine.model.gameobjects.interactable.Collectible;
-import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
@@ -26,10 +27,10 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     private final SimpleIntegerProperty level;
     
     
-    private final Modifier<FightAgent> disApplicable;
+    private final DisApplicable<FightAgent> disApplicable;
     
     
-    public Artefact(String name, String description, String spriteFilePath, Modifier<FightAgent> disApplicable,
+    public Artefact(String name, String description, String spriteFilePath, DisApplicable<FightAgent> disApplicable,
                     int level)
     {
         super(name, description, spriteFilePath);
@@ -50,13 +51,12 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     @Override
     public int levelUp()
     {
-        FightAgentModifier fightAgentModifier = (FightAgentModifier) getModifier();
-        fightAgentModifier.getModifiers().addAll(fightAgentModifier.getModifiers());
+        //Todo wrapping class for applicables to stack their effect.
         return Leveler.super.levelUp();
     }
     
     
-    public Modifier<FightAgent> getModifier()
+    public DisApplicable<FightAgent> getApplicable()
     {
         return disApplicable;
     }

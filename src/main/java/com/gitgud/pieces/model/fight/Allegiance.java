@@ -1,5 +1,8 @@
 package com.gitgud.pieces.model.fight;
 
+/**
+ * The allegiance of a {@link com.gitgud.pieces.model.gameobjects.agents.FightAgent}.
+ */
 public enum Allegiance
 {
     BLACK,//friendly
@@ -18,6 +21,10 @@ public enum Allegiance
     }
     
     
+    /**
+     * Helper method for {@link com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector}.
+     * @return the type of the {@link com.gitgud.pieces.model.gameobjects.agents.FightAgent} as int.
+     */
     public int typeToInt()
     {
         return type;

@@ -24,24 +24,39 @@ import java.util.TreeSet;
  */
 public class Fight implements ActionAwaiterModel<FightAgent>
 {
-    //todo render
+    /**
+     * The GridMap on which the fight takes place.
+     */
     private final GridMap<FightAgent> gridMap;
     
     
-    //todo render at bottom of screen
+    /**
+     * The timeline of the fight.
+     */
     private final FightTimeLine fightTimeLine;
     
     
-    //todo render next to timeline?
+    /**
+     * The current turn.
+     */
     private final SimpleIntegerProperty turn = new SimpleIntegerProperty(1);
     
     
+    /**
+     * Constructs a Fight on the given GridMap.
+     * @param gridMap The GridMap.
+     */
     public Fight(GridMap<FightAgent> gridMap)
     {
         this(gridMap, FightTimeLine.create(gridMap.nonNullElements()));
     }
     
     
+    /**
+     * Sets the given GridMap and FightTimeLine.
+     * @param gridMap The GridMap.
+     * @param fightTimeLine The FightTimeLine.
+     */
     public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
     {
         this.gridMap = gridMap;
@@ -49,6 +64,10 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     }
     
     
+    /**
+     * Getter for the fights GridMap.
+     * @return The fights GridMap.
+     */
     public GridMap<FightAgent> getGridMap()
     {
         return gridMap;
@@ -62,6 +81,9 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     }
     
     
+    /**
+     * Increments the fights turn.
+     */
     public void incrementTurn()
     {
         getFightTimeLine().advance();

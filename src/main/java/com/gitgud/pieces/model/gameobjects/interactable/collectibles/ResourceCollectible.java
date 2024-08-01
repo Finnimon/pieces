@@ -8,6 +8,9 @@ import com.gitgud.pieces.model.ResourceCost;
 import com.gitgud.pieces.model.player.ResourceType;
 
 
+/**
+ *
+ */
 public class ResourceCollectible extends GameObject implements Collectible<MissionController>
 {
     private static final String DESCRIPTION_INSERT = " Collectible ";

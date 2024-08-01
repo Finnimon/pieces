@@ -20,7 +20,7 @@ import java.util.HashSet;
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.
- * @since 19.04.2022
+ * @since 19.04.2024
  */
 public class ArtefactPouch
 {
@@ -74,7 +74,7 @@ public class ArtefactPouch
             return;
         }
         
-        getAffectableFightAgents().forEach(fA -> artefact.getModifier().apply(fA));
+        getAffectableFightAgents().forEach(fA -> artefact.getApplicable().apply(fA));
     }
     
     
@@ -111,6 +111,6 @@ public class ArtefactPouch
     {
         Core.replaceFirstOccurrence(equippedArtefacts, artefact, null);
         
-        getAffectableFightAgents().forEach(fA -> artefact.getModifier().disApply(fA));
+        getAffectableFightAgents().forEach(fA -> artefact.getApplicable().disApply(fA));
     }
 }

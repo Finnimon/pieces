@@ -9,7 +9,12 @@ import com.gitgud.engine.model.map.Tile;
 
 /**
  * Interactable that can be collected and will be removed from their containing {@link GridMap} upon interaction.
+ *
  * @param <AAType> The type of containing {@link ActionAwaitingController}
+ * @Owner: Finn L.
+ * @Author: Finn L.
+ * @Since: 16.04.2024
+ * @Version: 1.0
  */
 public interface Collectible<AAType extends ActionAwaitingController<?, GameObject, ?>> extends Interactable<AAType>
 {
@@ -22,6 +27,7 @@ public interface Collectible<AAType extends ActionAwaitingController<?, GameObje
     
     /**
      * If Collection is currently possible, will collect the {@link Collectible} and remove it from the {@link GridMap}.
+     *
      * @param awaiter the containing {@link ActionAwaitingController}
      */
     default void collect(AAType awaiter)
@@ -39,6 +45,7 @@ public interface Collectible<AAType extends ActionAwaitingController<?, GameObje
     
     /**
      * Determines if the {@link Collectible} can be collected.
+     *
      * @return If the {@link Collectible} can be collected.
      */
     default boolean isCollectionPossible()
@@ -49,6 +56,7 @@ public interface Collectible<AAType extends ActionAwaitingController<?, GameObje
     
     /**
      * Adds this Collectible to the Players inventory or causes a resulting reaction.
+     *
      * @Precondition: The {@link #isCollectionPossible()} must return {@code true}.
      * @Postcondition: No undefined behaviour will occur.
      */
@@ -57,6 +65,7 @@ public interface Collectible<AAType extends ActionAwaitingController<?, GameObje
     
     /**
      * Removes this Collectible from the {@link GridMap}.
+     *
      * @param awaiter the containing {@link ActionAwaitingController} to remove the {@link Collectible} from.
      */
     private void removeFromMap(AAType awaiter)

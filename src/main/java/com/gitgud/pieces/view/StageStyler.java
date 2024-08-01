@@ -2,7 +2,7 @@ package com.gitgud.pieces.view;
 
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.control.game.Game;
+import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

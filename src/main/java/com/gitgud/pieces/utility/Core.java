@@ -25,13 +25,6 @@ public record Core()
     }
     
     
-    public static <T> void setMatrixValuesSymmetrically(T[][] matric, int yIndex, int xIndex, T value)
-    {
-        matric[yIndex][xIndex] = value;
-        matric[xIndex][yIndex] = value;
-    }
-    
-    
     public static void insertAtFirstNullIndex(Object[] objects, Object object)
     {
         replaceFirstOccurrence(objects, null, object);

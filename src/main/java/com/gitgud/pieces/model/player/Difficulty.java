@@ -10,6 +10,14 @@ import com.gitgud.pieces.utility.modification.fightAgent.FightAgentDefenceModifi
 import org.jetbrains.annotations.NotNull;
 
 
+/**
+ * Difficulty Enum that provides a way to affect the difficulty of fights.
+ *
+ * @author Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @since 19.06.2024
+ */
 public enum Difficulty implements Applicable<Fight>
 {
     EASY(new FightAgentAttackModifier(0, 0, 0)),
@@ -22,39 +30,14 @@ public enum Difficulty implements Applicable<Fight>
     private final Modifier<FightAgent> modifier;
     
     
-    Difficulty(Modifier<FightAgent> fightAgentAttackModifier)
+    Difficulty(@NotNull Modifier<FightAgent> fightAgentAttackModifier)
     {
         this.modifier = fightAgentAttackModifier;
     }
     
     
-    public static Difficulty fromString(String string)
-    {
-        for (Difficulty difficulty : Difficulty.values())
-        {
-            if (string.equalsIgnoreCase(difficulty.toString()))
-            {
-                return difficulty;
-            }
-        }
-        return null;
-    }
-    
-    
-    public Modifier<FightAgent> getFightAgentAttackModifier()
-    {
-        return modifier;
-    }
-    
-    
-    public String getAsString()
-    {
-        return this.toString();
-    }
-    
-    
     @Override
-    public Fight apply(@NotNull Fight fight)
+    public @NotNull Fight apply(@NotNull Fight fight)
     {
         fight.getGridMap()
              .nonNullElements()

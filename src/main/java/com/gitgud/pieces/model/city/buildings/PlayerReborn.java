@@ -43,6 +43,18 @@ public class PlayerReborn extends CityBuilding
     }
     
     
+    /**
+     * Gets the currrent faction for the {@link com.gitgud.pieces.model.gameobjects.agents.PlayerAgent} as supplied
+     * by this {@link PlayerReborn}.
+     *
+     * @return The current {@link com.gitgud.pieces.model.gameobjects.agents.PlayerAgent} faction.
+     */
+    public Faction getFaction()
+    {
+        return faction;
+    }
+    
+    
     public void rebirth(Faction faction)
     {
         this.faction = faction;

@@ -1,8 +1,7 @@
-package com.gitgud.pieces.control.game;
+package com.gitgud.pieces.control;
 
 import com.gitgud.engine.control.Startable;
 import com.gitgud.engine.utility.Strings;
-import com.gitgud.pieces.control.*;
 import com.gitgud.pieces.model.game.ActiveGame;
 import com.gitgud.pieces.model.game.GameState;
 import com.gitgud.pieces.model.player.Difficulty;

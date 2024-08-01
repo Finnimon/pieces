@@ -5,11 +5,11 @@ import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.control.actionChoice.*;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
-import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.fight.Fight;
+import com.gitgud.pieces.model.fight.SpellCaster;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
-import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
 import com.gitgud.pieces.view.render.fight.FightRender;
+import javafx.beans.property.SimpleBooleanProperty;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -28,6 +28,11 @@ import java.util.function.Consumer;
  */
 public class FightController extends ActionAwaitingController<Fight, FightAgent, FightRender>
 {
+    /**
+     * Observable value for {@link com.gitgud.engine.control.Ending}
+     */
+    private final SimpleBooleanProperty isFinishedProperty=new SimpleBooleanProperty(false);
+    
     /**
      * The index of the root movement choice in the first child layer of the action choice tree.
      */
@@ -149,15 +154,16 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
      *
      * @return The current root spell choice.
      */
-    private RootToActionChoice<FightController, Fight, FightAgent, FightRender> getSpellRootChoice()
+    private RootActionChoice<FightController, Fight, FightAgent, FightRender> getSpellRootChoice()
     {
         FightAgent agent = getActiveFightAgent();
-        if (!(agent instanceof SpellCasterFightAgent spellCasterFightAgent))
+        List<ActionChoice<FightController, Fight, FightAgent, FightRender>> choices = new ArrayList<>();
+        //        choices.add(getPlayerSpellChoice(this)); //todo not implemented
+        if (agent instanceof SpellCaster spellCaster)
         {
-            return new RootToActionChoice<>("Spells", "Cast Spells, available to you", this, new ArrayList<>());
+            choices.add(spellCaster.possibleSpellChoices(this));
         }
-        
-        throw new RuntimeException("not implemented");
+        return new RootActionChoice<>("Spells", "Cast Spells, available to you", this, choices);
     }
     
     
@@ -211,5 +217,12 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         ActiveGameController.getInstance().get().setFight(null);
         
         Game.Flow.showNextScene();
+    }
+    
+    
+    @Override
+    public SimpleBooleanProperty isFinishedProperty()
+    {
+        return isFinishedProperty;
     }
 }

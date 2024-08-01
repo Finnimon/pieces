@@ -5,6 +5,7 @@ import com.gitgud.pieces.model.fight.SpellBook;
 import com.gitgud.pieces.model.fight.SpellCaster;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
+import javafx.beans.property.SimpleIntegerProperty;
 
 
 public class SpellCasterFightAgent extends FightAgent implements SpellCaster
@@ -52,4 +53,5 @@ public class SpellCasterFightAgent extends FightAgent implements SpellCaster
     {
         return this.spellBook;
     }
+    
 }

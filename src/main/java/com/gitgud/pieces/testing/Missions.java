@@ -100,7 +100,7 @@ public interface Missions
         gridMap.place(1, 31, new FightTrigger(Fights.FIGHT1));
         gridMap.place(8, 7, new FightTrigger(Fights.FIGHT2));
         
-        gridMap.place(2, 31, Artefacts.BLOODY_SWORD.createArtefact());
+        gridMap.place(2, 31, Artefacts.BLOODY_SWORD_1.createArtefact());
         
         return new Mission(gridMap, startingPosition, fightAgents, 1);
     }

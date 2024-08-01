@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  * Interactables that remain on the Map and can be interacted with. As compared to {@link Collectible} which will be
  * removed after interaction.
  *
- * @param <AAType> The type of the {@link ActionAwaitingController} GameObject can be interacted with.
+ * @param <AAType> The type of the {@link ActionAwaitingController} in which this can be interacted with.
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.

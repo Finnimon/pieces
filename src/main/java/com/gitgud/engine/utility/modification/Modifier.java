@@ -19,14 +19,29 @@ import java.util.Collection;
 @GsonPolymorph
 public abstract class Modifier<T> implements DisApplicable<T>
 {
+    /**
+     * Helper Method for applying multiple Modifiers at once.
+     *
+     * @param object   The object to modify,
+     * @param modifier The modifiers that should be used.
+     * @param <T>      The type of object to be modified.
+     * @return The modified {@code object}.
+     */
     public static <T> T applyModifiers(T object, Collection<Modifier<T>> modifier)
     {
         for (Modifier<T> m : modifier)
         {
-            object = m.modify(object);
+            object = m.apply(object);//calls apply in case there is extra functionality.
         }
         
         return object;
+    }
+    
+    
+    @Override
+    public T apply(@NotNull T t)
+    {
+        return modify(t);
     }
     
     
@@ -37,13 +52,6 @@ public abstract class Modifier<T> implements DisApplicable<T>
      * @return modified object
      */
     public abstract T modify(T t);
-    
-    
-    @Override
-    public T apply(@NotNull T t)
-    {
-        return modify(t);
-    }
     
     
     @Override

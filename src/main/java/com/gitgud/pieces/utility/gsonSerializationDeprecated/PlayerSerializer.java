@@ -30,7 +30,7 @@ public class PlayerSerializer implements JsonSerializer<Player>, JsonDeserialize
         JsonObject jsonObject = src.getAsJsonObject();
 
         String name = jsonObject.get(NAME).toString();
-        Difficulty difficulty = Difficulty.fromString(jsonObject.get(DIFFICULTY).toString());
+//        Difficulty difficulty = Difficulty.fromString(jsonObject.get(DIFFICULTY).toString());
 //        Army army = deserializeArmy(jsonObject.getAsJsonObject(ARMY), context);
         Wallet wallet;
         ArtefactPouch artefactPouch;

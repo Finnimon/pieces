@@ -25,6 +25,15 @@ public interface TestAssets
         return new ActiveGame(getTestPlayer(), new City(), Missions.MISSION0, null);
     }
     
+    static ActiveGame getNewGame()
+    {
+        return new ActiveGame(new Player("NEW_GAME",
+                                         Difficulty.EASY,
+                                         testArmy(),
+                                         testWallet(),
+                                         testArtefactPouch(),
+                                         testSpellBook()), new City(), null, null);
+    }
     
     static Player getTestPlayer()
     {
@@ -55,7 +64,7 @@ public interface TestAssets
         
         for (ResourceType type : ResourceType.values())
         {
-            resourceMap.put(type, new SimpleLongProperty(10));
+            resourceMap.put(type, new SimpleLongProperty(0));
         }
         
         return new Wallet(resourceMap);
@@ -85,10 +94,6 @@ public interface TestAssets
         
         fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
                                                                        FightAgentType.PAWN,
-                                                                       Faction.MONOCHROME,
-                                                                       1)));
-        fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,
-                                                                       FightAgentType.QUEEN,
                                                                        Faction.MONOCHROME,
                                                                        1)));
         fightAgents.add(director.make(FightAgentDirector.calculateType(allegiance,

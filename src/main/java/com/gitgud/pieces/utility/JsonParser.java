@@ -106,7 +106,7 @@ public class JsonParser
     {
         try
         {
-            FileReader reader = new FileReader(jsonFile);
+            FileReader reader = getFileReader(jsonFile);
             T t = gson.fromJson(reader, clazz);
             reader.close();
             return t;
@@ -119,11 +119,33 @@ public class JsonParser
     
     
     /**
-     * Calls {@link #replaceFileContent(File, String)} with the given {@link File} and serializes the given Object into it.
-     * @see #replaceFileContent(File, String)
+     * Creates a File Reader for the given File.
+     *
+     * @param file The File to be read.
+     * @return The created File Reader.
+     * @throws IllegalArgumentException If the File cannot be read or found.
+     */
+    public FileReader getFileReader(File file)
+    {
+        try
+        {
+            return new FileReader(file);
+        }
+        catch (IOException e)
+        {
+            throw new IllegalArgumentException("File not found or unreadable: " + file, e);
+        }
+    }
+    
+    
+    /**
+     * Calls {@link #replaceFileContent(File, String)} with the given {@link File} and serializes the given Object
+     * into it.
+     *
      * @param jsonFile The File to be replaced.
      * @param object   The Object to be serialized.
      * @return True if the replacement was successful, false otherwise.
+     * @see #replaceFileContent(File, String)
      */
     public boolean parseIntoJsonFile(File jsonFile, Object object)
     {
@@ -133,7 +155,8 @@ public class JsonParser
     
     /**
      * Replaces/creates {@code file}'s content with {@code string}.
-     * @param file The File to be replaced.
+     *
+     * @param file   The File to be replaced.
      * @param string The String to be written into the File.
      * @return True if the replacement was successful, false otherwise.
      */

@@ -2,8 +2,10 @@ package com.gitgud.pieces;
 
 
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.control.StageController;
-import com.gitgud.pieces.control.game.Game;
+import com.gitgud.pieces.model.game.ActiveGame;
+import com.gitgud.pieces.testing.TestAssets;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -34,7 +36,9 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        Game.Flow.initializeGame(stage);
+        ActiveGameController.initialize(TestAssets.getNewGame());
+        Game.Saver.save();
+//        Game.Flow.initializeGame(stage);
     }
     
     

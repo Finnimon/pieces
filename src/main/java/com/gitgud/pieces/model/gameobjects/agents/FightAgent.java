@@ -113,9 +113,9 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
      * @param meleeDamage            The melee damage of the {@link FightAgent}
      * @param rangedDamage           The ranged damage of the {@link FightAgent}.
      * @param rangedAttackRange      The ranged attack range of the {@link FightAgent} 0 if the {@link FightAgent} is
-     *                              not a ranged attacker
+     *                               not a ranged attacker
      * @param remainingRangedAttacks The remaining ranged attacks of the {@link FightAgent} 0 if the
-     * {@link FightAgent} is not a ranged attacker
+     *                               {@link FightAgent} is not a ranged attacker
      * @param isRangedAttacker       True if the {@link FightAgent} is a ranged attacker
      * @param physicalDefence        The physical defence of the {@link FightAgent}
      * @param magicDefence           The magic defence of the {@link FightAgent}
@@ -327,13 +327,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     }
     
     
-    @Override
-    public SimpleIntegerProperty remainingRangedAttacksProperty()
-    {
-        return remainingRangedAttacks;
-    }
-    
-    
     /**
      * Getter for {@link #accuracy}
      *
@@ -391,6 +384,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     public void setAccuracy(float accuracy)
     {
         this.accuracy.setValue(accuracy);
+    }
+    
+    
+    @Override
+    public SimpleIntegerProperty remainingRangedAttacksProperty()
+    {
+        return remainingRangedAttacks;
     }
     
     
@@ -460,7 +460,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
             {
                 continue;
             }
-            artefact.getModifier().modify(this);
+            artefact.getApplicable().apply(this);
         }
         
         return getLevel();
@@ -631,5 +631,16 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     public Allegiance getAllegiance()
     {
         return allegiance;
+    }
+    
+    
+    /**
+     * Getter for the mana Property.
+     *
+     * @return The mana Property.
+     */
+    public SimpleIntegerProperty manaProperty()
+    {
+        return mana;
     }
 }

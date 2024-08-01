@@ -7,7 +7,7 @@ import com.gitgud.engine.model.map.Tile;
 import com.gitgud.engine.utility.Strings;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
-import com.gitgud.pieces.control.game.Game;
+import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.mission.Mission;
@@ -142,5 +142,7 @@ public class FightTrigger extends GameObject implements Collectible<MissionContr
             gridMap.place(position, fightAgent);
             current.add(fightAgent);
         }
+        
+        ActiveGameController.getInstance().get().getPlayer().difficulty().apply(fight);
     }
 }

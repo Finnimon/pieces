@@ -4,6 +4,14 @@ import com.gitgud.pieces.model.ResourceCost;
 import com.gitgud.pieces.model.player.ResourceType;
 
 
+/**
+ * Constants for the {@link CityBuilding}s.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 05.06.2024
+ * @Version: 1.0
+ */
 public interface CityConstants
 {
     //region FactionCamp

@@ -3,38 +3,11 @@ package com.gitgud.pieces.model.fight;
 
 public enum SpellType
 {
-    HEAL("heal"),
-    DAMAGE("damage"),
-    BUFF("buff"),
-    DEBUFF("debuff");
+    HEAL(),
+    DAMAGE(),
+    BUFF(),
+    DEBUFF();
     
-    
-    private final String type;
-    
-    
-    SpellType(String type)
-    {
-        this.type = type;
-    }
-    
-    
-    public static SpellType fromString(String string)
-    {
-        for (SpellType t : SpellType.values())
-        {
-            if (t.type.equalsIgnoreCase(string))
-            {
-                return t;
-            }
-        }
-        return null;
-    }
-    
-    
-    public String getAsString()
-    {
-        return this.type;
-    }
     
     
     public boolean getIsFriendlyTargeting()

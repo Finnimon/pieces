@@ -1,14 +1,9 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
-import com.gitgud.pieces.control.game.Game;
-import com.gitgud.pieces.model.city.buildings.headQuarters.MissionSelection;
+import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.utility.JsonParser;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 import static com.gitgud.pieces.testing.Missions.MISSION0;
 

@@ -7,9 +7,9 @@ import com.gitgud.engine.control.actionChoice.RootToActionChoice;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
-import com.gitgud.pieces.control.game.Game;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
+import javafx.beans.property.SimpleBooleanProperty;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class MissionController extends ActionAwaitingController<Mission, GameObject, MissionRender>
 {
-    
+    private final SimpleBooleanProperty isFinishedProperty=new SimpleBooleanProperty(false);
     public MissionController(Mission mission)
     {
         super(mission, new MissionRender(mission));
@@ -70,9 +70,16 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     {
         ActiveGameController.getInstance().get().setMission(null);
         
-        getModel().returnFightAgentsToArmy();
+        getModel().end();
         
         Game.Flow.showNextScene();
+    }
+    
+    
+    @Override
+    public SimpleBooleanProperty isFinishedProperty()
+    {
+        return isFinishedProperty;
     }
     
     
