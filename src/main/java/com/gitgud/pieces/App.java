@@ -36,9 +36,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        ActiveGameController.initialize(TestAssets.getNewGame());
-        Game.Saver.save();
-//        Game.Flow.initializeGame(stage);
+        Game.Flow.initializeGame(stage);
     }
     
     
