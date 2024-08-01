@@ -1,8 +1,6 @@
 package com.gitgud.pieces.view;
 
 import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.control.Game;
-import com.gitgud.pieces.control.MainMenuController;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.fxml.FXML;
@@ -16,10 +14,16 @@ import java.io.IOException;
 
 /**
  * Main menu of the game.
+ *
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 15.07.2024
+ * @Version: 0.2
  */
 public class MainMenu
 {
     private static final String FXML_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\view\\MainMenu.fxml";
+    
     
     private static final int ADDITIONAL_PANE_INDEX = 1;
     
@@ -67,21 +71,27 @@ public class MainMenu
     @FXML
     private void newGameAction()
     {
-        ((Pane) StageController.getInstance().getRoot()).getChildren().add(NewGame.create());
+        showMenuPane(NewGame.create());
+    }
+    
+    
+    protected static void showMenuPane(Pane e)
+    {
+        ((Pane) StageController.getInstance().getRoot()).getChildren().add(e);
     }
     
     
     @FXML
     private void loadAction()
     {
-        ((Pane) StageController.getInstance().getRoot()).getChildren().add(LoadMenu.create());
+        showMenuPane(LoadMenu.create());
     }
     
     
     @FXML
     private void settingsAction()
     {
-        ((Pane) StageController.getInstance().getRoot()).getChildren().add(Settings.create());
+        showMenuPane(Settings.create());
     }
     
 }

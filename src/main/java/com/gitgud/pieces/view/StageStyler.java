@@ -3,7 +3,6 @@ package com.gitgud.pieces.view;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.Game;
-import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import static com.gitgud.pieces.view.MainMenu.*;
 
 import java.net.MalformedURLException;
 import java.util.function.Predicate;
@@ -128,7 +128,7 @@ public class StageStyler
     {
         Menu menu = new Menu("New Game");
         
-        MenuItem newGame = createMenuItem("New Game", e -> ((Pane) StageController.getInstance().getRoot()).getChildren().add(NewGame.create()));
+        MenuItem newGame = createMenuItem("New Game", e -> showMenuPane(NewGame.create()));
         
         menu.getItems().add(newGame);
         return menu;
@@ -142,11 +142,10 @@ public class StageStyler
      */
     private static Menu settingsMenu()
     {
-        Menu menu = new Menu("GameSettings");
+        Menu menu = new Menu("Settings");
         menu.getItems()
             .add(createMenuItem("Settings",
-                                e -> ((Pane) StageController.getInstance().getRoot()).getChildren()
-                                                                                     .add(Settings.create())));
+                                e -> showMenuPane(Settings.create())));
         return menu;
     }
     
@@ -164,7 +163,6 @@ public class StageStyler
         
         MenuItem save = createMenuItem("Save", e ->
         {
-            e.consume();
             if (predicate.test(e))
             {
                 //todo show message
@@ -198,11 +196,7 @@ public class StageStyler
     {
         Menu menu = new Menu("Load");
         
-        MenuItem load = createMenuItem("Load", e ->
-        {
-            e.consume();
-            ((Pane) StageController.getInstance().getRoot()).getChildren().add(LoadMenu.create());
-        });
+        MenuItem load = createMenuItem("Load", e -> showMenuPane(LoadMenu.create()));
         
         menu.getItems().add(load);
         return menu;
