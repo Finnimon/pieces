@@ -11,6 +11,8 @@ import com.google.gson.JsonObject;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
@@ -50,6 +52,7 @@ public class Game
     /**
      * <p>Initialize the game.
      * <p>Controls the flow of the game and Scene Changes.
+     * <p>All public Methods must be called on the JavaFX thread.
      *
      * @author Finn L.
      * @Owner: Finn L.
@@ -105,6 +108,7 @@ public class Game
                 @Override
                 protected void succeeded()
                 {
+                    Utility.startPlayingMusic();
                     StageController.initialize(stage);
                     showNextScene();
                 }
@@ -171,7 +175,7 @@ public class Game
             System.out.println("GameState");
             return switch (gameState)
             {
-                case NOT_LOADED ->new MainMenuController();
+                case NOT_LOADED -> new MainMenuController();
                 case CITY -> new CityController(getActiveGame().getCity());//todo not yet implemented
                 case MISSION -> new MissionController(getActiveGame().getMission());
                 case MISSION_FIGHT -> new FightController(getActiveGame().getFight());
@@ -597,6 +601,21 @@ public class Game
             StageController stageController = StageController.getInstance();
             stageController.setRoot(pane);
             stageController.show();
+        }
+        
+        
+        /**
+         * Starts playing the theme song globally.
+         */
+        private static void startPlayingMusic()
+        {
+            String musicFilePath = "src/main/resources/com/gitgud/pieces/BachPDMusic.mp3";
+            Media music = new Media(new File(musicFilePath).toURI().toString());
+            
+            MediaPlayer player = new MediaPlayer(new Media(new File(musicFilePath).toURI().toString()));
+            player.volumeProperty().bind(GameSettings.getInstance().musicVolumeProperty());
+            player.setAutoPlay(true);
+            player.play();
         }
     }
 }

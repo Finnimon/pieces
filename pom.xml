@@ -63,6 +63,11 @@
             <artifactId>polymorphic-gson</artifactId>
             <version>0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>21.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -2,6 +2,9 @@ package com.gitgud.pieces.control;
 
 import com.gitgud.pieces.utility.JsonParser;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import org.jetbrains.annotations.NotNull;
+
 
 import java.io.File;
 
@@ -19,7 +22,8 @@ public class GameSettings
     /**
      * The location of the previous settings file.
      */
-    private static final File PREVOIUS_SETTINGS = new File("src\\main\\resources\\com\\gitgud\\pieces\\control\\settings.json");
+    private static final File PREVOIUS_SETTINGS = new File(
+            "src\\main\\resources\\com\\gitgud\\pieces\\control\\settings.json");
     
     
     /**
@@ -40,7 +44,7 @@ public class GameSettings
      *
      * @see Translator#translate(String)
      */
-    private final String language;
+    private final SimpleStringProperty language;
     
     
     /**
@@ -51,7 +55,7 @@ public class GameSettings
      */
     private GameSettings(String language, double musicVolume)
     {
-        this.language = language;
+        this.language = new SimpleStringProperty(language);
         this.musicVolume = new SimpleDoubleProperty(musicVolume);
     }
     
@@ -140,6 +144,37 @@ public class GameSettings
      */
     public String getLanguage()
     {
+        return language.get();
+    }
+    
+    
+    /**
+     * Setter for the language settings.
+     *
+     * @param language The new language settings.
+     * @Precondition: {@code language} must be in {@link Translator#getLanguages()}
+     * @Postcondition: The language settings will be set to {@code language}.
+     * @throws IllegalArgumentException If {@code language} is not in {@link Translator#getLanguages()}
+     */
+    public void setLanguage(@NotNull String language)
+    {
+        if (!Translator.getInstance().getLanguages().contains(language))
+        {
+            throw new IllegalArgumentException("Invalid language: " + language);
+        }
+        this.language.set(language);
+    }
+    
+    
+    /**
+     * Getter for the language settings property.
+     *
+     * @return The language settings property.
+     */
+    public SimpleStringProperty languageProperty()
+    {
         return language;
     }
+    
+    
 }
