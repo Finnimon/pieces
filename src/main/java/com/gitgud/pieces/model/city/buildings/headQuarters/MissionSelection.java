@@ -60,9 +60,17 @@ public enum MissionSelection implements Describable, Sprite
     private static final String DISCARDED_AGENTS_JSON_MEMBER_NAME = "discardedFightAgents";
     
     
+    /**
+     * The Description of the mission.
+     */
     private final String description;
     
     
+    /**
+     * Private Constructor for the enum.
+     *
+     * @param description The description of the mission.
+     */
     MissionSelection(String description)
     {
         this.description = description;

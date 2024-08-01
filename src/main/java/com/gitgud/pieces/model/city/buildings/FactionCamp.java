@@ -114,6 +114,7 @@ public class FactionCamp extends CityBuilding implements Transactor<FightAgent>
         return value;
     }
     
+    
     @Override
     public ResourceCost getCost(FightAgent fightAgent)
     {

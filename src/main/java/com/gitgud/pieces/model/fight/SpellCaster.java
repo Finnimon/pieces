@@ -133,7 +133,7 @@ public interface SpellCaster extends Named, Describable
     Allegiance getAllegiance();
     
     
-    default void cast(@NotNull Spell spell,@NotNull FightAgent fightAgent)
+    default void cast(@NotNull Spell spell, @NotNull FightAgent fightAgent)
     {
         deductManaCost(spell);
         spell.apply(fightAgent);

@@ -462,7 +462,7 @@ public class Graph<Vertex extends com.gitgud.graph.Vertex, Element, Edge extends
      * @param root           The root {@link Vertex} for the SubGraph
      * @param range          The maximum allowed distance from {@code root} going by adjacency
      * @param fromEdgeFilter a predicate to filter the {@link Vertex}s whose from edges should not be traversed. This
-     *                      excludes {@code root}
+     *                       excludes {@code root}
      * @param toEdgeFilter   a predicate to filter the {@link Vertex}s whose edges should not be traversed
      * @param weights        The so far lowest weights from {@code root} of all visited vertices used for recursion
      *                       only. Should be called with {@code new HashMap()}

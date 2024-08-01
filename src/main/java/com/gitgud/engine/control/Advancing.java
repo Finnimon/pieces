@@ -8,6 +8,7 @@ package com.gitgud.engine.control;
  * @Since: 30.05.2024
  * @Version: 1.0
  */
+
 public interface Advancing
 {
     /**

@@ -56,6 +56,7 @@ public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
     
     /**
      * Adds a new ActionChoiceNode to the ActionContextHud and registers it for later removal.
+     *
      * @param choiceNode The ActionChoiceNode to be added and registered.
      */
     public void addChoice(Node choiceNode)
@@ -69,6 +70,7 @@ public abstract class ActionContextHud<ModelType> extends Hud<ModelType>
     
     /**
      * Registers a new ActionChoiceNode for later removal.
+     *
      * @param choiceNode The ActionChoiceNode to be registered.
      */
     public void registerChoice(Node choiceNode)

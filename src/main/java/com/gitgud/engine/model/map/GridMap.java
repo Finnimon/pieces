@@ -61,7 +61,8 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     
     
     /**
-     * Factory method to create a {@link GridMap} from a 2D boolean array. This method is for dev purposes only and should be removed from Production code.
+     * Factory method to create a {@link GridMap} from a 2D boolean array. This method is for dev purposes only and
+     * should be removed from Production code.
      *
      * @param grid               The 2D boolean array that represent the {@link GridMap}. true = traversable, false =
      *                           non-traversable.
@@ -90,8 +91,10 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
         return create(terrainGrid);
     }
     
+    
     /**
-     * Factory method to create a {@link GridMap} from a 2D TerrainType array. This method is for dev purposes only and should be removed from Production code.
+     * Factory method to create a {@link GridMap} from a 2D TerrainType array. This method is for dev purposes only
+     * and should be removed from Production code.
      *
      * @param grid               The 2D TerrainType array that represents the {@link GridMap}s terrain.
      * @param <GridMappableType> The Type of the {@link com.gitgud.engine.model.gameobjects.GridMappable} on this
@@ -122,7 +125,9 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     
     
     /**
-     * Helper method for {@link #create(TerrainType[][])}.  This method is for dev purposes only and should be removed from Production code.
+     * Helper method for {@link #create(TerrainType[][])}.  This method is for dev purposes only and should be
+     * removed from Production code.
+     *
      * @param grid The 2D TerrainType array that represents the {@link GridMap}s terrain.
      * @return A 2D Tile array from the given 2D TerrainType array.
      */
@@ -164,6 +169,7 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     
     /**
      * Connects the given {@link Tile} to its traversable neighbors.
+     *
      * @param tile The Tile to connect.
      */
     private void connectNeighbors(Tile tile)
@@ -188,6 +194,7 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
     
     /**
      * Get the neighbors of the given {@link Tile}.
+     *
      * @param tile The Tile to get the neighbors of.
      * @return All tiles that are within a distance of sqrt(2) of the given Tile.
      */
@@ -220,7 +227,7 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
      * 001
      * the traversable 1s are not seen as connected as the non-Traversable 0s are also converging at the same point
      *
-     * @param tile The Tile to check.
+     * @param tile      The Tile to check.
      * @param otherTile The other Tile to check.
      * @return If an edge Should exist between the two given Tiles. Assuming the Tiles are neighbors and Traversable.
      */
@@ -230,8 +237,7 @@ public class GridMap<GridMappableType extends com.gitgud.engine.model.gameobject
         int y = tile.getY();
         int otherX = otherTile.getX();
         int otherY = otherTile.getY();
-        return getVertex(otherX, y).getTerrain().isTraversable() ||
-               getVertex(x, otherY).getTerrain().isTraversable();
+        return getVertex(otherX, y).getTerrain().isTraversable() || getVertex(x, otherY).getTerrain().isTraversable();
     }
     
     

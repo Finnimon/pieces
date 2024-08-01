@@ -13,6 +13,7 @@ public interface HudRender<ModelType> extends UpdatableRender<ModelType>
 {
     /**
      * Getter for the Heads-up display.
+     *
      * @return The Heads-up display.
      */
     Hud<ModelType> getHud();

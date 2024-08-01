@@ -16,7 +16,7 @@ import java.util.List;
  * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
  * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
  * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
- * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
+ * @param <RType>  The type of the {@link ActionContextRender} this Action can be applied to.
  * @author Finn L.
  * @version 1.1
  * @Owner: Finn L.

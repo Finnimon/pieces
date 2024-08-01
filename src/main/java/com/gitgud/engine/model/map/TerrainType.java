@@ -12,5 +12,5 @@ package com.gitgud.engine.model.map;
 public enum TerrainType
 {
     TRAVERSABLE,
-    NON_TRAVERSABLE;
+    NON_TRAVERSABLE
 }

@@ -1,7 +1,6 @@
 package com.gitgud.pieces.model.city.buildings.headQuarters;
 
 import com.gitgud.pieces.model.city.buildings.CityBuilding;
-import com.gitgud.pieces.model.mission.Mission;
 
 import java.util.List;
 
@@ -30,6 +29,7 @@ public class HeadQuarters extends CityBuilding
     
     /**
      * Gets all currently available {@link MissionSelection}s, determined by the player's progress.
+     *
      * @return All available {@link MissionSelection}s
      */
     public List<MissionSelection> getAvailableMissionSelections()

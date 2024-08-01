@@ -24,31 +24,31 @@ public enum Artefacts
 {
     BLOODY_SWORD_1("Bloody Sword",
                    "An ancient blade. See if it makes your soldiers fight more furious.",
-                 "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
-                 "/BloodyBlade.png",
+                   "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
+                   "/BloodyBlade.png",
                    new FightAgentModifier(List.of(new FightAgentAttackModifier(7, -1, 0.99f),
-                                                new FightAgentDefenceModifier(-2, -2, 1.001f))),
+                                                  new FightAgentDefenceModifier(-2, -2, 1.001f))),
                    1),
     TURTLE_RING_1("Turtle Ring",
                   "A ring made of turtle. It will surely make your soldiers fight more carefully.",
-                "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
-                "/TurtelShellRing.png",
+                  "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
+                  "/TurtelShellRing.png",
                   new FightAgentModifier(List.of(new FightAgentAttackModifier(-1, -1, 1.002f),
-                                               new FightAgentDefenceModifier(3, 3, 1.002f))),
+                                                 new FightAgentDefenceModifier(3, 3, 1.002f))),
                   1),
     BARBARIC_HELMET_1("Barbaric Helmet",
                       "A brutal looking helmet. It holds a lot of power.",
-                    "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
-                    "/BarbariansHelmet.png",
+                      "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
+                      "/BarbariansHelmet.png",
                       new FightAgentModifier(List.of(new FightAgentAttackModifier(7, -3, 0.95f),
-                                                   new FightAgentDefenceModifier(3, 3, 1.002f))),
+                                                     new FightAgentDefenceModifier(3, 3, 1.002f))),
                       2),
     ANGEL_FEATHER_1("An Angels Feather",
                     "A feather fallen from skies. It brings with it good luck",
-                  "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
-                  "/AngelFeather.png",
+                    "src/main/resources/com/gitgud/pieces/model/gameobjects/interactable/collectibles/artefact" +
+                    "/AngelFeather.png",
                     new FightAgentModifier(List.of(new FightAgentAttackModifier(0, 0, 1.02f),
-                                                 new FightAgentDefenceModifier(0, 5, 1.04f))),
+                                                   new FightAgentDefenceModifier(0, 5, 1.04f))),
                     1);
     
     

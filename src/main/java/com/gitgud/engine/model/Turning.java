@@ -11,10 +11,12 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @Since: 20.04.2024
  * @Version: 1.0
  */
+@FunctionalInterface
 public interface Turning
 {
     /**
      * Getter for the current turn.
+     *
      * @return The current turn.
      */
     default int getTurn()
@@ -25,6 +27,7 @@ public interface Turning
     
     /**
      * Getter for the turn property.
+     *
      * @return The turn property.
      */
     SimpleIntegerProperty turnProperty();

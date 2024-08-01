@@ -29,11 +29,6 @@ import java.util.function.Consumer;
 public class FightController extends ActionAwaitingController<Fight, FightAgent, FightRender>
 {
     /**
-     * Observable value for {@link com.gitgud.engine.control.Ending}
-     */
-    private final SimpleBooleanProperty isFinishedProperty=new SimpleBooleanProperty(false);
-    
-    /**
      * The index of the root movement choice in the first child layer of the action choice tree.
      */
     public static final int MOVEMENT_CHOICE_INDEX = 0;
@@ -55,6 +50,12 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
      * The index of the skip turn choice in the first child layer of the action choice tree.
      */
     public static final int SKIP_TURN_CHOICE_INDEX = 3;
+    
+    
+    /**
+     * Observable value for {@link com.gitgud.engine.control.Ending}
+     */
+    private final SimpleBooleanProperty isFinishedProperty = new SimpleBooleanProperty(false);
     
     
     /**
@@ -203,6 +204,13 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     
     
     @Override
+    public SimpleBooleanProperty isFinishedProperty()
+    {
+        return isFinishedProperty;
+    }
+    
+    
+    @Override
     public boolean isFinished()
     {
         return getModel().isFinished();
@@ -217,12 +225,5 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         ActiveGameController.getInstance().get().setFight(null);
         
         Game.Flow.showNextScene();
-    }
-    
-    
-    @Override
-    public SimpleBooleanProperty isFinishedProperty()
-    {
-        return isFinishedProperty;
     }
 }

@@ -68,7 +68,7 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
      * @see #BaseActionContextRender(MType, int, HudType)
      * @see #determineOptimumTileSize(GridMap)
      */
-    public BaseActionContextRender(@NotNull MType data,@NotNull HudType hud)
+    public BaseActionContextRender(@NotNull MType data, @NotNull HudType hud)
     {
         this(data, determineOptimumTileSize(data.getGridMap()), hud);
     }
@@ -81,7 +81,7 @@ public abstract class BaseActionContextRender<MType extends ActionAwaiterModel<G
      * @param tileSize The tileSize for the {@link GridMapRender}.
      * @param hud      The {@link ActionContextHud} for this Render.
      */
-    public BaseActionContextRender(@NotNull MType data, int tileSize,@NotNull HudType hud)
+    public BaseActionContextRender(@NotNull MType data, int tileSize, @NotNull HudType hud)
     {
         this.data = data;
         this.hud = hud;

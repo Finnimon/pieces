@@ -24,25 +24,37 @@ import java.util.HashSet;
  */
 public class ArtefactPouch
 {
-    private final int MAX_ARTEFACTS = 3;
+    /**
+     * The max allowed number of equipped artefacts.
+     */
+    private static final int MAX_EQUIPPED_ARTEFACTS = 3;
     
     
+    /**
+     * Artefacts that are equipped ie in effect.
+     */
     private final Artefact[] equippedArtefacts;
     
     
+    /**
+     * All Artefacts owned by the player include equipped artefact
+     */
     private final HashSet<Artefact> allOwnedArtefacts;
     
     
+    /**
+     * Creates an empty Artefact pouch.
+     */
     public ArtefactPouch()
     {
-        equippedArtefacts = new Artefact[MAX_ARTEFACTS];
+        equippedArtefacts = new Artefact[MAX_EQUIPPED_ARTEFACTS];
         allOwnedArtefacts = new HashSet<>();
     }
     
     
     public int getMAX_ARTEFACTS()
     {
-        return MAX_ARTEFACTS;
+        return MAX_EQUIPPED_ARTEFACTS;
     }
     
     

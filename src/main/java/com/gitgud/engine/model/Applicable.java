@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 22.04.2024
  */
 
+@FunctionalInterface
 public interface Applicable<T>
 {
     /**

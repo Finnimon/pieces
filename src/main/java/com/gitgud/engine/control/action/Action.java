@@ -16,6 +16,7 @@ import com.gitgud.engine.control.ActionAwaitingController;
  * @see com.gitgud.engine.control.actionChoice.ActionChoice
  * @see ActionAwaitingController
  */
+@FunctionalInterface
 public interface Action<Awaiter extends ActionAwaitingController>
 {
     /**

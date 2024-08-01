@@ -6,6 +6,7 @@ import com.google.gson.*;
 
 import java.lang.reflect.Type;
 
+
 @Deprecated
 public class GridMapSerializer implements JsonSerializer<GridMap<GridMappable>>, JsonDeserializer<GridMap<GridMappable>>
 {

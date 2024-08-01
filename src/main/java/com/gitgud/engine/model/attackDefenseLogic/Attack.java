@@ -2,7 +2,6 @@ package com.gitgud.engine.model.attackDefenseLogic;
 
 
 import com.gitgud.engine.model.Applicable;
-import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import org.jetbrains.annotations.NotNull;
 
 import static com.gitgud.pieces.utility.Core.roll;

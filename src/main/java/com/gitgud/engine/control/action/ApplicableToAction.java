@@ -13,10 +13,10 @@ import com.gitgud.engine.view.ActionContextRender;
  * A Targeted {@link ToAction} that has an {@link Applicable}
  *
  * @param <ApplicableType>
- * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
- * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
- * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
- * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
+ * @param <AaType>         The type of the {@link ActionAwaitingController} this Action can be applied to.
+ * @param <MType>          The type of the {@link ActionAwaiterModel} this Action can be applied to.
+ * @param <GmType>         The type of the {@link GridMappable} this Action can be applied to.
+ * @param <RType>          The type of the {@link ActionContextRender} this Action can be applied to.
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 30.05.2024

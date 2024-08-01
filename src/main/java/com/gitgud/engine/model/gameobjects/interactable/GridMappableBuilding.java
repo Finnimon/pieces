@@ -20,6 +20,7 @@ public abstract class GridMappableBuilding<AAType extends ActionAwaitingControll
 {
     /**
      * Defaults to {@link GameObject#GameObject(String, String, String)}
+     *
      * @see GameObject#GameObject(String, String, String)
      */
     public GridMappableBuilding(@NotNull String name, @NotNull String description, @NotNull String spriteUrl)

@@ -18,9 +18,9 @@ public class InfoPane extends StackPane
      * The default border around an InfoPane.
      */
     protected static final Border DEFAULT_BORDER = new Border(new BorderStroke(Color.BLACK,
-                                                                             BorderStrokeStyle.SOLID,
-                                                                             CornerRadii.EMPTY,
-                                                                             BorderWidths.DEFAULT));
+                                                                               BorderStrokeStyle.SOLID,
+                                                                               CornerRadii.EMPTY,
+                                                                               BorderWidths.DEFAULT));
     
     
     /**
@@ -33,8 +33,8 @@ public class InfoPane extends StackPane
      * The default background of an InfoPane.
      */
     protected static final Background DEFAULT_BACKGROUND = new Background(new BackgroundFill(DEFAULT_BACKGROUND_COLOR,
-                                                                                           CornerRadii.EMPTY,
-                                                                                           Insets.EMPTY));
+                                                                                             CornerRadii.EMPTY,
+                                                                                             Insets.EMPTY));
     
     
     /**

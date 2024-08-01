@@ -25,12 +25,6 @@ public class ResourceCost
     }
     
     
-    public HashMap<ResourceType, Long> getResourceCostMap()
-    {
-        return resourceCostMap;
-    }
-    
-    
     public boolean isResourceCostCoveredByWallet(int multiplier)
     {
         return multiple(multiplier).isResourceCostCoveredByWallet();
@@ -110,5 +104,11 @@ public class ResourceCost
     public String toString()
     {
         return getResourceCostMap().toString();
+    }
+    
+    
+    public HashMap<ResourceType, Long> getResourceCostMap()
+    {
+        return resourceCostMap;
     }
 }

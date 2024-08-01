@@ -19,6 +19,7 @@ public record Defence(int defence, float evasionChance, DamageType damageType)
 {
     /**
      * Calculates the damage that should be done by the {@link Attack}.
+     *
      * @param attack The {@link Attack} to defend from.
      * @return The damage that should be done by the {@link Attack}.
      */

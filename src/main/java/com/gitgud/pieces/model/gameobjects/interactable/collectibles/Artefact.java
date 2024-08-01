@@ -1,6 +1,5 @@
 package com.gitgud.pieces.model.gameobjects.interactable.collectibles;
 
-import com.gitgud.engine.model.Applicable;
 import com.gitgud.engine.model.DisApplicable;
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.Leveler;
@@ -9,7 +8,6 @@ import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.model.player.ArtefactPouch;
-import com.gitgud.pieces.utility.modification.fightAgent.FightAgentModifier;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
@@ -56,16 +54,16 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
     }
     
     
-    public DisApplicable<FightAgent> getApplicable()
-    {
-        return disApplicable;
-    }
-    
-    
     @Override
     public SimpleIntegerProperty levelProperty()
     {
         return level;
+    }
+    
+    
+    public DisApplicable<FightAgent> getApplicable()
+    {
+        return disApplicable;
     }
     
     

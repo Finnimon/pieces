@@ -1,5 +1,6 @@
 package com.gitgud.pieces.model.gameobjects;
 
+@Deprecated
 public interface GameObjectType
 {
     // fight agent types

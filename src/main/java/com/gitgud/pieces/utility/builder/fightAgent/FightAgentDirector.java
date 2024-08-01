@@ -13,8 +13,8 @@ public class FightAgentDirector implements Director<FightAgent>
     
     
     private static final int LEVEL1_MONOCHROME_PAWN_TYPE = FightAgentType.PAWN.typeToInt() +
-                                                          Faction.MONOCHROME.typeToInt() +
-                                                          1;
+                                                           Faction.MONOCHROME.typeToInt() +
+                                                           1;
     
     
     private Builder<FightAgent> builder;
@@ -78,7 +78,10 @@ public class FightAgentDirector implements Director<FightAgent>
     public static int calculateType(Allegiance allegiance, FightAgentType fightAgentType, Faction faction, int level)
     {
         return allegiance.typeToInt() + fightAgentType.typeToInt() + faction.typeToInt() + level;
-    }    @Override
+    }
+    
+    
+    @Override
     public void changeBuilder(Builder<FightAgent> builder)
     {
         Builder<FightAgent> oldBuilder = this.builder;
@@ -106,9 +109,6 @@ public class FightAgentDirector implements Director<FightAgent>
     {
         return make(LEVEL1_MONOCHROME_PAWN_TYPE);
     }
-    
-    
-
     
     
     @Override

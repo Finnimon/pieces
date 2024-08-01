@@ -1,7 +1,5 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.engine.model.gameobjects.GridMappable;
-import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.pieces.model.city.City;
 import com.gitgud.pieces.model.fight.Allegiance;
 import com.gitgud.pieces.model.fight.SpellBook;
@@ -25,15 +23,6 @@ public interface TestAssets
         return new ActiveGame(getTestPlayer(), new City(), Missions.MISSION0, null);
     }
     
-    static ActiveGame getNewGame()
-    {
-        return new ActiveGame(new Player("NEW_GAME",
-                                         Difficulty.EASY,
-                                         testArmy(),
-                                         testWallet(),
-                                         testArtefactPouch(),
-                                         testSpellBook()), new City(), null, null);
-    }
     
     static Player getTestPlayer()
     {
@@ -100,6 +89,17 @@ public interface TestAssets
                                                                        FightAgentType.ROOK,
                                                                        Faction.MONOCHROME,
                                                                        1)));
+    }
+    
+    
+    static ActiveGame getNewGame()
+    {
+        return new ActiveGame(new Player("NEW_GAME",
+                                         Difficulty.EASY,
+                                         testArmy(),
+                                         testWallet(),
+                                         testArtefactPouch(),
+                                         testSpellBook()), new City(), null, null);
     }
     
 }

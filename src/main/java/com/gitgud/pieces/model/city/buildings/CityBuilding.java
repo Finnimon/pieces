@@ -50,6 +50,7 @@ public abstract class CityBuilding implements Describable, Named, Sprite, Levele
     
     /**
      * Assigns all the values for the building and determines the sprite path
+     *
      * @param name
      * @param description
      * @param level

@@ -44,6 +44,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     /**
      * Constructs a Fight on the given GridMap.
+     *
      * @param gridMap The GridMap.
      */
     public Fight(GridMap<FightAgent> gridMap)
@@ -54,7 +55,8 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     /**
      * Sets the given GridMap and FightTimeLine.
-     * @param gridMap The GridMap.
+     *
+     * @param gridMap       The GridMap.
      * @param fightTimeLine The FightTimeLine.
      */
     public Fight(GridMap<FightAgent> gridMap, FightTimeLine fightTimeLine)
@@ -66,6 +68,7 @@ public class Fight implements ActionAwaiterModel<FightAgent>
     
     /**
      * Getter for the fights GridMap.
+     *
      * @return The fights GridMap.
      */
     public GridMap<FightAgent> getGridMap()

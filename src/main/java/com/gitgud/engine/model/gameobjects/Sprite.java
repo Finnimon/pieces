@@ -16,6 +16,8 @@ import java.util.HashMap;
  * @Since: 25.04.2024
  * @Version: 2.0
  */
+
+@FunctionalInterface
 public interface Sprite
 {
     String DOT_PNG = ".png";
@@ -85,7 +87,7 @@ public interface Sprite
      * @param filePath The FilePath.
      * @return Whole URL of {@code filePath}.
      * @throws MalformedURLException If a protocol handler for the URL could not be found, or if some other error
-     * occurred while constructing the URL
+     *                               occurred while constructing the URL
      */
     static String urlFromFilePath(String filePath) throws MalformedURLException
     {
@@ -95,6 +97,7 @@ public interface Sprite
     
     /**
      * Getter for an Objects sprite file path.
+     *
      * @return The sprite file path of an Object.
      */
     @NotNull String getSpriteFilePath();

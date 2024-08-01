@@ -36,8 +36,9 @@ public class GameObject implements GridMappable
     
     /**
      * Default Constructor that assigns all properties.
-     * @param name The name of the GameObject.
-     * @param description The description of the GameObject.
+     *
+     * @param name           The name of the GameObject.
+     * @param description    The description of the GameObject.
      * @param spriteFilePath The path to the sprite of the GameObject.
      */
     public GameObject(@NotNull String name, @NotNull String description, @NotNull String spriteFilePath)

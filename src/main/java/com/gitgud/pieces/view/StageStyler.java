@@ -179,7 +179,6 @@ public class StageStyler
             if (predicate.test(e))
             {
                 //todo show message
-                return;
             }
             //todo Game.Saver.saveAs();
         });
@@ -207,7 +206,6 @@ public class StageStyler
             if (predicate.test(e))
             {
                 //todo show message want to save before?, then show Game.Loader.getSaveFileNames();....
-                return;
             }
             //create context menu for offering Game.Loader.getSaveFileNames(); and calling Game.Loader.load
             // (selectedName);

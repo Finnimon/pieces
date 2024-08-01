@@ -1,1 +1,243 @@
-{"player":{"difficulty":"EASY","army":[{"type":"PAWN","faction":"MONOCHROME","allegiance":"BLACK","isRangedAttacker":false,"levelProperty":1,"meleeDamage":5,"rangedDamage":0,"rangedAttackRange":0,"remainingRangedAttacks":0,"physicalDefence":10,"magicDefence":2,"evadeChance":0.4,"maxHealth":50,"maxMana":0,"health":50,"mana":0,"initiative":90,"accuracy":0.9,"isFlying":false,"movementRangeProperty":4,"name":"Monochrome Pawn","description":"A Pawn is a small figure,\r\nhe is the best at dodging.","spriteFilePath":"src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\BLACK_PAWN.png","@type":"fightAgent"},{"type":"KNIGHT","faction":"MONOCHROME","allegiance":"BLACK","isRangedAttacker":false,"levelProperty":1,"meleeDamage":20,"rangedDamage":0,"rangedAttackRange":0,"remainingRangedAttacks":0,"physicalDefence":2,"magicDefence":2,"evadeChance":0.2,"maxHealth":50,"maxMana":0,"health":50,"mana":0,"initiative":100,"accuracy":0.9,"isFlying":true,"movementRangeProperty":6,"name":"Monochrome Knight","description":"A knight is a person who is able to move,\r\nignoring obstacles and attack.","spriteFilePath":"src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\BLACK_KNIGHT.png","@type":"fightAgent"},{"type":"ROOK","faction":"MONOCHROME","allegiance":"BLACK","isRangedAttacker":true,"levelProperty":1,"meleeDamage":3,"rangedDamage":35,"rangedAttackRange":10,"remainingRangedAttacks":20,"physicalDefence":40,"magicDefence":30,"evadeChance":0.05,"maxHealth":150,"maxMana":1,"health":150,"mana":1,"initiative":80,"accuracy":0.8,"isFlying":false,"movementRangeProperty":1,"name":"Monochrome Rook","description":"A Rook is not fast,\r\nbut deadly in distance..","spriteFilePath":"src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\BLACK_ROOK.png","@type":"fightAgent"}],"wallet":{"resourceMap":{"COPPER":0,"GOLD":0,"PLATINUM":0,"IRON":0,"SILVER":0,"REDSTONE":0}},"artefactPouch":{"MAX_ARTEFACTS":3,"equippedArtefacts":[null,null,null],"allOwnedArtefacts":[]},"spellbook":{"spells":[]},"name":"NEW_GAME"},"city":{"playerReborn":{"faction":"MONOCHROME","name":"Player Reborn","description":"Rebirth your player here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\Player Reborn.png","level":1},"blackSmith":{"name":"BlackSmith","description":"Upgrade your Artefacts Here for the cost of {PLATINUM=10000} per Level ","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\BlackSmith.png","level":1},"monoChromeFactionCamp":{"faction":"MONOCHROME","name":"MONOCHROME Faction Camp","description":"Pieces of it's faction can be recruited here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\MONOCHROME Faction Camp.png","level":1},"pinkFactionCamp":{"faction":"PINK","name":"PINK Faction Camp","description":"Pieces of it's faction can be recruited here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\PINK Faction Camp.png","level":1},"greenFactionCamp":{"faction":"GREEN","name":"GREEN Faction Camp","description":"Pieces of it's faction can be recruited here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\GREEN Faction Camp.png","level":1},"headQuarters":{"name":"HeadQuarters","description":"Select missions here","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\HeadQuarters.png","level":1},"magicEnhancer":{"name":"Magic Enhancer","description":"Enhance your magic here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\Magic Enhancer.png","level":1},"market":{"platinumExchange":{"price":{"resourceCostMap":{"GOLD":100}},"value":{"resourceCostMap":{"PLATINUM":5}}},"goldExchange":{"price":{"resourceCostMap":{"SILVER":100}},"value":{"resourceCostMap":{"GOLD":5}}},"silverExchange":{"price":{"resourceCostMap":{"COPPER":100}},"value":{"resourceCostMap":{"SILVER":10}}},"ironExchange":{"price":{"resourceCostMap":{"IRON":100}},"value":{"resourceCostMap":{"COPPER":20}}},"copperExchange":{"price":{"resourceCostMap":{"REDSTONE":100}},"value":{"resourceCostMap":{"IRON":40}}},"redstoneExchange":{"price":{"resourceCostMap":{"COPPER":100}},"value":{"resourceCostMap":{"REDSTONE":1000}}},"name":"Market","description":"Exchange resources here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\Market.png","level":1},"trainingGrounds":{"name":"Training Grounds","description":"Your Pieces can be trained here.","spriteFilePath":"com\\gitgud\\pieces\\model\\city\\buildings\\Training Grounds.png","level":1}},"mission":null,"fight":null}
+{
+  "player": {
+    "difficulty": "EASY",
+    "army": [
+      {
+        "type": "PAWN",
+        "faction": "MONOCHROME",
+        "allegiance": "BLACK",
+        "isRangedAttacker": false,
+        "levelProperty": 1,
+        "meleeDamage": 5,
+        "rangedDamage": 0,
+        "rangedAttackRange": 0,
+        "remainingRangedAttacks": 0,
+        "physicalDefence": 10,
+        "magicDefence": 2,
+        "evadeChance": 0.4,
+        "maxHealth": 50,
+        "maxMana": 0,
+        "health": 50,
+        "mana": 0,
+        "initiative": 90,
+        "accuracy": 0.9,
+        "isFlying": false,
+        "movementRangeProperty": 4,
+        "name": "Monochrome Pawn",
+        "description": "A Pawn is a small figure,\r\nhe is the best at dodging.",
+        "spriteFilePath": "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\BLACK_PAWN.png",
+        "@type": "fightAgent"
+      },
+      {
+        "type": "KNIGHT",
+        "faction": "MONOCHROME",
+        "allegiance": "BLACK",
+        "isRangedAttacker": false,
+        "levelProperty": 1,
+        "meleeDamage": 20,
+        "rangedDamage": 0,
+        "rangedAttackRange": 0,
+        "remainingRangedAttacks": 0,
+        "physicalDefence": 2,
+        "magicDefence": 2,
+        "evadeChance": 0.2,
+        "maxHealth": 50,
+        "maxMana": 0,
+        "health": 50,
+        "mana": 0,
+        "initiative": 100,
+        "accuracy": 0.9,
+        "isFlying": true,
+        "movementRangeProperty": 6,
+        "name": "Monochrome Knight",
+        "description": "A knight is a person who is able to move,\r\nignoring obstacles and attack.",
+        "spriteFilePath": "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\BLACK_KNIGHT.png",
+        "@type": "fightAgent"
+      },
+      {
+        "type": "ROOK",
+        "faction": "MONOCHROME",
+        "allegiance": "BLACK",
+        "isRangedAttacker": true,
+        "levelProperty": 1,
+        "meleeDamage": 3,
+        "rangedDamage": 35,
+        "rangedAttackRange": 10,
+        "remainingRangedAttacks": 20,
+        "physicalDefence": 40,
+        "magicDefence": 30,
+        "evadeChance": 0.05,
+        "maxHealth": 150,
+        "maxMana": 1,
+        "health": 150,
+        "mana": 1,
+        "initiative": 80,
+        "accuracy": 0.8,
+        "isFlying": false,
+        "movementRangeProperty": 1,
+        "name": "Monochrome Rook",
+        "description": "A Rook is not fast,\r\nbut deadly in distance..",
+        "spriteFilePath": "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents\\monochrome\\BLACK_ROOK.png",
+        "@type": "fightAgent"
+      }
+    ],
+    "wallet": {
+      "resourceMap": {
+        "COPPER": 0,
+        "GOLD": 0,
+        "PLATINUM": 0,
+        "IRON": 0,
+        "SILVER": 0,
+        "REDSTONE": 0
+      }
+    },
+    "artefactPouch": {
+      "equippedArtefacts": [
+        null,
+        null,
+        null
+      ],
+      "allOwnedArtefacts": [
+      ]
+    },
+    "spellbook": {
+      "spells": [
+      ]
+    },
+    "name": "NEW_GAME"
+  },
+  "city": {
+    "playerReborn": {
+      "faction": "MONOCHROME",
+      "name": "Player Reborn",
+      "description": "Rebirth your player here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\Player Reborn.png",
+      "level": 1
+    },
+    "blackSmith": {
+      "name": "BlackSmith",
+      "description": "Upgrade your Artefacts Here for the cost of {PLATINUM=10000} per Level ",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\BlackSmith.png",
+      "level": 1
+    },
+    "monoChromeFactionCamp": {
+      "faction": "MONOCHROME",
+      "name": "MONOCHROME Faction Camp",
+      "description": "Pieces of it's faction can be recruited here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\MONOCHROME Faction Camp.png",
+      "level": 1
+    },
+    "pinkFactionCamp": {
+      "faction": "PINK",
+      "name": "PINK Faction Camp",
+      "description": "Pieces of it's faction can be recruited here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\PINK Faction Camp.png",
+      "level": 1
+    },
+    "greenFactionCamp": {
+      "faction": "GREEN",
+      "name": "GREEN Faction Camp",
+      "description": "Pieces of it's faction can be recruited here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\GREEN Faction Camp.png",
+      "level": 1
+    },
+    "headQuarters": {
+      "name": "HeadQuarters",
+      "description": "Select missions here",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\HeadQuarters.png",
+      "level": 1
+    },
+    "magicEnhancer": {
+      "name": "Magic Enhancer",
+      "description": "Enhance your magic here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\Magic Enhancer.png",
+      "level": 1
+    },
+    "market": {
+      "platinumExchange": {
+        "price": {
+          "resourceCostMap": {
+            "GOLD": 100
+          }
+        },
+        "value": {
+          "resourceCostMap": {
+            "PLATINUM": 5
+          }
+        }
+      },
+      "goldExchange": {
+        "price": {
+          "resourceCostMap": {
+            "SILVER": 100
+          }
+        },
+        "value": {
+          "resourceCostMap": {
+            "GOLD": 5
+          }
+        }
+      },
+      "silverExchange": {
+        "price": {
+          "resourceCostMap": {
+            "COPPER": 100
+          }
+        },
+        "value": {
+          "resourceCostMap": {
+            "SILVER": 10
+          }
+        }
+      },
+      "ironExchange": {
+        "price": {
+          "resourceCostMap": {
+            "IRON": 100
+          }
+        },
+        "value": {
+          "resourceCostMap": {
+            "COPPER": 20
+          }
+        }
+      },
+      "copperExchange": {
+        "price": {
+          "resourceCostMap": {
+            "REDSTONE": 100
+          }
+        },
+        "value": {
+          "resourceCostMap": {
+            "IRON": 40
+          }
+        }
+      },
+      "redstoneExchange": {
+        "price": {
+          "resourceCostMap": {
+            "COPPER": 100
+          }
+        },
+        "value": {
+          "resourceCostMap": {
+            "REDSTONE": 1000
+          }
+        }
+      },
+      "name": "Market",
+      "description": "Exchange resources here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\Market.png",
+      "level": 1
+    },
+    "trainingGrounds": {
+      "name": "Training Grounds",
+      "description": "Your Pieces can be trained here.",
+      "spriteFilePath": "com\\gitgud\\pieces\\model\\city\\buildings\\Training Grounds.png",
+      "level": 1
+    }
+  },
+  "mission": null,
+  "fight": null
+}

@@ -11,11 +11,11 @@ import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
 /**
  * Override for special case of player agent in Mission, because he is not on the actual GridMap.
  *
- * @see Mission
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 05.06.2024
  * @Version: 1.0
+ * @see Mission
  */
 public class MissionMovementAction extends TileMovementAction<MissionController, Mission, GameObject, MissionRender>
 {
@@ -32,6 +32,7 @@ public class MissionMovementAction extends TileMovementAction<MissionController,
     {
         super(from, to);
     }
+    
     
     @Override
     public void enAct(MissionController awaiter)

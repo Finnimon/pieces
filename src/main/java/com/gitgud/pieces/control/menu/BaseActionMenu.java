@@ -6,6 +6,7 @@ import javafx.event.Event;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+
 @Deprecated
 public class BaseActionMenu implements ActionMenu
 {

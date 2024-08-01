@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
  * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
  * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
  * @param <GmType> The type of the {@link GridMappable} this Action can be applied to.
- * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
+ * @param <RType>  The type of the {@link ActionContextRender} this Action can be applied to.
  */
 public class ToActionChoice<AaType extends ActionAwaitingController<MType, GmType, RType>,
         MType extends ActionAwaiterModel<GmType>, GmType extends GridMappable,
@@ -57,7 +57,7 @@ public class ToActionChoice<AaType extends ActionAwaitingController<MType, GmTyp
         return color;
     }
     
-
+    
     @Override
     protected @NotNull ToAction<AaType, Tile> getAction()
     {

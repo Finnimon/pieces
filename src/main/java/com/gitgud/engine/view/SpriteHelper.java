@@ -76,10 +76,10 @@ public class SpriteHelper
      * Creates a Rectangle with the specified values.
      *
      * @param pattern The Paint for the rectangle.
-     * @param x The x coordinate of the rectangle.
-     * @param y The y coordinate of the rectangle.
-     * @param width The width of the rectangle.
-     * @param height The height of the rectangle.
+     * @param x       The x coordinate of the rectangle.
+     * @param y       The y coordinate of the rectangle.
+     * @param width   The width of the rectangle.
+     * @param height  The height of the rectangle.
      * @return The created Rectangle.
      */
     public static Rectangle createRectangle(Paint pattern, int x, int y, int width, int height)

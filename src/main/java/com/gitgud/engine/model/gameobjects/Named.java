@@ -2,11 +2,14 @@ package com.gitgud.engine.model.gameobjects;
 
 /**
  * An object with a name
+ *
  * @author Finn L.
  * @version 1.1
  * @Owner: Finn L.
  * @since 22.04.2024
  */
+
+@FunctionalInterface
 public interface Named
 {
     String WHITESPACE = " ";
@@ -14,7 +17,8 @@ public interface Named
     
     /**
      * Formats a String to be usable as a FileName.
-      * @param string The String to format.
+     *
+     * @param string The String to format.
      * @return the formatted String.
      */
     static String formatString(String string)
@@ -31,6 +35,7 @@ public interface Named
     
     /**
      * Getter for the displayable name of an Object.
+     *
      * @return The name of the Object.
      */
     String name();

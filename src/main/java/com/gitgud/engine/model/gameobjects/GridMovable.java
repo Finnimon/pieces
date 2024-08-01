@@ -50,6 +50,18 @@ public interface GridMovable extends GridMappable
     
     
     /**
+     * Creates and returns a Predicate that filters out {@link Tile}s that are occupied by {@link GridMappable}s.
+     *
+     * @param gridMap The GridMap that this {@link GridMovable} is on.
+     * @return The Predicate.
+     */
+    private static Predicate<Tile> filter(GridMap<?> gridMap)
+    {
+        return tile -> gridMap.get(tile) == null;
+    }
+    
+    
+    /**
      * Finds and returns possible movement targets.
      *
      * @param gridMap  The GridMap that this {@link GridMovable} is on.
@@ -162,17 +174,6 @@ public interface GridMovable extends GridMappable
                                       }
                                   });
         result.removeAll(inValidTiles);
-    }
-    
-    
-    /**
-     * Creates and returns a Predicate that filters out {@link Tile}s that are occupied by {@link GridMappable}s.
-     * @param gridMap The GridMap that this {@link GridMovable} is on.
-     * @return The Predicate.
-     */
-    private static Predicate<Tile> filter(GridMap<?> gridMap)
-    {
-        return tile -> gridMap.get(tile) == null;
     }
     
 }

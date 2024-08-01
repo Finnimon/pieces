@@ -20,6 +20,8 @@ public class City
      * The model for the playerReborn.
      */
     private final PlayerReborn playerReborn;
+    
+    
     /**
      * The model for the blacksmith.
      */
@@ -84,12 +86,12 @@ public class City
      * @Precondition: The {@link FactionCamp}s all have the proper Faction.
      * @Postcondition: No undefined behaviour will occur. No Exceptions will be thrown.
      */
-    public City(@NotNull PlayerReborn playerReborn,@NotNull BlackSmith blackSmith, @NotNull FactionCamp monoChromeFactionCamp,
-                @NotNull FactionCamp pinkFactionCamp, @NotNull FactionCamp greenFactionCamp,
-                @NotNull HeadQuarters headQuarters, @NotNull MagicEnhancer magicEnhancer, @NotNull Market market,
-                @NotNull TrainingGrounds trainingGrounds)
+    public City(@NotNull PlayerReborn playerReborn, @NotNull BlackSmith blackSmith,
+                @NotNull FactionCamp monoChromeFactionCamp, @NotNull FactionCamp pinkFactionCamp,
+                @NotNull FactionCamp greenFactionCamp, @NotNull HeadQuarters headQuarters,
+                @NotNull MagicEnhancer magicEnhancer, @NotNull Market market, @NotNull TrainingGrounds trainingGrounds)
     {
-        this.playerReborn=playerReborn;
+        this.playerReborn = playerReborn;
         this.blackSmith = blackSmith;
         this.monoChromeFactionCamp = monoChromeFactionCamp;
         this.pinkFactionCamp = pinkFactionCamp;
@@ -146,6 +148,7 @@ public class City
     
     /**
      * Getter for the blackSmith.
+     *
      * @return The blackSmith.
      */
     public BlackSmith getBlackSmith()
@@ -156,6 +159,7 @@ public class City
     
     /**
      * Getter for the monoChromeFactionCamp.
+     *
      * @return The monoChromeFactionCamp.
      */
     public FactionCamp getMonoChromeFactionCamp()
@@ -163,8 +167,10 @@ public class City
         return monoChromeFactionCamp;
     }
     
+    
     /**
      * Getter for the pinkFactionCamp.
+     *
      * @return The pinkFactionCamp.
      */
     public FactionCamp getPinkFactionCamp()
@@ -172,8 +178,10 @@ public class City
         return pinkFactionCamp;
     }
     
+    
     /**
      * Getter for the greenFactionCamp.
+     *
      * @return The greenFactionCamp.
      */
     public FactionCamp getGreenFactionCamp()
@@ -181,8 +189,10 @@ public class City
         return greenFactionCamp;
     }
     
+    
     /**
      * Getter for the headQuarters.
+     *
      * @return The headQuarters.
      */
     public HeadQuarters getHeadQuarters()
@@ -190,8 +200,10 @@ public class City
         return headQuarters;
     }
     
+    
     /**
      * Getter for the magicEnhancer.
+     *
      * @return The magicEnhancer.
      */
     public MagicEnhancer getMagicEnhancer()
@@ -199,8 +211,10 @@ public class City
         return magicEnhancer;
     }
     
+    
     /**
      * Getter for the market.
+     *
      * @return The market.
      */
     public Market getMarket()
@@ -208,8 +222,10 @@ public class City
         return market;
     }
     
+    
     /**
      * Getter for the trainingGrounds.
+     *
      * @return The trainingGrounds.
      */
     public TrainingGrounds getTrainingGrounds()
@@ -220,6 +236,7 @@ public class City
     
     /**
      * Getter for the playerReborn.
+     *
      * @return The playerReborn.
      */
     public PlayerReborn getPlayerReborn()

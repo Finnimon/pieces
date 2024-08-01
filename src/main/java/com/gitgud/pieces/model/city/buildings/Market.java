@@ -6,7 +6,7 @@ import com.gitgud.pieces.model.player.ResourceType;
 
 /**
  * CityBuilding where you can buy and sell resources for other resources.
- 
+ *
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.

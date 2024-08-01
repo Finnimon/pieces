@@ -71,6 +71,13 @@ public class QueenBuilder extends FightAgentBuilder
     
     
     @Override
+    public boolean canBuild(int type)
+    {
+        return FightAgentDirector.getFightAgentType(type) == FightAgentType.QUEEN;
+    }
+    
+    
+    @Override
     public void tryBuild(int type)
     {
         FightAgentType fightAgentType = FightAgentType.QUEEN;
@@ -128,12 +135,5 @@ public class QueenBuilder extends FightAgentBuilder
         setLevel(level);
         
         setAllegiance(allegiance);
-    }
-    
-    
-    @Override
-    public boolean canBuild(int type)
-    {
-        return FightAgentDirector.getFightAgentType(type) == FightAgentType.QUEEN;
     }
 }

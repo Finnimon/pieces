@@ -23,7 +23,7 @@ public class Translator
      * Filepath of the translation table.
      */
     private static final String TRANSLATION_TABLE_FILEPATH = "src\\main\\resources\\com\\gitgud\\pieces\\control" +
-                                                       "\\translatingTable.txt";
+                                                             "\\translatingTable.json";
     
     
     /**
@@ -85,6 +85,7 @@ public class Translator
     
     /**
      * Translates the given {@code key} according to {@link GameSettings#getLanguage()}.
+     *
      * @param key The key of the translation.
      * @return The translation of {@code key} in {@link GameSettings#getLanguage()}.
      */

@@ -48,6 +48,7 @@ public interface Transactor<T>
     
     /**
      * Deducts the cost for changing {@code t} from the player inventory.
+     *
      * @param t The value whose changing cost is to be deducted.
      */
     void deductCostFromInventory(T t);
@@ -55,6 +56,7 @@ public interface Transactor<T>
     
     /**
      * Change the value of {@code t} by adding it to the inventory or causing a reaction such as a level-up.
+     *
      * @param value The value to change.
      * @return The changed value. Can often be ignored.
      */
@@ -63,6 +65,7 @@ public interface Transactor<T>
     
     /**
      * Get the cost of changing {@code t}.
+     *
      * @param t The value to get the cost of changing.
      * @return The cost of changing {@code t}.
      */

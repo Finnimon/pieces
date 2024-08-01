@@ -2,7 +2,6 @@ package com.gitgud.engine.control.action;
 
 import com.gitgud.engine.control.ActionAwaitingController;
 import com.gitgud.engine.model.ActionAwaiterModel;
-import com.gitgud.engine.model.gameobjects.GridMappable;
 import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import com.gitgud.engine.model.map.GridMap;
 import com.gitgud.engine.model.map.Tile;
@@ -15,13 +14,13 @@ import com.gitgud.engine.view.GridMapRender;
  *
  * @param <AaType> The type of the {@link ActionAwaitingController} this Action can be applied to.
  * @param <MType>  The type of the {@link ActionAwaiterModel} this Action can be applied to.
- * @param <FType> The type of the {@link Fighter} this Action can be applied to.
- * @param <RType> The type of the {@link ActionContextRender} this Action can be applied to.
- * @see Fighter
+ * @param <FType>  The type of the {@link Fighter} this Action can be applied to.
+ * @param <RType>  The type of the {@link ActionContextRender} this Action can be applied to.
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 30.05.2024
  * @Version: 1.0
+ * @see Fighter
  */
 public interface AttackAction<AaType extends ActionAwaitingController<MType, FType, RType>,
         MType extends ActionAwaiterModel<FType>, FType extends Fighter, RType extends ActionContextRender<MType, FType>>

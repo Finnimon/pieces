@@ -1,12 +1,7 @@
 package com.gitgud.pieces;
 
 
-import com.gitgud.pieces.control.ActiveGameController;
-import com.gitgud.pieces.control.Game;
-import com.gitgud.pieces.control.GameSettings;
-import com.gitgud.pieces.control.StageController;
-import com.gitgud.pieces.model.game.ActiveGame;
-import com.gitgud.pieces.testing.TestAssets;
+import com.gitgud.pieces.control.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -42,7 +37,7 @@ public class App extends Application
     
     
     /**
-     * <p> {@link StageController} and {@link ActiveGameController} are reset because garbage collection is not
+     * <p> The singletons are reset because garbage collection is not
      * guaranteed.
      * {@inheritDoc}
      */
@@ -51,6 +46,8 @@ public class App extends Application
     {
         StageController.reset();
         ActiveGameController.reset();
+        GameSettings.reset();
+        Translator.reset();
         super.stop();
     }
 }

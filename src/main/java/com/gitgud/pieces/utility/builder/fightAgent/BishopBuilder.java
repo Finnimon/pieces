@@ -71,6 +71,13 @@ public class BishopBuilder extends FightAgentBuilder
     
     
     @Override
+    public boolean canBuild(int type)
+    {
+        return FightAgentDirector.getFightAgentType(type) == FightAgentType.BISHOP;
+    }
+    
+    
+    @Override
     public void tryBuild(int type)
     {
         FightAgentType fightAgentType = FightAgentType.BISHOP;
@@ -128,12 +135,5 @@ public class BishopBuilder extends FightAgentBuilder
         setLevel(level);
         
         setAllegiance(allegiance);
-    }
-    
-    
-    @Override
-    public boolean canBuild(int type)
-    {
-        return FightAgentDirector.getFightAgentType(type) == FightAgentType.BISHOP;
     }
 }

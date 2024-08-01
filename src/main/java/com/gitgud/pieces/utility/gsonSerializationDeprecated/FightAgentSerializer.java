@@ -2,7 +2,6 @@ package com.gitgud.pieces.utility.gsonSerializationDeprecated;
 
 
 import com.gitgud.pieces.model.gameobjects.Faction;
-import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.google.gson.*;
 
@@ -11,6 +10,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 
 @Deprecated
 public class FightAgentSerializer implements JsonSerializer<FightAgent>, JsonDeserializer<FightAgent>
@@ -42,7 +42,7 @@ public class FightAgentSerializer implements JsonSerializer<FightAgent>, JsonDes
                 switch (field.getName())
                 {
                     case TYPE:
-//                        jsonObject.add(TYPE, context.serialize(src.getType().getAsString()));
+                        //                        jsonObject.add(TYPE, context.serialize(src.getType().getAsString()));
                         break;
                     
                     case FACTION:
@@ -84,7 +84,8 @@ public class FightAgentSerializer implements JsonSerializer<FightAgent>, JsonDes
                 switch (field.getName())
                 {
                     case TYPE:
-//                        field.set(fightAgent, FightAgentType.fromString(jsonObject.get(TYPE).getAsString()));
+                        //                        field.set(fightAgent, FightAgentType.fromString(jsonObject.get
+                        //                        (TYPE).getAsString()));
                         break;
                     
                     case FACTION:

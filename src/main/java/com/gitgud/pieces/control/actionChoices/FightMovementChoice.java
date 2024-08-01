@@ -1,7 +1,6 @@
 package com.gitgud.pieces.control.actionChoices;
 
 import com.gitgud.engine.control.ActionAwaitingController;
-import com.gitgud.engine.control.action.Action;
 import com.gitgud.engine.control.action.TileMovementAction;
 import com.gitgud.engine.control.action.ToAction;
 import com.gitgud.engine.control.actionChoice.RootToActionChoice;
@@ -16,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Covers special case, that {@link FightAgent} may move and attack afterward within the same turn.
+ *
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 05.06.2024
@@ -33,12 +33,12 @@ public class FightMovementChoice extends ToActionChoice<FightController, Fight, 
     
     /**
      * Calls super constructor.
-     * @see ToActionChoice#ToActionChoice(String, String, ActionAwaitingController,ToAction)
+     *
      * @param awaiter The {@link FightController} this RootChoice will be enacted upon.
-     * @param action   The {@link TileMovementAction} that will be enacted upon selection.
+     * @param action  The {@link TileMovementAction} that will be enacted upon selection.
+     * @see ToActionChoice#ToActionChoice(String, String, ActionAwaitingController, ToAction)
      */
-    public FightMovementChoice(FightController awaiter,
-                               ToAction<FightController, Tile> action)
+    public FightMovementChoice(FightController awaiter, ToAction<FightController, Tile> action)
     {
         super(NAME, DESCRIPTION, awaiter, action);
     }

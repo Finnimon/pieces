@@ -121,7 +121,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
         returnFightAgentsToArmy();
         City city = ActiveGameController.getInstance().get().getCity();
         HeadQuarters headQuarters = city.getHeadQuarters();
-        while (index >= headQuarters.getLevel()&& headQuarters.getLevel() < MissionSelection.values().length)
+        while (index >= headQuarters.getLevel() && headQuarters.getLevel() < MissionSelection.values().length)
             headQuarters.levelUp();
     }
     

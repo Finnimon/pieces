@@ -87,7 +87,7 @@ public class WalletRender extends VBox implements Render<Wallet>
      * @param resourceType  The {@link ResourceType}.
      * @param valueProperty The amount of the resource.
      */
-    private void render(@NotNull ResourceType resourceType,@NotNull SimpleLongProperty valueProperty)
+    private void render(@NotNull ResourceType resourceType, @NotNull SimpleLongProperty valueProperty)
     {
         ImageView imageView = new ImageView(resourceType.getSprite());
         imageView.setPreserveRatio(true);

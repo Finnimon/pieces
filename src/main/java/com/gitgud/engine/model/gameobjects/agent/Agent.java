@@ -18,6 +18,7 @@ public abstract class Agent extends GameObject implements GridMovable
 {
     /**
      * Whether the agent can fly.
+     *
      * @see GridMovable
      */
     private final boolean isFlying;
@@ -30,13 +31,15 @@ public abstract class Agent extends GameObject implements GridMovable
     
     
     /**
-     * Calls the constructor of {@link GameObject#GameObject(String, String, String)} and assigns values to {@link #isFlying} and {@link #movementRangeProperty}.
-     * @see GameObject#GameObject(String, String, String)  GameObject
-     * @param name The name of the agent.
-     * @param description The description of the agent.
+     * Calls the constructor of {@link GameObject#GameObject(String, String, String)} and assigns values to
+     * {@link #isFlying} and {@link #movementRangeProperty}.
+     *
+     * @param name           The name of the agent.
+     * @param description    The description of the agent.
      * @param spriteFilePath The sprite file path of the agent.
-     * @param isFlying Whether the agent can fly.
-     * @param movementRange The movement range of the agent.
+     * @param isFlying       Whether the agent can fly.
+     * @param movementRange  The movement range of the agent.
+     * @see GameObject#GameObject(String, String, String)  GameObject
      */
     public Agent(String name, String description, String spriteFilePath, boolean isFlying, int movementRange)
     {
@@ -46,18 +49,17 @@ public abstract class Agent extends GameObject implements GridMovable
     }
     
     
+    @Override
+    public boolean isFlying()
+    {
+        return isFlying;
+    }
+    
     
     @Override
     public SimpleIntegerProperty movementRangeProperty()
     {
         return movementRangeProperty;
-    }
-    
-    
-    @Override
-    public boolean isFlying()
-    {
-        return isFlying;
     }
     
     

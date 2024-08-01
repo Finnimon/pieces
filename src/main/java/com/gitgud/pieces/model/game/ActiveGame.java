@@ -11,12 +11,12 @@ import com.gitgud.pieces.model.player.Player;
  * The data object used by the Singleton {@link com.gitgud.pieces.control.ActiveGameController}.
  * <p>Also used by {@link Game} as the saveFile.
  *
- * @see Game
- * @see com.gitgud.pieces.control.ActiveGameController
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 05.06.2024
  * @Version: 1.1
+ * @see Game
+ * @see com.gitgud.pieces.control.ActiveGameController
  */
 public class ActiveGame
 {
@@ -46,10 +46,11 @@ public class ActiveGame
     
     /**
      * Default Constructor that sets als values.
-     * @param player The player for this active game.
-     * @param city The city for this active game.
+     *
+     * @param player  The player for this active game.
+     * @param city    The city for this active game.
      * @param mission The current mission for this active game.
-     * @param fight The current fight for this active game.
+     * @param fight   The current fight for this active game.
      */
     public ActiveGame(Player player, City city, Mission mission, Fight fight)
     {
@@ -62,6 +63,7 @@ public class ActiveGame
     
     /**
      * Gets the player.
+     *
      * @return The player.
      */
     public Player getPlayer()
@@ -72,6 +74,7 @@ public class ActiveGame
     
     /**
      * Gets the city.
+     *
      * @return The city.
      */
     public City getCity()
@@ -82,6 +85,7 @@ public class ActiveGame
     
     /**
      * Gets the currents mission.
+     *
      * @return The current mission.
      */
     public Mission getMission()
@@ -92,6 +96,7 @@ public class ActiveGame
     
     /**
      * Setter for the current mission.
+     *
      * @param mission The new value for the current mission.
      */
     public void setMission(Mission mission)

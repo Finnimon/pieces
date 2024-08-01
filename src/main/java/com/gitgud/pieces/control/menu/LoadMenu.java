@@ -1,4 +1,5 @@
 package com.gitgud.pieces.control.menu;
+
 @Deprecated
 public class LoadMenu extends BaseActionMenu
 {

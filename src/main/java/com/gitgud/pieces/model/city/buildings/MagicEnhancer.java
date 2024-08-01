@@ -6,8 +6,8 @@ import com.gitgud.pieces.model.player.ResourceType;
 
 
 /**
- *CityBuilding where Spells can be improved
- 
+ * CityBuilding where Spells can be improved
+ *
  * @author Finn L.
  * @version 1.0
  * @Owner: Finn L.
@@ -39,12 +39,6 @@ public class MagicEnhancer extends CityBuilding implements Transactor<Spell>
         return getLevel() >= spell.getLevel() && getCost(spell).isResourceCostCoveredByWallet();
     }
     
-    @Override
-    public ResourceCost getCost(Spell spell)
-    {
-        return TRANSACT_COST.multiple(spell.getLevel());
-    }
-    
     
     @Override
     public void deductCostFromInventory(Spell spell)
@@ -58,6 +52,13 @@ public class MagicEnhancer extends CityBuilding implements Transactor<Spell>
     {
         value.levelUp();
         return value;
+    }
+    
+    
+    @Override
+    public ResourceCost getCost(Spell spell)
+    {
+        return TRANSACT_COST.multiple(spell.getLevel());
     }
     
     
@@ -76,6 +77,7 @@ public class MagicEnhancer extends CityBuilding implements Transactor<Spell>
     
     /**
      * Gets the current cost to level up this building.
+     *
      * @return The current cost to level up this building.
      */
     public ResourceCost getLevelUpCost()

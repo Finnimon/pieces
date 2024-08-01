@@ -2,11 +2,11 @@ package com.gitgud.pieces.utility.gsonSerializationDeprecated;
 
 
 import com.gitgud.pieces.model.fight.Spell;
-import com.gitgud.pieces.model.fight.SpellType;
 import com.google.gson.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+
 
 @Deprecated
 public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<Spell>
@@ -33,7 +33,7 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
                 switch (field.getName())
                 {
                     case TYPE:
-//                        jsonObject.add(TYPE, context.serialize(src.getType().getAsString()));
+                        //                        jsonObject.add(TYPE, context.serialize(src.getType().getAsString()));
                         break;
                     
                     case MODIFIER:
@@ -74,7 +74,8 @@ public class SpellSerializer implements JsonSerializer<Spell>, JsonDeserializer<
                 switch (field.getName())
                 {
                     case TYPE:
-//                        field.set(spell, SpellType.fromString(jsonObject.get(TYPE).getAsString()));
+                        //                        field.set(spell, SpellType.fromString(jsonObject.get(TYPE)
+                        //                        .getAsString()));
                         break;
                     
                     case MODIFIER:

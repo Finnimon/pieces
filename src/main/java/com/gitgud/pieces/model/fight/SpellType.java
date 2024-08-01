@@ -9,7 +9,6 @@ public enum SpellType
     DEBUFF();
     
     
-    
     public boolean getIsFriendlyTargeting()
     {
         return this == BUFF || this == HEAL;

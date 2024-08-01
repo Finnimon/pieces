@@ -8,10 +8,11 @@ package com.gitgud.engine.control;
  * @Since: 30.05.2024
  * @Version: 1.0
  */
+@FunctionalInterface
 public interface Startable
 {
     /**
-     * Start the new situation and change the scene.
+     * Start the new situation and changes the scene.
      */
     void start();
 }

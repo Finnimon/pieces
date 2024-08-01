@@ -21,7 +21,8 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     private final static ResourceCost TRANSACT_COST = new ResourceCost(ResourceType.PLATINUM, 10000);
     
     
-    private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " + TRANSACT_COST +
+    private static final String DESCRIPTION = "Upgrade your Artefacts Here for the cost of " +
+                                              TRANSACT_COST +
                                               " per Level ";
     
     
@@ -55,17 +56,17 @@ public class BlackSmith extends CityBuilding implements Transactor<Artefact>
     
     
     @Override
-    public ResourceCost getCost(Artefact artefact)
-    {
-        return TRANSACT_COST.multiple(artefact.getLevel());
-    }
-    
-    
-    @Override
     public Artefact changeValue(Artefact value)
     {
         value.levelUp();
         
         return value;
+    }
+    
+    
+    @Override
+    public ResourceCost getCost(Artefact artefact)
+    {
+        return TRANSACT_COST.multiple(artefact.getLevel());
     }
 }

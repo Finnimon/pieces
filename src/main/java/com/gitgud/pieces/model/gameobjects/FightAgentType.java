@@ -9,7 +9,6 @@ public enum FightAgentType
     QUEEN();
     
     
-    
     public static final int TYPE_MULTIPLIER = 100;
     
     

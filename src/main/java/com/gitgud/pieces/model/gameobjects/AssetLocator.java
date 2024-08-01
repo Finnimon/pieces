@@ -4,6 +4,7 @@ package com.gitgud.pieces.model.gameobjects;
  * @author Finn Kramer
  * @version 1.0
  */
+@Deprecated
 public interface AssetLocator
 {
     String DEAD_SPRITE = "src\\main\\resources\\com\\gitgud\\gameObjectTypes\\fightAgentTypes\\pawn.json";

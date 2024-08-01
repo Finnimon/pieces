@@ -25,11 +25,16 @@ import java.util.stream.Collectors;
 
 /**
  * <p>Static structural control class for the game.
+ * <p>Houses the main functionality and logic of the game.
  *
  * @author Finn L.
  * @Owner: Finn L.
  * @Since: 25.07.2024
  * @Version: 3.0
+ * @see Flow
+ * @see Loader
+ * @see Saver
+ * @see New
  */
 public class Game
 {
@@ -50,6 +55,7 @@ public class Game
      * @Owner: Finn L.
      * @Since: 25.07.2024
      * @Version: 3.0
+     * @see Startable
      */
     public static class Flow
     {
@@ -68,11 +74,49 @@ public class Game
          *
          * @param stage The main stage of the application.
          */
-        public static void initializeGame(Stage stage)
+        public static void initializeGame(@NotNull Stage stage)
+        {
+        }
+        
+        
+        /**
+         * Creates a Task that:
+         * <p>Initializes the singleton instances and styles the {@code stage}.
+         * <p>Initializes the {@link StageController} and calls  {@link #showNextScene()} on success.
+         *
+         * @param stage The main stage of the application.
+         * @return The created task.
+         */
+        private static Task<Stage> initializeTask(@NotNull Stage stage)
+        {
+            return new Task<>()
+            {
+                @Override
+                protected Stage call()
+                {
+                    initializeSingletons();
+                    return stage;
+                }
+                
+                
+                @Override
+                protected void succeeded()
+                {
+                    StageController.initialize(stage);
+                    showNextScene();
+                }
+            };
+        }
+        
+        
+        /**
+         * Initializes the singleton instances and styles the {@code stage}.
+         */
+        private static void initializeSingletons()
         {
             JsonParser.getInstance();
-            StageController.initialize(stage);
-            showNextScene();
+            GameSettings.getInstance();
+            Translator.getInstance();
         }
         
         
@@ -123,7 +167,9 @@ public class Game
             GameState gameState = ActiveGameController.getGameState();
             return switch (gameState)
             {
-                case NOT_LOADED -> throw new RuntimeException("Not implemented");//MainMenuController.getInstance();//todo not yet implemented
+                case NOT_LOADED ->
+                        throw new RuntimeException("Not implemented");//MainMenuController.getInstance();//todo not
+                // yet implemented
                 case CITY -> new CityController(getActiveGame().getCity());//todo not yet implemented
                 case MISSION -> new MissionController(getActiveGame().getMission());
                 case MISSION_FIGHT -> new FightController(getActiveGame().getFight());
@@ -345,7 +391,7 @@ public class Game
          * @param newPlayerName The new player name.
          * @return The parsed String of {@code activeGame}.
          */
-        private static @NotNull String activeGameToString(@NotNull ActiveGame activeGame,@NotNull String newPlayerName)
+        private static @NotNull String activeGameToString(@NotNull ActiveGame activeGame, @NotNull String newPlayerName)
         {
             Gson gson = JsonParser.getInstance().getGson();
             JsonObject jsonElement = gson.toJsonTree(activeGame).getAsJsonObject();
@@ -514,10 +560,10 @@ public class Game
          * Changes the players name in the given JsonObject.
          *
          * @param activeGameJson The JsonObject to change.
-         *                    <p>A serialized {@link ActiveGame}.
-         * @param playerName  The new player name.
+         *                       <p>A serialized {@link ActiveGame}.
+         * @param playerName     The new player name.
          */
-        private static void changePlayerName(@NotNull JsonObject activeGameJson,@NotNull String playerName)
+        private static void changePlayerName(@NotNull JsonObject activeGameJson, @NotNull String playerName)
         {
             JsonObject player = activeGameJson.get(PLAYER_MEMBER_NAME).getAsJsonObject();
             player.remove(NAME_MEMBER_NAME);

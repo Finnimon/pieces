@@ -1,7 +1,7 @@
 package com.gitgud.pieces.testing;
 
-import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.control.Game;
+import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.mission.Mission;
 import javafx.stage.Stage;
 
@@ -23,11 +23,13 @@ public class TestStuff
     
     private static void lindigJsonTest()
     {
-//        ActiveGameController.testInitialize();
-//        Mission mission= MissionSelection.TUTORIAL.getMission();
-////        Game.Saver.save();
+        //        ActiveGameController.testInitialize();
+        //        Mission mission= MissionSelection.TUTORIAL.getMission();
+        ////        Game.Saver.save();
         Game.Loader.load("TestPlayer");
-//        JsonParser.getInstance().parseIntoJsonFile(new File("src\\main\\resources\\com\\gitgud\\pieces\\model\\city\\buildings\\headQuarters\\MissionSelection\\TUTORIAL.json"),ActiveGameController.getInstance().get().getMission());
+        //        JsonParser.getInstance().parseIntoJsonFile(new File
+        //        ("src\\main\\resources\\com\\gitgud\\pieces\\model\\city\\buildings\\headQuarters\\MissionSelection
+        //        \\TUTORIAL.json"),ActiveGameController.getInstance().get().getMission());
     }
     
     

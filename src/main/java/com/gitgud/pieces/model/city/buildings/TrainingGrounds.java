@@ -47,6 +47,7 @@ public class TrainingGrounds extends CityBuilding implements Transactor<FightAge
     
     /**
      * Constructs a new {@link TrainingGrounds} with the given level.
+     *
      * @param level The level of the new {@link TrainingGrounds}.
      */
     public TrainingGrounds(int level)
@@ -56,22 +57,24 @@ public class TrainingGrounds extends CityBuilding implements Transactor<FightAge
     
     
     /**
-     * Getter for all player owned FightAgents.
-     * @return All FightAgents owned by the {@link ActiveGameController#getInstance()} player.
-     */
-    public Collection<FightAgent> getPlayerOwnedFightAgents()
-    {
-        return ActiveGameController.getInstance().get().getPlayer().army();
-    }
-    
-    
-    /**
      * Getter for all trainable FightAgents whose training can be afforded.
+     *
      * @return All trainable FightAgents whose training can be afforded.
      */
     public Collection<FightAgent> getTrainableFightAgents()
     {
         return getPlayerOwnedFightAgents().stream().filter(this::isTransactionPossible).toList();
+    }
+    
+    
+    /**
+     * Getter for all player owned FightAgents.
+     *
+     * @return All FightAgents owned by the {@link ActiveGameController#getInstance()} player.
+     */
+    public Collection<FightAgent> getPlayerOwnedFightAgents()
+    {
+        return ActiveGameController.getInstance().get().getPlayer().army();
     }
     
     

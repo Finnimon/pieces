@@ -26,7 +26,9 @@ import java.util.List;
  */
 public class MissionController extends ActionAwaitingController<Mission, GameObject, MissionRender>
 {
-    private final SimpleBooleanProperty isFinishedProperty=new SimpleBooleanProperty(false);
+    private final SimpleBooleanProperty isFinishedProperty = new SimpleBooleanProperty(false);
+    
+    
     public MissionController(Mission mission)
     {
         super(mission, new MissionRender(mission));
@@ -59,6 +61,13 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
     
     
     @Override
+    public SimpleBooleanProperty isFinishedProperty()
+    {
+        return isFinishedProperty;
+    }
+    
+    
+    @Override
     public boolean isFinished()
     {
         return getModel().isFinished();
@@ -73,13 +82,6 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         getModel().end();
         
         Game.Flow.showNextScene();
-    }
-    
-    
-    @Override
-    public SimpleBooleanProperty isFinishedProperty()
-    {
-        return isFinishedProperty;
     }
     
     
