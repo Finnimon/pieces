@@ -1,7 +1,6 @@
 package com.gitgud.engine.utility.modification;
 
 import com.gitgud.engine.model.DisApplicable;
-import com.github.ruediste.polymorphicGson.GsonPolymorph;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -16,7 +15,6 @@ import java.util.Collection;
  * @Since: 20.04.2024
  * @Version: 1.0
  */
-@GsonPolymorph
 public abstract class Modifier<T> implements DisApplicable<T>
 {
     /**

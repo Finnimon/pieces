@@ -49,12 +49,6 @@ public class PlayerAgent extends Agent implements SpellCaster
     private final SimpleIntegerProperty mana = new SimpleIntegerProperty(200);
     
     
-    public PlayerAgent()
-    {
-        this(ActiveGameController.getInstance().get().getCity().getPlayerReborn().getFaction());
-    }
-    
-    
     public PlayerAgent(Faction faction)
     {
         super(determineName(faction), DESCRIPTION, determinSpriteFilePath(faction), IS_FLYING, MOVEMENT_RANGE);

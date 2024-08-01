@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.jetbrains.annotations.NotNull;
 
-
 import java.io.File;
 
 
@@ -152,9 +151,9 @@ public class GameSettings
      * Setter for the language settings.
      *
      * @param language The new language settings.
+     * @throws IllegalArgumentException If {@code language} is not in {@link Translator#getLanguages()}
      * @Precondition: {@code language} must be in {@link Translator#getLanguages()}
      * @Postcondition: The language settings will be set to {@code language}.
-     * @throws IllegalArgumentException If {@code language} is not in {@link Translator#getLanguages()}
      */
     public void setLanguage(@NotNull String language)
     {

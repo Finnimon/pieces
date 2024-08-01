@@ -13,14 +13,16 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import static com.gitgud.pieces.view.MainMenu.*;
 
 import java.net.MalformedURLException;
 import java.util.function.Predicate;
+
+import static com.gitgud.pieces.view.MainMenu.showMenuPane;
 
 
 /**
@@ -34,6 +36,8 @@ import java.util.function.Predicate;
  */
 public class StageStyler
 {
+    
+    
     private static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents" +
                                             "\\monochrome\\black_king.png";
     
@@ -61,10 +65,17 @@ public class StageStyler
     }
     
     
+    /**
+     * Styles the stage.
+     *
+     * @param stage The stage to style.
+     */
     private static void initialize(Stage stage)
     {
-        stage.initStyle(StageStyle.DECORATED);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         setTitleAndIcon(stage);
     }
     
@@ -143,9 +154,7 @@ public class StageStyler
     private static Menu settingsMenu()
     {
         Menu menu = new Menu("Settings");
-        menu.getItems()
-            .add(createMenuItem("Settings",
-                                e -> showMenuPane(Settings.create())));
+        menu.getItems().add(createMenuItem("Settings", e -> showMenuPane(Settings.create())));
         return menu;
     }
     
@@ -176,9 +185,9 @@ public class StageStyler
         {
             if (predicate.test(e))
             {
-                //todo show message
+                return;
             }
-            //todo Game.Saver.saveAs();
+            showMenuPane(SaveAs.create());
         });
         
         menu.getItems().addAll(save, saveAs);

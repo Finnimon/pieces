@@ -20,7 +20,7 @@ public class MainMenuController implements Startable
     
     public MainMenuController()
     {
-        this.mainMenu = MainMenu.create();
+        this.mainMenu = (StackPane) MainMenu.create();
     }
     
     

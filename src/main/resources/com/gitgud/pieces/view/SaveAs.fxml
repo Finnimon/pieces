@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.gitgud.pieces.view.SaveAs" style="-fx-background-color: grey">
+            <VBox prefWidth="500" alignment="CENTER" spacing="50">
+                <Label text="Enter your new save name:"/>
+                <TextField fx:id="saveAsNameId" prefWidth="500" maxWidth="500"/>
+                <Button text="Save" prefWidth="500" prefHeight="200" onAction="#saveAsAction"/>
+                <Button text="Return"  prefWidth="500" prefHeight="200" onAction="#returnAction"/>
+            </VBox>
+</StackPane>

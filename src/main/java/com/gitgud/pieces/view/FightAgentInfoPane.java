@@ -3,6 +3,7 @@ package com.gitgud.pieces.view;
 import com.gitgud.engine.view.infopane.GridMappableInfoPane;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
+
 @Deprecated
 public class FightAgentInfoPane extends GridMappableInfoPane<FightAgent>
 {

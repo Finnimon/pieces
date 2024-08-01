@@ -6,7 +6,6 @@ module com.gitgud.pieces {
     requires com.opencsv;
     requires jeromq;
     requires org.hildan.fxgson;
-    requires com.github.ruediste.polymorphicGson;
     requires org.jetbrains.annotations;
     requires javafx.media;
     requires gson.extras;

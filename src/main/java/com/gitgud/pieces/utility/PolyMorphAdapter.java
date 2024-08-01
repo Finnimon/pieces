@@ -24,6 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Provides polymorphic adapters for the {@link com.google.gson.Gson} instance.
+ *
  * @author Finn L.
  */
 public class PolyMorphAdapter
@@ -32,7 +33,8 @@ public class PolyMorphAdapter
     protected static RuntimeTypeAdapterFactory<GridMappable> getGameObjectPolyMorphAdapter()
     {
         RuntimeTypeAdapterFactory<GridMappable> gameObjectAdapterFactory =
-                RuntimeTypeAdapterFactory.of(GridMappable.class,"@type");
+                RuntimeTypeAdapterFactory.of(GridMappable.class,
+                                                                                                        "@type");
         gameObjectAdapterFactory.recognizeSubtypes()
                                 .registerSubtype(GameObject.class)
                                 .registerSubtype(HealthWell.class)

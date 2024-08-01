@@ -159,7 +159,11 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     {
         FightAgent agent = getActiveFightAgent();
         List<ActionChoice<FightController, Fight, FightAgent, FightRender>> choices = new ArrayList<>();
-        choices.add(ActiveGameController.getInstance().get().getMission().getPlayerAgent().possibleSpellChoices(this)); //todo not implemented
+        choices.add(ActiveGameController.getInstance()
+                                        .get()
+                                        .getMission()
+                                        .getPlayerAgent()
+                                        .possibleSpellChoices(this)); //todo not implemented
         if (agent instanceof SpellCaster spellCaster)
         {
             choices.add(spellCaster.possibleSpellChoices(this));

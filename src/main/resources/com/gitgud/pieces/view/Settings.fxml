@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -17,7 +14,6 @@
                 </HBox>
                 <Label text="Music Volume"/>
                 <Slider fx:id="musicVolumeId" max="1" />
-                <Button text="Save settings" onAction="#saveAction" prefWidth="500" prefHeight="100"/>
                 <Button text="Return" prefWidth="500" prefHeight="100" onAction="#returnAction"/>
             </VBox>
 </StackPane>

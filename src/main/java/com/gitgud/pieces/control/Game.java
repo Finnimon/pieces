@@ -195,6 +195,20 @@ public class Game
         {
             return ActiveGameController.getInstance().get();
         }
+        
+        
+        /**
+         * Ends all current music and cleans up memory.
+         */
+        public static void end()
+        {
+            if (Utility.currentMusicPlayer != null)
+            {
+                Utility.currentMusicPlayer.stop();
+                Utility.currentMusicPlayer = null;
+            }
+            Utility.cleanUpMemory();
+        }
     }
     
     
@@ -555,6 +569,12 @@ public class Game
         
         
         /**
+         * For proper garbage collection.
+         */
+        private static MediaPlayer currentMusicPlayer = null;
+        
+        
+        /**
          * Private Constructor to stop instantiation.
          */
         private Utility()
@@ -618,6 +638,19 @@ public class Game
             player.volumeProperty().bind(GameSettings.getInstance().musicVolumeProperty());
             player.setAutoPlay(true);
             player.play();
+            currentMusicPlayer = player;
+        }
+        
+        
+        /**
+         * Cleans up the singletons.
+         */
+        private static void cleanUpMemory()
+        {
+            StageController.reset();
+            ActiveGameController.reset();
+            GameSettings.reset();
+            Translator.reset();
         }
     }
 }

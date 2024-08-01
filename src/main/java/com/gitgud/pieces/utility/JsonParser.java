@@ -101,12 +101,13 @@ public class JsonParser
         try
         {
             FileReader reader = getFileReader(jsonFile);
+            
             T t = gson.fromJson(reader, clazz);
             reader.close();
             
             return t;
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             throw new IllegalArgumentException("File not found: " + jsonFile, e);
         }

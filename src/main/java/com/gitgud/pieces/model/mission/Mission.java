@@ -48,7 +48,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
     {
         this(index,
              gridMap,
-             new PlayerAgent(),
+             new PlayerAgent(ActiveGameController.getInstance().get().getCity().getPlayerReborn().getFaction() ),
              startingPosition,
              activeFightAgents,
              new FightAgent[activeFightAgents.length]);

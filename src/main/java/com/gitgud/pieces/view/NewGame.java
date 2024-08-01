@@ -4,13 +4,9 @@ import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.player.Difficulty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 
 /**
@@ -40,16 +36,7 @@ public class NewGame
     
     public static Pane create()
     {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        try
-        {
-            FileInputStream fxmlInputStream = new FileInputStream(FXML_PATH);
-            return fxmlLoader.load(fxmlInputStream);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Error loading FXML file: " + FXML_PATH, e);
-        }
+        return (Pane) FxmlUtility.loadFxml(FXML_PATH);
     }
     
     

@@ -3,13 +3,12 @@ package com.gitgud.pieces.view;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.GameState;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 
 /**
@@ -22,6 +21,17 @@ import java.io.IOException;
  */
 public class MainMenu
 {
+    public static final EventHandler<KeyEvent> OPEN_MAIN_MENU_ON_ESCAPE = e ->
+    {
+        if (e.getCode() != KeyCode.ESCAPE)
+        {
+            return;
+        }
+        e.consume();
+        showMenuPane(create());
+    };
+    
+    
     private static final String FXML_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\view\\MainMenu.fxml";
     
     
@@ -32,20 +42,9 @@ public class MainMenu
     private StackPane mainMenuId;
     
     
-    public static StackPane create()
+    public static Pane create()
     {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        
-        try
-        {
-            FileInputStream fxmlInputStream = new FileInputStream(FXML_PATH);
-            
-            return fxmlLoader.load(fxmlInputStream);
-        }
-        catch (IOException e)
-        {
-            throw new RuntimeException("Error loading FXML file: " + FXML_PATH, e);
-        }
+        return (Pane) FxmlUtility.loadFxml(FXML_PATH);
     }
     
     

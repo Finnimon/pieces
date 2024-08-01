@@ -198,7 +198,11 @@ public enum MissionSelection implements Describable, Sprite
     private static void replacePlayerAgent(@NotNull Gson gson, @NotNull JsonObject missionJsonObject)
     {
         missionJsonObject.remove(PLAYER_AGENT_JSON_MEMBER_NAME);
-        JsonElement newPlayerAgent = gson.toJsonTree(new PlayerAgent());
+        JsonElement newPlayerAgent = gson.toJsonTree(new PlayerAgent(ActiveGameController.getInstance()
+                                                                                         .get()
+                                                                                         .getCity()
+                                                                                         .getPlayerReborn()
+                                                                                         .getFaction()));
         missionJsonObject.add(PLAYER_AGENT_JSON_MEMBER_NAME, newPlayerAgent);
     }
     

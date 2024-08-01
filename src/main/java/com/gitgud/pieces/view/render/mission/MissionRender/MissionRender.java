@@ -12,8 +12,10 @@ import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.InteractionChecker;
 import com.gitgud.pieces.model.mission.Mission;
+import com.gitgud.pieces.view.MainMenu;
 import com.gitgud.pieces.view.render.mission.MissionHud;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
@@ -24,6 +26,7 @@ public class MissionRender extends BaseActionContextRender<Mission, GameObject, 
     public MissionRender(Mission mission)
     {
         super(mission, new MissionHud(mission));
+        this.addEventHandler(KeyEvent.KEY_PRESSED, MainMenu.OPEN_MAIN_MENU_ON_ESCAPE);
     }
     
     

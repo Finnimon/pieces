@@ -71,6 +71,8 @@ public class Settings
     {
         englishId.setSelected(true);
         germanId.setSelected(false);
+        
+        GameSettings.getInstance().setLanguage("en");
     }
     
     
@@ -79,24 +81,8 @@ public class Settings
     {
         englishId.setSelected(false);
         germanId.setSelected(true);
-    }
-    
-    
-    @FXML
-    private void saveAction()
-    {
-        GameSettings gameSettings = GameSettings.getInstance();
         
-        gameSettings.setMusicVolume(musicVolumeId.getValue());
-        
-        if (englishId.isSelected())
-        {
-            gameSettings.setLanguage("en");
-        }
-        else if (germanId.isSelected())
-        {
-            gameSettings.setLanguage("de");
-        }
+        GameSettings.getInstance().setLanguage("de");
     }
     
     

@@ -126,7 +126,7 @@ public class StageController
     {
         StackPane stackPane = getInnerStackPane();
         stackPane.getChildren().clear();
-        stackPane.getChildren().add( node);
+        stackPane.getChildren().add(node);
     }
     
     

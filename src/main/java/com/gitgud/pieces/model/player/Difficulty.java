@@ -1,13 +1,11 @@
 package com.gitgud.pieces.model.player;
 
-import com.gitgud.engine.model.Applicable;
 import com.gitgud.engine.utility.modification.Modifier;
 import com.gitgud.pieces.control.EnemyAlgorithm;
 import com.gitgud.pieces.model.fight.Fight;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentAttackModifier;
 import com.gitgud.pieces.utility.modification.fightAgent.FightAgentDefenceModifier;
-import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.NotNull;
 
 

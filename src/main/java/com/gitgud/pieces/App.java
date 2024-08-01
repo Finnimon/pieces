@@ -1,9 +1,7 @@
 package com.gitgud.pieces;
 
 
-import com.gitgud.pieces.control.*;
-import com.gitgud.pieces.testing.Missions;
-import com.gitgud.pieces.utility.JsonParser;
+import com.gitgud.pieces.control.Game;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -47,10 +45,9 @@ public class App extends Application
     @Override
     public void stop() throws Exception
     {
-        StageController.reset();
-        ActiveGameController.reset();
-        GameSettings.reset();
-        Translator.reset();
+        Game.Flow.end();
         super.stop();
     }
+    
+    
 }

@@ -16,7 +16,6 @@ import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
-import com.github.ruediste.polymorphicGson.GsonPolymorph;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
