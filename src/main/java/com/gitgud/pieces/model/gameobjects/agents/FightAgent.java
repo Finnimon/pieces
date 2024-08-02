@@ -16,7 +16,7 @@ import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.interactable.collectibles.Artefact;
 import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.Collection;
@@ -75,7 +75,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     private final SimpleIntegerProperty magicDefence;
     
     
-    private final SimpleFloatProperty evadeChance;
+    private final SimpleDoubleProperty evadeChance;
     
     
     private final SimpleIntegerProperty maxHealth;
@@ -93,7 +93,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     private final SimpleIntegerProperty initiative;
     
     
-    private final SimpleFloatProperty accuracy;
+    private final SimpleDoubleProperty accuracy;
     
     
     /**
@@ -144,13 +144,13 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
         this.isRangedAttacker = isRangedAttacker;
         this.physicalDefence = new SimpleIntegerProperty(physicalDefence);
         this.magicDefence = new SimpleIntegerProperty(magicDefence);
-        this.evadeChance = new SimpleFloatProperty(evadeChance);
+        this.evadeChance = new SimpleDoubleProperty(evadeChance);
         this.maxHealth = new SimpleIntegerProperty(maxHealth);
         this.maxMana = new SimpleIntegerProperty(maxMana);
         this.health = new SimpleIntegerProperty(health);
         this.mana = new SimpleIntegerProperty(mana);
         this.initiative = new SimpleIntegerProperty(initiative);
-        this.accuracy = new SimpleFloatProperty(accuracy);
+        this.accuracy = new SimpleDoubleProperty(accuracy);
     }
     
     
@@ -225,7 +225,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
      *
      * @return {@link #evadeChance} value
      */
-    public float getEvadeChance()
+    public double getEvadeChance()
     {
         return evadeChance.get();
     }
@@ -234,7 +234,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     /**
      * Setter for {@link #evadeChance} value
      */
-    public void setEvadeChance(float evadeChance)
+    public void setEvadeChance(double evadeChance)
     {
         this.evadeChance.setValue(evadeChance);
     }
@@ -330,7 +330,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
      *
      * @return {@link #accuracy} value
      */
-    public float getAccuracy()
+    public double getAccuracy()
     {
         return accuracy.get();
     }
@@ -379,7 +379,7 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     /**
      * Setter for {@link #accuracy} value
      */
-    public void setAccuracy(float accuracy)
+    public void setAccuracy(double accuracy)
     {
         this.accuracy.setValue(accuracy);
     }
@@ -466,37 +466,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     
     
     /**
-     * Getter for {@link #maxMana}
-     *
-     * @return {@link #maxMana} value
-     */
-    public int getMaxMana()
-    {
-        return maxMana.get();
-    }
-    
-    
-    /**
-     * Getter for {@link #mana} value
-     *
-     * @return {@link #mana} value
-     */
-    public int getMana()
-    {
-        return mana.get();
-    }
-    
-    
-    /**
-     * Setter for {@link #mana}
-     */
-    public void setMana(int mana)
-    {
-        this.mana.setValue(mana);
-    }
-    
-    
-    /**
      * Getter for {@link #initiative}
      *
      * @return {@link #initiative} value
@@ -513,15 +482,6 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     public void setInitiative(int initative)
     {
         this.initiative.setValue(initative);
-    }
-    
-    
-    /**
-     * Setter for {@link #maxMana} value
-     */
-    public void setMaxMana(int maxMana)
-    {
-        this.maxMana.setValue(maxMana);
     }
     
     
@@ -632,11 +592,14 @@ public class FightAgent extends Fighter implements Comparable<FightAgent>, Level
     }
     
     
-    /**
-     * Getter for the mana Property.
-     *
-     * @return The mana Property.
-     */
+    @Override
+    public SimpleIntegerProperty maxManaProperty()
+    {
+        return maxMana;
+    }
+    
+    
+    @Override
     public SimpleIntegerProperty manaProperty()
     {
         return mana;

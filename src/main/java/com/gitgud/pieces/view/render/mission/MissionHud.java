@@ -8,6 +8,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 
 
+/**
+ * HUD for {@link com.gitgud.pieces.model.mission.Mission}
+ *
+ * @author Julius Rohe, Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @since 30.06.2024
+ */
 public class MissionHud extends ActionContextHud<Mission>
 {
     public MissionHud(Mission data)

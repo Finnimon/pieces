@@ -8,7 +8,7 @@ import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.actionChoices.MovementRootChoice;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
+import com.gitgud.pieces.view.render.mission.MissionRender;
 import javafx.beans.property.SimpleBooleanProperty;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,7 +56,7 @@ public class MissionController extends ActionAwaitingController<Mission, GameObj
         List<ActionChoice<MissionController, Mission, GameObject, MissionRender>> choices = List.of(rootToActionChoice,
                                                                                                     skipTurnChoice);
         
-        return new RootActionChoice<>("root", "root", this, choices);
+        return new RootActionChoice<>(this, choices);
     }
     
     

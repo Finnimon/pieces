@@ -25,7 +25,26 @@ public interface RootChoice<ChoiceType>
      */
     default boolean isEmpty()
     {
-        return getChildren().isEmpty();
+        if (getChildren().isEmpty())
+        {
+            return true;
+        }
+        
+        for (var child : getChildren())
+        {
+            if (!(child instanceof RootChoice root))
+            {
+                return false;
+            }
+            
+            if (!root.isEmpty())
+            {
+                return false;
+            }
+            
+        }
+        
+        return true;
     }
     
     

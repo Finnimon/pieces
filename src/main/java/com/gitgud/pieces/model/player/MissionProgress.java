@@ -8,6 +8,7 @@ package com.gitgud.pieces.model.player;
  * @Owner: Finn L.
  * @since 19.04.2022
  */
+@Deprecated
 public class MissionProgress
 {
     private boolean completedFirstMission;

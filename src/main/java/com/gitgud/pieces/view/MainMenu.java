@@ -1,6 +1,7 @@
 package com.gitgud.pieces.view;
 
 import com.gitgud.pieces.control.ActiveGameController;
+import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.event.EventHandler;
@@ -14,13 +15,16 @@ import javafx.scene.layout.StackPane;
 /**
  * Main menu of the game.
  *
- * @author Julius Rohe, Finn L.
+ * @author Finn L.
  * @Owner: Finn L.
  * @Since: 15.07.2024
  * @Version: 0.2
  */
 public class MainMenu
 {
+    private static final String FXML_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\view\\MainMenu.fxml";
+    
+    
     public static final EventHandler<KeyEvent> OPEN_MAIN_MENU_ON_ESCAPE = e ->
     {
         if (e.getCode() != KeyCode.ESCAPE)
@@ -30,9 +34,6 @@ public class MainMenu
         e.consume();
         showMenuPane(create());
     };
-    
-    
-    private static final String FXML_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\view\\MainMenu.fxml";
     
     
     private static final int ADDITIONAL_PANE_INDEX = 1;
@@ -51,6 +52,7 @@ public class MainMenu
     @FXML
     private void exitAction()
     {
+        Game.Flow.end();
         System.exit(0);
     }
     

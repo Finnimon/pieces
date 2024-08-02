@@ -1,4 +1,4 @@
-package com.gitgud.pieces.view.render.mission.MissionRender;
+package com.gitgud.pieces.view.render.mission;
 
 import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
@@ -13,13 +13,20 @@ import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.InteractionChecker;
 import com.gitgud.pieces.model.mission.Mission;
 import com.gitgud.pieces.view.MainMenu;
-import com.gitgud.pieces.view.render.mission.MissionHud;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 
+/**
+ * Render for {@link Mission}
+ *
+ * @author Julius Rohe, Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @since 30.06.2024
+ */
 public class MissionRender extends BaseActionContextRender<Mission, GameObject, MissionHud>
 {
     

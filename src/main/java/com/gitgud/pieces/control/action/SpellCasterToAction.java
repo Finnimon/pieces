@@ -10,7 +10,7 @@ import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 public final class SpellCasterToAction implements ToAction<FightController, Tile>
 {
-    private final Tile tile;
+    private final Tile to;
     
     
     private final FightController fightController;
@@ -22,31 +22,32 @@ public final class SpellCasterToAction implements ToAction<FightController, Tile
     private final SpellCaster spellCaster;
     
     
-    public SpellCasterToAction(Tile tile, FightController fightController, Spell spell, SpellCaster spellCaster)
+    public SpellCasterToAction(Tile to, FightController fightController, Spell spell, SpellCaster spellCaster)
     {
         this.spellCaster = spellCaster;
-        this.tile = tile;
+        this.to = to;
         this.fightController = fightController;
         this.spell = spell;
     }
     
     
     @Override
-    public Tile getTo()
+    public void enAct(FightController actionAwaitingController)
     {
-        return tile;
+        FightAgent fightAgent = fightController.getModel().getGridMap().get(to);
+        spellCaster.cast(spell, fightAgent);
+        if (fightAgent.isDead())
+        {
+            fightController.getModel().getGridMap().clearVertex(getTo());
+            fightController.getRender().getGridMapRender().removeGridMappable(fightAgent);
+        }
+        
     }
     
     
     @Override
-    public void enAct(FightController actionAwaitingController)
+    public Tile getTo()
     {
-        FightAgent fightAgent = fightController.getModel().getGridMap().get(tile);
-        spellCaster.cast(spell, fightAgent);
-        if (fightAgent.isDead())
-        {
-            fightController.getRender().getGridMapRender().removeGridMappable(fightAgent);
-        }
-        
+        return to;
     }
 }

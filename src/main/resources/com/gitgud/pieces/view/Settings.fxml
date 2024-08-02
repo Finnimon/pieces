@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<StackPane fx:id="settingsId" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.gitgud.pieces.view.Settings" style="-fx-background-color: grey">
-            <VBox prefWidth="500" maxWidth="500" alignment="CENTER" spacing="50">
-                <Label text="Language Settings:"/>
-                <HBox prefWidth="500" maxWidth="500" spacing="200">
-                    <RadioButton fx:id="englishId" text="English " onAction="#englishAction"/>
-                    <RadioButton fx:id="germanId" text="Deutsch " onAction="#germanAction"/>
-                </HBox>
-                <Label text="Music Volume"/>
-                <Slider fx:id="musicVolumeId" max="1" />
-                <Button text="Return" prefWidth="500" prefHeight="100" onAction="#returnAction"/>
-            </VBox>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:id="settingsId"
+           xmlns="http://javafx.com/javafx"
+           fx:controller="com.gitgud.pieces.view.Settings" style="-fx-background-color: grey">
+    <VBox prefWidth="500" maxWidth="500" alignment="CENTER" spacing="50">
+        <Label text="Language Settings:"/>
+        <HBox prefWidth="500" maxWidth="500" spacing="200">
+            <RadioButton fx:id="englishId" text="English " onAction="#englishAction"/>
+            <RadioButton fx:id="germanId" text="Deutsch " onAction="#germanAction"/>
+        </HBox>
+        <Label text="Music Volume"/>
+        <Slider fx:id="musicVolumeId" max="1"/>
+        <Button text="Return" prefWidth="500" prefHeight="100" onAction="#returnAction"/>
+    </VBox>
 </StackPane>

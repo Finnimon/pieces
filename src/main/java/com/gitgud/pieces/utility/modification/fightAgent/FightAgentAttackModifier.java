@@ -12,10 +12,10 @@ public class FightAgentAttackModifier extends Modifier<FightAgent>
     private final int rangedDamageModifier;
     
     
-    private final float accuracyModifier;
+    private final double accuracyModifier;
     
     
-    public FightAgentAttackModifier(int meleeDamageModifier, int rangedDamageModifier, float accuracyModifier)
+    public FightAgentAttackModifier(int meleeDamageModifier, int rangedDamageModifier, double accuracyModifier)
     {
         this.meleeDamageModifier = meleeDamageModifier;
         this.rangedDamageModifier = rangedDamageModifier;
@@ -26,7 +26,7 @@ public class FightAgentAttackModifier extends Modifier<FightAgent>
     public FightAgent modify(FightAgent fightAgent)
     {
         int meleeDamage = fightAgent.getMeleeDamage() + meleeDamageModifier;
-        float accuracy = fightAgent.getAccuracy() * accuracyModifier;
+        double accuracy = fightAgent.getAccuracy() * accuracyModifier;
         
         fightAgent.setMeleeDamage(meleeDamage);
         fightAgent.setAccuracy(accuracy);
@@ -46,7 +46,7 @@ public class FightAgentAttackModifier extends Modifier<FightAgent>
     public FightAgent demodify(FightAgent fightAgent)
     {
         int meleeDamage = fightAgent.getMeleeDamage() - meleeDamageModifier;
-        float accuracy = fightAgent.getAccuracy() / accuracyModifier;
+        double accuracy = fightAgent.getAccuracy() / accuracyModifier;
         
         fightAgent.setMeleeDamage(meleeDamage);
         fightAgent.setAccuracy(accuracy);

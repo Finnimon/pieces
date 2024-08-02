@@ -8,7 +8,14 @@ import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
-//todo
+/**
+ * Builder for {@link FightAgentType#BISHOP}
+ *
+ * @author Julius Rohe
+ * @Owner: Julius Rohe
+ * @Since: 16.04.2024
+ * @Version: 1.0
+ */
 public class QueenBuilder extends FightAgentBuilder
 {
     private static final String NAME_SUFFIX = " Queen";

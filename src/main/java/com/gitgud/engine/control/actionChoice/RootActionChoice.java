@@ -7,6 +7,7 @@ import com.gitgud.engine.view.ActionContextRender;
 import com.gitgud.engine.view.RootActionChoiceRender;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,10 +30,29 @@ public class RootActionChoice<AaType extends ActionAwaitingController<MType, GmT
         extends ActionChoice<AaType, MType, GmType, RType>
         implements RootChoice<ActionChoice<AaType, MType, GmType, RType>>
 {
+    private static final String ABSOLUTE_PARENT_NAME = "root";
+    
+    
+    private static final String ABSOLUTE_PARENT_DESCRIPTION = "root";
+    
+    
     /**
      * The child Choices of this RootChoice
      */
-    private final List<ActionChoice<AaType, MType, GmType, RType>> choices;
+    private final ArrayList<ActionChoice<AaType, MType, GmType, RType>> children;
+    
+    
+    /**
+     * The Constructor for the absolute the RootChoice
+     * <p>Defaults to {@link RootActionChoice#RootActionChoice(String, String, ActionAwaitingController, List)} with
+     * {@link RootActionChoice#ABSOLUTE_PARENT_NAME} and {@link RootActionChoice#ABSOLUTE_PARENT_DESCRIPTION}.
+     *
+     * @see RootActionChoice#RootActionChoice(String, String, ActionAwaitingController, List)
+     */
+    public RootActionChoice(@NotNull AaType awaiter, @NotNull List<ActionChoice<AaType, MType, GmType, RType>> children)
+    {
+        this(ABSOLUTE_PARENT_NAME, ABSOLUTE_PARENT_DESCRIPTION, awaiter, children);
+    }
     
     
     /**
@@ -41,20 +61,20 @@ public class RootActionChoice<AaType extends ActionAwaitingController<MType, GmT
      * @param name        The name of this ActionChoice
      * @param description The description of this ActionChoice
      * @param awaiter     The targeted {@link ActionAwaitingController}.
-     * @param choices     The child choices for this RootChoice.
+     * @param children    The child children for this RootChoice.
      */
     public RootActionChoice(@NotNull String name, @NotNull String description, @NotNull AaType awaiter,
-                            @NotNull List<ActionChoice<AaType, MType, GmType, RType>> choices)
+                            @NotNull List<ActionChoice<AaType, MType, GmType, RType>> children)
     {
         super(name, description, awaiter);
-        this.choices = choices;
+        this.children = new ArrayList<>(children);
     }
     
     
     @Override
     public @NotNull List<ActionChoice<AaType, MType, GmType, RType>> getChildren()
     {
-        return choices;
+        return children;
     }
     
     

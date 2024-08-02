@@ -106,7 +106,7 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
         choices.add(ATTACK_CHOICE_INDEX, getAttackRootChoice());
         choices.add(SPELL_CHOICE_INDEX, getSpellRootChoice());
         choices.add(SKIP_TURN_CHOICE_INDEX, getSkipTurnChoice());
-        return new RootActionChoice<>("root", "root", this, choices);//todo
+        return new RootActionChoice<>(this, choices);//todo
     }
     
     
@@ -159,11 +159,14 @@ public class FightController extends ActionAwaitingController<Fight, FightAgent,
     {
         FightAgent agent = getActiveFightAgent();
         List<ActionChoice<FightController, Fight, FightAgent, FightRender>> choices = new ArrayList<>();
-        choices.add(ActiveGameController.getInstance()
-                                        .get()
-                                        .getMission()
-                                        .getPlayerAgent()
-                                        .possibleSpellChoices(this)); //todo not implemented
+        if (getActiveFightAgent().getAllegiance() != EnemyAlgorithm.ENEMY_ALLEGIANCE)
+        {
+            choices.add(ActiveGameController.getInstance()
+                                            .get()
+                                            .getMission()
+                                            .getPlayerAgent()
+                                            .possibleSpellChoices(this)); //todo not implemented
+        }
         if (agent instanceof SpellCaster spellCaster)
         {
             choices.add(spellCaster.possibleSpellChoices(this));

@@ -5,7 +5,7 @@ import com.gitgud.engine.model.gameobjects.GameObject;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
+import com.gitgud.pieces.view.render.mission.MissionRender;
 
 
 /**

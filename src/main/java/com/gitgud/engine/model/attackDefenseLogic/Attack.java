@@ -1,7 +1,6 @@
 package com.gitgud.engine.model.attackDefenseLogic;
 
 
-import com.gitgud.engine.model.Applicable;
 import org.jetbrains.annotations.NotNull;
 
 import static com.gitgud.pieces.utility.Core.roll;
@@ -19,19 +18,15 @@ import static com.gitgud.pieces.utility.Core.roll;
  * @see Defender#defend(Attack)
  * @since 16.04.2024
  */
-public record Attack(int damage, float accuracy, DamageType damageType) implements Applicable<Defender>
+public record Attack(int damage, double accuracy, DamageType damageType)
 {
-    @Override
     public Defender apply(@NotNull Defender fighter)
     {
         if (!doesHit())
         {
             return fighter;
         }
-        
         fighter.defend(this);
-        
-        
         return fighter;
     }
     

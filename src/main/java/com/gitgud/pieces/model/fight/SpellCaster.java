@@ -44,9 +44,12 @@ public interface SpellCaster extends Named, Describable
         List<ActionChoice> choices = new ArrayList<>(spellsTargets.size());
         for (Spell spell : spellsTargets.keySet())
         {
+            if (!canCast(spell))
+            {
+                continue;
+            }
             choices.add(possibleSpellTargetChoices(spell, spellsTargets.get(spell), fightController));
         }
-        
         return new RootActionChoice(name(), description(), fightController, choices);
     }
     
@@ -64,9 +67,21 @@ public interface SpellCaster extends Named, Describable
         
         for (Spell spell : getSpellbook().spells())
         {
-            HashSet<Tile> getSpellTargets = getSpellTargets(spell, gridMap);
+            targets.put(spell, getSpellTargets(spell, gridMap));
         }
         return targets;
+    }
+    
+    
+    /**
+     * Determines if {@code spell} can be cast.
+     *
+     * @param spell The spell that is determined to be castable.
+     * @return Whether {@code spell} can be cast.
+     */
+    default boolean canCast(Spell spell)
+    {
+        return spell.getManaCost() <= getMana();
     }
     
     
@@ -115,6 +130,12 @@ public interface SpellCaster extends Named, Describable
     }
     
     
+    default int getMana()
+    {
+        return manaProperty().get();
+    }
+    
+    
     /**
      * Returns the {@link Allegiance} of FightAgent targeted by {@code spell}.
      *
@@ -132,11 +153,30 @@ public interface SpellCaster extends Named, Describable
     
     
     /**
+     * Gets the Property with the current mana of the SpellCaster as value;
+     *
+     * @return The Property with the current mana of the SpellCaster as value;
+     */
+    SimpleIntegerProperty manaProperty();
+    
+    
+    /**
      * Gets the {@link Allegiance} of this SpellCaster.
      *
      * @return The {@link Allegiance} of this SpellCaster.
      */
     Allegiance getAllegiance();
+    
+    
+    /**
+     * Setter for mana.
+     *
+     * @param mana The new value for mana.
+     */
+    default void setMana(int mana)
+    {
+        manaProperty().set(mana);
+    }
     
     
     default void cast(@NotNull Spell spell, @NotNull FightAgent fightAgent)
@@ -154,42 +194,5 @@ public interface SpellCaster extends Named, Describable
     private void deductManaCost(@NotNull Spell spell)
     {
         setMana(getMana() - spell.getManaCost());
-    }
-    
-    
-    default int getMana()
-    {
-        return manaProperty().get();
-    }
-    
-    
-    /**
-     * Gets the Property with the current mana of the SpellCaster as value;
-     *
-     * @return The Property with the current mana of the SpellCaster as value;
-     */
-    SimpleIntegerProperty manaProperty();
-    
-    
-    /**
-     * Setter for mana.
-     *
-     * @param mana The new value for mana.
-     */
-    default void setMana(int mana)
-    {
-        manaProperty().set(mana);
-    }
-    
-    
-    /**
-     * Determines if {@code spell} can be cast.
-     *
-     * @param spell The spell that is determined to be castable.
-     * @return Whether {@code spell} can be cast.
-     */
-    default boolean canCast(Spell spell)
-    {
-        return spell.getManaCost() <= getMana();
     }
 }

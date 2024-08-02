@@ -32,6 +32,7 @@ module com.gitgud.pieces {
     opens com.gitgud.pieces.model.gameobjects.interactable.buildings to com.google.gson;
     opens com.gitgud.pieces.model to com.google.gson;
     opens com.gitgud.engine.utility.modification to com.google.gson;
+    opens com.gitgud.engine.model.attackDefenseLogic to com.google.gson;
     exports com.gitgud.pieces;
     exports com.gitgud.pieces.control;
     exports com.gitgud.pieces.view;

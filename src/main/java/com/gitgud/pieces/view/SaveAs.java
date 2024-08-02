@@ -4,7 +4,6 @@ package com.gitgud.pieces.view;
 import com.gitgud.pieces.control.Game;
 import com.gitgud.pieces.control.StageController;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
@@ -20,20 +19,28 @@ import javafx.scene.layout.Pane;
 public class SaveAs
 {
     private static final String FXML_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\view\\SaveAs.fxml";
+    
+    
+    @FXML
+    private Pane saveAsId;
+    
+    
+    @FXML
+    private TextField saveAsNameId;
+    
+    
     public static Pane create()
     {
         return (Pane) FxmlUtility.loadFxml(FXML_PATH);
     }
-    @FXML
-    private Pane saveAsId;
-    @FXML 
-    private TextField saveAsNameId;
+    
     
     @FXML
     private void saveAsAction()
     {
         Game.Saver.saveAs(saveAsNameId.getText());
     }
+    
     
     @FXML
     private void returnAction()
@@ -44,6 +51,7 @@ public class SaveAs
     
     /**
      * Removes a MenuPane from the root of the Scene.
+     *
      * @param menuPane The MenuPane to remove.
      */
     public static void removeMenuPane(Pane menuPane)

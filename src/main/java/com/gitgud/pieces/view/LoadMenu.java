@@ -2,12 +2,8 @@ package com.gitgud.pieces.view;
 
 import com.gitgud.pieces.control.StageController;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 
 /**

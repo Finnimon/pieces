@@ -12,6 +12,14 @@ import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
 import com.gitgud.pieces.utility.builder.Builder;
 
 
+/**
+ * Abstract Builder for {@link FightAgentType}
+ *
+ * @author Julius Rohe, Finn L.
+ * @Owner: Finn L.
+ * @Since: 16.04.2024
+ * @Version: 1.0
+ */
 public abstract class FightAgentBuilder implements Builder<FightAgent>
 {
     protected static final String SPRITE_FILEPATH_DIRECTORY = "src\\main\\resources\\com\\gitgud\\pieces\\model" +

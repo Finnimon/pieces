@@ -12,10 +12,10 @@ public class FightAgentDefenceModifier extends Modifier<FightAgent>
     private final int magicDefenceModifier;
     
     
-    private final float evadeChanceModifier;
+    private final double evadeChanceModifier;
     
     
-    public FightAgentDefenceModifier(int physicalDefenceModifier, int magicDefenceModifier, float evadeChanceModifier)
+    public FightAgentDefenceModifier(int physicalDefenceModifier, int magicDefenceModifier, double evadeChanceModifier)
     {
         this.physicalDefenceModifier = physicalDefenceModifier;
         this.magicDefenceModifier = magicDefenceModifier;
@@ -28,7 +28,7 @@ public class FightAgentDefenceModifier extends Modifier<FightAgent>
     {
         int physicalDefence = fightAgent.getPhysicalDefence() + physicalDefenceModifier;
         int magicDefence = fightAgent.getMagicDefence() + magicDefenceModifier;
-        float evadeChance = fightAgent.getEvadeChance() * evadeChanceModifier;
+        double evadeChance = fightAgent.getEvadeChance() * evadeChanceModifier;
         fightAgent.setPhysicalDefence(physicalDefence);
         fightAgent.setMagicDefence(magicDefence);
         fightAgent.setEvadeChance(evadeChance);
@@ -41,7 +41,7 @@ public class FightAgentDefenceModifier extends Modifier<FightAgent>
     {
         int physicalDefence = fightAgent.getPhysicalDefence() - physicalDefenceModifier;
         int magicDefence = fightAgent.getMagicDefence() - magicDefenceModifier;
-        float evadeChance = fightAgent.getEvadeChance() / evadeChanceModifier;
+        double evadeChance = fightAgent.getEvadeChance() / evadeChanceModifier;
         fightAgent.setPhysicalDefence(physicalDefence);
         fightAgent.setMagicDefence(magicDefence);
         fightAgent.setEvadeChance(evadeChance);

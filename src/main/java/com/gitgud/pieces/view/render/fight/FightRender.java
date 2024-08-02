@@ -8,6 +8,14 @@ import com.gitgud.pieces.view.MainMenu;
 import javafx.scene.input.KeyEvent;
 
 
+/**
+ * Render for the {@link Fight} Scene.
+ *
+ * @author Julius Rohe, Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @since 30.06.2024
+ */
 public class FightRender extends BaseActionContextRender<Fight, FightAgent, FightHud>
 {
     public FightRender(Fight data)

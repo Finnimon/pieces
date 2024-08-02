@@ -34,7 +34,7 @@ public enum Faction
     public static Faction fromString(String name)
     {
         name = name.trim().toUpperCase();
-        for (Faction f : Faction.values())
+        for (var f : Faction.values())
         {
             if (!Objects.equals(f.name, name))
             {

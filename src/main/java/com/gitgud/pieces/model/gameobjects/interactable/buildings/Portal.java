@@ -9,7 +9,7 @@ import com.gitgud.engine.view.GridMappableRender;
 import com.gitgud.pieces.control.MissionController;
 import com.gitgud.pieces.model.gameobjects.agents.PlayerAgent;
 import com.gitgud.pieces.model.mission.Mission;
-import com.gitgud.pieces.view.render.mission.MissionRender.MissionRender;
+import com.gitgud.pieces.view.render.mission.MissionRender;
 import javafx.scene.input.MouseEvent;
 
 

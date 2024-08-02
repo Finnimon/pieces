@@ -67,7 +67,7 @@ public abstract class ActionAwaitingController<MType extends ActionAwaiterModel<
      */
     public void showRootAction()
     {
-        executeActionChoiceTask(actionChoice -> actionChoice.show(this));
+        executeActionChoiceTask(ActionChoice::select);
     }
     
     

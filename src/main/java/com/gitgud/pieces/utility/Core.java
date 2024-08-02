@@ -19,7 +19,7 @@ public record Core()
      * @param chance The probability of the event happening.
      * @return true if the event happens based on the probability, false otherwise.
      */
-    public static boolean roll(float chance)
+    public static boolean roll(double chance)
     {
         return Math.random() < chance;
     }

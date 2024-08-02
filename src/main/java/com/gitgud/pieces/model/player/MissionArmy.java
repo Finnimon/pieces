@@ -3,6 +3,7 @@ package com.gitgud.pieces.model.player;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
+@Deprecated
 public class MissionArmy
 {
     private final FightAgent[] activeFightFigures;

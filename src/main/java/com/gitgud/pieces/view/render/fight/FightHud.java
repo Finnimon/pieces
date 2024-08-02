@@ -7,6 +7,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 
 
+/**
+ * Hud for the fight scene.
+ *
+ * @author Julius Rohe, Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @since 30.06.2024
+ */
 public class FightHud extends ActionContextHud<Fight>
 {
     

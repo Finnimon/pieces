@@ -15,7 +15,7 @@ import com.gitgud.pieces.utility.Core;
  * @Version: 1.0
  * @see Defender#defend(Attack)
  */
-public record Defence(int defence, float evasionChance, DamageType damageType)
+public record Defence(int defence, double evasionChance, DamageType damageType)
 {
     /**
      * Calculates the damage that should be done by the {@link Attack}.

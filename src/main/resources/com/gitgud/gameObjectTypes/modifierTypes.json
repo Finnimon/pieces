@@ -1,39 +1,34 @@
 [
   {
-    "FightAgentAttackModifier" : {
-      "meleeDamageModifier" : 5,
-      "rangedDamageModifier" : 5,
-      "accuracyModifier" : 5
+    "FightAgentAttackModifier": {
+      "meleeDamageModifier": 5,
+      "rangedDamageModifier": 5,
+      "accuracyModifier": 5
     }
   },
-
   {
-    "FightAgentDefenceModifier" : {
-      "physicalDefenceModifier" : 5,
-      "magicDefenceModifier" : 5,
-      "evadeChanceModifier" : 5
+    "FightAgentDefenceModifier": {
+      "physicalDefenceModifier": 5,
+      "magicDefenceModifier": 5,
+      "evadeChanceModifier": 5
     }
   },
-
   {
-    "FightAgentHealthModifier" : {
-      "healthModifier" : 5,
-      "maxHealthModifier" : 5
+    "FightAgentHealthModifier": {
+      "healthModifier": 5,
+      "maxHealthModifier": 5
     }
   },
-
   {
-    "FightAgentManaModifier" : {}
+    "FightAgentManaModifier": {}
   },
-
   {
-    "FightAgentMovementModifier" : {
-      "movementRangeModifier" : 5,
-      "initiativeModifier" : 5
+    "FightAgentMovementModifier": {
+      "movementRangeModifier": 5,
+      "initiativeModifier": 5
     }
   },
-
   {
-    "FightAgentModifier" : []
+    "FightAgentModifier": []
   }
 ]

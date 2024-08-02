@@ -2,15 +2,33 @@ package com.gitgud.pieces.utility.builder.fightAgent;
 
 import com.gitgud.engine.model.gameobjects.Named;
 import com.gitgud.engine.utility.Strings;
-import com.gitgud.pieces.model.fight.Allegiance;
+import com.gitgud.pieces.model.fight.Spell;
+import com.gitgud.pieces.model.fight.SpellBook;
 import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.SpellCasterFightAgent;
+import com.gitgud.pieces.utility.JsonParser;
+
+import java.io.File;
+import java.util.HashSet;
 
 
-//todo
+/**
+ * Builder for {@link FightAgentType#BISHOP}
+ *
+ * @author Julius Rohe
+ * @Owner: Julius Rohe
+ * @Since: 16.04.2024
+ * @Version: 1.0
+ */
 public class BishopBuilder extends FightAgentBuilder
 {
+    
+    
+    public static final String SPELLS_JSON_FILE_PATH = "src/main/resources/com/gitgud/pieces/utility/builder" +
+                                                       "/fightAgent/BishopBuilder/spells.json";
+    
+    
     private static final String NAME_SUFFIX = " Bishop";
     
     
@@ -55,7 +73,7 @@ public class BishopBuilder extends FightAgentBuilder
     private static final int MAX_HEALTH = 70;
     
     
-    private static final int MAX_MANA = 100;
+    private static final int MAX_MANA = 300;
     
     
     private static final int INITIATIVE = 80;
@@ -80,20 +98,20 @@ public class BishopBuilder extends FightAgentBuilder
     @Override
     public void tryBuild(int type)
     {
-        FightAgentType fightAgentType = FightAgentType.BISHOP;
-        Allegiance allegiance = FightAgentDirector.getAllegiance(type);
-        Faction faction = FightAgentDirector.getFaction(type);
+        var fightAgentType = FightAgentType.BISHOP;
+        var allegiance = FightAgentDirector.getAllegiance(type);
+        var faction = FightAgentDirector.getFaction(type);
         int level = FightAgentDirector.getLevel(type);
-        int testType = FightAgentDirector.calculateType(allegiance, fightAgentType, faction, level);
+        var testType = FightAgentDirector.calculateType(allegiance, fightAgentType, faction, level);
         
         assert testType == type : "Type mismatch. " + type + " != " + testType;
         
-        String name = Named.formatString(faction.name()) + NAME_SUFFIX;
+        var name = Named.formatString(faction.name()) + NAME_SUFFIX;
         setName(name);
         
         setDescription(DESCRIPTION);
         
-        String spriteFilePath = determineSpriteFilePath(faction, allegiance, fightAgentType);
+        var spriteFilePath = determineSpriteFilePath(faction, allegiance, fightAgentType);
         setSpriteFilePath(spriteFilePath);
         
         setFaction(faction);
@@ -134,6 +152,19 @@ public class BishopBuilder extends FightAgentBuilder
         
         setLevel(level);
         
+        
         setAllegiance(allegiance);
+        SpellBook spellBook = new SpellBook(getSpells(faction));
+        setSpellBook(spellBook);
+    }
+    
+    
+    private HashSet<Spell> getSpells(Faction faction)
+    {
+        Spell[] spellsArray = JsonParser.getInstance()
+                                        .deserializeJsonFile(new File(SPELLS_JSON_FILE_PATH), Spell[].class);
+        HashSet<Spell> spells = new HashSet<>();
+        spells.add(spellsArray[faction.ordinal()]);
+        return spells;
     }
 }

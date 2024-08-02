@@ -1,0 +1,69 @@
+[
+  {
+    "@type": "Spell",
+    "name": "Bishop\u0027s\r\n Aura ",
+    "description": "Strengthen your allies defences.",
+    "spriteFilePath": "",
+    "type": "BUFF",
+    "applicable": {
+      "@type": "DurableFightAgentModifier",
+      "modifier": {
+        "@type": "FightAgentModifier",
+        "modifiers": [
+          {
+            "@type": "FightAgentMovementModifier",
+            "movementRangeModifier": 1,
+            "initiativeModifier": 50
+          },
+          {
+            "@type": "FightAgentDefenceModifier",
+            "physicalDefenceModifier": 3,
+            "magicDefenceModifier": 4,
+            "evadeChanceModifier": 1.1
+          }
+        ]
+      },
+      "duration": 5,
+      "modified": []
+    },
+    "successChance": 0.8,
+    "level": 1,
+    "manaCost": 99
+  },
+  {
+    "@type": "Spell",
+    "name": "Holy\r\nThorns",
+    "description": "Deal 3 damage to an enemy.",
+    "spriteFilePath": "",
+    "type": "DAMAGE",
+    "applicable": {
+      "@type": "SpellAttack",
+      "attack": {
+        "damage": 150,
+        "accuracy": 1.0,
+        "damageType": "MAGIC"
+      }
+    },
+    "successChance": 0.8,
+    "level": 1,
+    "manaCost": 199
+  },
+  {
+    "@type": "Spell",
+    "name": "Heal",
+    "description": "Heal an ally",
+    "spriteFilePath": "",
+    "type": "HEAL",
+    "applicable": {
+      "@type": "SpellAttack",
+      "attack": {
+        "damage": -100,
+        "accuracy": 1.0,
+        "damageType": "MAGIC"
+      }
+    },
+    "successChance": 0.8,
+    "level": 1,
+    "manaCost": 99
+  }
+]

@@ -81,15 +81,15 @@ public class PlayerAgent extends Agent implements SpellCaster
     
     
     @Override
-    public Allegiance getAllegiance()
+    public SimpleIntegerProperty manaProperty()
     {
-        return Allegiance.BLACK;
+        return mana;
     }
     
     
     @Override
-    public SimpleIntegerProperty manaProperty()
+    public Allegiance getAllegiance()
     {
-        return mana;
+        return Allegiance.BLACK;
     }
 }

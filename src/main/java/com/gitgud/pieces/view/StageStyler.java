@@ -3,11 +3,13 @@ package com.gitgud.pieces.view;
 import com.gitgud.engine.model.gameobjects.Sprite;
 import com.gitgud.pieces.control.ActiveGameController;
 import com.gitgud.pieces.control.Game;
+import com.gitgud.pieces.control.StageController;
 import com.gitgud.pieces.model.game.GameState;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -36,8 +38,6 @@ import static com.gitgud.pieces.view.MainMenu.showMenuPane;
  */
 public class StageStyler
 {
-    
-    
     private static final String ICON_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\gameobjects\\agents" +
                                             "\\monochrome\\black_king.png";
     
@@ -88,7 +88,7 @@ public class StageStyler
     private static void createSceneGraph(Stage stage)
     {
         StackPane stackPane = new StackPane();
-        MenuBar menuBar = createMenu();
+        MenuBar menuBar = createMenuBar();
         StackPane innerPane = new StackPane();
         stackPane.getChildren().addAll(menuBar, innerPane);
         menuBar.toFront();
@@ -118,15 +118,37 @@ public class StageStyler
      *
      * @return The created menu.
      */
-    private static MenuBar createMenu()
+    private static MenuBar createMenuBar()
     {
         MenuBar menuBar = new MenuBar();
         ObservableList<Menu> menus = menuBar.getMenus();
+        menus.add(continueMenu());
         menus.add(newGameMenu());
         menus.add(settingsMenu());
         menus.add(saveMenu());
         menus.add(loadMenu());
+        menus.add(exitMenu());
         return menuBar;
+    }
+    
+    
+    /**
+     * Creates a menu for continuing the game and removing menus from the screen.
+     *
+     * @return The created menu.
+     */
+    private static Menu continueMenu()
+    {
+        Menu menu = new Menu("Continue");
+        menu.getItems().add(createMenuItem("Continue", e ->
+        {
+            e.consume();
+            Pane root = (Pane) StageController.getInstance().getRoot();
+            ObservableList<Node> children = root.getChildren();
+            while (children.size() > 1)
+                children.removeLast();
+        }));
+        return menu;
     }
     
     
@@ -208,6 +230,23 @@ public class StageStyler
         MenuItem load = createMenuItem("Load", e -> showMenuPane(LoadMenu.create()));
         
         menu.getItems().add(load);
+        return menu;
+    }
+    
+    
+    /**
+     * Creates a menu for exiting the application.
+     *
+     * @return The created menu.
+     */
+    private static Menu exitMenu()
+    {
+        Menu menu = new Menu("Exit");
+        menu.getItems().add(createMenuItem("Exit", e ->
+        {
+            Game.Flow.end();
+            System.exit(0);
+        }));
         return menu;
     }
     

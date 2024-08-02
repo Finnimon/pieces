@@ -18,6 +18,14 @@ import java.util.HashSet;
 import java.util.Objects;
 
 
+/**
+ * Contains all information about a {@link Mission} and its {@link ActionAwaiterModel}
+ *
+ * @author Finn L.
+ * @version 2.0
+ * @Owner: Finn L.
+ * @since 30.06.2022
+ */
 public class Mission implements ActionAwaiterModel<GameObject>
 {
     private final int index;
@@ -48,7 +56,7 @@ public class Mission implements ActionAwaiterModel<GameObject>
     {
         this(index,
              gridMap,
-             new PlayerAgent(ActiveGameController.getInstance().get().getCity().getPlayerReborn().getFaction() ),
+             new PlayerAgent(ActiveGameController.getInstance().get().getCity().getPlayerReborn().getFaction()),
              startingPosition,
              activeFightAgents,
              new FightAgent[activeFightAgents.length]);

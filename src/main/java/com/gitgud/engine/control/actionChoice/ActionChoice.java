@@ -119,19 +119,19 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
     
     
     /**
-     * Creates and returns an ActionChoice that returns to the absolute current {@link RootChoice} of the game
+     * Creates and returns an ActionChoice that returns to the {@code parent} choice.
      *
-     * @param name          The name for the returned action
-     * @param description   The description for the returned action
-     * @param actionAwaiter The targeted {@link ActionAwaitingController}
-     * @return The {@link ActionChoice} that returns to the absolute {@link RootChoice}
+     * @param name        The name for the returned action
+     * @param description The description for the returned action
+     * @param parent      The parent {@link ActionChoice}.
+     * @return The {@link ActionChoice} that returns to the parent {@link RootChoice}
      */
     public static <AAType extends ActionAwaitingController<MType, GType, RType>,
             MType extends ActionAwaiterModel<GType>, GType extends GridMappable,
-            RType extends ActionContextRender<MType, GType>> @NotNull ActionChoice<AAType, MType, GType, RType> returnToRoot(
-            @NotNull String name, @NotNull String description, @NotNull AAType actionAwaiter)
+            RType extends ActionContextRender<MType, GType>> @NotNull ActionChoice<AAType, MType, GType, RType> returnToParent(
+            @NotNull String name, @NotNull String description, ActionChoice<AAType, MType, GType, RType> parent)
     {
-        return new ActionChoice<>(name, description, actionAwaiter, Action.rootReturn())
+        return new ActionChoice<>(name, description, parent.getAwaiter(), (aaType) -> parent.select())
         {
             @Override
             public void show(@NotNull AAType actionAwaiter)
@@ -143,6 +143,47 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
             }
         };
     }
+    
+    
+    /**
+     * Getter for the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     *
+     * @return the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     */
+    public AaType getAwaiter()
+    {
+        return awaiter;
+    }
+    
+    
+    /**
+     * <p>Selects this action choice.
+     * <p>If this is a rootChoice, it's choices will be displayed.
+     * <p>Else {@code action.enAct(awaiter)} will be called.
+     */
+    public void select()
+    {
+        AaType awaiter = getAwaiter();
+        awaiter.getRender().getHud().clearChoices();
+        
+        if (action != null)
+        {
+            action.enAct(awaiter);
+            awaiter.advance();
+            return;
+        }
+        
+        show(awaiter);
+    }
+    
+    
+    /**
+     * <p>If this is a {@link  RootChoice}, it's choices will be displayed.
+     * <p>In other cases this will show the ActionChoice as one of the choices in a {@link  RootChoice}
+     *
+     * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     */
+    public abstract void show(@NotNull AaType actionAwaiter);
     
     
     /**
@@ -213,45 +254,4 @@ public abstract class ActionChoice<AaType extends ActionAwaitingController<MType
             select();
         };
     }
-    
-    
-    /**
-     * <p>Selects this action choice.
-     * <p>If this is a rootChoice, it's choices will be displayed.
-     * <p>Else {@code action.enAct(awaiter)} will be called.
-     */
-    public void select()
-    {
-        AaType awaiter = getAwaiter();
-        awaiter.getRender().getHud().clearChoices();
-        
-        if (action != null)
-        {
-            action.enAct(awaiter);
-            awaiter.advance();
-            return;
-        }
-        
-        show(awaiter);
-    }
-    
-    
-    /**
-     * Getter for the {@link ActionAwaitingController} associated with this {@link ActionChoice}
-     *
-     * @return the {@link ActionAwaitingController} associated with this {@link ActionChoice}
-     */
-    public AaType getAwaiter()
-    {
-        return awaiter;
-    }
-    
-    
-    /**
-     * <p>If this is a {@link  RootChoice}, it's choices will be displayed.
-     * <p>In other cases this will show the ActionChoice as one of the choices in a {@link  RootChoice}
-     *
-     * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
-     */
-    public abstract void show(@NotNull AaType actionAwaiter);
 }

@@ -3,15 +3,16 @@ package com.gitgud.pieces.model.mission;
 import com.gitgud.engine.model.gameobjects.interactable.Interactable;
 import com.gitgud.engine.model.map.Tile;
 import com.gitgud.pieces.control.MissionController;
+import com.gitgud.pieces.view.render.mission.MissionRender;
 
 
 /**
- * Helperclass for Interactions in {@link com.gitgud.pieces.view.render.mission.MissionRender.MissionRender}.
+ * Helperclass for Interactions in {@link MissionRender}.
  *
  * @author Finn L.
  * @version 2.0
  * @Owner: Finn L.
- * @see com.gitgud.pieces.view.render.mission.MissionRender.MissionRender#addInteractionHandlers(MissionController)
+ * @see MissionRender#addInteractionHandlers(MissionController)
  * @since 30.06.2022
  */
 public class InteractionChecker

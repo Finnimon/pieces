@@ -77,7 +77,7 @@ public class Game
          *
          * @param stage The main stage of the application.
          */
-        public static void initializeGame(@NotNull Stage stage)
+        public static void initializeAndStart(@NotNull Stage stage)
         {
             ExecutorService executorService = Executors.newSingleThreadExecutor();
             executorService.execute(initializeTask(stage));

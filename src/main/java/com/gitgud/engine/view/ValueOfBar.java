@@ -1,6 +1,7 @@
 package com.gitgud.engine.view;
 
 import com.gitgud.engine.model.attackDefenseLogic.Health;
+import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberExpression;
 import javafx.beans.binding.StringExpression;
@@ -106,14 +107,36 @@ public class ValueOfBar extends StackPane
     }
     
     
+    /**
+     * @see ProgressBar#setStyle(String)
+     */
     public void setProgressBarStyle(String style)
     {
         progressBar.setStyle(style);
     }
     
     
+    /**
+     * @see Label#setStyle(String)
+     */
     public void setLabelStyle(String style)
     {
         label.setStyle(style);
+    }
+    
+    
+    public static ValueOfBar manaBar(Fighter fighter)
+    {
+        ValueOfBar valueOfBar = new ValueOfBar(fighter.manaProperty(), fighter.maxManaProperty());
+        valueOfBar.setProgressBarStyle("-fx-accent: #00b2ff");
+        valueOfBar.setLabelStyle("-fx-font-weight: bold");
+        SimpleDoubleProperty doubleValue = new SimpleDoubleProperty();
+        doubleValue.bind(valueOfBar.value);
+        valueOfBar.progressBar.progressProperty().unbind();
+        var progressBinding = Bindings.when(fighter.manaProperty().isEqualTo(0))
+                                      .then(0.0)
+                                      .otherwise(doubleValue.divide(valueOfBar.max));
+        valueOfBar.progressBar.progressProperty().bind(progressBinding);
+        return valueOfBar;
     }
 }

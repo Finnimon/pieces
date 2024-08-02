@@ -1,5 +1,15 @@
 package com.gitgud.pieces.utility.builder;
 
+
+/**
+ * Director-Builder-Pattern Builder
+ *
+ * @param <Type> The type of Object to be built.
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 16.04.2024
+ * @Version: 1.0
+ */
 public interface Builder<Type>
 {
     Type result();

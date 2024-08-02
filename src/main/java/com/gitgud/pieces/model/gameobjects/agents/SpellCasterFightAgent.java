@@ -7,6 +7,16 @@ import com.gitgud.pieces.model.gameobjects.Faction;
 import com.gitgud.pieces.model.gameobjects.FightAgentType;
 
 
+/**
+ * Expands FightAgents with {@link SpellCaster} functionality.
+ *
+ * @author Finn L.
+ * @Owner: Finn L.
+ * @Since: 16.06.2024
+ * @Version: 1.2
+ * @see FightAgent
+ * @see SpellCaster
+ */
 public class SpellCasterFightAgent extends FightAgent implements SpellCaster
 {
     

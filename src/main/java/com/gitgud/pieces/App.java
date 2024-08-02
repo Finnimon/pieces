@@ -2,9 +2,15 @@ package com.gitgud.pieces;
 
 
 import com.gitgud.pieces.control.Game;
+import com.gitgud.pieces.model.fight.Allegiance;
+import com.gitgud.pieces.model.gameobjects.Faction;
+import com.gitgud.pieces.model.gameobjects.FightAgentType;
+import com.gitgud.pieces.utility.JsonParser;
+import com.gitgud.pieces.utility.builder.fightAgent.FightAgentDirector;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -32,7 +38,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        Game.Flow.initializeGame(stage);
+        Game.Flow.initializeAndStart(stage);
     }
     
     

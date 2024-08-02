@@ -8,6 +8,14 @@ import com.gitgud.pieces.model.gameobjects.FightAgentType;
 import com.gitgud.pieces.model.gameobjects.agents.FightAgent;
 
 
+/**
+ * Builder for {@link FightAgentType#BISHOP}
+ *
+ * @author Julius Rohe
+ * @Owner: Julius Rohe
+ * @Since: 16.04.2024
+ * @Version: 1.0
+ */
 public class KnightBuilder extends FightAgentBuilder
 {
     private static final String NAME_SUFFIX = " Knight";
@@ -87,52 +95,29 @@ public class KnightBuilder extends FightAgentBuilder
         
         assert testType == type : "Type mismatch. " + type + " != " + testType;
         
-        String name = Named.formatString(faction.name()) + NAME_SUFFIX;
-        setName(name);
-        
-        setDescription(DESCRIPTION);
-        
         String spriteFilePath = determineSpriteFilePath(faction, allegiance, fightAgentType);
-        setSpriteFilePath(spriteFilePath);
-        
-        setFaction(faction);
-        
-        setFlying(IS_FLYING);
-        
-        setMovementRange(MOVEMENT_RANGE);
-        
-        setType(fightAgentType);
-        
-        setMeleeDamage(MELEE_DAMAGE);
-        
-        setRangedDamage(RANGED_DAMAGE);
-        
-        setRangedAttackRange(RANGED_ATTACK_RANGE);
-        
-        setRemainingRangedAttacks(REMAINING_RANGED_ATTACKS);
-        
-        setRangedAttacker(IS_RANGED_ATTACKER);
-        
-        setPhysicalDefence(PHYSICAL_DEFENCE);
-        
-        setMagicDefence(MAGIC_DEFENCE);
-        
-        setEvadeChance(EVADE_CHANCE);
-        
-        setMaxHealth(MAX_HEALTH);
-        
-        setMaxMana(MAX_MANA);
-        
-        setHealth(MAX_HEALTH);
-        
-        setMana(MAX_MANA);
-        
-        setInitiative(INITIATIVE);
-        
-        setAccuracy(ACCURACY);
-        
-        setLevel(level);
-        
-        setAllegiance(allegiance);
+        String name = Named.formatString(faction.name()) + NAME_SUFFIX;
+        setName(name).setDescription(DESCRIPTION)
+                     .setSpriteFilePath(spriteFilePath)
+                     .setFaction(faction)
+                     .setFlying(IS_FLYING)
+                     .setMovementRange(MOVEMENT_RANGE)
+                     .setType(fightAgentType)
+                     .setMeleeDamage(MELEE_DAMAGE)
+                     .setRangedDamage(RANGED_DAMAGE)
+                     .setRangedAttackRange(RANGED_ATTACK_RANGE)
+                     .setRemainingRangedAttacks(REMAINING_RANGED_ATTACKS)
+                     .setRangedAttacker(IS_RANGED_ATTACKER)
+                     .setPhysicalDefence(PHYSICAL_DEFENCE)
+                     .setMagicDefence(MAGIC_DEFENCE)
+                     .setEvadeChance(EVADE_CHANCE)
+                     .setMaxHealth(MAX_HEALTH)
+                     .setMaxMana(MAX_MANA)
+                     .setHealth(MAX_HEALTH)
+                     .setMana(MAX_MANA)
+                     .setInitiative(INITIATIVE)
+                     .setAccuracy(ACCURACY)
+                     .setLevel(level)
+                     .setAllegiance(allegiance);
     }
 }

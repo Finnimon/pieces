@@ -2,6 +2,10 @@ package com.gitgud.engine.control.action;
 
 
 import com.gitgud.engine.control.ActionAwaitingController;
+import com.gitgud.engine.control.actionChoice.ActionChoice;
+import com.gitgud.engine.model.ActionAwaiterModel;
+import com.gitgud.engine.model.gameobjects.GridMappable;
+import com.gitgud.engine.view.ActionContextRender;
 
 
 /**
@@ -24,8 +28,11 @@ public interface Action<Awaiter extends ActionAwaitingController>
      *
      * @param <AAType>> the type of the {@link ActionAwaitingController} this Action can be applied to
      * @return an action that will return to the {@link ActionAwaitingController#showRootAction()}
+     * @deprecated No Longer in use as is this offers far worse performance than
+     * {@link com.gitgud.engine.control.actionChoice.ActionChoice#returnToParent(String, String, ActionChoice)}
      */
-    static <AAType extends ActionAwaitingController<?, ?, ?>> Action<AAType> rootReturn()
+    static <AAType extends ActionAwaitingController<MType, GmType, RType>, MType extends ActionAwaiterModel<GmType>,
+            GmType extends GridMappable, RType extends ActionContextRender<MType, GmType>> Action<AAType> rootReturn()
     {
         return ActionAwaitingController::showRootAction;
     }

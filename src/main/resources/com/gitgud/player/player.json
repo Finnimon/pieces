@@ -40,9 +40,9 @@
       {
         "name": "Bombus-Explosivus",
         "description": "Endeavoring to light the sky with bright flames, this explosive piece of magic hits fatal on rooks.",
-        "spriteFilePath" : "src/main/resources/com/gitgud/sprites/agents/transparent18x18.png",
-        "type" : "damage",
-        "modifier" : {
+        "spriteFilePath": "src/main/resources/com/gitgud/sprites/agents/transparent18x18.png",
+        "type": "damage",
+        "modifier": {
           "FightAgentModifier": [
             {
               "FightAgentAttackModifier": {
@@ -60,8 +60,8 @@
             }
           ]
         },
-        "manaCost" : 4,
-        "successChance" : 5
+        "manaCost": 4,
+        "successChance": 5
       }
     ]
   }

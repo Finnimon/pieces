@@ -36,6 +36,23 @@ public class ToActionChoice<AaType extends ActionAwaitingController<MType, GmTyp
     
     
     /**
+     * Shows this {@link ActionChoice} on a {@link com.gitgud.engine.view.GridMapRender} as a clickable highlight.
+     *
+     * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
+     */
+    @Override
+    public void show(@NotNull AaType actionAwaiter)
+    {
+        ToAction<AaType, Tile> action = getAction();
+        
+        Color color = determineHighlightColor();
+        RType render = actionAwaiter.getRender();
+        Node node = render.getGridMapRender().addHighLight(action.getTo(), color, getMouseEventHandler());
+        render.getHud().registerChoice(node);
+    }
+    
+    
+    /**
      * Determines the highlight color of the {@link ActionChoice} if it is shown on a
      * {@link com.gitgud.engine.view.GridMapRender} as a
      * {@link com.gitgud.engine.view.GridMapRender#addHighLight(Tile, Color, EventHandler)}
@@ -62,22 +79,5 @@ public class ToActionChoice<AaType extends ActionAwaitingController<MType, GmTyp
     protected @NotNull ToAction<AaType, Tile> getAction()
     {
         return (ToAction<AaType, Tile>) super.getAction();
-    }
-    
-    
-    /**
-     * Shows this {@link ActionChoice} on a {@link com.gitgud.engine.view.GridMapRender} as a clickable highlight.
-     *
-     * @param actionAwaiter the {@link ActionAwaitingController} associated with this {@link ActionChoice}
-     */
-    @Override
-    public void show(@NotNull AaType actionAwaiter)
-    {
-        ToAction<AaType, Tile> action = getAction();
-        
-        Color color = determineHighlightColor();
-        RType render = actionAwaiter.getRender();
-        Node node = render.getGridMapRender().addHighLight(action.getTo(), color, getMouseEventHandler());
-        render.getHud().registerChoice(node);
     }
 }

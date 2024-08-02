@@ -2,6 +2,7 @@ package com.gitgud.engine.view;
 
 import com.gitgud.engine.model.attackDefenseLogic.Health;
 import com.gitgud.engine.model.gameobjects.GridMappable;
+import com.gitgud.engine.model.gameobjects.agent.Fighter;
 import com.gitgud.engine.view.infopane.GridMappableInfoPane;
 import com.gitgud.engine.view.utility.AppendRemoveNodeOnMouseEventHandler;
 import javafx.geometry.Pos;
@@ -27,7 +28,7 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends S
     /**
      * The Proportional Height of a HealthBar if this {@link GridMappable} implements {@link Health}
      */
-    public static final float PROPORTIONAL_HEALTHBAR_HEIGHT = 1f / 5;
+    public static final float PROPORTIONAL_VALUEOFBAR_HEIGHT = 1f / 6;
     
     
     public GridMappableRender(GridMappableType gridMappable, double size)
@@ -126,26 +127,36 @@ public class GridMappableRender<GridMappableType extends GridMappable> extends S
         getChildren().add(imageView);
         setAlignment(imageView, Pos.TOP_CENTER);
         
-        if (!(model instanceof Health defender))
+        if (!(model instanceof Fighter fighter))
         {
             return;
         }
-        renderDefender(defender, imageView);
+        renderFighter(fighter, imageView);
     }
     
     
-    private void renderDefender(Health defender, ImageView imageView)
+    private void renderFighter(Fighter fighter, ImageView imageView)
     {
-        ValueOfBar valueOfBar = ValueOfBar.healthBar(defender);
-        getChildren().add(valueOfBar);
+        var healthBar = ValueOfBar.healthBar(fighter);
+        var manaBar = ValueOfBar.manaBar(fighter);
+        getChildren().addAll(healthBar, manaBar);
+        
         imageView.fitHeightProperty().unbind();
-        imageView.fitHeightProperty().bind(heightProperty().subtract(valueOfBar.heightProperty()));
-        valueOfBar.setMaxHeight(Region.USE_PREF_SIZE);
-        valueOfBar.setMinHeight(Region.USE_PREF_SIZE);
-        valueOfBar.setMaxWidth(Region.USE_PREF_SIZE);
-        valueOfBar.setMinWidth(Region.USE_PREF_SIZE);
-        valueOfBar.prefWidthProperty().bind(this.widthProperty());
-        valueOfBar.prefHeightProperty().bind(this.heightProperty().multiply(PROPORTIONAL_HEALTHBAR_HEIGHT));
-        setAlignment(valueOfBar, Pos.BOTTOM_CENTER);
+        imageView.fitHeightProperty()
+                 .bind(heightProperty().subtract(healthBar.heightProperty().add(manaBar.heightProperty())));
+        
+        healthBar.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        healthBar.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        manaBar.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        manaBar.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        
+        healthBar.prefWidthProperty().bind(this.widthProperty());
+        healthBar.prefHeightProperty().bind(this.heightProperty().multiply(PROPORTIONAL_VALUEOFBAR_HEIGHT));
+        healthBar.translateYProperty().bind(manaBar.heightProperty().multiply(-1));
+        setAlignment(healthBar, Pos.BOTTOM_CENTER);
+        
+        manaBar.prefWidthProperty().bind(this.widthProperty());
+        manaBar.prefHeightProperty().bind(this.heightProperty().multiply(PROPORTIONAL_VALUEOFBAR_HEIGHT));
+        setAlignment(manaBar, Pos.BOTTOM_CENTER);
     }
 }

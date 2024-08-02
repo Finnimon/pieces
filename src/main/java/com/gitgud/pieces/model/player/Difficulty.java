@@ -19,11 +19,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public enum Difficulty
 {
-    EASY(new FightAgentAttackModifier(0, 0, 0)),
+    EASY(new FightAgentAttackModifier(0, 0, 1)),
     
-    MEDIUM(new FightAgentDefenceModifier(2, 0, 1.2f)),
+    MEDIUM(new FightAgentDefenceModifier(2, 0, 1.2)),
     
-    HARD(new FightAgentAttackModifier(2, 3, 2f));
+    HARD(new FightAgentAttackModifier(2, 3, 2));
     
     
     private final Modifier<FightAgent> modifier;

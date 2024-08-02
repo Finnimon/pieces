@@ -11,6 +11,14 @@ import javafx.scene.layout.Region;
 import java.util.ArrayList;
 
 
+/**
+ * Render of {@link FightTimeLine}
+ *
+ * @author Julius Rohe, Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @since 30.06.2024
+ */
 public class FightTimeLineRender extends HBox implements UpdatableRender<FightTimeLine>
 {
     

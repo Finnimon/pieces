@@ -4,6 +4,16 @@ import com.gitgud.engine.model.gameobjects.Sprite;
 import org.jetbrains.annotations.NotNull;
 
 
+/**
+ * The Type of the {@link com.gitgud.pieces.model.player.Player} Resource.
+ * <p>The basis of money.
+ *
+ * @author Finn L.
+ * @version 1.1
+ * @Owner: Finn L.
+ * @see com.gitgud.pieces.model.ResourceCost
+ * @since 19.04.2024
+ */
 public enum ResourceType implements Sprite
 {
     IRON,
@@ -17,28 +27,10 @@ public enum ResourceType implements Sprite
     public static final String DIR_PATH = "src\\main\\resources\\com\\gitgud\\pieces\\model\\player\\resourceType\\";
     
     
-    public static ResourceType fromString(String string)
-    {
-        for (ResourceType resourceType : ResourceType.values())
-        {
-            if (string.equalsIgnoreCase(resourceType.toString()))
-            {
-                return resourceType;
-            }
-        }
-        return null;
-    }
-    
-    
     @Override
     public @NotNull String getSpriteFilePath()
     {
         return DIR_PATH + name() + DOT_PNG;
     }
     
-    
-    public String getAsString()
-    {
-        return this.toString();
-    }
 }

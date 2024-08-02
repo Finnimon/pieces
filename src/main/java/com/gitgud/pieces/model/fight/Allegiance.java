@@ -2,6 +2,11 @@ package com.gitgud.pieces.model.fight;
 
 /**
  * The allegiance of a {@link com.gitgud.pieces.model.gameobjects.agents.FightAgent}.
+ *
+ * @author Finn L.
+ * @version 1.0
+ * @Owner: Finn L.
+ * @since 16.05.2024
  */
 public enum Allegiance
 {

@@ -74,6 +74,13 @@ public class Artefact extends GameObject implements Collectible<MissionControlle
         {
             return false;
         }
-        return other.name().equals(name()) && other.getLevel() == getLevel();
+        return hashCode() == other.hashCode();
+    }
+    
+    
+    @Override
+    public int hashCode()
+    {
+        return (name() + description()).hashCode() + Artefact.class.hashCode();
     }
 }

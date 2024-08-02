@@ -60,10 +60,10 @@ public final class Spell implements Sprite, Describable, Named, Leveler, Applica
         this.spriteFilePath = spriteFilePath;
         this.type = type;
         this.applicable = applicable;
-        this.manaCost = new SimpleIntegerProperty(manaCost);
         this.successChance = successChance;
         this.level = new SimpleIntegerProperty(level);
-        this.manaCost.bind(this.manaCost.subtract(levelProperty()));
+        this.manaCost = new SimpleIntegerProperty();
+        this.manaCost.bind(levelProperty().subtract(manaCost).multiply(-1));
     }
     
     
@@ -118,12 +118,6 @@ public final class Spell implements Sprite, Describable, Named, Leveler, Applica
     }
     
     
-    public boolean doesSucceed()
-    {
-        return Core.roll(successChance);
-    }
-    
-    
     /**
      * Gets the {@link SpellType} of the {@link Spell}.
      *
@@ -166,6 +160,16 @@ public final class Spell implements Sprite, Describable, Named, Leveler, Applica
     @Override
     public FightAgent apply(@NotNull FightAgent fightAgent)
     {
+        if (!doesSucceed())
+        {
+            return fightAgent;
+        }
         return applicable.apply(fightAgent);
+    }
+    
+    
+    public boolean doesSucceed()
+    {
+        return Core.roll(successChance);
     }
 }
